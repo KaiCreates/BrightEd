@@ -62,8 +62,23 @@ export default function ProfilePage() {
         intent: userData.intent || 'learner'
       });
 
+      // robustness: handle mastery if it's an object (map) or a number
+      const getMasteryValue = (val: any): number => {
+        if (typeof val === 'number') return val;
+        if (typeof val === 'object' && val !== null) {
+          // If it's a map of subject/objective mastery, calculate average
+          const values = Object.values(val).filter(v => typeof v === 'number') as number[];
+          if (values.length === 0) return 0.1;
+          const sum = values.reduce((a, b) => a + b, 0);
+          return sum / values.length;
+        }
+        return 0.1;
+      };
+
+      const masteryScore = getMasteryValue(userData.mastery);
+
       setStats([
-        { label: 'Mastery', value: (userData.mastery || 1.0).toFixed(1), unit: '/ 10', icon: '🧠' },
+        { label: 'Mastery', value: masteryScore.toFixed(1), unit: '/ 10', icon: '🧠' },
         { label: 'Consistency', value: userData.streak > 0 ? Math.min(100, userData.streak * 10).toString() : '0', unit: '%', icon: '📈' },
         { label: 'Streak', value: (userData.streak || 0).toString(), unit: 'Days', icon: '🔥' },
         { label: 'XP', value: userData.xp >= 1000 ? (userData.xp / 1000).toFixed(1) + 'k' : (userData.xp || 0).toString(), unit: 'Total', icon: '⚡' },
