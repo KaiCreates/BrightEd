@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getQuestionsDb } from '@/lib/db';
 import { adminDb } from '@/lib/firebase-admin';
 import { verifyAuth } from '@/lib/auth-server';
 import {
@@ -106,36 +105,37 @@ export async function GET(request: NextRequest) {
 
 async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number) {
   try {
-    const db = getQuestionsDb();
+    // Migrate to Firestore
+    const questionsRef = adminDb.collection('questions');
 
-    // Query using correct column names (camelCase to match schema)
-    const query = `
-      SELECT id, objectiveId, subjectId, questionText, options, correctAnswer, 
-             explanation, storyElement, difficulty, question_json
-      FROM Questions 
-      WHERE objectiveId = ? 
-      AND difficulty BETWEEN ? AND ?
-      LIMIT 20
-    `;
+    // In-memory filtering approach (safer against missing indexes for now)
+    // In production, you'd want a composite index on objectiveId + difficulty
+    const snapshot = await questionsRef
+      .where('objectiveId', '==', objectiveId)
+      .limit(50)
+      .get();
 
-    const stmt = db.prepare(query);
-    // Fetch range (e.g., if target is 6, fetch 4-8)
-    const rows = stmt.all(objectiveId, targetDifficulty - 2, targetDifficulty + 2) as any[];
-
-    // If no specific difficulty found, broaden search
-    if (rows.length === 0) {
-      const fallbackStmt = db.prepare(`
-        SELECT id, objectiveId, subjectId, questionText, options, correctAnswer, 
-               explanation, storyElement, difficulty, question_json
-        FROM Questions WHERE objectiveId = ? LIMIT 20
-      `);
-      const fallbackRows = fallbackStmt.all(objectiveId) as any[];
-      return processRows(fallbackRows, objectiveId);
+    if (snapshot.empty) {
+      return [];
     }
 
-    return processRows(rows, objectiveId);
+    const rows = snapshot.docs.map(doc => doc.data());
+    const minDiff = targetDifficulty - 2;
+    const maxDiff = targetDifficulty + 2;
+
+    const filtered = rows.filter(q => {
+      const d = q.difficulty || 5;
+      return d >= minDiff && d <= maxDiff;
+    });
+
+    if (filtered.length === 0) {
+      // Return all if no specific difficulty match found (fallback)
+      return processRows(rows, objectiveId);
+    }
+
+    return processRows(filtered, objectiveId);
   } catch (error) {
-    console.error('DB Fetch Error:', error);
+    console.error('Firestore Fetch Error:', error);
     return [];
   }
 }
@@ -143,35 +143,17 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
 function processRows(rows: any[], objectiveId: string) {
   return rows.map(row => {
     try {
-      // Try to use question_json first if available
-      if (row.question_json) {
-        const q = JSON.parse(row.question_json);
-        return {
-          ...q,
-          questionId: q.id || q.questionId || row.id || `${objectiveId}_${Math.random()}`,
-          difficulty: q.difficulty || row.difficulty || 5,
-          subSkills: q.subSkills || [objectiveId],
-        };
-      }
-
-      // Fallback: Build question object from individual columns
-      const options = row.options ? JSON.parse(row.options) : [];
+      // Firestore data is already an object, no need to parse like SQLite rows
       return {
-        id: row.id || `${objectiveId}_${Math.random()}`,
-        questionId: row.id || `${objectiveId}_${Math.random()}`,
-        question: row.questionText,
-        questionText: row.questionText,
-        options,
-        correctAnswer: row.correctAnswer ?? 0,
-        explanation: row.explanation || '',
-        storyElement: row.storyElement || 'Challenge',
-        difficulty: row.difficulty || 5,
-        subjectId: row.subjectId,
-        objectiveId: row.objectiveId,
-        subSkills: [objectiveId],
+        ...row,
+        questionId: row.id || row.questionId || `${objectiveId}_${Math.random()}`,
+        difficulty: row.difficulty || 5, // Ensure difficulty exists
+        subSkills: row.subSkills || [objectiveId],
+        // Ensure options is an array (JSON parsed if string, though Firestore stores arrays)
+        options: typeof row.options === 'string' ? JSON.parse(row.options) : (row.options || []),
       };
     } catch (e) {
-      console.warn('Failed to parse row:', e);
+      console.warn('Failed to parse question row:', e);
       return null;
     }
   }).filter(Boolean);
