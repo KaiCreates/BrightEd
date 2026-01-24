@@ -25,6 +25,7 @@ import Marketplace from '@/components/business/Marketplace';
 import OrgChart from '@/components/business/OrgChart';
 import EmployeeShop from '@/components/business/EmployeeShop';
 import { BusinessStatsBar } from '@/components/business/BusinessStatsBar';
+import InventoryPanel from '@/components/business/InventoryPanel';
 import {
   BusinessState,
   Order,
@@ -278,19 +279,53 @@ function CommandCenterContent() {
               let totalPay = 0;
 
               // Batch updates logic
-              const batchFinancials = {
+              const batchFinancials: {
+                cashBalance: number;
+                reputation: number;
+                ordersCompleted: number;
+                reviews: any[];
+                inventory: Record<string, number>;
+              } = {
                 cashBalance: business.cashBalance,
                 reputation: business.reputation,
                 ordersCompleted: business.ordersCompleted,
-                reviews: business.reviews || []
+                reviews: business.reviews || [],
+                inventory: { ...business.inventory }
               };
 
               ordersToComplete.forEach(orderToProcess => {
+                // Check stock before auto-processing
+                const reqInventory: Record<string, number> = {};
+                orderToProcess.items.forEach(item => {
+                  const product = businessType.products.find(p => p.id === item.productId);
+                  if (product?.requiresInventory && product.inventoryItemId) {
+                    reqInventory[product.inventoryItemId] = (reqInventory[product.inventoryItemId] || 0) + (product.inventoryPerUnit || 1) * item.quantity;
+                  }
+                });
+
+                const hasStock = Object.entries(reqInventory).every(([itemId, qty]) => (business.inventory?.[itemId] || 0) >= qty);
+
+                if (!hasStock) {
+                  // Proactively fail the order if no stock (instead of skipping)
+                  const { order: failed, reputationPenalty } = failOrder(orderToProcess, 'stockout');
+                  updateOrderStatus(business.id, orderToProcess.id, failed);
+
+                  // Small reputation hit for stockout
+                  updateBusinessFinancials(business.id, {
+                    reputation: Math.max(0, business.reputation - reputationPenalty)
+                  });
+
+                  if (Math.random() > 0.5) {
+                    showInterrupt('keisha', `We're out of stock for ${orderToProcess.customerName}'s order! I had to cancel it.`, 'concerned');
+                  }
+                  return;
+                }
+
                 // Calculate Quality
                 const avgQuality = business.employees.reduce((acc: number, e: any) => acc + (e.stats?.quality || 50), 0) / business.employees.length;
                 const qualityScore = Math.min(100, Math.floor(avgQuality + (Math.random() * 20 - 10)));
 
-                const { order: completed, payment, tip } = completeOrder(orderToProcess, qualityScore);
+                const { order: completed, payment, tip, inventoryDeductions } = completeOrder(orderToProcess, qualityScore, businessType);
 
                 // Review
                 const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
@@ -311,6 +346,11 @@ function CommandCenterContent() {
                 batchFinancials.reviews.unshift(newReview);
                 totalPay += payment;
 
+                // Apply inventory deductions to local state for batching
+                Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
+                  batchFinancials.inventory[itemId] = Math.max(0, (batchFinancials.inventory[itemId] || 0) - qty);
+                });
+
                 updateOrderStatus(business.id, orderToProcess.id, completed);
               });
 
@@ -322,7 +362,8 @@ function CommandCenterContent() {
                 cashBalance: batchFinancials.cashBalance,
                 reputation: batchFinancials.reputation,
                 ordersCompleted: batchFinancials.ordersCompleted,
-                reviews: batchFinancials.reviews
+                reviews: batchFinancials.reviews,
+                inventory: batchFinancials.inventory
               });
 
               // Occasional interrupt
@@ -397,7 +438,16 @@ function CommandCenterContent() {
     if (!order) return;
 
     const qualityScore = customQuality ?? Math.floor(60 + Math.random() * 40);
-    const { order: completed, payment, tip } = completeOrder(order, qualityScore);
+    const { order: completed, payment, tip, inventoryDeductions } = completeOrder(order, qualityScore, businessType ?? undefined);
+
+    // Validate stock manually just in case
+    const currentInv = business.inventory || {};
+    const insufficientStock = Object.entries(inventoryDeductions).some(([itemId, qty]) => (currentInv[itemId] || 0) < qty);
+
+    if (insufficientStock) {
+      showInterrupt('keisha', "Wait! We don't have enough stock to fulfill this order!", 'concerned');
+      return;
+    }
 
     const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
     const reviewText = stars === 6 ? 'Absolutely legendary service!' :
@@ -418,11 +468,17 @@ function CommandCenterContent() {
 
     await updateOrderStatus(business.id, orderId, completed);
 
+    const updatedInventory = { ...currentInv };
+    Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
+      updatedInventory[itemId] = Math.max(0, (updatedInventory[itemId] || 0) - qty);
+    });
+
     await updateBusinessFinancials(business.id, {
       cashBalance: business.cashBalance + payment + tip,
       reputation: Math.min(100, business.reputation + (stars >= 5 ? 2 : stars <= 2 ? -2 : 0)),
       ordersCompleted: business.ordersCompleted + 1,
-      reviews: [newReview, ...currentReviews].slice(0, 20)
+      reviews: [newReview, ...currentReviews].slice(0, 20),
+      inventory: updatedInventory
     });
 
     if (stars === 6) {
@@ -580,8 +636,8 @@ function CommandCenterContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-          {/* COLUMN 1: OPERATIONS (Orders) - Span 4 */}
-          <div className="lg:col-span-4 space-y-6">
+          {/* COLUMN 1: OPERATIONS (7/12) */}
+          <div className="lg:col-span-7 space-y-10">
             <div>
               <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Operations Console</BrightHeading>
               {business && businessType && (
@@ -596,38 +652,47 @@ function CommandCenterContent() {
                 />
               )}
             </div>
-          </div>
-
-          {/* COLUMN 2: ORGANIZATION (Org Chart + Feed) - Span 5 */}
-          <div className="lg:col-span-5 space-y-8">
-            <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Organization</BrightHeading>
-              {business && <OrgChart business={business} />}
-            </div>
 
             <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Activity Log</BrightHeading>
-              <BrightLayer variant="glass" padding="none" className="h-64 overflow-hidden relative">
-                <div className="absolute inset-0 flex items-center justify-center text-[var(--text-muted)] pointer-events-none z-10">
-                  Simulating live activity...
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Activity Feed</BrightHeading>
+              <BrightLayer variant="glass" padding="none" className="min-h-[200px] relative overflow-hidden">
+                {/* Placeholder for real feed */}
+                <div className="absolute inset-0 flex items-center justify-center text-[var(--text-muted)] text-sm italic">
+                  Awaiting operational telemetry...
                 </div>
               </BrightLayer>
             </div>
           </div>
 
-          {/* COLUMN 3: RESOURCES (Recruitment + Market) - Span 3 */}
-          <div className="lg:col-span-3 space-y-8">
+          {/* COLUMN 2: HQ & ORGANIZATION (5/12) */}
+          <div className="lg:col-span-5 space-y-10">
             <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Recruitment</BrightHeading>
-              {business && <EmployeeShop business={business} />}
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Human Resources</BrightHeading>
+              {business && <OrgChart business={business} />}
             </div>
 
+            {/* Warehouse here keeps things compact */}
             <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Supply Chain</BrightHeading>
-              {business && <Marketplace business={business} />}
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Warehouse Management</BrightHeading>
+              {business && <InventoryPanel inventory={business.inventory || {}} />}
             </div>
           </div>
+        </div>
 
+        {/* RECRUITMENT HUB - Now Horizontal Scroll Chain */}
+        <div className="mt-16 space-y-6">
+          <div className="border-b border-[var(--border-subtle)] pb-4">
+            <BrightHeading level={4} className="text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Recruitment Hub</BrightHeading>
+          </div>
+          {business && <EmployeeShop business={business} />}
+        </div>
+
+        {/* SUPPLY CHAIN - Full width below Recruitment */}
+        <div className="mt-16 space-y-6">
+          <div className="border-b border-[var(--border-subtle)] pb-4">
+            <BrightHeading level={4} className="text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Supply Chain Ecosystem</BrightHeading>
+          </div>
+          {business && <Marketplace business={business} />}
         </div>
 
         <AnimatePresence>

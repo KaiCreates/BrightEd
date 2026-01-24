@@ -7,17 +7,19 @@ const nextConfig = {
     serverComponentsExternalPackages: ['better-sqlite3'],
   },
   webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.watchOptions = {
-        ignored: [
-          '**/node_modules/**',
-          '**/.next/**',
-          'C:/pagefile.sys',
-          'C:/hiberfil.sys',
-          'C:/dumpstack.log.tmp'
-        ],
-      }
-    }
+    config.watchOptions = {
+      ...(config.watchOptions || {}),
+      ignored: [
+        '**/node_modules/**',
+        '**/.next/**',
+        '**/pagefile.sys',
+        '**/hiberfil.sys',
+        '**/dumpstack.log.tmp',
+        'C:/pagefile.sys',
+        'C:/hiberfil.sys',
+        'C:/dumpstack.log.tmp'
+      ],
+    };
     return config
   },
 }

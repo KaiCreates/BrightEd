@@ -6,7 +6,8 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate:questions": "node scripts/migrate-questions.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",

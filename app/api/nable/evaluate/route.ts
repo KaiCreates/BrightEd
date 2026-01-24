@@ -174,6 +174,27 @@ export async function POST(request: NextRequest) {
                 timestamp: admin.firestore.FieldValue.serverTimestamp()
             });
 
+            // Track attempts so we can avoid immediate repeats.
+            const attemptRef = userRef.collection('question_attempts').doc();
+            transaction.set(attemptRef, {
+                questionId,
+                objectiveId,
+                isCorrect,
+                selectedAnswer,
+                correctAnswer,
+                timestamp: admin.firestore.FieldValue.serverTimestamp()
+            });
+
+            // Track correct questions so we can permanently exclude them.
+            if (isCorrect) {
+                const correctRef = userRef.collection('correct_questions').doc(questionId);
+                transaction.set(correctRef, {
+                    questionId,
+                    objectiveId,
+                    lastCorrectAt: admin.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+            }
+
             transaction.update(userRef, updates);
         });
 

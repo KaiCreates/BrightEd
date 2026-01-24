@@ -56,10 +56,51 @@ export async function GET(request: NextRequest) {
     // Variation 1 = Easy, 2 = Medium, 3 = Hard
     const targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
 
-    const candidates = await withTimeout(
+    let candidates = await withTimeout(
       fetchCandidatesFromDB(objectiveId, targetDifficulty),
       DB_TIMEOUT
     );
+
+    // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
+    if (userId && candidates && candidates.length > 0) {
+      const excludeIds = new Set<string>();
+
+      try {
+        const correctSnap = await adminDb
+          .collection('users')
+          .doc(userId)
+          .collection('correct_questions')
+          .where('objectiveId', '==', objectiveId)
+          .limit(500)
+          .get();
+
+        correctSnap.docs.forEach((d) => excludeIds.add(d.id));
+      } catch (e) {
+        // ignore (no index / no permissions)
+      }
+
+      try {
+        const attemptsSnap = await adminDb
+          .collection('users')
+          .doc(userId)
+          .collection('question_attempts')
+          .orderBy('timestamp', 'desc')
+          .limit(20)
+          .get();
+
+        attemptsSnap.docs.forEach((d) => {
+          const qid = d.get('questionId');
+          if (typeof qid === 'string' && qid) excludeIds.add(qid);
+        });
+      } catch (e) {
+        // ignore
+      }
+
+      candidates = candidates.filter((q: any) => {
+        const qid = q?.questionId || q?.id;
+        return !(typeof qid === 'string' && excludeIds.has(qid));
+      });
+    }
 
     if (!candidates || candidates.length === 0) {
       return NextResponse.json(createFallbackResponse(objectiveId, subjectId), { status: 200 });
@@ -119,12 +160,13 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
       return [];
     }
 
-    const rows = snapshot.docs.map(doc => doc.data());
+    const rows = snapshot.docs.map((doc): any => ({ id: doc.id, ...doc.data() }));
+
     const minDiff = targetDifficulty - 2;
     const maxDiff = targetDifficulty + 2;
 
-    const filtered = rows.filter(q => {
-      const d = q.difficulty || 5;
+    const filtered = rows.filter((q: any) => {
+      const d = q?.difficulty || 5;
       return d >= minDiff && d <= maxDiff;
     });
 
@@ -165,6 +207,7 @@ function formatResponse(question: any, objectiveId: string, subjectId: string | 
       {
         id: 1,
         type: 'decision',
+        questionId: question.questionId || question.id || null,
         content: question.question || question.questionText || "Question text missing",
         options: question.options || [],
         correctAnswer: question.correctAnswer ?? 0,

@@ -84,7 +84,8 @@ function selectCustomerType(config: DemandConfig): CustomerType {
 function selectOrderItems(
     products: ProductTemplate[],
     avgItems: number,
-    qualityTier: QualityTier
+    qualityTier: QualityTier,
+    inventory: Record<string, number> = {}
 ): OrderItem[] {
     // Determine number of items (weighted toward avgItems)
     const itemCount = Math.max(1, Math.round(avgItems + (Math.random() - 0.5) * 2));
@@ -93,8 +94,25 @@ function selectOrderItems(
     const availableProducts = [...products];
 
     for (let i = 0; i < itemCount && availableProducts.length > 0; i++) {
-        const idx = Math.floor(Math.random() * availableProducts.length);
-        const product = availableProducts[idx];
+        // Selection weights: items in stock are 5x more likely to be picked
+        const weightedProducts = availableProducts.map(p => {
+            const hasStock = (inventory[p.inventoryItemId || ''] || 0) > 0;
+            return { product: p, weight: hasStock ? 5 : 1 };
+        });
+
+        const totalWeight = weightedProducts.reduce((acc, p) => acc + p.weight, 0);
+        let roll = Math.random() * totalWeight;
+        let selectedIdx = 0;
+
+        for (let j = 0; j < weightedProducts.length; j++) {
+            roll -= weightedProducts[j].weight;
+            if (roll <= 0) {
+                selectedIdx = j;
+                break;
+            }
+        }
+
+        const product = availableProducts[selectedIdx];
 
         // Quantity varies by product type
         const quantity = product.baseTimeMinutes < 10
@@ -110,10 +128,8 @@ function selectOrderItems(
             qualityTier,
         });
 
-        // Remove to avoid duplicates (optional behavior)
-        if (Math.random() > 0.3) {
-            availableProducts.splice(idx, 1);
-        }
+        // Remove to avoid duplicates
+        availableProducts.splice(selectedIdx, 1);
     }
 
     return items;
@@ -218,8 +234,8 @@ export function generateOrder(
         qualityTier = Math.random() > 0.7 ? 'standard' : 'basic';
     }
 
-    // Select items
-    const items = selectOrderItems(businessType.products, config.avgItemsPerOrder, qualityTier);
+    // Select items (stock-aware)
+    const items = selectOrderItems(businessType.products, config.avgItemsPerOrder, qualityTier, businessState.inventory);
     const { total, cost } = calculateOrderTotals(items);
 
     // Generate deadline and expiry
@@ -353,8 +369,9 @@ export function startOrder(order: Order): Order {
  */
 export function completeOrder(
     order: Order,
-    qualityScore: number // 0-100
-): { order: Order; payment: number; tip: number } {
+    qualityScore: number, // 0-100
+    businessType?: BusinessType // Optional, but needed for inventory deduction
+): { order: Order; payment: number; tip: number; inventoryDeductions: Record<string, number> } {
     if (order.status !== 'in_progress' && order.status !== 'accepted') {
         throw new Error(`Cannot complete order in status: ${order.status}`);
     }
@@ -385,6 +402,18 @@ export function completeOrder(
 
     const payment = Math.round(order.totalAmount * paymentPercent);
 
+    // Calculate inventory deductions
+    const inventoryDeductions: Record<string, number> = {};
+    if (businessType) {
+        order.items.forEach(item => {
+            const product = businessType.products.find(p => p.id === item.productId);
+            if (product?.requiresInventory && product.inventoryItemId) {
+                const deduction = (product.inventoryPerUnit || 1) * item.quantity;
+                inventoryDeductions[product.inventoryItemId] = (inventoryDeductions[product.inventoryItemId] || 0) + deduction;
+            }
+        });
+    }
+
     // For milestone payments, only deliver the balance portion now
     let actualPayment = payment;
     if (order.paymentTerms.type === 'milestone' && order.paymentTerms.upfrontPercent) {
@@ -403,6 +432,7 @@ export function completeOrder(
         },
         payment: actualPayment,
         tip,
+        inventoryDeductions,
     };
 }
 

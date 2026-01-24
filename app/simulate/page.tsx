@@ -236,11 +236,12 @@ export default function SimulatePage() {
 
     // Call NABLE Engine for adaptive learning
     try {
+      const resolvedQuestionId = (step as any)?.questionId || `${objectiveId}-${questionVariation}`
       const nableRes = await authenticatedFetch('/api/nable/evaluate', {
         method: 'POST',
         body: JSON.stringify({
           userId: user.uid,
-          questionId: `${objectiveId}-${questionVariation}`,
+          questionId: resolvedQuestionId,
           objectiveId: objectiveId,
           selectedAnswer: answerIndex,
           correctAnswer: step.correctAnswer || 0,

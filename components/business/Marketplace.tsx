@@ -110,11 +110,17 @@ export default function Marketplace({ business }: MarketplaceProps) {
         { id: 'dish_soap', name: 'Sparkle Dish Soap', price: 9, stock: 30, maxStock: 30, image: '/products/DishSoap.png', icon: '🧼' },
         { id: 'tissue_4pk', name: 'Soft Tissue Pack', price: 14, stock: 20, maxStock: 20, image: '/products/toilet_paper.png', icon: '🧻' },
         { id: 'plantain_chips', name: 'Crunchy Chips', price: 6, stock: 50, maxStock: 50, image: '/products/PlantainChips.png', icon: '🍌' },
-        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 20, maxStock: 20, image: '/products/Surgar.png', icon: '🍬' }, // Note: Filename typo match
+        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 20, maxStock: 20, image: '/products/Surgar.png', icon: '🍬' },
         { id: 'cole_cold', name: 'Cole Cold', price: 8, stock: 40, maxStock: 40, image: '/products/Cole_Cold_copy.png', icon: '🥤' },
+        { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 30, maxStock: 30, image: '/products/Fries.png', icon: '🍟' },
+        { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 25, maxStock: 25, image: '/products/Peppers.jpg', icon: '🌶️' },
+        { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 40, maxStock: 40, image: '/products/Salt.png', icon: '🧂' },
     ];
 
-    const marketItems = (business.marketState?.items || getDefaultMarketItems()).map(item => ({
+    const marketItems = (business.marketState?.items && business.marketState.items.length > 0
+        ? business.marketState.items
+        : getDefaultMarketItems()
+    ).map(item => ({
         ...item,
         // Ensure icon exists if missing from DB state
         icon: (item as any).icon || '📦',
@@ -124,7 +130,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
 
     return (
         <div className="space-y-4">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-2">
                 <div>
                     <BrightHeading level={3}>Global Logistics Market</BrightHeading>
                     <p className="text-[var(--text-secondary)] text-sm">Purchase supplies to fulfill customer orders.</p>
@@ -135,15 +141,15 @@ export default function Marketplace({ business }: MarketplaceProps) {
                 </div>
             </div>
 
-            <BrightLayer variant="glass" padding="lg">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <BrightLayer variant="glass" padding="lg" className="border-none bg-transparent">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                     {marketItems.map((item) => {
                         const stockPercent = (item.stock / item.maxStock) * 100;
                         const isLowStock = stockPercent < 30;
                         const isSoldOut = item.stock === 0;
 
                         return (
-                            <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl overflow-hidden hover:border-[var(--brand-primary)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden hover:border-[var(--brand-primary)] hover:shadow-lg transition-all duration-300">
                                 {/* Stock Bar Overlay */}
                                 <div className="absolute top-0 left-0 right-0 h-1 z-10 bg-[var(--bg-elevated)]">
                                     <div
@@ -158,7 +164,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
                                         <img
                                             src={item.image}
                                             alt={item.name}
-                                            className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                            className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
                                         />
                                     ) : (
                                         <div className="text-4xl">{item.icon}</div>
@@ -170,26 +176,26 @@ export default function Marketplace({ business }: MarketplaceProps) {
                                 </div>
 
                                 {/* Details */}
-                                <div className="p-3">
+                                <div className="p-4">
                                     <h4 className="font-bold text-[var(--text-primary)] text-sm mb-1 truncate" title={item.name}>{item.name}</h4>
-                                    <div className="flex items-baseline gap-1 mb-3">
+                                    <div className="flex items-baseline gap-1 mb-4">
                                         <span className="text-[var(--brand-accent)] font-black text-base">฿{item.price}</span>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 gap-2">
                                         <button
                                             disabled={item.stock < 1 || business.cashBalance < item.price}
                                             onClick={() => handleBuy(item, 1)}
-                                            className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-1.5 text-xs font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            Buy 1
+                                            Purchase 1 Unit
                                         </button>
                                         <button
                                             disabled={item.stock < 5 || business.cashBalance < item.price * 5}
                                             onClick={() => handleBuy(item, 5)}
-                                            className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-1.5 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            Buy 5
+                                            Bulk Buy (5)
                                         </button>
                                     </div>
                                 </div>

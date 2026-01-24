@@ -44,87 +44,97 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
     };
 
     return (
-        <BrightLayer variant="elevated" padding="lg" className="h-full">
-            <div className="flex justify-between items-center mb-6">
+        <div className="space-y-4">
+            <div className="flex justify-between items-center px-2">
                 <BrightHeading level={3}>Recruitment Center</BrightHeading>
-                <div className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest">
-                    {candidates.length} Candidates
+                <div className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest bg-[var(--bg-elevated)] px-2 py-1 rounded border border-[var(--border-subtle)]">
+                    {candidates.length} Available Talent
                 </div>
             </div>
 
-            <div className="space-y-4">
-                {candidates.map(candidate => (
-                    <div key={candidate.id} className="bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl p-4 hover:border-[var(--brand-primary)] transition-all flex flex-col gap-4 relative overflow-hidden group">
+            <div className="relative group">
+                {/* Horizontal Scroll Container */}
+                <div className="flex overflow-x-auto gap-5 pb-6 snap-x snap-mandatory no-scrollbar hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    {candidates.map(candidate => (
+                        <div
+                            key={candidate.id}
+                            className="flex-none w-72 snap-start bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl p-5 hover:border-[var(--brand-primary)] hover:shadow-[0_0_20px_rgba(var(--brand-primary-rgb),0.1)] transition-all duration-300 relative overflow-hidden group/card"
+                        >
+                            {/* Role Tag */}
+                            <div className="absolute top-0 right-0 p-px">
+                                <div className="bg-[var(--bg-elevated)] text-[8px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-bl-xl border-l border-b border-[var(--border-subtle)] text-[var(--text-secondary)]">
+                                    {candidate.role}
+                                </div>
+                            </div>
 
-                        {/* Header Row */}
-                        <div className="flex justify-between items-start">
-                            <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-full flex items-center justify-center text-xl shadow-lg">
+                            {/* Header Row */}
+                            <div className="flex items-center gap-4 mb-6 mt-2">
+                                <div className="w-14 h-14 bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] rounded-2xl flex items-center justify-center text-2xl shadow-lg ring-1 ring-white/10">
                                     👤
                                 </div>
-                                <div>
-                                    <h4 className="font-bold text-[var(--text-primary)] leading-tight">{candidate.name}</h4>
-                                    <span className="inline-block bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md mt-1 text-[var(--text-secondary)]">
-                                        {candidate.role}
-                                    </span>
+                                <div className="overflow-hidden">
+                                    <h4 className="font-bold text-[var(--text-primary)] text-lg truncate pr-10">{candidate.name}</h4>
+                                    <div className="flex items-baseline gap-1 mt-1">
+                                        <span className="text-[var(--brand-accent)] font-black">฿{candidate.salaryPerDay * 7}</span>
+                                        <span className="text-[8px] text-[var(--text-muted)] font-black uppercase">Bonus</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="text-right">
-                                <p className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Sign-on</p>
-                                <p className="text-[var(--brand-accent)] font-black">฿{candidate.salaryPerDay * 7}</p>
-                            </div>
-                        </div>
 
-                        {/* Stats Row */}
-                        <div className="grid grid-cols-2 gap-3 bg-[var(--bg-elevated)]/50 p-2 rounded-lg">
-                            <div className="space-y-1">
-                                <div className="flex justify-between text-[10px] font-bold uppercase text-[var(--text-muted)]">
-                                    <span>Speed</span>
-                                    <span>{candidate.stats.speed}</span>
+                            {/* Stats Row */}
+                            <div className="space-y-4 mb-6 px-1">
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-[9px] font-black uppercase text-[var(--text-muted)] tracking-wider">
+                                        <span>Operational Speed</span>
+                                        <span className="text-[var(--text-primary)]">{candidate.stats.speed}%</span>
+                                    </div>
+                                    <div className="w-full h-1.5 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
+                                        <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" style={{ width: `${candidate.stats.speed}%` }} />
+                                    </div>
                                 </div>
-                                <div className="w-full h-1.5 bg-[var(--bg-primary)] rounded-full overflow-hidden">
-                                    <div className="h-full bg-blue-500 rounded-full" style={{ width: `${candidate.stats.speed}%` }} />
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-[9px] font-black uppercase text-[var(--text-muted)] tracking-wider">
+                                        <span>Work Quality</span>
+                                        <span className="text-[var(--text-primary)]">{candidate.stats.quality}%</span>
+                                    </div>
+                                    <div className="w-full h-1.5 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
+                                        <div className="h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full" style={{ width: `${candidate.stats.quality}%` }} />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="flex justify-between text-[10px] font-bold uppercase text-[var(--text-muted)]">
-                                    <span>Quality</span>
-                                    <span>{candidate.stats.quality}</span>
-                                </div>
-                                <div className="w-full h-1.5 bg-[var(--bg-primary)] rounded-full overflow-hidden">
-                                    <div className="h-full bg-purple-500 rounded-full" style={{ width: `${candidate.stats.quality}%` }} />
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="flex gap-2">
-                            <BrightButton
-                                variant="outline"
-                                size="sm"
-                                className="w-1/3 text-[var(--state-error)] border-[var(--state-error)] hover:bg-[var(--state-error)]/10"
-                                onClick={() => handleDecline(candidate)}
-                            >
-                                Decline
-                            </BrightButton>
-                            <BrightButton
-                                variant="primary"
-                                size="sm"
-                                className="w-2/3"
-                                onClick={() => handleHire(candidate)}
-                                disabled={business.cashBalance < candidate.salaryPerDay * 7}
-                            >
-                                Hire
-                            </BrightButton>
+                            <div className="flex gap-2">
+                                <button
+                                    className="flex-1 bg-transparent hover:bg-red-500/10 text-red-400 border border-red-500/30 rounded-xl py-2.5 text-xs font-bold transition-all active:scale-95"
+                                    onClick={() => handleDecline(candidate)}
+                                >
+                                    Decline
+                                </button>
+                                <button
+                                    className="flex-[2] bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 text-white border border-white/10 rounded-xl py-2.5 text-xs font-black shadow-lg shadow-[var(--brand-primary)]/20 transition-all active:scale-95 disabled:opacity-50 disabled:grayscale"
+                                    onClick={() => handleHire(candidate)}
+                                    disabled={business.cashBalance < candidate.salaryPerDay * 7}
+                                >
+                                    Hire Now
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+
+                    {/* End Spacer */}
+                    <div className="flex-none w-4" />
+                </div>
 
                 {candidates.length === 0 && (
-                    <div className="text-center py-8 text-[var(--text-muted)] italic">
-                        No active candidates. Check back later.
+                    <div className="text-center py-12 bg-[var(--bg-elevated)]/20 rounded-2xl border-2 border-dashed border-[var(--border-subtle)]">
+                        <p className="text-sm text-[var(--text-muted)] font-medium">No candidates in the pool.<br />Human resources will update soon.</p>
                     </div>
                 )}
+
+                {/* Fade Scroll Indicator */}
+                <div className="absolute right-0 top-0 bottom-6 w-16 bg-gradient-to-l from-[var(--bg-primary)] to-transparent pointer-events-none opacity-40" />
             </div>
-        </BrightLayer>
+        </div>
     );
 }
+
