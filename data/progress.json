@@ -1,0 +1,65 @@
+[
+  {
+    "userId": "user",
+    "objectiveId": "POB-00001",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T03:51:05.711Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "POB-00003",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T04:01:09.306Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "BIO-00001",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T04:23:54.214Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "ENG-00001",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T21:32:50.400Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "POB-00004",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T22:01:03.692Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "POB-00005",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T22:01:33.571Z"
+  },
+  {
+    "userId": "user",
+    "objectiveId": "POB-00009",
+    "stars": 3,
+    "completed": true,
+    "attempts": 3,
+    "bestScore": 3,
+    "lastAttempt": "2026-01-23T22:49:00.487Z"
+  }
+]

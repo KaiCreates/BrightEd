@@ -1,0 +1,304 @@
+Review of Your Proposed Onboarding (Quick Assessment)
+
+Your fields:
+
+Full name
+
+Current age
+
+Form
+
+Country
+
+School
+
+This is not wrong, but it has three problems:
+
+Age is unstable data (changes yearly, causes errors)
+
+Form alone is not enough for adaptive placement
+
+It feels like registration, not the start of a learning journey
+
+For BrightEd, onboarding must:
+
+Collect only what is essential
+
+Set expectations
+
+Prepare the adaptive engine
+
+Feel intelligent, not bureaucratic
+
+2. BrightEd V1 Onboarding — Improved Concept
+Core Principle
+
+Onboarding is placement, not paperwork.
+
+We want to:
+
+Identify academic context
+
+Set the learning track
+
+Reduce wrong assumptions
+
+Begin personalization immediately
+
+3. Step-by-Step Onboarding Flow (Optimized)
+Screen 1 — Welcome & Intent
+
+Purpose: Set trust and explain what happens next.
+
+Content:
+
+Welcome message
+
+Short line:
+
+“BrightEd adapts to how you actually learn. We’ll ask a few questions to personalize your experience.”
+
+Button:
+Start Setup
+
+Screen 2 — Identity (Minimal & Safe)
+
+Fields:
+
+First Name
+
+Last Name (optional display control)
+
+Why:
+
+Name is used for personalization
+
+Avoids early privacy resistance
+
+Screen 3 — Academic Context (Core Data)
+
+Fields:
+
+Country (dropdown)
+
+School (searchable dropdown)
+
+Exam Track:
+
+CSEC
+
+CAPE
+
+Why:
+
+Locks content to CXC
+
+Prevents international material
+
+Enables school-level analytics
+
+Screen 4 — Current Academic Level (Better Than Age)
+
+Instead of age, use learning stage.
+
+Fields:
+
+Current Form:
+
+Form 1
+
+Form 2
+
+…
+
+Form 6
+
+Optional helper text:
+
+“This helps us start you at the right level. If needed, BrightEd will adjust.”
+
+Why this beats age:
+
+Directly maps to syllabus
+
+Avoids age-based misplacement
+
+Works for repeaters, transfers, and late starters
+
+Screen 5 — Subject Selection (Intent Signal)
+
+Prompt:
+
+“Which subjects are you currently studying?”
+
+Selectable list:
+
+Mathematics
+
+English A
+
+Principles of Business
+
+Integrated Science
+
+Economics
+
+Geography
+
+etc.
+
+Why:
+
+Focuses onboarding
+
+Prevents content overload
+
+Allows subject-specific simulations
+
+Screen 6 — Learning Goal (Motivation Hook)
+
+Prompt:
+
+“What are you working toward right now?”
+
+Options:
+
+Improve understanding
+
+Prepare for exams
+
+Catch up on weak areas
+
+Stay consistent
+
+This sets tone, not restriction.
+
+Screen 7 — Diagnostic Setup (Expectation Management)
+
+Message:
+
+“Before we begin, BrightEd will run a short interactive diagnostic to understand how you learn.”
+
+Key points:
+
+No grades
+
+No penalties
+
+Used only for personalization
+
+Button:
+Begin Diagnostic
+
+4. Diagnostic Experience (Part of Onboarding)
+
+This is where BrightEd separates itself.
+
+What It Is
+
+A mini simulation
+
+Subject-based
+
+10–15 minutes max
+
+What It Tests
+
+Foundational understanding
+
+Application
+
+Reasoning speed
+
+Conceptual gaps
+
+What It Is NOT
+
+A long test
+
+A stressful exam
+
+A visible score
+
+5. Onboarding Completion Screen (Critical)
+Message Example
+
+“Your learning path is ready.”
+
+Display:
+
+Starting level per subject
+
+First recommended simulation
+
+Explanation:
+
+“We’ll adjust as you improve.”
+
+Primary Button:
+Start Learning
+
+6. Why This Onboarding Is Better Than the Original
+Your Version
+
+Static
+
+Form-based
+
+Assumes correctness
+
+No intelligence
+
+This Version
+
+Adaptive
+
+Context-aware
+
+Diagnostic-driven
+
+Emotionally reassuring
+
+Academically accurate
+
+It prevents misplacement, which is the #1 reason EdTech fails.
+
+7. Data Collected (Clean Summary)
+
+Collected:
+
+Name
+
+Country
+
+School
+
+Exam track
+
+Form
+
+Subjects
+
+Learning intent
+
+Diagnostic results
+
+Not collected:
+
+Age
+
+Sensitive personal data
+
+Unnecessary identifiers
+
+8. What This Enables Immediately
+
+Accurate content gating
+
+Lower-form recommendations when needed
+
+Simulation targeting
+
+Trust with parents and schools
+
+Long session times from day one

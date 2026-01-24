@@ -1,0 +1,511 @@
+[
+  {
+    "id": "CHEM-00001",
+    "section": "SECTION A - Principles of Chemistry\nSECTION B - Organic Chemistry\nSECTION C - Inorganic Chemistry",
+    "subsection": "Unknown",
+    "objective": "Knowledge and Comprehension",
+    "content": "",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehension"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "knowledge",
+      "comprehension"
+    ],
+    "hash": "875fa256",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:43.811102"
+  },
+  {
+    "id": "CHEM-00002",
+    "section": "SECTION A - Principles of Chemistry\nSECTION B - Organic Chemistry\nSECTION C - Inorganic Chemistry",
+    "subsection": "Unknown",
+    "objective": "Use of Knowledge",
+    "content": "",
+    "specific_objectives": [
+      "Use of Knowledge"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "knowledge"
+    ],
+    "hash": "3ece22bf",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:43.811138"
+  },
+  {
+    "id": "CHEM-00003",
+    "section": "SECTION A - Principles of Chemistry\nSECTION B - Organic Chemistry\nSECTION C - Inorganic Chemistry",
+    "subsection": "Unknown",
+    "objective": "Experimental Skills",
+    "content": "–",
+    "specific_objectives": [
+      "Experimental Skills"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "skills",
+      "experimental"
+    ],
+    "hash": "d3f3fb9d",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:43.811162"
+  },
+  {
+    "id": "CHEM-00004",
+    "section": "Section B involves the study of the sources and nature of the compounds of carbon",
+    "subsection": "Unknown",
+    "objective": "Boiling Tube",
+    "content": "Temperature (˚C)",
+    "specific_objectives": [
+      "Boiling Tube"
+    ],
+    "content_items": [
+      "Temperature (˚C)"
+    ],
+    "difficulty": 1,
+    "page_number": 53,
+    "keywords": [
+      "tube",
+      "boiling",
+      "temperature"
+    ],
+    "hash": "d0c3efb5",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:47.959622"
+  },
+  {
+    "id": "CHEM-00005",
+    "section": "Section B involves the study of the sources and nature of the compounds of carbon",
+    "subsection": "Unknown",
+    "objective": "OBSERVATION WITH DILUTE NaOH (aq)",
+    "content": "",
+    "specific_objectives": [
+      "OBSERVATION WITH DILUTE NaOH (aq)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "dilute",
+      "observation",
+      "naoh"
+    ],
+    "hash": "a7812b46",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:48.283760"
+  },
+  {
+    "id": "CHEM-00006",
+    "section": "Section B involves the study of the sources and nature of the compounds of carbon",
+    "subsection": "Unknown",
+    "objective": "A rusty-brown precipitate formed.",
+    "content": "The rusty-brown precipitate remained insoluble.",
+    "specific_objectives": [
+      "A rusty-brown precipitate formed."
+    ],
+    "content_items": [
+      "The rusty-brown precipitate remained insoluble."
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "rusty",
+      "remained",
+      "formed",
+      "insoluble",
+      "brown",
+      "precipitate"
+    ],
+    "hash": "2cd6a667",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:48.283832"
+  },
+  {
+    "id": "CHEM-00007",
+    "section": "module of the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "REGISTRATION NUMBER",
+    "content": "CANDIDATES NAME",
+    "specific_objectives": [
+      "REGISTRATION NUMBER"
+    ],
+    "content_items": [
+      "CANDIDATES NAME"
+    ],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "name",
+      "candidates",
+      "registration",
+      "number"
+    ],
+    "hash": "74dbe64b",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:49.201146"
+  },
+  {
+    "id": "CHEM-00008",
+    "section": "SECTION A\nAnswer ALL Questions",
+    "subsection": "Unknown",
+    "objective": "Mass of Manganese Dioxide (g)",
+    "content": "Rate of Reaction (10-3 g O s-1)",
+    "specific_objectives": [
+      "Mass of Manganese Dioxide (g)"
+    ],
+    "content_items": [
+      "Rate of Reaction (10-3 g O s-1)"
+    ],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "rate",
+      "mass",
+      "reaction",
+      "dioxide",
+      "manganese"
+    ],
+    "hash": "5a986961",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:51.016437"
+  },
+  {
+    "id": "CHEM-00009",
+    "section": "SECTION A\nAnswer ALL Questions",
+    "subsection": "Unknown",
+    "objective": "To a sample of Solution X, aqueous ammonia was added until in excess.",
+    "content": "Light blue precipitate is soluble in excess to produce deep blue solution.",
+    "specific_objectives": [
+      "To a sample of Solution X",
+      "aqueous ammonia was added until in excess."
+    ],
+    "content_items": [
+      "Light blue precipitate is soluble in excess to produce deep blue solution."
+    ],
+    "difficulty": 1,
+    "page_number": 90,
+    "keywords": [
+      "aqueous",
+      "added",
+      "blue",
+      "sample",
+      "light",
+      "produce",
+      "excess",
+      "solution",
+      "until",
+      "deep"
+    ],
+    "hash": "ea1af4dc",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:51.169961"
+  },
+  {
+    "id": "CHEM-00010",
+    "section": "SECTION A\nAnswer ALL Questions",
+    "subsection": "Unknown",
+    "objective": "Powdered zinc was added to a sample of Solution X.",
+    "content": "A red/brown solid is produced and the blue liquid gets paler.",
+    "specific_objectives": [
+      "Powdered zinc was added to a sample of Solution X."
+    ],
+    "content_items": [
+      "A red/brown solid is produced",
+      "the blue liquid gets paler."
+    ],
+    "difficulty": 1,
+    "page_number": 90,
+    "keywords": [
+      "paler",
+      "added",
+      "blue",
+      "powdered",
+      "sample",
+      "produced",
+      "solution",
+      "zinc",
+      "liquid",
+      "gets"
+    ],
+    "hash": "7c6fc463",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:51.170005"
+  },
+  {
+    "id": "CHEM-00011",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "To a sample of Solution X, aqueous ammonia was added until in excess",
+    "content": "Light blue precipitate soluble in excess to produce deep blue solution",
+    "specific_objectives": [
+      "To a sample of Solution X",
+      "aqueous ammonia was added until in excess"
+    ],
+    "content_items": [
+      "Light blue precipitate soluble in excess to produce deep blue solution"
+    ],
+    "difficulty": 1,
+    "page_number": 103,
+    "keywords": [
+      "aqueous",
+      "added",
+      "blue",
+      "sample",
+      "light",
+      "produce",
+      "excess",
+      "solution",
+      "until",
+      "deep"
+    ],
+    "hash": "ce9f2f3e",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:51.914278"
+  },
+  {
+    "id": "CHEM-00012",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Powedered zinc was added to a sample of Solution X",
+    "content": "A red/brown solid is produced and the blue liquid gets paler",
+    "specific_objectives": [
+      "Powedered zinc was added to a sample of Solution X"
+    ],
+    "content_items": [
+      "A red/brown solid is produced",
+      "the blue liquid gets paler"
+    ],
+    "difficulty": 1,
+    "page_number": 103,
+    "keywords": [
+      "powedered",
+      "paler",
+      "added",
+      "blue",
+      "sample",
+      "produced",
+      "solution",
+      "zinc",
+      "liquid",
+      "gets"
+    ],
+    "hash": "8bab3b9d",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:51.914359"
+  },
+  {
+    "id": "CHEM-00013",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Burette Reading",
+    "content": "Titration Number",
+    "specific_objectives": [
+      "Burette Reading"
+    ],
+    "content_items": [
+      "Titration Number"
+    ],
+    "difficulty": 1,
+    "page_number": 111,
+    "keywords": [
+      "number",
+      "titration",
+      "burette",
+      "reading"
+    ],
+    "hash": "7a53f93d",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.448440"
+  },
+  {
+    "id": "CHEM-00014",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Final Reading (cm3)",
+    "content": "",
+    "specific_objectives": [
+      "Final Reading (cm3)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 111,
+    "keywords": [
+      "final",
+      "reading"
+    ],
+    "hash": "e3951e8f",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.448466"
+  },
+  {
+    "id": "CHEM-00015",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Initial reading (cm3)",
+    "content": "",
+    "specific_objectives": [
+      "Initial reading (cm3)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 111,
+    "keywords": [
+      "initial",
+      "reading"
+    ],
+    "hash": "f01b5fa8",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.448480"
+  },
+  {
+    "id": "CHEM-00016",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Volume of P used (cm3)",
+    "content": "",
+    "specific_objectives": [
+      "Volume of P used (cm3)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 111,
+    "keywords": [
+      "volume",
+      "used"
+    ],
+    "hash": "90610f89",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.448494"
+  },
+  {
+    "id": "CHEM-00017",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "(i) In a test tube, add approximately 4 cm3 of water to a spatula full of solid T and swirl the tube until there is no further change. To separate portions of R, S and the mixture of T obtained in (i), carry out tests (ii) – (iv).",
+    "content": "",
+    "specific_objectives": [
+      "(i) In a test tube",
+      "add approximately 4 cm3 of water to a spatula full of solid T",
+      "swirl the tube until there is no further change. To separate portions of R",
+      "the mixture of T obtained in (i)",
+      "carry out tests (ii) – (iv)."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "tests",
+      "change",
+      "full",
+      "separate",
+      "portions",
+      "further",
+      "tube",
+      "swirl",
+      "test",
+      "there"
+    ],
+    "hash": "5955d4d1",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.507181"
+  },
+  {
+    "id": "CHEM-00018",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "(ii) Add aqueous ammonia gradually until in excess.",
+    "content": "(2 marks)",
+    "specific_objectives": [
+      "(ii) Add aqueous ammonia gradually until in excess."
+    ],
+    "content_items": [
+      "(2 marks)"
+    ],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "aqueous",
+      "excess",
+      "until",
+      "gradually",
+      "marks",
+      "ammonia"
+    ],
+    "hash": "5a9ad3cf",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.507219"
+  },
+  {
+    "id": "CHEM-00019",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "(iii) Add a few drops of aqueous potassium iodide.",
+    "content": "(1 mark)",
+    "specific_objectives": [
+      "(iii) Add a few drops of aqueous potassium iodide."
+    ],
+    "content_items": [
+      "(1 mark)"
+    ],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "aqueous",
+      "potassium",
+      "iodide",
+      "drops",
+      "mark"
+    ],
+    "hash": "f06ce45c",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.507244"
+  },
+  {
+    "id": "CHEM-00020",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Temperature (ºC)",
+    "content": "",
+    "specific_objectives": [
+      "Temperature (ºC)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 113,
+    "keywords": [
+      "temperature"
+    ],
+    "hash": "bfdf7e00",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.557809"
+  },
+  {
+    "id": "CHEM-00021",
+    "section": "SECTION B\nAnswer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "Solubility (g per 100 g water)",
+    "content": "Z",
+    "specific_objectives": [
+      "Solubility (g per 100 g water)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 113,
+    "keywords": [
+      "water",
+      "solubility"
+    ],
+    "hash": "b4edfba4",
+    "source_file": "CSEC Chemistry Syllabus with Specimen Papers and Mark Scheme-Keys.pdf",
+    "extraction_date": "2026-01-22T15:15:52.557842"
+  }
+]

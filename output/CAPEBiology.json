@@ -1,0 +1,171 @@
+[
+  {
+    "id": "BIO-00001",
+    "section": "Unit 1 Unit",
+    "subsection": "Unknown",
+    "objective": "*Observation, Recording and Reporting",
+    "content": "12 marks",
+    "specific_objectives": [
+      "*Observation",
+      "Recording",
+      "Reporting"
+    ],
+    "content_items": [
+      "marks"
+    ],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "marks",
+      "observation",
+      "reporting",
+      "recording"
+    ],
+    "hash": "a187d505",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.064196"
+  },
+  {
+    "id": "BIO-00002",
+    "section": "Unit 1 Unit",
+    "subsection": "Unknown",
+    "objective": "Manipulation and Measurement",
+    "content": "12 marks",
+    "specific_objectives": [
+      "Manipulation",
+      "Measurement"
+    ],
+    "content_items": [
+      "marks"
+    ],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "measurement",
+      "marks",
+      "manipulation"
+    ],
+    "hash": "ac4ef350",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.064239"
+  },
+  {
+    "id": "BIO-00003",
+    "section": "Unit 1 Unit",
+    "subsection": "Unknown",
+    "objective": "Analysis and Interpretation",
+    "content": "12 marks",
+    "specific_objectives": [
+      "Analysis",
+      "Interpretation"
+    ],
+    "content_items": [
+      "marks"
+    ],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "analysis",
+      "marks",
+      "interpretation"
+    ],
+    "hash": "0b4c953e",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.064264"
+  },
+  {
+    "id": "BIO-00004",
+    "section": "Unit 1 Unit",
+    "subsection": "Unknown",
+    "objective": "Planning and Designing",
+    "content": "-",
+    "specific_objectives": [
+      "Planning",
+      "Designing"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "planning",
+      "designing"
+    ],
+    "hash": "db4e308e",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.064285"
+  },
+  {
+    "id": "BIO-00005",
+    "section": "Unit contains marks assigned to papers and to Modules and percentage\ncontribution of each paper to total scores",
+    "subsection": "Unknown",
+    "objective": "External Assessment Paper 01 (1 hour 30 minutes) Multiple Choice",
+    "content": "15 30 (weighted)",
+    "specific_objectives": [
+      "External Assessment Paper 01 (1 hour 30 minutes) Multiple Choice"
+    ],
+    "content_items": [
+      "30 (weighted)"
+    ],
+    "difficulty": 3,
+    "page_number": 48,
+    "keywords": [
+      "external",
+      "minutes",
+      "multiple",
+      "choice",
+      "assessment",
+      "hour",
+      "paper",
+      "weighted"
+    ],
+    "hash": "054bc047",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.422601"
+  },
+  {
+    "id": "BIO-00006",
+    "section": "Unit contains marks assigned to papers and to Modules and percentage\ncontribution of each paper to total scores",
+    "subsection": "Unknown",
+    "objective": "Paper 02 (2 hours 30 minutes) Section A - Structured questions Section B - Essay questions",
+    "content": "15",
+    "specific_objectives": [
+      "Paper 02 (2 hours 30 minutes) Section A - Structured questions Section B - Essay questions"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "section",
+      "hours",
+      "questions",
+      "minutes",
+      "structured",
+      "essay",
+      "paper"
+    ],
+    "hash": "9da5a850",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.422679"
+  },
+  {
+    "id": "BIO-00007",
+    "section": "Unit contains marks assigned to papers and to Modules and percentage\ncontribution of each paper to total scores",
+    "subsection": "Unknown",
+    "objective": "Internal Assessment Papers 03A or 03B",
+    "content": "",
+    "specific_objectives": [
+      "Internal Assessment Papers 03A"
+    ],
+    "content_items": [],
+    "difficulty": 3,
+    "page_number": 48,
+    "keywords": [
+      "papers",
+      "internal",
+      "assessment"
+    ],
+    "hash": "e722687c",
+    "source_file": "CAPEBiology.pdf",
+    "extraction_date": "2026-01-22T15:09:06.422734"
+  }
+]

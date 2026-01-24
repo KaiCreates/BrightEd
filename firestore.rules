@@ -1,0 +1,123 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- HELPER FUNCTIONS ---
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    // --- USER PROFILE RULES ---
+    match /users/{userId} {
+      // Allow read for everyone (needed for Business Feed & Social Badge prestige)
+      allow read: if isAuthenticated();
+      // Only the user can edit their own profile
+      allow write: if isAuthenticated() && isOwner(userId);
+      
+      match /progress/{document=**} {
+        // Progress is strictly private
+        allow read, write: if isAuthenticated() && isOwner(userId);
+      }
+      
+      // NABLE Learning Engine state
+      match /nable/{document=**} {
+        // NABLE state is strictly private
+        allow read, write: if isAuthenticated() && isOwner(userId);
+      }
+    }
+
+    // --- BUSINESS SYSTEM RULES ---
+    match /businesses/{bizId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && resource.data.ownerId == request.auth.uid;
+
+      match /{allSubcollections=**} {
+        allow read, write: if isAuthenticated() && get(/databases/$(database)/documents/businesses/$(bizId)).data.ownerId == request.auth.uid;
+      }
+    }
+
+    // --- FORUM & SOCIAL SYSTEM RULES ---
+    
+    // 1. Forum Rooms (Public & Private)
+    match /rooms/{roomId} {
+      // Anyone authenticated can see rooms
+      allow read: if isAuthenticated();
+      
+      // Only allow creation of rooms if the user is authenticated
+      allow create: if isAuthenticated();
+      
+      // Allow update if user is adding themselves to members array or room is public
+      allow update: if isAuthenticated() && (
+        resource.data.type == 'public' ||
+        request.resource.data.type == 'public' ||
+        request.resource.data.members.hasAny([request.auth.uid]) ||
+        resource.data.members.hasAny([request.auth.uid])
+      );
+
+      // 2. Messages within Rooms
+      match /messages/{messageId} {
+        // Anyone authenticated can read messages (public rooms don't require membership)
+        allow read: if isAuthenticated();
+        
+        // User can only send a message if they set themselves as the sender
+        // Public rooms allow anyone, private rooms require membership
+        allow create: if isAuthenticated() 
+                      && request.resource.data.senderId == request.auth.uid
+                      && (
+                        get(/databases/$(database)/documents/rooms/$(roomId)).data.type == 'public' ||
+                        request.auth.uid in get(/databases/$(database)/documents/rooms/$(roomId)).data.members
+                      );
+        
+        // Only the sender can delete their own message
+        allow delete: if isAuthenticated() && resource.data.senderId == request.auth.uid;
+        
+        // Reactions (Update) - allow anyone authenticated to update reactions
+        allow update: if isAuthenticated(); 
+      }
+    }
+
+    // 3. Private Direct Messages (DMs) - Note: Code uses 'dms' not 'direct_messages'
+    match /dms/{chatId} {
+      // Allow creation if user is in participants array
+      allow create: if isAuthenticated() 
+                    && request.auth.uid in request.resource.data.participants;
+      
+      // Allow read if user is a participant (document exists)
+      allow read: if isAuthenticated() 
+                  && request.auth.uid in resource.data.participants;
+      
+      // Messages subcollection
+      match /messages/{messageId} {
+        // Allow read if user is participant in parent DM document (or document doesn't exist yet)
+        allow read: if isAuthenticated() && (
+          !exists(/databases/$(database)/documents/dms/$(chatId)) ||
+          request.auth.uid in get(/databases/$(database)/documents/dms/$(chatId)).data.participants
+        );
+        
+        // Allow create if user is sender and participant (or creating new DM)
+        allow create: if isAuthenticated() 
+                      && request.resource.data.senderId == request.auth.uid
+                      && (
+                        !exists(/databases/$(database)/documents/dms/$(chatId)) ||
+                        request.auth.uid in get(/databases/$(database)/documents/dms/$(chatId)).data.participants
+                      );
+      }
+    }
+
+    // 4. Moderation Queue (Reporting System)
+    match /moderation_queue/{reportId} {
+      // Anyone can create a report
+      allow create: if isAuthenticated();
+      // No one can read them except via Firebase Console (admin only)
+      allow read: if false;
+    }
+
+    // 5. Blocking System - stored in users collection as blockedUsers array
+    // Handled via users/{userId} update rules above
+  }
+}

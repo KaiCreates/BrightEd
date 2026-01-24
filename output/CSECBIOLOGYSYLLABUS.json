@@ -1,0 +1,912 @@
+[
+  {
+    "id": "BIO-00001",
+    "section": "SECTION A - Living Organisms in the Environment\nSECTION B - Life Processes and Disease\nSECTION C - Continuity and Variation",
+    "subsection": "Unknown",
+    "objective": "Knowledge and Comprehension",
+    "content": "",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehension"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "knowledge",
+      "comprehension"
+    ],
+    "hash": "875fa256",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:02.359417"
+  },
+  {
+    "id": "BIO-00002",
+    "section": "SECTION A - Living Organisms in the Environment\nSECTION B - Life Processes and Disease\nSECTION C - Continuity and Variation",
+    "subsection": "Unknown",
+    "objective": "Use of Knowledge",
+    "content": "-",
+    "specific_objectives": [
+      "Use of Knowledge"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "knowledge"
+    ],
+    "hash": "393040f0",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:02.359460"
+  },
+  {
+    "id": "BIO-00003",
+    "section": "SECTION A - Living Organisms in the Environment\nSECTION B - Life Processes and Disease\nSECTION C - Continuity and Variation",
+    "subsection": "Unknown",
+    "objective": "Experimental Skills",
+    "content": "–",
+    "specific_objectives": [
+      "Experimental Skills"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "skills",
+      "experimental"
+    ],
+    "hash": "d3f3fb9d",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:02.359493"
+  },
+  {
+    "id": "BIO-00004",
+    "section": "SECTION C - CONTINUITY AND VARIATION",
+    "subsection": "Unknown",
+    "objective": "No fertilizer",
+    "content": "",
+    "specific_objectives": [
+      "No fertilizer"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "fertilizer"
+    ],
+    "hash": "734a7c5f",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:06.759712"
+  },
+  {
+    "id": "BIO-00005",
+    "section": "SECTION C - CONTINUITY AND VARIATION",
+    "subsection": "Unknown",
+    "objective": "Full strength",
+    "content": "",
+    "specific_objectives": [
+      "Full strength"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "full",
+      "strength"
+    ],
+    "hash": "03da9854",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:06.759759"
+  },
+  {
+    "id": "BIO-00006",
+    "section": "SECTION C - CONTINUITY AND VARIATION",
+    "subsection": "Unknown",
+    "objective": "¾ strength",
+    "content": "",
+    "specific_objectives": [
+      "¾ strength"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "strength"
+    ],
+    "hash": "31a842ef",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:06.759804"
+  },
+  {
+    "id": "BIO-00007",
+    "section": "SECTION C - CONTINUITY AND VARIATION",
+    "subsection": "Unknown",
+    "objective": "½ strength",
+    "content": "",
+    "specific_objectives": [
+      "½ strength"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "strength"
+    ],
+    "hash": "815db674",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:06.759836"
+  },
+  {
+    "id": "BIO-00008",
+    "section": "SECTION C - CONTINUITY AND VARIATION",
+    "subsection": "Unknown",
+    "objective": "¼ strength",
+    "content": "",
+    "specific_objectives": [
+      "¼ strength"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "strength"
+    ],
+    "hash": "bb9c67fb",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:06.759865"
+  },
+  {
+    "id": "BIO-00009",
+    "section": "Section B Life Processes and Disease",
+    "subsection": "Unknown",
+    "objective": ":M e Oe Mr F",
+    "content": "E",
+    "specific_objectives": [
+      ":M e Oe Mr F"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [],
+    "hash": "cdb0b54f",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:07.296530"
+  },
+  {
+    "id": "BIO-00010",
+    "section": "Section B Life Processes and Disease",
+    "subsection": "Unknown",
+    "objective": "d e :M h c Oa t Mt A",
+    "content": "e",
+    "specific_objectives": [
+      "d e :M h c Oa t Mt A"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [],
+    "hash": "662f4212",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:07.296570"
+  },
+  {
+    "id": "BIO-00011",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "A. Williams",
+    "content": "",
+    "specific_objectives": [
+      "A. Williams"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "williams"
+    ],
+    "hash": "0062e160",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:07.967012"
+  },
+  {
+    "id": "BIO-00012",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "B. Cuthbert",
+    "content": "",
+    "specific_objectives": [
+      "B. Cuthbert"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "cuthbert"
+    ],
+    "hash": "9ef25631",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:07.967034"
+  },
+  {
+    "id": "BIO-00013",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "Allen, Veronica",
+    "content": "",
+    "specific_objectives": [
+      "Allen",
+      "Veronica"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "allen",
+      "veronica"
+    ],
+    "hash": "5e89825c",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.219709"
+  },
+  {
+    "id": "BIO-00014",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "Williams, Ann",
+    "content": "",
+    "specific_objectives": [
+      "Williams"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "williams"
+    ],
+    "hash": "62643a2e",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.219738"
+  },
+  {
+    "id": "BIO-00015",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "Cuthbert, Bryan",
+    "content": "",
+    "specific_objectives": [
+      "Cuthbert",
+      "Bryan"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "bryan",
+      "cuthbert"
+    ],
+    "hash": "e2dadbe5",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.219754"
+  },
+  {
+    "id": "BIO-00016",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "Moore, Jason",
+    "content": "",
+    "specific_objectives": [
+      "Moore",
+      "Jason"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "moore",
+      "jason"
+    ],
+    "hash": "ff686e04",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.219768"
+  },
+  {
+    "id": "BIO-00017",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "Worte, Stewart",
+    "content": "",
+    "specific_objectives": [
+      "Worte",
+      "Stewart"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "stewart",
+      "worte"
+    ],
+    "hash": "14383587",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.219782"
+  },
+  {
+    "id": "BIO-00018",
+    "section": "section\nwhere appropriate",
+    "subsection": "Unknown",
+    "objective": "CANDIDATES NUMBERS",
+    "content": "CANDIDATES NAMES",
+    "specific_objectives": [
+      "CANDIDATES NUMBERS"
+    ],
+    "content_items": [
+      "CANDIDATES NAMES"
+    ],
+    "difficulty": 1,
+    "page_number": 77,
+    "keywords": [
+      "numbers",
+      "names",
+      "candidates"
+    ],
+    "hash": "8263f791",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:08.473804"
+  },
+  {
+    "id": "BIO-00019",
+    "section": "section through a kidney",
+    "subsection": "Unknown",
+    "objective": "QUESTION NUMBER",
+    "content": "KEY",
+    "specific_objectives": [
+      "QUESTION NUMBER"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 101,
+    "keywords": [
+      "number",
+      "question"
+    ],
+    "hash": "8d0e30d5",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.620606"
+  },
+  {
+    "id": "BIO-00020",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Plant Organisms",
+    "content": "Quadrat Number",
+    "specific_objectives": [
+      "Plant Organisms"
+    ],
+    "content_items": [
+      "Quadrat Number"
+    ],
+    "difficulty": 1,
+    "page_number": 104,
+    "keywords": [
+      "organisms",
+      "quadrat",
+      "plant",
+      "number"
+    ],
+    "hash": "1481d8df",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.730782"
+  },
+  {
+    "id": "BIO-00021",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Small flowering shrub",
+    "content": "",
+    "specific_objectives": [
+      "Small flowering shrub"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 104,
+    "keywords": [
+      "shrub",
+      "flowering",
+      "small"
+    ],
+    "hash": "5b7de29c",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.730808"
+  },
+  {
+    "id": "BIO-00022",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Grass growing in clumps",
+    "content": "",
+    "specific_objectives": [
+      "Grass growing in clumps"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 104,
+    "keywords": [
+      "grass",
+      "clumps",
+      "growing"
+    ],
+    "hash": "428719a1",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.730824"
+  },
+  {
+    "id": "BIO-00023",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Succulent plant",
+    "content": "",
+    "specific_objectives": [
+      "Succulent plant"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 104,
+    "keywords": [
+      "succulent",
+      "plant"
+    ],
+    "hash": "3ad1ff65",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.730838"
+  },
+  {
+    "id": "BIO-00024",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Guppy (fish)",
+    "content": "Mosquito larvae, tadpoles",
+    "specific_objectives": [
+      "Guppy (fish)"
+    ],
+    "content_items": [
+      "Mosquito larvae",
+      "tadpoles"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "tadpoles",
+      "guppy",
+      "larvae",
+      "fish",
+      "mosquito"
+    ],
+    "hash": "f1e1b4ef",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.764174"
+  },
+  {
+    "id": "BIO-00025",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Water bird",
+    "content": "Guppy, frog, crab",
+    "specific_objectives": [
+      "Water bird"
+    ],
+    "content_items": [
+      "Guppy",
+      "frog",
+      "crab"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "frog",
+      "guppy",
+      "crab",
+      "bird",
+      "water"
+    ],
+    "hash": "3e12e5bb",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.764211"
+  },
+  {
+    "id": "BIO-00026",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Water snail",
+    "content": "Algae, water weed",
+    "specific_objectives": [
+      "Water snail"
+    ],
+    "content_items": [
+      "Algae",
+      "water weed"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "snail",
+      "algae",
+      "weed",
+      "water"
+    ],
+    "hash": "5ff753bd",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.764232"
+  },
+  {
+    "id": "BIO-00027",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Mosquito larvae",
+    "content": "Moss, decaying plant matter",
+    "specific_objectives": [
+      "Mosquito larvae"
+    ],
+    "content_items": [
+      "Moss",
+      "decaying plant matter"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "matter",
+      "decaying",
+      "larvae",
+      "moss",
+      "mosquito",
+      "plant"
+    ],
+    "hash": "a88159de",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.764253"
+  },
+  {
+    "id": "BIO-00028",
+    "section": "SECTION A\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Water weed",
+    "content": "Makes own food",
+    "specific_objectives": [
+      "Water weed"
+    ],
+    "content_items": [
+      "Makes own food"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "food",
+      "makes",
+      "weed",
+      "water"
+    ],
+    "hash": "f2ba761d",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:09.764270"
+  },
+  {
+    "id": "BIO-00029",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 1.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 1."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 124,
+    "keywords": [
+      "question"
+    ],
+    "hash": "c8657f98",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:10.548349"
+  },
+  {
+    "id": "BIO-00030",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "(a) (i) Rope/String Tape measure Bottles Traps Any other reasonable suggestion Any 2 = 2 marks (ii) Rope/String Use a line transect Secure the rope at one end of the habitat (1) Extend in a straight line to the other end (1) Any 1 = 1 mark Use the tape/measure to mark the transect (1) Record the species of plants touching the line at regular intervals (1) Any 1 = 1 mark Bottles/traps – laid along transect lines/pitfalls for catching mobile organisms (small/large) Any 1 = 1 mark Max mark = 2 Explanation to include how the apparatus will be used (b) (i) Throw the quadrat randomly Repeat throws Any 1 = 1 mark (ii) Sum all the quadrat results = 22 (1) Divide by 10 Species density = 2.2 shrubs/m2 (1) (c) (i) Food web Producer (1) Arrows pointing in the right direction Organisms used in logical sequence Interconnected food chains shown Any 2 = 2 marks",
+    "content": "",
+    "specific_objectives": [
+      "(a) (i) Rope/String Tape measure Bottles Traps Any other reasonable suggestion Any 2 = 2 marks (ii) Rope/String Use a line transect Secure the rope at one end of the habitat (1) Extend in a straight line to the other end (1) Any 1 = 1 mark Use the tape/measure to mark the transect (1) Record the species of plants touching the line at regular intervals (1) Any 1 = 1 mark Bottles/traps – laid along transect lines/pitfalls for catching mobile organisms (small/large) Any 1 = 1 mark Max mark = 2 Explanation to include how the apparatus will be used (b) (i) Throw the quadrat randomly Repeat throws Any 1 = 1 mark (ii) Sum all the quadrat results = 22 (1) Divide by 10 Species density = 2.2 shrubs/m2 (1) (c) (i) Food web Producer (1) Arrows pointing in the right direction Organisms used in logical sequence Interconnected food chains shown Any 2 = 2 marks"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 124,
+    "keywords": [
+      "transect",
+      "interconnected",
+      "suggestion",
+      "extend",
+      "throw",
+      "organisms",
+      "repeat",
+      "straight",
+      "divide",
+      "arrows"
+    ],
+    "hash": "644cd4b7",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:10.548555"
+  },
+  {
+    "id": "BIO-00031",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 1. (continued)",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 1. (continued)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 125,
+    "keywords": [
+      "continued",
+      "question"
+    ],
+    "hash": "ae53569c",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:10.676150"
+  },
+  {
+    "id": "BIO-00032",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "(c) (ii) Less energy available at higher trophic levels Energy lost at each successive trophic level Respiration activity, excretory losses at each level Competition for food Any 1 explained = 2 marks (ii) Temperature Turgidity Rainfall Any other reasonable suggestion Any 2 = 2 marks (d) (i) Line graph: (see graph on Page 5) Title (1) Axis labeled appropriately (1) Accurate plot (2) – scale – all points accurate (ii) Decline before hurricane (1) Limited availability of food Killed by vehicles/humans Use of insecticides Any 1 = 1 mark Increase after the hurricane (1) Pond expands due to rainfall More tadpoles/increased fertility Any 1 = 1 mark Decline after the hurricane (1) Competition Limited availability of food Killed by vehicles Use of insecticides Destruction of habitat by man Accept any other reasonable explanation Any 1 = 1 mark",
+    "content": "2",
+    "specific_objectives": [
+      "(c) (ii) Less energy available at higher trophic levels Energy lost at each successive trophic level Respiration activity",
+      "excretory losses at each level Competition for food Any 1 explained = 2 marks (ii) Temperature Turgidity Rainfall Any other reasonable suggestion Any 2 = 2 marks (d) (i) Line graph: (see graph on Page 5) Title (1) Axis labeled appropriately (1) Accurate plot (2) – scale – all points accurate (ii) Decline before hurricane (1) Limited availability of food Killed by vehicles/humans Use of insecticides Any 1 = 1 mark Increase after the hurricane (1) Pond expands due to rainfall More tadpoles/increased fertility Any 1 = 1 mark Decline after the hurricane (1) Competition Limited availability of food Killed by vehicles Use of insecticides Destruction of habitat by man Accept any other reasonable explanation Any 1 = 1 mark"
+    ],
+    "content_items": [],
+    "difficulty": 2,
+    "page_number": 125,
+    "keywords": [
+      "humans",
+      "suggestion",
+      "insecticides",
+      "title",
+      "activity",
+      "decline",
+      "increase",
+      "hurricane",
+      "explanation",
+      "killed"
+    ],
+    "hash": "9ebb1dde",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:10.676353"
+  },
+  {
+    "id": "BIO-00033",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 2.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 2."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 128,
+    "keywords": [
+      "question"
+    ],
+    "hash": "239c84c7",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:10.972054"
+  },
+  {
+    "id": "BIO-00034",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 3.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 3."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 129,
+    "keywords": [
+      "question"
+    ],
+    "hash": "0695c940",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.102169"
+  },
+  {
+    "id": "BIO-00035",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 4.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 4."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 130,
+    "keywords": [
+      "question"
+    ],
+    "hash": "0b95a9f1",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.244092"
+  },
+  {
+    "id": "BIO-00036",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 5.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 5."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 131,
+    "keywords": [
+      "question"
+    ],
+    "hash": "307b53b9",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.367375"
+  },
+  {
+    "id": "BIO-00037",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "(a) (i) Name of pathogen – Plasmodium, dengue virus, yellow fever virus, West Nile virus (1) Name of disease – malaria, dengue, Yellow fever West Nile fever (1) Role in transmission – Bites infected person – Hosts pathogen – Mosquito not affected by pathogen Any 4 = 4 marks Social Implications – Loss of productivity – Isolation of infected persons – Increased demand on human services Any other reasonable suggestion Any 2 = 2 marks (b) Adult Breeding in stagnant water – removing stagnant water prevents breeding site Feeding pattern – feeds at dusk so take measures to prevent contact, for example, spraying insecticide or using repellent 1 explained = 2 marks Eggs Eggs produced in stagnant water – prevent formation or drain stagnant pools of water (1) Larva/Pupa Live in stagnant water - chemicals can be used to destroy them Small fish feeds on this stage Oil on surface of water prevents air getting to pupa Any 1 explained = 2 marks",
+    "content": "2",
+    "specific_objectives": [
+      "(a) (i) Name of pathogen – Plasmodium",
+      "dengue virus",
+      "yellow fever virus",
+      "West Nile virus (1) Name of disease – malaria",
+      "dengue",
+      "Yellow fever West Nile fever (1) Role in transmission – Bites infected person – Hosts pathogen – Mosquito not affected by pathogen Any 4 = 4 marks Social Implications – Loss of productivity – Isolation of infected persons – Increased demand on human services Any other reasonable suggestion Any 2 = 2 marks (b) Adult Breeding in stagnant water – removing stagnant water prevents breeding site Feeding pattern – feeds at dusk so take measures to prevent contact",
+      "for example",
+      "spraying insecticide",
+      "using repellent 1 explained = 2 marks Eggs Eggs produced in stagnant water – prevent formation",
+      "drain stagnant pools of water (1) Larva/Pupa Live in stagnant water - chemicals can be used to destroy them Small fish feeds on this stage Oil on surface of water prevents air getting to pupa Any 1 explained = 2 marks"
+    ],
+    "content_items": [],
+    "difficulty": 2,
+    "page_number": 131,
+    "keywords": [
+      "suggestion",
+      "feeds",
+      "contact",
+      "surface",
+      "feeding",
+      "hosts",
+      "stagnant",
+      "dengue",
+      "prevent",
+      "infected"
+    ],
+    "hash": "69034e22",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.367646"
+  },
+  {
+    "id": "BIO-00038",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 5. (continued)",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 5. (continued)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 132,
+    "keywords": [
+      "continued",
+      "question"
+    ],
+    "hash": "5f45d2db",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.461853"
+  },
+  {
+    "id": "BIO-00039",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 6.",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 6."
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 133,
+    "keywords": [
+      "question"
+    ],
+    "hash": "5fb78efd",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.612236"
+  },
+  {
+    "id": "BIO-00040",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "(a) Natural selection – Process by which allele frequency changes – Species better adapted to the environment – Environmental selection pressure Any 2 = 2 marks Genetic variation allows for differences among populations Adaptive traits passed on to the next generation Any other reasonable suggestion Any 2 = 2 marks (b) – Dog breeding is a form of artificial selection – Man selects traits considered favourable – Faster than natural selection Any other reasonable suggestion Any 2 = 2 marks Disadvantages Traits selected by man may not allow species to adapt well/survive if environment becomes unfavourable Loss of genetic variation/density Any other reasonable suggestion Any 2 = 2 marks",
+    "content": "",
+    "specific_objectives": [
+      "(a) Natural selection – Process by which allele frequency changes – Species better adapted to the environment – Environmental selection pressure Any 2 = 2 marks Genetic variation allows for differences among populations Adaptive traits passed on to the next generation Any other reasonable suggestion Any 2 = 2 marks (b) – Dog breeding is a form of artificial selection – Man selects traits considered favourable – Faster than natural selection Any other reasonable suggestion Any 2 = 2 marks Disadvantages Traits selected by man may not allow species to adapt well/survive if environment becomes unfavourable Loss of genetic variation/density Any other reasonable suggestion Any 2 = 2 marks"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 133,
+    "keywords": [
+      "generation",
+      "adaptive",
+      "suggestion",
+      "than",
+      "which",
+      "changes",
+      "next",
+      "artificial",
+      "process",
+      "genetic"
+    ],
+    "hash": "3c9efea1",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.612515"
+  },
+  {
+    "id": "BIO-00041",
+    "section": "SECTION B\nAnswer ALL questions",
+    "subsection": "Unknown",
+    "objective": "Question 6.(continued)",
+    "content": "KC",
+    "specific_objectives": [
+      "Question 6.(continued)"
+    ],
+    "content_items": [],
+    "difficulty": 1,
+    "page_number": 134,
+    "keywords": [
+      "continued",
+      "question"
+    ],
+    "hash": "09e9575f",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:11.702946"
+  },
+  {
+    "id": "BIO-00042",
+    "section": "UNIT AREA IN\nTWO PLANT SPECIES OVER A",
+    "subsection": "Unknown",
+    "objective": "Time(hour)",
+    "content": "Percentage Water-loss",
+    "specific_objectives": [
+      "Time(hour)"
+    ],
+    "content_items": [
+      "Percentage Water-loss"
+    ],
+    "difficulty": 1,
+    "page_number": 140,
+    "keywords": [
+      "time",
+      "percentage",
+      "water",
+      "loss",
+      "hour"
+    ],
+    "hash": "4ca7ec3d",
+    "source_file": "CSECBIOLOGYSYLLABUS.pdf",
+    "extraction_date": "2026-01-22T15:09:12.310711"
+  }
+]

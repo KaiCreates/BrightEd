@@ -1,0 +1,417 @@
+import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import { getSubjectFromSourceFile } from '@/lib/subject-utils';
+
+// Simple in-memory cache for learning paths (cleared on server restart)
+const pathCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const MASTERY_THRESHOLD = 70;
+const MAX_OBJECTIVES_PER_SUBJECT = 30;
+const SYLLABUS_FILE_PATH = path.join(process.cwd(), 'syllabuses', 'output', 'combined_syllabuses.json');
+
+// ============================================================================
+// TYPES
+// ============================================================================
+
+interface SyllabusObjective {
+  id: string;
+  section: string;
+  subsection: string;
+  objective: string;
+  content: string;
+  specific_objectives: string[];
+  content_items: string[];
+  difficulty: number;
+  page_number: number;
+  keywords: string[];
+  hash: string;
+  source_file: string;
+  extraction_date: string;
+}
+
+interface UserProgress {
+  [objectiveId: string]: {
+    mastery: number;
+    attempts: number;
+    lastAttempt: string;
+    stability: number;
+  };
+}
+
+interface LearningPathResponse {
+  paths: { [subject: string]: SyllabusObjective[] };
+  subjects: string[];
+  total: number;
+  warnings?: string[];
+}
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Maps user-selected subject names to patterns used in source files
+ * @param subject - User-friendly subject name
+ * @returns Array of lowercase patterns to match against source files
+ */
+function mapSubjectToSourceFile(subject: string): string[] {
+  const lowerSubject = subject.toLowerCase();
+
+  if (lowerSubject.includes('math') || lowerSubject.includes('mathematics')) {
+    return ['mathematics', 'math'];
+  }
+  if (lowerSubject.includes('english') || lowerSubject.includes('language')) {
+    return ['english', 'language'];
+  }
+  if (lowerSubject.includes('business') || lowerSubject.includes('pob') || lowerSubject.includes('principles of business')) {
+    return ['business', 'pob', 'principles'];
+  }
+  if (lowerSubject.includes('economic')) {
+    return ['economic'];
+  }
+  if (lowerSubject.includes('science') || lowerSubject.includes('biology') || lowerSubject.includes('chemistry')) {
+    return ['biology', 'chemistry', 'science'];
+  }
+  if (lowerSubject.includes('social') || lowerSubject.includes('studies')) {
+    return ['social', 'studies'];
+  }
+  if (lowerSubject.includes('it') || lowerSubject.includes('information') || lowerSubject.includes('technology')) {
+    return ['information', 'technology', 'it'];
+  }
+  if (lowerSubject.includes('geography')) {
+    return ['geography'];
+  }
+
+  return [];
+}
+
+/**
+ * Validates and sanitizes user input
+ * @param body - Request body
+ * @returns Validated subjects and userProgress
+ */
+function validateInput(body: any): { subjects: string[], userProgress: UserProgress } {
+  const subjects = Array.isArray(body?.subjects)
+    ? body.subjects.filter((s: any) => typeof s === 'string' && s.trim())
+    : [];
+
+  const userProgress: UserProgress = {};
+
+  if (body?.userProgress && typeof body.userProgress === 'object') {
+    for (const [key, value] of Object.entries(body.userProgress)) {
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        typeof (value as any).mastery === 'number' &&
+        typeof (value as any).attempts === 'number' &&
+        typeof (value as any).lastAttempt === 'string' &&
+        typeof (value as any).stability === 'number'
+      ) {
+        userProgress[key] = value as any;
+      }
+    }
+  }
+
+  return { subjects, userProgress };
+}
+
+/**
+ * Groups objectives by subject and removes duplicates
+ * @param objectives - All syllabus objectives
+ * @returns Objectives grouped by subject with duplicates removed
+ */
+function groupObjectivesBySubject(
+  objectives: SyllabusObjective[]
+): { [subject: string]: SyllabusObjective[] } {
+  const bySubject: { [subject: string]: SyllabusObjective[] } = {};
+  const globalSeenIds = new Set<string>(); // Prevent cross-subject duplicates
+
+  for (const obj of objectives) {
+    const subject = getSubjectFromSourceFile(obj.source_file);
+
+    if (!bySubject[subject]) {
+      bySubject[subject] = [];
+    }
+
+    // Deduplicate globally across all subjects
+    if (!globalSeenIds.has(obj.id)) {
+      bySubject[subject].push(obj);
+      globalSeenIds.add(obj.id);
+    }
+    // Silently skip duplicates - no need to log in production
+  }
+
+  return bySubject;
+}
+
+/**
+ * Filters subjects based on user selection
+ * @param bySubject - All objectives grouped by subject
+ * @param requestedSubjects - User-selected subjects
+ * @returns Filtered subject names and warnings
+ */
+function filterSubjects(
+  bySubject: { [subject: string]: SyllabusObjective[] },
+  requestedSubjects: string[]
+): { filteredSubjects: string[], warnings: string[] } {
+  const warnings: string[] = [];
+
+  // If no subjects requested, return all
+  if (requestedSubjects.length === 0) {
+    return { filteredSubjects: Object.keys(bySubject), warnings };
+  }
+
+  // Generate patterns from requested subjects
+  const subjectPatterns = requestedSubjects.flatMap(mapSubjectToSourceFile);
+
+  // Filter available subjects
+  const filteredSubjects = Object.keys(bySubject).filter(subject => {
+    const subjectLower = subject.toLowerCase();
+    return subjectPatterns.some(pattern => subjectLower.includes(pattern)) ||
+      requestedSubjects.some(s => subjectLower.includes(s.toLowerCase()));
+  });
+
+  // Check if any matches were found
+  if (filteredSubjects.length === 0) {
+    const available = Object.keys(bySubject).join(', ');
+    warnings.push(
+      `No matching subjects found for: ${requestedSubjects.join(', ')}. ` +
+      `Available subjects: ${available}`
+    );
+    // Return all subjects as fallback
+    return { filteredSubjects: Object.keys(bySubject), warnings };
+  }
+
+  // Check for requested subjects that weren't found
+  const foundPatterns = new Set(
+    filteredSubjects.flatMap(s => mapSubjectToSourceFile(s))
+  );
+  const missingSubjects = requestedSubjects.filter(
+    req => !subjectPatterns.some(p => foundPatterns.has(p))
+  );
+
+  if (missingSubjects.length > 0) {
+    warnings.push(`Some requested subjects not found: ${missingSubjects.join(', ')}`);
+  }
+
+  return { filteredSubjects, warnings };
+}
+
+/**
+ * Sorts objectives for optimal learning progression
+ * Priority: 1) Incomplete objectives, 2) Lower stability, 3) Difficulty level
+ */
+function sortObjectivesForLearning(
+  objectives: SyllabusObjective[],
+  userProgress: UserProgress
+): SyllabusObjective[] {
+  return objectives.sort((a, b) => {
+    const progressA = userProgress[a.id]?.mastery || 0;
+    const progressB = userProgress[b.id]?.mastery || 0;
+
+    // First: Prioritize incomplete objectives (mastery < threshold)
+    const incompleteA = progressA < MASTERY_THRESHOLD;
+    const incompleteB = progressB < MASTERY_THRESHOLD;
+
+    if (incompleteA && !incompleteB) return -1;
+    if (!incompleteA && incompleteB) return 1;
+
+    // Second: Lower stability = needs more review
+    const stabilityA = userProgress[a.id]?.stability || 0;
+    const stabilityB = userProgress[b.id]?.stability || 0;
+
+    if (stabilityA !== stabilityB) {
+      return stabilityA - stabilityB;
+    }
+
+    // Third: Difficulty level (easier first)
+    return a.difficulty - b.difficulty;
+  });
+}
+
+/**
+ * Generates personalized learning paths separated by subject
+ * @param objectives - All syllabus objectives
+ * @param userProgress - User's progress data
+ * @param subjects - Requested subjects (empty = all subjects)
+ * @returns Learning paths organized by subject with warnings
+ */
+function generateLearningPath(
+  objectives: SyllabusObjective[],
+  userProgress: UserProgress = {},
+  subjects: string[] = []
+): { paths: { [subject: string]: SyllabusObjective[] }, warnings: string[] } {
+  const warnings: string[] = [];
+
+  // Group by subject and remove duplicates
+  const bySubject = groupObjectivesBySubject(objectives);
+
+  // Filter by requested subjects
+  const { filteredSubjects, warnings: filterWarnings } = filterSubjects(bySubject, subjects);
+  warnings.push(...filterWarnings);
+
+  // Generate path for each subject
+  const paths: { [subject: string]: SyllabusObjective[] } = {};
+
+  for (const subject of filteredSubjects) {
+    const subjectObjectives = bySubject[subject];
+
+    // Group by difficulty
+    const byDifficulty: { [difficulty: string]: SyllabusObjective[] } = {};
+    for (const obj of subjectObjectives) {
+      const key = obj.difficulty.toString();
+      if (!byDifficulty[key]) {
+        byDifficulty[key] = [];
+      }
+      byDifficulty[key].push(obj);
+    }
+
+    // Sort difficulties (easier to harder)
+    const sortedDifficulties = Object.keys(byDifficulty)
+      .map(d => parseInt(d))
+      .sort((a, b) => a - b);
+
+    // Build path for this subject
+    const path: SyllabusObjective[] = [];
+
+    for (const difficulty of sortedDifficulties) {
+      const group = byDifficulty[difficulty.toString()];
+
+      // Sort within difficulty group for optimal learning
+      const sortedGroup = sortObjectivesForLearning(group, userProgress);
+
+      // Add all objectives from this difficulty level
+      path.push(...sortedGroup);
+    }
+
+    paths[subject] = path;
+  }
+
+  return { paths, warnings };
+}
+
+/**
+ * Loads syllabus data from file
+ */
+function loadSyllabusData(): SyllabusObjective[] {
+  if (!fs.existsSync(SYLLABUS_FILE_PATH)) {
+    throw new Error('Syllabus data not found');
+  }
+
+  const fileContents = fs.readFileSync(SYLLABUS_FILE_PATH, 'utf8');
+  return JSON.parse(fileContents);
+}
+
+// ============================================================================
+// API ROUTES
+// ============================================================================
+import { verifyAuth } from '@/lib/auth-server';
+import { NextRequest } from 'next/server';
+
+export async function POST(request: NextRequest) {
+  try {
+    await verifyAuth(request);
+
+    const body = await request.json();
+    const { subjects, userProgress } = validateInput(body);
+
+    const allObjectives = loadSyllabusData();
+
+    // Generate paths separated by subject
+    const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);
+
+    // Limit each subject to max objectives
+    const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
+    for (const [subject, path] of Object.entries(paths)) {
+      limitedPaths[subject] = path.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
+    }
+
+    const response: LearningPathResponse = {
+      paths: limitedPaths,
+      subjects: Object.keys(limitedPaths),
+      total: Object.values(limitedPaths).reduce((sum, path) => sum + path.length, 0)
+    };
+
+    if (warnings.length > 0) {
+      response.warnings = warnings;
+    }
+
+    return NextResponse.json(response);
+  } catch (error: any) {
+    if (error.message?.includes('Unauthorized')) {
+      return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+    const errorMessage = error instanceof Error ? error.message : 'Failed to generate learning path';
+
+    return NextResponse.json(
+      { error: errorMessage },
+      { status: error instanceof Error && error.message === 'Syllabus data not found' ? 404 : 500 }
+    );
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    await verifyAuth(request);
+
+    const { searchParams } = new URL(request.url);
+
+    const subjectsParam = searchParams.get('subjects');
+    const subjects = subjectsParam
+      ? subjectsParam.split(',').map(s => s.trim()).filter(Boolean)
+      : [];
+
+    // Check cache
+    const cacheKey = subjects.sort().join(',');
+    const cached = pathCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+      return NextResponse.json(cached.data);
+    }
+
+    const allObjectives = loadSyllabusData();
+
+    // Note: In production, fetch userProgress from database based on user session
+    // For now, returning paths without personalization
+    const userProgress: UserProgress = {};
+
+    // Generate paths separated by subject
+    const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);
+
+    // Limit each subject to max objectives
+    const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
+    for (const [subject, path] of Object.entries(paths)) {
+      limitedPaths[subject] = path.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
+    }
+
+    const response: LearningPathResponse = {
+      paths: limitedPaths,
+      subjects: Object.keys(limitedPaths),
+      total: Object.values(limitedPaths).reduce((sum, path) => sum + path.length, 0)
+    };
+
+    if (warnings.length > 0) {
+      response.warnings = warnings;
+    }
+
+    // Cache the response
+    pathCache.set(cacheKey, { data: response, timestamp: Date.now() });
+
+    return NextResponse.json(response);
+  } catch (error: any) {
+    if (error.message?.includes('Unauthorized')) {
+      return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+    const errorMessage = error instanceof Error ? error.message : 'Failed to generate learning path';
+
+    return NextResponse.json(
+      { error: errorMessage },
+      { status: error instanceof Error && error.message === 'Syllabus data not found' ? 404 : 500 }
+    );
+  }
+}

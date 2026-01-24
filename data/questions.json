@@ -1,0 +1,189 @@
+[
+  {
+    "id": "ENG-00004_1",
+    "objectiveId": "ENG-00004",
+    "subjectId": "English",
+    "variation": 1,
+    "questionText": "In a drama, what is the purpose of stage directions?",
+    "options": [
+      "To provide background information on the characters",
+      "To guide the actors' performances",
+      "To add humor to the play",
+      "To help the audience follow the plot"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Stage directions provide clear instructions for the actors, ensuring that the performance is consistent and accurate. They also help the director and other production staff plan the logistics of the show.",
+    "storyElement": "Spot on!",
+    "createdAt": "2026-01-22T19:37:10.547Z"
+  },
+  {
+    "id": "ENG-00001_0",
+    "objectiveId": "ENG-00001",
+    "subjectId": "English",
+    "variation": 0,
+    "questionText": "What is the primary purpose of informative discourse?",
+    "options": [
+      "To persuade the audience",
+      "To inform the audience about a particular topic",
+      "To entertain the audience with fictional stories",
+      "To analyze complex issues"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Informative discourse aims to convey information, data, or knowledge to an audience. It provides facts, explanations, and insights to educate the audience.",
+    "storyElement": "Well done!",
+    "createdAt": "2026-01-22T19:36:28.003Z"
+  },
+  {
+    "id": "ENG-00004_3",
+    "objectiveId": "ENG-00004",
+    "subjectId": "English",
+    "variation": 3,
+    "questionText": "What is the primary purpose of a prologue in a play?",
+    "options": [
+      "To provide background information on the setting and characters",
+      "To introduce the main conflict or problem",
+      "To give a preview of the themes to be explored",
+      "To provide a sense of closure at the end of the play"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The prologue provides essential background information that helps audiences understand the context and characters in a play.",
+    "storyElement": "Well done! You're off to a great start!",
+    "createdAt": "2026-01-22T19:36:43.109Z"
+  },
+  {
+    "id": "MATH-00001_0",
+    "objectiveId": "MATH-00001",
+    "subjectId": "Mathematics",
+    "variation": 0,
+    "questionText": "What is the remainder when 17 is divided by 5?",
+    "options": [
+      "2",
+      "3",
+      "1",
+      "4"
+    ],
+    "correctAnswer": 3,
+    "explanation": "When dividing 17 by 5, we can find the remainder by subtracting the largest multiple of 5 from 17. In this case, 15 is the largest multiple of 5 that is less than or equal to 17. So, the remainder is 17 - 15 = 2.",
+    "storyElement": "Close but not quite!",
+    "createdAt": "2026-01-22T19:36:51.885Z"
+  },
+  {
+    "id": "ENG-00004_2",
+    "objectiveId": "ENG-00004",
+    "subjectId": "English",
+    "variation": 2,
+    "questionText": "Which of the following drama techniques is used to engage an audience emotionally?",
+    "options": [
+      "Role-playing",
+      "Improvisation",
+      "Character development",
+      "Scriptwriting"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Correct answer because character development involves creating relatable characters that audiences can connect with.",
+    "storyElement": "Spot on!",
+    "createdAt": "2026-01-22T19:37:38.040Z"
+  },
+  {
+    "id": "POB-00001_2",
+    "objectiveId": "POB-00001",
+    "subjectId": "Principles of Business",
+    "variation": 2,
+    "questionText": "Which dimension of a business profile focuses on its internal strengths, weaknesses, opportunities, and threats?",
+    "options": [
+      "External Analysis",
+      "SWOT Analysis",
+      "Market Analysis",
+      "Financial Analysis"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The SWOT Analysis (Strengths, Weaknesses, Opportunities, and Threats) is a strategic planning technique used to identify the internal and external factors that can impact a business.",
+    "storyElement": "Well done! You're off to a great start in understanding business fundamentals.",
+    "createdAt": "2026-01-22T19:42:13.280Z"
+  },
+  {
+    "id": "POB-00001_1",
+    "objectiveId": "POB-00001",
+    "subjectId": "Principles of Business",
+    "variation": 1,
+    "questionText": "Which of the following profile dimensions is responsible for determining an individual's personality traits, values, and life goals?",
+    "options": [
+      "Extrinsic",
+      "Intrinsic",
+      "Competency",
+      "Motivation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This dimension helps us understand why individuals make certain choices and pursue specific careers.",
+    "storyElement": "You got it right! Good job!",
+    "createdAt": "2026-01-22T19:43:15.520Z"
+  },
+  {
+    "id": "POB-00001_3",
+    "objectiveId": "POB-00001",
+    "subjectId": "Principles of Business",
+    "variation": 3,
+    "questionText": "Which profile dimension represents an individual's ability to lead and direct others?",
+    "options": [
+      "Entrepreneurship",
+      "Creativity",
+      "Communication",
+      "Management"
+    ],
+    "correctAnswer": 3,
+    "explanation": "The Management dimension is concerned with planning, organizing, directing, and controlling activities within an organization.",
+    "storyElement": "Spot on!",
+    "createdAt": "2026-01-22T19:42:52.239Z"
+  },
+  {
+    "id": "POB-00001_4",
+    "objectiveId": "POB-00001",
+    "subjectId": "Principles of Business",
+    "variation": 4,
+    "questionText": "Which of the following profile dimensions is most closely related to a company's internal characteristics?",
+    "options": [
+      "Core Competence",
+      "Market Orientation",
+      "Learning Organization",
+      "SWOT Analysis"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A company's core competence refers to its unique skills and expertise that set it apart from others.",
+    "storyElement": "Spot on!",
+    "createdAt": "2026-01-22T19:49:27.117Z"
+  },
+  {
+    "id": "ENG-00004_4",
+    "objectiveId": "ENG-00004",
+    "subjectId": "English",
+    "variation": 4,
+    "questionText": "Which of the following is an important element in developing a character's personality in drama?",
+    "options": [
+      "Theme",
+      "Conflict",
+      "Setting",
+      "Dialogue"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The setting provides the backdrop against which characters' personalities emerge. It helps establish their values, motivations, and goals.",
+    "storyElement": "Spot on!",
+    "createdAt": "2026-01-22T20:04:33.135Z"
+  },
+  {
+    "id": "ENG-00004_5",
+    "objectiveId": "ENG-00004",
+    "subjectId": "English",
+    "variation": 5,
+    "questionText": "In a Caribbean drama, what is the primary purpose of using dialogue?",
+    "options": [
+      "To provide background information",
+      "To reveal character traits and relationships",
+      "To advance the plot",
+      "To describe setting"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Dialogue in a Caribbean drama serves to reveal the characters' personalities, their relationships with each other, and their cultural context.",
+    "storyElement": "Well done! You're really getting into character!",
+    "createdAt": "2026-01-22T20:04:52.260Z"
+  }
+]
