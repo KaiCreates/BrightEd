@@ -240,14 +240,14 @@ const MINIMART_COSTS: OperatingCostTemplate = {
 };
 
 const MINIMART_DEMAND: DemandConfig = {
-    baseOrdersPerHour: 4,
+    baseOrdersPerHour: 10,
     maxConcurrentOrders: 5,
     hourlyMultipliers: {
         6: 0.3, 7: 0.6, 8: 1.0, 9: 0.8, 10: 0.7, 11: 0.9, 12: 1.3,
         13: 0.9, 14: 0.7, 15: 0.8, 16: 1.2, 17: 1.5, 18: 1.8, 19: 1.2,
         20: 0.8, 21: 0.5, 22: 0.3,
     },
-    reputationFloor: 0.5,
+    reputationFloor: 0.2,
     reputationCeiling: 1.8,
     customerTypeProbabilities: { walk_in: 0.7, regular: 0.25, business: 0.03, vip: 0.02 },
     avgItemsPerOrder: 4,

@@ -7,12 +7,14 @@ interface BusinessCardProps {
     businessName: string;
     className?: string;
     tier?: 'Startup' | 'Growth' | 'Enterprise';
+    ownerName?: string;
 }
 
 export default function BusinessCard3D({
     businessName,
     className = '',
-    tier = 'Startup'
+    tier = 'Startup',
+    ownerName = 'Unknown Director'
 }: BusinessCardProps) {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -74,6 +76,7 @@ export default function BusinessCard3D({
                     <h3 className="text-2xl font-black text-white tracking-tight text-glow-cyan">
                         {businessName}
                     </h3>
+                    <p className="text-sm text-white/70 font-medium">Director: {ownerName}</p>
                 </div>
 
                 <div className="flex justify-between items-end">

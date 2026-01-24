@@ -104,16 +104,22 @@ export default function Marketplace({ business }: MarketplaceProps) {
     };
 
     const getDefaultMarketItems = (): MarketItem[] => [
-        { id: 'supplies_basic', name: 'Standard Packaging', price: 10, stock: 25, maxStock: 25, icon: '📦' },
-        { id: 'supplies_premium', name: 'Premium Gold Box', price: 50, stock: 10, maxStock: 10, icon: '🎁' },
-        { id: 'ingredients_fresh', name: 'Fresh Organic Goods', price: 20, stock: 20, maxStock: 20, icon: '🥬' },
-        { id: 'components_elec', name: 'Grade-A Electronics', price: 100, stock: 5, maxStock: 5, icon: '🔋' },
+        { id: 'rice_5kg', name: 'Premium Rice (5kg)', price: 25, stock: 20, maxStock: 20, image: '/products/Rice.png', icon: '🍚' },
+        { id: 'flour_2kg', name: 'All-Purpose Flour', price: 12, stock: 25, maxStock: 25, image: '/products/Flour.png', icon: '🌾' },
+        { id: 'oil_1l', name: 'Vegetable Oil', price: 20, stock: 15, maxStock: 15, image: '/products/CookingOil.png', icon: '🛢️' },
+        { id: 'dish_soap', name: 'Sparkle Dish Soap', price: 9, stock: 30, maxStock: 30, image: '/products/DishSoap.png', icon: '🧼' },
+        { id: 'tissue_4pk', name: 'Soft Tissue Pack', price: 14, stock: 20, maxStock: 20, image: '/products/toilet_paper.png', icon: '🧻' },
+        { id: 'plantain_chips', name: 'Crunchy Chips', price: 6, stock: 50, maxStock: 50, image: '/products/PlantainChips.png', icon: '🍌' },
+        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 20, maxStock: 20, image: '/products/Surgar.png', icon: '🍬' }, // Note: Filename typo match
+        { id: 'cole_cold', name: 'Cole Cold', price: 8, stock: 40, maxStock: 40, image: '/products/Cole_Cold_copy.png', icon: '🥤' },
     ];
 
     const marketItems = (business.marketState?.items || getDefaultMarketItems()).map(item => ({
         ...item,
         // Ensure icon exists if missing from DB state
-        icon: (item as any).icon || '📦'
+        icon: (item as any).icon || '📦',
+        // Fallback for image if older DB state doesn't have it (client-side patch)
+        image: (item as any).image || getDefaultMarketItems().find(d => d.id === item.id)?.image
     }));
 
     return (
@@ -130,52 +136,62 @@ export default function Marketplace({ business }: MarketplaceProps) {
             </div>
 
             <BrightLayer variant="glass" padding="lg">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {marketItems.map((item) => {
                         const stockPercent = (item.stock / item.maxStock) * 100;
                         const isLowStock = stockPercent < 30;
                         const isSoldOut = item.stock === 0;
 
                         return (
-                            <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl p-5 hover:border-[var(--brand-primary)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                {/* Stock Bar */}
-                                <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--bg-elevated)]">
+                            <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl overflow-hidden hover:border-[var(--brand-primary)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                                {/* Stock Bar Overlay */}
+                                <div className="absolute top-0 left-0 right-0 h-1 z-10 bg-[var(--bg-elevated)]">
                                     <div
                                         className={`h-full transition-all duration-500 ${isLowStock ? 'bg-[var(--state-error)]' : 'bg-[var(--state-success)]'}`}
                                         style={{ width: `${stockPercent}%` }}
                                     />
                                 </div>
 
-                                <div className="flex justify-between items-start mb-4 mt-2">
-                                    <div className="w-12 h-12 bg-[var(--bg-elevated)] rounded-xl flex items-center justify-center text-2xl shadow-inner">
-                                        {(item as any).icon}
-                                    </div>
-                                    <div className={`px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-widest border ${isSoldOut ? 'bg-[var(--state-error)]/10 text-[var(--state-error)] border-[var(--state-error)]/20' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border-subtle)]'}`}>
-                                        {isSoldOut ? 'Sold Out' : `${item.stock}/${item.maxStock}`}
+                                {/* Image Area */}
+                                <div className="aspect-square relative bg-white/5 p-4 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                                    {item.image ? (
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300"
+                                        />
+                                    ) : (
+                                        <div className="text-4xl">{item.icon}</div>
+                                    )}
+
+                                    <div className={`absolute top-2 right-2 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border backdrop-blur-md ${isSoldOut ? 'bg-[var(--state-error)]/90 text-white border-[var(--state-error)]' : 'bg-black/50 text-white border-white/20'}`}>
+                                        {isSoldOut ? 'Sold Out' : `${item.stock} left`}
                                     </div>
                                 </div>
 
-                                <h4 className="font-bold text-[var(--text-primary)] mb-1 truncate">{item.name}</h4>
-                                <div className="flex items-baseline gap-1 mb-6">
-                                    <span className="text-[var(--brand-accent)] font-black text-lg">฿{item.price}</span>
-                                    <span className="text-[var(--text-muted)] text-xs">/ unit</span>
-                                </div>
+                                {/* Details */}
+                                <div className="p-3">
+                                    <h4 className="font-bold text-[var(--text-primary)] text-sm mb-1 truncate" title={item.name}>{item.name}</h4>
+                                    <div className="flex items-baseline gap-1 mb-3">
+                                        <span className="text-[var(--brand-accent)] font-black text-base">฿{item.price}</span>
+                                    </div>
 
-                                <div className="grid grid-cols-2 gap-2">
-                                    <button
-                                        disabled={item.stock < 1 || business.cashBalance < item.price}
-                                        onClick={() => handleBuy(item, 1)}
-                                        className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-2 text-xs font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        Buy 1
-                                    </button>
-                                    <button
-                                        disabled={item.stock < 5 || business.cashBalance < item.price * 5}
-                                        onClick={() => handleBuy(item, 5)}
-                                        className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-2 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        Buy 5
-                                    </button>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            disabled={item.stock < 1 || business.cashBalance < item.price}
+                                            onClick={() => handleBuy(item, 1)}
+                                            className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-1.5 text-xs font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            Buy 1
+                                        </button>
+                                        <button
+                                            disabled={item.stock < 5 || business.cashBalance < item.price * 5}
+                                            onClick={() => handleBuy(item, 5)}
+                                            className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-1.5 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            Buy 5
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         );

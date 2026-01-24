@@ -295,6 +295,8 @@ export interface MarketItem {
     price: number;
     stock: number; // Max 25
     maxStock: number;
+    image?: string;
+    icon?: string;
 }
 
 export interface MarketState {

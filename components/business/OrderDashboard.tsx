@@ -85,36 +85,7 @@ export function OrderDashboard({
 
     return (
         <div className="space-y-6">
-            {/* Financial Summary Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <BrightLayer variant="glass" padding="sm">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Cash Balance</p>
-                    <p className="text-2xl font-black text-[var(--text-primary)]">
-                        ฿{businessState.cashBalance.toLocaleString()}
-                    </p>
-                </BrightLayer>
-
-                <BrightLayer variant="glass" padding="sm">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Pending Revenue</p>
-                    <p className="text-2xl font-black text-[var(--state-info)]">
-                        ฿{totalPending.toLocaleString()}
-                    </p>
-                </BrightLayer>
-
-                <BrightLayer variant="glass" padding="sm">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Earned Today</p>
-                    <p className="text-2xl font-black text-[var(--state-success)]">
-                        ฿{totalEarnedToday.toLocaleString()}
-                    </p>
-                </BrightLayer>
-
-                <BrightLayer variant="glass" padding="sm">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Reputation</p>
-                    <p className="text-2xl font-black text-[var(--brand-accent)]">
-                        {businessState.reputation}/100
-                    </p>
-                </BrightLayer>
-            </div>
+            {/* Stats removed - moved to BusinessStatsBar */}
 
             {/* Incoming Orders (Pending) */}
             {pendingOrders.length > 0 && (

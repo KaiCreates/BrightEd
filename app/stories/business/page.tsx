@@ -14,15 +14,17 @@ import {
   StatReactor
 } from '@/components/cinematic';
 import { OrderDashboard } from '@/components/business/OrderDashboard';
+import BusinessCard3D from '@/components/business/BusinessCard3D';
 import { useAuth } from '@/lib/auth-context';
 import { useBusiness } from '@/lib/business-context';
 import { db } from '@/lib/firebase';
-import { collection, query, where, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, query, where, doc, onSnapshot, updateDoc, deleteDoc } from 'firebase/firestore';
 import BusinessFeed from '@/components/business/BusinessFeed';
 import BusinessWorkspace from '@/components/business/BusinessWorkspace';
 import Marketplace from '@/components/business/Marketplace';
 import OrgChart from '@/components/business/OrgChart';
 import EmployeeShop from '@/components/business/EmployeeShop';
+import { BusinessStatsBar } from '@/components/business/BusinessStatsBar';
 import {
   BusinessState,
   Order,
@@ -229,49 +231,104 @@ function CommandCenterContent() {
         }
       }
 
-      // AUTO-FULFILLMENT: Employees work on Accepted orders
+      // AUTO-FULFILLMENT & MANAGER LOGIC
       // Cooldown: 2 seconds (2000ms)
+
       if (business.employees && business.employees.length > 0) {
+        const hasManager = business.employees.some((e: any) => e.role === 'manager');
+
+        // 1. Calculate Capacity
+        const roleCaps: Record<string, number> = { 'trainee': 2, 'speedster': 2, 'specialist': 3, 'manager': 4 };
+        const totalCapacity = business.employees.reduce((acc: number, e: any) => acc + (roleCaps[e.role] || 2), 0);
+        const activeOrderCount = orders.filter(o => o.status === 'accepted' || o.status === 'in_progress').length;
+
+        // 2. Manager Auto-Accept (If capacity allows)
+        // Check pending orders only
+        if (hasManager && activeOrderCount < totalCapacity) {
+          const pendingOrders = orders.filter(o => o.status === 'pending').sort((a, b) => b.totalAmount - a.totalAmount); // Prioritize value
+          const slotsAvailable = totalCapacity - activeOrderCount;
+
+          // Process up to slotsAvailable
+          const toAccept = pendingOrders.slice(0, slotsAvailable);
+
+          if (toAccept.length > 0) {
+            toAccept.forEach(order => {
+              const accepted = { ...order, status: 'accepted', acceptedAt: new Date().toISOString() };
+              updateOrderStatus(business.id, order.id, accepted as any);
+            });
+
+            if (Math.random() > 0.7) {
+              showInterrupt('luka', `Manager accepted ${toAccept.length} orders automatically.`, 'neutral');
+            }
+          }
+        }
+
+        // 3. Employee Work (Auto-Complete)
         if (now - lastAutoWorkRef.current >= 2000) {
           const acceptedOrders = orders.filter(o => o.status === 'accepted').sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
           if (acceptedOrders.length > 0) {
-            const orderToProcess = acceptedOrders[0];
-            lastAutoWorkRef.current = now;
+            // Scaling: Allow processing multiple orders if you have a large team
+            const workPower = Math.max(1, Math.floor(business.employees.length / 1.5));
+            const ordersToComplete = acceptedOrders.slice(0, workPower);
 
-            // Calculate Quality: Average of employee quality + random variance
-            // Simple average for now
-            const avgQuality = business.employees.reduce((acc: number, e: any) => acc + (e.stats?.quality || 50), 0) / business.employees.length;
-            const qualityScore = Math.min(100, Math.floor(avgQuality + (Math.random() * 20 - 10)));
+            if (ordersToComplete.length > 0) {
+              lastAutoWorkRef.current = now;
 
-            const { order: completed, payment, tip } = completeOrder(orderToProcess, qualityScore);
+              let totalPay = 0;
 
-            // Generate Review (Silent/Background)
-            const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
-            const reviewText = stars === 6 ? "Fast service!" : "Good auto-service.";
-            const newReview = {
-              id: `rev_${Date.now()}`,
-              orderId: orderToProcess.id,
-              customerName: orderToProcess.customerName,
-              rating: stars,
-              text: reviewText,
-              timestamp: new Date().toISOString()
-            };
+              // Batch updates logic
+              const batchFinancials = {
+                cashBalance: business.cashBalance,
+                reputation: business.reputation,
+                ordersCompleted: business.ordersCompleted,
+                reviews: business.reviews || []
+              };
 
-            const currentReviews = business.reviews || [];
+              ordersToComplete.forEach(orderToProcess => {
+                // Calculate Quality
+                const avgQuality = business.employees.reduce((acc: number, e: any) => acc + (e.stats?.quality || 50), 0) / business.employees.length;
+                const qualityScore = Math.min(100, Math.floor(avgQuality + (Math.random() * 20 - 10)));
 
-            // Update DB
-            updateOrderStatus(business.id, orderToProcess.id, completed);
-            updateBusinessFinancials(business.id, {
-              cashBalance: business.cashBalance + payment + tip,
-              reputation: Math.min(100, business.reputation + (stars >= 5 ? 1 : 0)),
-              ordersCompleted: business.ordersCompleted + 1,
-              reviews: [newReview, ...currentReviews].slice(0, 20)
-            });
+                const { order: completed, payment, tip } = completeOrder(orderToProcess, qualityScore);
 
-            // Occasional interrupt
-            if (Math.random() > 0.8) {
-              showInterrupt('mendy', `Staff completed order for ${orderToProcess.customerName}. +฿${payment}`, 'neutral');
+                // Review
+                const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
+                const reviewText = stars === 6 ? "Fast service!" : "Good auto-service.";
+                const newReview = {
+                  id: `rev_${Date.now()}_${Math.random()}`,
+                  orderId: orderToProcess.id,
+                  customerName: orderToProcess.customerName,
+                  rating: stars,
+                  text: reviewText,
+                  timestamp: new Date().toISOString()
+                };
+
+                // Accumulate
+                batchFinancials.cashBalance += (payment + tip);
+                batchFinancials.reputation = Math.min(100, batchFinancials.reputation + (stars >= 5 ? 1 : 0));
+                batchFinancials.ordersCompleted += 1;
+                batchFinancials.reviews.unshift(newReview);
+                totalPay += payment;
+
+                updateOrderStatus(business.id, orderToProcess.id, completed);
+              });
+
+              // Trim reviews
+              batchFinancials.reviews = batchFinancials.reviews.slice(0, 20);
+
+              // Single Financial Update
+              updateBusinessFinancials(business.id, {
+                cashBalance: batchFinancials.cashBalance,
+                reputation: batchFinancials.reputation,
+                ordersCompleted: batchFinancials.ordersCompleted,
+                reviews: batchFinancials.reviews
+              });
+
+              // Occasional interrupt
+              if (Math.random() > 0.7) {
+                showInterrupt('mendy', `Staff cleared ${ordersToComplete.length} orders. +฿${totalPay}`, 'neutral');
+              }
             }
           }
         }
@@ -466,37 +523,112 @@ function CommandCenterContent() {
         </div>
       </nav>
 
-      <main className="relative z-10 pt-32 pb-32 px-4 max-w-7xl mx-auto">
-        {/* Order Dashboard containing Stats + Queue */}
-        {business && businessType && (
-          <OrderDashboard
-            businessState={business}
-            businessType={businessType}
-            orders={orders}
-            onAcceptOrder={handleAcceptOrder}
-            onRejectOrder={handleRejectOrder}
-            onCompleteOrder={handleCompleteOrder}
-            onFulfill={handleStartFulfillment}
-          />
-        )}
+      <main className="relative z-10 pt-28 pb-32 px-4 max-w-[1600px] mx-auto">
 
-        {/* Marketplace Section */}
+        {/* Top: HQ Section (Business Card + Controls + Stats) */}
         {business && (
-          <div className="space-y-12">
-            <Marketplace business={business} />
+          <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            {/* Identity Card */}
+            <div className="lg:col-span-4 max-w-sm">
+              <BusinessCard3D
+                businessName={business.businessName}
+                tier="Startup"
+                ownerName={user?.displayName || "Unknown Director"}
+              />
+            </div>
 
-            <div>
-              <div className="grid lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2">
-                  <OrgChart business={business} />
-                </div>
-                <div>
-                  <EmployeeShop business={business} />
-                </div>
+            {/* Stats & Controls */}
+            <div className="lg:col-span-8 flex flex-col gap-6 w-full">
+              {/* Control Panel */}
+              <div className="flex justify-end items-center gap-4">
+                <BrightButton
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    isPausedRef.current = !isPausedRef.current;
+                    // Force re-render UI toggle text
+                    const btn = document.getElementById('pause-btn-text');
+                    if (btn) btn.innerText = isPausedRef.current ? "RESUME OPERATION" : "PAUSE OPERATION";
+                  }}
+                  className="text-[var(--text-muted)] hover:text-white border border-[var(--border-subtle)]"
+                >
+                  <span className="mr-2">⏸</span> <span id="pause-btn-text">PAUSE OPERATION</span>
+                </BrightButton>
+                <BrightButton
+                  variant="danger"
+                  size="sm"
+                  onClick={async () => {
+                    if (confirm("ARE YOU SURE? This will liquidate your business and delete all progress.")) {
+                      await deleteDoc(doc(db, 'businesses', business.id));
+                    }
+                  }}
+                  className="bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500 hover:text-white"
+                >
+                  SHUTDOWN
+                </BrightButton>
               </div>
+
+              {/* Stats Bar */}
+              <BusinessStatsBar
+                businessState={business}
+                pendingRevenue={orders.filter(o => ['accepted', 'in_progress'].includes(o.status)).reduce((acc, o) => acc + o.totalAmount, 0)}
+                earnedToday={business.ordersCompleted * 50}
+              />
             </div>
           </div>
         )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+          {/* COLUMN 1: OPERATIONS (Orders) - Span 4 */}
+          <div className="lg:col-span-4 space-y-6">
+            <div>
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Operations Console</BrightHeading>
+              {business && businessType && (
+                <OrderDashboard
+                  businessState={business}
+                  businessType={businessType}
+                  orders={orders}
+                  onAcceptOrder={handleAcceptOrder}
+                  onRejectOrder={handleRejectOrder}
+                  onCompleteOrder={handleCompleteOrder}
+                  onFulfill={handleStartFulfillment}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* COLUMN 2: ORGANIZATION (Org Chart + Feed) - Span 5 */}
+          <div className="lg:col-span-5 space-y-8">
+            <div>
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Organization</BrightHeading>
+              {business && <OrgChart business={business} />}
+            </div>
+
+            <div>
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Activity Log</BrightHeading>
+              <BrightLayer variant="glass" padding="none" className="h-64 overflow-hidden relative">
+                <div className="absolute inset-0 flex items-center justify-center text-[var(--text-muted)] pointer-events-none z-10">
+                  Simulating live activity...
+                </div>
+              </BrightLayer>
+            </div>
+          </div>
+
+          {/* COLUMN 3: RESOURCES (Recruitment + Market) - Span 3 */}
+          <div className="lg:col-span-3 space-y-8">
+            <div>
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Recruitment</BrightHeading>
+              {business && <EmployeeShop business={business} />}
+            </div>
+
+            <div>
+              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Supply Chain</BrightHeading>
+              {business && <Marketplace business={business} />}
+            </div>
+          </div>
+
+        </div>
 
         <AnimatePresence>
           {activeFulfillmentOrder && businessType && (
@@ -508,25 +640,6 @@ function CommandCenterContent() {
             />
           )}
         </AnimatePresence>
-
-        {/* Additional sections like Leaderboard or upgrades could go here */}
-        <div className="mt-12 grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <BrightHeading level={4} className="mb-4">Activity Feed</BrightHeading>
-            <BrightLayer variant="glass" padding="none" className="h-64 overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center text-[var(--text-muted)] pointer-events-none z-10">
-                Activity feed coming soon
-              </div>
-              {/* Placeholder for feed */}
-            </BrightLayer>
-          </div>
-          <div>
-            <BrightHeading level={4} className="mb-4">Market Trends</BrightHeading>
-            <BrightLayer variant="glass" padding="md">
-              <p className="text-sm text-[var(--text-secondary)]">Demand is normal. No major market events detected.</p>
-            </BrightLayer>
-          </div>
-        </div>
       </main>
 
     </div>
