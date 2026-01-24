@@ -228,8 +228,24 @@ export interface BusinessState {
     staffCount: number;
     maxConcurrentOrders: number;
 
-    // Inventory
-    inventory: Record<string, number>;
+    // Workforce
+    employees: Employee[];
+
+    // Inventory & Market
+    inventory: Record<string, number>; // ItemId -> Quantity
+    marketState: MarketState;
+
+    marketState: MarketState;
+
+    // Recruitment
+    recruitmentPool: Employee[];
+    lastRecruitmentTime: string;
+
+    // Payroll
+    lastPayrollTime: string;
+
+    // Reviews
+    reviews: Review[];
 
     // Active work
     activeOrders: string[];      // Order IDs
@@ -241,6 +257,52 @@ export interface BusinessState {
     // Timestamps
     createdAt: string;
     lastActiveAt: string;
+}
+
+export interface Review {
+    id: string;
+    orderId: string;
+    customerName: string;
+    rating: number; // 1-6
+    text: string;
+    timestamp: string;
+}
+
+// ============================================================================
+// WORKFORCE
+// ============================================================================
+
+export type JobRole = 'manager' | 'specialist' | 'speedster' | 'trainee';
+
+export interface Employee {
+    id: string;
+    name: string;
+    role: JobRole;
+    salaryPerDay: number;
+    stats: {
+        speed: number;    // 0-100, reduces fulfillment time
+        quality: number;  // 0-100, boosts quality score base
+        morale: number;   // 0-100, affects reliability
+    };
+    hiredAt: string;
+}
+
+// ============================================================================
+// MARKETPLACE
+// ============================================================================
+
+export interface MarketItem {
+    id: string;
+    name: string;
+    price: number;
+    stock: number; // Max 25
+    maxStock: number;
+}
+
+export interface MarketState {
+    lastRestock: string;
+    nextRestock: string;
+    items: MarketItem[];
 }
 
 // ============================================================================

@@ -99,7 +99,7 @@ export default function ProfilePage() {
         name: business.name || 'My Business',
         valuation: business.valuation || 0,
         cashflow: business.cashflow || 0,
-        employees: business.employees || 1,
+        employees: Array.isArray(business.employees) ? business.employees.length : (business.staffCount || 0),
         trend: 'up',
         balance: business.balance || 0
       });
@@ -112,7 +112,7 @@ export default function ProfilePage() {
             name: b.name || 'My Business',
             valuation: b.valuation || 0,
             cashflow: b.cashflow || 0,
-            employees: b.employees || 1,
+            employees: Array.isArray(b.employees) ? b.employees.length : (b.staffCount || 0),
             trend: 'up',
             balance: b.balance || 0
           });

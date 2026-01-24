@@ -158,6 +158,8 @@ export async function updateBusinessFinancials(
         ordersCompleted?: number;
         ordersFailed?: number;
         inventory?: Record<string, number>;
+        lastPayrollTime?: string;
+        reviews?: any[]; // Typed loosely to avoid circular dep for now
     }
 ) {
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
@@ -174,6 +176,8 @@ export async function updateBusinessFinancials(
     if (updates.ordersCompleted !== undefined) firestoreUpdates.ordersCompleted = updates.ordersCompleted;
     if (updates.ordersFailed !== undefined) firestoreUpdates.ordersFailed = updates.ordersFailed;
     if (updates.inventory !== undefined) firestoreUpdates.inventory = updates.inventory;
+    if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
+    if (updates.reviews !== undefined) firestoreUpdates.reviews = updates.reviews;
 
     await updateDoc(docRef, firestoreUpdates);
 }

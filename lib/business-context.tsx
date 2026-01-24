@@ -12,7 +12,8 @@ interface BusinessData {
     valuation: number;
     balance: number;
     cashflow: number;
-    employees: number;
+    employees: any; // Can be number or array
+    staffCount?: number;
     category: string;
     phase: string;
     status: string;
