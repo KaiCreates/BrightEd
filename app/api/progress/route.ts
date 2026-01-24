@@ -2,6 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { verifyAuth } from '@/lib/auth-server';
+import { z } from 'zod';
+
+// Request validation schemas
+const ProgressUpdateSchema = z.object({
+  userId: z.string().optional(),
+  objectiveId: z.string().min(1, 'Objective ID is required'),
+  stars: z.number().min(0, 'Stars must be non-negative').max(3, 'Stars cannot exceed 3'),
+  completed: z.boolean()
+});
+
+const ProgressQuerySchema = z.object({
+  userId: z.string().optional()
+});
 
 // Helper to get formatted progress using Admin SDK
 async function getUserProgressMap(userId: string) {
@@ -74,7 +87,17 @@ export async function POST(request: NextRequest) {
     try {
         const decodedToken = await verifyAuth(request);
         const body = await request.json();
-        const { userId = decodedToken.uid, objectiveId, stars, completed } = body;
+        
+        const result = ProgressUpdateSchema.safeParse(body);
+
+        if (!result.success) {
+            return NextResponse.json({ 
+                error: 'Invalid request data', 
+                details: result.error.format() 
+            }, { status: 400 });
+        }
+
+        const { userId = decodedToken.uid, objectiveId, stars, completed } = result.data;
 
         if (!objectiveId) {
             return NextResponse.json({ error: 'Missing objectiveId' }, { status: 400 });
@@ -85,32 +108,38 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
         }
 
+        // ATOMIC BATCH OPERATION - Update progress and XP together
+        const batch = adminDb.batch();
         const userRef = adminDb.collection('users').doc(userId);
         const progressRef = userRef.collection('progress').doc(objectiveId);
 
         // Update progress document
-        await progressRef.set({
+        batch.set(progressRef, {
             objectiveId,
             stars,
             completed,
-            lastAttempt: new Date().toISOString()
+            lastAttempt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         }, { merge: true });
 
-        // Update User XP atomically
-        const userDoc = await userRef.get();
-        if (userDoc.exists) {
-            await userRef.update({
-                xp: FieldValue.increment(10),
-                xp_today: FieldValue.increment(10)
-            });
-        }
+        // Update User XP atomically in the same batch
+        batch.update(userRef, {
+            xp: FieldValue.increment(10),
+            xp_today: FieldValue.increment(10),
+            updatedAt: new Date().toISOString()
+        });
 
+        // Commit all operations atomically
+        await batch.commit();
+
+        // Get the updated progress document
         const updatedProgress = (await progressRef.get()).data();
         return NextResponse.json({ success: true, progress: updatedProgress });
     } catch (error: any) {
         if (error.message?.includes('Unauthorized')) {
             return NextResponse.json({ error: error.message }, { status: 401 });
         }
+        console.error('Progress update error:', error);
         return NextResponse.json({ error: 'Failed to update progress' }, { status: 500 });
     }
 }

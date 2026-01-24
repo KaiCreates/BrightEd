@@ -20,6 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0EA5E9" />
+      </head>
       <body className="font-sans antialiased text-[var(--text-primary)] bg-[var(--bg-primary)] min-h-screen">
         <ErrorBoundary>
           <AuthProvider>

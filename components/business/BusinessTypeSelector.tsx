@@ -276,7 +276,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
 
                                 <div className="bg-[var(--bg-elevated)]/50 rounded-xl p-4 mb-8 text-left">
                                     <h4 className="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)] mb-3">
-                                        What you'll face:
+                                        What you&apos;ll face:
                                     </h4>
                                     <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
                                         <li className="flex items-start gap-2">

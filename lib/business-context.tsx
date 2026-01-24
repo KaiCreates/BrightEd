@@ -64,18 +64,30 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     const deleteBusiness = async () => {
         if (!user || !userData?.businessID) return;
 
-        const batch = writeBatch(db);
-        const businessRef = doc(db, 'businesses', userData.businessID);
-        const userRef = doc(db, 'users', user.uid);
+        try {
+            // ATOMIC BATCH OPERATION - Prevent data inconsistency
+            const batch = writeBatch(db);
+            const businessRef = doc(db, 'businesses', userData.businessID);
+            const userRef = doc(db, 'users', user.uid);
 
-        batch.delete(businessRef);
-        batch.update(userRef, {
-            hasBusiness: false,
-            businessID: null
-        });
+            // Delete business document
+            batch.delete(businessRef);
+            
+            // Update user document atomically
+            batch.update(userRef, {
+                hasBusiness: false,
+                businessID: null,
+                updatedAt: new Date().toISOString()
+            });
 
-        await batch.commit();
-        setBusiness(null);
+            // Commit all operations atomically
+            await batch.commit();
+            setBusiness(null);
+        } catch (error) {
+            console.error('Error deleting business:', error);
+            // Optionally show user feedback
+            throw new Error('Failed to delete business. Please try again.');
+        }
     };
 
     const pauseBusiness = async (isPaused: boolean) => {

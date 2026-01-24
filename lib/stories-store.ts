@@ -1,29 +1,25 @@
-import path from 'path';
-import fs from 'fs';
-import { randomUUID } from 'crypto';
+/**
+ * BrightEd Stories Engine - Firestore Data Layer
+ * Migrated from SQLite to Firestore for consistency and scalability
+ */
 
-// Use same DB path logic as questions generator but for dev.db (Prisma's storage)
-const DB_PATH = path.join(process.cwd(), 'prisma', 'dev.db');
+import { adminDb } from '@/lib/firebase-admin';
+import * as admin from 'firebase-admin';
 
-import { getStoriesDb } from './db';
-
-function getDb() {
-    return getStoriesDb();
-}
-
-export function closeDb() {
-    // Handled by global utility if needed
-}
-
-// Helper for JSON parsing
-function parseJson<T>(raw: string | null, fallback: T): T {
-    if (!raw) return fallback;
-    try {
-        return JSON.parse(raw) as T;
-    } catch {
-        console.error('Failed to parse JSON:', raw);
-        return fallback;
+// Helper for Firestore timestamp conversion
+function convertTimestamp(data: any): any {
+  if (!data) return data;
+  
+  const converted = { ...data };
+  
+  // Convert Firestore Timestamps to ISO strings
+  Object.keys(converted).forEach(key => {
+    if (converted[key] && typeof converted[key] === 'object' && 'toDate' in converted[key]) {
+      converted[key] = converted[key].toDate().toISOString();
     }
+  });
+  
+  return converted;
 }
 
 // ----- Types -----
@@ -39,178 +35,192 @@ export interface Story {
 }
 
 export async function getAllStories(): Promise<Story[]> {
-    const db = getDb();
-    const rows = db.prepare('SELECT * FROM Story ORDER BY name ASC').all();
-    return (rows as any[]).map((s: any) => ({
-        ...s,
-        config: parseJson(s.config, {}),
-    })) as Story[];
+    try {
+        const storiesRef = adminDb.collection('stories');
+        const q = storiesRef.orderBy('name', 'asc');
+        const snapshot = await q.get();
+        
+        return snapshot.docs.map((doc) => {
+            const data = convertTimestamp(doc.data());
+            return {
+                id: doc.id,
+                ...data,
+                config: data.config || {}
+            } as Story;
+        });
+    } catch (error) {
+        console.error('Error fetching stories:', error);
+        return [];
+    }
 }
 
 export async function getStoryBySlug(slug: string): Promise<Story | null> {
-    const db = getDb();
-    const row = db.prepare('SELECT * FROM Story WHERE slug = ?').get(slug) as any;
-    if (!row) return null;
-    return {
-        ...row,
-        config: parseJson(row.config, {}),
-    } as Story;
+    try {
+        const storiesRef = adminDb.collection('stories');
+        const q = storiesRef.where('slug', '==', slug);
+        const snapshot = await q.get();
+        
+        if (snapshot.empty) return null;
+        
+        const doc = snapshot.docs[0];
+        const data = convertTimestamp(doc.data());
+        
+        return {
+            id: doc.id,
+            ...data,
+            config: data.config || {}
+        } as Story;
+    } catch (error) {
+        console.error('Error fetching story by slug:', error);
+        return null;
+    }
 }
 
 export async function ensureDefaultStory() {
-    const db = getDb();
-    const existing = db.prepare('SELECT id FROM Story WHERE slug = ?').get('business-financial-literacy');
-    if (existing) return;
+    try {
+        const existing = await getStoryBySlug('business-financial-literacy');
+        if (existing) return;
 
-    const defaultStory = {
-        id: randomUUID(),
-        slug: 'business-financial-literacy',
-        name: 'Business & Financial Literacy',
-        subject: 'business',
-        config: JSON.stringify({
-            timeMultiplier: 1,
-            registrationDelayMinutes: 0.5, // 30 seconds
-            loanApprovalDelayMinutes: 5,
-        }),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-    };
+        const defaultStory = {
+            slug: 'business-financial-literacy',
+            name: 'Business & Financial Literacy',
+            subject: 'business',
+            config: {
+                timeMultiplier: 1,
+                registrationDelayMinutes: 0.5, // 30 seconds
+                loanApprovalDelayMinutes: 5,
+            },
+            createdAt: admin.firestore.Timestamp.now(),
+            updatedAt: admin.firestore.Timestamp.now()
+        };
 
-    const insert = db.prepare(`
-    INSERT INTO Story (id, slug, name, subject, config, createdAt, updatedAt)
-    VALUES (@id, @slug, @name, @subject, @config, @createdAt, @updatedAt)
-  `);
-    insert.run(defaultStory);
+        const storiesRef = adminDb.collection('stories');
+        await storiesRef.add(defaultStory);
+    } catch (error) {
+        console.error('Error ensuring default story:', error);
+    }
 }
 
 // ----- Profiles -----
 
 export async function getPlayerProfile(userId: string) {
-    const db = getDb();
-    let row = db.prepare('SELECT * FROM StoriesPlayerProfile WHERE userId = ?').get(userId) as any;
-    if (!row) {
-        // ... (creation logic stays same but typed)
+    try {
+        const profileRef = adminDb.collection('storiesPlayerProfiles').doc(userId);
+        const profileDoc = await profileRef.get();
+        
+        if (!profileDoc.exists) {
+            // Create default profile
+            const defaultProfile = {
+                userId,
+                skills: {
+                    financialLiteracy: 50,
+                    businessStrategy: 50,
+                    riskManagement: 50
+                },
+                reputation: {
+                    overall: 50,
+                    reliability: 50,
+                    innovation: 50
+                },
+                inventory: {},
+                bCoins: 1000,
+                timeUnits: 100,
+                energy: 100,
+                activeConsequences: [],
+                financialData: {
+                    totalRevenue: 0,
+                    totalExpenses: 0,
+                    netProfit: 0
+                },
+                createdAt: admin.firestore.Timestamp.now(),
+                updatedAt: admin.firestore.Timestamp.now()
+            };
+            
+            await profileRef.set(defaultProfile);
+            return defaultProfile;
+        }
+        
+        return convertTimestamp(profileDoc.data());
+    } catch (error) {
+        console.error('Error getting player profile:', error);
+        throw error;
     }
-    return {
-        ...row,
-        skills: parseJson(row.skills, {}),
-        reputation: parseJson(row.reputation, {}),
-        inventory: parseJson(row.inventory, {}),
-        activeConsequences: parseJson(row.activeConsequences, []),
-        financialData: parseJson(row.financialData, {}),
-    };
 }
 
 export async function updatePlayerProfile(userId: string, data: Record<string, any>) {
-    const db = getDb();
-    const sets: string[] = [];
-    const params: Record<string, any> = { userId };
-
-    for (const [key, value] of Object.entries(data)) {
-        if (key === 'userId' || key === 'id') continue;
-        sets.push(`${key} = @${key}`);
-        params[key] = typeof value === 'object' ? JSON.stringify(value) : value;
+    try {
+        const profileRef = adminDb.collection('storiesPlayerProfiles').doc(userId);
+        await profileRef.set(
+            {
+                ...data,
+                updatedAt: admin.firestore.Timestamp.now()
+            },
+            { merge: true }
+        );
+    } catch (error) {
+        console.error('Error updating player profile:', error);
+        throw error;
     }
-
-    sets.push(`updatedAt = @updatedAt`);
-    params.updatedAt = new Date().toISOString();
-
-    if (sets.length === 0) return;
-
-    const sql = `UPDATE StoriesPlayerProfile SET ${sets.join(', ')} WHERE userId = @userId`;
-    db.prepare(sql).run(params);
-}
-
-// ----- Businesses -----
-
-export async function getBusinesses(profileId: string): Promise<any[]> {
-    const db = getDb();
-    const rows = db.prepare('SELECT * FROM Business WHERE profileId = ? ORDER BY createdAt DESC').all(profileId) as any[];
-    return rows.map((b) => ({
-        ...b,
-        financialHistory: parseJson(b.financialHistory, [])
-    }));
-}
-
-export async function createBusiness(data: {
-    profileId: string;
-    name: string;
-    category: string;
-    description?: string;
-    status?: string;
-}) {
-    const db = getDb();
-    const id = randomUUID();
-    const now = new Date().toISOString();
-
-    const business = {
-        id,
-        profileId: data.profileId,
-        name: data.name,
-        category: data.category,
-        description: data.description || '',
-        status: data.status || 'active',
-        valuation: 0,
-        cashFlow: 0,
-        financialHistory: '[]',
-        createdAt: now,
-        updatedAt: now
-    };
-
-    db.prepare(`
-        INSERT INTO Business (id, profileId, name, category, description, status, valuation, cashFlow, financialHistory, createdAt, updatedAt)
-        VALUES (@id, @profileId, @name, @category, @description, @status, @valuation, @cashFlow, @financialHistory, @createdAt, @updatedAt)
-    `).run(business);
-
-    return business;
-}
-
-export async function updateBusiness(id: string, data: Record<string, any>) {
-    const db = getDb();
-    const sets: string[] = [];
-    const params: Record<string, any> = { id };
-
-    for (const [key, value] of Object.entries(data)) {
-        if (key === 'id') continue;
-        sets.push(`${key} = @${key}`);
-        params[key] = typeof value === 'object' ? JSON.stringify(value) : value;
-    }
-
-    sets.push(`updatedAt = @updatedAt`);
-    params.updatedAt = new Date().toISOString();
-
-    if (sets.length === 0) return;
-
-    const sql = `UPDATE Business SET ${sets.join(', ')} WHERE id = @id`;
-    db.prepare(sql).run(params);
 }
 
 // ----- Sessions -----
 
 export async function getSessions(userId: string, filters: { storyId?: string; state?: string } = {}): Promise<any[]> {
-    const db = getDb();
-    let sql = 'SELECT s.*, st.name as storyName, st.slug as storySlug FROM StorySession s LEFT JOIN Story st ON s.storyId = st.id WHERE s.userId = ?';
-    const params: (string | number)[] = [userId];
+    try {
+        // NOTE: Firestore requires a composite index for (where userId == X) + (orderBy lastPlayedAt)
+        // and even more for additional where clauses. To keep local/dev environments working without
+        // requiring console index creation, we fetch by userId only and then filter/sort in memory.
+        const snapshot = await adminDb
+            .collection('storySessions')
+            .where('userId', '==', userId)
+            .get();
 
-    if (filters.storyId) {
-        sql += ' AND s.storyId = ?';
-        params.push(filters.storyId);
+        let sessionDocs = snapshot.docs;
+
+        if (filters.storyId) {
+            sessionDocs = sessionDocs.filter((d) => d.get('storyId') === filters.storyId);
+        }
+
+        if (filters.state) {
+            sessionDocs = sessionDocs.filter((d) => d.get('state') === filters.state);
+        }
+
+        sessionDocs.sort((a, b) => {
+            const aVal = a.get('lastPlayedAt');
+            const bVal = b.get('lastPlayedAt');
+            const aMs = aVal && typeof aVal.toDate === 'function' ? aVal.toDate().getTime() : new Date(aVal || 0).getTime();
+            const bMs = bVal && typeof bVal.toDate === 'function' ? bVal.toDate().getTime() : new Date(bVal || 0).getTime();
+            return bMs - aMs;
+        });
+
+        return Promise.all(sessionDocs.map(async (snap) => {
+            const data = convertTimestamp(snap.data());
+            
+            // Get story details
+            let story = null;
+            if (data.storyId) {
+                const storyDoc = await adminDb.collection('stories').doc(data.storyId).get();
+                if (storyDoc.exists) {
+                    const storyData = convertTimestamp(storyDoc.data());
+                    story = {
+                        id: storyDoc.id,
+                        name: storyData.name,
+                        slug: storyData.slug,
+                        config: storyData.config || {}
+                    };
+                }
+            }
+            
+            return {
+                id: snap.id,
+                ...data,
+                story
+            };
+        }));
+    } catch (error) {
+        console.error('Error getting sessions:', error);
+        return [];
     }
-    if (filters.state) {
-        sql += ' AND s.state = ?';
-        params.push(filters.state);
-    }
-
-    sql += ' ORDER BY s.lastPlayedAt DESC';
-
-    const rows = db.prepare(sql).all(...params) as any[];
-    return rows.map((s) => ({
-        ...s,
-        snapshot: parseJson(s.snapshot, {}),
-        businessState: parseJson(s.businessState, null),
-        difficultyContext: parseJson(s.difficultyContext, {}),
-        story: s.storyId ? { id: s.storyId, name: s.storyName, slug: s.storySlug } : null
-    }));
 }
 
 export async function createSession(data: {
@@ -221,61 +231,70 @@ export async function createSession(data: {
     businessState?: any;
     difficultyContext: any;
 }) {
-    const db = getDb();
-    const id = randomUUID();
-    const now = new Date().toISOString();
+    try {
+        const sessionData = {
+            ...data,
+            startedAt: admin.firestore.Timestamp.now(),
+            lastPlayedAt: admin.firestore.Timestamp.now()
+        };
 
-    const session = {
-        id,
-        userId: data.userId,
-        storyId: data.storyId,
-        state: data.state,
-        snapshot: JSON.stringify(data.snapshot),
-        businessState: data.businessState ? JSON.stringify(data.businessState) : null,
-        difficultyContext: JSON.stringify(data.difficultyContext),
-        startedAt: now,
-        lastPlayedAt: now
-    };
-
-    db.prepare(`
-    INSERT INTO StorySession (id, userId, storyId, state, snapshot, businessState, difficultyContext, startedAt, lastPlayedAt)
-    VALUES (@id, @userId, @storyId, @state, @snapshot, @businessState, @difficultyContext, @startedAt, @lastPlayedAt)
-  `).run(session);
-
-    return id;
+        const docRef = await adminDb.collection('storySessions').add(sessionData);
+        return docRef.id;
+    } catch (error) {
+        console.error('Error creating session:', error);
+        throw error;
+    }
 }
 
 export async function updateSession(id: string, data: Record<string, any>) {
-    const db = getDb();
-    const sets: string[] = [];
-    const params: Record<string, any> = { id };
-
-    for (const [key, value] of Object.entries(data)) {
-        if (key === 'id') continue;
-        sets.push(`${key} = @${key}`);
-        params[key] = typeof value === 'object' ? JSON.stringify(value) : value;
+    try {
+        const sessionRef = adminDb.collection('storySessions').doc(id);
+        await sessionRef.set(
+            {
+                ...data,
+                lastPlayedAt: admin.firestore.Timestamp.now()
+            },
+            { merge: true }
+        );
+    } catch (error) {
+        console.error('Error updating session:', error);
+        throw error;
     }
-
-    sets.push(`lastPlayedAt = @lastPlayedAt`);
-    params.lastPlayedAt = new Date().toISOString();
-
-    const sql = `UPDATE StorySession SET ${sets.join(', ')} WHERE id = @id`;
-    db.prepare(sql).run(params);
 }
 
 export async function getSessionById(id: string) {
-    const db = getDb();
-    const row = db.prepare('SELECT s.*, st.name as storyName, st.slug as storySlug, st.config as storyConfig FROM StorySession s LEFT JOIN Story st ON s.storyId = st.id WHERE s.id = ?').get(id) as any;
-    if (!row) return null;
-    return {
-        ...row,
-        snapshot: parseJson(row.snapshot, {}),
-        businessState: parseJson(row.businessState, null),
-        difficultyContext: parseJson(row.difficultyContext, {}),
-        story: row.storyId ? { id: row.storyId, name: row.storyName, slug: row.storySlug, config: parseJson(row.storyConfig, {}) } : null
-    };
-}
+    try {
+        const sessionDoc = await adminDb.collection('storySessions').doc(id).get();
 
+        if (!sessionDoc.exists) return null;
+
+        const data = convertTimestamp(sessionDoc.data());
+        
+        // Get story details
+        let story = null;
+        if (data.storyId) {
+            const storyDoc = await adminDb.collection('stories').doc(data.storyId).get();
+            if (storyDoc.exists) {
+                const storyData = convertTimestamp(storyDoc.data());
+                story = {
+                    id: storyDoc.id,
+                    name: storyData.name,
+                    slug: storyData.slug,
+                    config: storyData.config || {}
+                };
+            }
+        }
+        
+        return {
+            id: sessionDoc.id,
+            ...data,
+            story
+        };
+    } catch (error) {
+        console.error('Error getting session by ID:', error);
+        return null;
+    }
+}
 
 // ----- Consequences -----
 
@@ -287,59 +306,51 @@ export async function createConsequence(data: {
     ruleId: string;
     effects: any[];
 }) {
-    const db = getDb();
-    const id = randomUUID();
-    const consequence = {
-        id,
-        decisionId: data.decisionId || null,
-        sessionId: data.sessionId,
-        type: data.type,
-        scheduledAt: data.scheduledAt || null,
-        ruleId: data.ruleId,
-        effects: JSON.stringify(data.effects),
-        appliedAt: null
-    };
+    try {
+        const consequenceData = {
+            ...data,
+            appliedAt: null,
+            createdAt: admin.firestore.Timestamp.now()
+        };
 
-    db.prepare(`
-        INSERT INTO Consequence (id, decisionId, sessionId, type, scheduledAt, ruleId, effects, appliedAt)
-        VALUES (@id, @decisionId, @sessionId, @type, @scheduledAt, @ruleId, @effects, @appliedAt)
-    `).run(consequence);
-
-    return id;
+        const docRef = await adminDb.collection('consequences').add(consequenceData);
+        return docRef.id;
+    } catch (error) {
+        console.error('Error creating consequence:', error);
+        throw error;
+    }
 }
 
 export async function getDueConsequences(sessionId: string) {
-    const db = getDb();
-    const now = new Date().toISOString();
-    const rows = db.prepare(`
-        SELECT * FROM Consequence 
-        WHERE sessionId = ? 
-        AND type = 'delayed' 
-        AND (scheduledAt IS NULL OR scheduledAt <= ?) 
-        AND appliedAt IS NULL
-    `).all(sessionId, now);
+    try {
+        const snapshot = await adminDb
+            .collection('consequences')
+            .where('sessionId', '==', sessionId)
+            .where('type', '==', 'delayed')
+            .where('appliedAt', '==', null)
+            .get();
 
-    return rows.map((c: any) => ({
-        ...c,
-        effects: parseJson(c.effects, [])
-    }));
+        return snapshot.docs.map((snap) => {
+            const data = convertTimestamp(snap.data());
+            return {
+                id: snap.id,
+                ...data,
+                effects: data.effects || []
+            };
+        });
+    } catch (error) {
+        console.error('Error getting due consequences:', error);
+        return [];
+    }
 }
 
 export async function updateConsequence(id: string, data: Record<string, any>) {
-    const db = getDb();
-    const sets: string[] = [];
-    const params: Record<string, any> = { id };
-
-    for (const [key, value] of Object.entries(data)) {
-        if (key === 'id') continue;
-        sets.push(`${key} = @${key}`);
-        params[key] = typeof value === 'object' ? JSON.stringify(value) : value;
+    try {
+        await adminDb.collection('consequences').doc(id).set(data, { merge: true });
+    } catch (error) {
+        console.error('Error updating consequence:', error);
+        throw error;
     }
-
-    if (sets.length === 0) return;
-
-    const sql = `UPDATE Consequence SET ${sets.join(', ')} WHERE id = @id`;
-    db.prepare(sql).run(params);
 }
 
 // ----- Decision Log -----
@@ -350,69 +361,68 @@ export async function createDecisionLog(data: {
     payload: any;
     resolved: boolean;
 }) {
-    const db = getDb();
-    const id = randomUUID();
-    const now = new Date().toISOString();
+    try {
+        const decisionData = {
+            ...data,
+            at: admin.firestore.Timestamp.now()
+        };
 
-    const decision = {
-        id,
-        sessionId: data.sessionId,
-        choiceId: data.choiceId,
-        payload: JSON.stringify(data.payload),
-        resolved: data.resolved ? 1 : 0,
-        at: now
-    };
-
-    db.prepare(`
-        INSERT INTO DecisionLog (id, sessionId, choiceId, payload, resolved, at)
-        VALUES (@id, @sessionId, @choiceId, @payload, @resolved, @at)
-        `).run(decision);
-
-    return id;
+        const docRef = await adminDb.collection('decisionLogs').add(decisionData);
+        return docRef.id;
+    } catch (error) {
+        console.error('Error creating decision log:', error);
+        throw error;
+    }
 }
 
 // ----- NPCs & Memory -----
 
 export async function getNPCMemory(userId: string, npcId: string) {
-    const db = getDb();
-    const row = db.prepare(`
-    SELECT m.*, n.name as npcName, n.role as npcRole, n.config as npcConfig
-    FROM NPCMemory m
-    JOIN NPC n ON m.npcId = n.id
-    WHERE m.userId = ? AND m.npcId = ?
-  `).get(userId, npcId) as any;
+    try {
+        const memoryDoc = await adminDb.collection('npcMemories').doc(`${userId}_${npcId}`).get();
 
-    if (!row) return null;
+        if (!memoryDoc.exists) return null;
 
-    return {
-        ...row,
-        interactions: parseJson(row.interactions, []),
-        npc: {
-            id: row.npcId,
-            name: row.npcName,
-            role: row.npcRole,
-            config: parseJson(row.npcConfig, {})
+        const data = convertTimestamp(memoryDoc.data());
+        
+        // Get NPC details
+        let npc = null;
+        const npcDoc = await adminDb.collection('npcs').doc(npcId).get();
+        if (npcDoc.exists) {
+            const npcData = convertTimestamp(npcDoc.data());
+            npc = {
+                id: npcDoc.id,
+                name: npcData.name,
+                role: npcData.role,
+                config: npcData.config || {}
+            };
         }
-    };
+        
+        return {
+            ...data,
+            npc,
+            interactions: data.interactions || []
+        };
+    } catch (error) {
+        console.error('Error getting NPC memory:', error);
+        return null;
+    }
 }
 
 export async function recordNPCInteraction(userId: string, npcId: string, interactions: any, sentiment: number) {
-    const db = getDb();
-    const now = new Date().toISOString();
+    try {
+        const interactionData = {
+            userId,
+            npcId,
+            interactions,
+            sentiment,
+            lastInteractionAt: admin.firestore.Timestamp.now(),
+            updatedAt: admin.firestore.Timestamp.now()
+        };
 
-    const existing = db.prepare('SELECT id FROM NPCMemory WHERE userId = ? AND npcId = ?').get(userId, npcId);
-
-    if (existing) {
-        db.prepare(`
-      UPDATE NPCMemory 
-      SET interactions = ?, sentiment = ?, lastInteractionAt = ?
-      WHERE userId = ? AND npcId = ?
-    `).run(JSON.stringify(interactions), sentiment, now, userId, npcId);
-    } else {
-        const id = randomUUID();
-        db.prepare(`
-      INSERT INTO NPCMemory (id, userId, npcId, interactions, sentiment, lastInteractionAt)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `).run(id, userId, npcId, JSON.stringify(interactions), sentiment, now);
+        await adminDb.collection('npcMemories').doc(`${userId}_${npcId}`).set(interactionData, { merge: true });
+    } catch (error) {
+        console.error('Error recording NPC interaction:', error);
+        throw error;
     }
 }

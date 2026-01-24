@@ -235,8 +235,6 @@ export interface BusinessState {
     inventory: Record<string, number>; // ItemId -> Quantity
     marketState: MarketState;
 
-    marketState: MarketState;
-
     // Recruitment
     recruitmentPool: Employee[];
     lastRecruitmentTime: string;

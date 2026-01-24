@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
+import { z } from 'zod';
 
-interface XPUpdate {
-  objectiveId: string;
-  xpEarned: number;
-  reason: string;
-}
+// Request validation schemas
+const XPUpdateSchema = z.object({
+  objectiveId: z.string().min(1, 'Objective ID is required'),
+  xpEarned: z.number().min(0, 'XP earned must be non-negative'),
+  reason: z.string().min(1, 'Reason is required').max(100, 'Reason must be 100 characters or less')
+});
+
+const XPQuerySchema = z.object({
+  userId: z.string().optional()
+});
 
 // XP calculation based on performance
 function calculateXP(correct: boolean, difficulty: number, timeSpent: number): number {
@@ -38,8 +44,17 @@ export async function POST(request: NextRequest) {
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 
-    const body: XPUpdate = await request.json();
-    const { objectiveId, xpEarned, reason } = body;
+    const body = await request.json();
+    const result = XPUpdateSchema.safeParse(body);
+
+    if (!result.success) {
+      return NextResponse.json({ 
+        error: 'Invalid request data', 
+        details: result.error.format() 
+      }, { status: 400 });
+    }
+
+    const { objectiveId, xpEarned, reason } = result.data;
 
     // In production, this would update database
     // For now, return the XP calculation
@@ -66,6 +81,19 @@ export async function GET(request: NextRequest) {
   try {
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
+
+    // Validate query parameters
+    const { searchParams } = new URL(request.url);
+    const queryResult = XPQuerySchema.safeParse({
+      userId: searchParams.get('userId') || undefined
+    });
+
+    if (!queryResult.success) {
+      return NextResponse.json({ 
+        error: 'Invalid query parameters', 
+        details: queryResult.error.format() 
+      }, { status: 400 });
+    }
 
     // In production, fetch from database
     // For now, calculate from localStorage data

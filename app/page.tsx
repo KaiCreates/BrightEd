@@ -6,33 +6,42 @@ import { useAuth } from '@/lib/auth-context'
 
 export default function RootPage() {
   const router = useRouter()
-  const { user, loading, authHint } = useAuth()
+  const { user, loading } = useAuth()
 
   useEffect(() => {
     // If we are still initializing auth, don't do anything yet
     if (loading) return
 
     if (!user) {
-      // If we are NOT loading and there's definitely no user...
-      // But wait! If authHint is true, it might be a transient state where Firebase 
-      // hasn't quite caught up yet (though usually 'loading' handles this).
-      // If loading is false and user is null, Firebase says no user.
+      // User is not authenticated, redirect to landing
       router.push('/landing')
     } else {
-      // User is authenticated
-      const onboardingData = localStorage.getItem('brighted_onboarding')
-
-      if (onboardingData) {
-        router.push('/home')
-      } else {
-        // Double check Firestore if local storage is empty
-        router.push('/onboarding')
+      // User is authenticated, check onboarding status
+      const checkOnboarding = async () => {
+        try {
+          const { doc, getDoc } = await import('firebase/firestore')
+          const { db } = await import('@/lib/firebase')
+          
+          const userDoc = await getDoc(doc(db, 'users', user.uid))
+          const userData = userDoc.data()
+          
+          if (userData?.onboardingCompleted) {
+            router.push('/home')
+          } else {
+            router.push('/onboarding')
+          }
+        } catch (error) {
+          console.error('Error checking onboarding status:', error)
+          router.push('/onboarding')
+        }
       }
+      
+      checkOnboarding()
     }
   }, [user, loading, router])
 
-  // Show loading while transitioning or if we expect a user (authHint)
-  if (loading || (authHint && !user)) {
+  // Show loading while transitioning
+  if (loading) {
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">

@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User, signOut as firebaseSignOut } from 'firebase/auth';
 import { auth, db } from './firebase';
 import { doc, getDoc, onSnapshot, updateDoc, setDoc } from 'firebase/firestore';
+import { HydrationFix } from '@/components/HydrationFix';
 
 export interface UserData {
     xp: number;
@@ -38,7 +39,6 @@ interface AuthContextType {
     user: User | null;
     loading: boolean;
     userData: UserData | null; // Firestore user document
-    authHint: boolean;
     logout: () => Promise<void>;
     refreshUserData: () => Promise<void>;
 }
@@ -49,23 +49,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [authHint, setAuthHint] = useState<boolean>(false);
 
     useEffect(() => {
-        // Initialize authHint from localStorage
-        const hint = localStorage.getItem('brighted_auth_hint') === 'true';
-        setAuthHint(hint);
-
         let unsubscribeSnapshot: (() => void) | undefined;
 
         const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
 
             if (currentUser) {
-                // Set authHint for future loads
-                localStorage.setItem('brighted_auth_hint', 'true');
-                setAuthHint(true);
-
                 // Real-time listener for user document
                 const userRef = doc(db, 'users', currentUser.uid);
 
@@ -135,8 +126,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const logout = async () => {
-        localStorage.removeItem('brighted_auth_hint');
-        setAuthHint(false);
         await firebaseSignOut(auth);
         setUserData(null);
     };
@@ -146,13 +135,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, userData, logout, refreshUserData, authHint } as any}>
-            {children}
-        </AuthContext.Provider>
+        <HydrationFix>
+            <AuthContext.Provider value={{ user, loading, userData, logout, refreshUserData }}>
+                {children}
+            </AuthContext.Provider>
+        </HydrationFix>
     );
 }
 
-export function useAuth(): AuthContextType & { authHint: boolean } {
+export function useAuth(): AuthContextType {
     const context = useContext(AuthContext);
     if (context === undefined) {
         throw new Error('useAuth must be used within an AuthProvider');

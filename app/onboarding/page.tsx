@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { BrightLayer, BrightButton, BrightHeading } from '@/components/system'
+import { useAuth } from '@/lib/auth-context'
 
 interface OnboardingData {
   firstName: string
@@ -47,6 +48,7 @@ const learningGoals = [
  */
 export default function OnboardingPage() {
   const router = useRouter()
+  const { user } = useAuth()
   const [step, setStep] = useState(1)
   const [data, setData] = useState<OnboardingData>({
     firstName: '',
@@ -103,9 +105,27 @@ export default function OnboardingPage() {
     }
   }
 
-  const handleComplete = () => {
-    localStorage.setItem('brighted_onboarding', JSON.stringify(data))
-    router.push('/onboarding/diagnostic')
+  const handleComplete = async () => {
+    try {
+      // Save onboarding data to Firestore instead of localStorage
+      const { doc, updateDoc } = await import('firebase/firestore')
+      const { db } = await import('@/lib/firebase')
+
+      if (user) {
+        await updateDoc(doc(db, 'users', user.uid), {
+          onboardingData: data,
+          onboardingCompleted: true,
+          updatedAt: new Date().toISOString()
+        })
+      }
+      
+      router.push('/onboarding/diagnostic')
+    } catch (error) {
+      console.error('Error saving onboarding data:', error)
+      // Fallback to localStorage for now, but this should be removed
+      localStorage.setItem('brighted_onboarding', JSON.stringify(data))
+      router.push('/onboarding/diagnostic')
+    }
   }
 
   return (
