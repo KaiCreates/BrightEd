@@ -19,6 +19,7 @@ interface OrderDashboardProps {
     onAcceptOrder: (orderId: string) => void;
     onRejectOrder: (orderId: string) => void;
     onCompleteOrder: (orderId: string) => void;
+    onFulfill: (order: Order) => void;
 }
 
 const STATUS_COLORS: Record<OrderStatus, string> = {
@@ -54,6 +55,7 @@ export function OrderDashboard({
     onAcceptOrder,
     onRejectOrder,
     onCompleteOrder,
+    onFulfill,
 }: OrderDashboardProps) {
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
@@ -165,6 +167,7 @@ export function OrderDashboard({
                                 order={order}
                                 businessType={businessType}
                                 onComplete={() => onCompleteOrder(order.id)}
+                                onFulfill={() => onFulfill(order)}
                                 showActions={true}
                                 showDeadline={true}
                             />
@@ -215,6 +218,7 @@ interface OrderCardProps {
     onAccept?: () => void;
     onReject?: () => void;
     onComplete?: () => void;
+    onFulfill?: () => void;
     showActions?: boolean;
     showDeadline?: boolean;
 }
@@ -225,6 +229,7 @@ function OrderCard({
     onAccept,
     onReject,
     onComplete,
+    onFulfill,
     showActions = false,
     showDeadline = false,
 }: OrderCardProps) {
@@ -259,9 +264,9 @@ function OrderCard({
             variant="glass"
             padding="md"
             className={`relative overflow-hidden ${isPending ? 'border-l-4 border-l-[var(--state-warning)]' :
-                    isOverdue ? 'border-l-4 border-l-[var(--state-error)] animate-urgent-pulse' :
-                        isUrgent ? 'border-l-4 border-l-[var(--state-warning)]' :
-                            'border-l-4 border-l-[var(--brand-primary)]'
+                isOverdue ? 'border-l-4 border-l-[var(--state-error)] animate-urgent-pulse' :
+                    isUrgent ? 'border-l-4 border-l-[var(--state-warning)]' :
+                        'border-l-4 border-l-[var(--brand-primary)]'
                 }`}
         >
             {/* Header */}
@@ -336,9 +341,14 @@ function OrderCard({
                         </>
                     )}
                     {isActive && (
-                        <BrightButton variant="primary" size="sm" onClick={onComplete}>
-                            Mark Complete
-                        </BrightButton>
+                        <div className="flex gap-2">
+                            <BrightButton variant="ghost" size="sm" onClick={onComplete}>
+                                Skip to Done
+                            </BrightButton>
+                            <BrightButton variant="primary" size="sm" onClick={onFulfill}>
+                                Fulfill Order
+                            </BrightButton>
+                        </div>
                     )}
                 </div>
             )}

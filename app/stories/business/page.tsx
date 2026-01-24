@@ -52,6 +52,8 @@ export default function BusinessCommandCenter() {
 // CONTENT COMPONENT (Inside Cinematic Context)
 // ============================================================================
 
+import BusinessWorkspace from '@/components/business/BusinessWorkspace';
+
 function CommandCenterContent() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
@@ -62,6 +64,7 @@ function CommandCenterContent() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [activeFulfillmentOrder, setActiveFulfillmentOrder] = useState<Order | null>(null);
 
   // Simulation state
   const [simHour, setSimHour] = useState(8);
@@ -210,14 +213,13 @@ function CommandCenterContent() {
     }
   };
 
-  const handleCompleteOrder = async (orderId: string) => {
+  const handleCompleteOrder = async (orderId: string, customQuality?: number) => {
     if (!business) return;
     const order = orders.find(o => o.id === orderId);
     if (!order) return;
 
-    // Random quality score for simulation
-    // In full version, this would be a minigame or resource check
-    const qualityScore = Math.floor(60 + Math.random() * 40);
+    // Use simulated quality score or randomize if skipped
+    const qualityScore = customQuality ?? Math.floor(60 + Math.random() * 40);
 
     const { order: completed, payment, tip } = completeOrder(order, qualityScore);
     await updateOrderStatus(business.id, orderId, completed);
@@ -232,6 +234,12 @@ function CommandCenterContent() {
     if (tip > 0) {
       showInterrupt('mendy', `Awesome! Received ฿${payment} plus a ฿${tip} tip!`, 'happy');
     }
+
+    setActiveFulfillmentOrder(null);
+  };
+
+  const handleStartFulfillment = (order: Order) => {
+    setActiveFulfillmentOrder(order);
   };
 
   if (authLoading || loading) {
@@ -327,8 +335,20 @@ function CommandCenterContent() {
             onAcceptOrder={handleAcceptOrder}
             onRejectOrder={handleRejectOrder}
             onCompleteOrder={handleCompleteOrder}
+            onFulfill={handleStartFulfillment}
           />
         )}
+
+        <AnimatePresence>
+          {activeFulfillmentOrder && businessType && (
+            <BusinessWorkspace
+              order={activeFulfillmentOrder}
+              businessType={businessType}
+              onComplete={(quality) => handleCompleteOrder(activeFulfillmentOrder.id, quality)}
+              onCancel={() => setActiveFulfillmentOrder(null)}
+            />
+          )}
+        </AnimatePresence>
 
         {/* Additional sections like Leaderboard or upgrades could go here */}
         <div className="mt-12 grid lg:grid-cols-3 gap-8">

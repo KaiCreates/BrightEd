@@ -340,6 +340,28 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        <div className="mt-12 text-center border-t border-[var(--border-subtle)] pt-8 pb-4">
+          <button
+            onClick={async () => {
+              if (confirm('This will clear local cache and reload. Continue?')) {
+                try {
+                  const { clearPersistence, terminate } = await import('firebase/firestore');
+                  const { db } = await import('@/lib/firebase');
+                  await terminate(db);
+                  await clearPersistence(db);
+                  window.location.reload();
+                } catch (e) {
+                  console.error('Failed to clear persistence:', e);
+                  alert('Could not clear cache. Please manually clear site data.');
+                }
+              }
+            }}
+            className="text-xs text-[var(--text-muted)] hover:text-[var(--state-error)] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 mx-auto"
+          >
+            <span>🗑️</span> Reset App Data (Fix Cache Errors)
+          </button>
+        </div>
+
       </div>
     </div>
   )

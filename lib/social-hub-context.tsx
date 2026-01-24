@@ -113,18 +113,26 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         ];
 
         const initializeRooms = async () => {
-            for (const lounge of subjectLounges) {
-                const roomRef = doc(db, 'rooms', lounge.name);
-                const roomSnap = await getDoc(roomRef);
+            try {
+                for (const lounge of subjectLounges) {
+                    const roomRef = doc(db, 'rooms', lounge.name);
+                    const roomSnap = await getDoc(roomRef);
 
-                if (!roomSnap.exists()) {
-                    await setDoc(roomRef, {
-                        name: lounge.name,
-                        type: 'public',
-                        subject: lounge.subject,
-                        members: [],
-                        createdAt: serverTimestamp()
-                    });
+                    if (!roomSnap.exists()) {
+                        await setDoc(roomRef, {
+                            name: lounge.name,
+                            type: 'public',
+                            subject: lounge.subject,
+                            members: [],
+                            createdAt: serverTimestamp()
+                        });
+                    }
+                }
+            } catch (error: any) {
+                if (error.code === 'failed-precondition' || error.message.includes('terminated')) {
+                    console.warn('Firestore client terminated, skipping room init');
+                } else {
+                    console.error('Error initializing rooms:', error);
                 }
             }
         };

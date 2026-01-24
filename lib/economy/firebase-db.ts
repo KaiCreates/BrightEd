@@ -85,8 +85,11 @@ export async function createEconomyBusiness(
     };
 
     // Create document in Firestore
-    // We flatten the structure for Firestore but keep types consistent
-    await setDoc(businessRef, {
+    // We use a batch to ensure the business is created AND the user record is updated atomically
+    const batch = writeBatch(db);
+    const userRef = doc(db, 'users', userId);
+
+    batch.set(businessRef, {
         ownerId: userId, // For permission query
         ...initialState,
         createdAt: serverTimestamp(),
@@ -97,6 +100,14 @@ export async function createEconomyBusiness(
         valuation: businessType.startingCapital, // Simple valuation start
         status: 'active',
     });
+
+    batch.update(userRef, {
+        hasBusiness: true,
+        businessID: businessId,
+        xp: increment(100) // Bonus for starting a venture
+    });
+
+    await batch.commit();
 
     return businessId;
 }
