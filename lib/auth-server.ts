@@ -26,8 +26,10 @@ export async function verifyAuth(request: NextRequest) {
     try {
         const decodedToken = await adminAuth.verifyIdToken(token);
         return decodedToken;
-    } catch (error) {
-        console.error("Firebase ID Token verification failed:", error);
+    } catch (error: any) {
+        console.error("Firebase ID Token verification failed:");
+        console.error("  Code:", error.code);
+        console.error("  Message:", error.message);
         throw new Error('Unauthorized: Invalid token');
     }
 }

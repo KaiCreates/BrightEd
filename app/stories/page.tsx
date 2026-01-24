@@ -45,9 +45,12 @@ export default function StoriesPage() {
       try {
         setLoading(true);
         setError(null);
+        const token = await user.getIdToken();
+        const headers = { 'Authorization': `Bearer ${token}` };
+
         const [storiesRes, sessionsRes] = await Promise.all([
-          fetch('/api/stories/stories'),
-          fetch(`/api/stories/sessions?userId=${user.uid}`)
+          fetch('/api/stories/stories', { headers }),
+          fetch(`/api/stories/sessions?userId=${user.uid}`, { headers })
         ]);
 
         if (!storiesRes.ok) throw new Error('Failed to fetch stories');
