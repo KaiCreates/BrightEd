@@ -14,7 +14,7 @@ const navItems = [
   { href: '/learn', label: 'Learn', icon: '📚' },
   { href: '/leaderboard', label: 'Rankings', icon: '🏆' },
   { href: '/simulate', label: 'Simulate', icon: '🎮' },
-  { href: '/stories', label: 'Stories', icon: '📖' },
+  { href: '/practicals', label: 'Practicals', icon: '🧪' },
   { href: '/achievements', label: 'Locker', icon: '🎖️' },
   { href: '/profile', label: 'Profile', icon: '👤' },
 ]

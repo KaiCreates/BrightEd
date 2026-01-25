@@ -48,9 +48,9 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
     const handleConfirm = () => {
         if (selectedType && businessName.trim()) {
             onSelect(selectedType, businessName.trim(), {
-                themeColor: themeColor.trim() || undefined,
-                logoUrl: logoUrl || undefined,
-                icon: icon || undefined,
+                themeColor: themeColor.trim() || '#7c3aed',
+                logoUrl: logoUrl || '',
+                icon: icon || '🏢',
             });
         }
     };
@@ -124,12 +124,12 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
     };
 
     return (
-        <div className="min-h-screen bg-[var(--bg-primary)] py-12 px-4">
-            <div className="max-w-5xl mx-auto">
+        <div className="w-full">
+            <div className="max-w-5xl mx-auto px-2 sm:px-4">
 
                 {/* Header */}
                 <motion.div
-                    className="text-center mb-12"
+                    className="text-center mb-10"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
@@ -165,7 +165,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                         key={type.id}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: idx * 0.1 }}
+                                        transition={{ delay: idx * 0.03 }}
                                     >
                                         <button
                                             onClick={() => handleTypeSelect(type)}
@@ -390,11 +390,10 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                                             key={i}
                                                             type="button"
                                                             onClick={() => setIcon(i)}
-                                                            className={`h-11 w-11 rounded-xl border transition-all text-lg active:scale-95 ${
-                                                                icon === i
+                                                            className={`h-11 w-11 rounded-xl border transition-all text-lg active:scale-95 ${icon === i
                                                                     ? 'border-white/10 bg-[var(--brand-primary)]/20 shadow-lg'
                                                                     : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 hover:border-[var(--brand-primary)]/40'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             {i}
                                                         </button>

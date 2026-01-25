@@ -559,6 +559,9 @@ function CommandCenterContent() {
                 businessName={business.businessName}
                 tier="Startup"
                 ownerName={user?.displayName || 'Unknown Director'}
+                themeColor={business.branding?.themeColor}
+                logoUrl={business.branding?.logoUrl}
+                icon={business.branding?.icon}
               />
             </div>
 

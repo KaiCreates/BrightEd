@@ -8,14 +8,21 @@ interface BusinessCardProps {
     className?: string;
     tier?: 'Startup' | 'Growth' | 'Enterprise';
     ownerName?: string;
+    logoUrl?: string;
+    themeColor?: string;
+    icon?: string;
 }
 
 export default function BusinessCard3D({
     businessName,
     className = '',
     tier = 'Startup',
-    ownerName = 'Unknown Director'
+    ownerName = 'Unknown Director',
+    logoUrl,
+    themeColor,
+    icon
 }: BusinessCardProps) {
+    const accent = themeColor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(themeColor) ? themeColor : 'var(--neon-cyan)';
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -58,11 +65,25 @@ export default function BusinessCard3D({
                 className="absolute inset-4 rounded-2xl border border-white/10 flex flex-col justify-between p-6 bg-white/5 backdrop-blur-sm"
             >
                 <div className="flex justify-between items-start">
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--brand-primary)] flex items-center justify-center text-[10px] font-black text-black">
-                            BE
+                    <div className="flex items-center gap-3">
+                        {logoUrl ? (
+                            <img
+                                src={logoUrl}
+                                alt="Logo"
+                                className="w-10 h-10 rounded-xl object-cover border border-white/20 bg-white/5"
+                            />
+                        ) : (
+                            <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center text-xl border border-white/20"
+                                style={{ background: `linear-gradient(135deg, ${accent}, var(--brand-primary))` }}
+                            >
+                                {icon || '🏢'}
+                            </div>
+                        )}
+                        <div className="flex flex-col">
+                            <span className="text-[10px] font-black text-white/40 tracking-[0.2em] uppercase">Enterprise</span>
+                            <span className="text-[10px] font-bold text-white/80 tracking-widest uppercase">BrightEd Account</span>
                         </div>
-                        <span className="text-xs font-bold text-white/60 tracking-widest uppercase">BrightEd Enterprise</span>
                     </div>
                     <span className="px-2 py-1 bg-white/10 rounded text-[10px] font-black uppercase text-white/50 border border-white/10">
                         {tier}
@@ -70,7 +91,7 @@ export default function BusinessCard3D({
                 </div>
 
                 <div className="space-y-1">
-                    <p className="text-[10px] font-bold text-[var(--neon-cyan)] uppercase tracking-widest">
+                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: accent }}>
                         Identity Card
                     </p>
                     <h3 className="text-2xl font-black text-white tracking-tight text-glow-cyan">
@@ -98,7 +119,7 @@ export default function BusinessCard3D({
             />
 
             {/* Neon accent glow */}
-            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-[var(--neon-cyan)] blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity" />
+            <div className="absolute -bottom-20 -right-20 w-40 h-40 blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: accent }} />
 
         </motion.div>
     );

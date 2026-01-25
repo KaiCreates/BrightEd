@@ -53,13 +53,18 @@ export async function createEconomyBusiness(
     const businessRef = doc(collection(db, COLLECTIONS.BUSINESSES));
     const businessId = businessRef.id;
 
+    // Sanitize branding to remove undefined values (Firestore doesn't like them)
+    const cleanBranding = branding ? Object.fromEntries(
+        Object.entries(branding).filter(([_, v]) => v !== undefined)
+    ) : {};
+
     const initialState: BusinessState = {
         id: businessId,
         playerId: userId,
         businessTypeId: businessType.id,
         businessName,
 
-        branding: branding ?? {},
+        branding: cleanBranding,
 
         // Financials
         cashBalance: businessType.startingCapital,
@@ -117,7 +122,7 @@ export async function createEconomyBusiness(
     batch.set(businessRef, {
         ownerId: userId, // For permission query
         ...initialState,
-        branding: branding ?? {},
+        branding: cleanBranding,
         employees: [{
             id: `emp_${Date.now()}`,
             name: `${userRef.id.slice(0, 5)} Manager`,
@@ -179,6 +184,7 @@ export async function fetchBusinessState(businessId: string): Promise<BusinessSt
         reputation: data.reputation ?? 50,
         customerSatisfaction: data.customerSatisfaction ?? 70,
         reviewCount: data.reviewCount ?? 0,
+        branding: data.branding ?? {},
         operatingHours: data.operatingHours ?? { open: 8, close: 20 },
         staffCount: data.staffCount ?? 1,
         maxConcurrentOrders: data.maxConcurrentOrders ?? 3,
