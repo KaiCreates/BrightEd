@@ -14,6 +14,7 @@ import {
 import { OrderDashboard } from '@/components/business/OrderDashboard';
 import BusinessCard3D from '@/components/business/BusinessCard3D';
 import { useAuth } from '@/lib/auth-context';
+import { useBusiness } from '@/lib/business-context';
 import { db } from '@/lib/firebase';
 import { collection, query, where, doc, onSnapshot, updateDoc, deleteDoc } from 'firebase/firestore';
 import BusinessWorkspace from '@/components/business/BusinessWorkspace';
@@ -48,6 +49,7 @@ export default function BusinessOperationsCommandCenter() {
 
 function CommandCenterContent() {
   const { user, userData, loading: authLoading } = useAuth();
+  const { economyRuntimeActive } = useBusiness();
   const { showInterrupt } = useCinematic();
 
   const [business, setBusiness] = useState<BusinessState | null>(null);
@@ -57,12 +59,28 @@ function CommandCenterContent() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [activeFulfillmentOrder, setActiveFulfillmentOrder] = useState<Order | null>(null);
 
-  const [simHour, setSimHour] = useState(8);
+  const [simHour, setSimHour] = useState(() => {
+    const h = new Date().getHours();
+    if (h < 6) return 6;
+    if (h > 22) return 22;
+    return h;
+  });
   const lastTickRef = useRef<number>(Date.now());
   const isPausedRef = useRef(false);
   const lastPayrollRunRef = useRef<number>(0);
   const lastAutoWorkRef = useRef<number>(0);
   const lastWageAccrualRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!economyRuntimeActive) return;
+
+    const interval = setInterval(() => {
+      const h = new Date().getHours();
+      setSimHour(h < 6 ? 6 : h > 22 ? 22 : h);
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [economyRuntimeActive]);
 
   useEffect(() => {
     if (authLoading || !user) return;
@@ -149,6 +167,7 @@ function CommandCenterContent() {
 
   useEffect(() => {
     if (!business || !businessType) return;
+    if (economyRuntimeActive) return;
 
     const interval = setInterval(() => {
       if (isPausedRef.current) return;
@@ -369,7 +388,7 @@ function CommandCenterContent() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [business, businessType, simHour, orders, showInterrupt]);
+  }, [business, businessType, simHour, orders, showInterrupt, economyRuntimeActive]);
 
   const handleAcceptOrder = async (orderId: string) => {
     if (!business) return;

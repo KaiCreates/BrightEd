@@ -18,7 +18,8 @@ import {
     limit,
     serverTimestamp,
     increment,
-    writeBatch
+    writeBatch,
+    runTransaction
 } from 'firebase/firestore';
 import {
     BusinessState,
@@ -32,6 +33,73 @@ const COLLECTIONS = {
     ORDERS: 'orders',
     EXPENSES: 'expenses',
 };
+
+function getDefaultMarketItems() {
+    return [
+        { id: 'rice_5kg', name: 'Premium Rice (5kg)', price: 25, stock: 120, maxStock: 120, image: '/products/Rice.png', icon: '🍚' },
+        { id: 'flour_2kg', name: 'All-Purpose Flour', price: 12, stock: 160, maxStock: 160, image: '/products/Flour.png', icon: '🌾' },
+        { id: 'oil_1l', name: 'Vegetable Oil', price: 20, stock: 90, maxStock: 90, image: '/products/CookingOil.png', icon: '🛢️' },
+        { id: 'dish_soap', name: 'Sparkle Dish Soap', price: 9, stock: 200, maxStock: 200, image: '/products/DishSoap.png', icon: '🧼' },
+        { id: 'tissue_4pk', name: 'Soft Tissue Pack', price: 14, stock: 140, maxStock: 140, image: '/products/toilet_paper.png', icon: '🧻' },
+        { id: 'plantain_chips', name: 'Crunchy Chips', price: 6, stock: 300, maxStock: 300, image: '/products/PlantainChips.png', icon: '🍌' },
+        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 140, maxStock: 140, image: '/products/Surgar.png', icon: '🍬' },
+        { id: 'cole_cold', name: 'Cole Cold', price: 8, stock: 240, maxStock: 240, image: '/products/Cole_Cold_copy.png', icon: '🥤' },
+        { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 180, maxStock: 180, image: '/products/Fries.png', icon: '🍟' },
+        { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 150, maxStock: 150, image: '/products/Peppers.jpg', icon: '🌶️' },
+        { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 240, maxStock: 240, image: '/products/Salt.png', icon: '🧂' },
+    ];
+}
+
+export async function ensureMarketRestock(businessId: string) {
+    const bizRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
+
+    return runTransaction(db, async (tx) => {
+        const snap = await tx.get(bizRef);
+        if (!snap.exists()) return { restocked: false };
+
+        const data: any = snap.data();
+        const marketState = data.marketState ?? { lastRestock: '', nextRestock: '', items: [] };
+
+        const now = Date.now();
+        const nextRestockMs = marketState?.nextRestock ? new Date(marketState.nextRestock).getTime() : 0;
+
+        if (nextRestockMs && now < nextRestockMs) {
+            return { restocked: false, nextRestock: marketState.nextRestock };
+        }
+
+        const defaults = getDefaultMarketItems();
+        const items = marketState?.items && marketState.items.length > 0 ? marketState.items : defaults;
+
+        const mergedItems = items.map((item: any) => {
+            const def = defaults.find((d) => d.id === item.id);
+            const mergedMax = Math.max(item.maxStock ?? 0, def?.maxStock ?? 0);
+            return {
+                ...def,
+                ...item,
+                image: item.image ?? def?.image,
+                icon: item.icon ?? def?.icon,
+                maxStock: mergedMax,
+                stock: mergedMax,
+            };
+        });
+
+        const missingDefaults = defaults.filter((d) => !mergedItems.some((i: any) => i.id === d.id));
+        const newItems = [...mergedItems, ...missingDefaults];
+
+        const nextRestock = new Date(now + 5 * 60 * 1000).toISOString();
+
+        tx.update(bizRef, {
+            marketState: {
+                lastRestock: new Date(now).toISOString(),
+                nextRestock,
+                items: newItems,
+            },
+            updatedAt: serverTimestamp(),
+        });
+
+        return { restocked: true, nextRestock };
+    });
+}
 
 // ============================================================================
 // BUSINESS PROFILE

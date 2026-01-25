@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { MarketItem, BusinessState } from '@/lib/economy/economy-types';
 import { updateBusinessFinancials } from '@/lib/economy/firebase-db'; // We might need to export this or use context
+import { ensureMarketRestock } from '@/lib/economy';
 import { BCoinIcon } from '@/components/BCoinIcon';
 import { doc, updateDoc, Timestamp, increment } from 'firebase/firestore'; // Import directly for now or use db helper
 import { db } from '@/lib/firebase';
@@ -19,15 +20,20 @@ export default function Marketplace({ business }: MarketplaceProps) {
 
     // Initial Restock Check
     useEffect(() => {
-        const checkRestock = async () => {
+        let mounted = true;
+
+        const tryRestockIfDue = async () => {
             const now = Date.now();
             const nextRestock = business.marketState?.nextRestock ? new Date(business.marketState.nextRestock).getTime() : 0;
 
-            if (now >= nextRestock && !isRestocking) {
-                // Trigger Restock
+            if (!nextRestock || now >= nextRestock) {
+                if (!mounted) return;
                 setIsRestocking(true);
-                await performRestock();
-                setIsRestocking(false);
+                try {
+                    await ensureMarketRestock(business.id);
+                } finally {
+                    if (mounted) setIsRestocking(false);
+                }
             }
         };
 
@@ -42,48 +48,19 @@ export default function Marketplace({ business }: MarketplaceProps) {
                 setTimeLeft(`${m}:${s.toString().padStart(2, '0')}`);
             } else {
                 setTimeLeft('Restocking...');
-                checkRestock();
+                if (!isRestocking) {
+                    tryRestockIfDue();
+                }
             }
         }, 1000);
 
-        checkRestock(); // Run immediately
+        tryRestockIfDue();
 
-        return () => clearInterval(timer);
-    }, [business]);
-
-    const performRestock = async () => {
-        const defaults = getDefaultMarketItems();
-
-        const items = business.marketState?.items && business.marketState.items.length > 0
-            ? business.marketState.items
-            : defaults;
-
-        const mergedItems = items.map((item: any) => {
-            const def = defaults.find(d => d.id === item.id);
-            const mergedMax = Math.max(item.maxStock ?? 0, def?.maxStock ?? 0);
-            return {
-                ...def,
-                ...item,
-                maxStock: mergedMax,
-                stock: mergedMax,
-            };
-        });
-
-        const missingDefaults = defaults.filter(d => !mergedItems.some((i: any) => i.id === d.id));
-        const newItems = [...mergedItems, ...missingDefaults];
-
-        // Set next restock time (Strict 5 minutes)
-        const nextRestock = new Date(Date.now() + 5 * 60 * 1000).toISOString();
-
-        const bizRef = doc(db, 'businesses', business.id);
-        await updateDoc(bizRef, {
-            marketState: {
-                lastRestock: new Date().toISOString(),
-                nextRestock,
-                items: newItems
-            }
-        });
-    };
+        return () => {
+            mounted = false;
+            clearInterval(timer);
+        };
+    }, [business.id, business.marketState?.nextRestock, isRestocking]);
 
     const handleBuy = async (item: MarketItem, quantity: number) => {
         const cost = item.price * quantity;
