@@ -109,6 +109,10 @@ export interface Order {
     paidAmount: number;
     tipAmount: number;
 
+    // Collection state (optional)
+    isCollected?: boolean;
+    collectedAt?: string;
+
     // Quality
     qualityRequirement: QualityTier;
     qualityDelivered?: number;  // 0-100 score

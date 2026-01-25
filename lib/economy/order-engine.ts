@@ -429,6 +429,10 @@ export function completeOrder(
             qualityDelivered: qualityScore,
             paidAmount: payment,
             tipAmount: tip,
+            // For now, we treat completion as payment collected.
+            // This avoids confusing "invoice" behavior and fixes missing cash updates.
+            isCollected: true,
+            collectedAt: new Date().toISOString(),
         },
         payment: actualPayment,
         tip,
@@ -536,6 +540,9 @@ export function collectDuePayments(
         if (order.status !== 'completed') continue;
         if (order.paidAmount <= 0) continue;
 
+        // Skip anything already marked as collected
+        if ((order as any).isCollected) continue;
+
         if (order.paymentTerms.type === 'net_days' && order.paymentTerms.netDays) {
             const completedDate = new Date(order.completedAt!);
             const dueDate = new Date(completedDate.getTime() + order.paymentTerms.netDays * 24 * 60 * 60 * 1000);
@@ -551,8 +558,6 @@ export function collectDuePayments(
             } else {
                 uncollected.push(order);
             }
-        } else if (order.paymentTerms.type === 'immediate' || order.paymentTerms.type === 'on_completion') {
-            collected += order.paidAmount + order.tipAmount;
         }
     }
 

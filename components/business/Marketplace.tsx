@@ -104,17 +104,17 @@ export default function Marketplace({ business }: MarketplaceProps) {
     };
 
     const getDefaultMarketItems = (): MarketItem[] => [
-        { id: 'rice_5kg', name: 'Premium Rice (5kg)', price: 25, stock: 20, maxStock: 20, image: '/products/Rice.png', icon: '🍚' },
-        { id: 'flour_2kg', name: 'All-Purpose Flour', price: 12, stock: 25, maxStock: 25, image: '/products/Flour.png', icon: '🌾' },
-        { id: 'oil_1l', name: 'Vegetable Oil', price: 20, stock: 15, maxStock: 15, image: '/products/CookingOil.png', icon: '🛢️' },
-        { id: 'dish_soap', name: 'Sparkle Dish Soap', price: 9, stock: 30, maxStock: 30, image: '/products/DishSoap.png', icon: '🧼' },
-        { id: 'tissue_4pk', name: 'Soft Tissue Pack', price: 14, stock: 20, maxStock: 20, image: '/products/toilet_paper.png', icon: '🧻' },
-        { id: 'plantain_chips', name: 'Crunchy Chips', price: 6, stock: 50, maxStock: 50, image: '/products/PlantainChips.png', icon: '🍌' },
-        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 20, maxStock: 20, image: '/products/Surgar.png', icon: '🍬' },
-        { id: 'cole_cold', name: 'Cole Cold', price: 8, stock: 40, maxStock: 40, image: '/products/Cole_Cold_copy.png', icon: '🥤' },
-        { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 30, maxStock: 30, image: '/products/Fries.png', icon: '🍟' },
-        { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 25, maxStock: 25, image: '/products/Peppers.jpg', icon: '🌶️' },
-        { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 40, maxStock: 40, image: '/products/Salt.png', icon: '🧂' },
+        { id: 'rice_5kg', name: 'Premium Rice (5kg)', price: 25, stock: 120, maxStock: 120, image: '/products/Rice.png', icon: '🍚' },
+        { id: 'flour_2kg', name: 'All-Purpose Flour', price: 12, stock: 160, maxStock: 160, image: '/products/Flour.png', icon: '🌾' },
+        { id: 'oil_1l', name: 'Vegetable Oil', price: 20, stock: 90, maxStock: 90, image: '/products/CookingOil.png', icon: '🛢️' },
+        { id: 'dish_soap', name: 'Sparkle Dish Soap', price: 9, stock: 200, maxStock: 200, image: '/products/DishSoap.png', icon: '🧼' },
+        { id: 'tissue_4pk', name: 'Soft Tissue Pack', price: 14, stock: 140, maxStock: 140, image: '/products/toilet_paper.png', icon: '🧻' },
+        { id: 'plantain_chips', name: 'Crunchy Chips', price: 6, stock: 300, maxStock: 300, image: '/products/PlantainChips.png', icon: '🍌' },
+        { id: 'sugar_1kg', name: 'Cane Sugar', price: 15, stock: 140, maxStock: 140, image: '/products/Surgar.png', icon: '🍬' },
+        { id: 'cole_cold', name: 'Cole Cold', price: 8, stock: 240, maxStock: 240, image: '/products/Cole_Cold_copy.png', icon: '🥤' },
+        { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 180, maxStock: 180, image: '/products/Fries.png', icon: '🍟' },
+        { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 150, maxStock: 150, image: '/products/Peppers.jpg', icon: '🌶️' },
+        { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 240, maxStock: 240, image: '/products/Salt.png', icon: '🧂' },
     ];
 
     const marketItems = (business.marketState?.items && business.marketState.items.length > 0

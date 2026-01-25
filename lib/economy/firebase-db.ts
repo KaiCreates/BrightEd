@@ -204,14 +204,21 @@ export async function updateBusinessFinancials(
     businessId: string,
     updates: {
         cashBalance?: number;
+        cashDelta?: number;
         reputation?: number;
+        reputationDelta?: number;
         ordersCompleted?: number;
+        ordersCompletedDelta?: number;
         ordersFailed?: number;
+        ordersFailedDelta?: number;
         inventory?: Record<string, number>;
+        inventoryDeltas?: Record<string, number>;
         lastPayrollTime?: string;
         reviews?: any[]; // Typed loosely to avoid circular dep for now
         totalRevenue?: number;
+        totalRevenueDelta?: number;
         totalExpenses?: number;
+        totalExpensesDelta?: number;
     }
 ) {
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
@@ -220,18 +227,54 @@ export async function updateBusinessFinancials(
         updatedAt: serverTimestamp(),
     };
 
-    if (updates.cashBalance !== undefined) {
+    // Prefer atomic deltas when provided (prevents stale state overwrites)
+    if (updates.cashDelta !== undefined) {
+        firestoreUpdates.balance = increment(updates.cashDelta);
+        firestoreUpdates.cashBalance = increment(updates.cashDelta);
+    } else if (updates.cashBalance !== undefined) {
         firestoreUpdates.balance = updates.cashBalance;
         firestoreUpdates.cashBalance = updates.cashBalance;
     }
-    if (updates.reputation !== undefined) firestoreUpdates.reputation = updates.reputation;
-    if (updates.ordersCompleted !== undefined) firestoreUpdates.ordersCompleted = updates.ordersCompleted;
-    if (updates.ordersFailed !== undefined) firestoreUpdates.ordersFailed = updates.ordersFailed;
-    if (updates.inventory !== undefined) firestoreUpdates.inventory = updates.inventory;
+
+    if (updates.totalRevenueDelta !== undefined) {
+        firestoreUpdates.totalRevenue = increment(updates.totalRevenueDelta);
+    } else if (updates.totalRevenue !== undefined) {
+        firestoreUpdates.totalRevenue = updates.totalRevenue;
+    }
+
+    if (updates.totalExpensesDelta !== undefined) {
+        firestoreUpdates.totalExpenses = increment(updates.totalExpensesDelta);
+    } else if (updates.totalExpenses !== undefined) {
+        firestoreUpdates.totalExpenses = updates.totalExpenses;
+    }
+
+    if (updates.reputationDelta !== undefined) {
+        firestoreUpdates.reputation = increment(updates.reputationDelta);
+    } else if (updates.reputation !== undefined) {
+        firestoreUpdates.reputation = updates.reputation;
+    }
+
+    if (updates.ordersCompletedDelta !== undefined) {
+        firestoreUpdates.ordersCompleted = increment(updates.ordersCompletedDelta);
+    } else if (updates.ordersCompleted !== undefined) {
+        firestoreUpdates.ordersCompleted = updates.ordersCompleted;
+    }
+
+    if (updates.ordersFailedDelta !== undefined) {
+        firestoreUpdates.ordersFailed = increment(updates.ordersFailedDelta);
+    } else if (updates.ordersFailed !== undefined) {
+        firestoreUpdates.ordersFailed = updates.ordersFailed;
+    }
+
+    if (updates.inventoryDeltas !== undefined) {
+        for (const [itemId, delta] of Object.entries(updates.inventoryDeltas)) {
+            firestoreUpdates[`inventory.${itemId}`] = increment(delta);
+        }
+    } else if (updates.inventory !== undefined) {
+        firestoreUpdates.inventory = updates.inventory;
+    }
     if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
     if (updates.reviews !== undefined) firestoreUpdates.reviews = updates.reviews;
-    if (updates.totalRevenue !== undefined) firestoreUpdates.totalRevenue = updates.totalRevenue;
-    if (updates.totalExpenses !== undefined) firestoreUpdates.totalExpenses = updates.totalExpenses;
 
     await updateDoc(docRef, firestoreUpdates);
 }

@@ -47,7 +47,7 @@ export default function BusinessOperationsCommandCenter() {
 }
 
 function CommandCenterContent() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, userData, loading: authLoading } = useAuth();
   const { showInterrupt } = useCinematic();
 
   const [business, setBusiness] = useState<BusinessState | null>(null);
@@ -62,17 +62,24 @@ function CommandCenterContent() {
   const isPausedRef = useRef(false);
   const lastPayrollRunRef = useRef<number>(0);
   const lastAutoWorkRef = useRef<number>(0);
+  const lastWageAccrualRef = useRef<number>(0);
 
   useEffect(() => {
     if (authLoading || !user) return;
 
-    const q = query(collection(db, 'businesses'), where('ownerId', '==', user.uid));
+    if (!userData?.businessID) {
+      setBusiness(null);
+      setLoading(false);
+      return;
+    }
 
-    const unsub = onSnapshot(q, (snap) => {
-      if (!snap.empty) {
-        const data: any = snap.docs[0].data();
+    const bizRef = doc(db, 'businesses', userData.businessID);
+
+    const unsub = onSnapshot(bizRef, (snap) => {
+      if (snap.exists()) {
+        const data: any = snap.data();
         const bizState: BusinessState = {
-          id: snap.docs[0].id,
+          id: snap.id,
           playerId: data.ownerId,
           businessTypeId: data.businessTypeId,
           businessName: data.name,
@@ -120,7 +127,7 @@ function CommandCenterContent() {
     });
 
     return () => unsub();
-  }, [user, authLoading]);
+  }, [user, userData?.businessID, authLoading]);
 
   useEffect(() => {
     if (!business) return;
@@ -230,21 +237,11 @@ function CommandCenterContent() {
             if (ordersToComplete.length > 0) {
               lastAutoWorkRef.current = now;
 
-              let totalPay = 0;
-
-              const batchFinancials: {
-                cashBalance: number;
-                reputation: number;
-                ordersCompleted: number;
-                reviews: any[];
-                inventory: Record<string, number>;
-              } = {
-                cashBalance: business.cashBalance,
-                reputation: business.reputation,
-                ordersCompleted: business.ordersCompleted,
-                reviews: business.reviews || [],
-                inventory: { ...business.inventory },
-              };
+              let cashEarned = 0;
+              let revenueEarned = 0;
+              let completedCount = 0;
+              let reputationDelta = 0;
+              const inventoryDeltas: Record<string, number> = {};
 
               ordersToComplete.forEach((orderToProcess) => {
                 const reqInventory: Record<string, number> = {};
@@ -300,31 +297,28 @@ function CommandCenterContent() {
                   timestamp: new Date().toISOString(),
                 };
 
-                batchFinancials.cashBalance += payment + tip;
-                batchFinancials.reputation = Math.min(100, batchFinancials.reputation + (stars >= 5 ? 1 : 0));
-                batchFinancials.ordersCompleted += 1;
-                batchFinancials.reviews.unshift(newReview);
-                totalPay += payment;
+                cashEarned += payment + tip;
+                revenueEarned += payment + tip;
+                completedCount += 1;
+                if (stars >= 5) reputationDelta += 1;
 
                 Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
-                  batchFinancials.inventory[itemId] = Math.max(0, (batchFinancials.inventory[itemId] || 0) - qty);
+                  inventoryDeltas[itemId] = (inventoryDeltas[itemId] || 0) - qty;
                 });
 
                 updateOrderStatus(business.id, orderToProcess.id, completed);
               });
 
-              batchFinancials.reviews = batchFinancials.reviews.slice(0, 20);
-
               updateBusinessFinancials(business.id, {
-                cashBalance: batchFinancials.cashBalance,
-                reputation: batchFinancials.reputation,
-                ordersCompleted: batchFinancials.ordersCompleted,
-                reviews: batchFinancials.reviews,
-                inventory: batchFinancials.inventory,
+                cashDelta: cashEarned,
+                totalRevenueDelta: revenueEarned,
+                ordersCompletedDelta: completedCount,
+                reputationDelta,
+                inventoryDeltas,
               });
 
               if (Math.random() > 0.7) {
-                showInterrupt('mendy', `Staff cleared ${ordersToComplete.length} orders. +฿${totalPay}`, 'neutral');
+                showInterrupt('mendy', `Staff cleared ${ordersToComplete.length} orders. +฿${cashEarned}`, 'neutral');
               }
             }
           }
@@ -339,9 +333,9 @@ function CommandCenterContent() {
           return next;
         });
 
-        const bizRef = doc(db, 'businesses', business.id);
-
-        if (business.employees && business.employees.length > 0) {
+        if (business.employees && business.employees.length > 0 && now - lastWageAccrualRef.current >= 30000) {
+          lastWageAccrualRef.current = now;
+          const bizRef = doc(db, 'businesses', business.id);
           const updatedEmployees = business.employees.map((emp: any) => {
             const hourlyWage = Math.floor(emp.salaryPerDay / 8);
             const newUnpaid = (emp.unpaidWages || 0) + hourlyWage;
@@ -360,15 +354,6 @@ function CommandCenterContent() {
           });
 
           updateDoc(bizRef, { employees: updatedEmployees });
-        }
-
-        const { collected } = collectDuePayments(orders, new Date());
-        if (collected > 0) {
-          updateBusinessFinancials(business.id, {
-            cashBalance: business.cashBalance + collected,
-            totalRevenue: (business.totalRevenue || 0) + collected,
-          });
-          showInterrupt('mendy', `Collected ฿${collected} from pending business invoices!`, 'happy');
         }
 
         const activeCount = orders.filter((o) => o.status === 'accepted' || o.status === 'in_progress').length;
@@ -460,17 +445,18 @@ function CommandCenterContent() {
 
     await updateOrderStatus(business.id, orderId, completed);
 
-    const updatedInventory = { ...currentInv };
+    const inventoryDeltas: Record<string, number> = {};
     Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
-      updatedInventory[itemId] = Math.max(0, (updatedInventory[itemId] || 0) - qty);
+      inventoryDeltas[itemId] = (inventoryDeltas[itemId] || 0) - qty;
     });
 
     await updateBusinessFinancials(business.id, {
-      cashBalance: business.cashBalance + payment + tip,
+      cashDelta: payment + tip,
+      totalRevenueDelta: payment + tip,
       reputation: Math.min(100, business.reputation + (stars >= 5 ? 2 : stars <= 2 ? -2 : 0)),
-      ordersCompleted: business.ordersCompleted + 1,
+      ordersCompletedDelta: 1,
       reviews: [newReview, ...currentReviews].slice(0, 20),
-      inventory: updatedInventory,
+      inventoryDeltas,
     });
 
     if (stars === 6) {
