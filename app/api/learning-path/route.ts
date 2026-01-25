@@ -2,10 +2,14 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { getSubjectFromSourceFile } from '@/lib/subject-utils';
+import { adminDb } from '@/lib/firebase-admin';
 
 // Simple in-memory cache for learning paths (cleared on server restart)
 const pathCache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+let questionObjectiveCache: { ids: Set<string>; timestamp: number } | null = null;
+const QUESTION_CACHE_TTL = 5 * 60 * 1000;
 
 // ============================================================================
 // CONSTANTS
@@ -308,6 +312,29 @@ function loadSyllabusData(): SyllabusObjective[] {
   return JSON.parse(fileContents);
 }
 
+async function getObjectiveIdsWithQuestions(): Promise<Set<string>> {
+  if (questionObjectiveCache && Date.now() - questionObjectiveCache.timestamp < QUESTION_CACHE_TTL) {
+    return questionObjectiveCache.ids;
+  }
+
+  try {
+    const snap = await adminDb.collection('questions').select('objectiveId').limit(2000).get();
+    const ids = new Set<string>();
+
+    for (const doc of snap.docs) {
+      const objectiveId = doc.get('objectiveId');
+      if (typeof objectiveId === 'string' && objectiveId) ids.add(objectiveId);
+    }
+
+    questionObjectiveCache = { ids, timestamp: Date.now() };
+    return ids;
+  } catch {
+    const ids = new Set<string>();
+    questionObjectiveCache = { ids, timestamp: Date.now() };
+    return ids;
+  }
+}
+
 // ============================================================================
 // API ROUTES
 // ============================================================================
@@ -326,10 +353,16 @@ export async function POST(request: NextRequest) {
     // Generate paths separated by subject
     const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);
 
+    const objectiveIdsWithQuestions = await getObjectiveIdsWithQuestions();
+
     // Limit each subject to max objectives
     const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
     for (const [subject, path] of Object.entries(paths)) {
-      limitedPaths[subject] = path.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
+      const shouldFilterByQuestions = objectiveIdsWithQuestions.size >= 100;
+      const filtered = shouldFilterByQuestions
+        ? path.filter((o) => objectiveIdsWithQuestions.has(o.id))
+        : path;
+      limitedPaths[subject] = filtered.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
     }
 
     const response: LearningPathResponse = {
@@ -383,10 +416,16 @@ export async function GET(request: NextRequest) {
     // Generate paths separated by subject
     const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);
 
+    const objectiveIdsWithQuestions = await getObjectiveIdsWithQuestions();
+
     // Limit each subject to max objectives
     const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
     for (const [subject, path] of Object.entries(paths)) {
-      limitedPaths[subject] = path.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
+      const shouldFilterByQuestions = objectiveIdsWithQuestions.size >= 100;
+      const filtered = shouldFilterByQuestions
+        ? path.filter((o) => objectiveIdsWithQuestions.has(o.id))
+        : path;
+      limitedPaths[subject] = filtered.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
     }
 
     const response: LearningPathResponse = {

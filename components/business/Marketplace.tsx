@@ -6,7 +6,7 @@ import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { MarketItem, BusinessState } from '@/lib/economy/economy-types';
 import { updateBusinessFinancials } from '@/lib/economy/firebase-db'; // We might need to export this or use context
 import { BCoinIcon } from '@/components/BCoinIcon';
-import { doc, updateDoc, Timestamp } from 'firebase/firestore'; // Import directly for now or use db helper
+import { doc, updateDoc, Timestamp, increment } from 'firebase/firestore'; // Import directly for now or use db helper
 import { db } from '@/lib/firebase';
 
 interface MarketplaceProps {
@@ -52,16 +52,18 @@ export default function Marketplace({ business }: MarketplaceProps) {
     }, [business]);
 
     const performRestock = async () => {
-        const items = business.marketState?.items || getDefaultMarketItems();
+        const items = business.marketState?.items && business.marketState.items.length > 0
+            ? business.marketState.items
+            : getDefaultMarketItems();
 
-        // Refill stock to max (random variance)
+        // Refill stock to max
         const newItems = items.map(item => ({
             ...item,
-            stock: Math.min(item.maxStock, Math.floor(item.maxStock * 0.8) + Math.floor(Math.random() * (item.maxStock * 0.2)))
+            stock: item.maxStock
         }));
 
-        // Set next restock time (5-10 mins)
-        const nextRestock = new Date(Date.now() + (5 + Math.random() * 5) * 60 * 1000).toISOString();
+        // Set next restock time (Strict 5 minutes)
+        const nextRestock = new Date(Date.now() + 5 * 60 * 1000).toISOString();
 
         const bizRef = doc(db, 'businesses', business.id);
         await updateDoc(bizRef, {
@@ -77,28 +79,26 @@ export default function Marketplace({ business }: MarketplaceProps) {
         const cost = item.price * quantity;
 
         if (business.cashBalance < cost) {
-            alert("Insufficient funds!");
+            alert("Insufficient Bcoins!");
             return;
         }
         if (item.stock < quantity) {
-            alert("Not enough stock!");
+            alert("Not enough stock available!");
             return;
         }
 
-        // Optimistic UI updates handled by parent subscription usually, but we assume fast DB
         const bizRef = doc(db, 'businesses', business.id);
 
-        // Update Inventory & Market
-        const currentInventory = business.inventory || {};
-        const newQty = (currentInventory[item.id] || 0) + quantity;
-
-        const newMarketItems = business.marketState.items.map(i =>
+        // Update Marketplace Stock specifically within the marketState array
+        const newMarketItems = marketItems.map(i =>
             i.id === item.id ? { ...i, stock: i.stock - quantity } : i
         );
 
+        // Deduct money and update inventory + marketplace state
         await updateDoc(bizRef, {
-            [`inventory.${item.id}`]: newQty,
-            cashBalance: business.cashBalance - cost,
+            [`inventory.${item.id}`]: increment(quantity),
+            cashBalance: increment(-cost),
+            balance: increment(-cost),
             'marketState.items': newMarketItems
         });
     };

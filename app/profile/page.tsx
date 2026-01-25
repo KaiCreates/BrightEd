@@ -114,7 +114,7 @@ export default function ProfilePage() {
             cashflow: b.cashflow || 0,
             employees: Array.isArray(b.employees) ? b.employees.length : (b.staffCount || 0),
             trend: 'up',
-            balance: b.balance || 0
+            balance: b.balance !== undefined ? b.balance : (b.cashBalance || 0)
           });
         }
       });
@@ -192,7 +192,7 @@ export default function ProfilePage() {
           >
             <div className="scale-90 lg:scale-100 origin-top-right">
               <BCoinCard
-                balance={businessData ? (businessData.balance + (userData?.bCoins || 0)) : (userData?.bCoins || 0)}
+                balance={(businessData?.balance || 0) + (userData?.bCoins || 0)}
                 tier="Platinum"
                 cardHolder={`${displayProfile.firstName} ${displayProfile.lastName || ''}`.trim() || 'Student'}
               />

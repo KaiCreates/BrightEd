@@ -51,6 +51,8 @@ function LearnContent() {
   const shouldAnimateUnlock = searchParams.get('animation') === 'unlock'
   const { user, userData, loading: authLoading } = useAuth()
 
+  const onboardingCompleted = userData?.onboardingCompleted === true
+
   const [learningModules, setLearningModules] = useState<LearningModule[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -68,7 +70,7 @@ function LearnContent() {
     async function fetchLearningPath() {
       try {
         setLoading(true)
-        // Get user's selected subjects from onboarding
+        // Get user's selected subjects from onboarding (prefer Firestore userData; fallback to localStorage)
         const onboardingData = localStorage.getItem('brighted_onboarding')
 
         // Fetch progress directly from Firestore (Client SDK has Auth)
@@ -87,16 +89,20 @@ function LearnContent() {
 
 
         let userSubjects: string[] = []
-        if (onboardingData) {
+        const firestoreSubjects = (userData as any)?.onboardingData?.subjects
+        if (Array.isArray(firestoreSubjects) && firestoreSubjects.length > 0) {
+          userSubjects = firestoreSubjects
+        } else if (onboardingData) {
           const data = JSON.parse(onboardingData)
           userSubjects = data.subjects || []
         }
 
         // Fetch learning path with subject separation
         const token = await user?.getIdToken();
-        const res = await fetch('/api/learning-path?' + new URLSearchParams({
-          subjects: userSubjects.join(',')
-        }), {
+        const params = new URLSearchParams({})
+        if (userSubjects.length > 0) params.set('subjects', userSubjects.join(','))
+
+        const res = await fetch('/api/learning-path?' + params, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -201,7 +207,7 @@ function LearnContent() {
     }
 
     fetchLearningPath()
-  }, [selectedSubject, user, authLoading, router])
+  }, [selectedSubject, user, userData, authLoading, router])
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] pb-24 relative overflow-hidden">
@@ -259,20 +265,40 @@ function LearnContent() {
           {error && (
             <BrightLayer variant="elevated" className="border-l-4 border-l-red-500 text-center max-w-md">
               <p className="text-red-500 font-bold mb-4">{error}</p>
-              <Link href="/onboarding" className="block w-full">
-                <BrightButton size="md" variant="primary" className="w-full">
-                  Complete Onboarding
+              {!onboardingCompleted ? (
+                <Link href="/onboarding" className="block w-full">
+                  <BrightButton size="md" variant="primary" className="w-full">
+                    Complete Onboarding
+                  </BrightButton>
+                </Link>
+              ) : (
+                <BrightButton
+                  size="md"
+                  variant="primary"
+                  className="w-full"
+                  onClick={() => window.location.reload()}
+                >
+                  Retry
                 </BrightButton>
-              </Link>
+              )}
             </BrightLayer>
           )}
 
           {!loading && !error && learningModules.length === 0 && (
             <div className="text-center py-10">
               <p className="text-[var(--text-secondary)] mb-4">No learning objectives available.</p>
-              <Link href="/onboarding" className="text-[var(--brand-primary)] hover:underline font-black">
-                Complete onboarding to get started
-              </Link>
+              {!onboardingCompleted ? (
+                <Link href="/onboarding" className="text-[var(--brand-primary)] hover:underline font-black">
+                  Complete onboarding to get started
+                </Link>
+              ) : (
+                <button
+                  onClick={() => window.location.reload()}
+                  className="text-[var(--brand-primary)] hover:underline font-black"
+                >
+                  Retry
+                </button>
+              )}
             </div>
           )}
 

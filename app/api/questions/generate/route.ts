@@ -57,24 +57,25 @@ export async function GET(request: NextRequest) {
     const targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
 
     let candidates = await withTimeout(
-      fetchCandidatesFromDB(objectiveId, targetDifficulty),
+      fetchCandidatesFromDB(objectiveId, targetDifficulty, subjectId),
       DB_TIMEOUT
     );
 
     // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
+    // If the pool is small, we relax the "recent attempts" exclusion to avoid "out of questions".
     if (userId && candidates && candidates.length > 0) {
-      const excludeIds = new Set<string>();
+      const correctIds = new Set<string>();
+      const attemptIds = new Set<string>();
 
       try {
         const correctSnap = await adminDb
           .collection('users')
           .doc(userId)
           .collection('correct_questions')
-          .where('objectiveId', '==', objectiveId)
           .limit(500)
           .get();
 
-        correctSnap.docs.forEach((d) => excludeIds.add(d.id));
+        correctSnap.docs.forEach((d) => correctIds.add(d.id));
       } catch (e) {
         // ignore (no index / no permissions)
       }
@@ -90,16 +91,23 @@ export async function GET(request: NextRequest) {
 
         attemptsSnap.docs.forEach((d) => {
           const qid = d.get('questionId');
-          if (typeof qid === 'string' && qid) excludeIds.add(qid);
+          if (typeof qid === 'string' && qid) attemptIds.add(qid);
         });
       } catch (e) {
         // ignore
       }
 
-      candidates = candidates.filter((q: any) => {
+      const withoutCorrect = candidates.filter((q: any) => {
         const qid = q?.questionId || q?.id;
-        return !(typeof qid === 'string' && excludeIds.has(qid));
+        return !(typeof qid === 'string' && correctIds.has(qid));
       });
+
+      const withoutAttempts = withoutCorrect.filter((q: any) => {
+        const qid = q?.questionId || q?.id;
+        return !(typeof qid === 'string' && attemptIds.has(qid));
+      });
+
+      candidates = withoutAttempts.length > 0 ? withoutAttempts : withoutCorrect;
     }
 
     if (!candidates || candidates.length === 0) {
@@ -144,21 +152,27 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number) {
+async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number, subjectId: string | null) {
   try {
     // Migrate to Firestore
     const questionsRef = adminDb.collection('questions');
 
     // In-memory filtering approach (safer against missing indexes for now)
     // In production, you'd want a composite index on objectiveId + difficulty
-    const snapshot = await questionsRef
+    let snapshot = await questionsRef
       .where('objectiveId', '==', objectiveId)
       .limit(50)
       .get();
 
-    if (snapshot.empty) {
-      return [];
+    // Fallback: if no objective-scoped questions exist yet, pull from the subject pool.
+    if (snapshot.empty && subjectId) {
+      snapshot = await questionsRef
+        .where('subjectId', '==', subjectId)
+        .limit(50)
+        .get();
     }
+
+    if (snapshot.empty) return [];
 
     const rows = snapshot.docs.map((doc): any => ({ id: doc.id, ...doc.data() }));
 

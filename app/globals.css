@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .sleek-scrollbar::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+
+  .sleek-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+  }
+
+  .sleek-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(var(--brand-primary-rgb), 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .sleek-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--brand-primary-rgb), 0.5);
+    box-shadow: 0 0 10px rgba(var(--brand-primary-rgb), 0.3);
+  }
+
+  /* Layout Stability & Animation Helpers */
+  .layout-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--brand-primary-rgb), 0.3);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes list-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-list-item {
+  animation: list-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 

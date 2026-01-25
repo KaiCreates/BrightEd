@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:questions": "node scripts/migrate-questions.js"
+    "migrate:questions": "node scripts/migrate-questions.js",
+    "generate:questions": "python scripts/generate_questions_ollama_firestore.py"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",

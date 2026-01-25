@@ -29,6 +29,7 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
 
         await updateDoc(bizRef, {
             cashBalance: increment(-hiringCost),
+            balance: increment(-hiringCost),
             employees: arrayUnion(candidate),
             recruitmentPool: newPool,
             staffCount: increment(1)
@@ -54,7 +55,7 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
 
             <div className="relative group">
                 {/* Horizontal Scroll Container */}
-                <div className="flex overflow-x-auto gap-5 pb-6 snap-x snap-mandatory no-scrollbar hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="flex overflow-x-auto gap-5 pb-6 snap-x snap-mandatory sleek-scrollbar" style={{ scrollbarWidth: 'thin' }}>
                     {candidates.map(candidate => (
                         <div
                             key={candidate.id}

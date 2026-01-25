@@ -94,7 +94,7 @@ function CommandCenterContent() {
           playerId: data.ownerId,
           businessTypeId: data.businessTypeId,
           businessName: data.name,
-          cashBalance: data.balance ?? data.cashBalance ?? 0,
+          cashBalance: data.balance !== undefined ? data.balance : (data.cashBalance ?? 0),
           totalRevenue: data.totalRevenue ?? 0,
           totalExpenses: data.totalExpenses ?? 0,
           reputation: data.reputation ?? 50,
@@ -637,7 +637,7 @@ function CommandCenterContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* COLUMN 1: OPERATIONS (7/12) */}
-          <div className="lg:col-span-7 space-y-10">
+          <div className="lg:col-span-7 space-y-10 min-h-[500px]">
             <div>
               <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">Operations Console</BrightHeading>
               {business && businessType && (

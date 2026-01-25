@@ -149,7 +149,7 @@ async function migrate() {
 
   const counts = candidates.map((t) => ({ table: t, count: getTableRowCount(sqlite, t) }));
   counts.sort((a, b) => b.count - a.count);
-  const sourceTable = counts[0].table;
+  let sourceTable = counts[0].table;
 
   console.log('Detected question tables:', counts);
   console.log(`Starting migration from SQLite table: ${sourceTable}`);
@@ -167,8 +167,7 @@ async function migrate() {
           console.log(`SQLite has 0 rows. Falling back to JSON: ${jsonPath}`);
           rows = parsed;
           // Use a synthetic sourceTable marker so normalizeQuestionRow can adapt.
-          // eslint-disable-next-line no-var
-          var sourceTable = 'json';
+          sourceTable = 'json';
         }
       } catch (e) {
         console.warn('Failed to read/parse questions.json fallback:', e?.message || e);
