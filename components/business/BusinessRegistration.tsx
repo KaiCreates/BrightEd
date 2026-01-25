@@ -39,16 +39,16 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
 
             setRegisteredName(name);
 
-            // Simulate processing delay for effect
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // Short feedback delay to keep the UI feeling responsive
+            await new Promise((resolve) => setTimeout(resolve, 700));
 
             setStep('success');
 
-            // Wait a moment then complete
+            // Complete shortly after success to avoid a sluggish feel
             setTimeout(() => {
                 onComplete(name);
                 router.refresh();
-            }, 2000);
+            }, 900);
 
         } catch (err: any) {
             console.error('Registration failed:', err);
@@ -58,7 +58,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
     };
 
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full">
             <AnimatePresence mode="wait">
                 {step === 'select' && (
                     <motion.div
@@ -68,7 +68,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
                         exit={{ opacity: 0, scale: 0.95 }}
                     >
                         {error && (
-                            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-500 text-center font-bold">
+                            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-200 text-center font-bold">
                                 {error}
                             </div>
                         )}
@@ -82,7 +82,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="text-center py-20"
+                        className="text-center py-14"
                     >
                         <BrightHeading level={2} className="mb-4">Registering Enterprise</BrightHeading>
                         <div className="relative w-24 h-24 mx-auto mb-8">
@@ -99,7 +99,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
                         key="success"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="text-center py-20"
+                        className="text-center py-14"
                     >
                         <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-emerald-500 text-white text-5xl mb-6 shadow-lg shadow-emerald-500/20">
                             ✓

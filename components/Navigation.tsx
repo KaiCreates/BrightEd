@@ -37,12 +37,15 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
 
   if (variant === 'minimal') {
     return (
-      <nav className="fixed top-0 left-0 right-0 h-20 bg-[var(--bg-primary)]/50 backdrop-blur-md z-50 flex items-center justify-center">
+      <nav className="fixed top-0 left-0 right-0 h-20 bg-[var(--bg-primary)]/50 backdrop-blur-md z-50 flex items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-3 opacity-50 hover:opacity-100 transition-opacity">
           <div className="relative w-8 h-8">
             <Image src="/BrightEdLogo.png" alt="Logo" fill className="object-contain" />
           </div>
         </Link>
+        <div className="p-1 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+          <ThemeToggle />
+        </div>
       </nav>
     )
   }
@@ -126,9 +129,9 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
 
             <div className="h-8 w-[1px] bg-white/5 mx-6" />
 
-            {/* Currency & Actions */}
-            {isAuthenticated && (
-              <div className="flex items-center gap-4">
+            {/* Actions */}
+            <div className="flex items-center gap-4">
+              {isAuthenticated && (
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-2xl border border-yellow-500/20 shadow-lg"
@@ -138,12 +141,12 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                     {userData?.bCoins?.toLocaleString() || '0'}
                   </span>
                 </motion.div>
+              )}
 
-                <div className="p-1 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
-                  <ThemeToggle />
-                </div>
+              <div className="p-1 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                <ThemeToggle />
               </div>
-            )}
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}

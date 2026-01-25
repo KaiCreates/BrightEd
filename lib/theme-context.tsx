@@ -7,6 +7,7 @@ type Theme = 'light' | 'dark'
 interface ThemeContextType {
     theme: Theme
     toggleTheme: () => void
+    mounted: boolean
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -23,6 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         
         // Set theme immediately to prevent flash
         document.documentElement.setAttribute('data-theme', initialTheme)
+        document.documentElement.style.colorScheme = initialTheme
         setTheme(initialTheme)
         setMounted(true)
     }, [])
@@ -32,6 +34,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             // Use requestAnimationFrame for smooth transition
             requestAnimationFrame(() => {
                 document.documentElement.setAttribute('data-theme', theme)
+                document.documentElement.style.colorScheme = theme
                 localStorage.setItem('brighted-theme', theme)
             })
         }
@@ -42,7 +45,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
             {children}
         </ThemeContext.Provider>
     )
