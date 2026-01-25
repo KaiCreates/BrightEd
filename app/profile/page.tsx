@@ -238,7 +238,7 @@ export default function ProfilePage() {
                   <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
                     Register your business to unlock Principles of Business and Accounts simulations.
                   </p>
-                  <Link href="/stories/business">
+                  <Link href="/stories/business/register">
                     <BrightButton variant="primary">Start Your Venture 🚀</BrightButton>
                   </Link>
                 </div>
@@ -291,7 +291,7 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Link href="/stories/business" className="flex-1">
+                      <Link href="/stories/business/register" className="flex-1">
                         <BrightButton variant="primary" className="w-full">
                           Enter Dashboard
                         </BrightButton>

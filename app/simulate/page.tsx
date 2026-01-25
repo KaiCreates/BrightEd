@@ -32,8 +32,8 @@ interface SimulationStep {
 export default function SimulatePage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const objectiveId = searchParams.get('objective') || searchParams.get('objectiveId')
-  const subjectId = searchParams.get('subject') || searchParams.get('subjectId')
+  const objectiveId = searchParams?.get('objective') || searchParams?.get('objectiveId') || null
+  const subjectId = searchParams?.get('subject') || searchParams?.get('subjectId') || null
   const { user, userData, loading: authLoading } = useAuth()
 
 

@@ -71,9 +71,11 @@ export default function BusinessHub() {
                 <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
                   Set up your company brand, unlock the simulation dashboard, and start building.
                 </p>
-                <BrightButton variant="primary" size="lg" className="w-full" onClick={() => setIsRegistering(true)}>
-                  Create Business
-                </BrightButton>
+                <Link href="/stories/business/register">
+                  <BrightButton variant="primary" size="lg" className="w-full">
+                    Create Business
+                  </BrightButton>
+                </Link>
               </BrightLayer>
             </div>
           </motion.div>

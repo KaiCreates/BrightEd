@@ -62,7 +62,7 @@ export default function BusinessAccessGate({ children, subject }: BusinessAccess
               You need to register a business before you can access {subject} simulations. 
               These real-world scenarios require an active business entity.
             </p>
-            <Link href="/stories/business">
+            <Link href="/stories/business/register">
               <BrightButton variant="primary" size="lg" className="w-full mb-4">
                 Register Your Business
               </BrightButton>

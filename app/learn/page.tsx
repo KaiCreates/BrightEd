@@ -48,7 +48,7 @@ export default function LearnPage() {
 function LearnContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const shouldAnimateUnlock = searchParams.get('animation') === 'unlock'
+  const shouldAnimateUnlock = searchParams?.get('animation') === 'unlock'
   const { user, userData, loading: authLoading } = useAuth()
 
   const onboardingCompleted = userData?.onboardingCompleted === true
@@ -89,7 +89,7 @@ function LearnContent() {
 
 
         let userSubjects: string[] = []
-        const firestoreSubjects = (userData as any)?.onboardingData?.subjects
+        const firestoreSubjects = userData?.subjects
         if (Array.isArray(firestoreSubjects) && firestoreSubjects.length > 0) {
           userSubjects = firestoreSubjects
         } else if (onboardingData) {
