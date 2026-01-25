@@ -414,13 +414,6 @@ export function completeOrder(
         });
     }
 
-    // For milestone payments, only deliver the balance portion now
-    let actualPayment = payment;
-    if (order.paymentTerms.type === 'milestone' && order.paymentTerms.upfrontPercent) {
-        const upfrontPaid = Math.round(order.totalAmount * (order.paymentTerms.upfrontPercent / 100));
-        actualPayment = payment - upfrontPaid;
-    }
-
     return {
         order: {
             ...order,
@@ -434,7 +427,7 @@ export function completeOrder(
             isCollected: true,
             collectedAt: new Date().toISOString(),
         },
-        payment: actualPayment,
+        payment,
         tip,
         inventoryDeductions,
     };

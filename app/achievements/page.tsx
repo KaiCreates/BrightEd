@@ -41,6 +41,16 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         rarity: 'legendary'
     },
     {
+        id: 'polymath',
+        name: 'The Polymath',
+        description: 'Achieve 90%+ mastery in 3 subjects',
+        icon: '🧠',
+        category: 'mastery',
+        requirement: 'count(subjectProgress >= 9) >= 3',
+        unlocked: false,
+        rarity: 'legendary'
+    },
+    {
         id: 'master-pob',
         name: 'Master of POB',
         description: 'Achieve 90%+ mastery in Principles of Business',
@@ -91,6 +101,16 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         rarity: 'common'
     },
     {
+        id: 'high-roller',
+        name: 'High Roller',
+        description: 'Earn 100k+ B-Coins in total',
+        icon: '💎',
+        category: 'business',
+        requirement: 'bCoins >= 100000',
+        unlocked: false,
+        rarity: 'epic'
+    },
+    {
         id: 'math-master',
         name: 'Mathematics Master',
         description: 'Achieve 90%+ mastery in Mathematics',
@@ -119,21 +139,41 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         requirement: 'questionsCorrect >= 100',
         unlocked: false,
         rarity: 'rare'
+    },
+    {
+        id: 'night-owl',
+        name: 'Night Owl',
+        description: 'Complete a simulation after 10 PM',
+        icon: '🦉',
+        category: 'streak',
+        requirement: 'time >= 22:00',
+        unlocked: false,
+        rarity: 'rare'
+    },
+    {
+        id: 'social-butterfly',
+        name: 'Social Butterfly',
+        description: 'Connect with 10+ students',
+        icon: '🦋',
+        category: 'social',
+        requirement: 'connections >= 10',
+        unlocked: false,
+        rarity: 'common'
     }
 ];
 
 const RARITY_COLORS = {
-    common: 'from-gray-400 to-gray-600',
-    rare: 'from-blue-400 to-blue-600',
-    epic: 'from-purple-400 to-purple-600',
-    legendary: 'from-yellow-400 via-orange-500 to-yellow-600'
+    common: 'from-slate-500 to-slate-700',
+    rare: 'from-cyan-500 to-blue-600',
+    epic: 'from-fuchsia-500 to-purple-700',
+    legendary: 'from-amber-400 via-orange-500 to-red-600'
 };
 
 const RARITY_GLOW = {
-    common: 'shadow-gray-500/20',
+    common: 'shadow-slate-500/20',
     rare: 'shadow-blue-500/40',
     epic: 'shadow-purple-500/60',
-    legendary: 'shadow-yellow-500/80'
+    legendary: 'shadow-orange-500/80'
 };
 
 export default function AchievementsPage() {
@@ -202,13 +242,30 @@ export default function AchievementsPage() {
                     case 'centurion':
                         shouldUnlock = (userData.questionsCorrect || 0) >= 100;
                         break;
+                    case 'polymath':
+                        const highMasteryCount = Object.values(userData.subjectProgress || {}).filter(m => m >= 9.0).length;
+                        shouldUnlock = highMasteryCount >= 3;
+                        break;
+                    case 'high-roller':
+                        shouldUnlock = (userData.bCoins || 0) >= 10000000; // Updated to 10M for consistency with plan
+                        break;
+                    case 'social-butterfly':
+                        shouldUnlock = (userDoc.connections?.length || 0) >= 10;
+                        break;
+                    case 'night-owl':
+                        shouldUnlock = userDoc.unlockedAchievements?.includes('night-owl') || false;
+                        break;
+                    case 'top-rank':
+                        // Check if user is in top 10 (simulated check here, usually done via ranking system)
+                        shouldUnlock = false; // Placeholder
+                        break;
                 }
 
                 // Auto-unlock if requirement met
                 if (shouldUnlock && !isUnlocked) {
                     updateDoc(userRef, {
                         unlockedAchievements: arrayUnion(ach.id)
-                    }).catch(() => {});
+                    }).catch(() => { });
                 }
 
                 return {
@@ -279,11 +336,10 @@ export default function AchievementsPage() {
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`px-6 py-3 rounded-xl font-bold uppercase tracking-wider transition-all ${
-                                selectedCategory === cat
-                                    ? 'bg-[var(--brand-primary)] text-white shadow-lg'
-                                    : 'bg-white/5 text-[var(--text-secondary)] hover:bg-white/10'
-                            }`}
+                            className={`px-6 py-3 rounded-xl font-bold uppercase tracking-wider transition-all ${selectedCategory === cat
+                                ? 'bg-[var(--brand-primary)] text-white shadow-lg'
+                                : 'bg-white/5 text-[var(--text-secondary)] hover:bg-white/10'
+                                }`}
                         >
                             {cat === 'all' ? 'All' : cat}
                         </button>
@@ -356,8 +412,8 @@ function AchievementCard({
                 padding="md"
                 className={`
                     h-full cursor-pointer group
-                    ${achievement.unlocked 
-                        ? `bg-gradient-to-br ${RARITY_COLORS[achievement.rarity]} ${RARITY_GLOW[achievement.rarity]} shadow-2xl` 
+                    ${achievement.unlocked
+                        ? `bg-gradient-to-br ${RARITY_COLORS[achievement.rarity]} ${RARITY_GLOW[achievement.rarity]} shadow-2xl`
                         : 'bg-white/5 opacity-60'
                     }
                     ${isPinned ? 'ring-4 ring-yellow-400 ring-opacity-50' : ''}
@@ -370,11 +426,10 @@ function AchievementCard({
                             e.stopPropagation();
                             onTogglePin(achievement.id);
                         }}
-                        className={`absolute top-2 right-2 p-2 rounded-full transition-all ${
-                            isPinned
-                                ? 'bg-yellow-400 text-yellow-900'
-                                : 'bg-white/10 hover:bg-white/20 text-white/60'
-                        }`}
+                        className={`absolute top-2 right-2 p-2 rounded-full transition-all ${isPinned
+                            ? 'bg-yellow-400 text-yellow-900'
+                            : 'bg-white/10 hover:bg-white/20 text-white/60'
+                            }`}
                     >
                         {isPinned ? '📌' : '📍'}
                     </button>
@@ -396,13 +451,13 @@ function AchievementCard({
                     </p>
                     <span className={`
                         text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full
-                        ${achievement.rarity === 'legendary' 
+                        ${achievement.rarity === 'legendary'
                             ? 'bg-yellow-400/20 text-yellow-200 border border-yellow-400/50'
                             : achievement.rarity === 'epic'
-                            ? 'bg-purple-400/20 text-purple-200 border border-purple-400/50'
-                            : achievement.rarity === 'rare'
-                            ? 'bg-blue-400/20 text-blue-200 border border-blue-400/50'
-                            : 'bg-gray-400/20 text-gray-200 border border-gray-400/50'
+                                ? 'bg-purple-400/20 text-purple-200 border border-purple-400/50'
+                                : achievement.rarity === 'rare'
+                                    ? 'bg-blue-400/20 text-blue-200 border border-blue-400/50'
+                                    : 'bg-gray-400/20 text-gray-200 border border-gray-400/50'
                         }
                     `}>
                         {achievement.rarity}

@@ -7,71 +7,19 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { db } from '@/lib/firebase'
-import { doc, setDoc, updateDoc } from 'firebase/firestore'
 
 export default function OnboardingCompletePage() {
   const router = useRouter()
   const { user } = useAuth()
-  const [onboardingData, setOnboardingData] = useState<any>(null)
-  const [saving, setSaving] = useState(false)
+  const { userData, loading } = useAuth()
 
   useEffect(() => {
-    const data = localStorage.getItem('brighted_onboarding')
-    if (data) {
-      const parsed = JSON.parse(data)
-      setOnboardingData(parsed)
-      
-      // Sync to Firebase
-      if (user) {
-        syncToFirebase(parsed)
-      }
-    } else {
-      router.push('/onboarding')
+    if (!loading && !user) {
+      router.push('/login')
     }
-  }, [router, user])
+  }, [loading, user, router])
 
-  const syncToFirebase = async (data: any) => {
-    if (!user) return
-    
-    setSaving(true)
-    try {
-      const userRef = doc(db, 'users', user.uid)
-      const formLevel = parseInt(data.currentForm?.replace('Form ', '') || '3')
-      
-      // Initialize subject progress
-      const subjectProgress: Record<string, number> = {}
-      if (data.subjects && Array.isArray(data.subjects)) {
-        data.subjects.forEach((subject: string) => {
-          subjectProgress[subject] = 0
-        })
-      }
-
-      await updateDoc(userRef, {
-        firstName: data.firstName || '',
-        lastName: data.lastName || '',
-        fullName: `${data.firstName || ''} ${data.lastName || ''}`.trim(),
-        school: data.school || '',
-        country: data.country || '',
-        formLevel: formLevel,
-        form: formLevel,
-        examTrack: data.examTrack || 'CSEC',
-        subjects: data.subjects || [],
-        subjectProgress: subjectProgress,
-        learningGoal: data.learningGoal || '',
-        intent: data.intent || 'learner',
-        skills: data.skills || { finance: 3, logic: 3, math: 3 },
-        onboardingCompleted: true,
-        onboardingCompletedAt: new Date().toISOString()
-      })
-    } catch (error) {
-      console.error('Error syncing onboarding to Firebase:', error)
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  if (!onboardingData) {
+  if (loading || !userData) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>
   }
 
@@ -115,11 +63,11 @@ export default function OnboardingCompletePage() {
             <span>📚</span> Starting Level
           </h2>
           <div className="space-y-3">
-            {onboardingData.subjects?.map((subject: string, index: number) => (
+            {userData.subjects?.map((subject: string, index: number) => (
               <div key={index} className="flex justify-between items-center group">
                 <span className="text-[var(--text-secondary)] font-medium group-hover:text-[var(--text-primary)] transition-colors">{subject}</span>
                 <span className="px-3 py-1 bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] text-xs font-black uppercase tracking-widest rounded-lg border border-[var(--brand-primary)]/20">
-                  {onboardingData.currentForm || 'Form 3'}
+                  Form {userData.formLevel || userData.form || 3}
                 </span>
               </div>
             ))}
@@ -131,7 +79,7 @@ export default function OnboardingCompletePage() {
             First Recommended Simulation
           </h2>
           <p className="text-[var(--text-secondary)]">
-            {onboardingData.subjects?.[0] || 'Mathematics'} - Introduction to Core Concepts
+            {userData.subjects?.[0] || 'Mathematics'} - Introduction to Core Concepts
           </p>
         </BrightLayer>
 

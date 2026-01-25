@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { updateSkillMetrics, UserSkillStats, PerformanceSnapshot } from '@/lib/learning-algorithm'
 import { BrightButton, BrightLayer, BrightHeading } from '@/components/system'
+import { useAuth } from '@/lib/auth-context'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 
 interface DiagnosticQuestion {
   id: string
@@ -15,55 +18,142 @@ interface DiagnosticQuestion {
   correctAnswer: number
 }
 
-const diagnosticQuestions: DiagnosticQuestion[] = [
+const QUESTION_BANK: Record<string, DiagnosticQuestion[]> = {
+  Mathematics: [
+    {
+      id: 'math_1',
+      question: 'Solve for x: 3x + 6 = 21',
+      difficulty: 2.0,
+      tags: ['math', 'algebra'],
+      options: ['3', '5', '7', '9'],
+      correctAnswer: 2,
+    },
+    {
+      id: 'math_2',
+      question: 'If 20% of a number is 14, what is the number?',
+      difficulty: 3.0,
+      tags: ['math', 'percentages'],
+      options: ['28', '70', '56', '84'],
+      correctAnswer: 1,
+    },
+  ],
+  'Principles of Business': [
+    {
+      id: 'pob_1',
+      question: 'Which is an example of a variable cost?',
+      difficulty: 2.5,
+      tags: ['business', 'costs'],
+      options: ['Rent', 'Insurance', 'Raw materials', 'Business license'],
+      correctAnswer: 2,
+    },
+    {
+      id: 'pob_2',
+      question: 'If price increases and demand decreases slightly, total revenue will most likely:',
+      difficulty: 4.0,
+      tags: ['business', 'revenue'],
+      options: ['Increase', 'Decrease', 'Stay the same', 'Become zero'],
+      correctAnswer: 0,
+    },
+  ],
+  Economics: [
+    {
+      id: 'eco_1',
+      question: 'Opportunity cost is best defined as:',
+      difficulty: 4.5,
+      tags: ['economics', 'concepts'],
+      options: [
+        'The money you spend',
+        'The value of the next best alternative you give up',
+        'The amount of profit you earn',
+        'The cost of taxes',
+      ],
+      correctAnswer: 1,
+    },
+  ],
+  'Information Technology': [
+    {
+      id: 'it_1',
+      question: 'Which component stores data permanently in a computer?',
+      difficulty: 2.0,
+      tags: ['it', 'hardware'],
+      options: ['RAM', 'CPU', 'SSD/HDD', 'GPU'],
+      correctAnswer: 2,
+    },
+  ],
+  'English A': [
+    {
+      id: 'eng_1',
+      question: 'Which sentence is grammatically correct?',
+      difficulty: 2.0,
+      tags: ['english', 'grammar'],
+      options: [
+        'Me and him went to school.',
+        'He and I went to school.',
+        'Him and I went to school.',
+        'He and me went to school.',
+      ],
+      correctAnswer: 1,
+    },
+  ],
+}
+
+const GENERAL_QUESTIONS: DiagnosticQuestion[] = [
   {
-    id: 'd1',
-    question: 'If a business increases its price by 20% and demand decreases by 10%, what happens to total revenue?',
-    difficulty: 3.5,
-    tags: ['economics', 'revenue'],
-    options: [
-      'Revenue increases',
-      'Revenue decreases',
-      'Revenue stays the same',
-      'Cannot determine',
-    ],
-    correctAnswer: 0,
-  },
-  {
-    id: 'd2',
-    question: 'Solve for x: 2x + 5 = 15. Then determine x^2.',
-    difficulty: 2.0,
-    tags: ['math', 'logic'],
-    options: ['25', '100', '10', '50'],
-    correctAnswer: 0,
-  },
-  {
-    id: 'd3',
-    question: 'A supplier increases the cost of materials by 15%. If you maintain your price, your profit margin will:',
-    difficulty: 4.0,
-    tags: ['finance', 'profit-margin'],
-    options: ['Increase', 'Decrease', 'Stay fixed', 'Scale with volume'],
+    id: 'gen_1',
+    question: 'Solve: 12 ÷ 3 + 4',
+    difficulty: 1.5,
+    tags: ['logic', 'math'],
+    options: ['6', '7', '8', '9'],
     correctAnswer: 1,
   },
   {
-    id: 'd4',
-    question: 'Which of these best describes "Opportunity Cost"?',
-    difficulty: 5.0,
-    tags: ['economics', 'logic'],
-    options: [
-      'The actual cash cost of an item',
-      'The value of the next best alternative given up',
-      'The cost of hiring a second employee',
-      'The tax paid on business revenue'
-    ],
-    correctAnswer: 1,
-  }
+    id: 'gen_2',
+    question: 'If you buy something for 10 and sell it for 15, your profit is:',
+    difficulty: 1.5,
+    tags: ['finance', 'logic'],
+    options: ['5', '10', '15', '25'],
+    correctAnswer: 0,
+  },
 ]
+
+function buildDiagnosticQuestions(selectedSubjects: string[] | undefined): DiagnosticQuestion[] {
+  const subs = (selectedSubjects || []).filter(Boolean)
+
+  const maxQuestions = 8
+  const out: DiagnosticQuestion[] = []
+
+  for (const q of GENERAL_QUESTIONS) {
+    if (out.length >= Math.min(2, maxQuestions)) break
+    out.push(q)
+  }
+
+  const perSubjectPools: DiagnosticQuestion[][] = subs
+    .map((s) => QUESTION_BANK[s] || [])
+    .filter((arr) => arr.length > 0)
+
+  let idx = 0
+  while (out.length < maxQuestions && perSubjectPools.length > 0) {
+    const pool = perSubjectPools[idx % perSubjectPools.length]
+    const pick = pool.shift()
+    if (pick) out.push(pick)
+    idx += 1
+
+    const remaining = perSubjectPools.filter((p) => p.length > 0)
+    if (remaining.length !== perSubjectPools.length) {
+      perSubjectPools.splice(0, perSubjectPools.length, ...remaining)
+      idx = 0
+    }
+  }
+
+  return out.slice(0, maxQuestions)
+}
 
 export default function DiagnosticPage() {
   const router = useRouter()
+  const { user, userData, loading: authLoading } = useAuth()
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
+  const [questions, setQuestions] = useState<DiagnosticQuestion[]>([])
   const [stats, setStats] = useState<UserSkillStats>({
     generalLevel: 3.0, // Start at mid-low
     consistency: 0.5,
@@ -78,11 +168,24 @@ export default function DiagnosticPage() {
   const questionStartTime = useRef<number>(Date.now())
 
   useEffect(() => {
+    if (authLoading) return
+    if (!user) {
+      router.push('/login')
+      return
+    }
+    if (userData?.onboardingCompleted !== true) {
+      router.push('/onboarding')
+      return
+    }
+    setQuestions(buildDiagnosticQuestions(userData?.subjects))
+  }, [user, userData?.subjects, userData?.onboardingCompleted, authLoading, router])
+
+  useEffect(() => {
     questionStartTime.current = Date.now()
   }, [currentQuestionIdx])
 
   const handleAnswer = (answerIndex: number) => {
-    const question = diagnosticQuestions[currentQuestionIdx]
+    const question = questions[currentQuestionIdx]
     const endTime = Date.now()
     const responseTime = (endTime - questionStartTime.current) / 1000
 
@@ -96,7 +199,7 @@ export default function DiagnosticPage() {
     const updatedStats = updateSkillMetrics(stats, snapshot)
     setStats(updatedStats)
 
-    if (currentQuestionIdx < diagnosticQuestions.length - 1) {
+    if (currentQuestionIdx < questions.length - 1) {
       setCurrentQuestionIdx(currentQuestionIdx + 1)
     } else {
       setIsComplete(true)
@@ -137,8 +240,16 @@ export default function DiagnosticPage() {
               </p>
             </div>
             <BrightButton
-              onClick={() => {
-                localStorage.setItem('brighted_user_stats', JSON.stringify(stats))
+              onClick={async () => {
+                if (!user) return
+                const mastery = Math.max(0.1, Math.min(1, stats.generalLevel / 10))
+                await updateDoc(doc(db, 'users', user.uid), {
+                  mastery,
+                  diagnosticStats: stats,
+                  diagnosticCompleted: true,
+                  diagnosticCompletedAt: new Date().toISOString(),
+                  updatedAt: new Date().toISOString(),
+                })
                 router.push('/home')
               }}
               className="w-full"
@@ -152,8 +263,16 @@ export default function DiagnosticPage() {
     )
   }
 
-  const question = diagnosticQuestions[currentQuestionIdx]
-  const progress = ((currentQuestionIdx + 1) / diagnosticQuestions.length) * 100
+  if (questions.length === 0) {
+    return (
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)]" />
+      </div>
+    )
+  }
+
+  const question = questions[currentQuestionIdx]
+  const progress = ((currentQuestionIdx + 1) / questions.length) * 100
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-300">
@@ -164,7 +283,7 @@ export default function DiagnosticPage() {
           <div className="flex justify-between items-end mb-3 px-2">
             <div>
               <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-[0.2em] mb-1">Diagnostic Mode</p>
-              <h3 className="text-[var(--text-primary)] font-black text-lg">Question {currentQuestionIdx + 1} <span className="text-[var(--text-muted)]">/ {diagnosticQuestions.length}</span></h3>
+              <h3 className="text-[var(--text-primary)] font-black text-lg">Question {currentQuestionIdx + 1} <span className="text-[var(--text-muted)]">/ {questions.length}</span></h3>
             </div>
             <span className="text-[var(--brand-primary)] font-black text-sm">{Math.round(progress)}%</span>
           </div>

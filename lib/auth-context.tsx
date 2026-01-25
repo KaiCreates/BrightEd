@@ -94,16 +94,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                             bCoins: 0,
                             dailyGoal: 500,
                             lastActive: new Date().toISOString(),
-                            subjectProgress: {
-                                "Principles of Business": 0,
-                                "Mathematics": 0,
-                                "English A": 0
-                            },
+                            subjectProgress: {},
+                            subjects: [],
                             hasBusiness: false,
                             firstName: currentUser.displayName?.split(' ')[0] || currentUser.email?.split('@')[0] || 'Student',
                             displayName: currentUser.displayName || currentUser.email?.split('@')[0] || 'User',
                             fullName: currentUser.displayName || currentUser.email?.split('@')[0] || 'New Student',
-                            username: currentUser.email?.split('@')[0] || 'user_' + Math.floor(Math.random() * 1000)
+                            username: currentUser.email?.split('@')[0] || 'user_' + Math.floor(Math.random() * 1000),
+                            onboardingCompleted: false,
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString(),
                         };
                         setDoc(userRef, defaultData).catch(console.error);
                         setUserData(defaultData as UserData);

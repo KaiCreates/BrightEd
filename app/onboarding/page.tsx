@@ -108,15 +108,84 @@ export default function OnboardingPage() {
   const handleComplete = async () => {
     try {
       // Save onboarding data to Firestore instead of localStorage
-      const { doc, updateDoc } = await import('firebase/firestore')
+      const { doc, updateDoc, collection, getDocs, limit, query, writeBatch } = await import('firebase/firestore')
       const { db } = await import('@/lib/firebase')
 
       if (user) {
-        await updateDoc(doc(db, 'users', user.uid), {
+        const userRef = doc(db, 'users', user.uid)
+        const formLevel = parseInt((data.currentForm || '').replace('Form ', '') || '3')
+        const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim()
+
+        const subjectProgress: Record<string, number> = {}
+        ;(data.subjects || []).forEach((subject: string) => {
+          subjectProgress[subject] = 0
+        })
+
+        await updateDoc(userRef, {
           onboardingData: data,
+          firstName: data.firstName || '',
+          lastName: data.lastName || '',
+          fullName,
+          school: data.school || '',
+          country: data.country || '',
+          examTrack: data.examTrack || 'CSEC',
+          formLevel,
+          form: formLevel,
+          subjects: data.subjects || [],
+          subjectProgress,
+          learningGoal: data.learningGoal || '',
+          intent: data.intent || 'learner',
+          skills: data.skills || { finance: 3, logic: 3, math: 3 },
           onboardingCompleted: true,
+          onboardingCompletedAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         })
+
+        // Initialize learning path progress once (based on selected subjects)
+        if ((data.subjects || []).length > 0) {
+          const progressRef = collection(userRef, 'progress')
+          const existing = await getDocs(query(progressRef, limit(1)))
+
+          if (existing.empty) {
+            const { data: pathData } = await fetch(
+              '/api/learning-path?' +
+                new URLSearchParams({
+                  subjects: (data.subjects || []).join(','),
+                })
+            ).then((res) => res.json())
+
+            if (pathData?.paths) {
+              const batch = writeBatch(db)
+              let isFirstModule = true
+
+              for (const [subject, objectives] of Object.entries(pathData.paths)) {
+                const objectivesList = objectives as any[]
+                for (const obj of objectivesList) {
+                  const moduleRef = doc(progressRef, obj.id)
+                  batch.set(moduleRef, {
+                    moduleId: obj.id,
+                    subject,
+                    isUnlocked: isFirstModule,
+                    status: isFirstModule ? 'active' : 'locked',
+                    mastery: 0,
+                    attempts: 0,
+                  })
+                  if (isFirstModule) isFirstModule = false
+                }
+              }
+              await batch.commit()
+            }
+          }
+        }
+
+        // Sync to Firebase Auth profile displayName
+        if (fullName) {
+          const { auth } = await import('@/lib/firebase')
+          const { updateProfile } = await import('firebase/auth')
+          if (auth.currentUser) {
+            await updateProfile(auth.currentUser, { displayName: fullName })
+          }
+        }
       }
       
       router.push('/onboarding/diagnostic')
