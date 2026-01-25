@@ -35,10 +35,24 @@ export function getFirebaseAdmin() {
     });
 }
 
-export const adminDb = admin.apps.length > 0
-    ? admin.apps[0]!.firestore()
-    : getFirebaseAdmin().firestore();
+function getAdminDb() {
+    return (admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin()).firestore();
+}
 
-export const adminAuth = admin.apps.length > 0
-    ? admin.apps[0]!.auth()
-    : getFirebaseAdmin().auth();
+function getAdminAuth() {
+    return (admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin()).auth();
+}
+
+export const adminDb = new Proxy({} as FirebaseFirestore.Firestore, {
+    get(_target, prop) {
+        const db = getAdminDb() as any;
+        return db[prop];
+    },
+});
+
+export const adminAuth = new Proxy({} as admin.auth.Auth, {
+    get(_target, prop) {
+        const authInstance = getAdminAuth() as any;
+        return authInstance[prop];
+    },
+});

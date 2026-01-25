@@ -49,7 +49,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
         if (selectedType && businessName.trim()) {
             onSelect(selectedType, businessName.trim(), {
                 themeColor: themeColor.trim() || '#7c3aed',
-                logoUrl: logoUrl || '',
+                logoUrl: logoUrl || undefined,
                 icon: icon || '🏢',
             });
         }

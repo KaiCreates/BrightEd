@@ -7,6 +7,9 @@ import { BrightHeading } from '@/components/system';
 import { BusinessTypeSelector } from '@/components/business/BusinessTypeSelector';
 import { BusinessType } from '@/lib/economy/economy-types';
 import { auth } from '@/lib/firebase';
+import { useAuth } from '@/lib/auth-context';
+import Link from 'next/link';
+import { BrightButton, BrightLayer } from '@/components/system';
 
 interface BusinessRegistrationProps {
     onComplete: (name: string) => void;
@@ -14,9 +17,39 @@ interface BusinessRegistrationProps {
 
 export default function BusinessRegistration({ onComplete }: BusinessRegistrationProps) {
     const router = useRouter();
+    const { userData, loading } = useAuth();
     const [step, setStep] = useState<'select' | 'processing' | 'success'>('select');
     const [error, setError] = useState<string | null>(null);
     const [registeredName, setRegisteredName] = useState('');
+
+    if (!loading && userData?.hasBusiness) {
+        return (
+            <BrightLayer variant="glass" padding="lg" className="border border-white/10 bg-white/[0.03] rounded-[1.5rem]">
+                <div className="text-center">
+                    <div className="text-5xl mb-4">🏢</div>
+                    <BrightHeading level={2} className="mb-2">Business Registered</BrightHeading>
+                    <p className="text-[var(--text-secondary)] mb-8">
+                        You can only register <span className="font-semibold text-[var(--text-primary)]">1 business per account</span>.
+                        More business slots and expansions are coming soon.
+                    </p>
+                    <div className="flex flex-col gap-3">
+                        <Link href="/stories/business/operations">
+                            <BrightButton variant="primary" className="w-full">
+                                Go to Operations
+                            </BrightButton>
+                        </Link>
+                        <BrightButton
+                            variant="ghost"
+                            className="w-full opacity-60 cursor-not-allowed"
+                            disabled
+                        >
+                            Register Another Business (Coming Soon)
+                        </BrightButton>
+                    </div>
+                </div>
+            </BrightLayer>
+        );
+    }
 
     const handleRegistration = async (
         type: BusinessType,
@@ -35,6 +68,16 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
         try {
             const token = await user.getIdToken();
 
+            const cleanBranding = branding
+                ? Object.fromEntries(
+                    Object.entries(branding).filter(([k, v]) => {
+                        if (v === undefined) return false;
+                        if (k === 'logoUrl' && (!v || typeof v !== 'string' || !v.startsWith('http'))) return false;
+                        return true;
+                    })
+                )
+                : undefined;
+
             const res = await fetch('/api/business/register', {
                 method: 'POST',
                 headers: {
@@ -44,7 +87,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
                 body: JSON.stringify({
                     name,
                     businessTypeId: type.id,
-                    branding: branding ?? {},
+                    branding: cleanBranding,
                 }),
             });
 

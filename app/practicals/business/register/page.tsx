@@ -11,7 +11,7 @@ export default function PracticalBusinessRegisterPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, scale: 1.04 }}
         animate={{ opacity: 0.45, scale: 1 }}
@@ -23,7 +23,7 @@ export default function PracticalBusinessRegisterPage() {
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--bg-primary)] via-black/20 to-[var(--bg-primary)]" />
       <div className="fixed inset-0 z-0 bg-gradient-to-r from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 pb-24">
         <div className="flex items-center justify-between mb-10">
           <Link
             href="/practicals"
@@ -44,7 +44,7 @@ export default function PracticalBusinessRegisterPage() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
+            className="lg:col-span-5 lg:sticky lg:top-32 self-start"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--brand-primary)]">Business Practical</span>

@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import Link from 'next/link'
+import { useAuth } from '@/lib/auth-context'
 
 interface BusinessAccessGateProps {
   children: React.ReactNode
@@ -12,24 +12,8 @@ interface BusinessAccessGateProps {
 }
 
 export default function BusinessAccessGate({ children, subject }: BusinessAccessGateProps) {
-  const [hasBusiness, setHasBusiness] = useState<boolean | null>(null)
-  const [loading, setLoading] = useState(true)
+  const { userData, loading } = useAuth()
   const router = useRouter()
-
-  useEffect(() => {
-    // Check if user has a registered business
-    fetch('/api/business/status')
-      .then(res => res.json())
-      .then(data => {
-        setHasBusiness(data.has_business || false)
-      })
-      .catch(() => {
-        setHasBusiness(false)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
 
   if (loading) {
     return (
@@ -45,7 +29,7 @@ export default function BusinessAccessGate({ children, subject }: BusinessAccess
                            subject.toLowerCase().includes('accounts') ||
                            subject.toLowerCase().includes('accounting')
 
-  if (requiresBusiness && !hasBusiness) {
+  if (requiresBusiness && !userData?.hasBusiness) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--bg-primary)] p-4">
         <motion.div
@@ -62,7 +46,7 @@ export default function BusinessAccessGate({ children, subject }: BusinessAccess
               You need to register a business before you can access {subject} simulations. 
               These real-world scenarios require an active business entity.
             </p>
-            <Link href="/stories/business/register">
+            <Link href="/practicals/business/register">
               <BrightButton variant="primary" size="lg" className="w-full mb-4">
                 Register Your Business
               </BrightButton>
