@@ -13,8 +13,8 @@ service cloud.firestore {
     
     // --- USER PROFILE RULES ---
     match /users/{userId} {
-      // Allow read for everyone (needed for Business Feed & Social Badge prestige)
-      allow read: if isAuthenticated();
+      // User documents may contain PII; restrict reads to the owner.
+      allow read: if isAuthenticated() && isOwner(userId);
       // Only the user can edit their own profile
       allow write: if isAuthenticated() && isOwner(userId);
       

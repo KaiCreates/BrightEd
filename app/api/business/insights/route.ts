@@ -5,17 +5,13 @@ import { verifyAuth } from '@/lib/auth-server';
 export async function POST(request: NextRequest) {
     try {
         const decodedToken = await verifyAuth(request);
-        const authUserId = decodedToken.uid;
+        const userId = decodedToken.uid;
 
         const body = await request.json();
-        const { businessId, userId } = body;
+        const { businessId } = body;
 
-        if (!businessId || !userId) {
-            return NextResponse.json({ error: 'Missing businessId or userId' }, { status: 400 });
-        }
-
-        if (authUserId !== userId) {
-            return NextResponse.json({ error: 'Unauthorized: User ID mismatch' }, { status: 403 });
+        if (!businessId) {
+            return NextResponse.json({ error: 'Missing businessId' }, { status: 400 });
         }
 
         // 1. Fetch live business metrics
@@ -25,6 +21,10 @@ export async function POST(request: NextRequest) {
         }
 
         const data = bizDoc.data();
+
+        if (data?.ownerId !== userId) {
+            return NextResponse.json({ error: 'Business not found' }, { status: 404 });
+        }
 
         // 2. Mock AI Logic (In a real scenario, this would call Gemini/GPT)
         // Here we simulate professional suggestions based on actual metrics
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
         if (error.message?.includes('Unauthorized')) {
             return NextResponse.json({ error: error.message }, { status: 401 });
         }
-        console.error('AI Insights error:', error);
+        console.error('AI Insights error');
         return NextResponse.json({ error: 'Failed to generate insights' }, { status: 500 });
     }
 }

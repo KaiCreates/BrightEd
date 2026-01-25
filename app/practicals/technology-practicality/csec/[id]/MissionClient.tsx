@@ -280,9 +280,7 @@ function Notifications({
         {items.slice(-4).map((n) => (
           <div
             key={n.id}
-            className={`rounded-2xl border p-4 backdrop-blur-md ${
-              n.kind === 'alert' ? 'border-red-500/30 bg-red-500/10' : 'border-white/10 bg-black/35'
-            }`}
+            className={`border p-4 ${n.kind === 'alert' ? 'border-red-500/40 bg-red-950/60' : 'border-white/20 bg-zinc-900/90'}`}
           >
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -291,7 +289,7 @@ function Notifications({
               </div>
               <button
                 onClick={() => onDismiss(n.id)}
-                className="h-7 w-10 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-zinc-200"
+                className="h-7 w-10 border border-white/20 bg-black/20 hover:bg-black/30 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-200"
               >
                 X
               </button>
@@ -1768,7 +1766,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         endLiveSession(sid, { status: 'completed', xpEarned: 300 });
         liveSessionEndedRef.current = true;
       }
-      const { cooldown } = registerMissionCompletionAndMaybeCooldown();
+      const { cooldown } = registerMissionCompletionAndMaybeCooldown(`brightos:csec:${mission.id}`);
 
       push([{ id: uid('sys'), kind: 'sys', text: 'Mission complete. +300 XP earned.' }]);
 
@@ -1815,7 +1813,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-          <div className="w-full max-w-lg rounded-[2rem] border border-white/10 bg-black/45 backdrop-blur-md p-10">
+          <div className="w-full max-w-lg border border-white/20 bg-black/75 p-10">
             <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS</div>
             <div className="mt-2 text-3xl font-black text-white">Booting…</div>
             <div className="mt-6 h-3 rounded-full border border-white/10 bg-white/[0.03] overflow-hidden">
@@ -1834,7 +1832,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-          <div className="w-full max-w-lg rounded-[2rem] border border-white/10 bg-black/45 backdrop-blur-md p-10">
+          <div className="w-full max-w-lg border border-white/20 bg-black/75 p-10">
             <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS Account</div>
             <div className="mt-2 text-3xl font-black text-white">Student</div>
 
@@ -1866,8 +1864,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
                   }
                 }}
                 placeholder="Password"
-                className="w-full h-12 rounded-2xl border border-white/10 bg-black/35 px-4 text-sm font-mono text-white outline-none focus:border-[var(--brand-primary)]/60"
-                autoFocus
+                className="w-full h-12 border border-white/20 bg-black/20 px-4 text-sm font-mono text-white outline-none focus:border-[var(--brand-primary)]/60"
               />
               <div className="mt-3 flex items-center justify-between gap-4">
                 <div className="text-xs text-zinc-400">
@@ -1893,44 +1890,34 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
                       }
                     }, 450);
                   }}
-                  className={`h-12 px-6 rounded-2xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
-                    loginBusy
-                      ? 'border-white/10 bg-white/[0.03] text-zinc-400'
-                      : 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-white'
-                  }`}
+                  className="h-12 px-6 border border-[var(--brand-primary)]/40 bg-[var(--brand-primary)]/20 hover:bg-[var(--brand-primary)]/30 transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
                 >
                   {loginBusy ? 'Verifying…' : 'Unlock'}
                 </button>
               </div>
             </div>
-
-            {cooldownActive && (
-              <div className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 p-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-200">Cooldown Active</div>
-                <div className="mt-1 text-sm text-red-100/90">You have completed 5 missions today. Try again in {cooldownLabel}.</div>
-              </div>
-            )}
           </div>
         </div>
       </div>
     );
   }
 
-  const securityPulse = state.process.high_cpu.running || state.window.stuck_app.open || state.network.status !== 'Connected';
+  const securityPulse = state.process.high_cpu.running || Object.values(state.apps).some((a) => a.malware && a.installed);
   const fan = fanLevel(state.cpu_load);
-
-  const batteryLabel = mission.brightos_desktop.device === 'Laptop' ? '78%' : 'AC';
+  const batteryLabel = '78%';
   const networkLabel = state.network.status === 'Connected' ? 'WiFi' : state.network.status;
 
   return (
     <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
       <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-      <div className={`absolute inset-0 ${theme === 'light' ? 'bg-white/10' : 'bg-black/35'}`} />
+      <div className="absolute inset-0 bg-black/60" />
 
       <div className="relative z-10 h-screen">
         <Notifications
           items={state.notifications}
-          onDismiss={(id) => setState((p) => ({ ...p, notifications: p.notifications.filter((x) => x.id !== id) }))}
+          onDismiss={(id) => {
+            setState((p) => ({ ...p, notifications: p.notifications.filter((n) => n.id !== id) }));
+          }}
         />
 
         <StartMenu
@@ -1938,72 +1925,25 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
           query={startQuery}
           setQuery={setStartQuery}
           apps={startApps}
-          theme={theme}
-          onClose={() => setStartOpen(false)}
-          onToggleTheme={() => setTheme((p) => (p === 'light' ? 'dark' : 'light'))}
-          onLock={() => {
-            setStartOpen(false);
-            setPassword('');
-            setLoginBusy(false);
-            setLoginError(null);
-            setState((p) => ({ ...p, power: 'lock' }));
-          }}
           onLaunch={(id) => {
             setStartOpen(false);
+            setStartQuery('');
             taskbarToggle(id);
           }}
+          onClose={() => {
+            setStartOpen(false);
+          }}
+          onLock={() => {
+            setStartOpen(false);
+            setStartQuery('');
+            setState((p) => ({ ...p, power: 'lock' }));
+          }}
+          onToggleTheme={() => {
+            setTheme((p) => (p === 'light' ? 'dark' : 'light'));
+            notify('info', 'SYSTEM', 'Theme updated.');
+          }}
+          theme={theme}
         />
-
-        {missionComplete && (
-          <div className="absolute inset-0 z-[300] flex items-center justify-center px-6">
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="relative w-full max-w-xl rounded-[2rem] border border-white/10 bg-black/55 backdrop-blur-md p-10">
-              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[var(--brand-primary)]">Mission Complete</div>
-              <div className="mt-3 text-3xl font-black text-white">+300 XP</div>
-              <div className="mt-3 text-zinc-200/80">Nice work. You can exit back to the mission list or retry.</div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <button
-                  onClick={() => {
-                    const sid = liveSessionIdRef.current;
-                    if (sid && !liveSessionEndedRef.current) {
-                      endLiveSession(sid, { status: 'abandoned' });
-                      liveSessionEndedRef.current = true;
-                    }
-                    router.push('/practicals/technology-practicality/csec-roadmap');
-                  }}
-                  className="h-12 px-6 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
-                >
-                  Exit
-                </button>
-                <button
-                  onClick={() => {
-                    setMissionComplete(false);
-                    setState(initRuntime(mission));
-                    setWins(initialWindows(mission));
-                    setActiveWin(mission.id === 'tech-1' ? 'stuck_app' : 'terminal');
-
-                    liveSessionEndedRef.current = false;
-                    const session = startLiveSession('csec', mission.id);
-                    liveSessionIdRef.current = session.id;
-                    setPassword('');
-                    setLoginBusy(false);
-                    setLoginError(null);
-                    setTermLines([
-                      { id: uid('sys'), kind: 'sys', text: `Mission loaded: ${mission.id} — ${mission.title}` },
-                      { id: uid('sys'), kind: 'sys', text: 'Terminal: try help, dir, ipconfig /renew, tracert, netstat -ano' },
-                    ]);
-                    setTermInput('');
-                    notify('info', 'SYSTEM', 'Mission reset.');
-                  }}
-                  className="h-12 px-6 rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.06] transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
-                >
-                  Retry
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="absolute top-4 left-4 z-[200] border border-white/20 bg-black/45 px-4 py-3">
           <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS Live Mission</div>
@@ -2316,7 +2256,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
           />
         </div>
 
-        <div className="absolute bottom-14 left-4 z-[210] rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-3 max-w-[520px]">
+        <div className="absolute bottom-14 left-4 z-[210] rounded-2xl border border-white/10 bg-black/40 px-4 py-3 max-w-[520px]">
           <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Free-Play Objective</div>
           <div className="mt-1 text-sm text-zinc-200">Resolve the client issue and the system will validate completion.</div>
           <div className="mt-2 text-xs text-zinc-400">Tools allowed: {mission.tools_allowed.join(', ')}</div>

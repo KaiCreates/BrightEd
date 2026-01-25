@@ -8,19 +8,25 @@ export function getFirebaseAdmin() {
         return admin.apps[0]!;
     }
 
-    // Dynamic key loading: Find any file matching the pattern
-    const rootDir = process.cwd();
-    const files = fs.readdirSync(rootDir);
-    const serviceAccountFile = files.find(f => f.includes('firebase-adminsdk') && f.endsWith('.json'));
+    const json = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON;
+    const base64 = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64;
+    const serviceAccountPathEnv = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH || process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-    if (!serviceAccountFile) {
-        throw new Error('No Firebase Service Account key file (*firebase-adminsdk*.json) found in project root.');
+    let serviceAccount: any | null = null;
+
+    if (typeof json === 'string' && json.trim()) {
+        serviceAccount = JSON.parse(json);
+    } else if (typeof base64 === 'string' && base64.trim()) {
+        const decoded = Buffer.from(base64, 'base64').toString('utf8');
+        serviceAccount = JSON.parse(decoded);
+    } else if (typeof serviceAccountPathEnv === 'string' && serviceAccountPathEnv.trim()) {
+        const p = path.isAbsolute(serviceAccountPathEnv) ? serviceAccountPathEnv : path.join(process.cwd(), serviceAccountPathEnv);
+        serviceAccount = JSON.parse(fs.readFileSync(p, 'utf8'));
     }
 
-    const serviceAccountPath = path.join(rootDir, serviceAccountFile);
-    console.log(`Loading Firebase Admin credentials from: ${serviceAccountFile}`);
-
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+    if (!serviceAccount) {
+        throw new Error('Missing Firebase Admin credentials. Set FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON (recommended) or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH / GOOGLE_APPLICATION_CREDENTIALS.');
+    }
 
     return admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),

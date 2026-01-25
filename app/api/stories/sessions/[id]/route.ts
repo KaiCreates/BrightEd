@@ -12,15 +12,13 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // Verify auth but we don't strictly need userId for this read if we just want to protect the endpoint
-    // However, best practice is to ensure proper access control. 
-    // For now just ensuring the user is logged in.
-    await verifyAuth(request);
+    const decodedToken = await verifyAuth(request);
+    const userId = decodedToken.uid;
 
     const { id } = await params;
     const session = await getSessionById(id);
 
-    if (!session) {
+    if (!session || session.userId !== userId) {
       return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
@@ -65,10 +63,7 @@ export async function GET(
       return NextResponse.json({ error: e.message }, { status: 401 });
     }
     console.error('[stories] session GET', e);
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : 'Failed to get session' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to get session' }, { status: 500 });
   }
 }
 
@@ -77,13 +72,19 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await verifyAuth(request);
+    const decodedToken = await verifyAuth(request);
+    const userId = decodedToken.uid;
 
     const { id } = await params;
     const body = (await request.json()) as {
       state?: string;
       businessState?: any;
     };
+
+    const session = await getSessionById(id);
+    if (!session || session.userId !== userId) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
+    }
 
     const updates: any = {};
     if (body.state) {
@@ -97,14 +98,14 @@ export async function PATCH(
     }
 
     await updateSession(id, updates);
-    const session = await getSessionById(id);
+    const updated = await getSessionById(id);
 
     return NextResponse.json({
       session: {
-        id: session.id,
-        state: session.state,
-        businessState: session.businessState,
-        completedAt: session.completedAt ? new Date(session.completedAt).toISOString() : null,
+        id: updated.id,
+        state: updated.state,
+        businessState: updated.businessState,
+        completedAt: updated.completedAt ? new Date(updated.completedAt).toISOString() : null,
       },
     });
   } catch (e: any) {
@@ -112,9 +113,6 @@ export async function PATCH(
       return NextResponse.json({ error: e.message }, { status: 401 });
     }
     console.error('[stories] session PATCH', e);
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : 'Failed to update session' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to update session' }, { status: 500 });
   }
 }

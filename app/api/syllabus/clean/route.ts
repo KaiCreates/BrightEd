@@ -3,6 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import { verifyAuth } from '@/lib/auth-server';
 
+function aiCleaningEnabled() {
+  return process.env.ALLOW_LOCAL_AI_CLEANING === 'true';
+}
+
 // Batch clean syllabus content
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +38,7 @@ export async function POST(request: NextRequest) {
       if (needsCleaning) {
         let cleanedContent = obj.content;
 
-        if (useAI) {
+        if (useAI && aiCleaningEnabled()) {
           try {
             // Try Ollama API
             const response = await fetch('http://localhost:11434/api/generate', {

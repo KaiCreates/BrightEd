@@ -16,12 +16,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: e.message }, { status: 401 });
     }
     console.error('[stories] stories GET error:', e);
-    return NextResponse.json(
-      {
-        error: 'Failed to list stories',
-        details: e instanceof Error ? e.message : String(e)
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to list stories' }, { status: 500 });
   }
 }

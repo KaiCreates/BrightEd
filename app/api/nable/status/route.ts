@@ -14,9 +14,6 @@ import {
 } from '@/lib/nable';
 import { verifyAuth } from '@/lib/auth-server';
 
-// In-memory state cache (would be database in production)
-const stateCache = new Map<string, NABLEState>();
-
 export async function GET(request: NextRequest) {
     try {
         const decodedToken = await verifyAuth(request);
@@ -27,11 +24,7 @@ export async function GET(request: NextRequest) {
         // const { searchParams } = new URL(request.url);
         // const requestedUser = searchParams.get('userId');
 
-        // Load or create state
-        let state = stateCache.get(userId);
-        if (!state) {
-            state = loadState(userId);
-        }
+        const state = loadState(userId);
 
         // Get overall status
         const status = getStatus(state);
@@ -52,7 +45,6 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            userId,
             overview: {
                 overallMastery: Math.round(status.overallMastery * 100),
                 overallConfidence: Math.round(status.overallConfidence * 100),
@@ -82,13 +74,7 @@ export async function GET(request: NextRequest) {
         if (error.message?.includes('Unauthorized')) {
             return NextResponse.json({ error: error.message }, { status: 401 });
         }
-        console.error('NABLE Status Error:', error);
-        return NextResponse.json(
-            {
-                error: 'Failed to get status',
-                details: error instanceof Error ? error.message : 'Unknown error'
-            },
-            { status: 500 }
-        );
+        console.error('NABLE Status Error');
+        return NextResponse.json({ error: 'Failed to get status' }, { status: 500 });
     }
 }

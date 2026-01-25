@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
-    console.error('Error loading syllabus:', error);
+    console.error('Error loading syllabus');
     return NextResponse.json({ error: 'Failed to load syllabus data' }, { status: 500 });
   }
 }

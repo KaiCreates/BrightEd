@@ -6,6 +6,10 @@ interface CleanRequest {
   useAI?: boolean;
 }
 
+function aiCleaningEnabled() {
+  return process.env.ALLOW_LOCAL_AI_CLEANING === 'true';
+}
+
 // Pattern detection for mangled PDF text
 const MANGLE_PATTERNS = [
   /(\d+)x(\d+)/g, // 3x2 -> 3x²
@@ -94,7 +98,7 @@ Cleaned:`,
     const data = await response.json();
     return data.response?.trim() || content;
   } catch (error) {
-    console.error('Ollama API error:', error);
+    console.error('Ollama API error');
     throw error;
   }
 }
@@ -123,7 +127,7 @@ export async function POST(request: NextRequest) {
     let method: string;
 
     // Try AI cleaning if requested and available
-    if (useAI) {
+    if (useAI && aiCleaningEnabled()) {
       try {
         cleaned = await cleanWithAI(content);
         method = 'ai';
@@ -148,7 +152,7 @@ export async function POST(request: NextRequest) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
-    console.error('Error cleaning content:', error);
+    console.error('Error cleaning content');
     return NextResponse.json(
       { error: 'Failed to clean content' },
       { status: 500 }

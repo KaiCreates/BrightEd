@@ -89,7 +89,7 @@ async function getBusinessState(businessId: string): Promise<BusinessState | nul
       lastActiveAt: toIso(data.lastActiveAt)
     };
   } catch (error) {
-    console.error('Error getting business state:', error);
+    console.error('Error getting business state');
     return null;
   }
 }
@@ -103,7 +103,7 @@ async function updateBusinessState(businessId: string, updates: Partial<Business
       updatedAt: new Date()
     });
   } catch (error) {
-    console.error('Error updating business state:', error);
+    console.error('Error updating business state');
     throw error;
   }
 }
@@ -204,7 +204,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Economy calculation error:', error);
+    console.error('Economy calculation error');
     return NextResponse.json({ error: 'Failed to calculate economy' }, { status: 500 });
   }
 }
@@ -306,7 +306,7 @@ export async function PUT(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Order action error:', error);
+    console.error('Order action error');
     return NextResponse.json({ error: 'Failed to process order action' }, { status: 500 });
   }
 }

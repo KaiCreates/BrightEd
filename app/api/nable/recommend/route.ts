@@ -20,7 +20,6 @@ export const dynamic = 'force-dynamic';
 
 // 1. Validation Schema
 const QuerySchema = z.object({
-    userId: z.string(),
     subject: z.string(),
     exclude: z.string().optional().default(''),
 });
@@ -29,11 +28,11 @@ export async function GET(request: NextRequest) {
     try {
         // 2. Auth Check
         const decodedToken = await verifyAuth(request);
+        const userId = decodedToken.uid;
 
         // 3. Parse and Validate Query Params
         const { searchParams } = new URL(request.url);
         const query = QuerySchema.safeParse({
-            userId: searchParams.get('userId'),
             subject: searchParams.get('subject'),
             exclude: searchParams.get('exclude'),
         });
@@ -42,13 +41,11 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'Invalid query parameters' }, { status: 400 });
         }
 
-        const { userId, subject, exclude } = query.data;
+        const { subject, exclude } = query.data;
         const excludeIds = exclude ? exclude.split(',') : [];
 
         // Security check: Users can only request their own recommendations
-        if (decodedToken.uid !== userId) {
-            return NextResponse.json({ error: 'Unauthorized: UID mismatch' }, { status: 401 });
-        }
+        // Removed this check as userId is now derived from auth token
 
         // 4. Load NABLE State from Firestore
         const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
@@ -116,7 +113,7 @@ export async function GET(request: NextRequest) {
         });
 
     } catch (error: any) {
-        console.error('NABLE Recommend Error:', error);
+        console.error('NABLE Recommend Error');
 
         if (error.message?.includes("Unauthorized")) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

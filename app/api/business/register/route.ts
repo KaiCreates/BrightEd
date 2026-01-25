@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Registration Error:', error);
+    console.error('Registration Error');
     
     // Better error handling for specific cases
     if (error.code === 'permission-denied') {
@@ -105,8 +105,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
     
-    return NextResponse.json({ 
-      error: error.message || 'Registration failed' 
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
   }
 }

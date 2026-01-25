@@ -31,10 +31,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: e.message }, { status: 401 });
     }
     console.error('[stories] sessions GET', e);
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : 'Failed to list sessions' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to list sessions' }, { status: 500 });
   }
 }
 
@@ -99,10 +96,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: e.message }, { status: 401 });
     }
     console.error('[stories] sessions POST', e);
-    return NextResponse.json(
-      { error: e instanceof Error ? e.message : 'Failed to create session' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create session' }, { status: 500 });
   }
 }
 

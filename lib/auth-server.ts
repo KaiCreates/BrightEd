@@ -12,7 +12,7 @@ export async function verifyAuth(request: NextRequest) {
     // console.log("Auth Header Received:", authHeader);
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        console.warn("Missing or malformed Authorization header:", authHeader);
+        console.warn("Missing or malformed Authorization header");
         throw new Error('Unauthorized: Missing or malformed token');
     }
 
@@ -27,9 +27,7 @@ export async function verifyAuth(request: NextRequest) {
         const decodedToken = await adminAuth.verifyIdToken(token);
         return decodedToken;
     } catch (error: any) {
-        console.error("Firebase ID Token verification failed:");
-        console.error("  Code:", error.code);
-        console.error("  Message:", error.message);
+        console.error("Firebase ID Token verification failed");
         throw new Error('Unauthorized: Invalid token');
     }
 }

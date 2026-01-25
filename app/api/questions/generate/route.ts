@@ -34,23 +34,15 @@ export async function GET(request: NextRequest) {
     }
 
     // 1. Authenticate & Load NABLE State
-    let nableState: NABLEState | null = null;
-    let userId: string | null = null;
+    const decodedToken = await verifyAuth(request);
+    const userId = decodedToken.uid;
 
-    try {
-      // Pass the actual request to verifyAuth
-      const decodedToken = await verifyAuth(request);
-      userId = decodedToken.uid;
+    const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
+    const nableDoc = await nableRef.get();
 
-      const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
-      const nableDoc = await nableRef.get();
-
-      nableState = nableDoc.exists
-        ? loadState(userId, nableDoc.data() as Partial<NABLEState>)
-        : createInitialState(userId);
-    } catch (e) {
-      console.warn('Proceeding in Legacy Mode: Auth failed or missing');
-    }
+    const nableState: NABLEState = nableDoc.exists
+      ? loadState(userId, nableDoc.data() as Partial<NABLEState>)
+      : createInitialState(userId);
 
     // 2. Fetch Candidates with Target Difficulty
     // Variation 1 = Easy, 2 = Medium, 3 = Hard
@@ -144,11 +136,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(formatResponse(selectedQuestion, objectiveId, subjectId));
 
   } catch (error: any) {
-    console.error('Generation API Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
-      { status: 500 }
-    );
+    if (error.message?.includes('Unauthorized')) {
+      return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+    console.error('Generation API Error');
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 

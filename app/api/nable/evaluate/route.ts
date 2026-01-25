@@ -13,7 +13,6 @@ import {
 } from '@/lib/nable';
 
 const EvaluateSchema = z.object({
-    userId: z.string(),
     questionId: z.string(),
     objectiveId: z.string(),
     selectedAnswer: z.number(),
@@ -35,11 +34,8 @@ export async function POST(request: NextRequest) {
 
         // 2. Strict Auth Verification
         const decodedToken = await verifyAuth(request);
+        const userId = decodedToken.uid;
         const body = await request.json();
-
-        if (decodedToken.uid !== body.userId) {
-            return NextResponse.json({ error: 'Auth mismatch: Unauthorized' }, { status: 401 });
-        }
 
         // 3. Validation
         const result = EvaluateSchema.safeParse(body);
@@ -48,7 +44,6 @@ export async function POST(request: NextRequest) {
         }
 
         const {
-            userId,
             questionId,
             objectiveId,
             selectedAnswer,
@@ -206,10 +201,10 @@ export async function POST(request: NextRequest) {
         });
 
     } catch (error: any) {
-        console.error("Evaluation Error:", error.message || error);
+        console.error("Evaluation Error");
         if (error.message?.includes("Unauthorized")) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
-        return NextResponse.json({ error: error.message || 'Evaluation failed' }, { status: 500 });
+        return NextResponse.json({ error: 'Evaluation failed' }, { status: 500 });
     }
 }

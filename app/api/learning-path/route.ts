@@ -380,12 +380,8 @@ export async function POST(request: NextRequest) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
-    const errorMessage = error instanceof Error ? error.message : 'Failed to generate learning path';
-
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: error instanceof Error && error.message === 'Syllabus data not found' ? 404 : 500 }
-    );
+    const isNotFound = error instanceof Error && error.message === 'Syllabus data not found';
+    return NextResponse.json({ error: isNotFound ? 'Syllabus data not found' : 'Failed to generate learning path' }, { status: isNotFound ? 404 : 500 });
   }
 }
 
@@ -446,11 +442,7 @@ export async function GET(request: NextRequest) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
-    const errorMessage = error instanceof Error ? error.message : 'Failed to generate learning path';
-
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: error instanceof Error && error.message === 'Syllabus data not found' ? 404 : 500 }
-    );
+    const isNotFound = error instanceof Error && error.message === 'Syllabus data not found';
+    return NextResponse.json({ error: isNotFound ? 'Syllabus data not found' : 'Failed to generate learning path' }, { status: isNotFound ? 404 : 500 });
   }
 }
