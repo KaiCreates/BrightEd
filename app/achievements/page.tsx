@@ -27,6 +27,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '🔥',
         category: 'streak',
         requirement: 'streak >= 30',
+        unlocked: false,
         rarity: 'epic'
     },
     {
@@ -36,6 +37,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '👑',
         category: 'business',
         requirement: 'valuation >= 1000000',
+        unlocked: false,
         rarity: 'legendary'
     },
     {
@@ -45,6 +47,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '💼',
         category: 'mastery',
         requirement: 'subjectProgress["Principles of Business"] >= 9.0',
+        unlocked: false,
         rarity: 'rare'
     },
     {
@@ -54,6 +57,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '🌟',
         category: 'social',
         requirement: 'helpCount >= 50',
+        unlocked: false,
         rarity: 'epic'
     },
     {
@@ -63,6 +67,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '🌱',
         category: 'business',
         requirement: 'hasBusiness === true',
+        unlocked: false,
         rarity: 'common'
     },
     {
@@ -72,6 +77,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '💰',
         category: 'business',
         requirement: 'bCoins >= 1000',
+        unlocked: false,
         rarity: 'common'
     },
     {
@@ -81,6 +87,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '📈',
         category: 'business',
         requirement: 'valuation >= 10000',
+        unlocked: false,
         rarity: 'common'
     },
     {
@@ -90,6 +97,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '📐',
         category: 'mastery',
         requirement: 'subjectProgress["Mathematics"] >= 9.0',
+        unlocked: false,
         rarity: 'rare'
     },
     {
@@ -99,6 +107,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '⚔️',
         category: 'streak',
         requirement: 'streak >= 7',
+        unlocked: false,
         rarity: 'common'
     },
     {
@@ -108,6 +117,7 @@ const ALL_ACHIEVEMENTS: Achievement[] = [
         icon: '💯',
         category: 'mastery',
         requirement: 'questionsCorrect >= 100',
+        unlocked: false,
         rarity: 'rare'
     }
 ];

@@ -345,10 +345,10 @@ export default function ProfilePage() {
             onClick={async () => {
               if (confirm('This will clear local cache and reload. Continue?')) {
                 try {
-                  const { clearPersistence, terminate } = await import('firebase/firestore');
+                  const { clearIndexedDbPersistence, terminate } = await import('firebase/firestore');
                   const { db } = await import('@/lib/firebase');
                   await terminate(db);
-                  await clearPersistence(db);
+                  await clearIndexedDbPersistence(db);
                   window.location.reload();
                 } catch (e) {
                   console.error('Failed to clear persistence:', e);

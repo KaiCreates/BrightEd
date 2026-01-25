@@ -94,8 +94,8 @@ def _hash_text(s: str) -> str:
     return hashlib.sha1(_normalize_text(s).encode('utf-8')).hexdigest()
 
 
-def _ollama_generate(ollama_host: str, model: str, prompt: str, temperature: float, timeout_sec: int) -> str:
-    r = requests.post(
+def _ollama_generate(session: requests.Session, ollama_host: str, model: str, prompt: str, temperature: float, timeout_sec: int, num_predict: int) -> str:
+    r = session.post(
         f"{ollama_host}/api/generate",
         json={
             'model': model,
@@ -103,6 +103,9 @@ def _ollama_generate(ollama_host: str, model: str, prompt: str, temperature: flo
             'stream': False,
             'format': 'json',
             'temperature': temperature,
+            'options': {
+                'num_predict': num_predict,
+            },
         },
         timeout=timeout_sec,
     )
@@ -110,12 +113,31 @@ def _ollama_generate(ollama_host: str, model: str, prompt: str, temperature: flo
     return (r.json() or {}).get('response', '')
 
 
-def _build_prompt(objective: dict, subject: str, difficulty_text: str, count: int, existing_questions: list[str]) -> str:
+def _build_prompt(
+    objective: dict,
+    subject: str,
+    difficulty_text: str,
+    count: int,
+    existing_questions: list[str],
+    max_context_chars: int,
+    max_existing: int,
+    max_existing_chars: int,
+) -> str:
     topic = str(objective.get('objective') or '')
     context = str(objective.get('content') or '')
+    if max_context_chars > 0 and len(context) > max_context_chars:
+        context = context[:max_context_chars]
     keywords = objective.get('keywords') or []
     keyword_text = ', '.join([k for k in keywords if isinstance(k, str)][:12])
-    existing_block = '\n'.join([f"- {q}" for q in existing_questions[-15:]])
+    trimmed_existing: list[str] = []
+    for q in existing_questions[-max_existing:] if max_existing > 0 else []:
+        q = str(q or '').strip()
+        if not q:
+            continue
+        if max_existing_chars > 0 and len(q) > max_existing_chars:
+            q = q[:max_existing_chars]
+        trimmed_existing.append(q)
+    existing_block = '\n'.join([f"- {q}" for q in trimmed_existing])
 
     return (
         f"Create {count} CSEC style multiple-choice questions for the subject \"{subject}\".\n"
@@ -193,20 +215,27 @@ def _iter_objectives(syllabus_dir: Path):
 def main():
     syllabus_dir = Path(os.getenv('SYLLABUS_OUTPUT_DIR', 'syllabuses/output'))
     per_objective = int(os.getenv('QUESTIONS_PER_OBJECTIVE', '50'))
-    model = os.getenv('OLLAMA_MODEL', 'llama3')
+    model = os.getenv('OLLAMA_MODEL', 'smollm:1.7b')
     ollama_host = os.getenv('OLLAMA_HOST', 'http://127.0.0.1:11434').rstrip('/')
-    batch_n = int(os.getenv('OLLAMA_BATCH_SIZE', '5'))
+    batch_n = int(os.getenv('OLLAMA_BATCH_SIZE', '8'))
     temperature = float(os.getenv('OLLAMA_TEMPERATURE', '0.8'))
-    timeout_sec = int(os.getenv('OLLAMA_TIMEOUT_SEC', '180'))
+    timeout_sec = int(os.getenv('OLLAMA_TIMEOUT_SEC', '60'))
+    num_predict = int(os.getenv('OLLAMA_NUM_PREDICT', '1200'))
     force = os.getenv('FORCE_REGENERATE', '0') in {'1', 'true', 'TRUE', 'yes', 'YES'}
     subject_prefix_filter = os.getenv('SUBJECT_PREFIX_FILTER', '').strip()
     max_objectives = int(os.getenv('MAX_OBJECTIVES', '0'))
     start_index = int(os.getenv('START_INDEX', '0'))
+    prompt_context_max_chars = int(os.getenv('PROMPT_CONTEXT_MAX_CHARS', '1200'))
+    prompt_existing_max = int(os.getenv('PROMPT_EXISTING_MAX', '8'))
+    prompt_existing_max_chars = int(os.getenv('PROMPT_EXISTING_MAX_CHARS', '180'))
+    max_seconds_per_objective = int(os.getenv('MAX_SECONDS_PER_OBJECTIVE', '180'))
+    explicit_max_attempts = int(os.getenv('MAX_ATTEMPTS_PER_OBJECTIVE', '0'))
 
     if not syllabus_dir.exists() or not syllabus_dir.is_dir():
         raise RuntimeError(f"Syllabus output dir not found: {syllabus_dir}")
 
     db = _get_firestore()
+    session = requests.Session()
 
     global_seen = set()
     total_written = 0
@@ -268,17 +297,33 @@ def main():
         generated = []
         attempts = 0
         max_attempts = max(10, (remaining // max(1, batch_n)) * 6)
+        if explicit_max_attempts > 0:
+            max_attempts = explicit_max_attempts
+        started_at = time.time()
 
         while len(generated) < remaining and attempts < max_attempts:
+            if max_seconds_per_objective > 0 and (time.time() - started_at) > max_seconds_per_objective:
+                break
             need_now = min(batch_n, remaining - len(generated))
-            prompt = _build_prompt(obj, subject, _difficulty_text(difficulty), need_now, existing_texts + [g['question'] for g in generated])
+            prompt = _build_prompt(
+                obj,
+                subject,
+                _difficulty_text(difficulty),
+                need_now,
+                existing_texts + [g['question'] for g in generated],
+                prompt_context_max_chars,
+                prompt_existing_max,
+                prompt_existing_max_chars,
+            )
             attempts += 1
 
+            print(f"  attempt {attempts}/{max_attempts}: have {len(generated)}/{remaining} (asking {need_now})")
+
             try:
-                raw = _ollama_generate(ollama_host, model, prompt, temperature, timeout_sec)
+                raw = _ollama_generate(session, ollama_host, model, prompt, temperature, timeout_sec, num_predict)
                 qs = _parse_questions_json(raw)
             except Exception:
-                time.sleep(0.5)
+                time.sleep(0.2)
                 continue
 
             for q in qs:

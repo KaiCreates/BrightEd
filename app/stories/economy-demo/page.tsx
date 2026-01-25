@@ -43,6 +43,7 @@ function EconomyDemoContent() {
             playerId: 'demo_player',
             businessTypeId: type.id,
             businessName: name,
+            branding: { themeColor: '#7c3aed', icon: type.emoji },
             cashBalance: type.startingCapital,
             totalRevenue: 0,
             totalExpenses: 0,
@@ -52,7 +53,17 @@ function EconomyDemoContent() {
             operatingHours: { open: 8, close: 20 },
             staffCount: 1,
             maxConcurrentOrders: type.demandConfig.maxConcurrentOrders,
+            employees: [],
             inventory: {},
+            marketState: {
+                items: [],
+                lastRestock: new Date().toISOString(),
+                nextRestock: new Date(Date.now() + 300000).toISOString()
+            },
+            recruitmentPool: [],
+            lastRecruitmentTime: new Date().toISOString(),
+            lastPayrollTime: new Date().toISOString(),
+            reviews: [],
             activeOrders: [],
             ordersCompleted: 0,
             ordersFailed: 0,
@@ -117,6 +128,11 @@ function EconomyDemoContent() {
         if (reputationPenalty > 2) {
             showInterrupt('keisha', `${order.customerName} seemed disappointed you couldn't help them.`, 'concerned');
         }
+    };
+
+    const handleFulfill = () => {
+        // Demo page does not include the fulfillment workspace UI.
+        // This prop is required by OrderDashboard.
     };
 
     // Handle order complete
@@ -233,6 +249,7 @@ function EconomyDemoContent() {
                         onAcceptOrder={handleAcceptOrder}
                         onRejectOrder={handleRejectOrder}
                         onCompleteOrder={handleCompleteOrder}
+                        onFulfill={handleFulfill}
                     />
                 </main>
             )}

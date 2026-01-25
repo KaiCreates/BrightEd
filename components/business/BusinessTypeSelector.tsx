@@ -5,22 +5,35 @@
  * Allows players to choose their business type during onboarding.
  */
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrightLayer, BrightButton, BrightHeading } from '@/components/system';
 import { CharacterDialogue } from '@/components/cinematic';
 import { ALL_BUSINESS_TYPES, BusinessType } from '@/lib/economy';
 import { DialogueNode } from '@/lib/cinematic/character-types';
+import BusinessCreditCard from '@/components/business/BusinessCreditCard';
+import { auth, storage } from '@/lib/firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 interface BusinessTypeSelectorProps {
-    onSelect: (businessType: BusinessType, businessName: string) => void;
+    onSelect: (
+        businessType: BusinessType,
+        businessName: string,
+        branding?: { themeColor?: string; logoUrl?: string; icon?: string }
+    ) => void;
     onBack?: () => void;
 }
 
 export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorProps) {
     const [selectedType, setSelectedType] = useState<BusinessType | null>(null);
     const [businessName, setBusinessName] = useState('');
-    const [step, setStep] = useState<'select' | 'name' | 'confirm'>('select');
+    const [step, setStep] = useState<'select' | 'name' | 'brand' | 'confirm'>('select');
+
+    const [themeColor, setThemeColor] = useState<string>('#7c3aed');
+    const [icon, setIcon] = useState<string>('🏢');
+    const [logoUrl, setLogoUrl] = useState<string>('');
+    const [logoUploading, setLogoUploading] = useState(false);
+    const [logoError, setLogoError] = useState<string | null>(null);
 
     const handleTypeSelect = (type: BusinessType) => {
         setSelectedType(type);
@@ -29,12 +42,16 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
 
     const handleNameSubmit = () => {
         if (businessName.trim().length < 2) return;
-        setStep('confirm');
+        setStep('brand');
     };
 
     const handleConfirm = () => {
         if (selectedType && businessName.trim()) {
-            onSelect(selectedType, businessName.trim());
+            onSelect(selectedType, businessName.trim(), {
+                themeColor: themeColor.trim() || undefined,
+                logoUrl: logoUrl || undefined,
+                icon: icon || undefined,
+            });
         }
     };
 
@@ -42,10 +59,40 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
         if (step === 'name') {
             setStep('select');
             setSelectedType(null);
-        } else if (step === 'confirm') {
+        } else if (step === 'brand') {
             setStep('name');
+        } else if (step === 'confirm') {
+            setStep('brand');
         } else {
             onBack?.();
+        }
+    };
+
+    const presetIcons = useMemo(
+        () => ['🏢', '🧾', '🧠', '🛍️', '🍽️', '📦', '🧰', '🧪', '🎧', '🧑‍💻', '🚚', '🌐', '🏦', '🧿'],
+        []
+    );
+
+    const handleLogoUpload = async (file: File) => {
+        const user = auth.currentUser;
+        if (!user) {
+            setLogoError('Please log in again to upload a logo.');
+            return;
+        }
+
+        setLogoError(null);
+        setLogoUploading(true);
+        try {
+            const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            const path = `business-logos/${user.uid}/${Date.now()}_${safeName}`;
+            const objRef = ref(storage, path);
+            await uploadBytes(objRef, file);
+            const url = await getDownloadURL(objRef);
+            setLogoUrl(url);
+        } catch (e) {
+            setLogoError('Failed to upload logo. Please try again.');
+        } finally {
+            setLogoUploading(false);
         }
     };
 
@@ -252,7 +299,130 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                         </motion.div>
                     )}
 
-                    {/* Step 3: Confirm */}
+                    {/* Step 3: Brand Your Business */}
+                    {step === 'brand' && selectedType && (
+                        <motion.div
+                            key="brand"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className="max-w-5xl mx-auto"
+                        >
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                                <div className="lg:col-span-5">
+                                    <BusinessCreditCard
+                                        businessName={businessName}
+                                        ownerName="Director"
+                                        themeColor={themeColor}
+                                        logoUrl={logoUrl || undefined}
+                                        icon={icon}
+                                        cardLabel="BUSINESS CREDIT"
+                                    />
+                                </div>
+
+                                <div className="lg:col-span-7">
+                                    <BrightLayer variant="glass" padding="lg" className="border-2 border-[var(--border-subtle)]">
+                                        <div className="flex items-start justify-between gap-4 mb-8">
+                                            <div>
+                                                <BrightHeading level={2} className="mb-2">Branding</BrightHeading>
+                                                <p className="text-[var(--text-secondary)]">Choose a logo, icon, and theme color. This will style your business card.</p>
+                                            </div>
+                                            <div className="text-3xl">🎨</div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="space-y-3">
+                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Theme Color</div>
+                                                <div className="flex items-center gap-3">
+                                                    <input
+                                                        type="color"
+                                                        value={themeColor}
+                                                        onChange={(e) => setThemeColor(e.target.value)}
+                                                        className="h-10 w-14 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        value={themeColor}
+                                                        onChange={(e) => setThemeColor(e.target.value)}
+                                                        className="flex-1 px-4 py-3 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)] focus:outline-none"
+                                                        placeholder="#7c3aed"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Logo Upload</div>
+                                                <div className="flex items-center gap-3">
+                                                    <label className="flex-1">
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={(e) => {
+                                                                const file = e.target.files?.[0];
+                                                                if (file) handleLogoUpload(file);
+                                                            }}
+                                                            className="hidden"
+                                                        />
+                                                        <div className="px-4 py-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/40 hover:border-[var(--brand-primary)]/40 transition-colors cursor-pointer text-sm font-bold text-[var(--text-primary)]">
+                                                            {logoUploading ? 'Uploading...' : (logoUrl ? 'Replace Logo' : 'Upload Logo')}
+                                                        </div>
+                                                    </label>
+                                                    {logoUrl && (
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setLogoUrl('')}
+                                                            className="px-4 py-3 rounded-xl border border-[var(--border-subtle)] bg-transparent hover:bg-[var(--bg-elevated)]/40 transition-colors text-sm font-bold text-[var(--text-muted)]"
+                                                        >
+                                                            Clear
+                                                        </button>
+                                                    )}
+                                                </div>
+                                                {logoError && (
+                                                    <div className="text-sm font-bold text-[var(--state-error)]">{logoError}</div>
+                                                )}
+                                            </div>
+
+                                            <div className="md:col-span-2 space-y-3">
+                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Preset Icon</div>
+                                                <div className="grid grid-cols-7 sm:grid-cols-10 gap-2">
+                                                    {presetIcons.map((i) => (
+                                                        <button
+                                                            key={i}
+                                                            type="button"
+                                                            onClick={() => setIcon(i)}
+                                                            className={`h-11 w-11 rounded-xl border transition-all text-lg active:scale-95 ${
+                                                                icon === i
+                                                                    ? 'border-white/10 bg-[var(--brand-primary)]/20 shadow-lg'
+                                                                    : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 hover:border-[var(--brand-primary)]/40'
+                                                            }`}
+                                                        >
+                                                            {i}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-10 flex justify-between items-center gap-4">
+                                            <BrightButton variant="ghost" onClick={handleBack}>
+                                                ← Back
+                                            </BrightButton>
+                                            <BrightButton
+                                                variant="primary"
+                                                size="lg"
+                                                onClick={() => setStep('confirm')}
+                                                disabled={logoUploading}
+                                            >
+                                                Continue →
+                                            </BrightButton>
+                                        </div>
+                                    </BrightLayer>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* Step 4: Confirm */}
                     {step === 'confirm' && selectedType && (
                         <motion.div
                             key="confirm"
@@ -266,7 +436,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                 padding="lg"
                                 className="text-center border-2 border-[var(--brand-primary)]/30"
                             >
-                                <span className="text-6xl mb-4 inline-block">{selectedType.emoji}</span>
+                                <span className="text-6xl mb-4 inline-block">{logoUrl ? '✅' : icon}</span>
                                 <BrightHeading level={2} className="mb-2">
                                     {businessName}
                                 </BrightHeading>

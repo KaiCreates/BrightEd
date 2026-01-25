@@ -19,7 +19,11 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
     const [error, setError] = useState<string | null>(null);
     const [registeredName, setRegisteredName] = useState('');
 
-    const handleRegistration = async (type: BusinessType, name: string) => {
+    const handleRegistration = async (
+        type: BusinessType,
+        name: string,
+        branding?: { themeColor?: string; logoUrl?: string; icon?: string }
+    ) => {
         const user = auth.currentUser;
         if (!user) {
             setError('Please log in again to register.');
@@ -31,7 +35,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
 
         try {
             // Create economy business directly via Firebase
-            await createEconomyBusiness(user.uid, name, type);
+            await createEconomyBusiness(user.uid, name, type, branding);
 
             setRegisteredName(name);
 

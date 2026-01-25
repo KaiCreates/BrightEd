@@ -74,6 +74,16 @@ export default function OrgChart({ business }: OrgChartProps) {
                                 <div className="h-1 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
                                     <div className="h-full bg-purple-500" style={{ width: `${emp.stats.quality}%` }} />
                                 </div>
+
+                                <div className="flex items-center justify-between text-[10px] uppercase font-bold text-[var(--text-muted)] mt-2">
+                                    <span>Morale</span>
+                                    <span className={emp.stats.morale > 50 ? 'text-[var(--state-success)]' : 'text-[var(--state-error)]'}>
+                                        {emp.stats.morale}%
+                                    </span>
+                                </div>
+                                <div className="h-1 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
+                                    <div className={`h-full ${emp.stats.morale > 50 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${emp.stats.morale}%` }} />
+                                </div>
                             </div>
 
                             <p className="text-[10px] text-[var(--text-muted)] text-right font-mono">

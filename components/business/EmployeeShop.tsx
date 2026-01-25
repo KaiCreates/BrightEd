@@ -14,23 +14,33 @@ interface EmployeeShopProps {
 export default function EmployeeShop({ business }: EmployeeShopProps) {
     const candidates = business.recruitmentPool || [];
 
-    const handleHire = async (candidate: Employee) => {
-        const hiringCost = candidate.salaryPerDay * 7;
+    const handleHire = async (candidateId: string) => {
+        const candidate = candidates.find(c => c.id === candidateId);
+        if (!candidate) return;
 
+        const hiringCost = Math.floor(candidate.salaryPerDay * 1); // 1 day deposit
         if (business.cashBalance < hiringCost) {
-            alert(`Need ฿${hiringCost} (Sign-on Bonus) to hire!`);
+            alert("Insufficient funds for hiring deposit!");
             return;
         }
 
         const bizRef = doc(db, 'businesses', business.id);
+        const newPool = candidates.filter(c => c.id !== candidateId);
 
-        // Transaction style update: remove from pool, add to employees, pay cost
-        const newPool = candidates.filter(c => c.id !== candidate.id);
+        // Ensure stats and new fields are present
+        const employeeRecord = {
+            ...candidate,
+            unpaidWages: 0,
+            stats: {
+                ...candidate.stats,
+                morale: 100
+            }
+        };
 
         await updateDoc(bizRef, {
             cashBalance: increment(-hiringCost),
             balance: increment(-hiringCost),
-            employees: arrayUnion(candidate),
+            employees: arrayUnion(employeeRecord),
             recruitmentPool: newPool,
             staffCount: increment(1)
         });
@@ -113,8 +123,8 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
                                 </button>
                                 <button
                                     className="flex-[2] bg-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/90 text-white border border-white/10 rounded-xl py-2.5 text-xs font-black shadow-lg shadow-[var(--brand-primary)]/20 transition-all active:scale-95 disabled:opacity-50 disabled:grayscale"
-                                    onClick={() => handleHire(candidate)}
-                                    disabled={business.cashBalance < candidate.salaryPerDay * 7}
+                                    onClick={() => handleHire(candidate.id)}
+                                    disabled={business.cashBalance < candidate.salaryPerDay * 1}
                                 >
                                     Hire Now
                                 </button>

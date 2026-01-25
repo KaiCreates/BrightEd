@@ -213,6 +213,12 @@ export interface BusinessState {
     businessTypeId: string;
     businessName: string;
 
+    branding?: {
+        themeColor?: string;
+        logoUrl?: string;
+        icon?: string;
+    };
+
     // Financials
     cashBalance: number;
     totalRevenue: number;
@@ -282,6 +288,7 @@ export interface Employee {
         quality: number;  // 0-100, boosts quality score base
         morale: number;   // 0-100, affects reliability
     };
+    unpaidWages: number;
     hiredAt: string;
 }
 

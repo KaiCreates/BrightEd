@@ -43,7 +43,12 @@ const COLLECTIONS = {
 export async function createEconomyBusiness(
     userId: string,
     businessName: string,
-    businessType: BusinessType
+    businessType: BusinessType,
+    branding?: {
+        themeColor?: string;
+        logoUrl?: string;
+        icon?: string;
+    }
 ): Promise<string> {
     const businessRef = doc(collection(db, COLLECTIONS.BUSINESSES));
     const businessId = businessRef.id;
@@ -53,6 +58,8 @@ export async function createEconomyBusiness(
         playerId: userId,
         businessTypeId: businessType.id,
         businessName,
+
+        branding: branding ?? {},
 
         // Financials
         cashBalance: businessType.startingCapital,
@@ -69,8 +76,26 @@ export async function createEconomyBusiness(
         staffCount: 1,
         maxConcurrentOrders: businessType.demandConfig.maxConcurrentOrders,
 
-        // Inventory
+        // Workforce
+        employees: [],
+
+        // Inventory & Market
         inventory: {},
+        marketState: {
+            items: [],
+            lastRestock: new Date().toISOString(),
+            nextRestock: new Date(Date.now() + 300000).toISOString()
+        },
+
+        // Recruitment
+        recruitmentPool: [],
+        lastRecruitmentTime: new Date().toISOString(),
+
+        // Payroll
+        lastPayrollTime: new Date().toISOString(),
+
+        // Reviews
+        reviews: [],
 
         // Active work
         activeOrders: [],
@@ -92,6 +117,25 @@ export async function createEconomyBusiness(
     batch.set(businessRef, {
         ownerId: userId, // For permission query
         ...initialState,
+        branding: branding ?? {},
+        employees: [{
+            id: `emp_${Date.now()}`,
+            name: `${userRef.id.slice(0, 5)} Manager`,
+            role: 'manager',
+            salaryPerDay: businessType.operatingCosts.staffPerHour ? (businessType.operatingCosts.staffPerHour * 8) : 200,
+            stats: { speed: 50, quality: 50, morale: 100 },
+            unpaidWages: 0,
+            hiredAt: new Date().toISOString()
+        }],
+        marketState: {
+            lastRestock: new Date().toISOString(),
+            nextRestock: new Date(Date.now() + 300000).toISOString(),
+            items: []
+        },
+        recruitmentPool: [],
+        lastRecruitmentTime: new Date().toISOString(),
+        lastPayrollTime: new Date().toISOString(),
+        reviews: [],
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         // Keep compatible with legacy fields
@@ -139,6 +183,12 @@ export async function fetchBusinessState(businessId: string): Promise<BusinessSt
         staffCount: data.staffCount ?? 1,
         maxConcurrentOrders: data.maxConcurrentOrders ?? 3,
         inventory: data.inventory ?? {},
+        employees: data.employees ?? [],
+        marketState: data.marketState ?? { items: [], lastRestock: '', nextRestock: '' },
+        recruitmentPool: data.recruitmentPool ?? [],
+        lastRecruitmentTime: data.lastRecruitmentTime ?? '',
+        lastPayrollTime: data.lastPayrollTime ?? '',
+        reviews: data.reviews ?? [],
         activeOrders: data.activeOrders ?? [],
         ordersCompleted: data.ordersCompleted ?? 0,
         ordersFailed: data.ordersFailed ?? 0,
@@ -160,6 +210,8 @@ export async function updateBusinessFinancials(
         inventory?: Record<string, number>;
         lastPayrollTime?: string;
         reviews?: any[]; // Typed loosely to avoid circular dep for now
+        totalRevenue?: number;
+        totalExpenses?: number;
     }
 ) {
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
@@ -178,6 +230,8 @@ export async function updateBusinessFinancials(
     if (updates.inventory !== undefined) firestoreUpdates.inventory = updates.inventory;
     if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
     if (updates.reviews !== undefined) firestoreUpdates.reviews = updates.reviews;
+    if (updates.totalRevenue !== undefined) firestoreUpdates.totalRevenue = updates.totalRevenue;
+    if (updates.totalExpenses !== undefined) firestoreUpdates.totalExpenses = updates.totalExpenses;
 
     await updateDoc(docRef, firestoreUpdates);
 }

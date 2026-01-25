@@ -22,40 +22,40 @@ export async function getQuestionFromStore(
     variation: number
 ): Promise<StoredQuestion | undefined> {
     const db = getQuestionsDb();
-    const row = db.prepare('SELECT * FROM Questions WHERE objectiveId = ? AND variation = ?').get(objectiveId, variation);
+    const row: any = db.prepare('SELECT * FROM Questions WHERE objectiveId = ? AND variation = ?').get(objectiveId, variation);
     if (!row) return undefined;
 
     return {
         ...row,
-        options: JSON.parse(row.options)
-    };
+        options: JSON.parse(row.options) as string[]
+    } as StoredQuestion;
 }
 
 export async function getQuestionsByObjective(objectiveId: string): Promise<StoredQuestion[]> {
     const db = getQuestionsDb();
-    const rows = db.prepare('SELECT * FROM Questions WHERE objectiveId = ?').all(objectiveId);
+    const rows: any[] = db.prepare('SELECT * FROM Questions WHERE objectiveId = ?').all(objectiveId) as any[];
     return rows.map((r: any) => ({
         ...r,
-        options: JSON.parse(r.options)
-    }));
+        options: JSON.parse(r.options) as string[]
+    }) as StoredQuestion);
 }
 
 export async function getQuestionsBySubject(subjectId: string): Promise<StoredQuestion[]> {
     const db = getQuestionsDb();
-    const rows = db.prepare('SELECT * FROM Questions WHERE subjectId = ?').all(subjectId);
+    const rows: any[] = db.prepare('SELECT * FROM Questions WHERE subjectId = ?').all(subjectId) as any[];
     return rows.map((r: any) => ({
         ...r,
-        options: JSON.parse(r.options)
-    }));
+        options: JSON.parse(r.options) as string[]
+    }) as StoredQuestion);
 }
 
 export async function getAllQuestions(): Promise<StoredQuestion[]> {
     const db = getQuestionsDb();
-    const rows = db.prepare('SELECT * FROM Questions').all();
+    const rows: any[] = db.prepare('SELECT * FROM Questions').all() as any[];
     return rows.map((r: any) => ({
         ...r,
-        options: JSON.parse(r.options)
-    }));
+        options: JSON.parse(r.options) as string[]
+    }) as StoredQuestion);
 }
 
 export async function saveQuestionToStore(question: StoredQuestion): Promise<boolean> {
