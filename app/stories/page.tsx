@@ -251,7 +251,7 @@ export default function StoriesPage() {
                 >
                   <Link
                     href={
-                      isLocked ? '/stories/business/register' :
+                      isLocked ? '/practicals/business/register' :
                         story.slug === 'business-financial-literacy'
                           ? '/stories/business/operations'
                           : `/stories/${story.slug}`
@@ -312,7 +312,7 @@ export default function StoriesPage() {
                   {/* Locked Overlay Link if needed */}
                   {isLocked && (
                     <Link
-                      href="/stories/business/register"
+                      href="/practicals/business/register"
                       className="absolute inset-0 bg-black/40 backdrop-blur-[2px] rounded-[2rem] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <BrightButton variant="primary" size="sm">Register Business</BrightButton>

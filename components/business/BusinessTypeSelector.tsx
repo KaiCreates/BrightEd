@@ -41,7 +41,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
     };
 
     const handleNameSubmit = () => {
-        if (businessName.trim().length < 2) return;
+        if (businessName.trim().length < 3) return;
         setStep('brand');
     };
 
@@ -290,7 +290,7 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                     <BrightButton
                                         variant="primary"
                                         onClick={handleNameSubmit}
-                                        disabled={businessName.trim().length < 2}
+                                        disabled={businessName.trim().length < 3}
                                     >
                                         Continue →
                                     </BrightButton>

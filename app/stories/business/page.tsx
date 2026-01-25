@@ -71,7 +71,7 @@ export default function BusinessHub() {
                 <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
                   Set up your company brand, unlock the simulation dashboard, and start building.
                 </p>
-                <Link href="/stories/business/register">
+                <Link href="/practicals/business/register">
                   <BrightButton variant="primary" size="lg" className="w-full">
                     Create Business
                   </BrightButton>

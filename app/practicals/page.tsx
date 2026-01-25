@@ -191,7 +191,7 @@ export default function PracticalsPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             <Link
-              href="/stories/business/register"
+              href="/practicals/business/register"
               className="group block rounded-[2rem] border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] transition-all overflow-hidden"
             >
               <div className="p-8">

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrightHeading } from '@/components/system';
 import { BusinessTypeSelector } from '@/components/business/BusinessTypeSelector';
-import { createEconomyBusiness } from '@/lib/economy';
 import { BusinessType } from '@/lib/economy/economy-types';
 import { auth } from '@/lib/firebase';
 
@@ -34,8 +33,28 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
         setError(null);
 
         try {
-            // Create economy business directly via Firebase
-            await createEconomyBusiness(user.uid, name, type, branding);
+            const token = await user.getIdToken();
+
+            const res = await fetch('/api/business/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    name,
+                    businessTypeId: type.id,
+                    branding: branding ?? {},
+                }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                const msg = typeof data?.error === 'string' ? data.error : 'Failed to register business. Please try again.';
+                setError(msg);
+                setStep('select');
+                return;
+            }
 
             setRegisteredName(name);
 
@@ -51,8 +70,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
             }, 900);
 
         } catch (err: any) {
-            console.error('Registration failed:', err);
-            setError(err.message || 'Failed to register business. Please try again.');
+            setError('Failed to register business. Please try again.');
             setStep('select');
         }
     };

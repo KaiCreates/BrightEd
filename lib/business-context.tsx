@@ -167,7 +167,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
             } catch {
                 // Silent: restock is best-effort and will retry.
             }
-        }, 5000);
+        }, 30000);
 
         return () => {
             mounted = false;
@@ -364,7 +364,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
             }
 
             // Economy tick (every 5 seconds): generate new orders
-            if (now - lastEconomyTickRef.current >= 5000) {
+            if (now - lastEconomyTickRef.current >= 60000) {
                 lastEconomyTickRef.current = now;
 
                 const simHour = (() => {
@@ -381,7 +381,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     saveNewOrders(businessId, newOrders);
                 }
             }
-        }, 1000);
+        }, 3000);
 
         return () => {
             mounted = false;

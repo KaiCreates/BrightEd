@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ConditionalNavigation } from '@/components/ConditionalNavigation'
+import { ConditionalMain } from '@/components/ConditionalMain'
 import { ThemeProvider } from '@/lib/theme-context'
 import { AuthProvider } from '@/lib/auth-context'
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Toaster } from 'react-hot-toast'
 import { BusinessProvider } from '@/lib/business-context'
+import { AuthGate } from '@/components/AuthGate'
 
 export default function RootLayout({
   children,
@@ -39,10 +41,10 @@ export default function RootLayout({
                     backdropFilter: 'blur(10px)',
                   }
                 }} />
-                <ConditionalNavigation />
-                <main className="relative min-h-screen pt-20">
-                  {children}
-                </main>
+                <AuthGate>
+                  <ConditionalNavigation />
+                  <ConditionalMain>{children}</ConditionalMain>
+                </AuthGate>
               </ThemeProvider>
             </BusinessProvider>
           </AuthProvider>

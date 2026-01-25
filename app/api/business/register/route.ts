@@ -4,9 +4,18 @@ import { verifyAuth } from '@/lib/auth-server';
 import { z } from 'zod';
 import * as admin from 'firebase-admin';
 import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
+import { getBusinessType } from '@/lib/economy';
 
 const RegistrationSchema = z.object({
   name: z.string().min(3).max(50),
+  businessTypeId: z.string().min(1).max(50),
+  branding: z
+    .object({
+      themeColor: z.string().min(1).max(32).optional(),
+      logoUrl: z.string().url().optional(),
+      icon: z.string().min(1).max(16).optional(),
+    })
+    .optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -25,27 +34,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid data', details: result.error.format() }, { status: 400 });
     }
 
-    const { name } = result.data;
+    const { name, businessTypeId, branding } = result.data;
     const FieldValue = admin.firestore.FieldValue;
 
     const businessesRef = adminDb.collection('businesses');
-    const existingQuery = await businessesRef.where('ownerId', '==', userId).get();
-
-    if (existingQuery.size >= 3) {
-      return NextResponse.json({ error: 'Venture Limit Reached (3/3).' }, { status: 403 });
-    }
 
     const nameQuery = await businessesRef.where('name', '==', name).get();
     if (!nameQuery.empty) {
       return NextResponse.json({ error: `The name "${name}" is already taken.` }, { status: 400 });
     }
 
-    // ATOMIC TRANSACTION - Ensure data consistency
+    const selectedType = getBusinessType(businessTypeId);
+    if (!selectedType) {
+      return NextResponse.json({ error: 'Invalid business type' }, { status: 400 });
+    }
+
+    // ATOMIC BATCH - Ensure data consistency
     const newBizId = adminDb.collection('businesses').doc().id;
-    const now = new Date().toISOString();
-    
-    // Get user data in transaction to ensure consistency
-    const userDoc = await adminDb.collection('users').doc(userId).get();
+    const nowIso = new Date().toISOString();
+
+    const userRef = adminDb.collection('users').doc(userId);
+    const userDoc = await userRef.get();
     if (!userDoc.exists) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
@@ -53,21 +62,77 @@ export async function POST(request: NextRequest) {
     const userData = userDoc.data() || {};
     const ownerName = userData.firstName || userData.displayName || "Founder";
 
+    if (userData.hasBusiness && userData.businessID) {
+      return NextResponse.json({ error: 'Business already registered' }, { status: 403 });
+    }
+
+    const cleanBranding = branding
+      ? Object.fromEntries(Object.entries(branding).filter(([_, v]) => v !== undefined))
+      : {};
+
+    const startingCapital = selectedType.startingCapital;
+
     const businessData = {
+      // Ownership
       id: newBizId,
-      name,
       ownerId: userId,
       ownerName,
-      category: "Global Ecommerce",
-      phase: "Startup",
-      valuation: 0,
-      balance: 0,
+      playerId: userId,
+
+      // Economy model
+      businessTypeId: selectedType.id,
+      businessName: name,
+      branding: cleanBranding,
+      cashBalance: startingCapital,
+      totalRevenue: 0,
+      totalExpenses: 0,
+      reputation: 50,
+      customerSatisfaction: 70,
+      reviewCount: 0,
+      operatingHours: { open: 8, close: 20 },
+      staffCount: 1,
+      maxConcurrentOrders: selectedType.demandConfig.maxConcurrentOrders,
+      inventory: {},
+      employees: [
+        {
+          id: `emp_${Date.now()}`,
+          name: `${userId.slice(0, 5)} Manager`,
+          role: 'manager',
+          salaryPerDay: selectedType.operatingCosts.staffPerHour
+            ? selectedType.operatingCosts.staffPerHour * 8
+            : 200,
+          stats: { speed: 50, quality: 50, morale: 100 },
+          unpaidWages: 0,
+          hiredAt: nowIso,
+        },
+      ],
+      marketState: {
+        lastRestock: nowIso,
+        nextRestock: new Date(Date.now() + 300000).toISOString(),
+        items: [],
+      },
+      recruitmentPool: [],
+      lastRecruitmentTime: nowIso,
+      lastPayrollTime: nowIso,
+      reviews: [],
+      activeOrders: [],
+      ordersCompleted: 0,
+      ordersFailed: 0,
+
+      // Compatibility (legacy fields used by some UI)
+      name,
+      balance: startingCapital,
+      valuation: startingCapital,
+      category: selectedType.name,
+      phase: 'Startup',
       cashflow: 0,
       employeeCount: 1,
-      founded: now,
-      createdAt: now,
-      status: "ACTIVE",
-      stats: { revenueHistory: [0], expenses: 0 }
+      founded: nowIso,
+
+      // Status
+      status: 'active',
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     };
 
     // ATOMIC BATCH OPERATION
@@ -77,11 +142,11 @@ export async function POST(request: NextRequest) {
     batch.set(adminDb.collection('businesses').doc(newBizId), businessData);
     
     // Update user document atomically
-    batch.update(adminDb.collection('users').doc(userId), {
+    batch.update(userRef, {
       hasBusiness: true,
       businessID: newBizId,
       xp: FieldValue.increment(100),
-      updatedAt: now
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     // Commit all operations atomically - all succeed or all fail
