@@ -16,11 +16,16 @@ const firebaseConfig = {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || `https://${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}-default-rtdb.firebaseio.com`
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const realtimeDb = getDatabase(app);
-export const storage = getStorage(app);
+const isConfigValid = !!firebaseConfig.apiKey && !!firebaseConfig.projectId;
+
+const app = isConfigValid
+    ? initializeApp(firebaseConfig)
+    : initializeApp({ apiKey: "placeholder", projectId: "placeholder" });
+
+export const auth = isConfigValid ? getAuth(app) : null as any;
+export const db = isConfigValid ? getFirestore(app) : null as any;
+export const realtimeDb = isConfigValid ? getDatabase(app) : null as any;
+export const storage = isConfigValid ? getStorage(app) : null as any;
 
 export const analytics = typeof window !== 'undefined' ?
     isSupported().then(yes => yes ? getAnalytics(app) : null) : null;

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface BusinessCreditCardProps {
   businessName: string;
@@ -25,6 +26,7 @@ export default function BusinessCreditCard({
   cardNumber = '4921  0032  8841  2049',
   expiry = '01/29'
 }: BusinessCreditCardProps) {
+  const anySrcLoader = ({ src }: { src: string }) => src;
   const accent = themeColor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(themeColor) ? themeColor : 'var(--brand-primary)';
 
   return (
@@ -61,9 +63,13 @@ export default function BusinessCreditCard({
 
           <div className="flex items-center gap-3">
             {logoUrl ? (
-              <img
+              <Image
+                loader={anySrcLoader}
+                unoptimized
                 src={logoUrl}
                 alt="Business logo"
+                width={40}
+                height={40}
                 className="w-10 h-10 rounded-xl object-cover border border-white/15 bg-white/5"
               />
             ) : (

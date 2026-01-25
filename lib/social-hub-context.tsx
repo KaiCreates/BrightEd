@@ -437,7 +437,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             senderName: userData?.firstName || 'User',
             timestamp: serverTimestamp()
         });
-    }, [user]);
+    }, [user, userData?.firstName]);
 
     const addReaction = useCallback(async (messageId: string, emoji: string) => {
         if (!user || !activeRoom) return;

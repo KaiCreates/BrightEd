@@ -85,6 +85,13 @@ export function SceneRenderer({
         });
     }, [currentNode]);
 
+    const completeScene = useCallback((finalDecisions: Record<string, string>) => {
+        setIsExiting(true);
+        setTimeout(() => {
+            onSceneComplete?.(finalDecisions);
+        }, DEFAULT_TRANSITIONS.exit.duration);
+    }, [onSceneComplete]);
+
     // Handle choice selection
     const handleChoiceSelect = useCallback((choice: DialogueChoice) => {
         if (!currentNode) return;
@@ -106,7 +113,7 @@ export function SceneRenderer({
             // Scene complete
             completeScene(newDecisions);
         }
-    }, [currentNode, decisions, onDecision]);
+    }, [currentNode, decisions, onDecision, completeScene]);
 
     // Handle dialogue completion (no choices, auto-advance)
     const handleDialogueComplete = useCallback(() => {
@@ -123,14 +130,7 @@ export function SceneRenderer({
             // Scene complete
             completeScene(decisions);
         }
-    }, [currentNode, decisions]);
-
-    const completeScene = (finalDecisions: Record<string, string>) => {
-        setIsExiting(true);
-        setTimeout(() => {
-            onSceneComplete?.(finalDecisions);
-        }, DEFAULT_TRANSITIONS.exit.duration);
-    };
+    }, [currentNode, decisions, completeScene]);
 
     // Get background style
     const bgAsset = BACKGROUND_ASSETS[scene.background];

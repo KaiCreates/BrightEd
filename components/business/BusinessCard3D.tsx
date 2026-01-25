@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useState } from 'react';
+import Image from 'next/image';
 
 interface BusinessCardProps {
     businessName: string;
@@ -22,6 +22,7 @@ export default function BusinessCard3D({
     themeColor,
     icon
 }: BusinessCardProps) {
+    const anySrcLoader = ({ src }: { src: string }) => src;
     const accent = themeColor && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(themeColor) ? themeColor : 'var(--neon-cyan)';
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -67,9 +68,13 @@ export default function BusinessCard3D({
                 <div className="flex justify-between items-start">
                     <div className="flex items-center gap-3">
                         {logoUrl ? (
-                            <img
+                            <Image
+                                loader={anySrcLoader}
+                                unoptimized
                                 src={logoUrl}
                                 alt="Logo"
+                                width={40}
+                                height={40}
                                 className="w-10 h-10 rounded-xl object-cover border border-white/20 bg-white/5"
                             />
                         ) : (

@@ -25,7 +25,13 @@ export function getFirebaseAdmin() {
     }
 
     if (!serviceAccount) {
-        throw new Error('Missing Firebase Admin credentials. Set FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON (recommended) or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH / GOOGLE_APPLICATION_CREDENTIALS.');
+        if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PHASE) {
+            // Only throw if we're actually running in prod and not building
+            throw new Error('Missing Firebase Admin credentials. Set FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON (recommended) or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH / GOOGLE_APPLICATION_CREDENTIALS.');
+        }
+        console.warn('Firebase Admin credentials missing. Skipping initialization during build/dev if not strictly required.');
+        // Return a dummy app or handle it in the getters
+        return null as any;
     }
 
     return admin.initializeApp({
@@ -36,23 +42,25 @@ export function getFirebaseAdmin() {
 }
 
 function getAdminDb() {
-    return (admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin()).firestore();
+    const app = admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin();
+    return app ? app.firestore() : null;
 }
 
 function getAdminAuth() {
-    return (admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin()).auth();
+    const app = admin.apps.length > 0 ? admin.apps[0]! : getFirebaseAdmin();
+    return app ? app.auth() : null;
 }
 
 export const adminDb = new Proxy({} as FirebaseFirestore.Firestore, {
     get(_target, prop) {
         const db = getAdminDb() as any;
-        return db[prop];
+        return db ? db[prop] : undefined;
     },
 });
 
 export const adminAuth = new Proxy({} as admin.auth.Auth, {
     get(_target, prop) {
         const authInstance = getAdminAuth() as any;
-        return authInstance[prop];
+        return authInstance ? authInstance[prop] : undefined;
     },
 });

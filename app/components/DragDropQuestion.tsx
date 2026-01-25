@@ -55,6 +55,16 @@ export default function DragDropQuestion({
     setDragOverIndex(null)
   }, [])
 
+  const checkAnswer = useCallback((currentOrder: DroppedItem[]) => {
+    const correct = correctOrder.every((correctOriginalIndex, position) => {
+      return currentOrder[position]?.originalIndex === correctOriginalIndex
+    })
+
+    setIsComplete(true)
+    setIsCorrect(correct)
+    onComplete(correct)
+  }, [correctOrder, onComplete])
+
   const handleDrop = useCallback((targetIndex: number) => {
     if (!draggedItem || isComplete) return
 
@@ -87,7 +97,7 @@ export default function DragDropQuestion({
 
     setDraggedItem(null)
     setDragOverIndex(null)
-  }, [draggedItem, draggedItems, isComplete])
+  }, [draggedItem, draggedItems, isComplete, checkAnswer])
 
   const handleRemoveItem = useCallback((index: number) => {
     if (isComplete) return
@@ -102,16 +112,6 @@ export default function DragDropQuestion({
     setAvailableItems(prev => [...prev, item])
     setIsCorrect(null)
   }, [draggedItems, isComplete])
-
-  const checkAnswer = useCallback((currentOrder: DroppedItem[]) => {
-    const correct = correctOrder.every((correctOriginalIndex, position) => {
-      return currentOrder[position]?.originalIndex === correctOriginalIndex
-    })
-
-    setIsComplete(true)
-    setIsCorrect(correct)
-    onComplete(correct)
-  }, [correctOrder, onComplete])
 
   const handleReset = useCallback(() => {
     setDraggedItems(new Array(items.length).fill(null))

@@ -97,7 +97,7 @@ function EconomyDemoContent() {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [isSimulating, businessType, businessState, simHour, orders]);
+    }, [isSimulating, businessType, businessState, simHour, orders, showInterrupt]);
 
     // Handle order accept
     const handleAcceptOrder = (orderId: string) => {

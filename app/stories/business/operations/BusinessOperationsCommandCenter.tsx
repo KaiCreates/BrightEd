@@ -148,11 +148,12 @@ function CommandCenterContent() {
   }, [user, userData?.businessID, authLoading]);
 
   useEffect(() => {
-    if (!business) return;
+    const businessId = business?.id;
+    if (!businessId) return;
 
-    fetchActiveOrders(business.id).then(setOrders);
+    fetchActiveOrders(businessId).then(setOrders);
 
-    const ordersQuery = query(collection(db, 'businesses', business.id, 'orders'));
+    const ordersQuery = query(collection(db, 'businesses', businessId, 'orders'));
     const unsub = onSnapshot(ordersQuery, (snap) => {
       const activeOrders = snap.docs
         .map((d) => ({ id: d.id, ...d.data() } as Order))

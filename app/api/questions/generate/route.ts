@@ -139,7 +139,7 @@ export async function GET(request: NextRequest) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
-    console.error('Generation API Error');
+    if (process.env.NODE_ENV === 'development') console.error('Generation API Error');
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

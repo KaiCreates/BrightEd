@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { MarketItem, BusinessState } from '@/lib/economy/economy-types';
 import { updateBusinessFinancials } from '@/lib/economy/firebase-db'; // We might need to export this or use context
@@ -17,6 +18,7 @@ interface MarketplaceProps {
 export default function Marketplace({ business }: MarketplaceProps) {
     const [timeLeft, setTimeLeft] = useState<string>('00:00');
     const [isRestocking, setIsRestocking] = useState(false);
+    const anySrcLoader = ({ src }: { src: string }) => src;
 
     // Initial Restock Check
     useEffect(() => {
@@ -148,10 +150,14 @@ export default function Marketplace({ business }: MarketplaceProps) {
                                 {/* Image Area */}
                                 <div className="aspect-square relative bg-white/5 p-4 flex items-center justify-center group-hover:bg-white/10 transition-colors">
                                     {item.image ? (
-                                        <img
+                                        <Image
+                                            loader={anySrcLoader}
+                                            unoptimized
                                             src={item.image}
                                             alt={item.name}
-                                            className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
+                                            fill
+                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                                            className="object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
                                         />
                                     ) : (
                                         <div className="text-4xl">{item.icon}</div>

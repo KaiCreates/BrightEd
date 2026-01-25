@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
         if (error.message?.includes('Unauthorized')) {
             return NextResponse.json({ error: error.message }, { status: 401 });
         }
-        console.error('NABLE Status Error');
+        if (process.env.NODE_ENV === 'development') console.error('NABLE Status Error');
         return NextResponse.json({ error: 'Failed to get status' }, { status: 500 });
     }
 }
