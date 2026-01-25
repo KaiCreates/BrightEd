@@ -1,0 +1,2327 @@
+'use client';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
+
+import type { BrightOSMission } from '@/lib/brightos/csec-roadmap-missions';
+import { getMissionCooldown, registerMissionCompletionAndMaybeCooldown } from '@/lib/brightos/mission-rewards';
+import { awardFixedMissionXP } from '@/lib/brightos/mission-xp';
+import { markMissionCompleted } from '@/lib/brightos/mission-progress';
+import { endLiveSession, startLiveSession } from '@/lib/brightos/live-sessions';
+
+type WindowId = 'taskmgr' | 'terminal' | 'settings' | 'browser' | 'automation' | 'explorer' | 'stuck_app' | 'uninstall' | 'registry';
+
+type WindowState = {
+  id: WindowId;
+  title: string;
+  open: boolean;
+  minimized: boolean;
+  z: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+};
+
+type RuntimeState = {
+  power: 'booting' | 'lock' | 'on';
+  boot_phase: 0 | 1 | 2 | 3 | 4 | 5;
+  cpu_load: number;
+  network: { status: 'Connected' | 'Disconnected' | 'Slow'; ip_renewed: boolean };
+  window: { stuck_app: { open: boolean } };
+  process: { high_cpu: { running: boolean } };
+  disk: { free_space_mb: number };
+  files: { tmp: { count: number } };
+  recycle_bin: { empty: boolean };
+  file: { opened: string | null };
+  terminal: { history: string[] };
+  notifications: Array<{ id: string; kind: 'alert' | 'info'; title: string; body: string }>;
+  apps: Record<string, { name: string; installed: boolean; malware: boolean; reinstall: boolean; process?: string; registryKeys?: string[] }>;
+  registry: Record<string, string>;
+};
+
+type TerminalLine = { id: string; kind: 'in' | 'out' | 'sys'; text: string };
+
+type AllowedTool = BrightOSMission['tools_allowed'][number];
+
+type AppId = AllowedTool;
+
+function uid(prefix: string) {
+  return `${prefix}_${Math.random().toString(16).slice(2)}_${Date.now()}`;
+}
+
+function normPath(p: string) {
+  return p.replace(/\\/g, '/');
+}
+
+function listByPrefix(entries: string[], prefix: string) {
+  const base = prefix;
+  return entries
+    .map(normPath)
+    .filter((p) => p.startsWith(base))
+    .sort((a, b) => a.localeCompare(b));
+}
+
+function moveToRecycleBin(entries: string[], path: string) {
+  const target = normPath(path);
+  if (target.startsWith('RecycleBin:/')) return entries;
+  return entries.map((entry) => {
+    const normalized = normPath(entry);
+    if (normalized !== target) return normalized;
+    return `RecycleBin:/${normalized.replace(/^[A-Z]:\//i, '')}`;
+  });
+}
+
+function DesktopIcon({
+  title,
+  subtitle,
+  icon,
+  onOpen,
+  disabled,
+}: {
+  title: string;
+  subtitle: string;
+  icon: string;
+  onOpen: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <button
+      onDoubleClick={() => {
+        if (disabled) return;
+        onOpen();
+      }}
+      onClick={(e) => e.currentTarget.focus()}
+      className={`w-24 select-none text-center rounded border px-2 py-2 transition-colors ${
+        disabled
+          ? 'border-white/20 bg-black/20 text-zinc-500 cursor-not-allowed'
+          : 'border-white/20 bg-black/25 hover:bg-black/35'
+      }`}
+      aria-disabled={disabled}
+    >
+      <div className="mx-auto h-10 w-10 rounded bg-white/10 border border-white/10 flex items-center justify-center text-xl text-white">
+        {icon}
+      </div>
+      <div className="mt-2 text-[11px] leading-tight font-semibold text-white">{title}</div>
+      <div className="mt-1 text-[10px] leading-tight text-zinc-300/80">{subtitle}</div>
+    </button>
+  );
+}
+
+function UninstallPrograms({
+  apps,
+  onUninstall,
+}: {
+  apps: RuntimeState['apps'];
+  onUninstall: (appId: string) => void;
+}) {
+  const [query, setQuery] = useState('');
+
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return Object.entries(apps)
+      .map(([id, a]) => ({ id, ...a }))
+      .filter((a) => (q ? a.name.toLowerCase().includes(q) : true))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [apps, query]);
+
+  return (
+    <div className="h-full flex flex-col gap-3">
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Installed Programs</div>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search programs"
+        className="h-11 rounded-2xl border border-white/10 bg-black/30 px-4 text-sm text-white outline-none focus:border-[var(--brand-primary)]/60"
+      />
+
+      <div className="flex-1 rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
+        <div className="grid grid-cols-[1fr_140px_160px] gap-2 px-4 py-3 border-b border-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">
+          <div>Name</div>
+          <div>Status</div>
+          <div>Action</div>
+        </div>
+        <div className="h-[calc(100%-2.75rem)] overflow-auto">
+          {rows.map((a) => (
+            <div key={a.id} className={`grid grid-cols-[1fr_140px_160px] gap-2 px-4 py-3 border-b border-white/5 text-sm ${a.malware && a.installed ? 'bg-red-500/5 text-zinc-100' : 'text-zinc-200'}`}>
+              <div className="font-semibold">
+                {a.name}{' '}
+                {a.malware ? <span className="text-[10px] font-black uppercase tracking-[0.25em] text-red-200">MALWARE</span> : null}
+              </div>
+              <div className="font-mono text-xs">
+                {a.installed ? 'Installed' : 'Uninstalled'}
+              </div>
+              <div>
+                <button
+                  disabled={!a.installed}
+                  onClick={() => onUninstall(a.id)}
+                  className={`h-9 px-3 rounded-xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                    a.installed
+                      ? 'border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-red-100'
+                      : 'border-white/10 bg-white/[0.03] text-zinc-500'
+                  }`}
+                >
+                  Uninstall
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RegistryEditor({
+  registry,
+  onSet,
+  onDelete,
+}: {
+  registry: RuntimeState['registry'];
+  onSet: (fullKey: string, value: string) => void;
+  onDelete: (prefix: string) => void;
+}) {
+  const [filter, setFilter] = useState('');
+  const [selected, setSelected] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState('');
+
+  const keys = useMemo(() => {
+    const q = filter.trim().toLowerCase();
+    return Object.keys(registry)
+      .filter((k) => (q ? k.toLowerCase().includes(q) : true))
+      .sort((a, b) => a.localeCompare(b));
+  }, [filter, registry]);
+
+  useEffect(() => {
+    if (!selected) return;
+    setEditValue(registry[selected] ?? '');
+  }, [registry, selected]);
+
+  return (
+    <div className="h-full grid grid-cols-[320px_1fr] gap-4">
+      <div className="rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
+        <div className="p-3 border-b border-white/10">
+          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Registry</div>
+          <input
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder="Filter keys"
+            className="mt-3 h-10 w-full rounded-2xl border border-white/10 bg-black/30 px-3 text-xs text-white outline-none focus:border-[var(--brand-primary)]/60"
+          />
+        </div>
+        <div className="h-[calc(100%-4.5rem)] overflow-auto">
+          {keys.slice(0, 240).map((k) => (
+            <button
+              key={k}
+              onClick={() => setSelected(k)}
+              className={`w-full text-left px-3 py-2 border-b border-white/5 text-xs font-mono transition-colors ${
+                selected === k ? 'bg-white/[0.06] text-white' : 'hover:bg-white/[0.04] text-zinc-200'
+              }`}
+            >
+              {k}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+        <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Key Editor</div>
+
+        {!selected ? (
+          <div className="mt-3 text-sm text-zinc-300">Select a key from the left.</div>
+        ) : (
+          <div className="mt-3">
+            <div className="text-xs text-zinc-400">Selected</div>
+            <div className="mt-1 text-xs font-mono text-white break-all">{selected}</div>
+
+            <div className="mt-4 text-xs text-zinc-400">Value</div>
+            <input
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+              className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-black/30 px-4 text-sm font-mono text-white outline-none focus:border-[var(--brand-primary)]/60"
+            />
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                onClick={() => onSet(selected, editValue)}
+                className="h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => {
+                  onDelete(selected);
+                  setSelected(null);
+                }}
+                className="h-10 px-4 rounded-2xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100 transition-colors"
+              >
+                Delete Key
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Notifications({
+  items,
+  onDismiss,
+}: {
+  items: Array<{ id: string; kind: 'alert' | 'info'; title: string; body: string }>;
+  onDismiss: (id: string) => void;
+}) {
+  return (
+    <div className="absolute top-16 right-4 z-[260] w-[360px] max-w-[92vw]">
+      <div className="grid gap-3">
+        {items.slice(-4).map((n) => (
+          <div
+            key={n.id}
+            className={`rounded-2xl border p-4 backdrop-blur-md ${
+              n.kind === 'alert' ? 'border-red-500/30 bg-red-500/10' : 'border-white/10 bg-black/35'
+            }`}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">{n.title}</div>
+                <div className="mt-1 text-sm text-zinc-100/90">{n.body}</div>
+              </div>
+              <button
+                onClick={() => onDismiss(n.id)}
+                className="h-7 w-10 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-zinc-200"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, n));
+}
+
+function pickBestActiveWindow(wins: Record<WindowId, WindowState>): WindowId {
+  const open = Object.values(wins)
+    .filter((w) => w.open && !w.minimized)
+    .sort((a, b) => b.z - a.z);
+  return (open[0]?.id ?? 'terminal') as WindowId;
+}
+
+function fanLevel(cpu: number) {
+  if (cpu > 85) return 3;
+  if (cpu > 60) return 2;
+  if (cpu > 35) return 1;
+  return 0;
+}
+
+function pickFromPool(pool: string[]) {
+  if (!pool.length) return '';
+  return pool[Math.floor(Math.random() * pool.length)] || pool[0] || '';
+}
+
+function getPath(obj: any, path: string) {
+  return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
+}
+
+function parseValue(raw: string) {
+  const s = raw.trim();
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    return s.slice(1, -1);
+  }
+  if (s === 'true') return true;
+  if (s === 'false') return false;
+  const n = Number(s);
+  if (!Number.isNaN(n)) return n;
+  return s;
+}
+
+function evalCondition(state: RuntimeState, cond: string) {
+  const ops = ['>=', '<=', '==', '!=', '>', '<'] as const;
+  const op = ops.find((o) => cond.includes(o));
+  if (!op) return false;
+
+  const [leftRaw, rightRaw] = cond.split(op);
+  if (!leftRaw || rightRaw == null) return false;
+
+  const leftPath = leftRaw.trim();
+  const rightVal = parseValue(rightRaw);
+  const leftVal = getPath(state, leftPath);
+
+  switch (op) {
+    case '==':
+      return leftVal === rightVal;
+    case '!=':
+      return leftVal !== rightVal;
+    case '>':
+      return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal > rightVal;
+    case '<':
+      return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal < rightVal;
+    case '>=':
+      return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal >= rightVal;
+    case '<=':
+      return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal <= rightVal;
+    default:
+      return false;
+  }
+}
+
+function evalSuccess(state: RuntimeState, expr: string) {
+  const orParts = expr.split('||').map((s) => s.trim()).filter(Boolean);
+  if (orParts.length === 0) return false;
+
+  return orParts.some((part) => {
+    const andParts = part.split('&&').map((s) => s.trim()).filter(Boolean);
+    if (andParts.length === 0) return false;
+    return andParts.every((c) => evalCondition(state, c));
+  });
+}
+
+function initRuntime(mission: BrightOSMission): RuntimeState {
+  const tmpCount = mission.initial_state.file_system.filter((p) => p.toLowerCase().endsWith('.tmp')).length;
+  const recycleHas = mission.initial_state.file_system.some((p) => p.startsWith('RecycleBin:/'));
+
+  const storageLow = mission.id === 'tech-3' || tmpCount > 0 || recycleHas;
+
+  const defaultApps: RuntimeState['apps'] = {
+    photos: { name: 'Photos', installed: true, malware: false, reinstall: false, process: 'photos.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Photos\\InstallPath'] },
+    stickynotes: { name: 'Sticky Notes', installed: true, malware: false, reinstall: false, process: 'stickynotes.exe', registryKeys: ['HKCU\\Software\\BrightOS\\StickyNotes\\Enabled'] },
+    notepad: { name: 'Notepad', installed: true, malware: false, reinstall: false, process: 'notepad.exe' },
+    brightos365: { name: 'BrightOS 365', installed: true, malware: false, reinstall: false, process: 'brightos365.exe', registryKeys: ['HKLM\\Software\\BrightOS\\365\\Version'] },
+    edulearner: { name: 'EduLearner', installed: true, malware: false, reinstall: false, process: 'edulearner.exe' },
+    calculator: { name: 'Calculator', installed: true, malware: false, reinstall: false, process: 'calc.exe' },
+    paint: { name: 'Paint', installed: true, malware: false, reinstall: false, process: 'mspaint.exe' },
+    mediaplayer: { name: 'Media Player', installed: true, malware: false, reinstall: false, process: 'wmplayer.exe' },
+    mail: { name: 'Mail', installed: true, malware: false, reinstall: false, process: 'mail.exe' },
+    calendar: { name: 'Calendar', installed: true, malware: false, reinstall: false, process: 'calendar.exe' },
+    camera: { name: 'Camera', installed: true, malware: false, reinstall: false, process: 'camera.exe' },
+    weather: { name: 'Weather', installed: true, malware: false, reinstall: false, process: 'weather.exe' },
+    maps: { name: 'Maps', installed: true, malware: false, reinstall: false, process: 'maps.exe' },
+    voice: { name: 'Voice Recorder', installed: true, malware: false, reinstall: false, process: 'voice.exe' },
+    scanner: { name: 'Scanner', installed: true, malware: false, reinstall: false, process: 'scanner.exe' },
+    backup: { name: 'Backup Tool', installed: true, malware: false, reinstall: false, process: 'backup.exe' },
+    security: { name: 'Security Center', installed: true, malware: false, reinstall: false, process: 'security.exe' },
+    cleaner: { name: 'Disk Cleaner', installed: true, malware: false, reinstall: false, process: 'cleaner.exe' },
+    updater: { name: 'Updater Service', installed: true, malware: false, reinstall: true, process: 'updater.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Updater\\AutoStart'] },
+    telemetry: { name: 'Telemetry', installed: true, malware: false, reinstall: true, process: 'telemetry.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Telemetry\\Enabled'] },
+    bloat1: { name: 'Coupon Companion', installed: true, malware: false, reinstall: true, process: 'coupon.exe', registryKeys: ['HKCU\\Software\\BrightOS\\CouponCompanion\\Enabled'] },
+    bloat2: { name: 'Game Bar Overlay', installed: true, malware: false, reinstall: true, process: 'gamebar.exe', registryKeys: ['HKCU\\Software\\BrightOS\\GameBar\\Enabled'] },
+    bloat3: { name: 'Smart Search', installed: true, malware: false, reinstall: true, process: 'smartsearch.exe', registryKeys: ['HKLM\\Software\\BrightOS\\SmartSearch\\Default'] },
+    bloat4: { name: 'Quick Launch', installed: true, malware: false, reinstall: true, process: 'quicklaunch.exe', registryKeys: ['HKCU\\Software\\BrightOS\\QuickLaunch\\Pin'] },
+    bloat5: { name: 'File Converter', installed: true, malware: false, reinstall: true, process: 'fileconv.exe', registryKeys: ['HKLM\\Software\\BrightOS\\FileConv\\Assoc'] },
+    bloat6: { name: 'PDF Viewer', installed: true, malware: false, reinstall: true, process: 'pdfviewer.exe', registryKeys: ['HKLM\\Software\\BrightOS\\PDFViewer\\Default'] },
+    bloat7: { name: 'Video Editor', installed: true, malware: false, reinstall: true, process: 'videoedit.exe', registryKeys: ['HKCU\\Software\\BrightOS\\VideoEditor\\LastProject'] },
+    bloat8: { name: 'Music Stream', installed: true, malware: false, reinstall: true, process: 'musicstream.exe', registryKeys: ['HKLM\\Software\\BrightOS\\MusicStream\\Service'] },
+    bloat9: { name: 'Cloud Sync', installed: true, malware: false, reinstall: true, process: 'cloudsync.exe', registryKeys: ['HKCU\\Software\\BrightOS\\CloudSync\\Folder'] },
+    bloat10: { name: 'Remote Desktop', installed: true, malware: false, reinstall: true, process: 'rdp.exe', registryKeys: ['HKLM\\Software\\BrightOS\\RDP\\Enabled'] },
+    bloat11: { name: 'Network Monitor', installed: true, malware: false, reinstall: true, process: 'netmon.exe', registryKeys: ['HKLM\\Software\\BrightOS\\NetMon\\Service'] },
+    bloat12: { name: 'System Info', installed: true, malware: false, reinstall: true, process: 'sysinfo.exe', registryKeys: ['HKCU\\Software\\BrightOS\\SysInfo\\LastScan'] },
+    bloat13: { name: 'Disk Defrag', installed: true, malware: false, reinstall: true, process: 'defrag.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Defrag\\Schedule'] },
+    bloat14: { name: 'Driver Updater', installed: true, malware: false, reinstall: true, process: 'driverup.exe', registryKeys: ['HKLM\\Software\\BrightOS\\DriverUpdater\\Auto'] },
+    bloat15: { name: 'Browser Helper', installed: true, malware: false, reinstall: true, process: 'browserhelper.exe', registryKeys: ['HKLM\\Software\\BrightOS\\BrowserHelper\\Ext'] },
+    bloat16: { name: 'Ad Blocker', installed: true, malware: false, reinstall: true, process: 'adblock.exe', registryKeys: ['HKCU\\Software\\BrightOS\\AdBlock\\Lists'] },
+    bloat17: { name: 'Game Booster', installed: true, malware: false, reinstall: true, process: 'gameboost.exe', registryKeys: ['HKCU\\Software\\BrightOS\\GameBoost\\Profile'] },
+    bloat18: { name: 'File Shredder', installed: true, malware: false, reinstall: true, process: 'shred.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Shred\\Secure'] },
+    bloat19: { name: 'VPN Client', installed: true, malware: false, reinstall: true, process: 'vpn.exe', registryKeys: ['HKLM\\Software\\BrightOS\\VPN\\Server'] },
+    bloat20: { name: 'Password Manager', installed: true, malware: false, reinstall: true, process: 'pwdmgr.exe', registryKeys: ['HKCU\\Software\\BrightOS\\PwdMgr\\Vault'] },
+    bloat21: { name: 'Screen Recorder', installed: true, malware: false, reinstall: true, process: 'screenrec.exe', registryKeys: ['HKCU\\Software\\BrightOS\\ScreenRec\\OutPath'] },
+    bloat22: { name: 'Partition Manager', installed: true, malware: false, reinstall: true, process: 'partmgr.exe', registryKeys: ['HKLM\\Software\\BrightOS\\PartMgr\\Layout'] },
+    bloat23: { name: 'Recovery Tool', installed: true, malware: false, reinstall: true, process: 'recovery.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Recovery\\Point'] },
+    bloat24: { name: 'Tweak Tool', installed: true, malware: false, reinstall: true, process: 'tweak.exe', registryKeys: ['HKCU\\Software\\BrightOS\\Tweak\\Profile'] },
+    bloat25: { name: 'Font Manager', installed: true, malware: false, reinstall: true, process: 'fontmgr.exe', registryKeys: ['HKLM\\Software\\BrightOS\\FontMgr\\Cache'] },
+    bloat26: { name: 'Icon Pack', installed: true, malware: false, reinstall: true, process: 'iconpack.exe', registryKeys: ['HKCU\\Software\\BrightOS\\IconPack\\Theme'] },
+    bloat27: { name: 'Theme Engine', installed: true, malware: false, reinstall: true, process: 'theme.exe', registryKeys: ['HKLM\\Software\\BrightOS\\Theme\\Current'] },
+    bloat28: { name: 'Startup Manager', installed: true, malware: false, reinstall: true, process: 'startupmgr.exe', registryKeys: ['HKLM\\Software\\BrightOS\\StartupMgr\\List'] },
+    bloat29: { name: 'Service Manager', installed: true, malware: false, reinstall: true, process: 'svc.exe', registryKeys: ['HKLM\\Software\\BrightOS\\SvcMgr\\Services'] },
+    bloat30: { name: 'Event Viewer', installed: true, malware: false, reinstall: true, process: 'eventvwr.exe', registryKeys: ['HKLM\\Software\\BrightOS\\EventViewer\\Log'] },
+    malware1: { name: 'CryptoMiner', installed: true, malware: true, reinstall: true, process: 'cryptominer.exe', registryKeys: ['HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\CryptoMiner', 'HKCU\\Software\\CryptoMiner\\Wallet'] },
+    malware2: { name: 'KeyLogger', installed: true, malware: true, reinstall: true, process: 'keylogger.exe', registryKeys: ['HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\KeyLogger', 'HKCU\\Software\\KeyLogger\\LogPath'] },
+    malware3: { name: 'RansomWare', installed: true, malware: true, reinstall: true, process: 'ransom.exe', registryKeys: ['HKLM\\Software\\Ransom\\Key', 'HKCU\\Software\\Ransom\\Target'] },
+    malware4: { name: 'Backdoor', installed: true, malware: true, reinstall: true, process: 'backdoor.exe', registryKeys: ['HKLM\\Software\\Backdoor\\C2', 'HKCU\\Software\\Backdoor\\Port'] },
+    malware5: { name: 'TrojanDownloader', installed: true, malware: true, reinstall: true, process: 'trojandl.exe', registryKeys: ['HKLM\\Software\\TrojanDL\\URL', 'HKCU\\Software\\TrojanDL\\Path'] },
+    malware6: { name: 'Spyware', installed: true, malware: true, reinstall: true, process: 'spyware.exe', registryKeys: ['HKLM\\Software\\Spyware\\Report', 'HKCU\\Software\\Spyware\\Exfil'] },
+    malware7: { name: 'AdwareInjector', installed: true, malware: true, reinstall: true, process: 'adinject.exe', registryKeys: ['HKLM\\Software\\Adware\\Config', 'HKCU\\Software\\Adware\\Ads'] },
+    malware8: { name: 'Rootkit', installed: true, malware: true, reinstall: true, process: 'rootkit.sys', registryKeys: ['HKLM\\System\\CurrentControlSet\\Services\\Rootkit', 'HKCU\\Software\\Rootkit\\Hide'] },
+  };
+
+  const defaultRegistry: RuntimeState['registry'] = {
+    'HKLM\\Software\\BrightOS\\Version': '10.0',
+    'HKLM\\Software\\BrightOS\\InstallPath': 'C:\\BrightOS',
+    'HKLM\\Software\\BrightOS\\Language': 'en-US',
+    'HKLM\\Software\\BrightOS\\TimeZone': 'UTC-04:00',
+    'HKLM\\Software\\BrightOS\\AutoUpdate': '1',
+    'HKLM\\Software\\BrightOS\\Telemetry\\Enabled': '1',
+    'HKLM\\Software\\BrightOS\\Telemetry\\Level': 'Full',
+    'HKLM\\Software\\BrightOS\\Security\\Firewall': '1',
+    'HKLM\\Software\\BrightOS\\Security\\Defender': '1',
+    'HKLM\\Software\\BrightOS\\Security\\RealTime': '1',
+    'HKLM\\Software\\BrightOS\\Performance\\PowerPlan': 'Balanced',
+    'HKLM\\Software\\BrightOS\\Performance\\Index': '7.8',
+    'HKLM\\Software\\BrightOS\\Network\\Proxy': '',
+    'HKLM\\Software\\BrightOS\\Network\\DNS': '8.8.8.8,8.8.4.4',
+    'HKLM\\Software\\BrightOS\\UI\\Theme': 'Dark',
+    'HKLM\\Software\\BrightOS\\UI\\Accent': '#0099FF',
+    'HKLM\\Software\\BrightOS\\UI\\Transparency': '1',
+    'HKLM\\Software\\BrightOS\\Explorer\\ShowHidden': '0',
+    'HKLM\\Software\\BrightOS\\Explorer\\FileExt': '1',
+    'HKLM\\Software\\BrightOS\\Explorer\\Compact': '0',
+    'HKLM\\Software\\BrightOS\\System\\Restore': '1',
+    'HKLM\\Software\\BrightOS\\System\\Defrag': 'Weekly',
+    'HKLM\\Software\\BrightOS\\System\\Backup': 'Daily',
+    'HKLM\\Software\\BrightOS\\Drivers\\Signed': '1',
+    'HKLM\\Software\\BrightOS\\Drivers\\AutoUpdate': '1',
+    'HKLM\\Software\\BrightOS\\Services\\Indexing': '1',
+    'HKLM\\Software\\BrightOS\\Services\\Search': '1',
+    'HKLM\\Software\\BrightOS\\Services\\Update': '1',
+    'HKLM\\Software\\BrightOS\\Services\\Sync': '1',
+    'HKLM\\Software\\BrightOS\\Apps\\Store': '1',
+    'HKLM\\Software\\BrightOS\\Apps\\StoreURL': 'https://store.brightos.com',
+    'HKLM\\Software\\BrightOS\\Apps\\DevMode': '0',
+    'HKLM\\Software\\BrightOS\\Hardware\\CPU': 'Intel Core i7-12700K',
+    'HKLM\\Software\\BrightOS\\Hardware\\GPU': 'NVIDIA RTX 4070',
+    'HKLM\\Software\\BrightOS\\Hardware\\RAM': '16GB',
+    'HKLM\\Software\\BrightOS\\Hardware\\Disk': '512GB SSD',
+    'HKLM\\Software\\BrightOS\\Hardware\\Motherboard': 'BrightOS Z790',
+    'HKLM\\Software\\BrightOS\\Licensing\\Key': 'XXXX-XXXX-XXXX-XXXX',
+    'HKLM\\Software\\BrightOS\\Licensing\\Activated': '1',
+    'HKLM\\Software\\BrightOS\\Licensing\\OEM': 'BrightOS Systems',
+    'HKLM\\Software\\BrightOS\\Debug\\LogLevel': 'Info',
+    'HKLM\\Software\\BrightOS\\Debug\\Dump': '0',
+    'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SecurityHealth': 'C:\\BrightOS\\System32\\securityhealth.exe',
+    'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater': 'C:\\BrightOS\\System32\\updater.exe',
+    'HKCU\\Software\\BrightOS\\User\\Name': 'Student',
+    'HKCU\\Software\\BrightOS\\User\\Email': 'student@brighted.edu',
+    'HKCU\\Software\\BrightOS\\User\\Theme': 'Dark',
+    'HKCU\\Software\\BrightOS\\User\\Language': 'en-US',
+    'HKCU\\Software\\BrightOS\\User\\Desktop\\Wallpaper': 'C:\\BrightOS\\Web\\Wallpaper\\default.jpg',
+    'HKCU\\Software\\BrightOS\\User\\Desktop\\Icons': '1',
+    'HKCU\\Software\\BrightOS\\User\\Desktop\\Gadgets': '0',
+    'HKCU\\Software\\BrightOS\\User\\Privacy\\Telemetry': '1',
+    'HKCU\\Software\\BrightOS\\User\\Privacy\\Location': '0',
+    'HKCU\\Software\\BrightOS\\User\\Privacy\\Ads': '0',
+    'HKCU\\Software\\BrightOS\\User\\Accessibility\\Narrator': '0',
+    'HKCU\\Software\\BrightOS\\User\\Accessibility\\Magnifier': '0',
+    'HKCU\\Software\\BrightOS\\User\\Accessibility\\HighContrast': '0',
+    'HKCU\\Software\\BrightOS\\User\\Network\\WiFi': '1',
+    'HKCU\\Software\\BrightOS\\User\\Network\\Ethernet': '1',
+    'HKCU\\Software\\BrightOS\\User\\Network\\VPN': '0',
+    'HKCU\\Software\\BrightOS\\User\\Power\\Battery': 'Balanced',
+    'HKCU\\Software\\BrightOS\\User\\Power\\Sleep': '30',
+    'HKCU\\Software\\BrightOS\\User\\Power\\Hibernate': '0',
+    'HKCU\\Software\\BrightOS\\User\\Sound\\Volume': '75',
+    'HKCU\\Software\\BrightOS\\User\\Sound\\Mute': '0',
+    'HKCU\\Software\\BrightOS\\User\\Sound\\Notifications': '1',
+    'HKCU\\Software\\BrightOS\\User\\Display\\Brightness': '80',
+    'HKCU\\Software\\BrightOS\\User\\Display\\NightLight': '0',
+    'HKCU\\Software\\BrightOS\\User\\Display\\Resolution': '1920x1080',
+    'HKCU\\Software\\BrightOS\\User\\Input\\Keyboard': 'US',
+    'HKCU\\Software\\BrightOS\\User\\Input\\MouseSpeed': '10',
+    'HKCU\\Software\\BrightOS\\User\\Input\\Touchpad': '1',
+  };
+
+  return {
+    power: 'booting',
+    boot_phase: 0,
+    cpu_load: mission.initial_state.cpu_load,
+    network: { status: mission.initial_state.network_status, ip_renewed: false },
+    window: { stuck_app: { open: mission.id === 'tech-1' } },
+    process: { high_cpu: { running: mission.id === 'tech-2' } },
+    disk: { free_space_mb: storageLow ? 120 : 850 },
+    files: { tmp: { count: tmpCount } },
+    recycle_bin: { empty: !recycleHas },
+    file: { opened: null },
+    terminal: { history: mission.initial_state.terminal_history },
+    notifications: [],
+    apps: defaultApps,
+    registry: defaultRegistry,
+  } satisfies RuntimeState;
+}
+
+function initialWindows(mission: BrightOSMission): Record<WindowId, WindowState> {
+  const wins: Record<WindowId, WindowState> = {
+    taskmgr: { id: 'taskmgr', title: 'Task Manager', open: false, minimized: false, z: 4, x: 90, y: 120, w: 560, h: 420 },
+    terminal: { id: 'terminal', title: 'Terminal', open: false, minimized: false, z: 3, x: 150, y: 140, w: 700, h: 420 },
+    settings: { id: 'settings', title: 'Settings', open: false, minimized: false, z: 2, x: 120, y: 120, w: 620, h: 460 },
+    browser: { id: 'browser', title: 'Browser', open: false, minimized: false, z: 1, x: 180, y: 120, w: 760, h: 480 },
+    automation: { id: 'automation', title: 'Automation App', open: false, minimized: false, z: 1, x: 220, y: 130, w: 720, h: 440 },
+    explorer: { id: 'explorer', title: 'File Explorer', open: false, minimized: false, z: 1, x: 160, y: 120, w: 820, h: 520 },
+    uninstall: { id: 'uninstall', title: 'Uninstall or change a program', open: false, minimized: false, z: 1, x: 200, y: 140, w: 740, h: 500 },
+    registry: { id: 'registry', title: 'Registry Editor', open: false, minimized: false, z: 1, x: 240, y: 160, w: 680, h: 540 },
+    stuck_app: { id: 'stuck_app', title: 'Stuck Window', open: mission.id === 'tech-1', minimized: false, z: 5, x: 210, y: 180, w: 460, h: 220 },
+  };
+
+  const allowed = new Set(mission.tools_allowed);
+  if (allowed.has('Task Manager')) wins.taskmgr.open = true;
+  if (allowed.has('Terminal')) wins.terminal.open = true;
+  if (allowed.has('Settings')) wins.settings.open = true;
+
+  return wins;
+}
+
+function toolToWindowId(tool: AppId): WindowId {
+  if (tool === 'Task Manager') return 'taskmgr';
+  if (tool === 'Terminal') return 'terminal';
+  if (tool === 'Settings') return 'settings';
+  if (tool === 'Browser') return 'browser';
+  return 'automation';
+}
+
+function toolLabel(tool: AppId) {
+  if (tool === 'Task Manager') return 'TaskMgr';
+  if (tool === 'Automation App') return 'Automation';
+  return tool;
+}
+
+function formatTime(now: Date) {
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  return `${hh}:${mm}`;
+}
+
+function StartMenu({
+  open,
+  query,
+  setQuery,
+  apps,
+  onLaunch,
+  onClose,
+  onLock,
+  onToggleTheme,
+  theme,
+}: {
+  open: boolean;
+  query: string;
+  setQuery: (v: string) => void;
+  apps: Array<{ id: WindowId; title: string; subtitle: string; disabled: boolean }>;
+  onLaunch: (id: WindowId) => void;
+  onClose: () => void;
+  onLock: () => void;
+  onToggleTheme: () => void;
+  theme: 'dark' | 'light';
+}) {
+  if (!open) return null;
+  const isLight = theme === 'light';
+  const q = query.trim().toLowerCase();
+  const filtered = q ? apps.filter((a) => `${a.title} ${a.subtitle}`.toLowerCase().includes(q)) : apps;
+
+  return (
+    <div className="absolute inset-0 z-[260]" onMouseDown={onClose}>
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute left-2 bottom-12" onMouseDown={(e) => e.stopPropagation()}>
+        <div className={`w-[420px] max-w-[92vw] border shadow-2xl overflow-hidden ${isLight ? 'border-black/30 bg-zinc-50' : 'border-white/20 bg-zinc-900'}`}>
+          <div className={`px-3 py-3 border-b ${isLight ? 'border-black/20' : 'border-white/10'}`}>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search programs and files"
+              className={`w-full h-10 border px-3 text-sm outline-none ${
+                isLight ? 'border-black/20 bg-white text-zinc-900' : 'border-white/20 bg-black/20 text-white'
+              }`}
+              autoFocus
+            />
+          </div>
+
+          <div className="p-3 grid grid-cols-1 gap-2">
+            {filtered.slice(0, 14).map((a) => (
+              <button
+                key={a.id}
+                disabled={a.disabled}
+                onClick={() => {
+                  if (a.disabled) return;
+                  onLaunch(a.id);
+                }}
+                className={`w-full border px-3 py-2 text-left transition-colors ${
+                  a.disabled
+                    ? isLight
+                      ? 'border-black/15 bg-black/[0.03] text-zinc-500 cursor-not-allowed'
+                      : 'border-white/10 bg-white/[0.02] text-zinc-500 cursor-not-allowed'
+                    : isLight
+                      ? 'border-black/20 bg-white hover:bg-zinc-100 text-zinc-900'
+                      : 'border-white/20 bg-black/20 hover:bg-black/30 text-white'
+                }`}
+              >
+                <div className="text-sm font-semibold">{a.title}</div>
+                <div className={`mt-0.5 text-xs ${isLight ? 'text-zinc-600' : 'text-zinc-300/80'}`}>{a.subtitle}</div>
+              </button>
+            ))}
+          </div>
+
+          <div className={`px-3 py-3 border-t flex items-center justify-between gap-3 ${isLight ? 'border-black/20' : 'border-white/10'}`}>
+            <div className={`text-[10px] font-black uppercase tracking-[0.25em] ${isLight ? 'text-zinc-700' : 'text-zinc-300'}`}>BrightOS</div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onToggleTheme}
+                className={`h-9 px-3 border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                  isLight ? 'border-black/20 bg-white hover:bg-zinc-100 text-zinc-900' : 'border-white/20 bg-black/20 hover:bg-black/30 text-zinc-200'
+                }`}
+              >
+                Theme
+              </button>
+              <button
+                onClick={onLock}
+                className={`h-9 px-3 border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                  isLight ? 'border-black/20 bg-white hover:bg-zinc-100 text-zinc-900' : 'border-white/20 bg-black/20 hover:bg-black/30 text-zinc-200'
+                }`}
+              >
+                Lock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Taskbar({
+  now,
+  tools,
+  wins,
+  onToggle,
+  fan,
+  cpu,
+  securityPulse,
+  lockedByStuck,
+  theme,
+  onStart,
+  startOpen,
+  batteryLabel,
+  networkLabel,
+}: {
+  now: Date;
+  tools: AppId[];
+  wins: Record<WindowId, WindowState>;
+  onToggle: (id: WindowId) => void;
+  fan: number;
+  cpu: number;
+  securityPulse: boolean;
+  lockedByStuck: boolean;
+  theme: 'dark' | 'light';
+  onStart: () => void;
+  startOpen: boolean;
+  batteryLabel: string;
+  networkLabel: string;
+}) {
+  const isLight = theme === 'light';
+  const pinned = (
+    [
+      { id: 'explorer' as const, label: 'Explorer' },
+      { id: 'uninstall' as const, label: 'Apps' },
+      { id: 'registry' as const, label: 'Reg' },
+      ...tools.map((t) => ({ id: toolToWindowId(t) as WindowId, label: toolLabel(t) })),
+    ] satisfies Array<{ id: WindowId; label: string }>
+  ).filter((v, i, arr) => arr.findIndex((x) => x.id === v.id) === i);
+
+  return (
+    <div className="h-12 border-t border-black/40 bg-zinc-900">
+      <div className="h-full px-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onStart}
+            className={`h-9 px-3 border text-[11px] font-semibold tracking-wide transition-colors ${
+              startOpen
+                ? 'border-[var(--brand-primary)]/50 bg-[var(--brand-primary)]/20 text-white'
+                : 'border-white/20 bg-black/10 hover:bg-black/20 text-zinc-100'
+            }`}
+            aria-label="Start"
+          >
+            Start
+          </button>
+        </div>
+
+        <div className="flex items-center gap-1 flex-1">
+          {pinned.map((a) => {
+            const w = wins[a.id];
+            const active = w?.open && !w?.minimized;
+            return (
+              <button
+                key={a.id}
+                onClick={() => onToggle(a.id)}
+                className={`h-9 px-3 border text-[11px] font-semibold transition-colors ${
+                  active
+                    ? 'border-[var(--brand-primary)]/50 bg-[var(--brand-primary)]/20 text-white'
+                    : 'border-white/20 bg-black/10 hover:bg-black/20 text-zinc-100'
+                }`}
+              >
+                {a.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className={`h-2 w-2 rounded-full ${securityPulse ? 'bg-red-400' : 'bg-emerald-400'}`} />
+          <div className="text-[11px] text-zinc-100">{networkLabel}</div>
+          <div className="text-[11px] text-zinc-100">{batteryLabel}</div>
+          <div className="text-[11px] text-zinc-100">CPU {Math.round(cpu)}%</div>
+          <div className="text-[11px] text-zinc-300">FAN {fan}</div>
+          <div className="text-[11px] text-zinc-100">{formatTime(now)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WindowFrame({
+  win,
+  focused,
+  onClose,
+  onFocus,
+  onDownMove,
+  onDownResize,
+  children,
+  theme,
+}: {
+  win: WindowState;
+  focused: boolean;
+  onClose: () => void;
+  onFocus: () => void;
+  onDownMove: (e: ReactMouseEvent) => void;
+  onDownResize: (e: ReactMouseEvent) => void;
+  children: ReactNode;
+  theme: 'dark' | 'light';
+}) {
+  if (!win.open) return null;
+
+  const isLight = theme === 'light';
+
+  return (
+    <div
+      className={`absolute overflow-hidden border shadow-2xl ${
+        focused ? (isLight ? 'border-black/40' : 'border-white/30') : isLight ? 'border-black/20' : 'border-white/20'
+      } ${isLight ? 'bg-zinc-50' : 'bg-zinc-900'}`}
+      style={{ left: win.x, top: win.y, width: win.w, height: win.minimized ? 48 : win.h, zIndex: win.z }}
+      onMouseDown={onFocus}
+    >
+      <div
+        className={`h-11 flex items-center justify-between px-3 border-b ${isLight ? 'border-black/20 bg-zinc-100' : 'border-white/10 bg-black/20'}`}
+      >
+        <div className={`text-xs font-semibold ${isLight ? 'text-zinc-900' : 'text-white'}`}>{win.title}</div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            className={`h-7 w-10 border text-[10px] font-black uppercase tracking-[0.25em] ${
+              isLight ? 'border-black/20 bg-white hover:bg-zinc-200 text-zinc-900' : 'border-white/20 bg-black/20 hover:bg-black/30 text-zinc-200'
+            }`}
+          >
+            X
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="absolute left-0 top-0 right-12 h-12 cursor-grab"
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          onDownMove(e);
+        }}
+      />
+
+      {!win.minimized && <div className="absolute inset-0 top-12 p-4 overflow-auto">{children}</div>}
+
+      {!win.minimized && (
+        <div
+          className="absolute bottom-2 right-2 h-6 w-6 cursor-nwse-resize border border-white/20 bg-white/[0.05]"
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            onDownResize(e);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function Terminal({
+  mission,
+  state,
+  fsEntries,
+  lines,
+  input,
+  setInput,
+  push,
+  onState,
+}: {
+  mission: BrightOSMission;
+  state: RuntimeState;
+  fsEntries: string[];
+  lines: TerminalLine[];
+  input: string;
+  setInput: (v: string) => void;
+  push: (l: TerminalLine[]) => void;
+  onState: (fn: (p: RuntimeState) => RuntimeState) => void;
+}) {
+  function run(raw: string) {
+    const cmd = raw.trim();
+    if (!cmd) return;
+    push([{ id: uid('in'), kind: 'in', text: `> ${cmd}` }]);
+
+    const low = cmd.toLowerCase();
+
+    if (low === 'help') {
+      push([
+        { id: uid('o'), kind: 'out', text: 'dir' },
+        { id: uid('o'), kind: 'out', text: 'ipconfig /renew' },
+        { id: uid('o'), kind: 'out', text: 'tracert brighted.edu' },
+        { id: uid('o'), kind: 'out', text: 'netstat -ano' },
+        { id: uid('o'), kind: 'out', text: 'clear' },
+        { id: uid('o'), kind: 'out', text: 'apps' },
+        { id: uid('o'), kind: 'out', text: 'apps uninstall "<name>"' },
+        { id: uid('o'), kind: 'out', text: 'reg get <key> [value]' },
+        { id: uid('o'), kind: 'out', text: 'reg set <key> <value> <data>' },
+        { id: uid('o'), kind: 'out', text: 'reg delete <key>' },
+      ]);
+      return;
+    }
+
+    if (low === 'clear') {
+      push([{ id: uid('sys'), kind: 'sys', text: 'Terminal cleared.' }]);
+      return;
+    }
+
+    if (low === 'dir') {
+      const items = fsEntries;
+      push([
+        { id: uid('o'), kind: 'out', text: ' Directory of C:/' },
+        ...items.slice(0, 60).map((p) => ({ id: uid('o'), kind: 'out' as const, text: ` ${p}` })),
+      ]);
+      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low === 'ipconfig /renew') {
+      push([
+        { id: uid('o'), kind: 'out', text: 'Windows IP Configuration' },
+        { id: uid('o'), kind: 'out', text: 'Renewing adapter… OK' },
+        { id: uid('o'), kind: 'out', text: 'IPv4 Address. . . . . . . . . . . : 192.168.1.101' },
+      ]);
+      onState((p) => ({ ...p, network: { ...p.network, status: 'Connected', ip_renewed: true }, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low.startsWith('tracert')) {
+      push([
+        { id: uid('o'), kind: 'out', text: `Tracing route to ${cmd.slice(7).trim() || 'destination'}...` },
+        { id: uid('o'), kind: 'out', text: '  1   <1 ms   <1 ms   <1 ms  192.168.1.1' },
+        { id: uid('o'), kind: 'out', text: '  2     7 ms     8 ms     8 ms  10.40.0.1' },
+        { id: uid('o'), kind: 'out', text: '  3    15 ms    16 ms    15 ms  172.16.2.10' },
+        { id: uid('o'), kind: 'out', text: 'Trace complete.' },
+      ]);
+      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low === 'netstat -ano') {
+      push([
+        { id: uid('o'), kind: 'out', text: 'Proto  Local Address          Foreign Address        State           PID' },
+        { id: uid('o'), kind: 'out', text: 'TCP    192.168.1.101:51322    13.107.6.171:443       ESTABLISHED     1104' },
+        { id: uid('o'), kind: 'out', text: 'TCP    192.168.1.101:51340    151.101.1.69:443       ESTABLISHED     904' },
+        { id: uid('o'), kind: 'out', text: 'UDP    0.0.0.0:1900           *:*                                   712' },
+      ]);
+      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low === 'apps') {
+      const apps = Object.entries(state.apps);
+      push([
+        { id: uid('o'), kind: 'out', text: 'Installed Apps:' },
+        ...apps.map(([id, a]) => ({
+          id: uid('o'),
+          kind: 'out' as const,
+          text: `  ${a.installed ? '[+]' : '[ ]'} ${a.malware ? '[MALWARE]' : '[OK   ]'} ${a.name}`,
+        })),
+      ]);
+      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low.startsWith('apps uninstall')) {
+      const name = cmd.slice('apps uninstall'.length).trim().replace(/^["']|["']$/g, '');
+      const appEntry = Object.entries(state.apps).find(([, a]) => a.name.toLowerCase() === name.toLowerCase());
+      if (!appEntry) {
+        push([{ id: uid('o'), kind: 'out', text: `App not found: ${name}` }]);
+        onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+        return;
+      }
+      const [appId, app] = appEntry;
+      if (!app.installed) {
+        push([{ id: uid('o'), kind: 'out', text: `${app.name} is already uninstalled.` }]);
+        onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+        return;
+      }
+      onState((p) => {
+        const newApps = { ...p.apps };
+        newApps[appId] = { ...app, installed: false };
+        const newRegistry = { ...p.registry };
+        if (app.registryKeys) {
+          app.registryKeys.forEach((k) => delete newRegistry[k]);
+        }
+        return { ...p, apps: newApps, registry: newRegistry, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } };
+      });
+      push([{ id: uid('o'), kind: 'out', text: `Uninstalled ${app.name}. Registry entries removed.` }]);
+      return;
+    }
+
+    if (low.startsWith('reg get')) {
+      const parts = cmd.trim().split(/\s+/).slice(2);
+      const key = parts[0];
+      const value = parts[1];
+      if (!key) {
+        push([{ id: uid('o'), kind: 'out', text: 'Usage: reg get <key> [value]' }]);
+        onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+        return;
+      }
+      const full = value ? `${key}\\${value}` : key;
+      const data = state.registry[full];
+      if (data === undefined) {
+        push([{ id: uid('o'), kind: 'out', text: `${full} not found.` }]);
+      } else {
+        push([{ id: uid('o'), kind: 'out', text: `${full} = ${data}` }]);
+      }
+      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      return;
+    }
+
+    if (low.startsWith('reg set')) {
+      const parts = cmd.trim().split(/\s+/).slice(2);
+      if (parts.length < 2) {
+        push([{ id: uid('o'), kind: 'out', text: 'Usage: reg set <key> <value> <data>' }]);
+        onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+        return;
+      }
+      const key = parts[0];
+      const value = parts[1];
+      const data = parts.slice(2).join(' ');
+      onState((p) => ({ ...p, registry: { ...p.registry, [`${key}\\${value}`]: data }, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      push([{ id: uid('o'), kind: 'out', text: `Set ${key}\\${value} = ${data}` }]);
+      return;
+    }
+
+    if (low.startsWith('reg delete')) {
+      const key = cmd.trim().split(/\s+/).slice(2).join(' ');
+      if (!key) {
+        push([{ id: uid('o'), kind: 'out', text: 'Usage: reg delete <key>' }]);
+        onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+        return;
+      }
+      onState((p) => {
+        const newRegistry = { ...p.registry };
+        const toDelete = Object.keys(newRegistry).filter((k) => k.startsWith(key));
+        toDelete.forEach((k) => delete newRegistry[k]);
+        return { ...p, registry: newRegistry, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } };
+      });
+      push([{ id: uid('o'), kind: 'out', text: `Deleted registry key and subkeys: ${key}` }]);
+      return;
+    }
+
+    push([{ id: uid('o'), kind: 'out', text: 'Command not recognized. Type help.' }]);
+    onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+  }
+
+  return (
+    <div>
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Windows-like Terminal</div>
+      <div className="mt-3 rounded-2xl border border-white/10 bg-black/30 p-4">
+        <div className="h-56 overflow-auto font-mono text-xs text-zinc-200 whitespace-pre-wrap">
+          {lines.map((l) => (
+            <div key={l.id} className={l.kind === 'in' ? 'text-white' : l.kind === 'sys' ? 'text-teal-200' : 'text-zinc-200'}>
+              {l.text}
+            </div>
+          ))}
+        </div>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              const v = input;
+              setInput('');
+              run(v);
+            }
+          }}
+          placeholder="Type a command… (help)"
+          className="mt-3 w-full h-11 rounded-2xl border border-white/10 bg-black/30 px-4 text-sm font-mono text-white outline-none focus:border-[var(--brand-primary)]/60"
+        />
+      </div>
+
+      <div className="mt-3 text-xs text-zinc-400">
+        Network: <span className="text-zinc-200 font-semibold">{state.network.status}</span>
+      </div>
+    </div>
+  );
+}
+
+function TaskManager({ state, onEndHighCpu }: { state: RuntimeState; onEndHighCpu: () => void }) {
+  const rows = useMemo(() => {
+    type ProcRow = { pid: number; name: string; cpu: number; kind: 'system' | 'user' | 'malware' };
+
+    const base: ProcRow[] = [
+      { pid: 120, name: 'kernel_task', cpu: 3, kind: 'system' },
+      { pid: 221, name: 'shell_ui', cpu: 5, kind: 'system' },
+      { pid: 304, name: 'brightos_cloud_sync', cpu: 2, kind: 'system' },
+      { pid: 388, name: 'coupon_tray', cpu: 1, kind: 'user' },
+      { pid: 420, name: 'game_bar_overlay', cpu: 1, kind: 'user' },
+      { pid: 512, name: 'auto_updater', cpu: 2, kind: 'system' },
+      { pid: 603, name: 'search_indexer', cpu: 3, kind: 'system' },
+    ];
+
+    const appProcs: ProcRow[] = Object.values(state.apps)
+      .filter((a) => a.installed && a.process)
+      .slice(0, 18)
+      .map((a, idx) => ({
+        pid: 900 + idx,
+        name: a.process as string,
+        cpu: a.malware ? 2 : 1,
+        kind: a.malware ? 'malware' : 'user',
+      }));
+
+    const cpuNoise = Math.max(0, Math.round((state.cpu_load - 10) / 20));
+    const noisy: ProcRow[] = base.concat(appProcs).map((r) => {
+      if (r.pid === 120) return r;
+      if (r.pid === 221) return { ...r, cpu: clamp(r.cpu + cpuNoise, 1, 18) };
+      return { ...r, cpu: clamp(r.cpu + Math.floor(cpuNoise / 2), 0, 12) };
+    });
+
+    if (state.process.high_cpu.running) {
+      noisy.unshift({ pid: 777, name: 'mystery_app.exe', cpu: Math.round(state.cpu_load), kind: 'malware' });
+    }
+    return noisy.sort((a, b) => b.cpu - a.cpu);
+  }, [state.apps, state.cpu_load, state.process.high_cpu.running]);
+
+  return (
+    <div>
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Processes</div>
+      <div className="mt-3 rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
+        <div className="grid grid-cols-[1fr_120px_120px] gap-2 px-4 py-3 border-b border-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">
+          <div>Name</div>
+          <div>CPU</div>
+          <div>Action</div>
+        </div>
+        {rows.map((r) => (
+          <div
+            key={r.pid}
+            className={`grid grid-cols-[1fr_120px_120px] gap-2 px-4 py-3 border-b border-white/5 text-sm text-zinc-200 ${
+              r.kind === 'malware' ? 'bg-red-500/5' : ''
+            }`}
+          >
+            <div className="font-mono">
+              {r.name}{' '}
+              {r.kind === 'malware' ? <span className="text-red-200">(suspicious)</span> : null}
+            </div>
+            <div className="font-mono">{r.cpu}%</div>
+            <div>
+              {r.pid === 777 ? (
+                <button
+                  onClick={onEndHighCpu}
+                  className="h-9 px-3 rounded-xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100"
+                >
+                  End Task
+                </button>
+              ) : (
+                <div className="text-xs text-zinc-500">—</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 text-xs text-zinc-400">
+        CPU Load: <span className="text-zinc-200 font-semibold">{Math.round(state.cpu_load)}%</span>
+      </div>
+    </div>
+  );
+}
+
+function Settings({
+  state,
+  onCleanTmp,
+  onEmptyRecycle,
+  theme,
+  onToggleTheme,
+}: {
+  state: RuntimeState;
+  onCleanTmp: () => void;
+  onEmptyRecycle: () => void;
+  theme: 'dark' | 'light';
+  onToggleTheme: () => void;
+}) {
+  return (
+    <div>
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Storage</div>
+      <div className="mt-3 grid gap-3">
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Disk Free Space</div>
+          <div className="mt-1 text-2xl font-black text-[var(--brand-primary)]">{state.disk.free_space_mb} MB</div>
+          <div className="mt-2 text-xs text-zinc-400">
+            Temp files: <span className="text-zinc-200 font-semibold">{state.files.tmp.count}</span> • Recycle Bin:
+            <span className="text-zinc-200 font-semibold"> {state.recycle_bin.empty ? 'Empty' : 'Not Empty'}</span>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Cleanup</div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={onCleanTmp}
+              disabled={state.files.tmp.count === 0}
+              className={`h-10 px-4 rounded-2xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                state.files.tmp.count === 0
+                  ? 'border-white/10 bg-white/[0.03] text-zinc-500'
+                  : 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-white'
+              }`}
+            >
+              Delete .tmp
+            </button>
+            <button
+              onClick={onEmptyRecycle}
+              disabled={state.recycle_bin.empty}
+              className={`h-10 px-4 rounded-2xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                state.recycle_bin.empty
+                  ? 'border-white/10 bg-white/[0.03] text-zinc-500'
+                  : 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-white'
+              }`}
+            >
+              Empty Recycle
+            </button>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Appearance</div>
+          <div className="mt-2 text-xs text-zinc-400">
+            Theme: <span className="text-zinc-200 font-semibold">{theme === 'light' ? 'Light' : 'Dark'}</span>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={onToggleTheme}
+              className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] transition-colors text-white"
+            >
+              Toggle Theme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FileExplorer({
+  entries,
+  location,
+  onSetLocation,
+  onOpen,
+  onDeleteToRecycle,
+  onEmptyRecycle,
+  theme,
+}: {
+  entries: string[];
+  location: 'pc' | 'recycle';
+  onSetLocation: (v: 'pc' | 'recycle') => void;
+  onOpen: (path: string) => void;
+  onDeleteToRecycle: (path: string) => void;
+  onEmptyRecycle: () => void;
+  theme: 'dark' | 'light';
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [currentPath, setCurrentPath] = useState('C:/');
+  const isLight = theme === 'light';
+
+  useEffect(() => {
+    if (location === 'recycle') {
+      setCurrentPath('RecycleBin:/');
+      return;
+    }
+    setCurrentPath((prev) => (prev.startsWith('C:/') || prev.startsWith('D:/') ? prev : 'C:/'));
+  }, [location]);
+
+  const normalized = useMemo(() => entries.map(normPath).sort((a, b) => a.localeCompare(b)), [entries]);
+  const driveRoots = useMemo(() => {
+    const roots = new Set<string>();
+    normalized.forEach((entry) => {
+      const match = entry.match(/^([A-Z]:\/|[A-Z]:\/?)/i);
+      if (match) roots.add(match[1].replace(/\\/g, '/').replace(/\/?$/, '/'));
+    });
+    return Array.from(roots).sort();
+  }, [normalized]);
+
+  const listItems = useMemo(() => {
+    if (currentPath === 'ThisPC') {
+      return driveRoots.map((drive) => ({
+        path: drive,
+        name: drive.replace('/', ''),
+        type: 'drive' as const,
+      }));
+    }
+    const base = normPath(currentPath);
+    const prefix = base.endsWith('/') ? base : `${base}/`;
+    const children = new Map<string, { path: string; name: string; type: 'folder' | 'file' }>();
+
+    normalized.forEach((entry) => {
+      if (!entry.startsWith(prefix)) return;
+      const rest = entry.slice(prefix.length);
+      if (!rest) return;
+      const [first] = rest.split('/');
+      const isFolder = rest.includes('/');
+      const childPath = `${prefix}${first}${isFolder ? '/' : ''}`;
+      children.set(childPath, { path: childPath, name: first, type: isFolder ? 'folder' : 'file' });
+    });
+
+    return Array.from(children.values()).sort((a, b) => a.name.localeCompare(b.name));
+  }, [currentPath, driveRoots, normalized]);
+
+  const crumbs = useMemo(() => {
+    if (currentPath === 'ThisPC') return ['This PC'];
+    const parts = normPath(currentPath).replace(/\/+$/, '').split('/');
+    const out: string[] = [];
+    for (let i = 0; i < parts.length; i += 1) {
+      if (!parts[i]) continue;
+      const val = parts[i];
+      out.push(i === 0 ? `${val}/` : val);
+    }
+    return out.length ? out : ['This PC'];
+  }, [currentPath]);
+
+  return (
+    <div className="h-full grid grid-cols-[240px_1fr] gap-4">
+      <div className={`rounded-2xl border p-3 ${isLight ? 'border-black/10 bg-white/70' : 'border-white/10 bg-black/30'}`}>
+        <div className={`text-[10px] font-black uppercase tracking-[0.25em] ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>Quick Access</div>
+        <div className="mt-3 grid gap-2">
+          <button
+            onClick={() => {
+              setSelected(null);
+              onSetLocation('pc');
+              setCurrentPath('ThisPC');
+            }}
+            className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left ${
+              isLight
+                ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+            }`}
+          >
+            This PC
+          </button>
+          <button
+            onClick={() => {
+              setSelected(null);
+              onSetLocation('recycle');
+            }}
+            className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left ${
+              isLight
+                ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+            }`}
+          >
+            Recycle Bin
+          </button>
+        </div>
+
+        <div className="mt-6">
+          <div className={`text-[10px] font-black uppercase tracking-[0.25em] ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>This PC</div>
+          <div className="mt-3 grid gap-2">
+            {driveRoots.length === 0 && (
+              <div className={`text-xs ${isLight ? 'text-zinc-500' : 'text-zinc-400'}`}>No drives found.</div>
+            )}
+            {driveRoots.map((drive) => (
+              <button
+                key={drive}
+                onClick={() => {
+                  setSelected(null);
+                  onSetLocation('pc');
+                  setCurrentPath(drive);
+                }}
+                className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left ${
+                  isLight
+                    ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                    : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+                }`}
+              >
+                {drive}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <div className={`text-[10px] font-black uppercase tracking-[0.25em] ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>Actions</div>
+          <div className="mt-3 grid gap-2">
+            <button
+              onClick={() => {
+                if (!selected) return;
+                onDeleteToRecycle(selected);
+                setSelected(null);
+              }}
+              disabled={!selected || location === 'recycle'}
+              className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left transition-colors ${
+                !selected || location === 'recycle'
+                  ? isLight
+                    ? 'border-black/10 bg-black/[0.02] text-zinc-500'
+                    : 'border-white/10 bg-white/[0.02] text-zinc-500'
+                  : isLight
+                    ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                    : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+              }`}
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => {
+                if (location !== 'recycle') return;
+                onEmptyRecycle();
+                setSelected(null);
+              }}
+              disabled={location !== 'recycle'}
+              className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left transition-colors ${
+                location !== 'recycle'
+                  ? isLight
+                    ? 'border-black/10 bg-black/[0.02] text-zinc-500'
+                    : 'border-white/10 bg-white/[0.02] text-zinc-500'
+                  : isLight
+                    ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                    : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+              }`}
+            >
+              Empty Bin
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className={`rounded-2xl border overflow-hidden ${isLight ? 'border-black/10 bg-white/70' : 'border-white/10 bg-black/30'}`}>
+        <div className={`px-4 py-3 border-b ${isLight ? 'border-black/10' : 'border-white/10'}`}>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className={`text-[10px] font-black uppercase tracking-[0.25em] ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>Address</div>
+            <div className={`flex-1 rounded-xl border px-3 py-1.5 text-xs ${isLight ? 'border-black/10 bg-white/70 text-zinc-800' : 'border-white/10 bg-black/30 text-zinc-200'}`}>
+              {crumbs.join(' / ')}
+            </div>
+            <button
+              onClick={() => {
+                if (currentPath === 'ThisPC') return;
+                const parts = normPath(currentPath).replace(/\/+$/, '').split('/');
+                if (parts.length <= 1) {
+                  setCurrentPath('ThisPC');
+                  return;
+                }
+                parts.pop();
+                setCurrentPath(parts.join('/') + '/');
+              }}
+              className={`h-8 px-3 rounded-xl border text-[10px] font-black uppercase tracking-[0.25em] ${
+                isLight
+                  ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-800'
+                  : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-zinc-200'
+              }`}
+            >
+              Up
+            </button>
+          </div>
+        </div>
+
+        <div className="h-[360px] overflow-auto">
+          {listItems.length === 0 ? (
+            <div className={`p-4 text-sm ${isLight ? 'text-zinc-500' : 'text-zinc-400'}`}>No items.</div>
+          ) : (
+            listItems.slice(0, 250).map((item) => (
+              <button
+                key={item.path}
+                onClick={() => setSelected(item.path)}
+                onDoubleClick={() => {
+                  if (item.type === 'drive' || item.type === 'folder') {
+                    setCurrentPath(item.path);
+                    onSetLocation(item.path.startsWith('RecycleBin:/') ? 'recycle' : 'pc');
+                    return;
+                  }
+                  onOpen(item.path);
+                }}
+                className={`w-full px-4 py-3 border-b text-left text-sm transition-colors ${
+                  isLight ? 'border-black/5' : 'border-white/5'
+                } ${selected === item.path ? (isLight ? 'bg-black/[0.06]' : 'bg-white/[0.06]') : isLight ? 'hover:bg-black/[0.04]' : 'hover:bg-white/[0.04]'}`}
+              >
+                <div className={`font-semibold ${isLight ? 'text-zinc-900' : 'text-zinc-200'}`}>
+                  {item.type === 'drive' ? '🖴' : item.type === 'folder' ? '📁' : '📄'} {item.name}
+                </div>
+                <div className={`text-xs ${isLight ? 'text-zinc-500' : 'text-zinc-400'}`}>{item.path}</div>
+              </button>
+            ))
+          )}
+        </div>
+        {selected && (
+          <div className={`px-4 py-3 border-t text-xs ${isLight ? 'border-black/10 text-zinc-600' : 'border-white/10 text-zinc-400'}`}>
+            Selected: <span className={`${isLight ? 'text-zinc-800' : 'text-zinc-200'} font-mono`}>{selected}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function MissionClient({ mission }: { mission: BrightOSMission }) {
+  const router = useRouter();
+
+  const [now, setNow] = useState(() => new Date());
+  const [wallpaper, setWallpaper] = useState('');
+
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
+  const cooldownRemainingMs = cooldownUntil ? Math.max(0, cooldownUntil - now.getTime()) : 0;
+  const cooldownActive = cooldownUntil !== null && cooldownRemainingMs > 0;
+  const cooldownMins = Math.floor(cooldownRemainingMs / 60000);
+  const cooldownSecs = Math.floor((cooldownRemainingMs % 60000) / 1000);
+  const cooldownLabel = `${cooldownMins}:${String(cooldownSecs).padStart(2, '0')}`;
+
+  const [state, setState] = useState<RuntimeState>(() => initRuntime(mission));
+  const [wins, setWins] = useState<Record<WindowId, WindowState>>(() => initialWindows(mission));
+  const [activeWin, setActiveWin] = useState<WindowId>(() => (mission.id === 'tech-1' ? 'stuck_app' : 'terminal'));
+
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [fsEntries, setFsEntries] = useState<string[]>(() => mission.initial_state.file_system.map(normPath));
+  const [explorerLocation, setExplorerLocation] = useState<'pc' | 'recycle'>('pc');
+
+  const [startOpen, setStartOpen] = useState(false);
+  const [startQuery, setStartQuery] = useState('');
+
+  const [password, setPassword] = useState('');
+  const [loginBusy, setLoginBusy] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  const [termLines, setTermLines] = useState<TerminalLine[]>(() => [
+    { id: uid('sys'), kind: 'sys', text: `Mission loaded: ${mission.id} — ${mission.title}` },
+    { id: uid('sys'), kind: 'sys', text: 'Terminal: try help, dir, ipconfig /renew, tracert, netstat -ano' },
+  ]);
+  const [termInput, setTermInput] = useState('');
+
+  const rewardGrantedRef = useRef(false);
+  const [missionComplete, setMissionComplete] = useState(false);
+
+  const liveSessionIdRef = useRef<string | null>(null);
+  const liveSessionEndedRef = useRef(false);
+
+  const drag = useRef<{
+    id: WindowId | null;
+    mode: 'move' | 'resize' | null;
+    sx: number;
+    sy: number;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  }>({ id: null, mode: null, sx: 0, sy: 0, x: 0, y: 0, w: 0, h: 0 });
+
+  const dragRafRef = useRef<number | null>(null);
+  const dragPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  useEffect(() => {
+    setWallpaper(pickFromPool(mission.brightos_desktop.wallpaper_pool));
+    const cd = getMissionCooldown();
+    setCooldownUntil(cd?.until ?? null);
+  }, [mission.brightos_desktop.wallpaper_pool]);
+
+  useEffect(() => {
+    liveSessionEndedRef.current = false;
+    const session = startLiveSession('csec', mission.id);
+    liveSessionIdRef.current = session.id;
+
+    return () => {
+      const sid = liveSessionIdRef.current;
+      if (!sid) return;
+      if (liveSessionEndedRef.current) return;
+      endLiveSession(sid, { status: 'abandoned' });
+      liveSessionEndedRef.current = true;
+    };
+  }, [mission.id]);
+
+  useEffect(() => {
+    setTheme('dark');
+    setFsEntries(mission.initial_state.file_system.map(normPath));
+    setExplorerLocation('pc');
+    setStartOpen(false);
+    setStartQuery('');
+  }, [mission.id, mission.initial_state.file_system]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setState((p) => {
+        if (p.power !== 'booting') return p;
+        const next = (p.boot_phase + 1) as RuntimeState['boot_phase'];
+        if (next >= 5) return { ...p, power: 'lock', boot_phase: 5 };
+        return { ...p, boot_phase: next };
+      });
+    }, 850);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    if (state.power !== 'on') return;
+
+    const id = window.setInterval(() => {
+      setState((p) => {
+        const base = p.process.high_cpu.running ? 92 : p.cpu_load;
+        const noise = Math.random() * 4 - 2;
+        const nextCpu = clamp(base + noise, p.process.high_cpu.running ? 80 : 8, p.process.high_cpu.running ? 99 : 35);
+        return { ...p, cpu_load: nextCpu };
+      });
+    }, 700);
+
+    return () => window.clearInterval(id);
+  }, [state.power]);
+
+  useEffect(() => {
+    if (state.power !== 'on') return;
+    const id = window.setInterval(() => {
+      const roll = Math.random();
+      if (roll < 0.65) return;
+
+      setState((p) => ({
+        ...p,
+        notifications: [
+          ...p.notifications,
+          {
+            id: uid('n'),
+            kind: roll > 0.92 ? 'alert' : 'info',
+            title: roll > 0.92 ? 'SECURITY NOTICE' : 'SYSTEM',
+            body:
+              roll > 0.92
+                ? 'Background service attempted an outbound connection.'
+                : 'Try BrightOS Pro Trial — limited time offer.',
+          },
+        ],
+      }));
+    }, 9000);
+
+    return () => window.clearInterval(id);
+  }, [state.power]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    function onMove(e: MouseEvent) {
+      const d = drag.current;
+      if (!d.id || !d.mode) return;
+
+      dragPosRef.current = { x: e.clientX, y: e.clientY };
+      if (dragRafRef.current !== null) return;
+
+      dragRafRef.current = window.requestAnimationFrame(() => {
+        dragRafRef.current = null;
+        const p = dragPosRef.current;
+        const dx = p.x - d.sx;
+        const dy = p.y - d.sy;
+
+        setWins((prev) => {
+          const w = prev[d.id!];
+          if (!w) return prev;
+          if (d.mode === 'move') {
+            return {
+              ...prev,
+              [d.id!]: {
+                ...w,
+                x: clamp(d.x + dx, 10, window.innerWidth - 260),
+                y: clamp(d.y + dy, 10, window.innerHeight - 160),
+              },
+            };
+          }
+          return {
+            ...prev,
+            [d.id!]: {
+              ...w,
+              w: clamp(d.w + dx, 360, window.innerWidth - 40),
+              h: clamp(d.h + dy, 240, window.innerHeight - 100),
+            },
+          };
+        });
+      });
+    }
+
+    function onUp() {
+      drag.current = { id: null, mode: null, sx: 0, sy: 0, x: 0, y: 0, w: 0, h: 0 };
+      if (dragRafRef.current !== null) {
+        window.cancelAnimationFrame(dragRafRef.current);
+        dragRafRef.current = null;
+      }
+    }
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+  }, []);
+
+  const allowedTools = useMemo(() => mission.tools_allowed as AppId[], [mission.tools_allowed]);
+  const stuckLock = state.window.stuck_app.open;
+
+  const startApps = useMemo(() => {
+    const allowed = new Set(mission.tools_allowed);
+    return [
+      { id: 'explorer' as const, title: 'File Explorer', subtitle: 'Browse files', disabled: false },
+      { id: 'uninstall' as const, title: 'Uninstall Programs', subtitle: 'Installed apps', disabled: false },
+      { id: 'registry' as const, title: 'Registry Editor', subtitle: 'System registry', disabled: false },
+      { id: 'terminal' as const, title: 'Terminal', subtitle: 'Commands', disabled: !allowed.has('Terminal') },
+      { id: 'settings' as const, title: 'Settings', subtitle: 'System', disabled: !allowed.has('Settings') },
+      { id: 'taskmgr' as const, title: 'Task Manager', subtitle: 'Processes', disabled: !allowed.has('Task Manager') },
+    ];
+  }, [mission.tools_allowed]);
+
+  function push(lines: TerminalLine[]) {
+    setTermLines((p) => {
+      if (lines.length === 1 && lines[0]?.kind === 'sys' && lines[0]?.text === 'Terminal cleared.') {
+        return lines;
+      }
+      return [...p, ...lines];
+    });
+  }
+
+  function focus(id: WindowId) {
+    if (stuckLock && id !== 'stuck_app') {
+      notify('alert', 'SYSTEM', 'Close the stuck window before using other apps.');
+      setActiveWin('stuck_app');
+      setWins((prev) => {
+        const w = prev.stuck_app;
+        if (!w) return prev;
+        const maxZ = Math.max(...Object.values(prev).map((x) => x.z));
+        return { ...prev, stuck_app: { ...w, open: true, minimized: false, z: maxZ + 1 } };
+      });
+      return;
+    }
+    setActiveWin(id);
+    setWins((prev) => {
+      const w = prev[id];
+      if (!w) return prev;
+      const maxZ = Math.max(...Object.values(prev).map((x) => x.z));
+      return { ...prev, [id]: { ...w, open: true, minimized: false, z: maxZ + 1 } };
+    });
+  }
+
+  function close(id: WindowId) {
+    setWins((prev) => {
+      const w = prev[id];
+      if (!w) return prev;
+      const next = { ...prev, [id]: { ...w, open: false, minimized: false } };
+      return next;
+    });
+
+    if (id === 'stuck_app') {
+      setState((p) => ({ ...p, window: { ...p.window, stuck_app: { open: false } } }));
+      notify('info', 'SYSTEM', 'Stuck window closed. Desktop responsive again.');
+    }
+
+    if (activeWin === id) {
+      setWins((prev) => {
+        const nextId = pickBestActiveWindow(prev);
+        setActiveWin(nextId);
+        return prev;
+      });
+    }
+  }
+
+  function notify(kind: 'alert' | 'info', title: string, body: string) {
+    setState((p) => ({ ...p, notifications: [...p.notifications, { id: uid('n'), kind, title, body }] }));
+  }
+
+  function taskbarToggle(id: WindowId) {
+    if (stuckLock) {
+      notify('alert', 'SYSTEM', 'A stuck window is open. Some actions may be blocked until you close it.');
+    }
+    setWins((prev) => {
+      const w = prev[id];
+      if (!w) return prev;
+      const maxZ = Math.max(...Object.values(prev).map((x) => x.z));
+
+      if (!w.open) {
+        setActiveWin(id);
+        return { ...prev, [id]: { ...w, open: true, minimized: false, z: maxZ + 1 } };
+      }
+      if (w.minimized) {
+        setActiveWin(id);
+        return { ...prev, [id]: { ...w, minimized: false, z: maxZ + 1 } };
+      }
+
+      const next = { ...prev, [id]: { ...w, minimized: true } };
+      const nextId = pickBestActiveWindow(next);
+      setActiveWin(nextId);
+      return next;
+    });
+  }
+
+  const completeMissionOnce = useCallback(() => {
+    if (missionComplete) return;
+    setMissionComplete(true);
+
+    if (!rewardGrantedRef.current) {
+      rewardGrantedRef.current = true;
+      awardFixedMissionXP(`brightos:csec:${mission.id}`, 300, 'Mission complete');
+      markMissionCompleted(`brightos:csec:${mission.id}`, 300);
+
+      const sid = liveSessionIdRef.current;
+      if (sid && !liveSessionEndedRef.current) {
+        endLiveSession(sid, { status: 'completed', xpEarned: 300 });
+        liveSessionEndedRef.current = true;
+      }
+      const { cooldown } = registerMissionCompletionAndMaybeCooldown();
+
+      push([{ id: uid('sys'), kind: 'sys', text: 'Mission complete. +300 XP earned.' }]);
+
+      if (cooldown) {
+        setCooldownUntil(cooldown.until);
+        push([{ id: uid('sys'), kind: 'sys', text: `Cooldown active. Try again later.` }]);
+      }
+    }
+  }, [mission.id, missionComplete]);
+
+  useEffect(() => {
+    if (missionComplete) return;
+    if (state.power !== 'on') return;
+    const ok = evalSuccess(state, mission.success_condition);
+    if (ok) completeMissionOnce();
+  }, [mission.success_condition, state, state.power, missionComplete, completeMissionOnce]);
+
+  if (cooldownActive) {
+    return (
+      <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+        <div className="fixed inset-0 z-0 bg-gradient-to-b from-red-500/10 via-transparent to-[#050B14]" />
+        <div className="relative z-10 max-w-3xl mx-auto px-6 py-20">
+          <Link
+            href="/practicals/technology-practicality/csec-roadmap"
+            className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400 hover:text-white transition-colors"
+          >
+            ← Back to CSEC Roadmap
+          </Link>
+
+          <div className="mt-10 rounded-[2rem] border border-red-500/30 bg-red-500/10 p-10">
+            <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-200">Cooldown Active</div>
+            <div className="mt-4 text-3xl font-black text-white">Try again in {cooldownLabel}</div>
+            <div className="mt-3 text-zinc-200/80">You have completed 5 missions today. Your next mission run unlocks when the timer ends.</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (state.power === 'booting') {
+    const pct = Math.round((state.boot_phase / 5) * 100);
+    return (
+      <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+          <div className="w-full max-w-lg rounded-[2rem] border border-white/10 bg-black/45 backdrop-blur-md p-10">
+            <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS</div>
+            <div className="mt-2 text-3xl font-black text-white">Booting…</div>
+            <div className="mt-6 h-3 rounded-full border border-white/10 bg-white/[0.03] overflow-hidden">
+              <div className="h-full bg-[var(--brand-primary)]/60" style={{ width: `${pct}%` }} />
+            </div>
+            <div className="mt-3 text-xs text-zinc-300/80">Loading system services ({pct}%)</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (state.power === 'lock') {
+    return (
+      <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+          <div className="w-full max-w-lg rounded-[2rem] border border-white/10 bg-black/45 backdrop-blur-md p-10">
+            <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS Account</div>
+            <div className="mt-2 text-3xl font-black text-white">Student</div>
+
+            <div className="mt-5">
+              <input
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setLoginError(null);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    if (cooldownActive) {
+                      setLoginBusy(false);
+                      setLoginError(`Cooldown active. Try again in ${cooldownLabel}.`);
+                      return;
+                    }
+                    const candidate = password.trim().toLowerCase();
+                    setLoginBusy(true);
+                    window.setTimeout(() => {
+                      if (candidate === 'brightos') {
+                        setState((p) => ({ ...p, power: 'on' }));
+                        notify('info', 'SYSTEM', 'Welcome back. Mission environment loaded.');
+                      } else {
+                        setLoginBusy(false);
+                        setLoginError('Incorrect password');
+                      }
+                    }, 450);
+                  }
+                }}
+                placeholder="Password"
+                className="w-full h-12 rounded-2xl border border-white/10 bg-black/35 px-4 text-sm font-mono text-white outline-none focus:border-[var(--brand-primary)]/60"
+                autoFocus
+              />
+              <div className="mt-3 flex items-center justify-between gap-4">
+                <div className="text-xs text-zinc-400">
+                  {loginError ? <span className="text-red-300">{loginError}</span> : <span>Hint: <span className="font-mono text-zinc-200">brightos</span></span>}
+                </div>
+                <button
+                  disabled={loginBusy}
+                  onClick={() => {
+                    if (cooldownActive) {
+                      setLoginBusy(false);
+                      setLoginError(`Cooldown active. Try again in ${cooldownLabel}.`);
+                      return;
+                    }
+                    const candidate = password.trim().toLowerCase();
+                    setLoginBusy(true);
+                    window.setTimeout(() => {
+                      if (candidate === 'brightos') {
+                        setState((p) => ({ ...p, power: 'on' }));
+                        notify('info', 'SYSTEM', 'Welcome back. Mission environment loaded.');
+                      } else {
+                        setLoginBusy(false);
+                        setLoginError('Incorrect password');
+                      }
+                    }, 450);
+                  }}
+                  className={`h-12 px-6 rounded-2xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${
+                    loginBusy
+                      ? 'border-white/10 bg-white/[0.03] text-zinc-400'
+                      : 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-white'
+                  }`}
+                >
+                  {loginBusy ? 'Verifying…' : 'Unlock'}
+                </button>
+              </div>
+            </div>
+
+            {cooldownActive && (
+              <div className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-200">Cooldown Active</div>
+                <div className="mt-1 text-sm text-red-100/90">You have completed 5 missions today. Try again in {cooldownLabel}.</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const securityPulse = state.process.high_cpu.running || state.window.stuck_app.open || state.network.status !== 'Connected';
+  const fan = fanLevel(state.cpu_load);
+
+  const batteryLabel = mission.brightos_desktop.device === 'Laptop' ? '78%' : 'AC';
+  const networkLabel = state.network.status === 'Connected' ? 'WiFi' : state.network.status;
+
+  return (
+    <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+      <div className="absolute inset-0" style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+      <div className={`absolute inset-0 ${theme === 'light' ? 'bg-white/10' : 'bg-black/35'}`} />
+
+      <div className="relative z-10 h-screen">
+        <Notifications
+          items={state.notifications}
+          onDismiss={(id) => setState((p) => ({ ...p, notifications: p.notifications.filter((x) => x.id !== id) }))}
+        />
+
+        <StartMenu
+          open={startOpen}
+          query={startQuery}
+          setQuery={setStartQuery}
+          apps={startApps}
+          theme={theme}
+          onClose={() => setStartOpen(false)}
+          onToggleTheme={() => setTheme((p) => (p === 'light' ? 'dark' : 'light'))}
+          onLock={() => {
+            setStartOpen(false);
+            setPassword('');
+            setLoginBusy(false);
+            setLoginError(null);
+            setState((p) => ({ ...p, power: 'lock' }));
+          }}
+          onLaunch={(id) => {
+            setStartOpen(false);
+            taskbarToggle(id);
+          }}
+        />
+
+        {missionComplete && (
+          <div className="absolute inset-0 z-[300] flex items-center justify-center px-6">
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="relative w-full max-w-xl rounded-[2rem] border border-white/10 bg-black/55 backdrop-blur-md p-10">
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[var(--brand-primary)]">Mission Complete</div>
+              <div className="mt-3 text-3xl font-black text-white">+300 XP</div>
+              <div className="mt-3 text-zinc-200/80">Nice work. You can exit back to the mission list or retry.</div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button
+                  onClick={() => {
+                    const sid = liveSessionIdRef.current;
+                    if (sid && !liveSessionEndedRef.current) {
+                      endLiveSession(sid, { status: 'abandoned' });
+                      liveSessionEndedRef.current = true;
+                    }
+                    router.push('/practicals/technology-practicality/csec-roadmap');
+                  }}
+                  className="h-12 px-6 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
+                >
+                  Exit
+                </button>
+                <button
+                  onClick={() => {
+                    setMissionComplete(false);
+                    setState(initRuntime(mission));
+                    setWins(initialWindows(mission));
+                    setActiveWin(mission.id === 'tech-1' ? 'stuck_app' : 'terminal');
+
+                    liveSessionEndedRef.current = false;
+                    const session = startLiveSession('csec', mission.id);
+                    liveSessionIdRef.current = session.id;
+                    setPassword('');
+                    setLoginBusy(false);
+                    setLoginError(null);
+                    setTermLines([
+                      { id: uid('sys'), kind: 'sys', text: `Mission loaded: ${mission.id} — ${mission.title}` },
+                      { id: uid('sys'), kind: 'sys', text: 'Terminal: try help, dir, ipconfig /renew, tracert, netstat -ano' },
+                    ]);
+                    setTermInput('');
+                    notify('info', 'SYSTEM', 'Mission reset.');
+                  }}
+                  className="h-12 px-6 rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.06] transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="absolute top-4 left-4 z-[200] border border-white/20 bg-black/45 px-4 py-3">
+          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS Live Mission</div>
+          <div className="mt-1 text-white font-black">{mission.title}</div>
+          <div className="mt-1 text-xs text-zinc-300/80">{mission.client.name} • {mission.csec_alignment.concept}</div>
+        </div>
+
+        <div className="absolute top-4 right-4 z-[200] border border-white/20 bg-black/45 px-4 py-3 max-w-[460px]">
+          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Client</div>
+          <div className="mt-1 text-sm text-zinc-200">{mission.client.dialogue_start}</div>
+          <div className="mt-2 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Objective</div>
+          <div className="mt-1 text-xs text-zinc-200/90">Fix the issue and the system will auto-check completion.</div>
+        </div>
+
+        <div className="absolute left-4 top-24 z-[180] grid grid-cols-1 gap-3">
+          <DesktopIcon
+            title="This PC"
+            subtitle="File Explorer"
+            icon="🖥️"
+            onOpen={() => {
+              setExplorerLocation('pc');
+              taskbarToggle('explorer');
+            }}
+            disabled={stuckLock}
+          />
+          <DesktopIcon
+            title="Recycle Bin"
+            subtitle="Deleted items"
+            icon="🗑️"
+            onOpen={() => {
+              setExplorerLocation('recycle');
+              taskbarToggle('explorer');
+            }}
+            disabled={stuckLock}
+          />
+          <DesktopIcon
+            title="File Explorer"
+            subtitle="Browse"
+            icon="📁"
+            onOpen={() => {
+              taskbarToggle('explorer');
+            }}
+            disabled={stuckLock}
+          />
+          <DesktopIcon title="Apps" subtitle="Uninstall" icon="📦" onOpen={() => taskbarToggle('uninstall')} disabled={stuckLock} />
+          <DesktopIcon title="Registry" subtitle="Edit keys" icon="🧩" onOpen={() => taskbarToggle('registry')} disabled={stuckLock} />
+          {allowedTools.includes('Terminal') && (
+            <DesktopIcon title="Terminal" subtitle="Commands" icon="⌨️" onOpen={() => taskbarToggle('terminal')} disabled={stuckLock} />
+          )}
+          {allowedTools.includes('Task Manager') && (
+            <DesktopIcon title="Task Manager" subtitle="Processes" icon="📊" onOpen={() => taskbarToggle('taskmgr')} disabled={stuckLock} />
+          )}
+          {allowedTools.includes('Settings') && (
+            <DesktopIcon title="Settings" subtitle="System" icon="⚙️" onOpen={() => taskbarToggle('settings')} disabled={stuckLock} />
+          )}
+          {allowedTools.includes('Browser') && (
+            <DesktopIcon title="Browser" subtitle="Web" icon="🌐" onOpen={() => taskbarToggle('browser')} disabled={stuckLock} />
+          )}
+        </div>
+
+        <WindowFrame
+          win={wins.stuck_app}
+          focused={activeWin === 'stuck_app'}
+          onClose={() => close('stuck_app')}
+          onFocus={() => focus('stuck_app')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.stuck_app;
+            drag.current = { id: 'stuck_app', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('stuck_app');
+          }}
+          onDownResize={(e) => {
+            const w = wins.stuck_app;
+            drag.current = { id: 'stuck_app', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('stuck_app');
+          }}
+        >
+          <div className="text-sm text-zinc-200">This window is blocking your work. Close it to continue.</div>
+          <div className="mt-4 text-xs text-zinc-400">Tip: click X in the top-right. (Simulates a stuck app on the desktop.)</div>
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.uninstall}
+          focused={activeWin === 'uninstall'}
+          onClose={() => close('uninstall')}
+          onFocus={() => focus('uninstall')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.uninstall;
+            drag.current = { id: 'uninstall', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('uninstall');
+          }}
+          onDownResize={(e) => {
+            const w = wins.uninstall;
+            drag.current = { id: 'uninstall', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('uninstall');
+          }}
+        >
+          <UninstallPrograms
+            apps={state.apps}
+            onUninstall={(appId) => {
+              setState((p) => {
+                const app = p.apps[appId];
+                if (!app || !app.installed) return p;
+                const newApps = { ...p.apps, [appId]: { ...app, installed: false } };
+                const newRegistry = { ...p.registry };
+                if (app.registryKeys) app.registryKeys.forEach((k) => delete newRegistry[k]);
+                return { ...p, apps: newApps, registry: newRegistry };
+              });
+              notify('info', 'SYSTEM', `Uninstalled ${appId}.`);
+            }}
+          />
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.registry}
+          focused={activeWin === 'registry'}
+          onClose={() => close('registry')}
+          onFocus={() => focus('registry')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.registry;
+            drag.current = { id: 'registry', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('registry');
+          }}
+          onDownResize={(e) => {
+            const w = wins.registry;
+            drag.current = { id: 'registry', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('registry');
+          }}
+        >
+          <RegistryEditor
+            registry={state.registry}
+            onSet={(fullKey, value) => {
+              setState((p) => ({ ...p, registry: { ...p.registry, [fullKey]: value } }));
+              notify('info', 'SYSTEM', `Registry updated: ${fullKey}`);
+            }}
+            onDelete={(prefix) => {
+              setState((p) => {
+                const next = { ...p.registry };
+                Object.keys(next)
+                  .filter((k) => k.startsWith(prefix))
+                  .forEach((k) => delete next[k]);
+                return { ...p, registry: next };
+              });
+              notify('info', 'SYSTEM', `Registry key deleted: ${prefix}`);
+            }}
+          />
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.terminal}
+          focused={activeWin === 'terminal'}
+          onClose={() => close('terminal')}
+          onFocus={() => focus('terminal')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.terminal;
+            drag.current = { id: 'terminal', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('terminal');
+          }}
+          onDownResize={(e) => {
+            const w = wins.terminal;
+            drag.current = { id: 'terminal', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('terminal');
+          }}
+        >
+          <Terminal
+            mission={mission}
+            state={state}
+            fsEntries={fsEntries}
+            lines={termLines}
+            input={termInput}
+            setInput={setTermInput}
+            push={push}
+            onState={(fn) => setState(fn)}
+          />
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.explorer}
+          focused={activeWin === 'explorer'}
+          onClose={() => close('explorer')}
+          onFocus={() => focus('explorer')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.explorer;
+            drag.current = { id: 'explorer', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('explorer');
+          }}
+          onDownResize={(e) => {
+            const w = wins.explorer;
+            drag.current = { id: 'explorer', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('explorer');
+          }}
+        >
+          <FileExplorer
+            entries={fsEntries}
+            location={explorerLocation}
+            onSetLocation={setExplorerLocation}
+            onOpen={(path) => {
+              setState((p) => ({ ...p, file: { opened: path } }));
+              notify('info', 'SYSTEM', `Opened ${path}.`);
+            }}
+            onDeleteToRecycle={(path) => {
+              setFsEntries((prev) => moveToRecycleBin(prev, path));
+              setState((p) => ({ ...p, recycle_bin: { empty: false } }));
+              notify('info', 'SYSTEM', `Moved ${path} to Recycle Bin.`);
+            }}
+            onEmptyRecycle={() => {
+              setFsEntries((prev) => prev.filter((entry) => !normPath(entry).startsWith('RecycleBin:/')));
+              setState((p) => ({ ...p, recycle_bin: { empty: true } }));
+              notify('info', 'SYSTEM', 'Recycle Bin emptied.');
+            }}
+            theme={theme}
+          />
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.taskmgr}
+          focused={activeWin === 'taskmgr'}
+          onClose={() => close('taskmgr')}
+          onFocus={() => focus('taskmgr')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.taskmgr;
+            drag.current = { id: 'taskmgr', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('taskmgr');
+          }}
+          onDownResize={(e) => {
+            const w = wins.taskmgr;
+            drag.current = { id: 'taskmgr', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('taskmgr');
+          }}
+        >
+          <TaskManager
+            state={state}
+            onEndHighCpu={() => {
+              setState((p) => ({ ...p, cpu_load: 18, process: { ...p.process, high_cpu: { running: false } } }));
+              push([{ id: uid('sys'), kind: 'sys', text: 'Process ended. CPU load stabilizing.' }]);
+              notify('info', 'SYSTEM', 'Background process ended. Performance improved.');
+            }}
+          />
+        </WindowFrame>
+
+        <WindowFrame
+          win={wins.settings}
+          focused={activeWin === 'settings'}
+          onClose={() => close('settings')}
+          onFocus={() => focus('settings')}
+          theme={theme}
+          onDownMove={(e) => {
+            const w = wins.settings;
+            drag.current = { id: 'settings', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('settings');
+          }}
+          onDownResize={(e) => {
+            const w = wins.settings;
+            drag.current = { id: 'settings', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('settings');
+          }}
+        >
+          <Settings
+            state={state}
+            onCleanTmp={() => {
+              setFsEntries((prev) => prev.map(normPath).filter((p) => !p.toLowerCase().endsWith('.tmp')));
+              setState((p) => ({
+                ...p,
+                files: { ...p.files, tmp: { count: 0 } },
+                disk: { free_space_mb: p.disk.free_space_mb + 320 },
+              }));
+              push([{ id: uid('sys'), kind: 'sys', text: 'Temporary files deleted.' }]);
+              notify('info', 'SYSTEM', 'Storage cleanup completed.');
+            }}
+            onEmptyRecycle={() => {
+              setFsEntries((prev) => prev.map(normPath).filter((p) => !p.startsWith('RecycleBin:/')));
+              setState((p) => ({
+                ...p,
+                recycle_bin: { empty: true },
+                disk: { free_space_mb: p.disk.free_space_mb + 420 },
+              }));
+              push([{ id: uid('sys'), kind: 'sys', text: 'Recycle Bin emptied.' }]);
+              notify('info', 'SYSTEM', 'Recycle Bin emptied.');
+            }}
+            theme={theme}
+            onToggleTheme={() => {
+              setTheme((p) => (p === 'light' ? 'dark' : 'light'));
+              notify('info', 'SYSTEM', 'Theme updated.');
+            }}
+          />
+        </WindowFrame>
+
+        <div className="absolute left-0 right-0 bottom-0 z-[250]">
+          <Taskbar
+            now={now}
+            tools={allowedTools}
+            wins={wins}
+            onToggle={taskbarToggle}
+            fan={fan}
+            cpu={state.cpu_load}
+            securityPulse={securityPulse}
+            lockedByStuck={stuckLock}
+            theme={theme}
+            startOpen={startOpen}
+            onStart={() => {
+              setStartOpen((p) => !p);
+            }}
+            batteryLabel={batteryLabel}
+            networkLabel={networkLabel}
+          />
+        </div>
+
+        <div className="absolute bottom-14 left-4 z-[210] rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-3 max-w-[520px]">
+          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Free-Play Objective</div>
+          <div className="mt-1 text-sm text-zinc-200">Resolve the client issue and the system will validate completion.</div>
+          <div className="mt-2 text-xs text-zinc-400">Tools allowed: {mission.tools_allowed.join(', ')}</div>
+        </div>
+      </div>
+    </div>
+  );
+}

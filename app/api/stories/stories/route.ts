@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAllStories, ensureDefaultStory } from '@/lib/stories-store';
 import { verifyAuth } from '@/lib/auth-server';
 
+ export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     await verifyAuth(request);

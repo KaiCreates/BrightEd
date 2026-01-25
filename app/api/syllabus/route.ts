@@ -3,6 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { verifyAuth } from '@/lib/auth-server';
 
+ export const dynamic = 'force-dynamic';
+
 interface SyllabusObjective {
   id: string;
   section: string;

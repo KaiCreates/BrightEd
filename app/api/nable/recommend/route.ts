@@ -16,6 +16,8 @@ import {
     type ContentItem
 } from '@/lib/nable';
 
+export const dynamic = 'force-dynamic';
+
 // 1. Validation Schema
 const QuerySchema = z.object({
     userId: z.string(),
