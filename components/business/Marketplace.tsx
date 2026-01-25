@@ -52,15 +52,25 @@ export default function Marketplace({ business }: MarketplaceProps) {
     }, [business]);
 
     const performRestock = async () => {
+        const defaults = getDefaultMarketItems();
+
         const items = business.marketState?.items && business.marketState.items.length > 0
             ? business.marketState.items
-            : getDefaultMarketItems();
+            : defaults;
 
-        // Refill stock to max
-        const newItems = items.map(item => ({
-            ...item,
-            stock: item.maxStock
-        }));
+        const mergedItems = items.map((item: any) => {
+            const def = defaults.find(d => d.id === item.id);
+            const mergedMax = Math.max(item.maxStock ?? 0, def?.maxStock ?? 0);
+            return {
+                ...def,
+                ...item,
+                maxStock: mergedMax,
+                stock: mergedMax,
+            };
+        });
+
+        const missingDefaults = defaults.filter(d => !mergedItems.some((i: any) => i.id === d.id));
+        const newItems = [...mergedItems, ...missingDefaults];
 
         // Set next restock time (Strict 5 minutes)
         const nextRestock = new Date(Date.now() + 5 * 60 * 1000).toISOString();
