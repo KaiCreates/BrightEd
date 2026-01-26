@@ -10,6 +10,7 @@ import MathDiagram from '@/app/components/MathDiagram'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
 import { useQuestionLoader } from '@/app/hooks/useQuestionLoader'
+import { ScenarioBrief, DecisionCard } from '@/components/simulation'
 
 interface SimulationStep {
   id: number
@@ -105,6 +106,7 @@ export default function SimulatePage() {
     blockedProgression: boolean;
     currentStreak: number;
     masteryDelta: Record<string, number>;
+    lastDifficulty?: number; // Added for UI difficulty indicator
   } | null>(null)
   const [showMicroLesson, setShowMicroLesson] = useState(false)
   const [answerStartTime, setAnswerStartTime] = useState<number>(Date.now())
@@ -551,9 +553,18 @@ export default function SimulatePage() {
               ← Exit
             </Link>
             <div className="h-6 w-px bg-[var(--border-subtle)]" />
-            <span className="text-[var(--text-secondary)] font-bold text-sm">
-              Step {currentStep + 1} of {simulationSteps.length}
-            </span>
+            {/* Segmented Progress Bar */}
+            <div className="flex gap-1">
+              {simulationSteps.map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-2 w-8 rounded-full transition-all duration-500 ${i <= currentStep
+                      ? 'bg-[var(--brand-primary)] shadow-[0_0_10px_rgba(var(--brand-primary-rgb),0.4)]'
+                      : 'bg-[var(--border-subtle)]'
+                    }`}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
@@ -626,13 +637,13 @@ export default function SimulatePage() {
 
                   {step.type === 'decision' && (
                     <>
-                      <div className="mb-6">
-                        <span className="inline-block px-3 py-1 bg-[var(--brand-secondary)] text-white text-xs font-bold uppercase tracking-widest rounded-md mb-4">
-                          Decision Point
-                        </span>
-                        <BrightHeading level={2} className="leading-tight">
-                          {step.content}
-                        </BrightHeading>
+                      <div className="mb-8">
+                        {/* New Scenario Wrapper */}
+                        <ScenarioBrief
+                          content={step.content}
+                          subject={subjectId || 'GENERAL'}
+                          difficulty={nableResponse?.lastDifficulty || 1}
+                        />
                       </div>
 
                       {/* Math Diagram Support */}
@@ -669,34 +680,62 @@ export default function SimulatePage() {
                           }}
                         />
                       ) : (
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           {step.options?.map((option: string, index: number) => {
                             const isSelected = selectedAnswer === index
                             const isCorrect = index === step.correctAnswer
 
+                            // Only show result state if feedback is active
+                            const showResult = showFeedback
+
                             return (
-                              <button
-                                key={index}
-                                onClick={() => handleAnswer(index)}
-                                disabled={showFeedback}
-                                className={`
-                                  w-full px-6 py-4 rounded-xl font-bold text-left transition-all border-2
-                                  ${showFeedback
-                                    ? isCorrect
-                                      ? 'bg-[var(--state-success)] border-[var(--state-success)] text-white shadow-md'
-                                      : isSelected
-                                        ? 'bg-[var(--state-error)] border-[var(--state-error)] text-white shadow-md'
-                                        : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] opacity-50'
-                                    : 'bg-[var(--bg-primary)] border-[var(--border-subtle)] hover:border-[var(--brand-primary)] hover:shadow-lg active:scale-[0.98]'
-                                  }
-                                `}
-                              >
-                                <div className="flex items-center justify-between">
-                                  <span>{option}</span>
-                                  {showFeedback && isCorrect && <span>✅</span>}
-                                  {showFeedback && isSelected && !isCorrect && <span>❌</span>}
-                                </div>
-                              </button>
+                              <div key={index}>
+                                <DecisionCard
+                                  option={option}
+                                  index={index}
+                                  isSelected={isSelected}
+                                  isCorrect={isCorrect}
+                                  showResult={showResult}
+                                  disabled={showFeedback}
+                                  onSelect={() => handleAnswer(index)}
+                                />
+
+                                {/* EXPANDABLE OUTCOME PANEL (Only for selected or correct options) */}
+                                <AnimatePresence>
+                                  {showFeedback && (isSelected || (showResult && isCorrect)) && (
+                                    <motion.div
+                                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                      animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+                                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                                      className="overflow-hidden"
+                                    >
+                                      <div className={`
+                                        p-4 rounded-xl border-l-4 
+                                        ${isCorrect
+                                          ? 'bg-green-500/10 border-green-500'
+                                          : 'bg-amber-500/10 border-amber-500'}
+                                      `}>
+                                        <h4 className={`text-xs font-black uppercase tracking-widest mb-1 ${isCorrect ? 'text-green-600' : 'text-amber-600'}`}>
+                                          {isCorrect ? 'SIMULATION SUCCESS' : 'CRITICAL INSIGHT'}
+                                        </h4>
+                                        <p className="text-sm text-[var(--text-secondary)]">
+                                          {isCorrect
+                                            ? "Excellent decision. This aligns with best practices."
+                                            : "This choice would lead to suboptimal outcomes in a real scenario."}
+                                        </p>
+
+                                        {/* Show NABLE Mastery Delta if correct */}
+                                        {isCorrect && nableResponse?.masteryDelta && objectiveId && nableResponse.masteryDelta[objectiveId] > 0 && (
+                                          <div className="mt-2 inline-flex items-center gap-1.5 bg-green-500/20 px-2 py-0.5 rounded text-[10px] font-black uppercase text-green-700">
+                                            <span>📈</span>
+                                            <span>Mastery +{Math.round(nableResponse.masteryDelta[objectiveId] * 100)}%</span>
+                                          </div>
+                                        )}
+                                      </div>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </div>
                             )
                           })}
                         </div>
@@ -704,46 +743,22 @@ export default function SimulatePage() {
                     </>
                   )}
 
-                  {/* Feedback Section */}
+                  {/* Main Feedback Area (Now simpler, as detail is in cards) */}
                   <AnimatePresence>
                     {showFeedback && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mt-6"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="mt-8 flex justify-end"
                       >
-                        <BrightLayer variant="glass" className={`border-l-4 ${selectedAnswer === step.correctAnswer ? 'border-[var(--state-success)] bg-green-500/10' : 'border-[var(--state-error)] bg-red-500/10'}`}>
-                          <div className="flex gap-3">
-                            <div className="text-2xl">
-                              {selectedAnswer === step.correctAnswer ? '🎉' : '💡'}
-                            </div>
-                            <div>
-                              <p className="font-bold text-[var(--text-primary)]">
-                                {selectedAnswer === step.correctAnswer ? 'Correct!' : 'Not quite right.'}
-                              </p>
-                              {selectedAnswer !== step.correctAnswer && !showHint && (
-                                <button
-                                  onClick={() => setShowHint(true)}
-                                  className="text-sm text-[var(--brand-primary)] font-black hover:underline mt-1 uppercase tracking-wider"
-                                >
-                                  Show Hint
-                                </button>
-                              )}
-                              {/* NABLE Mastery Feedback */}
-                              {selectedAnswer === step.correctAnswer && nableResponse?.masteryDelta && objectiveId && nableResponse.masteryDelta[objectiveId] > 0 && (
-                                <motion.div
-                                  initial={{ scale: 0.8, opacity: 0 }}
-                                  animate={{ scale: 1, opacity: 1 }}
-                                  className="mt-2 inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border border-emerald-500/20"
-                                >
-                                  <span>📈</span>
-                                  <span>Mastery +{Math.round(nableResponse.masteryDelta[objectiveId] * 100)}%</span>
-                                </motion.div>
-                              )}
-                            </div>
-                          </div>
-                        </BrightLayer>
+                        <BrightButton
+                          size="lg"
+                          onClick={currentStep < simulationSteps.length - 1 ? nextStep : handleComplete}
+                          className="animate-bounce-subtle"
+                        >
+                          {currentStep < simulationSteps.length - 1 ? 'Next Scenario →' : 'Complete Module'}
+                        </BrightButton>
                       </motion.div>
                     )}
                   </AnimatePresence>

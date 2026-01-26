@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
+import { LearningPathNode, SectionHeader, PathConnector, type NodeType } from '@/components/learning'
 
 interface SyllabusObjective {
   id: string
@@ -29,6 +30,8 @@ interface LearningModule {
   icon: string
   color: string
   borderColor: string
+  nodeType: NodeType // NEW: Node variant type
+  lastVisited?: string // For maintenance detection
 }
 
 import { Suspense } from 'react'
@@ -185,6 +188,35 @@ function LearnContent() {
               status = stars >= 3 ? 'completed' : 'current'
             }
 
+            // Determine node type for Career Roadmap visualization
+            let nodeType: NodeType = 'standard'
+
+            // Boss node every 5th position (indices 4, 9, 14, etc.)
+            if ((index + 1) % 5 === 0) {
+              nodeType = 'boss'
+            }
+            // Crisis node for high difficulty objectives (randomly 15% chance)
+            else if (obj.difficulty >= 3 && Math.random() < 0.15) {
+              nodeType = 'crisis'
+            }
+            // Crunch node based on keywords or random 10% chance
+            else if (
+              obj.content?.toLowerCase().includes('rapid') ||
+              obj.content?.toLowerCase().includes('speed') ||
+              Math.random() < 0.1
+            ) {
+              nodeType = 'crunch'
+            }
+            // Maintenance node for completed nodes not visited in 3+ days
+            else if (status === 'completed' && progress?.lastVisited) {
+              const daysSinceVisit = Math.floor(
+                (Date.now() - new Date(progress.lastVisited).getTime()) / (1000 * 60 * 60 * 24)
+              )
+              if (daysSinceVisit >= 3) {
+                nodeType = 'maintenance'
+              }
+            }
+
             return {
               id: obj.id,
               title,
@@ -192,6 +224,8 @@ function LearnContent() {
               level: obj.difficulty || 1,
               status,
               stars,
+              nodeType,
+              lastVisited: progress?.lastVisited,
               ...style
             }
           })
@@ -303,92 +337,53 @@ function LearnContent() {
           )}
 
           {!loading && !error && learningModules.map((module, index) => {
-            // Calculate offset for "winding" effect
-            let alignClass = ''
-            if (index % 4 === 1) alignClass = '-ml-32' // Left
-            if (index % 4 === 3) alignClass = 'ml-32'  // Right
-
             // Check if this is the module to animate unlocking (the first 'current' one)
             const isUnlocking = shouldAnimateUnlock && module.status === 'current' && index > 0;
+            const isNext = module.status === 'current' || (module.status === 'locked' && index > 0 && learningModules[index - 1].status === 'completed');
 
-            const isLocked = module.status === 'locked';
-            const isCompleted = module.status === 'completed';
+            // Determine path direction for connector
+            let pathVariant: 'straight' | 'left' | 'right' = 'straight';
+            if (index % 4 === 0) pathVariant = 'left';       // 0 -> 1 goes left-ish
+            if (index % 4 === 1) pathVariant = 'straight';   // 1 -> 2 straight
+            if (index % 4 === 2) pathVariant = 'right';      // 2 -> 3 goes right-ish
+            if (index % 4 === 3) pathVariant = 'straight';   // 3 -> 4 straight
+
+            // Section Header every 5 modules
+            const showHeader = index % 5 === 0;
+            const moduleNum = Math.floor(index / 5) + 1;
+
+            // Determine header theme based on module number
+            const headerTheme = moduleNum === 1 ? 'startup' : moduleNum === 2 ? 'growth' : moduleNum === 3 ? 'mastery' : 'default';
 
             return (
-              <motion.div
-                key={module.id}
-                initial={{ opacity: 0, y: 50, scale: isUnlocking ? 0 : 1 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: index * 0.1,
-                  type: isUnlocking ? "spring" : "tween",
-                  stiffness: isUnlocking ? 200 : undefined
-                }}
-                className={`relative z-10 ${alignClass}`}
-              >
-                {/* Unlock Celebration Ring */}
-                {isUnlocking && (
-                  <motion.div
-                    initial={{ scale: 1.5, opacity: 0 }}
-                    animate={{ scale: 2.5, opacity: 0 }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-                    className="absolute inset-0 bg-[var(--brand-accent)] rounded-full opacity-0 z-0 pointer-events-none"
+              <div key={module.id} className="w-full flex flex-col items-center">
+                {/* Section Header */}
+                {showHeader && (
+                  <SectionHeader
+                    moduleNumber={moduleNum}
+                    title={moduleNum === 1 ? "The Startup Phase" : moduleNum === 2 ? "Growth & Scaling" : "Market Dominance"}
+                    theme={headerTheme}
                   />
                 )}
 
-                <Link
-                  href={!isLocked ? `/simulate?objectiveId=${module.id}&subjectId=${encodeURIComponent(module.subject)}` : '#'}
-                  className={`group relative flex flex-col items-center ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-                >
-                  {/* Floating Tooltip/Label */}
-                  <BrightLayer
-                    variant="glass"
-                    padding="sm"
-                    className="absolute -top-16 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none mb-2 border border-[var(--border-subtle)]"
-                  >
-                    <span className="font-bold text-[var(--text-primary)]">{module.title}</span>
-                  </BrightLayer>
+                {/* Node Component */}
+                <LearningPathNode
+                  {...module}
+                  id={String(module.id)}
+                  index={index}
+                  isUnlocking={isUnlocking}
+                />
 
-                  {/* Node Circle */}
-                  <div
-                    className={`
-                      w-24 h-24 rounded-full flex items-center justify-center text-4xl shadow-xl transition-all transform active:scale-95 border-b-[6px] border-4
-                      ${isLocked
-                        ? 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] grayscale opacity-70 text-[var(--text-muted)]'
-                        : `bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] border-[var(--brand-primary)] text-white hover:scale-110 hover:shadow-2xl hover:shadow-[var(--brand-primary)]/30`
-                      }
-                      ${isCompleted ? 'border-[var(--state-success)] from-[var(--state-success)] to-green-400' : ''}
-                    `}
-                  >
-                    {isCompleted ? (
-                      <span className="drop-shadow-md">✓</span>
-                    ) : isLocked ? (
-                      <span className="opacity-50 text-2xl">🔒</span>
-                    ) : (
-                      <span className="animate-pulse">{module.icon}</span>
-                    )}
-
-                    {/* Stars - always show for unlocked nodes */}
-                    {!isLocked && (
-                      <div className="absolute -bottom-6 flex gap-1 bg-[var(--bg-primary)] px-2 py-1 rounded-full border border-[var(--border-subtle)] shadow-sm">
-                        {[...Array(3)].map((_, i) => (
-                          <span key={i} className={`text-sm transition-all ${i < module.stars ? 'text-[var(--brand-accent)] drop-shadow-sm' : 'text-[var(--text-muted)] opacity-30'}`}>
-                            ★
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </Link>
-
-                {/* Connecting Path dots */}
+                {/* Connector Path (if not last) */}
                 {index < learningModules.length - 1 && (
-                  <div className={`absolute top-24 left-1/2 transform -translate-x-1/2 h-8 w-3 bg-[var(--border-subtle)] rounded-full -z-10 ${index % 4 === 1 ? 'rotate-[-30deg] origin-top' :
-                    index % 4 === 3 ? 'rotate-[30deg] origin-top' : ''
-                    }`}></div>
+                  <PathConnector
+                    fromIndex={index}
+                    isCompleted={module.status === 'completed'}
+                    isNext={isNext}
+                    variant={pathVariant}
+                  />
                 )}
-              </motion.div>
+              </div>
             )
           })}
         </div>
