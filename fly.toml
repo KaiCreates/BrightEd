@@ -12,12 +12,7 @@ primary_region = "ewr"
   min_machines_running = 0
   processes = ["app"]
 
-[[mounts]]
-  source = "brighted_data"
-  destination = "/app/data"
-
 [env]
-  DATABASE_URL = "file:/app/data/prod.db"
   PORT = "3000"
 
 [[vm]]

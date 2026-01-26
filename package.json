@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:questions": "node scripts/migrate-questions.js",
     "generate:questions": "python scripts/generate_questions_ollama_firestore.py"
   },
   "dependencies": {
@@ -15,17 +14,14 @@
     "@opentelemetry/resources": "^2.5.0",
     "@opentelemetry/sdk-trace-base": "^2.5.0",
     "@opentelemetry/sdk-trace-node": "^2.5.0",
-    "@prisma/client": "^7.3.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.91.1",
     "@types/react-window": "^1.8.8",
-    "better-sqlite3": "^12.6.2",
     "firebase": "^12.8.0",
     "firebase-admin": "^13.6.0",
     "framer-motion": "^11.0.0",
     "fuse.js": "^7.1.0",
     "next": "^14.2.0",
-    "prisma": "^7.3.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-hot-toast": "^2.4.1",
@@ -36,7 +32,6 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

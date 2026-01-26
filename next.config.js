@@ -4,9 +4,6 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  experimental: {
-    serverComponentsExternalPackages: ['better-sqlite3'],
-  },
   webpack: (config, { isServer }) => {
     config.watchOptions = {
       ...(config.watchOptions || {}),
