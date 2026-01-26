@@ -6,14 +6,14 @@ import { getStorage } from "firebase/storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-    databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || `https://${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}-default-rtdb.firebaseio.com`
+    apiKey: "AIzaSyCnYUApzy1NQeQSZHaM2e1FgcO_qLaHI_4",
+    authDomain: "brighted-426615.firebaseapp.com",
+    projectId: "brighted-426615",
+    storageBucket: "brighted-426615.appspot.com",
+    messagingSenderId: "1066222262665",
+    appId: "1:1066222262665:web:2c6b2c6b2c6b2c6b2c6b2c",
+    measurementId: "G-426615",
+    databaseURL: "https://brighted-426615-default-rtdb.firebaseio.com"
 };
 
 // Singleton pattern for Firebase initialization
