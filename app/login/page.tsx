@@ -27,6 +27,13 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
+
+    const { isFirebaseReady } = await import('@/lib/firebase')
+    if (!isFirebaseReady) {
+      setError("System temporary unavailable: Firebase configuration is missing. Please check your environment variables.")
+      return
+    }
+
     setLoading(true)
 
     try {
