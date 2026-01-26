@@ -2,12 +2,16 @@ import os
 import json
 import time
 import hashlib
+import asyncio
+import aiohttp
 from pathlib import Path
 
-import requests
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+# LIMIT CONCURRENCY TO PREVENT GPU OOM (Set to 1 for Llama 3.1 on 6GB VRAM)
+CONCURRENCY_LIMIT = int(os.getenv('OLLAMA_CONCURRENCY', '1'))
+SEMAPHORE = asyncio.Semaphore(CONCURRENCY_LIMIT)
 
 def _load_service_account():
     explicit_path = os.getenv('FIREBASE_SERVICE_ACCOUNT_PATH')
@@ -21,7 +25,6 @@ def _load_service_account():
 
     raise RuntimeError('No Firebase service account found. Set FIREBASE_SERVICE_ACCOUNT_PATH or place a *firebase-adminsdk*.json in the project root.')
 
-
 def _get_firestore():
     if firebase_admin._apps:
         return firestore.client()
@@ -29,365 +32,267 @@ def _get_firestore():
     firebase_admin.initialize_app(credentials.Certificate(sa))
     return firestore.client()
 
-
 def _subject_from_objective(obj: dict) -> str:
     oid = str(obj.get('id') or '')
     prefix = oid.split('-')[0].upper() if '-' in oid else oid.split('_')[0].upper()
     mapping = {
-        'MATH': 'Mathematics',
-        'ENG': 'English',
-        'POB': 'Principles of Business',
-        'SOC': 'Social Studies',
-        'BIO': 'Biology',
-        'CHEM': 'Chemistry',
-        'PHYS': 'Physics',
-        'IT': 'Information Technology',
-        'GEO': 'Geography',
-        'HIST': 'History',
-        'ECON': 'Economics',
+        'MATH': 'Mathematics', 'ENG': 'English', 'POB': 'Principles of Business',
+        'SOC': 'Social Studies', 'BIO': 'Biology', 'CHEM': 'Chemistry',
+        'PHYS': 'Physics', 'IT': 'Information Technology', 'GEO': 'Geography',
+        'HIST': 'History', 'ECON': 'Economics',
     }
     if prefix in mapping:
         return mapping[prefix]
 
     source = str(obj.get('source_file') or '').lower()
-    if 'mathematics' in source or 'math' in source:
-        return 'Mathematics'
-    if 'english' in source or 'language' in source:
-        return 'English'
-    if 'business' in source or 'pob' in source or 'principles' in source:
-        return 'Principles of Business'
-    if 'social' in source:
-        return 'Social Studies'
-    if 'biology' in source or 'biol' in source:
-        return 'Biology'
-    if 'chem' in source:
-        return 'Chemistry'
-    if 'phys' in source:
-        return 'Physics'
-    if 'geography' in source or 'geo' in source:
-        return 'Geography'
-    if 'history' in source or 'hist' in source:
-        return 'History'
-    if 'econ' in source:
-        return 'Economics'
+    for key, val in mapping.items():
+        if key.lower() in source: return val
     return 'General'
 
-
 def _difficulty_text(d: int) -> str:
-    if d <= 1:
-        return 'easy'
-    if d == 2:
-        return 'medium'
-    return 'hard'
-
+    return 'easy' if d <= 1 else 'medium' if d == 2 else 'hard'
 
 def _normalize_text(s: str) -> str:
     s = (s or '').strip().lower()
-    out = []
-    for ch in s:
-        if ch.isalnum() or ch.isspace():
-            out.append(ch)
-    return ' '.join(''.join(out).split())
-
+    return ' '.join(''.join(c for c in s if c.isalnum() or c.isspace()).split())
 
 def _hash_text(s: str) -> str:
     return hashlib.sha1(_normalize_text(s).encode('utf-8')).hexdigest()
 
+async def _ollama_generate(session: aiohttp.ClientSession, ollama_host: str, model: str, prompt: str, temperature: float, timeout_sec: int, num_predict: int) -> str:
+    async with SEMAPHORE:
+        try:
+            async with session.post(
+                f"{ollama_host}/api/generate",
+                json={
+                    'model': model,
+                    'prompt': prompt,
+                    'stream': False,
+                    'format': 'json',
+                    'temperature': temperature,
+                    'options': {'num_predict': num_predict},
+                },
+                timeout=aiohttp.ClientTimeout(total=timeout_sec),
+            ) as r:
+                r.raise_for_status()
+                data = await r.json()
+                return (data or {}).get('response', '')
+        except Exception as e:
+            print(f"    [!] Error during Ollama generation: {e}")
+            return ""
 
-def _ollama_generate(session: requests.Session, ollama_host: str, model: str, prompt: str, temperature: float, timeout_sec: int, num_predict: int) -> str:
-    r = session.post(
-        f"{ollama_host}/api/generate",
-        json={
-            'model': model,
-            'prompt': prompt,
-            'stream': False,
-            'format': 'json',
-            'temperature': temperature,
-            'options': {
-                'num_predict': num_predict,
-            },
-        },
-        timeout=timeout_sec,
-    )
-    r.raise_for_status()
-    return (r.json() or {}).get('response', '')
-
-
-def _build_prompt(
-    objective: dict,
-    subject: str,
-    difficulty_text: str,
-    count: int,
-    existing_questions: list[str],
-    max_context_chars: int,
-    max_existing: int,
-    max_existing_chars: int,
-) -> str:
+def _build_prompt(objective: dict, subject: str, difficulty_text: str, count: int, existing_questions: list[str], max_context: int, max_ex: int, max_ex_chars: int) -> str:
     topic = str(objective.get('objective') or '')
-    context = str(objective.get('content') or '')
-    if max_context_chars > 0 and len(context) > max_context_chars:
-        context = context[:max_context_chars]
-    keywords = objective.get('keywords') or []
-    keyword_text = ', '.join([k for k in keywords if isinstance(k, str)][:12])
-    trimmed_existing: list[str] = []
-    for q in existing_questions[-max_existing:] if max_existing > 0 else []:
-        q = str(q or '').strip()
-        if not q:
-            continue
-        if max_existing_chars > 0 and len(q) > max_existing_chars:
-            q = q[:max_existing_chars]
-        trimmed_existing.append(q)
-    existing_block = '\n'.join([f"- {q}" for q in trimmed_existing])
+    context = str(objective.get('content') or '')[:max_context]
+    keywords = (objective.get('keywords') or [])[:10]
+    
+    # Select a random pedagogical approach to force diversity
+    approaches = [
+        "theoretical understanding", "practical application in a Caribbean context", 
+        "problem solving", "definition and identification", "comparative analysis"
+    ]
+    approach = approaches[int(time.time()) % len(approaches)]
+    
+    existing_block = '\n'.join([f"- {q[:max_ex_chars]}" for q in existing_questions[-max_ex:] if q.strip()])
 
     return (
-        f"Create {count} CSEC style multiple-choice questions for the subject \"{subject}\".\n"
-        f"Topic objective ID: {objective.get('id')}\n"
-        f"Topic: {topic}\n"
-        f"Context: {context}\n"
-        f"Keywords: {keyword_text}\n"
-        f"Difficulty: {difficulty_text}\n\n"
-        f"Hard requirements:\n"
-        f"- Return ONLY valid JSON (no markdown).\n"
-        f"- Produce exactly {count} questions.\n"
-        f"- Every question must be unique and not paraphrases of each other.\n"
-        f"- Options must be 4 items, clearly distinct, and only one correct answer.\n"
-        f"- correctAnswer must be an integer 0-3.\n"
-        f"- Keep explanations short but specific.\n\n"
-        f"Avoid repeating these question texts (do not output anything similar):\n{existing_block}\n\n"
-        f"Return JSON with this exact structure:\n"
-        f"{{\n  \"questions\": [\n    {{\n      \"question\": \"...\",\n      \"options\": [\"A\", \"B\", \"C\", \"D\"],\n      \"correctAnswer\": 0,\n      \"explanation\": \"...\",\n      \"storyElement\": \"Spot on!\"\n    }}\n  ]\n}}"
+        f"You are a Senior CSEC Examiner for {subject}.\n"
+        f"Output ONLY valid JSON. No markdown, no introductory text.\n"
+        f"Create {count} unique, high-quality multiple-choice questions focusing on: {approach}.\n\n"
+        f"Topic: {topic}\nContext: {context}\nKeywords: {', '.join(keywords)}\nDifficulty: {difficulty_text}\n\n"
+        f"Pedagogical Requirements:\n"
+        f"- Distractors (wrong options) must be plausible and based on common misconceptions.\n"
+        f"- Avoid 'All of the above' or 'None of the above'.\n"
+        f"- The question must directly assess the topic objective.\n"
+        f"- Use Caribbean names and scenarios where appropriate for 'Caribbean context'.\n\n"
+        f"Avoid repeating or paraphrasing these existing questions:\n{existing_block}\n\n"
+        f"Required JSON Structure:\n"
+        f"{{\n  \"questions\": [\n    {{\n      \"question\": \"Question text here\",\n      \"options\": [\"Option A\", \"Option B\", \"Option C\", \"Option D\"],\n      \"correctAnswer\": 0,\n      \"explanation\": \"Explanation here.\",\n      \"storyElement\": \"Feedback here.\"\n    }}\n  ]\n}}"
     )
 
-
 def _parse_questions_json(raw: str) -> list[dict]:
+    if not raw: return []
     try:
         data = json.loads(raw)
     except Exception:
-        start = raw.find('{')
-        end = raw.rfind('}')
-        if start == -1 or end == -1 or end <= start:
-            raise
-        data = json.loads(raw[start : end + 1])
+        start, end = raw.find('{'), raw.rfind('}')
+        if start == -1 or end == -1: return []
+        try: data = json.loads(raw[start : end + 1])
+        except: return []
 
     qs = data.get('questions')
-    if not isinstance(qs, list):
-        raise ValueError('Invalid response: missing questions array')
+    if not isinstance(qs, list): return []
+
+    def _safe_str(val) -> str:
+        if isinstance(val, list):
+            return " ".join(str(i) for i in val)
+        return str(val or "").strip()
 
     out = []
     for q in qs:
-        if not isinstance(q, dict):
-            continue
-        question = q.get('question')
-        options = q.get('options')
+        # Validate structure but be lenient with types
+        q_text = _safe_str(q.get('question'))
+        opts = q.get('options')
         correct = q.get('correctAnswer')
-        if not isinstance(question, str) or not question.strip():
-            continue
-        if not isinstance(options, list) or len(options) != 4 or not all(isinstance(o, str) and o.strip() for o in options):
-            continue
-        if not isinstance(correct, int) or correct < 0 or correct > 3:
-            continue
-        out.append(
-            {
-                'question': question.strip(),
-                'options': [o.strip() for o in options],
-                'correctAnswer': int(correct),
-                'explanation': str(q.get('explanation') or '').strip(),
-                'storyElement': str(q.get('storyElement') or 'Challenge').strip() or 'Challenge',
-            }
-        )
-    return out
 
+        if not q_text or not isinstance(opts, list) or len(opts) != 4 or correct is None:
+            continue
+        
+        try:
+            out.append({
+                'question': q_text,
+                'options': [_safe_str(o) for o in opts],
+                'correctAnswer': int(correct) if str(correct).isdigit() else 0,
+                'explanation': _safe_str(q.get('explanation')),
+                'storyElement': _safe_str(q.get('storyElement') or 'Challenge'),
+            })
+        except:
+            continue
+    return out
 
 def _iter_objectives(syllabus_dir: Path):
     for p in sorted(syllabus_dir.glob('*.json')):
-        if p.name in {'combined_syllabuses.json', 'processing_summary.json'}:
-            continue
+        if p.name in {'combined_syllabuses.json', 'processing_summary.json'}: continue
         try:
             data = json.loads(p.read_text(encoding='utf-8'))
-        except Exception:
-            continue
-        if isinstance(data, list):
-            for obj in data:
-                if isinstance(obj, dict) and obj.get('id'):
-                    yield obj
+            if isinstance(data, list):
+                for obj in data:
+                    if isinstance(obj, dict) and obj.get('id'): yield obj
+        except: continue
 
-
-def main():
+async def main():
     syllabus_dir = Path(os.getenv('SYLLABUS_OUTPUT_DIR', 'syllabuses/output'))
     per_objective = int(os.getenv('QUESTIONS_PER_OBJECTIVE', '50'))
-    model = os.getenv('OLLAMA_MODEL', 'smollm:1.7b')
+    model = os.getenv('OLLAMA_MODEL', 'llama3.1')
     ollama_host = os.getenv('OLLAMA_HOST', 'http://127.0.0.1:11434').rstrip('/')
-    batch_n = int(os.getenv('OLLAMA_BATCH_SIZE', '8'))
+    batch_n = int(os.getenv('OLLAMA_BATCH_SIZE', '6')) # Reducing batch per request for JSON quality
     temperature = float(os.getenv('OLLAMA_TEMPERATURE', '0.8'))
     timeout_sec = int(os.getenv('OLLAMA_TIMEOUT_SEC', '60'))
     num_predict = int(os.getenv('OLLAMA_NUM_PREDICT', '1200'))
-    force = os.getenv('FORCE_REGENERATE', '0') in {'1', 'true', 'TRUE', 'yes', 'YES'}
-    subject_prefix_filter = os.getenv('SUBJECT_PREFIX_FILTER', '').strip()
+    force = os.getenv('FORCE_REGENERATE', '0') in {'1', 'true', 'yes'}
+    prefix_filter = os.getenv('SUBJECT_PREFIX_FILTER', '').strip()
     max_objectives = int(os.getenv('MAX_OBJECTIVES', '0'))
     start_index = int(os.getenv('START_INDEX', '0'))
-    prompt_context_max_chars = int(os.getenv('PROMPT_CONTEXT_MAX_CHARS', '1200'))
-    prompt_existing_max = int(os.getenv('PROMPT_EXISTING_MAX', '8'))
-    prompt_existing_max_chars = int(os.getenv('PROMPT_EXISTING_MAX_CHARS', '180'))
-    max_seconds_per_objective = int(os.getenv('MAX_SECONDS_PER_OBJECTIVE', '180'))
-    explicit_max_attempts = int(os.getenv('MAX_ATTEMPTS_PER_OBJECTIVE', '0'))
 
-    if not syllabus_dir.exists() or not syllabus_dir.is_dir():
-        raise RuntimeError(f"Syllabus output dir not found: {syllabus_dir}")
+    if not syllabus_dir.exists(): raise RuntimeError("Syllabus dir missing")
 
     db = _get_firestore()
-    session = requests.Session()
-
-    global_seen = set()
-    total_written = 0
-
+    
     objectives = list(_iter_objectives(syllabus_dir))
-    if not objectives:
-        raise RuntimeError('No objectives found in syllabus JSON files.')
+    if prefix_filter:
+        allowed = {p.strip().upper() for p in prefix_filter.split(',')}
+        objectives = [o for o in objectives if str(o.get('id')).split('-')[0].upper() in allowed]
 
-    if subject_prefix_filter:
-        allowed = {p.strip().upper() for p in subject_prefix_filter.split(',') if p.strip()}
+    objectives = objectives[start_index:]
+    if max_objectives > 0: objectives = objectives[:max_objectives]
 
-        def _prefix(o: dict) -> str:
-            oid = str(o.get('id') or '')
-            if '-' in oid:
-                return oid.split('-')[0].upper()
-            if '_' in oid:
-                return oid.split('_')[0].upper()
-            return oid[:3].upper()
+    print(f"[*] Starting async generation for {len(objectives)} objectives. Concurrency: {CONCURRENCY_LIMIT}")
+    
+    async with aiohttp.ClientSession() as session:
+        total_written = 0
+        global_seen = set()
 
-        objectives = [o for o in objectives if _prefix(o) in allowed]
-
-    if start_index > 0:
-        objectives = objectives[start_index:]
-
-    if max_objectives > 0:
-        objectives = objectives[:max_objectives]
-
-    for idx, obj in enumerate(objectives, start=1):
-        objective_id = str(obj.get('id'))
-        subject = _subject_from_objective(obj)
-        difficulty = int(obj.get('difficulty') or 1)
-        topic = str(obj.get('objective') or objective_id)
-
-        existing_texts: list[str] = []
-        existing_hashes = set()
-        existing_doc_ids = set()
-
-        if not force:
-            refs = [db.collection('questions').document(f"{objective_id}_{v}") for v in range(per_objective)]
-            snaps = db.get_all(refs)
-            for s in snaps:
-                if s.exists:
-                    existing_doc_ids.add(s.id)
-                    qt = s.get('questionText') or s.get('question')
-                    if isinstance(qt, str) and qt.strip():
-                        h = _hash_text(qt)
-                        existing_hashes.add(h)
-                        existing_texts.append(qt)
-
-        target_total = per_objective
-        have = len(existing_hashes)
-        remaining = max(0, target_total - have)
-
-        if remaining == 0:
-            continue
-
-        print(f"[{idx}/{len(objectives)}] {objective_id} ({subject}) generating {remaining}...")
-
-        generated = []
-        attempts = 0
-        max_attempts = max(10, (remaining // max(1, batch_n)) * 6)
-        if explicit_max_attempts > 0:
-            max_attempts = explicit_max_attempts
-        started_at = time.time()
-
-        while len(generated) < remaining and attempts < max_attempts:
-            if max_seconds_per_objective > 0 and (time.time() - started_at) > max_seconds_per_objective:
-                break
-            need_now = min(batch_n, remaining - len(generated))
-            prompt = _build_prompt(
-                obj,
-                subject,
-                _difficulty_text(difficulty),
-                need_now,
-                existing_texts + [g['question'] for g in generated],
-                prompt_context_max_chars,
-                prompt_existing_max,
-                prompt_existing_max_chars,
-            )
-            attempts += 1
-
-            print(f"  attempt {attempts}/{max_attempts}: have {len(generated)}/{remaining} (asking {need_now})")
-
-            try:
-                raw = _ollama_generate(session, ollama_host, model, prompt, temperature, timeout_sec, num_predict)
-                qs = _parse_questions_json(raw)
-            except Exception:
-                time.sleep(0.2)
-                continue
-
-            for q in qs:
-                h = _hash_text(q['question'])
-                if h in global_seen or h in existing_hashes:
-                    continue
-                global_seen.add(h)
-                existing_hashes.add(h)
-                generated.append(q)
-                if len(generated) >= remaining:
-                    break
-
-        if not generated:
-            continue
-
-        batch = db.batch()
-        writes_in_batch = 0
-        now_iso = time.strftime('%Y-%m-%dT%H:%M:%S', time.gmtime())
-
-        for v in range(per_objective):
-            if writes_in_batch >= 400:
-                batch.commit()
-                total_written += writes_in_batch
-                batch = db.batch()
-                writes_in_batch = 0
-
-            doc_id = f"{objective_id}_{v}"
-            ref = db.collection('questions').document(doc_id)
+        for idx, obj in enumerate(objectives, start=1):
+            obj_id = str(obj.get('id'))
+            subject = _subject_from_objective(obj)
+            difficulty = int(obj.get('difficulty') or 1)
+            
+            existing_texts = []
+            existing_hashes = set()
+            existing_doc_ids = set()
 
             if not force:
-                if doc_id in existing_doc_ids:
-                    continue
+                refs = [db.collection('questions').document(f"{obj_id}_{v}") for v in range(per_objective)]
+                snaps = db.get_all(refs)
+                for s in snaps:
+                    if s.exists:
+                        existing_doc_ids.add(s.id)
+                        text = s.get('questionText') or s.get('question')
+                        if text:
+                            h = _hash_text(text)
+                            existing_hashes.add(h)
+                            existing_texts.append(text)
 
-            if not generated:
-                break
+            remaining = max(0, per_objective - len(existing_hashes))
+            if remaining == 0: continue
 
-            q = generated.pop(0)
+            print(f"[{idx}/{len(objectives)}] {obj_id} ({subject}) - generating {remaining}...")
 
-            data = {
-                'id': doc_id,
-                'objectiveId': objective_id,
-                'subjectId': subject,
-                'variation': v,
-                'topic': topic,
-                'difficulty': difficulty,
-                'questionText': q['question'],
-                'options': q['options'],
-                'correctAnswer': q['correctAnswer'],
-                'explanation': q.get('explanation') or '',
-                'storyElement': q.get('storyElement') or 'Challenge',
-                'createdAt': now_iso,
-                'updatedAt': now_iso,
-                'generatedBy': f"ollama:{model}",
-            }
+            generated = []
+            max_attempts = max(10, (remaining // batch_n) * 4)
+            started_at = time.time()
 
-            batch.set(ref, data, merge=True)
-            writes_in_batch += 1
+            async def attempt_gen():
+                p = _build_prompt(obj, subject, _difficulty_text(difficulty), batch_n, existing_texts + [g['question'] for g in generated], 1200, 8, 180)
+                raw = await _ollama_generate(session, ollama_host, model, p, temperature, timeout_sec, num_predict)
+                return _parse_questions_json(raw)
 
-        if writes_in_batch > 0:
-            batch.commit()
-            total_written += writes_in_batch
+            # Parallel burst generation for this objective
+            while len(generated) < remaining and (time.time() - started_at) < 180:
+                tasks = [attempt_gen() for _ in range(min(CONCURRENCY_LIMIT, (remaining - len(generated) // batch_n) + 1))]
+                results = await asyncio.gather(*tasks)
+                
+                for qs in results:
+                    for q in qs:
+                        h = _hash_text(q['question'])
+                        if h not in global_seen and h not in existing_hashes:
+                            global_seen.add(h)
+                            existing_hashes.add(h)
+                            generated.append(q)
+                            if len(generated) >= remaining: break
+                print(f"  Progress: {len(generated)}/{remaining}...")
+                if not any(results): await asyncio.sleep(1) # Backoff if no valid JSON
 
-    print(f"Done. Wrote/updated ~{total_written} questions.")
+            if not generated: continue
 
+            batch = db.batch()
+            count = 0
+            now = time.strftime('%Y-%m-%dT%H:%M:%S', time.gmtime())
+
+            for v in range(per_objective):
+                doc_id = f"{obj_id}_{v}"
+                if not force and doc_id in existing_doc_ids: continue
+                if not generated: break
+
+                q = generated.pop(0)
+                
+                # ENHANCED READABLE SCHEMA
+                data = {
+                    'id': doc_id,
+                    'objectiveId': obj_id,
+                    'subjectId': subject.lower().replace(" ", "_"),
+                    'subjectName': subject,
+                    'variation': v,
+                    'topic': str(obj.get('objective') or obj_id),
+                    'difficulty': difficulty,
+                    'difficultyLabel': _difficulty_text(difficulty),
+                    'questionText': q['question'],
+                    'options': q['options'],
+                    'correctAnswer': q['correctAnswer'],
+                    'explanation': q['explanation'],
+                    'storyElement': q['storyElement'],
+                    'tags': (obj.get('keywords') or [])[:10],
+                    'metadata': {
+                        'generatedBy': f"ollama:{model}",
+                        'version': '2.0',
+                        'timestamp': now,
+                        'model': model
+                    }
+                }
+                
+                batch.set(db.collection('questions').document(doc_id), data, merge=True)
+                count += 1
+                if count >= 400:
+                    batch.commit()
+                    total_written += count
+                    batch = db.batch()
+                    count = 0
+            
+            if count > 0:
+                batch.commit()
+                total_written += count
+
+    print(f"Done. Wrote ~{total_written} questions.")
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())

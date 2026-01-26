@@ -20,7 +20,13 @@ export {
 export * from './types';
 
 // Sub-modules
-export { classifyError, analyzeErrorPatterns } from './error-classifier';
+export {
+    classifyError,
+    analyzeErrorPatterns,
+    classifyErrorEnhanced,
+    classifyErrorWithNormalization,
+    type EnhancedErrorResult
+} from './error-classifier';
 export {
     updateMastery,
     calculateFluency,
@@ -54,3 +60,19 @@ export {
     getDiagnosticQuestion,
     diagnosticResultToSubSkillScore
 } from './diagnostic';
+
+// Question Normalization (Production Robustness)
+export {
+    normalizeQuestion,
+    normalizeOption,
+    padOptions,
+    isAllOfAbove,
+    isNoneOfAbove,
+    isEmptyOption,
+    isMarksOnly,
+    isLetterOnly,
+    validateAnswer,
+    getQuestionTypeModifier,
+    type NormalizedQuestion,
+    type AnswerValidation
+} from './question-normalizer';

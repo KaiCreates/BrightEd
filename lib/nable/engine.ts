@@ -24,11 +24,12 @@ import {
     InteractionMetrics
 } from './types';
 
-import { classifyError, analyzeErrorPatterns, suggestRemediationTopic } from './error-classifier';
+import { classifyError, analyzeErrorPatterns, suggestRemediationTopic, classifyErrorEnhanced, EnhancedErrorResult } from './error-classifier';
 import { updateSubSkillScore, createInitialSubSkillScore, updateMastery, calculateFluency } from './mastery-tracker';
 import { calculateDifficultyScaling, rankQuestionsByFit, getRecommendedDifficulty } from './difficulty-scaler';
 import { checkSessionRefresh, applyDecayToGraph, calculateMemoryDecay } from './spaced-repetition';
 import { markSkillAsTheoreticalOnly } from './story-analyzer';
+import { normalizeQuestion, NormalizedQuestion, padOptions } from './question-normalizer';
 
 /**
  * NABLE Engine state
@@ -106,10 +107,25 @@ export function evaluate(
 
     const correct = selectedAnswer === correctAnswer;
 
-    // Classify error if wrong
+    // PRODUCTION FIX: Normalize options to handle edge cases
+    // - Empty options
+    // - "marks" text
+    // - Letter-only options
+    // - "All of the above" patterns
+    const safeOptions = padOptions(options || [], 4);
+    const normalizedQuestion = normalizeQuestion(safeOptions);
+
+    // Log warnings for debugging in production
+    if (normalizedQuestion.warnings.length > 0) {
+        console.warn(`[NABLE] Question ${questionId} warnings:`, normalizedQuestion.warnings);
+    }
+
+    // Classify error with enhanced logic (handles "all of the above", etc.)
     let errorClassification = null;
+    let enhancedErrorResult: EnhancedErrorResult | null = null;
     if (!correct) {
-        errorClassification = classifyError(selectedAnswer, correctAnswer, options);
+        enhancedErrorResult = classifyErrorEnhanced(selectedAnswer, correctAnswer, safeOptions);
+        errorClassification = enhancedErrorResult.errorType;
     }
 
     // Build interaction metrics

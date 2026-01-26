@@ -4,9 +4,21 @@
  * Distinguishes between Conceptual and Careless errors:
  * - Conceptual: User chose a logically-related but incorrect answer (needs remediation)
  * - Careless: Random or misread, no logical connection (just needs practice)
+ * 
+ * Enhanced with question normalization support for:
+ * - "All of the above" patterns
+ * - "None of the above" patterns
+ * - Empty/malformed options
  */
 
 import { ErrorType } from './types';
+import {
+    normalizeQuestion,
+    getQuestionTypeModifier,
+    isAllOfAbove,
+    isNoneOfAbove,
+    NormalizedQuestion
+} from './question-normalizer';
 
 /**
  * Common conceptual confusion patterns for business/financial literacy
@@ -250,4 +262,145 @@ export function suggestRemediationTopic(
 
     // Return the sub-skill that needs remediation
     return subSkillId;
+}
+
+// =============================================================================
+// ENHANCED ERROR CLASSIFICATION (with question normalization)
+// =============================================================================
+
+/**
+ * Extended error classification result
+ */
+export interface EnhancedErrorResult {
+    errorType: ErrorType;
+    isPartiallyCorrect: boolean;
+    conceptualHint: string | null;
+    questionType: string;
+    warnings: string[];
+}
+
+/**
+ * Enhanced error classification with question normalization support
+ * 
+ * This version handles edge cases like:
+ * - "All of the above" correct answers (user understanding partial concepts)
+ * - "None of the above" patterns
+ * - Empty/malformed options
+ * 
+ * @param selectedAnswer - Index of user's selected answer
+ * @param correctAnswer - Index of correct answer
+ * @param options - All answer options as strings
+ * @returns Enhanced error result with additional context
+ */
+export function classifyErrorEnhanced(
+    selectedAnswer: number,
+    correctAnswer: number,
+    options: string[]
+): EnhancedErrorResult {
+    // First, normalize the question to detect patterns
+    const normalized = normalizeQuestion(options);
+
+    // Get question type modifier for "all of the above" etc.
+    const modifier = getQuestionTypeModifier(normalized, selectedAnswer, correctAnswer);
+
+    // If correct, no error to classify
+    if (selectedAnswer === correctAnswer) {
+        return {
+            errorType: 'careless', // Not really an error, but satisfies type
+            isPartiallyCorrect: false,
+            conceptualHint: null,
+            questionType: normalized.questionType,
+            warnings: normalized.warnings
+        };
+    }
+
+    // Validate inputs
+    if (selectedAnswer < 0 || selectedAnswer >= options.length) {
+        return {
+            errorType: 'careless',
+            isPartiallyCorrect: false,
+            conceptualHint: 'Invalid selection index',
+            questionType: normalized.questionType,
+            warnings: [...normalized.warnings, 'Invalid selected answer index']
+        };
+    }
+
+    if (correctAnswer < 0 || correctAnswer >= options.length) {
+        return {
+            errorType: 'careless',
+            isPartiallyCorrect: false,
+            conceptualHint: 'Invalid correct answer index',
+            questionType: normalized.questionType,
+            warnings: [...normalized.warnings, 'Invalid correct answer index']
+        };
+    }
+
+    // Special case: "All of the above" is correct but user selected individual correct option
+    if (modifier.isPartiallyCorrect) {
+        return {
+            errorType: 'conceptual', // They understood the concept but missed the meta-pattern
+            isPartiallyCorrect: true,
+            conceptualHint: modifier.conceptualHint,
+            questionType: normalized.questionType,
+            warnings: normalized.warnings
+        };
+    }
+
+    // Special case: User selected "None of the above" but individual option was correct
+    if (normalized.noneOfAboveIndex === selectedAnswer && correctAnswer !== selectedAnswer) {
+        return {
+            errorType: 'conceptual',
+            isPartiallyCorrect: false,
+            conceptualHint: 'User failed to recognize the correct pattern among options',
+            questionType: normalized.questionType,
+            warnings: normalized.warnings
+        };
+    }
+
+    // Special case: User selected "All of the above" but individual option was correct
+    if (normalized.allOfAboveIndex === selectedAnswer && correctAnswer !== selectedAnswer) {
+        return {
+            errorType: 'conceptual',
+            isPartiallyCorrect: false,
+            conceptualHint: 'User thought all options were correct but only one was',
+            questionType: normalized.questionType,
+            warnings: normalized.warnings
+        };
+    }
+
+    // Use original logic for standard questions
+    const selectedText = normalized.normalizedOptions[selectedAnswer];
+    const correctText = normalized.normalizedOptions[correctAnswer];
+
+    // Check for conceptual relationship using original logic
+    if (isConceptuallyRelated(selectedText, correctText, normalized.normalizedOptions)) {
+        return {
+            errorType: 'conceptual',
+            isPartiallyCorrect: false,
+            conceptualHint: 'Selected answer is conceptually related to correct answer',
+            questionType: normalized.questionType,
+            warnings: normalized.warnings
+        };
+    }
+
+    return {
+        errorType: 'careless',
+        isPartiallyCorrect: false,
+        conceptualHint: null,
+        questionType: normalized.questionType,
+        warnings: normalized.warnings
+    };
+}
+
+/**
+ * Wrapper that uses enhanced classification but returns simple ErrorType
+ * for backward compatibility with existing code
+ */
+export function classifyErrorWithNormalization(
+    selectedAnswer: number,
+    correctAnswer: number,
+    options: string[]
+): ErrorType {
+    const enhanced = classifyErrorEnhanced(selectedAnswer, correctAnswer, options);
+    return enhanced.errorType;
 }
