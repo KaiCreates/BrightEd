@@ -117,6 +117,9 @@ export interface Order {
     qualityRequirement: QualityTier;
     qualityDelivered?: number;  // 0-100 score
 
+    // Loyalty
+    loyaltyLevel: 'new' | 'regular' | 'loyal';
+
     // Timestamps
     createdAt: string;
     acceptedAt?: string;

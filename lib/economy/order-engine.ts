@@ -45,7 +45,8 @@ const LAST_NAMES = [
 function randomCustomerName(): string {
     const first = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
     const last = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)];
-    return `${first} ${last}`;
+    const honorific = Math.random() > 0.8 ? (Math.random() > 0.5 ? 'Mr.' : 'Ms.') : '';
+    return `${honorific} ${first} ${last}`.trim();
 }
 
 /**
@@ -53,6 +54,21 @@ function randomCustomerName(): string {
  */
 function getHourlyDemandMultiplier(config: DemandConfig, hour: number): number {
     return config.hourlyMultipliers[hour] ?? 0.5;
+}
+
+/**
+ * Calculate market saturation multiplier (diminishing returns)
+ * Dampens demand as balance grows to prevent runaway wealth.
+ */
+function getSaturationMultiplier(balance: number): number {
+    if (balance <= 10000) return 1.0;
+
+    // Scale from 1.0 at 10k down to 0.4 at 1M
+    const reductionRange = 1000000 - 10000;
+    const excess = Math.max(0, balance - 10000);
+    const reduction = Math.min(0.6, (excess / reductionRange) * 0.6);
+
+    return 1.0 - reduction;
 }
 
 /**
@@ -251,6 +267,14 @@ export function generateOrder(
     if (customerType === 'vip') moods.push('demanding');
     const customerMood = moods[Math.floor(Math.random() * moods.length)];
 
+    // Loyalty level (based on reputation)
+    let loyaltyLevel: Order['loyaltyLevel'] = 'new';
+    const loyaltyRoll = Math.random() * 100;
+    const baseLoyaltyChance = businessState.reputation / 2; // 0-50%
+    if (loyaltyRoll < baseLoyaltyChance) {
+        loyaltyLevel = loyaltyRoll < (baseLoyaltyChance / 3) ? 'loyal' : 'regular';
+    }
+
     return {
         id: generateId(),
         businessId: businessState.id,
@@ -268,6 +292,7 @@ export function generateOrder(
         paidAmount: 0,
         tipAmount: 0,
         qualityRequirement: qualityTier,
+        loyaltyLevel,
         createdAt: new Date().toISOString(),
     };
 }
@@ -292,8 +317,10 @@ export function generateOrdersForTick(
     // Calculate expected orders
     const hourlyMultiplier = getHourlyDemandMultiplier(config, simHour);
     const repMultiplier = getReputationMultiplier(config, businessState.reputation);
+    const saturationMultiplier = getSaturationMultiplier(businessState.cashBalance);
+
     const baseRate = config.baseOrdersPerHour * (tickMinutes / 60);
-    const expectedOrders = baseRate * hourlyMultiplier * repMultiplier;
+    const expectedOrders = baseRate * hourlyMultiplier * repMultiplier * saturationMultiplier;
 
     // Poisson-ish distribution
     const orders: Order[] = [];
@@ -365,13 +392,62 @@ export function startOrder(order: Order): Order {
 }
 
 /**
+ * Generate a customer review based on quality score
+ */
+export function generateReview(
+    order: Order,
+    qualityScore: number,
+    failureReason?: string
+): { rating: number; text: string } {
+    const isSuccess = !failureReason;
+
+    // Rating calculation (1-5 star)
+    let rating = 3;
+    if (isSuccess) {
+        rating = Math.ceil((qualityScore / 100) * 5);
+        if (qualityScore > 95) rating = 5;
+        if (qualityScore < 40) rating = 2;
+    } else {
+        rating = failureReason === 'deadline_missed' ? 1 : 2;
+    }
+
+    // Caribbean-flavored review fragments
+    const praise = [
+        "Quality was real nice!", "Proper service, highly recommend.",
+        "Best in town for sure.", "Very impressed with the speed.",
+        "Everything was sweet!", "Top tier vibes."
+    ];
+    const neutral = [
+        "It was okay.", "Got what I paid for.", "Could be better but not bad.",
+        "Average service.", "Fine for now."
+    ];
+    const complaints = [
+        "Took way too long.", "Service was poor man.", "Quality not like before.",
+        "Real disappointed.", "Waste of my time.", "Wouldn't come back."
+    ];
+
+    let text = "";
+    if (rating >= 4) text = praise[Math.floor(Math.random() * praise.length)];
+    else if (rating === 3) text = neutral[Math.floor(Math.random() * neutral.length)];
+    else text = complaints[Math.floor(Math.random() * complaints.length)];
+
+    if (failureReason === 'deadline_missed') text = "Wait all day and nothing! Terrible.";
+    if (failureReason === 'stockout') text = "They never have anything in stock.";
+
+    // Loyalty bonus to text
+    if (order.loyaltyLevel === 'loyal' && rating >= 4) text += " Always my go-to spot.";
+
+    return { rating, text };
+}
+
+/**
  * Complete an order with quality score
  */
 export function completeOrder(
     order: Order,
     qualityScore: number, // 0-100
     businessType?: BusinessType // Optional, but needed for inventory deduction
-): { order: Order; payment: number; tip: number; inventoryDeductions: Record<string, number> } {
+): { order: Order; payment: number; tip: number; inventoryDeductions: Record<string, number>; review: { rating: number; text: string } } {
     if (order.status !== 'in_progress' && order.status !== 'accepted') {
         throw new Error(`Cannot complete order in status: ${order.status}`);
     }
@@ -414,6 +490,8 @@ export function completeOrder(
         });
     }
 
+    const review = generateReview(order, qualityScore);
+
     return {
         order: {
             ...order,
@@ -430,6 +508,7 @@ export function completeOrder(
         payment,
         tip,
         inventoryDeductions,
+        review
     };
 }
 
@@ -439,7 +518,7 @@ export function completeOrder(
 export function failOrder(
     order: Order,
     reason: 'deadline_missed' | 'stockout' | 'cancelled_by_business'
-): { order: Order; refund: number; reputationPenalty: number } {
+): { order: Order; refund: number; reputationPenalty: number; review: { rating: number; text: string } } {
     let refund = 0;
     let penalty = 10;
 
@@ -462,6 +541,8 @@ export function failOrder(
     if (order.customerType === 'vip') penalty *= 1.5;
     if (order.customerType === 'business') penalty *= 1.3;
 
+    const review = generateReview(order, 0, reason);
+
     return {
         order: {
             ...order,
@@ -470,6 +551,7 @@ export function failOrder(
         },
         refund,
         reputationPenalty: Math.round(penalty),
+        review
     };
 }
 

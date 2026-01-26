@@ -19,13 +19,15 @@ import {
     serverTimestamp,
     increment,
     writeBatch,
-    runTransaction
+    runTransaction,
+    arrayUnion
 } from 'firebase/firestore';
 import {
     BusinessState,
     Order,
     Expense,
-    BusinessType
+    BusinessType,
+    Review
 } from './economy-types';
 
 const COLLECTIONS = {
@@ -281,6 +283,7 @@ export async function updateBusinessFinancials(
         cashDelta?: number;
         reputation?: number;
         reputationDelta?: number;
+        customerSatisfactionDelta?: number;
         ordersCompleted?: number;
         ordersCompletedDelta?: number;
         ordersFailed?: number;
@@ -288,7 +291,8 @@ export async function updateBusinessFinancials(
         inventory?: Record<string, number>;
         inventoryDeltas?: Record<string, number>;
         lastPayrollTime?: string;
-        reviews?: any[]; // Typed loosely to avoid circular dep for now
+        reviews?: any[];
+        newReview?: Review;
         totalRevenue?: number;
         totalRevenueDelta?: number;
         totalExpenses?: number;
@@ -328,6 +332,10 @@ export async function updateBusinessFinancials(
         firestoreUpdates.reputation = updates.reputation;
     }
 
+    if (updates.customerSatisfactionDelta !== undefined) {
+        firestoreUpdates.customerSatisfaction = increment(updates.customerSatisfactionDelta);
+    }
+
     if (updates.ordersCompletedDelta !== undefined) {
         firestoreUpdates.ordersCompleted = increment(updates.ordersCompletedDelta);
     } else if (updates.ordersCompleted !== undefined) {
@@ -340,6 +348,13 @@ export async function updateBusinessFinancials(
         firestoreUpdates.ordersFailed = updates.ordersFailed;
     }
 
+    if (updates.newReview !== undefined) {
+        firestoreUpdates.reviews = arrayUnion(updates.newReview);
+        firestoreUpdates.reviewCount = increment(1);
+    } else if (updates.reviews !== undefined) {
+        firestoreUpdates.reviews = updates.reviews;
+    }
+
     if (updates.inventoryDeltas !== undefined) {
         for (const [itemId, delta] of Object.entries(updates.inventoryDeltas)) {
             firestoreUpdates[`inventory.${itemId}`] = increment(delta);
@@ -347,8 +362,8 @@ export async function updateBusinessFinancials(
     } else if (updates.inventory !== undefined) {
         firestoreUpdates.inventory = updates.inventory;
     }
+
     if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
-    if (updates.reviews !== undefined) firestoreUpdates.reviews = updates.reviews;
 
     await updateDoc(docRef, firestoreUpdates);
 }

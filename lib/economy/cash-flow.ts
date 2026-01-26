@@ -13,6 +13,37 @@ import {
 import { getBusinessType } from './business-templates';
 
 // ============================================================================
+// ECONOMIC STABILIZERS
+// ============================================================================
+
+/**
+ * Calculate progressive tax based on current balance
+ * Brackets:
+ * 0-5k: 0%
+ * 5k-20k: 5% (on amount above 5k)
+ * 20k-50k: 10% (on amount above 20k)
+ * 50k+: 15% (on amount above 50k)
+ */
+export function calculateProgressiveTax(balance: number): number {
+    if (balance <= 5000) return 0;
+
+    let tax = 0;
+    if (balance > 50000) {
+        tax += (balance - 50000) * 0.15;
+        balance = 50000;
+    }
+    if (balance > 20000) {
+        tax += (balance - 20000) * 0.10;
+        balance = 20000;
+    }
+    if (balance > 5000) {
+        tax += (balance - 5000) * 0.05;
+    }
+
+    return Math.round(tax / 30); // Daily prorated tax
+}
+
+// ============================================================================
 // EXPENSE GENERATION
 // ============================================================================
 
@@ -112,9 +143,24 @@ export function generateDailyExpenses(
         });
     }
 
-    // Random maintenance event
+    // Progressive Tax (Economic Scaler)
+    const dailyTax = calculateProgressiveTax(businessState.cashBalance);
+    if (dailyTax > 0) {
+        expenses.push({
+            id: `exp_tax_${simDate.getTime()}`,
+            businessId: businessState.id,
+            category: 'tax',
+            amount: dailyTax,
+            description: 'Business income tax (progressive)',
+            dueAt,
+            recurring: false,
+        });
+    }
+
+    // Random maintenance event (Scales with staff/complexity)
     if (costs.maintenanceChance && Math.random() < costs.maintenanceChance) {
-        const maintenanceCost = Math.round(50 + Math.random() * 150);
+        const complexityMultiplier = 1 + (businessState.employees?.length || 0) * 0.2;
+        const maintenanceCost = Math.round((50 + Math.random() * 150) * complexityMultiplier);
         expenses.push({
             id: `exp_maint_${simDate.getTime()}`,
             businessId: businessState.id,
