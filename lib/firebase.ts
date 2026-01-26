@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
@@ -16,24 +16,33 @@ const firebaseConfig = {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || `https://${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}-default-rtdb.firebaseio.com`
 };
 
+// Singleton pattern for Firebase initialization
 const isConfigValid = !!firebaseConfig.apiKey && firebaseConfig.apiKey !== "undefined";
 
-let app;
-try {
-    app = isConfigValid
-        ? initializeApp(firebaseConfig)
-        : initializeApp({ apiKey: "placeholder", projectId: "placeholder", appId: "placeholder" });
-} catch (e) {
-    console.error("Firebase initialization failed:", e);
-    app = {} as any;
+function getInitializedApp() {
+    if (getApps().length > 0) {
+        return getApp();
+    }
+
+    if (isConfigValid) {
+        return initializeApp(firebaseConfig);
+    }
+
+    // Placeholder to prevent build crashes, but will trigger warnings at runtime
+    return initializeApp({
+        apiKey: "placeholder",
+        projectId: "placeholder",
+        appId: "placeholder"
+    });
 }
 
-export const auth = isConfigValid ? getAuth(app) : null as any;
-export const db = isConfigValid ? getFirestore(app) : null as any;
-export const realtimeDb = isConfigValid ? getDatabase(app) : null as any;
-export const storage = isConfigValid ? getStorage(app) : null as any;
+const app = getInitializedApp();
 
 export const isFirebaseReady = isConfigValid;
+export const auth = isFirebaseReady ? getAuth(app) : null as any;
+export const db = isFirebaseReady ? getFirestore(app) : null as any;
+export const realtimeDb = isFirebaseReady ? getDatabase(app) : null as any;
+export const storage = isFirebaseReady ? getStorage(app) : null as any;
 
 if (typeof window !== 'undefined' && !isFirebaseReady) {
     console.warn("Firebase configuration is missing or invalid. Authentication and database features will be disabled.");
