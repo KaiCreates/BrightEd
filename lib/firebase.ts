@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCnYUApzy1NQeQSZHaM2e1FgcO_qLaHI_4",
+    apiKey: "AIzaSyCnYUAPzy1NQeQSZHaM2elFgcO_qLaHI_4",
     authDomain: "brighted-426615.firebaseapp.com",
     projectId: "brighted-426615",
     storageBucket: "brighted-426615.appspot.com",
