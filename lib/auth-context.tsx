@@ -51,6 +51,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!auth) {
+            console.warn("Firebase Auth not initialized. Skipping auth listener.");
+            setLoading(false);
+            return;
+        }
+
         let unsubscribeSnapshot: (() => void) | undefined;
 
         const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
@@ -126,6 +132,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const logout = async () => {
+        if (!auth) return;
         await firebaseSignOut(auth);
         setUserData(null);
     };

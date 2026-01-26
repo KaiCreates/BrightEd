@@ -33,9 +33,11 @@ export const db = isConfigValid ? getFirestore(app) : null as any;
 export const realtimeDb = isConfigValid ? getDatabase(app) : null as any;
 export const storage = isConfigValid ? getStorage(app) : null as any;
 
-if (typeof window !== 'undefined' && !isConfigValid) {
-    console.warn("Firebase configuration is missing or invalid. Authentication and database features will not work.");
+export const isFirebaseReady = isConfigValid;
+
+if (typeof window !== 'undefined' && !isFirebaseReady) {
+    console.warn("Firebase configuration is missing or invalid. Authentication and database features will be disabled.");
 }
 
-export const analytics = typeof window !== 'undefined' && isConfigValid ?
+export const analytics = typeof window !== 'undefined' && isFirebaseReady ?
     isSupported().then(yes => yes ? getAnalytics(app) : null) : Promise.resolve(null);

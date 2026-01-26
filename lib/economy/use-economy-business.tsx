@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { db } from '@/lib/firebase';
+import { db, isFirebaseReady } from '@/lib/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { BusinessState, BusinessType, getBusinessType } from '@/lib/economy';
 
@@ -15,7 +15,7 @@ export function useEconomyBusiness() {
   useEffect(() => {
     if (authLoading) return;
 
-    if (!user || !userData?.businessID) {
+    if (!user || !userData?.businessID || !isFirebaseReady || !db) {
       setBusiness(null);
       setBusinessType(null);
       setLoading(false);

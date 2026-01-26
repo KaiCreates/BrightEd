@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useAuth } from './auth-context';
-import { db } from './firebase';
+import { db, isFirebaseReady } from './firebase';
 import { collection, doc, onSnapshot, query, updateDoc, writeBatch } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import {
@@ -61,7 +61,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     const lastNotifiedRestockRef = useRef<string>('');
 
     useEffect(() => {
-        if (!user || !userData?.hasBusiness || !userData?.businessID) {
+        if (!user || !userData?.hasBusiness || !userData?.businessID || !isFirebaseReady || !db) {
             setBusiness(null);
             setLoading(false);
             return;
@@ -129,7 +129,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     }, [user, userData?.hasBusiness, userData?.businessID]);
 
     useEffect(() => {
-        if (!userData?.businessID) {
+        if (!userData?.businessID || !isFirebaseReady || !db) {
             ordersRef.current = [];
             return;
         }
@@ -400,7 +400,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
             // Delete business document
             batch.delete(businessRef);
-            
+
             // Update user document atomically
             batch.update(userRef, {
                 hasBusiness: false,

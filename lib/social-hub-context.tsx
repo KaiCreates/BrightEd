@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useAuth } from './auth-context';
-import { db, realtimeDb } from './firebase';
+import { db, realtimeDb, isFirebaseReady } from './firebase';
 import {
     collection,
     doc,
@@ -113,6 +113,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         ];
 
         const initializeRooms = async () => {
+            if (!isFirebaseReady || !db) return;
             try {
                 for (const lounge of subjectLounges) {
                     const roomRef = doc(db, 'rooms', lounge.name);
@@ -142,7 +143,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
     // Load user's blocked list
     useEffect(() => {
-        if (!user) return;
+        if (!user || !isFirebaseReady || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         const unsubscribe = onSnapshot(userRef, (snap) => {
@@ -157,7 +158,10 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
     // Load user's private rooms (subject lounges are always available, so we only load private rooms)
     useEffect(() => {
-        if (!user) return;
+        if (!user || !isFirebaseReady || !db) {
+            setLoading(false);
+            return;
+        }
 
         const q = query(
             collection(db, 'rooms'),
@@ -187,7 +191,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
     // Load messages for active room
     useEffect(() => {
-        if (!activeRoom || !user) {
+        if (!activeRoom || !user || !isFirebaseReady || !db) {
             setMessages([]);
             return;
         }
@@ -228,7 +232,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
     // Presence system with Realtime Database using .info/connected
     useEffect(() => {
-        if (!user || !userData) return;
+        if (!user || !userData || !isFirebaseReady || !realtimeDb) return;
 
         const userName = userData.firstName || 'User';
         const presenceRef = ref(realtimeDb, `presence/${user.uid}`);
@@ -317,7 +321,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const setActiveRoom = useCallback(async (room: Room | null) => {
-        if (!room) {
+        if (!room || !isFirebaseReady || !db) {
             setActiveRoomState(null);
             localStorage.removeItem('brighted_active_room');
             setMessages([]);
