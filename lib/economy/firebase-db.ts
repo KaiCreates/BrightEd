@@ -55,8 +55,8 @@ function getDefaultMarketItems() {
 export async function ensureMarketRestock(businessId: string) {
     const bizRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
 
-    return runTransaction(db, async (tx) => {
-        const snap = await tx.get(bizRef);
+    try {
+        const snap = await getDoc(bizRef);
         if (!snap.exists()) return { restocked: false };
 
         const data: any = snap.data();
@@ -90,7 +90,7 @@ export async function ensureMarketRestock(businessId: string) {
 
         const nextRestock = new Date(now + 5 * 60 * 1000).toISOString();
 
-        tx.update(bizRef, {
+        await updateDoc(bizRef, {
             marketState: {
                 lastRestock: new Date(now).toISOString(),
                 nextRestock,
@@ -100,7 +100,10 @@ export async function ensureMarketRestock(businessId: string) {
         });
 
         return { restocked: true, nextRestock };
-    });
+    } catch (e) {
+        console.error("Market restock failed:", e);
+        return { restocked: false };
+    }
 }
 
 // ============================================================================
@@ -293,6 +296,7 @@ export async function updateBusinessFinancials(
         lastPayrollTime?: string;
         reviews?: any[];
         newReview?: Review;
+        newReviews?: Review[];
         totalRevenue?: number;
         totalRevenueDelta?: number;
         totalExpenses?: number;
@@ -348,7 +352,10 @@ export async function updateBusinessFinancials(
         firestoreUpdates.ordersFailed = updates.ordersFailed;
     }
 
-    if (updates.newReview !== undefined) {
+    if (updates.newReviews !== undefined && updates.newReviews.length > 0) {
+        firestoreUpdates.reviews = arrayUnion(...updates.newReviews);
+        firestoreUpdates.reviewCount = increment(updates.newReviews.length);
+    } else if (updates.newReview !== undefined) {
         firestoreUpdates.reviews = arrayUnion(updates.newReview);
         firestoreUpdates.reviewCount = increment(1);
     } else if (updates.reviews !== undefined) {

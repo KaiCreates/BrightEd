@@ -194,6 +194,19 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 const now = Date.now();
                 const orders = ordersRef.current;
 
+                // TRACK AGGREGATED UPDATES FOR THE ENTIRE CYCLE
+                const bizUpdates: any = {
+                    cashDelta: 0,
+                    totalRevenueDelta: 0,
+                    ordersCompletedDelta: 0,
+                    ordersFailedDelta: 0,
+                    reputationDelta: 0,
+                    customerSatisfactionDelta: 0,
+                    inventoryDeltas: {},
+                    newReviews: []
+                };
+                let hasBizUpdates = false;
+
                 // Recruitment refresh (every 2 minutes)
                 const lastRecruit = businessState.lastRecruitmentTime ? new Date(businessState.lastRecruitmentTime).getTime() : 0;
                 if (now - lastRecruit >= 120000) {
@@ -277,11 +290,13 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                         if (ordersToComplete.length > 0) {
                             lastAutoWorkRef.current = now;
 
-                            let cashEarned = 0;
-                            let revenueEarned = 0;
-                            let completedCount = 0;
-                            let reputationDelta = 0;
-                            const inventoryDeltas: Record<string, number> = {};
+                            let totalCashEarned = 0;
+                            let totalRevenueEarned = 0;
+                            let totalCompletedCount = 0;
+                            let totalReputationDelta = 0;
+                            let totalSatisfactionDelta = 0;
+                            const allInventoryDeltas: Record<string, number> = {};
+                            const allNewReviews: any[] = [];
 
                             ordersToComplete.forEach((orderToProcess) => {
                                 const reqInventory: Record<string, number> = {};
@@ -298,11 +313,17 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                                 );
 
                                 if (!hasStock) {
-                                    const { order: failed, reputationPenalty } = failOrder(orderToProcess, 'stockout');
-                                    updateOrderStatus(businessId, orderToProcess.id, failed);
+                                    const { order: failed, reputationPenalty, review } = failOrder(orderToProcess, 'stockout');
+                                    updateOrderStatus(businessId, orderToProcess.id, failed).catch(console.error);
 
-                                    updateBusinessFinancials(businessId, {
-                                        reputation: Math.max(0, businessState.reputation - reputationPenalty),
+                                    totalReputationDelta -= reputationPenalty;
+                                    allNewReviews.push({
+                                        id: `rev_fail_stock_${Date.now()}_${Math.random().toString(36).slice(2, 5)}`,
+                                        orderId: orderToProcess.id,
+                                        customerName: orderToProcess.customerName,
+                                        rating: review.rating,
+                                        text: review.text,
+                                        timestamp: new Date().toISOString()
                                     });
                                     return;
                                 }
@@ -318,45 +339,45 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                                     businessType
                                 );
 
-                                cashEarned += payment + tip;
-                                revenueEarned += payment + tip;
-                                completedCount += 1;
+                                totalCashEarned += payment + tip;
+                                totalRevenueEarned += payment + tip;
+                                totalCompletedCount += 1;
 
                                 // Reputation impact from review rating
-                                // 5 stars = +2, 4 stars = +1, 3 stars = 0, 2 stars = -2, 1 star = -5
                                 const ratingRepDeltas: Record<number, number> = { 5: 2, 4: 1, 3: 0, 2: -2, 1: -5 };
-                                reputationDelta += (ratingRepDeltas[review.rating] || 0);
+                                totalReputationDelta += (ratingRepDeltas[review.rating] || 0);
+                                totalSatisfactionDelta += (review.rating - 3) * 5;
 
                                 Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
-                                    inventoryDeltas[itemId] = (inventoryDeltas[itemId] || 0) - qty;
+                                    allInventoryDeltas[itemId] = (allInventoryDeltas[itemId] || 0) - qty;
                                 });
 
-                                updateOrderStatus(businessId, orderToProcess.id, completed);
+                                updateOrderStatus(businessId, orderToProcess.id, completed).catch(console.error);
 
-                                // Save user review atomically
-                                const firestoreReview = {
+                                allNewReviews.push({
                                     id: `rev_${Date.now()}_${Math.random().toString(36).slice(2, 5)}`,
                                     orderId: orderToProcess.id,
                                     customerName: orderToProcess.customerName,
                                     rating: review.rating,
                                     text: review.text,
                                     timestamp: new Date().toISOString()
-                                };
-
-                                updateBusinessFinancials(businessId, {
-                                    newReview: firestoreReview,
-                                    customerSatisfactionDelta: (review.rating - 3) * 5 // Shift satisfaction +/- based on review
                                 });
                             });
 
-                            if (completedCount > 0) {
-                                updateBusinessFinancials(businessId, {
-                                    cashDelta: cashEarned,
-                                    totalRevenueDelta: revenueEarned,
-                                    ordersCompletedDelta: completedCount,
-                                    reputationDelta,
-                                    inventoryDeltas,
+                            // AGGREGATE TO GLOBAL UPDATES
+                            if (totalCompletedCount > 0 || allNewReviews.length > 0 || totalReputationDelta !== 0) {
+                                bizUpdates.cashDelta += totalCashEarned;
+                                bizUpdates.totalRevenueDelta += totalRevenueEarned;
+                                bizUpdates.ordersCompletedDelta += totalCompletedCount;
+                                bizUpdates.reputationDelta += totalReputationDelta;
+                                bizUpdates.customerSatisfactionDelta += totalSatisfactionDelta;
+
+                                Object.entries(allInventoryDeltas).forEach(([itemId, qty]) => {
+                                    bizUpdates.inventoryDeltas[itemId] = (bizUpdates.inventoryDeltas[itemId] || 0) + qty;
                                 });
+
+                                bizUpdates.newReviews.push(...allNewReviews);
+                                hasBizUpdates = true;
                             }
                         }
                     }
@@ -405,21 +426,19 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                         if ((order.status === 'accepted' || order.status === 'in_progress') && order.deadline) {
                             if (new Date(order.deadline).getTime() < now) {
                                 const { order: failed, reputationPenalty, review } = failOrder(order, 'deadline_missed');
-                                updateOrderStatus(businessId, order.id, failed);
+                                updateOrderStatus(businessId, order.id, failed).catch(console.error);
 
-                                // Save negative review
-                                updateBusinessFinancials(businessId, {
-                                    reputationDelta: -reputationPenalty,
-                                    ordersFailedDelta: 1,
-                                    newReview: {
-                                        id: `rev_fail_${Date.now()}`,
-                                        orderId: order.id,
-                                        customerName: order.customerName,
-                                        rating: review.rating,
-                                        text: review.text,
-                                        timestamp: new Date().toISOString()
-                                    }
+                                bizUpdates.reputationDelta -= reputationPenalty;
+                                bizUpdates.ordersFailedDelta += 1;
+                                bizUpdates.newReviews.push({
+                                    id: `rev_fail_overdue_${Date.now()}_${Math.random().toString(36).slice(2, 5)}`,
+                                    orderId: order.id,
+                                    customerName: order.customerName,
+                                    rating: review.rating,
+                                    text: review.text,
+                                    timestamp: new Date().toISOString()
                                 });
+                                hasBizUpdates = true;
                             }
                         }
                     });
@@ -431,8 +450,13 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     const newOrders = generateOrdersForTick(businessType, businessState, simHour, activeCount, 15);
 
                     if (newOrders.length > 0) {
-                        saveNewOrders(businessId, newOrders);
+                        saveNewOrders(businessId, newOrders).catch(console.error);
                     }
+                }
+
+                // COMMIT AGGREGATED UPDATES
+                if (hasBizUpdates) {
+                    updateBusinessFinancials(businessId, bizUpdates).catch(console.error);
                 }
             } catch (err) {
                 console.error("Economy Simulation Tick Error:", err);

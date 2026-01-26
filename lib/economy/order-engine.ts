@@ -304,32 +304,47 @@ export function generateOrdersForTick(
     businessType: BusinessType,
     businessState: BusinessState,
     simHour: number,
-    activeOrderCount: number,
+    activeOrderCount: number, // Total current orders (pending + accepted + in_progress)
     tickMinutes: number = 15
 ): Order[] {
     const config = businessType.demandConfig;
+    const maxCap = config.maxConcurrentCustomers || config.maxConcurrentOrders;
 
-    // Check capacity
-    if (activeOrderCount >= config.maxConcurrentOrders) {
+    // 1. CAPACITY CAPS (e.g., 50 for Mini Mart)
+    if (activeOrderCount >= maxCap) {
         return [];
     }
 
-    // Calculate expected orders
+    // 2. STOCK GRAVITATION LOGIC
+    // Customers only gravitate if the business has inventory for what they want.
+    const productsInStock = businessType.products.filter(p =>
+        !p.requiresInventory || (businessState.inventory?.[p.inventoryItemId || ''] || 0) > 0
+    ).length;
+
+    // Scale demand by % of catalog in stock. 0 stock = 0 customers.
+    const stockMultiplier = productsInStock / Math.max(1, businessType.products.length);
+    if (stockMultiplier === 0) return [];
+
+    // 3. DEMAND CALCULATION
     const hourlyMultiplier = getHourlyDemandMultiplier(config, simHour);
     const repMultiplier = getReputationMultiplier(config, businessState.reputation);
     const saturationMultiplier = getSaturationMultiplier(businessState.cashBalance);
 
+    // Theoretical 1M Market Pool influence
     const baseRate = config.baseOrdersPerHour * (tickMinutes / 60);
-    const expectedOrders = baseRate * hourlyMultiplier * repMultiplier * saturationMultiplier;
+    const expectedOrders = baseRate * hourlyMultiplier * repMultiplier * saturationMultiplier * stockMultiplier;
 
-    // Poisson-ish distribution
+    // 4. GENERATION
     const orders: Order[] = [];
     let remaining = expectedOrders;
 
-    while (remaining > 0 && orders.length < 5) {
+    while (remaining > 0 && orders.length < 10) {
         if (Math.random() < remaining) {
-            if (activeOrderCount + orders.length < config.maxConcurrentOrders) {
-                orders.push(generateOrder(businessType, businessState, simHour));
+            if (activeOrderCount + orders.length < maxCap) {
+                const newOrder = generateOrder(businessType, businessState, simHour);
+                if (newOrder.items.length > 0) {
+                    orders.push(newOrder);
+                }
             }
         }
         remaining -= 1;
@@ -358,21 +373,19 @@ export function acceptOrder(order: Order): Order {
 }
 
 /**
- * Reject an order - small reputation penalty
+ * Reject/Cancel an order
  */
 export function rejectOrder(order: Order): { order: Order; reputationPenalty: number } {
-    if (order.status !== 'pending') {
-        throw new Error(`Cannot reject order in status: ${order.status}`);
-    }
+    const isAccepted = order.status === 'accepted' || order.status === 'in_progress';
 
     // VIP and business customers remember rejections
-    let penalty = 1;
-    if (order.customerType === 'vip') penalty = 5;
-    if (order.customerType === 'business') penalty = 3;
+    let penalty = isAccepted ? 5 : 1;
+    if (order.customerType === 'vip') penalty *= 2;
+    if (order.customerType === 'business') penalty *= 1.5;
 
     return {
         order: { ...order, status: 'cancelled' },
-        reputationPenalty: penalty,
+        reputationPenalty: Math.round(penalty),
     };
 }
 

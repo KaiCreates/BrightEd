@@ -321,6 +321,9 @@ function OrderCard({
                         )}
                         {isActive && (
                             <div className="flex gap-2">
+                                <BrightButton variant="ghost" size="lg" onClick={onReject} className="px-3 h-8 text-[var(--state-error)]/70 hover:text-[var(--state-error)]">
+                                    Cancel
+                                </BrightButton>
                                 <BrightButton variant="ghost" size="lg" onClick={onComplete} className="px-3 h-8">
                                     Done
                                 </BrightButton>

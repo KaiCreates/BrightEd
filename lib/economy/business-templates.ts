@@ -81,7 +81,9 @@ const SALON_COSTS: OperatingCostTemplate = {
 
 const SALON_DEMAND: DemandConfig = {
     baseOrdersPerHour: 1.5,
-    maxConcurrentOrders: 3,
+    maxConcurrentOrders: 5,
+    maxConcurrentCustomers: 20,
+    marketScale: 1000000,
     hourlyMultipliers: {
         8: 0.5, 9: 0.8, 10: 1.0, 11: 1.2, 12: 0.8,
         13: 0.6, 14: 1.0, 15: 1.3, 16: 1.5, 17: 1.2,
@@ -306,7 +308,9 @@ const MINIMART_COSTS: OperatingCostTemplate = {
 
 const MINIMART_DEMAND: DemandConfig = {
     baseOrdersPerHour: 10,
-    maxConcurrentOrders: 5,
+    maxConcurrentOrders: 15,
+    maxConcurrentCustomers: 50,
+    marketScale: 1000000,
     hourlyMultipliers: {
         6: 0.3, 7: 0.6, 8: 1.0, 9: 0.8, 10: 0.7, 11: 0.9, 12: 1.3,
         13: 0.9, 14: 0.7, 15: 0.8, 16: 1.2, 17: 1.5, 18: 1.8, 19: 1.2,
@@ -463,7 +467,9 @@ const FOODTRUCK_COSTS: OperatingCostTemplate = {
 
 const FOODTRUCK_DEMAND: DemandConfig = {
     baseOrdersPerHour: 6,
-    maxConcurrentOrders: 4,
+    maxConcurrentOrders: 10,
+    maxConcurrentCustomers: 30,
+    marketScale: 1000000,
     hourlyMultipliers: {
         6: 0.2, 7: 0.5, 8: 0.8, 9: 0.4, 10: 0.3, 11: 1.2, 12: 2.0,
         13: 1.8, 14: 0.8, 15: 0.4, 16: 0.5, 17: 1.0, 18: 1.5, 19: 1.2,
@@ -585,8 +591,10 @@ const FREELANCE_COSTS: OperatingCostTemplate = {
 };
 
 const FREELANCE_DEMAND: DemandConfig = {
-    baseOrdersPerHour: 0.3, // Fewer but larger orders
-    maxConcurrentOrders: 3,
+    baseOrdersPerHour: 0.3,
+    maxConcurrentOrders: 5,
+    maxConcurrentCustomers: 10,
+    marketScale: 1000000,
     hourlyMultipliers: {
         9: 1.2, 10: 1.5, 11: 1.3, 12: 0.8, 13: 0.6,
         14: 1.0, 15: 1.4, 16: 1.2, 17: 0.8, 18: 0.4,

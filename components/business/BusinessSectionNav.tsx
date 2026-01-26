@@ -9,12 +9,12 @@ type BusinessNavItem = {
 };
 
 const NAV_ITEMS: BusinessNavItem[] = [
-  { href: '/stories/business', label: 'Hub' },
-  { href: '/stories/business/operations', label: 'Operations' },
-  { href: '/stories/business/credit', label: 'Credit' },
-  { href: '/stories/business/reports', label: 'Reports' },
-  { href: '/stories/business/team', label: 'Team' },
-  { href: '/stories/business/supply', label: 'Supply' },
+  { href: '/practicals/business', label: 'Hub' },
+  { href: '/practicals/business/operations', label: 'Operations' },
+  { href: '/practicals/business/credit', label: 'Credit' },
+  { href: '/practicals/business/reports', label: 'Reports' },
+  { href: '/practicals/business/team', label: 'Team' },
+  { href: '/practicals/business/supply', label: 'Supply' },
 ];
 
 export default function BusinessSectionNav() {
@@ -25,10 +25,10 @@ export default function BusinessSectionNav() {
       <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
         <div className="flex items-center justify-between gap-4">
           <Link
-            href="/stories"
+            href="/practicals"
             className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
           >
-            ← Stories
+            ← Practicals
           </Link>
 
           <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">
@@ -44,11 +44,10 @@ export default function BusinessSectionNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all whitespace-nowrap ${
-                  active
+                className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all whitespace-nowrap ${active
                     ? 'bg-[var(--brand-primary)] text-white border-white/10 shadow-lg shadow-[var(--brand-primary)]/15'
                     : 'bg-[var(--bg-elevated)]/20 text-[var(--text-muted)] border-[var(--border-subtle)] hover:text-[var(--text-primary)] hover:border-[var(--brand-primary)]/40'
-                }`}
+                  }`}
               >
                 {item.label}
               </Link>

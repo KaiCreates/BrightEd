@@ -158,6 +158,8 @@ export interface PaymentTerms {
 export interface DemandConfig {
     baseOrdersPerHour: number;
     maxConcurrentOrders: number;
+    maxConcurrentCustomers?: number; // Total capacity for pending + active
+    marketScale?: number;         // Theoretical pool (e.g., 1,000,000)
 
     // Time-based demand curves
     hourlyMultipliers: Record<number, number>;  // Hour (0-23) -> multiplier
