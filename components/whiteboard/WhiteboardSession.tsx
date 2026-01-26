@@ -3,13 +3,13 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import NextImage from 'next/image'
-import { db, isFirebaseReady, storage } from '@/lib/firebase'
+import { db, isFirebaseReady } from '@/lib/firebase'
 import {
   doc,
+  getDoc,
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 type PdfJsLegacy = any
 let pdfjsLegacyPromise: Promise<PdfJsLegacy> | null = null
@@ -109,6 +109,7 @@ export interface WhiteboardSessionProps {
   uid: string
   initialBoardId?: string
   initialBoardName?: string
+  roomId?: string | null
   activeRoomIdForPosting?: string | null
   onPostToHub?: (payload: {
     whiteboardId: string
@@ -218,6 +219,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     uid,
     initialBoardId,
     initialBoardName,
+    roomId,
     activeRoomIdForPosting,
     onPostToHub,
     onClose,
@@ -279,28 +281,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   const fileInputImageRef = useRef<HTMLInputElement | null>(null)
   const fileInputPdfRef = useRef<HTMLInputElement | null>(null)
 
-  const liveUsers = useMemo(
-    () => [
-      { id: 'u1', name: 'Ari', color: '#22D3EE' },
-      { id: 'u2', name: 'Maya', color: '#FACC15' },
-      { id: 'u3', name: 'Zion', color: '#EF4444' },
-    ],
-    []
-  )
-
-  const cursorMocks = useMemo(
-    () => [
-      { id: 'c1', name: 'Ari', color: '#22D3EE' },
-      { id: 'c2', name: 'Maya', color: '#FACC15' },
-    ],
-    []
-  )
-
-  const [cursorPositions, setCursorPositions] = useState<Record<string, { x: number; y: number }>>({
-    c1: { x: 120, y: 80 },
-    c2: { x: 260, y: 180 },
-  })
-
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -308,7 +288,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   useEffect(() => {
     if (!isOpen) return
 
-    const initialId = initialBoardId || boardId || safeUuid()
+    const initialId = initialBoardId || safeUuid()
     setBoardId(initialId)
     setBoardName(initialBoardName || 'Untitled Board')
 
@@ -328,6 +308,34 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       setPanX(0)
       setPanY(0)
       setZoom(1)
+
+      let cancelled = false
+      ;(async () => {
+        try {
+          if (!isFirebaseReady || !db) return
+
+          const refDoc = roomId
+            ? doc(db, 'rooms', roomId, 'whiteboards', initialId)
+            : doc(db, 'users', uid, 'binder', initialId)
+          const snap = await getDoc(refDoc)
+          if (!snap.exists() || cancelled) return
+
+          const data: any = snap.data()
+          const snapshot = data?.snapshot
+          if (!snapshot) return
+
+          setBoardName(data?.name || initialBoardName || 'Untitled Board')
+          setElements(snapshot.elements || [])
+          setPanX(typeof snapshot.panX === 'number' ? snapshot.panX : 0)
+          setPanY(typeof snapshot.panY === 'number' ? snapshot.panY : 0)
+          setZoom(typeof snapshot.zoom === 'number' ? snapshot.zoom : 1)
+        } catch {
+        }
+      })()
+
+      return () => {
+        cancelled = true
+      }
     }
 
     setIsExitModalOpen(false)
@@ -339,7 +347,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     textDraftRef.current = null
 
     localStorage.setItem('brighted_whiteboard_last_open', initialId)
-  }, [isOpen, initialBoardId, initialBoardName, boardId])
+  }, [isOpen, initialBoardId, initialBoardName, roomId, uid])
 
   useEffect(() => {
     if (!isOpen) return
@@ -354,26 +362,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
 
     return () => window.clearInterval(t)
   }, [isOpen])
-
-  useEffect(() => {
-    if (!isOpen) return
-
-    const t = window.setInterval(() => {
-      setCursorPositions((prev) => {
-        const next: Record<string, { x: number; y: number }> = { ...prev }
-        for (const c of cursorMocks) {
-          const cur = next[c.id] || { x: 120, y: 80 }
-          next[c.id] = {
-            x: cur.x + (Math.random() - 0.5) * 40,
-            y: cur.y + (Math.random() - 0.5) * 40,
-          }
-        }
-        return next
-      })
-    }, 800)
-
-    return () => window.clearInterval(t)
-  }, [cursorMocks, isOpen])
 
   useEffect(() => {
     if (!isOpen) return
@@ -950,11 +938,39 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     return blob
   }, [])
 
-  const uploadBlobToStorage = useCallback(async (path: string, blob: Blob) => {
-    const storageRef = ref(storage, path)
-    await uploadBytes(storageRef, blob)
-    return await getDownloadURL(storageRef)
-  }, [])
+  const uploadBlobToCloudinary = useCallback(
+    async (opts: { blob: Blob; folder: string }) => {
+      const cloudName = "dtsureq3d"
+      const uploadPreset = "ml_default"
+
+      if (!cloudName || !uploadPreset) {
+        throw new Error('Cloudinary not configured')
+      }
+
+      const formData = new FormData()
+      formData.append('file', opts.blob)
+      formData.append('upload_preset', uploadPreset)
+      formData.append('folder', opts.folder)
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '')
+        throw new Error(`Cloudinary upload failed${text ? `: ${text}` : ''}`)
+      }
+
+      const data: any = await res.json()
+      const url = data?.secure_url as string | undefined
+      if (!url) {
+        throw new Error('Cloudinary upload failed')
+      }
+      return url
+    },
+    []
+  )
 
   const normalizeImageUrlsForSave = useCallback(async (uid: string, wbId: string) => {
     const toUpload = elements.filter((el): el is Extract<WhiteboardElement, { type: 'image' }> => el.type === 'image')
@@ -980,7 +996,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       try {
         const res = await fetch(el.url)
         const blob = await res.blob()
-        const url = await uploadBlobToStorage(`whiteboards/${uid}/${wbId}/assets/${el.id}.png`, blob)
+        const url = await uploadBlobToCloudinary({ blob, folder: `whiteboards/${uid}/${wbId}/assets` })
         next.push({ ...el, url })
         uploaded++
       } catch {
@@ -989,12 +1005,12 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     }
 
     return { nextElements: next, uploadedCount: uploaded }
-  }, [elements, uploadBlobToStorage])
+  }, [elements, uploadBlobToCloudinary])
 
   const saveToBinder = useCallback(
     async (mode: 'save' | 'post') => {
-      if (!isFirebaseReady || !db || !storage) {
-        throw new Error('Storage not ready')
+      if (!isFirebaseReady || !db) {
+        throw new Error('Database not ready')
       }
 
       if (!uid) {
@@ -1008,7 +1024,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       const thumbBlob = await captureThumbnailBlob()
       let thumbnailUrl: string | undefined
       if (thumbBlob) {
-        thumbnailUrl = await uploadBlobToStorage(`whiteboards/${uid}/${wbId}/thumb.png`, thumbBlob)
+        thumbnailUrl = await uploadBlobToCloudinary({ blob: thumbBlob, folder: `whiteboards/${uid}/${wbId}` })
       }
 
       const binderDoc = doc(db, 'users', uid, 'binder', wbId)
@@ -1032,6 +1048,30 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         { merge: true }
       )
 
+      if (roomId) {
+        const roomDoc = doc(db, 'rooms', roomId, 'whiteboards', wbId)
+        await setDoc(
+          roomDoc,
+          {
+            id: wbId,
+            kind: 'whiteboard',
+            name: boardName,
+            ownerId: uid,
+            updatedAt: serverTimestamp(),
+            createdAt: serverTimestamp(),
+            snapshot: {
+              elements: nextElements,
+              panX,
+              panY,
+              zoom,
+            },
+            thumbnailUrl: thumbnailUrl || null,
+            lastMode: mode,
+          },
+          { merge: true }
+        )
+      }
+
       const draft: StoredWhiteboardDraft = {
         id: wbId,
         name: boardName,
@@ -1045,7 +1085,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
 
       return { binderItemId: wbId, thumbnailUrl }
     },
-    [boardId, boardName, captureThumbnailBlob, normalizeImageUrlsForSave, panX, panY, uid, uploadBlobToStorage, zoom]
+    [boardId, boardName, captureThumbnailBlob, normalizeImageUrlsForSave, panX, panY, roomId, uid, uploadBlobToCloudinary, zoom]
   )
 
   const handleCloseDiscard = useCallback(() => {
@@ -1153,19 +1193,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex -space-x-2">
-            {liveUsers.slice(0, 5).map((u) => (
-              <div
-                key={u.id}
-                className="w-9 h-9 rounded-full border-2 border-slate-950 flex items-center justify-center text-xs font-black"
-                style={{ backgroundColor: `${u.color}22`, color: u.color }}
-                title={u.name}
-              >
-                {u.name.charAt(0)}
-              </div>
-            ))}
-          </div>
-
           <button
             onClick={() => setIsExitModalOpen(true)}
             className="px-4 py-2 rounded-xl bg-red-500 text-white font-black uppercase tracking-widest text-xs hover:bg-red-600"
@@ -1292,38 +1319,14 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       <div className="absolute inset-0">
         <div
           ref={containerRef}
-          className="absolute inset-0"
+          className="relative flex-1 bg-slate-950 overflow-hidden select-none"
           onWheel={handleWheel}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDropSticker}
         >
           <canvas ref={canvasRef} className="absolute inset-0" />
-
-          {cursorMocks.map((c) => {
-            const container = containerRef.current
-            if (!container) return null
-            const rect = container.getBoundingClientRect()
-            const pos = cursorPositions[c.id]
-            if (!pos) return null
-            const screenX = pos.x * zoom + panX
-            const screenY = pos.y * zoom + panY
-
-            return (
-              <div
-                key={c.id}
-                className="absolute z-[105] pointer-events-none"
-                style={{ transform: `translate(${screenX}px, ${screenY}px)` }}
-              >
-                <div className="px-2 py-1 rounded-lg text-[10px] font-black text-slate-950" style={{ backgroundColor: c.color }}>
-                  {c.name}
-                </div>
-              </div>
-            )
-          })}
 
           {isTextDraftOpen && textDraftRef.current && containerRef.current && (
             <div

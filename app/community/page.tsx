@@ -107,6 +107,48 @@ function CommunityHubInner() {
 
   const [isWhiteboardOpen, setIsWhiteboardOpen] = useState(false)
   const [whiteboardSeed, setWhiteboardSeed] = useState(0)
+  const [whiteboardBoardId, setWhiteboardBoardId] = useState<string | null>(null)
+  const [whiteboardBoardName, setWhiteboardBoardName] = useState<string>('Untitled Board')
+  const [pendingWhiteboardAnnounce, setPendingWhiteboardAnnounce] = useState(false)
+
+  const createBoardId = () => {
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      return crypto.randomUUID()
+    }
+    return `${Date.now()}_${Math.random().toString(16).slice(2)}`
+  }
+
+  const openNewWhiteboard = () => {
+    const id = createBoardId()
+    setWhiteboardBoardId(id)
+    setWhiteboardBoardName('Untitled Board')
+    setWhiteboardSeed((s) => s + 1)
+    setIsWhiteboardOpen(true)
+    setPendingWhiteboardAnnounce(true)
+  }
+
+  const openExistingWhiteboard = (id: string, name?: string | null) => {
+    setWhiteboardBoardId(id)
+    setWhiteboardBoardName(name || 'Untitled Board')
+    setWhiteboardSeed((s) => s + 1)
+    setIsWhiteboardOpen(true)
+    setPendingWhiteboardAnnounce(false)
+  }
+
+  useEffect(() => {
+    if (!pendingWhiteboardAnnounce) return
+    if (!isWhiteboardOpen) return
+    if (!activeRoom?.id) return
+    if (!whiteboardBoardId) return
+
+    sendMessage(`🧠 Whiteboard session started: ${whiteboardBoardName}`, undefined, {
+      kind: 'whiteboard',
+      whiteboardId: whiteboardBoardId,
+      whiteboardName: whiteboardBoardName,
+    }).catch(() => {})
+
+    setPendingWhiteboardAnnounce(false)
+  }, [activeRoom?.id, isWhiteboardOpen, pendingWhiteboardAnnounce, sendMessage, whiteboardBoardId, whiteboardBoardName])
 
   const [fileUploading, setFileUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -284,8 +326,7 @@ function CommunityHubInner() {
       const code = await createPrivateRoom()
       await joinRoom(code)
       alert(`Study room created. Share code: ${code}`)
-      setWhiteboardSeed((s) => s + 1)
-      setIsWhiteboardOpen(true)
+      openNewWhiteboard()
     } catch (err: any) {
       alert(err?.message || 'Failed to create study room')
     }
@@ -445,10 +486,14 @@ function CommunityHubInner() {
                               <div className="text-xs text-gray-500">Whiteboard Preview</div>
                             </div>
                             <button
-                              onClick={() => alert('Whiteboard launch is being implemented next.')}
+                              onClick={() => {
+                                if (m.whiteboardId) {
+                                  openExistingWhiteboard(m.whiteboardId, m.whiteboardName)
+                                }
+                              }}
                               className="text-xs px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10"
                             >
-                              Edit Copy
+                              Open
                             </button>
                           </div>
                           {m.whiteboardThumbnailUrl ? (
@@ -596,8 +641,7 @@ function CommunityHubInner() {
 
               <button
                 onClick={() => {
-                  setWhiteboardSeed((s) => s + 1)
-                  setIsWhiteboardOpen(true)
+                  openNewWhiteboard()
                 }}
                 className="px-3 py-2 rounded-lg bg-cyan-500/20 text-cyan-100 hover:bg-cyan-500/30 text-xs font-black uppercase tracking-widest"
               >
@@ -685,7 +729,9 @@ function CommunityHubInner() {
             key={whiteboardSeed}
             uid={user.uid}
             isOpen={isWhiteboardOpen}
-            initialBoardName="Untitled Board"
+            initialBoardId={whiteboardBoardId || undefined}
+            initialBoardName={whiteboardBoardName}
+            roomId={activeRoom?.id || null}
             activeRoomIdForPosting={activeRoom?.id || null}
             onPostToHub={async ({ whiteboardId, whiteboardName, whiteboardThumbnailUrl }) => {
               if (!activeRoom?.id) return

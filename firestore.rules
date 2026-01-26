@@ -66,6 +66,15 @@ service cloud.firestore {
         resource.data.members.hasAny([request.auth.uid])
       );
 
+      // Room-scoped whiteboards (shared session state)
+      match /whiteboards/{boardId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if isAuthenticated() && (
+          request.auth.uid in get(/databases/$(database)/documents/rooms/$(roomId)).data.members ||
+          get(/databases/$(database)/documents/rooms/$(roomId)).data.ownerId == request.auth.uid
+        );
+      }
+
       // 2. Messages within Rooms
       match /messages/{messageId} {
         // Anyone authenticated can read messages (public rooms don't require membership)
