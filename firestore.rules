@@ -22,6 +22,10 @@ service cloud.firestore {
         // Progress is strictly private
         allow read, write: if isAuthenticated() && isOwner(userId);
       }
+
+      match /binder/{itemId} {
+        allow read, write: if isAuthenticated() && isOwner(userId);
+      }
       
       // NABLE Learning Engine state
       match /nable/{document=**} {
@@ -79,8 +83,24 @@ service cloud.firestore {
         // Only the sender can delete their own message
         allow delete: if isAuthenticated() && resource.data.senderId == request.auth.uid;
         
-        // Reactions (Update) - allow anyone authenticated to update reactions
-        allow update: if isAuthenticated(); 
+        // Updates:
+        // - Sender can edit their own message
+        // - Anyone can update reactions only (cannot edit message content)
+        allow update: if isAuthenticated() && (
+          (resource.data.senderId == request.auth.uid && request.resource.data.senderId == resource.data.senderId) ||
+          (
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reactions']) &&
+            request.resource.data.senderId == resource.data.senderId &&
+            request.resource.data.text == resource.data.text &&
+            request.resource.data.fileUrl == resource.data.fileUrl &&
+            request.resource.data.kind == resource.data.kind &&
+            request.resource.data.bountyPoints == resource.data.bountyPoints &&
+            request.resource.data.whiteboardId == resource.data.whiteboardId &&
+            request.resource.data.whiteboardName == resource.data.whiteboardName &&
+            request.resource.data.whiteboardThumbnailUrl == resource.data.whiteboardThumbnailUrl &&
+            request.resource.data.timestamp == resource.data.timestamp
+          )
+        );
       }
     }
 

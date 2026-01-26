@@ -1,22 +1,18 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { getTotalXP } from '@/lib/xp-tracker'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { SocialHubProvider } from '@/lib/social-hub-context'
-import { SocialHub } from '@/components/social/SocialHub'
 
 export default function HomePage() {
     const router = useRouter()
     const { user, userData, loading: authLoading } = useAuth()
     const [learningPath, setLearningPath] = useState<any[]>([])
-    const socialHubRef = useRef<HTMLDivElement>(null)
-    const isInView = useInView(socialHubRef, { once: false, margin: '-100px' })
 
     useEffect(() => {
         if (authLoading) return
@@ -396,34 +392,6 @@ export default function HomePage() {
                 </div>
             </div>
 
-            {/* Social Hub Section */}
-            <div ref={socialHubRef} className="w-full py-20 bg-gradient-to-b from-transparent to-[var(--brand-primary)]/5 mt-20 relative">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--border-subtle)] to-transparent" />
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="mb-12 text-center">
-                            <div className="inline-block bg-[var(--brand-primary)] text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest mb-4 shadow-xl shadow-[var(--brand-primary)]/40">
-                                Global Community
-                            </div>
-                            <BrightHeading level={2} className="mb-6 leading-tight">
-                                Live Campus & Social Hub
-                            </BrightHeading>
-                            <p className="text-[var(--text-secondary)] font-medium text-xl max-w-2xl mx-auto">
-                                You&apos;re not learning alone. Connect with 1,200+ students active right now.
-                            </p>
-                        </div>
-                        <div className="relative rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl">
-                            <SocialHubProvider>
-                                <SocialHub />
-                            </SocialHubProvider>
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
         </div>
     )
 }

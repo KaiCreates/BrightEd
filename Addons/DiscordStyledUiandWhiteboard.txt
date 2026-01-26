@@ -1,0 +1,90 @@
+I need to build the main "Community Hub" layout. It requires a 3-column "Holy Grail" layout (Sidebar, Chat, Right Panel).
+
+Please implement the following React/Tailwind structure:
+
+1. LEFT SIDEBAR: THE "DISTRICTS" NAV
+   - A thin vertical rail (width: w-20).
+   - Render these specific "District" Icons (use lucide-react):
+     - 🏢 (The Lobby)
+     - 💼 (Business District - POB, POE, Accts)
+     - 🔌 (Tech Hub - IT, CS)
+     - 🧪 (Science Lab)
+     - 🎓 (Exam HQ)
+   - Behavior: Clicking an icon switches the active "Server". Active state gets a Cyan vertical pill indicator.
+
+2. SECONDARY SIDEBAR: CHANNELS
+   - Width: w-60, Gray-900 bg.
+   - List channels based on the active District (e.g., if Tech Hub is active: #network-help, #programming-logic, #hardware-repair).
+   - Header: Show the District Name with a bold font.
+
+3. MAIN CHAT AREA (The Feed)
+   - This is the center flexible area.
+   - Input Bar: Needs to include a paperclip icon (upload), and crucially, a "✏️ DRAW" button (opens the whiteboard).
+   - Message Components:
+     - Standard Text Message.
+     - "Bounty Card": A message with a Gold border, offering "Reputation Points" for help.
+     - "Whiteboard Preview": A user-generated sketch that appears as an image thumbnail in chat with an "Edit Copy" button.
+
+4. RIGHT PANEL: THE "ACTIVE BENCH"
+   - Width: w-64.
+   - Show user status based on activity:
+     - "In Simulation": Show a status text like "running Business Sim..."
+     - "Mentors": Show online high-ranking users.
+   - Add a "Join Study Room" button at the top (for voice/whiteboard sessions).
+
+STYLE GUIDE:
+- Dark Mode (Slate-950 background).
+- Text: Gray-300 for normal text, White for headings.
+- Accents: Neon Cyan for tech, Gold for bounties.
+- Go for a sort of Discord styled layout but keeping the originality of the app
+
+Now, I need to implement the full-screen "Whiteboard Component" that launches when a user clicks "Draw" or joins a Study Room.
+
+Please build a canvas interface with these specific features:
+
+1. THE "ESCAPE HATCH" (Crucial)
+   - Create a floating header bar at the top of the screen.
+   - Top-Left: "Untitled Board" (editable name).
+   - Top-Right: A prominent red "EXIT SESSION" button.
+     - Logic: On click, trigger a "Save & Close" modal asking: "Post to chat before leaving?"
+     - Options: "Discard", "Save to Binder", "Post to Hub".
+
+2. THE TOOLBAR (Floating Bottom/Center)
+   - Implement these tool buttons (toggle state):
+     - 🖱️ Select/Move
+     - 🖊️ Pen (Color picker: White, Red, Cyan, Yellow)
+     - 🟧 Shape (Rect, Circle, Arrow)
+     - 📝 Text Box
+     - 📸 Upload Image (For pasting past paper screenshots)
+     - Upload PDF for past papers and make a mini tool box where they can pull out pages from the past paper and put it on the whiteboard
+     - 🔦 Laser Pointer (For 'Teaching Mode' - trails fade after 2 seconds)
+
+3. COLLABORATION FEATURES
+   - Add a "Live Users" stack in the top right (avatars of who is looking at the board).
+   - Cursor tracking: Show colored nametags moving on the canvas (mockup data is fine for now).
+
+4. CANVAS LOGIC
+   - Use an infinite canvas library logic (pan and zoom capable).
+   - Background: Very subtle dot grid pattern (opacity 10%) on dark background.
+
+5. EDUCATIONAL CONTEXT
+   - Add a "Resource Sidebar" (collapsible on the left).
+   - Allow users to drag-and-drop "Stickers" from this sidebar:
+     - Formulas (e.g., "Pythagoras", "Balance Sheet Template").
+     - Logic Gates (AND, OR, NOT symbols).
+
+
+Remove the social hub ui and then make a page called Community!
+
+For checks and debugs 
+-Make sure persons can delete their own messages, they should not be able to delete other persons messages
+- Make sure they are able to edit their own messages and report other messages 
+- Make sure they are able to react to messages, block other users, mute other users, and report other users make sure they can unblock the users and mute the users
+- Make sure the whiteboard allows persons to exit the session safely without loosing any of their work so presistence is required
+- Make sure the whiteboard allows persons to save their work to their binder and post it to the community hub
+- Allow persons to upload images to the communities/distrcits
+- Allow persons to have custom rooms to have private chats and study rooms and make sure the whiteboard is available in the custom rooms aswell
+- If the user is not logged in, they should not be able to access the community hub
+- if the user is disconnected from the internet allow them to reconnect to the community hub or to the whiteboard   
+- If all users disconnect from the internet allow the whiteboard to be saved to the user's binder and post it to the community hub so they can reopen with there data good
+- Allow persons to have a private chat with other persons

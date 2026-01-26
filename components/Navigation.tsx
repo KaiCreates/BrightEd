@@ -11,6 +11,7 @@ import { BCoinIcon } from '@/components/BCoinIcon'
 
 const navItems = [
   { href: '/home', label: 'Home', icon: '🏠' },
+  { href: '/community', label: 'Community', icon: '💬' },
   { href: '/learn', label: 'Learn', icon: '📚' },
   { href: '/leaderboard', label: 'Rankings', icon: '🏆' },
   { href: '/simulate', label: 'Simulate', icon: '🎮' },

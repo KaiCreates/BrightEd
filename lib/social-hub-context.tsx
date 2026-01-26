@@ -50,6 +50,11 @@ interface Message {
     businessPrestige?: number;
     timestamp: Timestamp | null;
     fileUrl?: string;
+    kind?: 'text' | 'bounty' | 'whiteboard';
+    bountyPoints?: number;
+    whiteboardId?: string;
+    whiteboardName?: string;
+    whiteboardThumbnailUrl?: string;
     reactions?: { [emoji: string]: string[] };
     threadId?: string;
     parentMessageId?: string;
@@ -70,17 +75,24 @@ interface SocialHubContextType {
     onlineUsers: { [uid: string]: { name: string; lastSeen: number } };
     dmWindows: DMWindow[];
     blockedUsers: string[];
+    mutedUsers: string[];
     setActiveRoom: (room: Room | null) => Promise<void>;
     createPrivateRoom: () => Promise<string>;
     joinRoom: (code: string) => Promise<boolean>;
-    sendMessage: (text: string, fileUrl?: string) => Promise<void>;
+    sendMessage: (text: string, fileUrl?: string, options?: Partial<Pick<Message, 'kind' | 'bountyPoints' | 'whiteboardId' | 'whiteboardName' | 'whiteboardThumbnailUrl'>>) => Promise<void>;
     sendDM: (userId: string, text: string) => Promise<void>;
     addReaction: (messageId: string, emoji: string) => Promise<void>;
+    editMessage: (messageId: string, newText: string) => Promise<void>;
+    deleteMessage: (messageId: string) => Promise<void>;
     openDM: (userId: string, userName: string) => void;
     closeDM: (userId: string) => void;
     toggleDMMinimize: (userId: string) => void;
     blockUser: (userId: string) => Promise<void>;
+    unblockUser: (userId: string) => Promise<void>;
+    muteUser: (userId: string) => Promise<void>;
+    unmuteUser: (userId: string) => Promise<void>;
     reportMessage: (messageId: string, reason: string) => Promise<void>;
+    reportUser: (userId: string, reason: string) => Promise<void>;
     leaveRoom: (roomId: string) => Promise<void>;
     deleteRoom: (roomId: string) => Promise<void>;
     reportRoom: (roomId: string, reason: string) => Promise<void>;
@@ -97,6 +109,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; lastSeen: number } }>({});
     const [dmWindows, setDmWindows] = useState<DMWindow[]>([]);
     const [blockedUsers, setBlockedUsers] = useState<string[]>([]);
+    const [mutedUsers, setMutedUsers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [lastMessageTime, setLastMessageTime] = useState<number>(0);
 
@@ -150,6 +163,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             if (snap.exists()) {
                 const data = snap.data();
                 setBlockedUsers(data.blockedUsers || []);
+                setMutedUsers(data.mutedUsers || []);
             }
         });
 
@@ -210,7 +224,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                         // Only show main messages (no threadId or parentMessageId)
                         if (!data.threadId && !data.parentMessageId) {
                             // Filter out messages from blocked users
-                            if (!blockedUsers.includes(data.senderId)) {
+                            if (!blockedUsers.includes(data.senderId) && !mutedUsers.includes(data.senderId)) {
                                 msgs.push({ id: doc.id, ...data } as Message);
                             }
                         }
@@ -228,7 +242,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             console.error('Error setting up message listener:', error);
             setMessages([]);
         }
-    }, [activeRoom, user, blockedUsers]);
+    }, [activeRoom, user, blockedUsers, mutedUsers]);
 
     // Presence system with Realtime Database using .info/connected
     useEffect(() => {
@@ -389,7 +403,11 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         return true;
     }, [user, setActiveRoom]);
 
-    const sendMessage = useCallback(async (text: string, fileUrl?: string) => {
+    const sendMessage = useCallback(async (
+        text: string,
+        fileUrl?: string,
+        options?: Partial<Pick<Message, 'kind' | 'bountyPoints' | 'whiteboardId' | 'whiteboardName' | 'whiteboardThumbnailUrl'>>
+    ) => {
         if (!user || !activeRoom) return;
 
         // Rate limiting: 1 message per 2 seconds
@@ -416,6 +434,11 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             businessPrestige,
             timestamp: serverTimestamp(),
             fileUrl: fileUrl || null,
+            kind: options?.kind || 'text',
+            bountyPoints: options?.bountyPoints || null,
+            whiteboardId: options?.whiteboardId || null,
+            whiteboardName: options?.whiteboardName || null,
+            whiteboardThumbnailUrl: options?.whiteboardThumbnailUrl || null,
             reactions: {}
         });
     }, [user, activeRoom, userData, lastMessageTime]);
@@ -467,6 +490,34 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         }
     }, [user, activeRoom]);
 
+    const editMessage = useCallback(async (messageId: string, newText: string) => {
+        if (!user || !activeRoom || !newText.trim()) return;
+
+        const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
+        const snap = await getDoc(messageRef);
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (data.senderId !== user.uid) {
+            throw new Error('You can only edit your own messages');
+        }
+        await updateDoc(messageRef, {
+            text: newText,
+        });
+    }, [user, activeRoom]);
+
+    const deleteMessage = useCallback(async (messageId: string) => {
+        if (!user || !activeRoom) return;
+
+        const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
+        const snap = await getDoc(messageRef);
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (data.senderId !== user.uid) {
+            throw new Error('You can only delete your own messages');
+        }
+        await deleteDoc(messageRef);
+    }, [user, activeRoom]);
+
     const openDM = useCallback((userId: string, userName: string) => {
         setDmWindows((prev) => {
             const existing = prev.find((dm) => dm.userId === userId);
@@ -501,6 +552,33 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         });
     }, [user]);
 
+    const unblockUser = useCallback(async (userId: string) => {
+        if (!user) return;
+
+        const userRef = doc(db, 'users', user.uid);
+        await updateDoc(userRef, {
+            blockedUsers: arrayRemove(userId)
+        });
+    }, [user]);
+
+    const muteUser = useCallback(async (userId: string) => {
+        if (!user) return;
+
+        const userRef = doc(db, 'users', user.uid);
+        await updateDoc(userRef, {
+            mutedUsers: arrayUnion(userId)
+        });
+    }, [user]);
+
+    const unmuteUser = useCallback(async (userId: string) => {
+        if (!user) return;
+
+        const userRef = doc(db, 'users', user.uid);
+        await updateDoc(userRef, {
+            mutedUsers: arrayRemove(userId)
+        });
+    }, [user]);
+
     const reportMessage = useCallback(async (messageId: string, reason: string) => {
         if (!user || !activeRoom) return;
 
@@ -520,6 +598,19 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             status: 'pending'
         });
     }, [user, activeRoom]);
+
+    const reportUser = useCallback(async (userId: string, reason: string) => {
+        if (!user) return;
+
+        await addDoc(collection(db, 'moderation_queue'), {
+            type: 'user_report',
+            targetId: userId,
+            reporterId: user.uid,
+            reason,
+            timestamp: serverTimestamp(),
+            status: 'pending'
+        });
+    }, [user]);
 
     const leaveRoom = useCallback(async (roomId: string) => {
         if (!user) return;
@@ -574,17 +665,24 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                 onlineUsers,
                 dmWindows,
                 blockedUsers,
+                mutedUsers,
                 setActiveRoom,
                 createPrivateRoom,
                 joinRoom,
                 sendMessage,
                 sendDM,
                 addReaction,
+                editMessage,
+                deleteMessage,
                 openDM,
                 closeDM,
                 toggleDMMinimize,
                 blockUser,
+                unblockUser,
+                muteUser,
+                unmuteUser,
                 reportMessage,
+                reportUser,
                 leaveRoom,
                 deleteRoom,
                 reportRoom,
