@@ -7,13 +7,13 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCnYUAPzy1NQeQSZHaM2elFgcO_qLaHI_4",
-    authDomain: "brighted-426615.firebaseapp.com",
-    projectId: "brighted-426615",
-    storageBucket: "brighted-426615.appspot.com",
-    messagingSenderId: "1066222262665",
-    appId: "1:1066222262665:web:2c6b2c6b2c6b2c6b2c6b2c",
-    measurementId: "G-426615",
-    databaseURL: "https://brighted-426615-default-rtdb.firebaseio.com"
+    authDomain: "brighted-b36ba.firebaseapp.com",
+    projectId: "brighted-b36ba",
+    storageBucket: "brighted-b36ba.firebasestorage.app",
+    messagingSenderId: "374276438230",
+    appId: "1:374276438230:web:c67ce5d516cb5d74b3f177",
+    measurementId: "G-G64MM2T49N",
+    databaseURL: "https://brighted-b36ba-default-rtdb.firebaseio.com/"
 };
 
 // Singleton pattern for Firebase initialization
