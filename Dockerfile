@@ -19,6 +19,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
+ENV DATABASE_URL "file:/app/data/prod.db"
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
