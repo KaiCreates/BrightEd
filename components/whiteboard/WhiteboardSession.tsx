@@ -34,66 +34,66 @@ type PenColor = 'white' | 'red' | 'cyan' | 'yellow'
 
 type WhiteboardElement =
   | {
-      id: string
-      type: 'path'
-      points: Array<{ x: number; y: number }>
-      color: PenColor
-      width: number
-      createdAt: number
-      isLaser?: boolean
-    }
+    id: string
+    type: 'path'
+    points: Array<{ x: number; y: number }>
+    color: PenColor
+    width: number
+    createdAt: number
+    isLaser?: boolean
+  }
   | {
-      id: string
-      type: 'rect'
-      x: number
-      y: number
-      w: number
-      h: number
-      color: PenColor
-      width: number
-      createdAt: number
-    }
+    id: string
+    type: 'rect'
+    x: number
+    y: number
+    w: number
+    h: number
+    color: PenColor
+    width: number
+    createdAt: number
+  }
   | {
-      id: string
-      type: 'circle'
-      x: number
-      y: number
-      r: number
-      color: PenColor
-      width: number
-      createdAt: number
-    }
+    id: string
+    type: 'circle'
+    x: number
+    y: number
+    r: number
+    color: PenColor
+    width: number
+    createdAt: number
+  }
   | {
-      id: string
-      type: 'arrow'
-      x1: number
-      y1: number
-      x2: number
-      y2: number
-      color: PenColor
-      width: number
-      createdAt: number
-    }
+    id: string
+    type: 'arrow'
+    x1: number
+    y1: number
+    x2: number
+    y2: number
+    color: PenColor
+    width: number
+    createdAt: number
+  }
   | {
-      id: string
-      type: 'text'
-      x: number
-      y: number
-      text: string
-      color: PenColor
-      fontSize: number
-      createdAt: number
-    }
+    id: string
+    type: 'text'
+    x: number
+    y: number
+    text: string
+    color: PenColor
+    fontSize: number
+    createdAt: number
+  }
   | {
-      id: string
-      type: 'image'
-      x: number
-      y: number
-      w: number
-      h: number
-      url: string
-      createdAt: number
-    }
+    id: string
+    type: 'image'
+    x: number
+    y: number
+    w: number
+    h: number
+    url: string
+    createdAt: number
+  }
 
 export type WhiteboardSaveMode = 'discard' | 'save' | 'post'
 
@@ -185,7 +185,7 @@ async function renderPdfToImages(file: File, maxPages: number) {
   const pdfjs = await loadPdfjsLegacy()
   const version = (pdfjs as any).version as string | undefined
   if ((pdfjs as any).GlobalWorkerOptions && version) {
-    ;(pdfjs as any).GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/legacy/build/pdf.worker.min.mjs`
+    ; (pdfjs as any).GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/legacy/build/pdf.worker.min.mjs`
   }
 
   const docRef = await (pdfjs as any).getDocument({ data: arrayBuffer }).promise
@@ -253,26 +253,26 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   const pointerStateRef = useRef<
     | null
     | {
-        mode: 'panning' | 'drawing'
-        pointerId: number
-        startClientX: number
-        startClientY: number
-        startPanX: number
-        startPanY: number
-        startWorldX: number
-        startWorldY: number
-        activeElementId: string
-      }
+      mode: 'panning' | 'drawing'
+      pointerId: number
+      startClientX: number
+      startClientY: number
+      startPanX: number
+      startPanY: number
+      startWorldX: number
+      startWorldY: number
+      activeElementId: string
+    }
   >(null)
 
   const textDraftRef = useRef<
     | null
     | {
-        x: number
-        y: number
-        clientX: number
-        clientY: number
-      }
+      x: number
+      y: number
+      clientX: number
+      clientY: number
+    }
   >(null)
 
   const [isTextDraftOpen, setIsTextDraftOpen] = useState(false)
@@ -310,28 +310,28 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       setZoom(1)
 
       let cancelled = false
-      ;(async () => {
-        try {
-          if (!isFirebaseReady || !db) return
+        ; (async () => {
+          try {
+            if (!isFirebaseReady || !db) return
 
-          const refDoc = roomId
-            ? doc(db, 'rooms', roomId, 'whiteboards', initialId)
-            : doc(db, 'users', uid, 'binder', initialId)
-          const snap = await getDoc(refDoc)
-          if (!snap.exists() || cancelled) return
+            const refDoc = roomId
+              ? doc(db, 'rooms', roomId, 'whiteboards', initialId)
+              : doc(db, 'users', uid, 'binder', initialId)
+            const snap = await getDoc(refDoc)
+            if (!snap.exists() || cancelled) return
 
-          const data: any = snap.data()
-          const snapshot = data?.snapshot
-          if (!snapshot) return
+            const data: any = snap.data()
+            const snapshot = data?.snapshot
+            if (!snapshot) return
 
-          setBoardName(data?.name || initialBoardName || 'Untitled Board')
-          setElements(snapshot.elements || [])
-          setPanX(typeof snapshot.panX === 'number' ? snapshot.panX : 0)
-          setPanY(typeof snapshot.panY === 'number' ? snapshot.panY : 0)
-          setZoom(typeof snapshot.zoom === 'number' ? snapshot.zoom : 1)
-        } catch {
-        }
-      })()
+            setBoardName(data?.name || initialBoardName || 'Untitled Board')
+            setElements(snapshot.elements || [])
+            setPanX(typeof snapshot.panX === 'number' ? snapshot.panX : 0)
+            setPanY(typeof snapshot.panY === 'number' ? snapshot.panY : 0)
+            setZoom(typeof snapshot.zoom === 'number' ? snapshot.zoom : 1)
+          } catch {
+          }
+        })()
 
       return () => {
         cancelled = true
@@ -603,7 +603,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldY: y,
           activeElementId: '',
         }
-        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+          ; (e.target as HTMLElement).setPointerCapture(e.pointerId)
         return
       }
 
@@ -633,7 +633,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldY: y,
           activeElementId: id,
         }
-        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+          ; (e.target as HTMLElement).setPointerCapture(e.pointerId)
         return
       }
 
@@ -661,7 +661,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldY: y,
           activeElementId: id,
         }
-        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+          ; (e.target as HTMLElement).setPointerCapture(e.pointerId)
         return
       }
 
@@ -688,7 +688,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldY: y,
           activeElementId: id,
         }
-        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+          ; (e.target as HTMLElement).setPointerCapture(e.pointerId)
         return
       }
 
@@ -716,7 +716,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldY: y,
           activeElementId: id,
         }
-        ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+          ; (e.target as HTMLElement).setPointerCapture(e.pointerId)
         return
       }
     },
@@ -1055,27 +1055,32 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       )
 
       if (roomId) {
-        const roomDoc = doc(db, 'rooms', roomId, 'whiteboards', wbId)
-        await setDoc(
-          roomDoc,
-          {
-            id: wbId,
-            kind: 'whiteboard',
-            name: boardName,
-            ownerId: uid,
-            updatedAt: serverTimestamp(),
-            createdAt: serverTimestamp(),
-            snapshot: {
-              elements: nextElements,
-              panX,
-              panY,
-              zoom,
+        try {
+          const roomDoc = doc(db, 'rooms', roomId, 'whiteboards', wbId)
+          await setDoc(
+            roomDoc,
+            {
+              id: wbId,
+              kind: 'whiteboard',
+              name: boardName,
+              ownerId: uid,
+              updatedAt: serverTimestamp(),
+              createdAt: serverTimestamp(),
+              snapshot: {
+                elements: nextElements,
+                panX,
+                panY,
+                zoom,
+              },
+              thumbnailUrl: thumbnailUrl || null,
+              lastMode: mode,
             },
-            thumbnailUrl: thumbnailUrl || null,
-            lastMode: mode,
-          },
-          { merge: true }
-        )
+            { merge: true }
+          )
+        } catch (err) {
+          console.warn('Failed to save to room binder (likely permissions), but personal binder saved:', err)
+          // We continue, as personal save succeeded
+        }
       }
 
       const draft: StoredWhiteboardDraft = {
@@ -1281,7 +1286,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           onChange={(e) => {
             const f = e.target.files?.[0]
             if (!f) return
-            handleUploadImage(f).catch(() => {})
+            handleUploadImage(f).catch(() => { })
             e.target.value = ''
           }}
         />
@@ -1300,7 +1305,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           onChange={(e) => {
             const f = e.target.files?.[0]
             if (!f) return
-            handleUploadPdf(f).catch(() => {})
+            handleUploadPdf(f).catch(() => { })
             e.target.value = ''
           }}
         />
