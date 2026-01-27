@@ -8,6 +8,11 @@ import { AuthProvider } from '@/lib/auth-context'
 export const metadata: Metadata = {
   title: 'BrightEd - Adaptive Learning for CXC',
   description: 'Simulation-first learning platform for SEA, CSEC, and CAPE students',
+  icons: {
+    icon: '/BrightEdLogo.png',
+    shortcut: '/BrightEdLogo.png',
+    apple: '/BrightEdLogo.png',
+  },
 }
 
 import { ErrorBoundary } from '@/components/ErrorBoundary'
