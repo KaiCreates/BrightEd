@@ -52,7 +52,7 @@ export function useQuestionLoader({
         async function loadQuestion() {
             // 1. Validation - Fail Fast
             if (!objectiveId || !subjectId) {
-                setError('Missing required parameters: objectiveId or subjectId')
+                setError('Please go to the Learning Path to begin your work.')
                 setLoading(false)
                 return
             }

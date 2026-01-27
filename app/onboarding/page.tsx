@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { BrightLayer, BrightButton, BrightHeading } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
+import schoolsData from '@/data/schools.json'
 
 interface OnboardingData {
   firstName: string
@@ -124,9 +125,9 @@ export default function OnboardingPage() {
           .slice(0, 64)
 
         const subjectProgress: Record<string, number> = {}
-        ;(data.subjects || []).forEach((subject: string) => {
-          subjectProgress[subject] = 0
-        })
+          ; (data.subjects || []).forEach((subject: string) => {
+            subjectProgress[subject] = 0
+          })
 
         await updateDoc(userRef, {
           onboardingData: data,
@@ -158,9 +159,9 @@ export default function OnboardingPage() {
           if (existing.empty) {
             const { data: pathData } = await fetch(
               '/api/learning-path?' +
-                new URLSearchParams({
-                  subjects: (data.subjects || []).join(','),
-                })
+              new URLSearchParams({
+                subjects: (data.subjects || []).join(','),
+              })
             ).then((res) => res.json())
 
             if (pathData?.paths) {
@@ -196,7 +197,7 @@ export default function OnboardingPage() {
           }
         }
       }
-      
+
       router.push('/onboarding/diagnostic')
     } catch (error) {
       console.error('Error saving onboarding data:', error)
@@ -593,7 +594,11 @@ function AcademicContextScreen({
             <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">Country</label>
             <select
               value={data.country}
-              onChange={(e) => updateData('country', e.target.value)}
+              onChange={(e) => {
+                const newCountry = e.target.value;
+                updateData('country', newCountry);
+                updateData('school', ''); // Reset school on country change
+              }}
               className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none appearance-none font-bold cursor-pointer"
               required
             >
@@ -607,14 +612,32 @@ function AcademicContextScreen({
           </div>
           <div>
             <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">School</label>
-            <input
-              type="text"
-              value={data.school}
-              onChange={(e) => updateData('school', e.target.value)}
-              placeholder="Your School Name"
-              className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none font-bold"
-              required
-            />
+            {data.country && (schoolsData as Record<string, string[]>)[data.country] ? (
+              <select
+                value={data.school}
+                onChange={(e) => updateData('school', e.target.value)}
+                className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none appearance-none font-bold cursor-pointer"
+                required
+              >
+                <option value="" className="bg-[var(--bg-elevated)]">Select Your School</option>
+                {(schoolsData as Record<string, string[]>)[data.country].map((school) => (
+                  <option key={school} value={school} className="bg-[var(--bg-elevated)]">
+                    {school}
+                  </option>
+                ))}
+                <option value="Other" className="bg-[var(--bg-elevated)]">Other / Not Listed</option>
+              </select>
+            ) : (
+              <input
+                type="text"
+                value={data.school}
+                onChange={(e) => updateData('school', e.target.value)}
+                placeholder="Your School Name"
+                className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none font-bold"
+                required
+                disabled={!data.country}
+              />
+            )}
           </div>
           <div>
             <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">Exam Track</label>

@@ -379,13 +379,19 @@ export function rejectOrder(order: Order): { order: Order; reputationPenalty: nu
     const isAccepted = order.status === 'accepted' || order.status === 'in_progress';
 
     // VIP and business customers remember rejections
-    let penalty = isAccepted ? 5 : 1;
-    if (order.customerType === 'vip') penalty *= 2;
-    if (order.customerType === 'business') penalty *= 1.5;
+    let penalty = isAccepted ? 3 : 0.5;
+
+    // Grace: Rejecting small pending orders is free
+    if (!isAccepted && order.totalAmount < 50) {
+        penalty = 0;
+    }
+
+    if (order.customerType === 'vip') penalty *= 1.5;
+    if (order.customerType === 'business') penalty *= 1.2;
 
     return {
         order: { ...order, status: 'cancelled' },
-        reputationPenalty: Math.round(penalty),
+        reputationPenalty: Math.ceil(penalty),
     };
 }
 
@@ -538,21 +544,31 @@ export function failOrder(
     switch (reason) {
         case 'deadline_missed':
             refund = order.paidAmount; // Full refund of any upfront
-            penalty = 20;
+            penalty = 12; // Reduced from 20
             break;
         case 'stockout':
             refund = order.paidAmount;
-            penalty = 15;
+            penalty = 8; // Reduced from 15
             break;
         case 'cancelled_by_business':
             refund = order.paidAmount;
-            penalty = 5;
+            penalty = 3; // Reduced from 5
             break;
     }
 
-    // Worse for premium customers
-    if (order.customerType === 'vip') penalty *= 1.5;
-    if (order.customerType === 'business') penalty *= 1.3;
+    // Scale penalty by order size (Severity)
+    // Small orders (< 50) have reduced impact (Grace Threshold)
+    if (order.totalAmount < 50) {
+        penalty = Math.ceil(penalty * 0.5);
+    }
+    // Massive orders (> 1000) have higher stakes
+    else if (order.totalAmount > 1000) {
+        penalty = Math.ceil(penalty * 1.25);
+    }
+
+    // Customer Type scaling
+    if (order.customerType === 'vip') penalty = Math.ceil(penalty * 1.5);
+    if (order.customerType === 'business') penalty = Math.ceil(penalty * 1.2);
 
     const review = generateReview(order, 0, reason);
 

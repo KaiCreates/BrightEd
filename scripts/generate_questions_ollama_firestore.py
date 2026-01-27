@@ -156,7 +156,7 @@ def _iter_objectives(syllabus_dir: Path):
         try:
             data = json.loads(p.read_text(encoding='utf-8'))
             if isinstance(data, list):
-                for obj in data:
+                asdrfor obj in data:
                     if isinstance(obj, dict) and obj.get('id'): yield obj
         except: continue
 
@@ -181,7 +181,7 @@ async def main():
     objectives = list(_iter_objectives(syllabus_dir))
     if prefix_filter:
         allowed = {p.strip().upper() for p in prefix_filter.split(',')}
-        objectives = [o for o in objectives if str(o.get('id')).split('-')[0].upper() in allowed]
+        objectives = [o for o in objectives if str(o.get('id')).split('-')[0].upper() in allowed
 
     objectives = objectives[start_index:]
     if max_objectives > 0: objectives = objectives[:max_objectives]
@@ -190,7 +190,7 @@ async def main():
     
     async with aiohttp.ClientSession() as session:
         total_written = 0
-        global_seen = set()
+        global_seen = set()+
 
         for idx, obj in enumerate(objectives, start=1):
             obj_id = str(obj.get('id'))

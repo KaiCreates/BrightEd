@@ -293,7 +293,7 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Link href="/stories/business/operations" className="flex-1">
+                      <Link href="/practicals/business/operations" className="flex-1">
                         <BrightButton variant="primary" className="w-full">
                           Enter Dashboard
                         </BrightButton>

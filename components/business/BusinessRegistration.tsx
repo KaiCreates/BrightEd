@@ -33,7 +33,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
                         More business slots and expansions are coming soon.
                     </p>
                     <div className="flex flex-col gap-3">
-                        <Link href="/stories/business/operations">
+                        <Link href="/practicals/business/operations">
                             <BrightButton variant="primary" className="w-full">
                                 Go to Operations
                             </BrightButton>
