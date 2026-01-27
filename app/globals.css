@@ -99,22 +99,22 @@
 
 [data-theme='dark'] {
   /* Neutral Palette - Dark Glassmorphism mode */
-  --bg-primary: #0a0b1e;
-  --bg-secondary: #0f1424;
-  --bg-elevated: #171b2e;
-  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-primary: #0B0C15;
+  --bg-secondary: #151725;
+  --bg-elevated: #1E2130;
+  --bg-glass: rgba(11, 12, 21, 0.7);
 
   --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
   --text-inverse: #0F172A;
 
   --brand-primary: #38BDF8;
   --brand-secondary: #818CF8;
   --brand-accent: #2DD4BF;
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
   /* Neon accents for interactive elements */
   --neon-cyan: #00f5ff;
@@ -139,7 +139,19 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Smooth theme transition */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Apply transitions to common theme-affected elements */
+a,
+button,
+input,
+select,
+textarea,
+.glass-card,
+.glass-card-hover {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 h1,
