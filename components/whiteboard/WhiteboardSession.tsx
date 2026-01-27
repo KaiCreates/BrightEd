@@ -185,7 +185,7 @@ async function renderPdfToImages(file: File, maxPages: number) {
   const pdfjs = await loadPdfjsLegacy()
   const version = (pdfjs as any).version as string | undefined
   if ((pdfjs as any).GlobalWorkerOptions && version) {
-    ;(pdfjs as any).GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`
+    ;(pdfjs as any).GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/legacy/build/pdf.worker.min.mjs`
   }
 
   const docRef = await (pdfjs as any).getDocument({ data: arrayBuffer }).promise
@@ -422,6 +422,8 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     const width = Math.floor(rect.width)
     const height = Math.floor(rect.height)
 
+    if (width <= 0 || height <= 0) return
+
     if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
       canvas.width = Math.floor(width * dpr)
       canvas.height = Math.floor(height * dpr)
@@ -497,6 +499,8 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       if (el.type === 'image') {
         const cached = imageCacheRef.current.get(el.url)
         if (cached?.loaded) {
+          if (!cached.img.naturalWidth || !cached.img.naturalHeight) continue
+          if (!el.w || !el.h) continue
           ctx.drawImage(cached.img, el.x, el.y, el.w, el.h)
           continue
         }
@@ -910,6 +914,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       const pages = await renderPdfToImages(file, 8)
       setPdfPages(pages)
     } catch (e) {
+      console.error(e)
       alert('Failed to load PDF')
     }
   }, [])
@@ -917,6 +922,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   const captureThumbnailBlob = useCallback(async () => {
     const canvas = canvasRef.current
     if (!canvas) return null
+    if (canvas.width <= 0 || canvas.height <= 0) return null
 
     const output = document.createElement('canvas')
     const ctx = output.getContext('2d')
@@ -1316,10 +1322,10 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         </button>
       </div>
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 w-full h-full">
         <div
           ref={containerRef}
-          className="relative flex-1 bg-slate-950 overflow-hidden select-none"
+          className="relative w-full h-full bg-slate-950 overflow-hidden select-none"
           onWheel={handleWheel}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}

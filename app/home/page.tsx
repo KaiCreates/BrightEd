@@ -5,14 +5,22 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { getTotalXP } from '@/lib/xp-tracker'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
+import { db } from '@/lib/firebase'
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
 
 export default function HomePage() {
     const router = useRouter()
     const { user, userData, loading: authLoading } = useAuth()
     const [learningPath, setLearningPath] = useState<any[]>([])
+
+    const [leaderPreview, setLeaderPreview] = useState<{
+        xpTop: { name: string; value: number } | null
+        streakTop: { name: string; value: number } | null
+        topBusiness: { name: string; value: number } | null
+        loading: boolean
+    }>({ xpTop: null, streakTop: null, topBusiness: null, loading: true })
 
     useEffect(() => {
         if (authLoading) return
@@ -71,6 +79,55 @@ export default function HomePage() {
         };
 
     }, [user, userData, authLoading, router])
+
+    useEffect(() => {
+        if (authLoading) return
+        if (!user) return
+
+        let cancelled = false
+
+        const load = async () => {
+            setLeaderPreview((p) => ({ ...p, loading: true }))
+            try {
+                const token = await user.getIdToken()
+
+                const [xpRes, streakRes, bizSnap] = await Promise.all([
+                    fetch(`/api/leaderboards?` + new URLSearchParams({ type: 'xp', limit: '1' }), {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    fetch(`/api/leaderboards?` + new URLSearchParams({ type: 'streak', limit: '1' }), {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }),
+                    getDocs(query(collection(db, 'businesses'), orderBy('valuation', 'desc'), limit(1))),
+                ])
+
+                if (cancelled) return
+
+                const [xpJson, streakJson] = await Promise.all([xpRes.json(), streakRes.json()])
+
+                const xpEntry = (xpJson?.entries?.[0] as any) || null
+                const streakEntry = (streakJson?.entries?.[0] as any) || null
+
+                const topBizDoc = bizSnap.docs[0]
+                const topBiz = topBizDoc ? topBizDoc.data() : null
+
+                setLeaderPreview({
+                    xpTop: xpEntry ? { name: String(xpEntry.name || 'Explorer'), value: Number(xpEntry.value || 0) } : null,
+                    streakTop: streakEntry ? { name: String(streakEntry.name || 'Explorer'), value: Number(streakEntry.value || 0) } : null,
+                    topBusiness: topBiz ? { name: String(topBiz.name || 'Business'), value: Number(topBiz.valuation || 0) } : null,
+                    loading: false,
+                })
+            } catch {
+                if (cancelled) return
+                setLeaderPreview((p) => ({ ...p, loading: false }))
+            }
+        }
+
+        load()
+        return () => {
+            cancelled = true
+        }
+    }, [authLoading, user])
 
     function getSubjectIcon(subject: string): string {
         const lower = subject.toLowerCase()
@@ -188,8 +245,8 @@ export default function HomePage() {
                                         <div className="text-3xl">🥇</div>
                                         <div>
                                             <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Global Rank #1</p>
-                                            <p className="text-lg font-bold">Zion K.</p>
-                                            <p className="text-[var(--brand-primary)] font-black text-xs">12.5k XP</p>
+                                            <p className="text-lg font-bold">{leaderPreview.xpTop?.name || (leaderPreview.loading ? 'Loading...' : '—')}</p>
+                                            <p className="text-[var(--brand-primary)] font-black text-xs">{leaderPreview.xpTop ? `${leaderPreview.xpTop.value.toLocaleString()} XP` : (leaderPreview.loading ? '—' : '0 XP')}</p>
                                         </div>
                                     </div>
                                 </BrightLayer>
@@ -198,8 +255,8 @@ export default function HomePage() {
                                         <div className="text-3xl">💹</div>
                                         <div>
                                             <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Top Business</p>
-                                            <p className="text-lg font-bold">Tech Bloom</p>
-                                            <p className="text-[var(--brand-accent)] font-black text-xs">$2.4M Value</p>
+                                            <p className="text-lg font-bold">{leaderPreview.topBusiness?.name || (leaderPreview.loading ? 'Loading...' : '—')}</p>
+                                            <p className="text-[var(--brand-accent)] font-black text-xs">{leaderPreview.topBusiness ? `$${leaderPreview.topBusiness.value.toLocaleString()} Value` : (leaderPreview.loading ? '—' : '$0 Value')}</p>
                                         </div>
                                     </div>
                                 </BrightLayer>
@@ -208,8 +265,8 @@ export default function HomePage() {
                                         <div className="text-3xl">🔥</div>
                                         <div>
                                             <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Streak Leader</p>
-                                            <p className="text-lg font-bold">Maya R.</p>
-                                            <p className="text-purple-500 font-black text-xs">42 Day Streak</p>
+                                            <p className="text-lg font-bold">{leaderPreview.streakTop?.name || (leaderPreview.loading ? 'Loading...' : '—')}</p>
+                                            <p className="text-purple-500 font-black text-xs">{leaderPreview.streakTop ? `${leaderPreview.streakTop.value.toLocaleString()} Day Streak` : (leaderPreview.loading ? '—' : '0 Day Streak')}</p>
                                         </div>
                                     </div>
                                 </BrightLayer>

@@ -363,37 +363,8 @@ export default function SimulatePage() {
       setTimeout(() => setStarJustEarned(false), 1500);
     }
 
-    try {
-      // Direct Firestore Write (Client SDK has Auth context)
-      if (correct) {
-        const { doc, setDoc, getDoc } = await import('firebase/firestore');
-        const { db } = await import('@/lib/firebase');
-
-        const progressRef = doc(db, 'users', user.uid, 'progress', objectiveId as string);
-        const userRef = doc(db, 'users', user.uid);
-
-        // 1. Update Progress
-        await setDoc(progressRef, {
-          objectiveId,
-          stars: newStars,
-          completed: newStars >= 3,
-          lastAttempt: new Date().toISOString()
-        }, { merge: true });
-
-        // 2. Update XP
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-          const curXP = userDoc.data()?.xp || 0;
-          await setDoc(userRef, { xp: curXP + 10 }, { merge: true });
-        }
-
-        console.log(`Progress saved: ${objectiveId} now has ${newStars} stars`);
-      }
-    } catch (e) {
-      console.error('Failed to save progress:', e);
-      // Optional: Rollback if critical, but local state is already updated
-      setEarnedStars(earnedStars);
-    }
+    // Progress/XP/Mastery/Streak are persisted by the server during answer evaluation.
+    // We only update local UI state here.
 
     // Check if we've completed the objective (3 stars)
     if (newStars >= 3) {

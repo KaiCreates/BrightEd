@@ -115,6 +115,13 @@ export default function OnboardingPage() {
         const userRef = doc(db, 'users', user.uid)
         const formLevel = parseInt((data.currentForm || '').replace('Form ', '') || '3')
         const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim()
+        const schoolName = (data.school || '').trim()
+        const schoolId = schoolName
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .slice(0, 64)
 
         const subjectProgress: Record<string, number> = {}
         ;(data.subjects || []).forEach((subject: string) => {
@@ -126,7 +133,9 @@ export default function OnboardingPage() {
           firstName: data.firstName || '',
           lastName: data.lastName || '',
           fullName,
-          school: data.school || '',
+          school: schoolName,
+          schoolId,
+          schoolLocked: true,
           country: data.country || '',
           examTrack: data.examTrack || 'CSEC',
           formLevel,

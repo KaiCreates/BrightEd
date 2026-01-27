@@ -8,8 +8,14 @@ import { HydrationFix } from '@/components/HydrationFix';
 
 export interface UserData {
     xp: number;
-    mastery: number;
+    mastery: number | Record<string, number>;
+    globalMastery?: number;
     streak: number;
+    lastStreakDay?: string;
+    lastLearningDay?: string;
+    lastLearningAt?: any;
+    activeDays30?: string[];
+    consistency?: number;
     questionsCorrect: number;
     questionsWrong: number;
     bCoins: number;
@@ -25,6 +31,8 @@ export interface UserData {
     username?: string;
     displayName?: string;
     school?: string;
+    schoolId?: string;
+    schoolLocked?: boolean;
     country?: string;
     form?: number;
     formLevel?: number;

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/lib/auth-context';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { db } from '@/lib/firebase';
-import { collection, query, orderBy, limit, getDocs, where } from 'firebase/firestore';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
 interface LeaderboardEntry {
     id: string;
@@ -17,34 +17,21 @@ interface LeaderboardEntry {
     isCurrentUser?: boolean;
 }
 
-type LeaderboardType = 'subject' | 'business' | 'school';
+type LeaderboardType = 'xp' | 'streak' | 'mastery' | 'schools' | 'business';
 
 export default function LeaderboardPage() {
     const { user, userData } = useAuth();
-    const [activeTab, setActiveTab] = useState<LeaderboardType>('subject');
+    const [activeTab, setActiveTab] = useState<LeaderboardType>('xp');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<LeaderboardEntry[]>([]);
 
     useEffect(() => {
+        if (!user) return;
+
         const fetchData = async () => {
             setLoading(true);
             try {
-                if (activeTab === 'subject') {
-                    // Subject Leaderboard (Mastery/XP)
-                    const usersRef = collection(db, 'users');
-                    const q = query(usersRef, orderBy('xp', 'desc'), limit(20));
-                    const snapshot = await getDocs(q);
-                    const entries: LeaderboardEntry[] = snapshot.docs.map((doc, index) => ({
-                        id: doc.id,
-                        name: doc.data().displayName || doc.data().fullName || 'Explorer',
-                        value: doc.data().xp || 0,
-                        subtext: `${doc.data().streak || 0} Day Streak`,
-                        icon: '🎓',
-                        rank: index + 1,
-                        isCurrentUser: doc.id === user?.uid
-                    }));
-                    setData(entries);
-                } else if (activeTab === 'business') {
+                if (activeTab === 'business') {
                     // Business Leaderboard
                     const bizRef = collection(db, 'businesses');
                     const q = query(bizRef, orderBy('valuation', 'desc'), limit(20));
@@ -59,31 +46,37 @@ export default function LeaderboardPage() {
                         isCurrentUser: doc.data().ownerId === user?.uid
                     }));
                     setData(entries);
-                } else if (activeTab === 'school') {
-                    // Schools Leaderboard (Sample aggregation logic - in reality, you'd likely have a 'schools' collection)
-                    // For now, let's fetch top 10 from a schools collection if it exists, or simulate it
-                    const schoolsRef = collection(db, 'schools');
-                    const q = query(schoolsRef, orderBy('totalXP', 'desc'), limit(20));
-                    const snapshot = await getDocs(q);
+                } else {
+                    const token = await user.getIdToken();
+                    const res = await fetch(`/api/leaderboards?` + new URLSearchParams({
+                        type: activeTab,
+                        limit: '20'
+                    }), {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
 
-                    if (snapshot.empty) {
-                        // Demo data if no schools yet
-                        setData([
-                            { id: '1', name: 'Bright Academy', value: 1250000, subtext: '450 Active Students', icon: '🏫', rank: 1 },
-                            { id: '2', name: 'Elite Business School', value: 980000, subtext: '320 Active Students', icon: '🏫', rank: 2 },
-                            { id: '3', name: 'St. Mary\'s High', value: 750000, subtext: '280 Active Students', icon: '🏫', rank: 3 },
-                        ]);
-                    } else {
-                        const entries: LeaderboardEntry[] = snapshot.docs.map((doc, index) => ({
-                            id: doc.id,
-                            name: doc.data().name || 'School',
-                            value: doc.data().totalXP || 0,
-                            subtext: `${doc.data().studentCount || 0} Students`,
-                            icon: '🏫',
-                            rank: index + 1,
-                        }));
-                        setData(entries);
+                    if (!res.ok) {
+                        throw new Error('Failed to fetch leaderboard');
                     }
+
+                    const payload = await res.json();
+                    const entries: LeaderboardEntry[] = (payload.entries || []).map((entry: any) => {
+                        const isMastery = activeTab === 'mastery';
+                        const value = typeof entry.value === 'number' ? entry.value : 0;
+                        return {
+                            id: entry.id,
+                            name: entry.name,
+                            value,
+                            subtext: entry.subtext,
+                            icon: entry.icon,
+                            rank: entry.rank,
+                            isCurrentUser: entry.id === user.uid,
+                        };
+                    });
+
+                    setData(entries);
                 }
             } catch (error) {
                 console.error("Error fetching leaderboard:", error);
@@ -112,7 +105,7 @@ export default function LeaderboardPage() {
 
                 {/* Tabs */}
                 <div className="flex bg-[var(--bg-elevated)] p-1 rounded-3xl mb-8 border border-[var(--border-subtle)] shadow-lg overflow-hidden">
-                    {(['subject', 'business', 'school'] as LeaderboardType[]).map((tab) => (
+                    {(['xp', 'streak', 'mastery', 'schools', 'business'] as LeaderboardType[]).map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -128,7 +121,7 @@ export default function LeaderboardPage() {
                                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
-                            {tab === 'subject' ? 'Learning' : tab === 'business' ? 'Business' : 'Schools'}
+                            {tab === 'xp' ? 'XP' : tab === 'streak' ? 'Streak' : tab === 'mastery' ? 'Mastery' : tab === 'schools' ? 'Schools' : 'Business'}
                         </button>
                     ))}
                 </div>
@@ -138,7 +131,7 @@ export default function LeaderboardPage() {
                     <div className="p-6 bg-gradient-to-r from-[var(--brand-primary)]/10 to-transparent border-b border-white/5 flex justify-between items-center">
                         <span className="font-black text-[var(--text-primary)] uppercase tracking-wider">Ranking</span>
                         <span className="font-black text-[var(--text-primary)] uppercase tracking-wider">
-                            {activeTab === 'subject' ? 'XP Score' : activeTab === 'business' ? 'Valuation' : 'Total XP'}
+                            {activeTab === 'xp' ? 'Total XP' : activeTab === 'streak' ? 'Current Streak' : activeTab === 'mastery' ? 'Global Mastery' : activeTab === 'business' ? 'Valuation' : 'School XP'}
                         </span>
                     </div>
 
@@ -180,10 +173,14 @@ export default function LeaderboardPage() {
                                         </div>
                                         <div className="text-right">
                                             <div className="text-2xl font-black text-[var(--brand-primary)] tracking-tighter">
-                                                {activeTab === 'business' ? `$${entry.value.toLocaleString()}` : entry.value.toLocaleString()}
+                                                {activeTab === 'business'
+                                                    ? `$${entry.value.toLocaleString()}`
+                                                    : activeTab === 'mastery'
+                                                        ? `${Math.round(entry.value * 100)}%`
+                                                        : entry.value.toLocaleString()}
                                             </div>
                                             <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">
-                                                {activeTab === 'business' ? 'Net Worth' : 'Total XP'}
+                                                {activeTab === 'business' ? 'Net Worth' : activeTab === 'streak' ? 'Days' : activeTab === 'mastery' ? 'Skill' : activeTab === 'schools' ? 'Total XP' : 'Total XP'}
                                             </p>
                                         </div>
                                     </motion.div>
@@ -198,7 +195,7 @@ export default function LeaderboardPage() {
                 </BrightLayer>
 
                 {/* Current User Stats Footer */}
-                {!loading && userData && activeTab === 'subject' && (
+                {!loading && userData && (activeTab === 'xp' || activeTab === 'streak' || activeTab === 'mastery') && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

@@ -1,0 +1,329 @@
+🔥 NABLE LEARNING ALGORITHM
+Complete Fixes, Architecture, and Implementation Guide
+1. CORE PROBLEM YOU’RE FIXING
+
+Right now, most learning systems fail because they:
+
+❌ Treat learning as quizzes
+❌ Only support MCQs
+❌ Don’t understand why a learner struggles
+❌ Don’t connect learning across features
+❌ Don’t adapt format, only difficulty
+
+Your fix:
+
+NABLE is a concept-driven, interaction-aware, adaptive learning engine.
+
+2. CORE PRINCIPLE (DO NOT SKIP THIS)
+🔑 NABLE DOES NOT TRACK SCORES
+
+It tracks CONCEPT MASTERY
+
+Everything else (questions, boards, images, chat, business sims) feeds concept mastery updates.
+
+3. REQUIRED DATA MODELS (MANDATORY)
+3.1 Concept Graph (Knowledge Graph)
+
+Each subject must be broken into concept nodes.
+
+Example:
+
+Mathematics
+ └─ Algebra
+    ├─ Linear Equations
+    ├─ Quadratic Equations
+    └─ Factorization
+
+
+Each concept has:
+
+prerequisites
+
+difficulty weight
+
+real-world relevance
+
+📌 Fix: Stop using “topic completion”. Use concept dependencies.
+
+3.2 Concept Mastery Table
+
+For every user + concept:
+
+{
+  "user_id": "...",
+  "concept": "quadratic_equations",
+  "mastery": 0.37,
+  "confidence": 0.42,
+  "last_interaction": "2026-01-26"
+}
+
+
+📌 Fix:
+
+Mastery ≠ score
+
+Confidence ≠ mastery
+
+Time matters
+
+3.3 Question Metadata (Critical Fix)
+
+Every question MUST have:
+
+{
+  "concepts": ["quadratics", "factoring"],
+  "difficulty": 3,
+  "question_type": "worked_solution",
+  "real_world_context": true,
+  "estimated_time": 4
+}
+
+
+📌 Fix:
+If a question does not map to concepts → it is useless to NABLE.
+
+4. QUESTION TYPE EXPANSION (MANDATORY FIX)
+
+You MUST stop treating all questions the same.
+
+Supported Types (Required)
+Type	Purpose
+MCQ	Recall & quick checks
+Short Answer	Concept clarity
+Worked Solution	Reasoning
+Image-Based	Visual understanding
+Whiteboard Task	Process & steps
+Scenario	Application
+
+📌 Fix:
+NABLE selects question type, not just question.
+
+5. NABLE DECISION ENGINE (CORE LOGIC)
+NABLE makes decisions in this order:
+STEP 1: Identify Weak Concepts
+Lowest mastery + high prerequisite importance
+
+STEP 2: Choose Best Learning Format
+
+Based on:
+
+Past success
+
+Engagement time
+
+Question fatigue
+
+Visual vs textual preference
+
+STEP 3: Select Question / Activity
+
+Could be:
+
+Question
+
+Whiteboard task
+
+Interactive image
+
+Peer collaboration
+
+📌 Fix:
+Do NOT always serve a question.
+
+6. MASTERY UPDATE LOGIC (MOST IMPORTANT FIX)
+Old (Wrong)
+Correct = +0.1
+Wrong = -0.1
+
+New (Correct)
+
+Mastery update uses:
+
+Signal	Weight
+Correctness	Medium
+Time spent	High
+Explanation quality	Very High
+Repeated attempts	Negative
+Teaching others	Massive boost
+Example Update Formula (Conceptual)
+Δmastery = (correctness × 0.3)
+         + (process_quality × 0.4)
+         + (engagement × 0.2)
+         + (collaboration × 0.1)
+
+
+📌 Fix:
+A student who explains well but answers wrong still gains mastery.
+
+7. WHITEBOARD INTEGRATION FIXES
+
+Whiteboards are graded learning environments, not drawing tools.
+
+NABLE Tracks:
+
+Steps taken
+
+Order of actions
+
+Corrections made
+
+Peer contributions
+
+Final outcome
+
+📌 Fix:
+Whiteboard interactions update mastery more than MCQs.
+
+8. IMAGE → THEORY → PRACTICE PIPELINE (ALGORITHM FIX)
+
+When an image is uploaded:
+
+Detect concepts
+
+Generate theory explanation
+
+Generate practical use cases
+
+Generate follow-up questions
+
+Update mastery based on interaction
+
+📌 Fix:
+Images become learning nodes, not static media.
+
+9. SOCIAL LEARNING FIXES (DISCORD INTEGRATION)
+NABLE Uses Social Data To:
+
+Recommend study partners
+
+Detect peer tutors
+
+Suggest group boards
+
+Boost mastery for teaching
+
+📌 Fix:
+Teaching = faster mastery gain than solo learning.
+
+10. ADAPTIVE DIFFICULTY FIX
+
+Difficulty should NOT increase just because user is correct.
+
+Increase difficulty ONLY if:
+
+Mastery > threshold
+
+Confidence stable
+
+Time per question reasonable
+
+📌 Fix:
+Fast guessing ≠ readiness.
+
+11. FATIGUE & VARIETY FIX
+
+NABLE must prevent:
+
+Question fatigue
+
+Format burnout
+
+Rules:
+
+Max 3 same-type questions in a row
+
+Force recap after concept clusters
+
+Switch modality when engagement drops
+
+12. RECAP SYSTEM (MANDATORY)
+
+Every 3–5 learning actions:
+
+Inject recap
+
+Mixed question types
+
+Cross-concept links
+
+📌 Fix:
+No continuous forward motion without consolidation.
+
+13. BUSINESS / PRACTICAL SYSTEM INTEGRATION
+
+Business decisions update learning:
+
+Action	Learning Trigger
+Miss payroll	Financial literacy
+Bad partnership	Ethics & decision making
+Tax issues	Applied math
+
+📌 Fix:
+Real-world mistakes = learning entry points.
+
+14. ONBOARDING & EVALUATION FIX
+
+Evaluation must:
+
+Use mixed formats
+
+Adapt in real time
+
+Produce mastery map, not score
+
+📌 Fix:
+Stop sending users to homepage after evaluation.
+
+15. ALGORITHM SAFEGUARDS (IMPORTANT)
+
+You MUST implement:
+
+Floor mastery (never drop to zero)
+
+Grace thresholds
+
+Explain why NABLE recommends something
+
+Transparency builds trust.
+
+16. IMPLEMENTATION STRATEGY (WITH WINDSURF AI)
+Step Order (IMPORTANT)
+
+Lock concept graph
+
+Normalize question schema
+
+Implement mastery tracking
+
+Build decision engine (rules first)
+
+Connect whiteboards
+
+Connect images
+
+Connect social hub
+
+Tune weights over time
+
+📌 Do NOT jump to ML early.
+
+17. WHAT MAKES YOUR SYSTEM ACTUALLY WORK
+
+✔ Concept-first
+✔ Interaction-aware
+✔ Multi-format
+✔ Socially reinforced
+✔ Real-world connected
+✔ Transparent
+
+This is how real adaptive learning systems are built — simplified, controlled, and scalable.
+
+18. FINAL TRUTH (IMPORTANT)
+
+You are not building:
+
+“An AI that gives questions”
+
+You are building:
+
+A learning intelligence that understands humans learning in real environments.

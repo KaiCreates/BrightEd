@@ -30,7 +30,7 @@ export default function ProfilePage() {
   const { business } = useBusiness()
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [stats, setStats] = useState([
-    { label: 'Mastery', value: '-', unit: '/ 10', icon: '🧠' },
+    { label: 'Mastery', value: '-', unit: '%', icon: '🧠' },
     { label: 'Consistency', value: '-', unit: '%', icon: '📈' },
     { label: 'Streak', value: '-', unit: 'Days', icon: '🔥' },
     { label: 'XP', value: '-', unit: 'Total', icon: '⚡' },
@@ -76,10 +76,12 @@ export default function ProfilePage() {
       };
 
       const masteryScore = getMasteryValue(userData.mastery);
+      const globalMastery = typeof userData.globalMastery === 'number' ? userData.globalMastery : masteryScore;
+      const consistency = typeof userData.consistency === 'number' ? userData.consistency : 0;
 
       setStats([
-        { label: 'Mastery', value: masteryScore.toFixed(1), unit: '/ 10', icon: '🧠' },
-        { label: 'Consistency', value: userData.streak > 0 ? Math.min(100, userData.streak * 10).toString() : '0', unit: '%', icon: '📈' },
+        { label: 'Mastery', value: Math.round(globalMastery * 100).toString(), unit: '%', icon: '🧠' },
+        { label: 'Consistency', value: Math.round(consistency).toString(), unit: '%', icon: '📈' },
         { label: 'Streak', value: (userData.streak || 0).toString(), unit: 'Days', icon: '🔥' },
         { label: 'XP', value: userData.xp >= 1000 ? (userData.xp / 1000).toFixed(1) + 'k' : (userData.xp || 0).toString(), unit: 'Total', icon: '⚡' },
       ]);

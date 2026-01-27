@@ -12,6 +12,22 @@ import {
     NABLEEvaluateRequest
 } from '@/lib/nable';
 
+function dayKeyUTC(d: Date) {
+    const y = d.getUTCFullYear();
+    const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(d.getUTCDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+}
+
+function isWithinRollingWindowUTC(dayKey: string, today: Date, windowDays: number) {
+    const [y, m, d] = dayKey.split('-').map((n) => Number(n));
+    if (!y || !m || !d) return false;
+    const dayDate = new Date(Date.UTC(y, m - 1, d));
+    const todayDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+    const diffDays = (todayDate.getTime() - dayDate.getTime()) / (1000 * 60 * 60 * 24);
+    return diffDays >= 0 && diffDays < windowDays;
+}
+
 const EvaluateSchema = z.object({
     questionId: z.string(),
     objectiveId: z.string(),
@@ -106,6 +122,9 @@ export async function POST(request: NextRequest) {
             if (!userDoc.exists) throw new Error("User not found");
             const userData = userDoc.data() || {};
 
+            const now = new Date();
+            const todayKey = dayKeyUTC(now);
+
             // A. Save NABLE State
             transaction.set(nableRef, newNableState);
 
@@ -118,8 +137,24 @@ export async function POST(request: NextRequest) {
             const currentProgress = userData.progress || {};
             const objProgress = currentProgress[objectiveId] || { stars: 0 };
 
-            const objMastery = newNableState.knowledgeGraph[objectiveId]?.mastery || 0;
+            const prevMasteryMap = (userData.mastery && typeof userData.mastery === 'object') ? userData.mastery : {};
+            const prevObjMasteryRaw = prevMasteryMap?.[objectiveId];
+            const prevObjMastery = typeof prevObjMasteryRaw === 'number' ? prevObjMasteryRaw : 0.2;
+
+            const baseGain = 0.08;
+            const adaptiveGain = baseGain * (1 - Math.max(0, Math.min(1, prevObjMastery)));
+            const masteryFloor = 0.2;
+            const masteryDelta = isCorrect ? adaptiveGain : -0.5 * adaptiveGain;
+            const nextObjMastery = Math.max(masteryFloor, Math.min(1, prevObjMastery + masteryDelta));
+
+            const objMastery = nextObjMastery;
             const objConfidence = newNableState.knowledgeGraph[objectiveId]?.confidence || 0;
+
+            if (!newNableState.knowledgeGraph[objectiveId]) {
+                newNableState.knowledgeGraph[objectiveId] = { mastery: objMastery, confidence: objConfidence } as any;
+            } else {
+                newNableState.knowledgeGraph[objectiveId].mastery = objMastery;
+            }
 
             // Calculate potential new stars based on mastery
             let calculatedStars = 0;
@@ -135,6 +170,21 @@ export async function POST(request: NextRequest) {
             const xpGain = (isCorrect ? 10 : 2) + (starIncrease * 50);
             const bCoinGain = isCorrect ? 5 : 0;
 
+            const prevStreak = typeof userData.streak === 'number' ? userData.streak : 0;
+            const lastStreakDay = typeof userData.lastStreakDay === 'string' ? userData.lastStreakDay : '';
+            const shouldIncrementStreak = lastStreakDay !== todayKey;
+            const nextStreak = shouldIncrementStreak ? prevStreak + 1 : prevStreak;
+
+            const prevActiveDays30 = Array.isArray(userData.activeDays30) ? userData.activeDays30.filter((v: any) => typeof v === 'string') : [];
+            const nextActiveDays30 = Array.from(new Set([...prevActiveDays30, todayKey]))
+                .filter((k) => isWithinRollingWindowUTC(k, now, 30))
+                .sort();
+            const consistency = Math.round((nextActiveDays30.length / 30) * 100);
+
+            const nextMasteryMap = { ...prevMasteryMap, [objectiveId]: objMastery };
+            const masteryValues = Object.values(nextMasteryMap).filter((v) => typeof v === 'number') as number[];
+            const globalMastery = masteryValues.length ? masteryValues.reduce((a, b) => a + b, 0) / masteryValues.length : 0;
+
             // Updates
             const updates: any = {
                 [`progress.${objectiveId}`]: {
@@ -149,6 +199,13 @@ export async function POST(request: NextRequest) {
                 // ATOMIC UPDATES: Use FieldValue.increment to prevent race conditions
                 xp: admin.firestore.FieldValue.increment(xpGain),
                 bCoins: admin.firestore.FieldValue.increment(bCoinGain),
+                streak: nextStreak,
+                lastStreakDay: shouldIncrementStreak ? todayKey : lastStreakDay,
+                lastLearningDay: todayKey,
+                lastLearningAt: admin.firestore.FieldValue.serverTimestamp(),
+                activeDays30: nextActiveDays30,
+                consistency,
+                globalMastery,
                 updatedAt: new Date().toISOString()
             };
 
