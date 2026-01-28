@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { getTotalXP } from '@/lib/xp-tracker'
 import Link from 'next/link'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
+import { useAuth } from '@/lib/auth-context'
 
 interface CompletionData {
   subject: string
@@ -17,35 +18,37 @@ interface CompletionData {
 }
 
 export default function ProgressPage() {
+  const { user, userData } = useAuth()
   const [completions, setCompletions] = useState<CompletionData[]>([])
   const [totalXP, setTotalXP] = useState(0)
   const [streak, setStreak] = useState(0)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Get real XP
-    setTotalXP(getTotalXP())
+    async function loadData() {
+      if (!user || !userData) return
 
-    // Calculate streak from completions
-    const completionRecords = JSON.parse(localStorage.getItem('brighted_completions') || '[]')
-    if (completionRecords.length > 0) {
-      const today = new Date().toDateString()
-      const recentDays = new Set()
-      completionRecords.forEach((c: any) => {
-        const date = new Date(c.date).toDateString()
-        recentDays.add(date)
-      })
-      setStreak(Math.min(7, recentDays.size))
-    }
+      try {
+        // Source of truth from Auth Context
+        setTotalXP(userData.xp || 0)
+        setStreak(userData.streak || 0)
 
-    // Get subject progress
-    const userProgress = JSON.parse(localStorage.getItem('brighted_progress') || '{}')
-    const onboardingData = JSON.parse(localStorage.getItem('brighted_onboarding') || '{}')
-    const subjects = onboardingData.subjects || []
+        // Fetch granular progress from Firestore subcollection
+        const { db } = await import('@/lib/firebase')
+        const { collection, getDocs } = await import('firebase/firestore')
 
-    fetch('/api/syllabus')
-      .then(res => res.json())
-      .then((objectives: any[]) => {
+        const progressRef = collection(db, 'users', user.uid, 'progress')
+        const snapshot = await getDocs(progressRef)
+        const userProgress: Record<string, any> = {}
+        snapshot.forEach(doc => {
+          userProgress[doc.id] = doc.data()
+        })
+
+        // Fetch Syllabus
+        const objectivesResponse = await fetch('/api/syllabus')
+        const objectives: any[] = await objectivesResponse.json()
+
+        const subjects = userData.subjects || []
         const subjectsData: CompletionData[] = []
 
         // Get unique subjects from syllabus + user selection
@@ -60,8 +63,10 @@ export default function ProgressPage() {
           if (subjectObjectives.length > 0) {
             const style = getSubjectStyle(subjName)
             const completed = subjectObjectives.filter((o: any) => {
-              const progress = userProgress[o.id]
-              return progress && progress.mastery >= 85
+              const p = userProgress[o.id] // Use firestore data
+              // Check if mastered (mastery >= 0.8 or 80, handle both scales)
+              const m = p?.mastery || 0
+              return m >= 85 || m >= 0.85
             }).length
 
             subjectsData.push({
@@ -76,12 +81,17 @@ export default function ProgressPage() {
 
         setCompletions(subjectsData.sort((a, b) => b.percentage - a.percentage))
         setLoading(false)
-      })
-      .catch(err => {
-        console.error('Error loading progress:', err)
+
+      } catch (error) {
+        console.error("Failed to load progress:", error)
         setLoading(false)
-      })
-  }, [])
+      }
+    }
+
+    if (user && userData) {
+      loadData()
+    }
+  }, [user, userData])
 
   const achievements = useMemo(() => {
     const list = []

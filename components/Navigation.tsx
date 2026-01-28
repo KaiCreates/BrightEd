@@ -162,8 +162,11 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-[var(--text-primary)] p-3 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-95 transition-all"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -178,6 +181,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
       {/* Mobile Menu Content */}
       {isMenuOpen && (
         <motion.div
+          id="mobile-menu"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="lg:hidden absolute top-24 left-0 right-0 bg-[var(--bg-elevated)] border-b border-[var(--border-subtle)] shadow-2xl p-4 flex flex-col gap-2"

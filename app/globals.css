@@ -39,6 +39,17 @@
     border-color: rgba(var(--brand-primary-rgb), 0.3);
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
   }
+
+  .min-h-main {
+    min-height: calc(100vh - 6rem);
+  }
+
+  .safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 
 @keyframes list-slide-in {

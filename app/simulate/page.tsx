@@ -530,8 +530,8 @@ export default function SimulatePage() {
                 <div
                   key={i}
                   className={`h-2 w-8 rounded-full transition-all duration-500 ${i <= currentStep
-                      ? 'bg-[var(--brand-primary)] shadow-[0_0_10px_rgba(var(--brand-primary-rgb),0.4)]'
-                      : 'bg-[var(--border-subtle)]'
+                    ? 'bg-[var(--brand-primary)] shadow-[0_0_10px_rgba(var(--brand-primary-rgb),0.4)]'
+                    : 'bg-[var(--border-subtle)]'
                     }`}
                 />
               ))}
@@ -595,7 +595,7 @@ export default function SimulatePage() {
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 className="flex-1"
               >
-                <BrightLayer variant="elevated" padding="lg" className="min-h-[400px] h-full relative overflow-hidden flex flex-col justify-center">
+                <BrightLayer variant="elevated" padding="lg" className="min-h-[50vh] md:min-h-[400px] h-full relative overflow-hidden flex flex-col justify-center">
 
                   {/* Story Element Tag */}
                   {step.storyElement && (
