@@ -21,7 +21,8 @@ import {
     MicroLesson,
     NABLE_CONSTANTS,
     UIMood,
-    InteractionMetrics
+    InteractionMetrics,
+    LearningEvent
 } from './types';
 
 import { classifyError, analyzeErrorPatterns, suggestRemediationTopic, classifyErrorEnhanced, EnhancedErrorResult } from './error-classifier';
@@ -93,7 +94,7 @@ export function loadState(
 export function evaluate(
     state: NABLEState,
     request: NABLEEvaluateRequest
-): { response: NABLEResponse; newState: NABLEState } {
+): { response: NABLEResponse; newState: NABLEState; learningEvent: LearningEvent } {
     const {
         questionId,
         objectiveId,
@@ -216,7 +217,22 @@ export function evaluate(
         currentStreak: newStreak
     };
 
-    return { response, newState };
+    // Build Learning Event for Global Intelligence
+    const learningEvent: LearningEvent = {
+        eventId: `${state.userId}-${Date.now()}`,
+        userId: state.userId,
+        timestamp: new Date().toISOString(),
+        subSkillId: primarySubSkill,
+        difficulty: questionDifficulty,
+        correct,
+        errorType: errorClassification,
+        timeToAnswer,
+        priorMastery: primaryScore.mastery, // Score before update
+        newMastery: newKnowledgeGraph[primarySubSkill].mastery,
+        interventionId: microLesson ? microLesson.id : undefined
+    };
+
+    return { response, newState, learningEvent };
 }
 
 /**

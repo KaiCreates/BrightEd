@@ -270,6 +270,57 @@ export interface StoryAnalysis {
 }
 
 // =============================================================================
+// GLOBAL INTELLIGENCE TYPES (Layer 1 Memory)
+// =============================================================================
+
+/**
+ * Aggregated stats for a specific sub-skill across population
+ */
+export interface SubSkillGlobalStats {
+    avgInitialMastery: number;
+    avgTimeToMastery: number; // hours/sessions
+    commonErrorTypes: Record<string, number>; // type -> frequency
+    decayRate: number; // avg decay per day
+    totalLearners: number;
+}
+
+/**
+ * Difficulty calibration stats
+ */
+export interface DifficultyGlobalStats {
+    successRate: number;
+    avgTime: number;
+    dropoutRate: number;
+    sampleSize: number;
+}
+
+/**
+ * The "Brain" of NABLE - Shared Wisdom
+ */
+export interface GlobalLearningStats {
+    subSkills: Record<string, SubSkillGlobalStats>;
+    difficultyStats: Record<number, DifficultyGlobalStats>; // 1-10 -> stats
+    interventions: Record<string, number>; // interventionId -> successRate
+}
+
+/**
+ * An atomic unit of learning to feed back into the global brain
+ */
+export interface LearningEvent {
+    eventId: string;
+    userId: string;
+    timestamp: string;
+    subSkillId: string;
+    difficulty: number;
+    correct: boolean;
+    errorType: ErrorType | null;
+    timeToAnswer: number;
+    priorMastery: number;
+    newMastery: number;
+    interventionId?: string; // If one was active
+}
+
+// =============================================================================
 // CONSTANTS
 // =============================================================================
 

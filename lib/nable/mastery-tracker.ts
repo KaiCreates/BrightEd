@@ -228,7 +228,7 @@ export function updateSubSkillScore(
  * Create initial sub-skill score for new users
  */
 export function createInitialSubSkillScore(
-    initialMastery: number = 0.5,
+    initialMastery: number = 0.3, // Global default if unknown
     initialConfidence: number = 0.5
 ): SubSkillScore {
     return {

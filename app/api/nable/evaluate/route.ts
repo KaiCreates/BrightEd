@@ -11,6 +11,8 @@ import {
     createInitialState,
     NABLEEvaluateRequest
 } from '@/lib/nable';
+import { GlobalIntelligence } from '@/lib/nable/global-intelligence';
+import { createInitialSubSkillScore } from '@/lib/nable/mastery-tracker';
 
 function dayKeyUTC(d: Date) {
     const y = d.getUTCFullYear();
@@ -97,6 +99,17 @@ export async function POST(request: NextRequest) {
         // Ensure subSkills has at least the objectiveId
         const activeSubSkills = subSkills.length > 0 ? subSkills : [objectiveId];
 
+        // Pre-fill missing Sub-Skills with Global Intelligence Priors
+        // This ensures cold-start users get "Human Average" not "Zero"
+        const missingSkills = activeSubSkills.filter(id => !nableState.knowledgeGraph[id]);
+        if (missingSkills.length > 0) {
+            for (const skillId of missingSkills) {
+                // Fetch prior (async but fast due to cache)
+                const prior = await GlobalIntelligence.getPriorMastery(skillId);
+                nableState.knowledgeGraph[skillId] = createInitialSubSkillScore(prior);
+            }
+        }
+
         const nableRequest: NABLEEvaluateRequest = {
             userId,
             questionId,
@@ -109,9 +122,14 @@ export async function POST(request: NextRequest) {
             questionDifficulty
         };
 
-        const { response: nableResponse, newState: newNableState } = evaluate(
+        const { response: nableResponse, newState: newNableState, learningEvent } = evaluate(
             nableState,
             nableRequest
+        );
+
+        // Emit Learning Event to Global Brain (Fire & Forget to avoid latency)
+        GlobalIntelligence.emitLearningEvent(learningEvent).catch(err =>
+            console.error("Global Intelligence Emit Failed:", err)
         );
 
         // 6. Atomic Persistence (NABLE State + Legacy Stats)
