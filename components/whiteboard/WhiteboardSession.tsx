@@ -257,7 +257,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     const gridSize = 40 * zoom
     const offsetX = panX % gridSize
     const offsetY = panY % gridSize
-    ctx.strokeStyle = '#e2e8f0'
+    ctx.strokeStyle = '#E5E7EB' // gray-200
     ctx.lineWidth = 1
     ctx.beginPath()
     for (let x = offsetX; x < rect.width; x += gridSize) { ctx.moveTo(x, 0); ctx.lineTo(x, rect.height); }
