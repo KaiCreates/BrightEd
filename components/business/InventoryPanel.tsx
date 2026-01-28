@@ -24,7 +24,7 @@ export default function InventoryPanel({ inventory }: InventoryPanelProps) {
                         <p className="text-xs text-[var(--text-muted)]">No stock in warehouse.<br />Restock from the Supply Chain.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {items.map(([itemId, quantity]) => (
                             <div key={itemId} className="bg-[var(--bg-elevated)]/50 rounded-lg p-3 border border-[var(--border-subtle)] flex items-center justify-between group hover:border-[var(--brand-primary)]/50 transition-colors">
                                 <div className="flex flex-col">

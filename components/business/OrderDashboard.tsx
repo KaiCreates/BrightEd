@@ -248,19 +248,19 @@ function OrderCard({
                         'border-l-4 border-l-[var(--brand-primary)]'
                 }`}
         >
-            <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-3">
-                    <span className="text-xl filter drop-shadow-sm group-hover/card:scale-110 transition-transform">{moodEmoji[order.customerMood]}</span>
-                    <div>
-                        <span className="block font-black text-sm text-[var(--text-primary)] leading-none mb-1">{order.customerName}</span>
-                        <div className="flex items-center gap-2">
-                            <span className="text-[9px] font-black uppercase text-[var(--text-muted)] tracking-widest">{order.customerType}</span>
-                            <span className="w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
-                            <span className="text-[9px] font-black text-[var(--brand-primary)] uppercase">{QUALITY_EMOJI[order.qualityRequirement]} QUALITY</span>
+            <div className="flex justify-between items-start mb-4 gap-2">
+                <div className="flex items-center gap-3 min-w-0">
+                    <span className="text-xl filter drop-shadow-sm group-hover/card:scale-110 transition-transform flex-shrink-0">{moodEmoji[order.customerMood]}</span>
+                    <div className="min-w-0">
+                        <span className="block font-black text-sm text-[var(--text-primary)] leading-tight mb-1 truncate">{order.customerName}</span>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-[9px] font-black uppercase text-[var(--text-muted)] tracking-widest flex-shrink-0">{order.customerType}</span>
+                            <span className="w-1 h-1 rounded-full bg-[var(--border-subtle)] flex-shrink-0" />
+                            <span className="text-[9px] font-black text-[var(--brand-primary)] uppercase flex-shrink-0">{QUALITY_EMOJI[order.qualityRequirement]} QUALITY</span>
                         </div>
                     </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right flex-shrink-0">
                     <div className="flex items-center justify-end gap-1 mb-1">
                         <span className="text-xs font-black text-[var(--brand-accent)]">฿</span>
                         <span className="text-lg font-black text-[var(--brand-accent)] leading-none">{order.totalAmount}</span>

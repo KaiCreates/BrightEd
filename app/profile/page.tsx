@@ -148,7 +148,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-6 pt-24 bg-[var(--bg-primary)]">
+    <div className="min-h-screen py-8 pt-20 md:py-12 md:pt-24 px-4 md:px-6 bg-[var(--bg-primary)]">
       <div className="max-w-6xl mx-auto">
 
         {/* Top Section: Profile Header & BCoin Card */}

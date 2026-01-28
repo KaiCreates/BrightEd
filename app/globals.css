@@ -50,6 +50,34 @@
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+
+  /* Mobile Touch Targets & Z-Index Fixes */
+  button,
+  a,
+  .clickable {
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  /* Universal Button Fix */
+  button,
+  .btn {
+    position: relative;
+    z-index: 10;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent invisible overlays from blocking buttons */
+  .overlay,
+  .modal-backdrop {
+    pointer-events: none;
+  }
+
+  .overlay.active {
+    pointer-events: auto;
+  }
 }
 
 @keyframes list-slide-in {

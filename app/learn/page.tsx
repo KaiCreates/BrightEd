@@ -261,28 +261,30 @@ function LearnContent() {
 
         {/* Subject Filter */}
         {subjects.length > 1 && (
-          <div className="mb-8 flex flex-wrap gap-2 justify-center">
-            <button
-              onClick={() => setSelectedSubject(null)}
-              className={`px-4 py-2 rounded-xl font-bold transition-all border-2 ${selectedSubject === null
-                ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
-                : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
-                }`}
-            >
-              All Subjects
-            </button>
-            {subjects.map((subject) => (
+          <div className="mb-8 w-full overflow-x-auto pb-4 -mx-4 px-4 flex justify-start sm:justify-center no-scrollbar">
+            <div className="flex gap-2 flex-nowrap">
               <button
-                key={subject}
-                onClick={() => setSelectedSubject(subject)}
-                className={`px-4 py-2 rounded-xl font-bold transition-all border-2 ${selectedSubject === subject
+                onClick={() => setSelectedSubject(null)}
+                className={`whitespace-nowrap px-4 py-2 rounded-xl font-bold transition-all border-2 flex-shrink-0 ${selectedSubject === null
                   ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
                   : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
                   }`}
               >
-                {subject}
+                All Subjects
               </button>
-            ))}
+              {subjects.map((subject) => (
+                <button
+                  key={subject}
+                  onClick={() => setSelectedSubject(subject)}
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl font-bold transition-all border-2 flex-shrink-0 ${selectedSubject === subject
+                    ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
+                    : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
+                    }`}
+                >
+                  {subject}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 

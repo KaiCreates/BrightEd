@@ -552,7 +552,7 @@ function CommandCenterContent() {
 
       <BusinessSectionNav />
 
-      <main className="relative z-10 pt-10 pb-32 px-4 max-w-[1600px] mx-auto">
+      <main className="relative z-10 pt-4 md:pt-10 pb-32 px-4 max-w-[1600px] mx-auto">
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
             <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Operations</div>

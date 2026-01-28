@@ -25,7 +25,7 @@ export default function PracticalsPage() {
   return (
     <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--brand-primary)]/10 via-transparent to-[#050B14]" />
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 pt-32">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8 pt-24 md:pt-32">
         <div className="mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--brand-primary)]">Practicals</span>

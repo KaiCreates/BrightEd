@@ -189,14 +189,14 @@ export default function HomePage() {
                                             ? `You're crushing ${learningPath[0]?.subject}. Just ${500 - (userData?.xp_today || 0)} more XP to hit your daily goal!`
                                             : 'Your journey to financial mastery starts here. Ready for today\'s challenge?'}
                                     </p>
-                                    <div className="flex gap-4 flex-wrap justify-center md:justify-start">
-                                        <Link href="/learn" className="min-w-[180px]">
-                                            <BrightButton variant="primary" size="lg" className="w-full border-b-[6px] border-[#1F7A85] active:border-b-0 active:translate-y-[6px]">
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full">
+                                        <Link href="/learn" className="w-full sm:w-auto">
+                                            <BrightButton variant="primary" size="lg" className="w-full sm:min-w-[180px] border-b-[6px] border-[#1F7A85] active:border-b-0 active:translate-y-[6px]">
                                                 Resume Journey
                                             </BrightButton>
                                         </Link>
-                                        <Link href="/leaderboard" className="min-w-[180px]">
-                                            <BrightButton variant="outline" size="lg" className="w-full border-b-[6px] active:border-b-2 active:translate-y-[4px]">
+                                        <Link href="/leaderboard" className="w-full sm:w-auto">
+                                            <BrightButton variant="outline" size="lg" className="w-full sm:min-w-[180px] border-b-[6px] active:border-b-2 active:translate-y-[4px]">
                                                 View Rankings
                                             </BrightButton>
                                         </Link>

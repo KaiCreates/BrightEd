@@ -90,14 +90,14 @@ export default function LandingV2() {
               BrightEd is a practical-first learning platform where students run businesses, fix systems, and master CSEC & CAPE subjects through real-world simulations.
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
               <a href="#beta" className="w-full sm:w-auto">
-                <BrightButton variant="primary" size="lg" className="min-w-[220px] py-6 text-lg font-black tracking-tight">
+                <BrightButton variant="primary" size="lg" className="w-full sm:min-w-[220px] py-4 sm:py-6 text-lg font-black tracking-tight">
                   Join the Beta
                 </BrightButton>
               </a>
               <a href="#product" className="w-full sm:w-auto">
-                <BrightButton variant="outline" size="lg" className="min-w-[220px] py-6 text-lg font-black border-white/20 hover:border-white/40">
+                <BrightButton variant="outline" size="lg" className="w-full sm:min-w-[220px] py-4 sm:py-6 text-lg font-black border-white/20 hover:border-white/40">
                   Watch It in Action
                 </BrightButton>
               </a>
