@@ -13,7 +13,7 @@ interface OnboardingData {
   lastName: string
   country: string
   school: string
-  examTrack: 'CSEC' | 'CAPE' | ''
+  examTrack: 'CSEC' | 'CAPE' | 'Tertiary' | ''
   currentForm: string
   subjects: string[]
   learningGoal: string
@@ -26,7 +26,7 @@ interface OnboardingData {
 }
 
 const countries = ['Trinidad and Tobago', 'Jamaica', 'Barbados', 'Guyana', 'Other']
-const forms = ['Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6']
+const forms = ['Form 1', 'Form 2', 'Form 3', 'Form 4', 'Form 5', 'Form 6', "University"]
 const subjects = [
   'Mathematics',
   'English A',
@@ -68,7 +68,6 @@ export default function OnboardingPage() {
     }
   })
 
-  // Auto-fill from Firestore
   useEffect(() => {
     const fillData = async () => {
       const { auth, db } = await import('@/lib/firebase');
@@ -82,7 +81,6 @@ export default function OnboardingPage() {
             ...prev,
             firstName: userData.firstName || prev.firstName,
             lastName: userData.lastName || prev.lastName,
-            // Fill other fields if they exist in DB schema, for now mostly names are stored
           }));
         }
       }
@@ -95,20 +93,15 @@ export default function OnboardingPage() {
   }
 
   const nextStep = () => {
-    if (step < 9) {
-      setStep(step + 1)
-    }
+    if (step < 9) setStep(step + 1)
   }
 
   const prevStep = () => {
-    if (step > 1) {
-      setStep(step - 1)
-    }
+    if (step > 1) setStep(step - 1)
   }
 
   const handleComplete = async () => {
     try {
-      // Save onboarding data to Firestore instead of localStorage
       const { doc, updateDoc, collection, getDocs, limit, query, writeBatch } = await import('firebase/firestore')
       const { db } = await import('@/lib/firebase')
       const { toast } = await import('react-hot-toast')
@@ -118,11 +111,8 @@ export default function OnboardingPage() {
         return
       }
 
-      // Set session flag to track evaluation is in progress
       localStorage.setItem('onboarding_status', 'in_progress')
       localStorage.setItem('brighted_onboarding_complete', 'true')
-
-      // Clear any stale redirects
       sessionStorage.removeItem('redirect_target')
 
       const userRef = doc(db, 'users', user.uid)
@@ -163,24 +153,23 @@ export default function OnboardingPage() {
         updatedAt: new Date().toISOString()
       })
 
-      // Initialize learning path progress once (based on selected subjects)
       if ((data.subjects || []).length > 0) {
         const progressRef = collection(userRef, 'progress')
         const existing = await getDocs(query(progressRef, limit(1)))
 
         if (existing.empty) {
-          const { data: pathData } = await fetch(
+          const { paths } = await fetch(
             '/api/learning-path?' +
             new URLSearchParams({
               subjects: (data.subjects || []).join(','),
             })
           ).then((res) => res.json())
 
-          if (pathData?.paths) {
+          if (paths) {
             const batch = writeBatch(db)
             let isFirstModule = true
 
-            for (const [subject, objectives] of Object.entries(pathData.paths)) {
+            for (const [subject, objectives] of Object.entries(paths)) {
               const objectivesList = objectives as any[]
               for (const obj of objectivesList) {
                 const moduleRef = doc(progressRef, obj.id)
@@ -200,7 +189,6 @@ export default function OnboardingPage() {
         }
       }
 
-      // Sync to Firebase Auth profile displayName
       if (fullName) {
         const { auth } = await import('@/lib/firebase')
         const { updateProfile } = await import('firebase/auth')
@@ -219,107 +207,95 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen min-h-[100dvh] relative flex items-center justify-center p-4 pb-20 safe-padding">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[var(--brand-primary)] opacity-5 rounded-full blur-[120px]" />
-        <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-[var(--brand-secondary)] opacity-5 rounded-full blur-[120px]" />
-      </div>
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] flex flex-col safe-padding">
+      {/* Duolingo-style Header */}
+      <header className="w-full max-w-5xl mx-auto px-4 py-8 flex items-center gap-6">
+        <button
+          onClick={prevStep}
+          className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-2xl p-2"
+          disabled={step === 1}
+        >
+          {step === 1 ? '✕' : '←'}
+        </button>
 
-      <div className="w-full max-w-2xl relative z-10">
-        <AnimatePresence mode="wait">
-          {step === 1 && <WelcomeScreen key="1" onNext={nextStep} />}
-          {step === 2 && (
-            <IntentScreen
-              key="2"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 3 && (
-            <IdentityScreen
-              key="3"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 4 && (
-            <AcademicContextScreen
-              key="4"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 5 && (
-            <SkillAssessmentScreen
-              key="5"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 6 && (
-            <CurrentLevelScreen
-              key="6"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 7 && (
-            <SubjectSelectionScreen
-              key="7"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 8 && (
-            <LearningGoalScreen
-              key="8"
-              data={data}
-              updateData={updateData}
-              onNext={nextStep}
-              onPrev={prevStep}
-            />
-          )}
-          {step === 9 && (
-            <DiagnosticSetupScreen
-              key="9"
-              onNext={handleComplete}
-              onPrev={prevStep}
-            />
-          )}
-        </AnimatePresence>
-
-        {/* Progress Bar */}
-        <div className="mt-12 flex flex-col items-center gap-4">
-          <div className="flex justify-center space-x-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((s) => (
-              <motion.div
-                key={s}
-                animate={{
-                  scale: s === step ? 1.2 : 1,
-                  backgroundColor: s <= step ? 'var(--brand-primary)' : 'var(--bg-secondary)',
-                }}
-                className="h-1 w-8 rounded-full"
-              />
-            ))}
-          </div>
-          <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-[0.2em]">
-            Step {step} of 9
-          </p>
+        <div className="flex-1 duo-progress-bar bg-gray-200">
+          <motion.div
+            className="duo-progress-fill"
+            initial={{ width: 0 }}
+            animate={{ width: `${(step / 9) * 100}%` }}
+          />
         </div>
-      </div>
+      </header>
+
+      <main className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-xl">
+          <AnimatePresence mode="wait">
+            {step === 1 && <WelcomeScreen key="1" onNext={nextStep} />}
+            {step === 2 && (
+              <IntentScreen
+                key="2"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 3 && (
+              <IdentityScreen
+                key="3"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 4 && (
+              <AcademicContextScreen
+                key="4"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 5 && (
+              <SkillAssessmentScreen
+                key="5"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 6 && (
+              <CurrentLevelScreen
+                key="6"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 7 && (
+              <SubjectSelectionScreen
+                key="7"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 8 && (
+              <LearningGoalScreen
+                key="8"
+                data={data}
+                updateData={updateData}
+                onNext={nextStep}
+              />
+            )}
+            {step === 9 && (
+              <DiagnosticSetupScreen
+                key="9"
+                onNext={handleComplete}
+              />
+            )}
+          </AnimatePresence>
+        </div>
+      </main>
     </div>
   )
 }
@@ -330,36 +306,39 @@ function WelcomeScreen({ onNext }: { onNext: () => void }) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
+      className="text-center"
     >
-      <BrightLayer variant="glass" padding="lg" className="text-center relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)]" />
+      <div className="mb-8 flex justify-center">
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative w-48 h-48 drop-shadow-2xl"
+        >
+          <Image
+            src="/BrightEdLogo.png"
+            alt="BrightEd Logo"
+            fill
+            className="object-contain"
+          />
+        </motion.div>
+      </div>
 
-        <div className="mb-8 flex justify-center">
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-32 h-32 p-4 bg-[var(--bg-secondary)] rounded-3xl border border-[var(--border-subtle)]"
-          >
-            <Image
-              src="/BrightEdLogo.png"
-              alt="BrightEd Logo"
-              fill
-              className="object-contain p-4"
-            />
-          </motion.div>
-        </div>
-        <BrightHeading level={1} className="mb-6">
-          Master Your <span className="text-[var(--brand-primary)]">Future.</span>
-        </BrightHeading>
-        <p className="text-lg text-[var(--text-secondary)] mb-10 max-w-md mx-auto leading-relaxed font-medium">
-          The only learning platform that adapts to your unique business goals and knowledge level.
-        </p>
-        <BrightButton onClick={onNext} size="lg">
-          Start Your Journey
-        </BrightButton>
-      </BrightLayer>
+      <BrightHeading level={1} className="mb-6 duo-text-primary text-5xl">
+        Master Your <span className="text-[var(--brand-primary)]">Future.</span>
+      </BrightHeading>
+
+      <p className="text-xl text-[var(--text-secondary)] mb-12 max-w-md mx-auto leading-relaxed font-bold">
+        Join 5,000+ students building real businesses while mastering their exams.
+      </p>
+
+      <button
+        onClick={onNext}
+        className="duo-btn duo-btn-primary w-full max-w-sm text-lg py-5"
+      >
+        Get Started
+      </button>
     </motion.div>
   )
 }
@@ -368,30 +347,28 @@ function IntentScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   const options = [
     {
       id: 'learner',
-      title: 'I want to Learn',
-      desc: 'Build a strong foundation in business and financials.',
+      title: 'LEARN',
+      desc: 'Build a strong foundation.',
       icon: '📚'
     },
     {
       id: 'owner',
-      title: 'I want to Build',
-      desc: 'Create, manage, and scale your own virtual business.',
+      title: 'BUILD',
+      desc: 'Create your virtual business.',
       icon: '🚀'
     },
     {
       id: 'both',
-      title: 'I want Both',
-      desc: 'Learn the theory and apply it to a real venture.',
+      title: 'MASTER BOTH',
+      desc: 'The complete experience.',
       icon: '💎'
     }
   ]
@@ -401,43 +378,33 @@ function IntentScreen({
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
+      className="flex flex-col h-full"
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">What&apos;s your primary goal?</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">We&apos;ll tailor your path based on your ambition.</p>
+      <BrightHeading level={2} className="mb-8 text-center">What&apos;s your goal?</BrightHeading>
 
-        <div className="space-y-4 mb-10">
-          {options.map((opt) => (
-            <button
-              key={opt.id}
-              onClick={() => updateData('intent', opt.id)}
-              className={`w-full text-left p-6 rounded-3xl border transition-all duration-300 group flex items-center gap-6 ${data.intent === opt.id
-                ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white'
-                : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/50'
-                }`}
-            >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 ${data.intent === opt.id ? 'bg-white/20' : 'bg-[var(--bg-primary)]'
-                }`}>
-                {opt.icon}
-              </div>
-              <div>
-                <div className="text-xl font-black mb-1 leading-tight">{opt.title}</div>
-                <div className={`text-sm font-medium ${data.intent === opt.id ? 'text-white/70' : 'text-[var(--text-muted)]'
-                  }`}>{opt.desc}</div>
-              </div>
-            </button>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-4 mb-8">
+        {options.map((opt) => (
+          <button
+            key={opt.id}
+            onClick={() => updateData('intent', opt.id)}
+            className={`duo-card flex items-center gap-6 text-left ${data.intent === opt.id ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : ''
+              }`}
+          >
+            <div className="text-4xl">{opt.icon}</div>
+            <div>
+              <div className="text-lg font-black">{opt.title}</div>
+              <div className="text-sm text-[var(--text-secondary)] font-bold">{opt.desc}</div>
+            </div>
+          </button>
+        ))}
+      </div>
 
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton onClick={onNext}>
-            Continue
-          </BrightButton>
-        </div>
-      </BrightLayer>
+      <button
+        onClick={onNext}
+        className="duo-btn duo-btn-primary w-full py-5"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
@@ -446,21 +413,19 @@ function SkillAssessmentScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   const updateSkill = (skill: keyof OnboardingData['skills'], val: number) => {
     updateData('skills', { ...data.skills, [skill]: val })
   }
 
   const skills = [
-    { id: 'finance', title: 'Financial Literacy', icon: '💰', desc: 'Money management, accounting, investing.' },
-    { id: 'logic', title: 'Logical Reasoning', icon: '🧩', desc: 'Strategy, problem solving, analysis.' },
-    { id: 'math', title: 'Mathematics', icon: '🔢', desc: 'Calculations, data interpretation.' }
+    { id: 'finance', title: 'Financial Literacy', icon: '💰', desc: 'Money, accounting, investing.' },
+    { id: 'logic', title: 'Logical Reasoning', icon: '🧩', desc: 'Strategy and analysis.' },
+    { id: 'math', title: 'Mathematics', icon: '🔢', desc: 'Calculations and data.' }
   ]
 
   return (
@@ -469,48 +434,42 @@ function SkillAssessmentScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">Self-Assessment</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">Be honest! We use this to set your starting difficulty.</p>
+      <BrightHeading level={2} className="mb-8 text-center">Self-Assessment</BrightHeading>
 
-        <div className="space-y-8 mb-10">
-          {skills.map((s) => (
-            <div key={s.id}>
-              <div className="flex justify-between items-end mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{s.icon}</span>
-                  <span className="text-lg font-black text-[var(--text-primary)]">{s.title}</span>
-                </div>
-                <span className="text-[var(--brand-primary)] font-black text-sm uppercase tracking-tighter">
-                  Level {data.skills[s.id as keyof OnboardingData['skills']]} / 5
-                </span>
+      <div className="space-y-8 mb-12">
+        {skills.map((s) => (
+          <div key={s.id} className="duo-card border-none bg-gray-50 flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{s.icon}</span>
+                <span className="text-lg font-black">{s.title}</span>
               </div>
-              <div className="relative h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden border border-[var(--border-subtle)] flex gap-1 p-1">
-                {[1, 2, 3, 4, 5].map((val) => (
-                  <button
-                    key={val}
-                    onClick={() => updateSkill(s.id as keyof OnboardingData['skills'], val)}
-                    className={`flex-1 h-full rounded-full transition-all duration-300 ${val <= data.skills[s.id as keyof OnboardingData['skills']]
-                      ? 'bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]/30'
-                      : 'bg-transparent hover:bg-[var(--bg-primary)]'
-                      }`}
-                  />
-                ))}
-              </div>
-              <p className="mt-2 text-xs text-[var(--text-muted)] font-medium italic">{s.desc}</p>
+              <span className="text-[var(--brand-primary)] font-black">Level {data.skills[s.id as keyof OnboardingData['skills']]} / 5</span>
             </div>
-          ))}
-        </div>
 
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton onClick={onNext}>
-            Confirm Levels
-          </BrightButton>
-        </div>
-      </BrightLayer>
+            <div className="flex gap-2 h-3">
+              {[1, 2, 3, 4, 5].map((val) => (
+                <button
+                  key={val}
+                  onClick={() => updateSkill(s.id as keyof OnboardingData['skills'], val)}
+                  className={`flex-1 rounded-full transition-all ${val <= data.skills[s.id as keyof OnboardingData['skills']]
+                      ? 'bg-[var(--brand-primary)]'
+                      : 'bg-gray-200'
+                    }`}
+                />
+              ))}
+            </div>
+            <p className="text-xs text-[var(--text-muted)] font-bold">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={onNext}
+        className="duo-btn duo-btn-primary w-full py-5"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
@@ -519,12 +478,10 @@ function IdentityScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   return (
     <motion.div
@@ -532,49 +489,37 @@ function IdentityScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-8 leading-tight">
-          Personal Details
-        </BrightHeading>
-        <div className="space-y-6 mb-10">
-          <div>
-            <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">
-              First Name
-            </label>
-            <input
-              type="text"
-              value={data.firstName}
-              onChange={(e) => updateData('firstName', e.target.value)}
-              placeholder="e.g. Alex"
-              className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent text-[var(--text-primary)] outline-none transition-all placeholder:text-[var(--text-muted)] font-bold"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">
-              Last Name (optional)
-            </label>
-            <input
-              type="text"
-              value={data.lastName}
-              onChange={(e) => updateData('lastName', e.target.value)}
-              placeholder="e.g. Smith"
-              className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-transparent text-[var(--text-primary)] outline-none transition-all placeholder:text-[var(--text-muted)] font-bold"
-            />
-          </div>
+      <BrightHeading level={2} className="mb-8 text-center">What&apos;s your name?</BrightHeading>
+
+      <div className="space-y-6 mb-12">
+        <div className="duo-card border-none bg-gray-100 p-0 overflow-hidden focus-within:ring-2 ring-[var(--brand-primary)]">
+          <input
+            type="text"
+            value={data.firstName}
+            onChange={(e) => updateData('firstName', e.target.value)}
+            placeholder="First Name"
+            className="w-full px-8 py-6 bg-transparent text-xl font-bold outline-none placeholder:text-gray-400"
+            required
+          />
         </div>
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            disabled={!data.firstName}
-          >
-            Next Step
-          </BrightButton>
+        <div className="duo-card border-none bg-gray-100 p-0 overflow-hidden focus-within:ring-2 ring-[var(--brand-primary)]">
+          <input
+            type="text"
+            value={data.lastName}
+            onChange={(e) => updateData('lastName', e.target.value)}
+            placeholder="Last Name (Optional)"
+            className="w-full px-8 py-6 bg-transparent text-xl font-bold outline-none placeholder:text-gray-400"
+          />
         </div>
-      </BrightLayer>
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={!data.firstName}
+        className="duo-btn duo-btn-primary w-full py-5 disabled:opacity-50"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
@@ -583,12 +528,10 @@ function AcademicContextScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   return (
     <motion.div
@@ -596,91 +539,65 @@ function AcademicContextScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">School & Region</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">This helps us localize your exam targets.</p>
+      <BrightHeading level={2} className="mb-8 text-center">Your School Info</BrightHeading>
 
-        <div className="space-y-6 mb-10">
-          <div>
-            <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">Country</label>
-            <select
-              value={data.country}
-              onChange={(e) => {
-                const newCountry = e.target.value;
-                updateData('country', newCountry);
-                updateData('school', ''); // Reset school on country change
-              }}
-              className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none appearance-none font-bold cursor-pointer"
-              required
-            >
-              <option value="" className="bg-[var(--bg-elevated)]">Select Your Country</option>
-              {countries.map((country) => (
-                <option key={country} value={country} className="bg-[var(--bg-elevated)]">
-                  {country}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">School</label>
-            {data.country && (schoolsData as Record<string, string[]>)[data.country] ? (
-              <select
-                value={data.school}
-                onChange={(e) => updateData('school', e.target.value)}
-                className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none appearance-none font-bold cursor-pointer"
-                required
-              >
-                <option value="" className="bg-[var(--bg-elevated)]">Select Your School</option>
-                {(schoolsData as Record<string, string[]>)[data.country].map((school) => (
-                  <option key={school} value={school} className="bg-[var(--bg-elevated)]">
-                    {school}
-                  </option>
-                ))}
-                <option value="Other" className="bg-[var(--bg-elevated)]">Other / Not Listed</option>
-              </select>
-            ) : (
-              <input
-                type="text"
-                value={data.school}
-                onChange={(e) => updateData('school', e.target.value)}
-                placeholder="Your School Name"
-                className="w-full px-6 py-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-2xl focus:ring-2 focus:ring-[var(--brand-primary)] text-[var(--text-primary)] outline-none font-bold"
-                required
-                disabled={!data.country}
-              />
-            )}
-          </div>
-          <div>
-            <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em] mb-3">Exam Track</label>
-            <div className="flex gap-4">
-              {['CSEC', 'CAPE'].map((track) => (
-                <button
-                  key={track}
-                  type="button"
-                  onClick={() => updateData('examTrack', track)}
-                  className={`flex-1 py-4 rounded-2xl font-black transition-all border ${data.examTrack === track
-                    ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white'
-                    : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/50'
-                    }`}
-                >
-                  {track}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            disabled={!data.country || !data.school || !data.examTrack}
+      <div className="space-y-4 mb-12">
+        <select
+          value={data.country}
+          onChange={(e) => {
+            updateData('country', e.target.value);
+            updateData('school', '');
+          }}
+          className="duo-card w-full py-5 px-8 font-bold text-lg outline-none cursor-pointer appearance-none bg-gray-100 border-none"
+        >
+          <option value="">Select Country</option>
+          {countries.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        {data.country && (schoolsData as any)[data.country] ? (
+          <select
+            value={data.school}
+            onChange={(e) => updateData('school', e.target.value)}
+            className="duo-card w-full py-5 px-8 font-bold text-lg outline-none cursor-pointer appearance-none bg-gray-100 border-none"
           >
-            Continue
-          </BrightButton>
+            <option value="">Select School</option>
+            {(schoolsData as any)[data.country].map((s: string) => <option key={s} value={s}>{s}</option>)}
+            <option value="Other">Other</option>
+          </select>
+        ) : (
+          <div className="duo-card border-none bg-gray-100 p-0 overflow-hidden">
+            <input
+              type="text"
+              value={data.school}
+              onChange={(e) => updateData('school', e.target.value)}
+              placeholder="Type School Name"
+              className="w-full px-8 py-5 bg-transparent text-lg font-bold outline-none"
+              disabled={!data.country}
+            />
+          </div>
+        )}
+
+        <div className="grid grid-cols-3 gap-3">
+          {['CSEC', 'CAPE', 'Tertiary'].map((t) => (
+            <button
+              key={t}
+              onClick={() => updateData('examTrack', t as any)}
+              className={`duo-card py-4 text-center font-bold ${data.examTrack === t ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : ''
+                }`}
+            >
+              {t}
+            </button>
+          ))}
         </div>
-      </BrightLayer>
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={!data.country || !data.school || !data.examTrack}
+        className="duo-btn duo-btn-primary w-full py-5 disabled:opacity-50"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
@@ -689,12 +606,10 @@ function CurrentLevelScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   return (
     <motion.div
@@ -702,37 +617,29 @@ function CurrentLevelScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">Academic Level</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">Pick your current grade level.</p>
+      <BrightHeading level={2} className="mb-8 text-center">Your Current Form</BrightHeading>
 
-        <div className="grid grid-cols-2 gap-3 mb-10">
-          {forms.map((form) => (
-            <button
-              key={form}
-              type="button"
-              onClick={() => updateData('currentForm', form)}
-              className={`px-4 py-4 rounded-2xl font-black text-center transition-all border ${data.currentForm === form
-                ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white'
-                : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/50'
-                }`}
-            >
-              {form}
-            </button>
-          ))}
-        </div>
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            disabled={!data.currentForm}
+      <div className="grid grid-cols-2 gap-4 mb-12">
+        {forms.map((form) => (
+          <button
+            key={form}
+            type="button"
+            onClick={() => updateData('currentForm', form)}
+            className={`duo-card py-6 text-xl font-black ${data.currentForm === form ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : ''
+              }`}
           >
-            Next
-          </BrightButton>
-        </div>
-      </BrightLayer>
+            {form}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={!data.currentForm}
+        className="duo-btn duo-btn-primary w-full py-5 disabled:opacity-50"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
@@ -741,12 +648,10 @@ function SubjectSelectionScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   const toggleSubject = (subject: string) => {
     const current = data.subjects
@@ -763,37 +668,33 @@ function SubjectSelectionScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">Your Subjects</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">Which ones are you focused on today?</p>
+      <BrightHeading level={2} className="mb-8 text-center">Your Core Trio</BrightHeading>
 
-        <div className="grid grid-cols-2 gap-3 mb-10">
-          {subjects.map((subject) => (
-            <button
-              key={subject}
-              type="button"
-              onClick={() => toggleSubject(subject)}
-              className={`px-4 py-4 rounded-2xl font-bold text-sm transition-all border ${data.subjects.includes(subject)
-                ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white'
-                : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/50'
-                }`}
-            >
-              {subject}
-            </button>
-          ))}
-        </div>
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            disabled={data.subjects.length === 0}
+      <div className="grid grid-cols-1 gap-3 mb-12">
+        {subjects.map((subject) => (
+          <button
+            key={subject}
+            type="button"
+            onClick={() => toggleSubject(subject)}
+            className={`duo-card py-5 px-8 flex justify-between items-center font-bold ${data.subjects.includes(subject) ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : ''
+              }`}
           >
-            Continue
-          </BrightButton>
-        </div>
-      </BrightLayer>
+            <span>{subject}</span>
+            <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${data.subjects.includes(subject) ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)]' : 'border-gray-200'
+              }`}>
+              {data.subjects.includes(subject) && <span className="text-white text-lg">✓</span>}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={data.subjects.length === 0}
+        className="duo-btn duo-btn-primary w-full py-5 disabled:opacity-50"
+      >
+        Assemble Path
+      </button>
     </motion.div>
   )
 }
@@ -802,12 +703,10 @@ function LearningGoalScreen({
   data,
   updateData,
   onNext,
-  onPrev,
 }: {
   data: OnboardingData
   updateData: (field: keyof OnboardingData, value: any) => void
   onNext: () => void
-  onPrev: () => void
 }) {
   return (
     <motion.div
@@ -815,84 +714,74 @@ function LearningGoalScreen({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
     >
-      <BrightLayer variant="elevated" padding="md">
-        <BrightHeading level={2} className="mb-2">Your Target</BrightHeading>
-        <p className="text-[var(--text-secondary)] mb-8 font-medium">Where do you want to be in 3 months?</p>
+      <BrightHeading level={2} className="mb-8 text-center">Your Target</BrightHeading>
 
-        <div className="space-y-4 mb-10">
-          {learningGoals.map((goal) => (
-            <button
-              key={goal}
-              type="button"
-              onClick={() => updateData('learningGoal', goal)}
-              className={`w-full text-left px-6 py-5 rounded-2xl font-bold transition-all border ${data.learningGoal === goal
-                ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg'
-                : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--brand-primary)]/50'
-                }`}
-            >
-              {goal}
-            </button>
-          ))}
-        </div>
-        <div className="flex justify-between items-center">
-          <BrightButton variant="ghost" onClick={onPrev} size="sm">
-            Back
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            disabled={!data.learningGoal}
+      <div className="space-y-4 mb-12">
+        {learningGoals.map((goal) => (
+          <button
+            key={goal}
+            type="button"
+            onClick={() => updateData('learningGoal', goal)}
+            className={`duo-card w-full text-left py-6 px-8 text-lg font-bold ${data.learningGoal === goal ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : ''
+              }`}
           >
-            Check-in
-          </BrightButton>
-        </div>
-      </BrightLayer>
+            {goal}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={onNext}
+        disabled={!data.learningGoal}
+        className="duo-btn duo-btn-primary w-full py-5 disabled:opacity-50"
+      >
+        Continue
+      </button>
     </motion.div>
   )
 }
 
 function DiagnosticSetupScreen({
   onNext,
-  onPrev,
 }: {
   onNext: () => void
-  onPrev: () => void
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
+      className="text-center"
     >
-      <BrightLayer variant="glass" padding="lg" className="text-center">
-        <div className="mb-8 text-6xl">🧠</div>
-        <BrightHeading level={2} className="mb-6 leading-tight">
-          One Last Thing.
-        </BrightHeading>
-        <div className="space-y-6 mb-10">
-          <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-medium">
-            To truly personalize your path, we need to see how you think.
-          </p>
-          <div className="bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 p-6 rounded-3xl text-left">
-            <p className="text-[var(--brand-primary)] font-black uppercase tracking-[0.2em] text-[10px] mb-3 inline-block">Diagnostic Phase</p>
-            <ul className="space-y-3 text-[var(--text-secondary)] font-bold text-sm">
-              <li className="flex items-center gap-2">✅ No Grades or Rankings</li>
-              <li className="flex items-center gap-2">✅ Measures Logic & Speed</li>
-              <li className="flex items-center gap-2">✅ Sets Your &quot;Baseline&quot;</li>
-            </ul>
-          </div>
+      <div className="mb-8 text-7xl">🧠</div>
+
+      <BrightHeading level={2} className="mb-6">Ready to check your skills?</BrightHeading>
+
+      <p className="text-xl text-[var(--text-secondary)] mb-12 max-w-md mx-auto leading-relaxed font-bold">
+        We&apos;ll start with a quick diagnostic session to set your starting difficulty.
+      </p>
+
+      <div className="duo-card text-left bg-gray-50 border-none mb-12 p-8">
+        <div className="flex items-center gap-4 mb-4">
+          <span className="text-2xl">✅</span>
+          <span className="font-bold text-lg">No Grades or Rankings</span>
         </div>
-        <div className="flex gap-4">
-          <BrightButton variant="secondary" onClick={onPrev} className="flex-1">
-            Revise
-          </BrightButton>
-          <BrightButton
-            onClick={onNext}
-            className="flex-[2]"
-          >
-            Start Evaluation
-          </BrightButton>
+        <div className="flex items-center gap-4 mb-4">
+          <span className="text-2xl">✅</span>
+          <span className="font-bold text-lg">Measures Logic & Speed</span>
         </div>
-      </BrightLayer>
+        <div className="flex items-center gap-4">
+          <span className="text-2xl">✅</span>
+          <span className="font-bold text-lg">Sets Your baseline</span>
+        </div>
+      </div>
+
+      <button
+        onClick={onNext}
+        className="duo-btn duo-btn-primary w-full py-5"
+      >
+        Start Diagnostic
+      </button>
     </motion.div>
   )
 }

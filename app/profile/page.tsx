@@ -30,10 +30,10 @@ export default function ProfilePage() {
   const { business } = useBusiness()
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [stats, setStats] = useState([
-    { label: 'Mastery', value: '-', unit: '%', icon: '🧠' },
-    { label: 'Consistency', value: '-', unit: '%', icon: '📈' },
-    { label: 'Streak', value: '-', unit: 'Days', icon: '🔥' },
-    { label: 'XP', value: '-', unit: 'Total', icon: '⚡' },
+    { label: 'Mastery', value: '-', unit: '%', icon: '🧠', color: 'text-purple-500' },
+    { label: 'Consistency', value: '-', unit: '%', icon: '📈', color: 'text-blue-500' },
+    { label: 'Streak', value: '-', unit: 'Days', icon: '🔥', color: 'text-orange-500' },
+    { label: 'XP', value: '-', unit: 'Total', icon: '⚡', color: 'text-yellow-500' },
   ])
 
   const [businessData, setBusinessData] = useState<{
@@ -50,7 +50,6 @@ export default function ProfilePage() {
     if (authLoading) return;
 
     if (userData) {
-      // Primary source: Firestore
       setProfile({
         firstName: userData.firstName || 'Student',
         lastName: userData.lastName || '',
@@ -62,11 +61,9 @@ export default function ProfilePage() {
         intent: userData.intent || 'learner'
       });
 
-      // robustness: handle mastery if it's an object (map) or a number
       const getMasteryValue = (val: any): number => {
         if (typeof val === 'number') return val;
         if (typeof val === 'object' && val !== null) {
-          // If it's a map of subject/objective mastery, calculate average
           const values = Object.values(val).filter(v => typeof v === 'number') as number[];
           if (values.length === 0) return 0.1;
           const sum = values.reduce((a, b) => a + b, 0);
@@ -80,13 +77,12 @@ export default function ProfilePage() {
       const consistency = typeof userData.consistency === 'number' ? userData.consistency : 0;
 
       setStats([
-        { label: 'Mastery', value: Math.round(globalMastery * 100).toString(), unit: '%', icon: '🧠' },
-        { label: 'Consistency', value: Math.round(consistency).toString(), unit: '%', icon: '📈' },
-        { label: 'Streak', value: (userData.streak || 0).toString(), unit: 'Days', icon: '🔥' },
-        { label: 'XP', value: userData.xp >= 1000 ? (userData.xp / 1000).toFixed(1) + 'k' : (userData.xp || 0).toString(), unit: 'Total', icon: '⚡' },
+        { label: 'Mastery', value: Math.round(globalMastery * 100).toString(), unit: '%', icon: '🧠', color: 'text-purple-500' },
+        { label: 'Consistency', value: Math.round(consistency).toString(), unit: '%', icon: '📈', color: 'text-blue-500' },
+        { label: 'Streak', value: (userData.streak || 0).toString(), unit: 'Days', icon: '🔥', color: 'text-orange-500' },
+        { label: 'XP', value: userData.xp >= 1000 ? (userData.xp / 1000).toFixed(1) + 'k' : (userData.xp || 0).toString(), unit: 'Total', icon: '⚡', color: 'text-yellow-500' },
       ]);
     } else {
-      // Fallback: LocalStorage (during onboarding or offline)
       const localProfile = localStorage.getItem('brighted_onboarding')
       if (localProfile) {
         setProfile(JSON.parse(localProfile))
@@ -94,7 +90,7 @@ export default function ProfilePage() {
     }
   }, [user, userData, authLoading])
 
-  // Sync business context to local state
+  // Sync business context
   useEffect(() => {
     if (business) {
       setBusinessData({
@@ -127,15 +123,11 @@ export default function ProfilePage() {
   if (authLoading || (!profile && !userData)) {
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)]"></div>
-          <p className="text-[var(--text-muted)] font-bold text-xs uppercase tracking-widest animate-pulse">Loading Profile...</p>
-        </div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)]"></div>
       </div>
     )
   }
 
-  // Ensure profile is at least a default if userData hasn't fully propagated yet
   const displayProfile = profile || {
     firstName: userData?.firstName || 'Student',
     lastName: userData?.lastName || '',
@@ -148,222 +140,177 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] py-8 pt-20 md:py-12 md:pt-24 px-4 md:px-6 bg-[var(--bg-primary)] safe-padding pb-24">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] safe-padding pb-24">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 pt-20">
 
-        {/* Top Section: Profile Header & BCoin Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-16 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6 mb-8">
-              <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-secondary)] p-1 shadow-lg shadow-[var(--brand-primary)]/20">
-                <div className="w-full h-full bg-[var(--bg-elevated)] rounded-[1.8rem] flex items-center justify-center text-4xl font-black text-[var(--text-primary)]">
-                  {displayProfile.firstName.charAt(0)}
-                </div>
-              </div>
-              <div>
-                <BrightHeading level={1} className="mb-2">
-                  {displayProfile.firstName} <span className="opacity-30">{displayProfile.lastName}</span>
-                </BrightHeading>
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] rounded-full text-[10px] font-black uppercase tracking-widest border border-[var(--brand-primary)]/20">
-                    Student
-                  </span>
-                  <p className="text-[var(--brand-secondary)] font-bold text-xs uppercase tracking-widest">
-                    {displayProfile.school} • {displayProfile.currentForm}
-                  </p>
-                </div>
-              </div>
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row gap-8 mb-12 items-center md:items-start text-center md:text-left">
+          <div className="w-32 h-32 rounded-full border-[6px] border-[var(--brand-primary)] bg-[var(--bg-secondary)] flex items-center justify-center text-5xl font-black text-[var(--brand-primary)] overflow-hidden">
+            {displayProfile.firstName.charAt(0)}
+          </div>
+          <div className="flex-1">
+            <BrightHeading level={1} className="mb-2 text-4xl">
+              {displayProfile.firstName} {displayProfile.lastName}
+            </BrightHeading>
+            <p className="text-[var(--text-secondary)] font-bold text-lg mb-4">
+              {displayProfile.school} • {displayProfile.currentForm}
+            </p>
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              <span className="px-3 py-1 bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] rounded-lg font-black uppercase text-xs tracking-widest border border-[var(--brand-accent)]/30">
+                {displayProfile.examTrack} Scholar
+              </span>
+              <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-lg font-black uppercase text-xs tracking-widest">
+                Joined 2024
+              </span>
             </div>
+          </div>
 
-            <div className="flex flex-wrap justify-center md:justify-start gap-3">
-              {displayProfile.subjects.map((sub: string) => (
-                <span key={sub} className="px-4 py-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] hover:border-[var(--brand-primary)] transition-colors cursor-default">
-                  {sub}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="scale-90 lg:scale-100 origin-top-right">
-              <BCoinCard
-                balance={(businessData?.balance || 0) + (userData?.bCoins || 0)}
-                tier="Platinum"
-                cardHolder={`${displayProfile.firstName} ${displayProfile.lastName || ''}`.trim() || 'Student'}
-              />
-            </div>
-          </motion.div>
+          <div className="flex-shrink-0">
+            <BCoinCard
+              balance={(businessData?.balance || 0) + (userData?.bCoins || 0)}
+              tier="Platinum"
+              cardHolder={`${displayProfile.firstName}`}
+            />
+          </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, i) => (
-            <BrightLayer
-              key={stat.label}
-              variant="elevated"
-              padding="sm"
-              className="hover:border-[var(--brand-primary)]/50 transition-all cursor-default group"
-            >
-              <div className="text-3xl mb-4 flex items-center justify-between">
-                <span className="group-hover:scale-110 transition-transform">{stat.icon}</span>
-                <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.2em]">{stat.unit}</span>
-              </div>
-              <div className="text-3xl font-black text-[var(--text-primary)] mb-1">{stat.value}</div>
-              <div className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest group-hover:text-[var(--brand-primary)] transition-colors">{stat.label}</div>
-            </BrightLayer>
+            <div key={i} className="duo-card p-6 flex flex-col items-center">
+              <span className={`text-3xl mb-2 ${stat.color}`}>{stat.icon}</span>
+              <span className="text-2xl font-black text-[var(--text-primary)]">{stat.value}</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">{stat.label}</span>
+            </div>
           ))}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Active Business Widget */}
-          <div className="lg:col-span-2">
-            <div className="flex justify-between items-end mb-6 px-2">
-              <BrightHeading level={4}>Active Enterprise</BrightHeading>
-              {businessData && <span className="text-xs font-bold text-[var(--state-success)] flex items-center gap-1">● Live Market Data</span>}
-            </div>
 
-            <BrightLayer variant="glass" padding="lg" className="relative overflow-hidden group border-[var(--border-strong)]">
-              {/* Conditional Rendering: Show Locked State or Active State */}
-              {!businessData ? (
-                <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-[var(--bg-elevated)] rounded-full flex items-center justify-center mx-auto mb-6 text-4xl grayscale opacity-50">
-                    🏢
+          {/* Main Column: Business or Learning Path */}
+          <div className="lg:col-span-2 space-y-8">
+            <BrightHeading level={2}>Your Enterprise</BrightHeading>
+
+            {!businessData ? (
+              <div className="duo-card bg-gray-100 border-dashed border-4 border-gray-300 p-12 text-center">
+                <div className="text-6xl grayscale opacity-30 mb-4">🏢</div>
+                <h3 className="text-xl font-black text-gray-400 mb-2">No Active Business</h3>
+                <p className="text-gray-500 font-bold mb-8">Start a venture to unlock the Simulation map.</p>
+                <Link href="/practicals/business/register">
+                  <button className="duo-btn duo-btn-primary px-8 py-4">Register New Biz</button>
+                </Link>
+              </div>
+            ) : (
+              <div className="duo-card border-[3px] border-[#1F7A85] bg-[#e0f2f1] overflow-hidden relative p-0">
+                {/* Header Strip */}
+                <div className="bg-[#1F7A85] p-4 flex justify-between items-center border-b-[3px] border-[#155d66]">
+                  <div className="flex items-center gap-2 text-white">
+                    <span className="text-2xl">🏢</span>
+                    <span className="font-black uppercase tracking-widest text-sm">Global Enterprise</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-[var(--text-muted)] mb-2">No Active Venture</h3>
-                  <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
-                    Register your business to unlock Principles of Business and Accounts simulations.
-                  </p>
-                  <Link href="/practicals/business/register">
-                    <BrightButton variant="primary">Start Your Venture 🚀</BrightButton>
-                  </Link>
+                  <div className="bg-white/20 px-3 py-1 rounded-full text-white font-bold text-xs backdrop-blur-sm">
+                    ● LIVE MARKET
+                  </div>
                 </div>
-              ) : (
-                <>
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--brand-accent)] opacity-5 blur-[80px] group-hover:opacity-10 transition-opacity" />
-                  <div className="relative z-10">
-                    <div className="grid md:grid-cols-2 gap-12 mb-10">
-                      <div>
-                        <div className="flex justify-between items-start mb-6">
-                          <div>
-                            <h3 className="text-3xl font-black mb-2 italic text-[var(--text-primary)] tracking-tight">{businessData.name}</h3>
-                            <p className="text-[var(--text-secondary)] font-medium text-sm">Global Ecommerce • Startup Phase</p>
-                          </div>
-                          <div className="px-3 py-1 bg-[var(--brand-accent)]/10 border border-[var(--brand-accent)]/20 text-[var(--brand-accent)] rounded-full text-[10px] font-black uppercase tracking-widest">
-                            Active
-                          </div>
-                        </div>
 
-                        <div className="space-y-6">
-                          <div>
-                            <p className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-1">Valuation</p>
-                            <div className="flex items-center gap-1 text-3xl font-black text-[var(--text-primary)]">
-                              <BCoinIcon size={24} /> {businessData.valuation.toLocaleString()}
-                            </div>
-                            <p className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mt-2">B-Coins Balance</p>
-                            <div className="flex items-center gap-1 text-xl font-black text-[var(--brand-accent)]">
-                              <BCoinIcon size={20} /> {(userData?.bCoins || 0).toLocaleString()}
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-1">Cashflow</p>
-                              <div className="flex items-center gap-1 text-xl font-black text-[var(--state-success)] text-glow-cyan">
-                                +<BCoinIcon size={16} /> {businessData.cashflow.toLocaleString()}
-                              </div>
-                            </div>
-                            <div>
-                              <p className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-1">Employees</p>
-                              <p className="text-xl font-black text-[var(--text-primary)]">{businessData.employees}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* 3D Business Card */}
-                      <div className="flex items-center justify-center -rotate-2 hover:rotate-0 transition-transform duration-500 overflow-hidden w-full max-w-[400px] mx-auto">
+                <div className="p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row gap-8 items-center">
+                    {/* Left: 3D Card / Visual */}
+                    <div className="w-full md:w-1/3 flex justify-center">
+                      <div className="transform -rotate-6 hover:rotate-0 transition-transform duration-300 w-full max-w-[220px] filter drop-shadow-xl">
                         <BusinessCard3D businessName={businessData.name} />
                       </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Link href="/practicals/business/operations" className="flex-1">
-                        <BrightButton variant="primary" className="w-full">
-                          Enter Dashboard
-                        </BrightButton>
-                      </Link>
-                      <BrightButton variant="secondary" className="w-full flex-1">
-                        View Reports
-                      </BrightButton>
+                    {/* Right: Stats */}
+                    <div className="flex-1 w-full">
+                      <div className="mb-6">
+                        <h3 className="text-3xl font-black text-[#0f4c54] mb-1 italic tracking-tight">{businessData.name}</h3>
+                        <p className="text-sm font-bold text-[#4a8891]">Valuation: ${businessData.valuation.toLocaleString()}</p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="bg-white border-2 border-[#1F7A85]/20 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                          <span className="text-xs font-black uppercase text-[#4a8891] tracking-wider">Monthly Cashflow</span>
+                          <span className="text-xl font-black text-[#1F7A85] flex items-center gap-2">
+                            +<BCoinIcon size={24} /> {businessData.cashflow.toLocaleString()}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-white border-2 border-gray-200 rounded-xl p-3 shadow-sm">
+                            <span className="text-[10px] font-black uppercase text-gray-400 block mb-1">Team Size</span>
+                            <span className="text-lg font-black text-gray-700">{businessData.employees} <span className="text-xs text-gray-400">Staff</span></span>
+                          </div>
+                          <div className="bg-white border-2 border-gray-200 rounded-xl p-3 shadow-sm">
+                            <span className="text-[10px] font-black uppercase text-gray-400 block mb-1">Trend</span>
+                            <span className="text-lg font-black text-green-500">↗ Growth</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </>
-              )}
-            </BrightLayer>
+
+                  <div className="mt-8 grid grid-cols-2 gap-4">
+                    <Link href="/practicals/business/operations" className="col-span-2 md:col-span-1">
+                      <button className="duo-btn duo-btn-primary w-full py-4 text-lg border-b-[6px] active:border-b-0">
+                        Enter HQ
+                      </button>
+                    </Link>
+                    <button className="duo-btn bg-white border-2 border-gray-200 border-b-[6px] hover:bg-gray-50 text-gray-600 font-bold w-full py-4 col-span-2 md:col-span-1 active:border-b-2 active:translate-y-[4px] transition-all">
+                      Financials
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Side Panel: Recent Achievements */}
+          {/* Sidebar: Achievements */}
           <div>
-            <BrightHeading level={4} className="mb-6 px-2">Recent Badges</BrightHeading>
-            <BrightLayer variant="elevated" padding="md" className="space-y-6 h-fit bg-[var(--bg-elevated)]/50 backdrop-blur-sm">
+            <BrightHeading level={2} className="mb-6">Badges</BrightHeading>
+            <div className="duo-card bg-[var(--bg-secondary)] p-0 overflow-hidden">
               {[
                 { name: 'Seed Founder', icon: '🌱', date: '2 days ago', rare: false },
                 { name: 'Profit First', icon: '💰', date: 'Yesterday', rare: true },
                 { name: 'Market Entry', icon: '🗺️', date: '6h ago', rare: false },
               ].map((badge, i) => (
-                <div key={i} className="flex items-center gap-4 group cursor-default">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl border transition-all ${badge.rare
-                    ? 'bg-[var(--brand-primary)]/10 border-[var(--brand-primary)]/50 neon-glow-primary'
-                    : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)]'
-                    }`}>
-                    {badge.icon}
-                  </div>
+                <div key={i} className="flex items-center gap-4 p-4 border-b border-[var(--border-subtle)] last:border-0 hover:bg-white/50 transition-colors">
+                  <div className="text-3xl">{badge.icon}</div>
                   <div>
-                    <p className={`font-bold transition-colors ${badge.rare ? 'text-[var(--brand-primary)]' : 'text-[var(--text-primary)]'}`}>
-                      {badge.name}
-                    </p>
-                    <p className="text-[10px] font-black text-[var(--text-muted)] uppercase">{badge.date}</p>
+                    <p className="font-black text-sm">{badge.name}</p>
+                    <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">{badge.date}</p>
                   </div>
                 </div>
               ))}
+              <Link href="/achievements" className="block p-4 text-center font-black text-xs uppercase text-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/5 transition-colors">
+                View All Badges
+              </Link>
+            </div>
 
-              <div className="pt-4 border-t border-[var(--border-subtle)]">
-                <Link href="/achievements">
-                  <p className="text-center text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest hover:text-[var(--brand-primary)] cursor-pointer transition-colors">View All Achievements →</p>
-                </Link>
-              </div>
-            </BrightLayer>
+            <div className="mt-8 text-center">
+              <button
+                onClick={async () => {
+                  if (confirm('This will clear local cache and reload. Continue?')) {
+                    try {
+                      const { clearIndexedDbPersistence, terminate } = await import('firebase/firestore');
+                      const { db } = await import('@/lib/firebase');
+                      await terminate(db);
+                      await clearIndexedDbPersistence(db);
+                      window.location.reload();
+                    } catch (e) {
+                      console.error('Failed to clear persistence:', e);
+                      alert('Could not clear cache. Please manually clear site data.');
+                    }
+                  }
+                }}
+                className="text-[10px] text-gray-400 font-black uppercase hover:text-red-500 transition-colors"
+              >
+                Reset Application Data
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-12 text-center border-t border-[var(--border-subtle)] pt-8 pb-4">
-          <button
-            onClick={async () => {
-              if (confirm('This will clear local cache and reload. Continue?')) {
-                try {
-                  const { clearIndexedDbPersistence, terminate } = await import('firebase/firestore');
-                  const { db } = await import('@/lib/firebase');
-                  await terminate(db);
-                  await clearIndexedDbPersistence(db);
-                  window.location.reload();
-                } catch (e) {
-                  console.error('Failed to clear persistence:', e);
-                  alert('Could not clear cache. Please manually clear site data.');
-                }
-              }
-            }}
-            className="text-xs text-[var(--text-muted)] hover:text-[var(--state-error)] font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 mx-auto"
-          >
-            <span>🗑️</span> Reset App Data (Fix Cache Errors)
-          </button>
         </div>
-
       </div>
     </div>
   )

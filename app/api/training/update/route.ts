@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
+import { db } from '@/lib/firebase';
+import { doc, getDoc, updateDoc, setDoc, increment, serverTimestamp } from 'firebase/firestore';
 
 interface TrainingUpdate {
   objectiveId: string;
@@ -7,54 +9,27 @@ interface TrainingUpdate {
   timeSpent: number; // seconds
   attempts: number;
 }
-interface UserProgress {
-  [objectiveId: string]: {
-    mastery: number;
-    attempts: number;
-    lastAttempt: string;
-    stability: number;
-    totalTime: number;
-    correctCount: number;
-    incorrectCount: number;
-  };
+
+// XP Calculation Logic
+function calculateXP(correct: boolean, timeSpent: number, attemptCount: number): number {
+  if (!correct) return 2; // Participation award (effort)
+
+  let baseXP = 15;
+
+  // Speed bonus (if under 30s)
+  if (timeSpent < 30) baseXP += 5;
+  if (timeSpent < 10) baseXP += 5; // Super fast
+
+  // First try bonus
+  if (attemptCount === 1) baseXP += 10;
+
+  return baseXP;
 }
 
-// Adaptive learning algorithm - updates mastery and stability
-function calculateMastery(progress: UserProgress[string]): number {
-  if (!progress) return 0;
-
-  const totalAttempts = progress.attempts;
-  if (totalAttempts === 0) return 0;
-
-  const correctRate = progress.correctCount / totalAttempts;
-  const baseMastery = correctRate * 100;
-
-  // Adjust based on stability (consistency matters)
-  const stabilityBonus = progress.stability * 0.2;
-
-  // Penalize for too many attempts (indicates struggle)
-  const attemptPenalty = totalAttempts > 5 ? (totalAttempts - 5) * 2 : 0;
-
-  return Math.min(100, Math.max(0, baseMastery + stabilityBonus - attemptPenalty));
-}
-
-function calculateStability(progress: UserProgress[string]): number {
-  if (!progress || progress.attempts < 2) return 0;
-
-  // Stability is based on consistency of correct answers
-  const recentCorrectRate = progress.correctCount / progress.attempts;
-
-  // If last few attempts were correct, stability increases
-  const consistency = recentCorrectRate;
-
-  // More attempts with consistent results = higher stability
-  const attemptBonus = Math.min(progress.attempts * 5, 30);
-
-  return Math.min(100, consistency * 70 + attemptBonus);
-}
 export async function POST(request: NextRequest) {
   try {
-    await verifyAuth(request);
+    const authUser = await verifyAuth(request);
+    const uid = authUser.uid;
 
     const body: TrainingUpdate = await request.json();
     const { objectiveId, correct, timeSpent, attempts } = body;
@@ -63,34 +38,70 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Objective ID is required' }, { status: 400 });
     }
 
-    // In production, this would fetch from database
-    // For now, we calculate and return the updated progress
-    // The frontend will save it to localStorage
+    const today = new Date().toISOString().split('T')[0];
+    const userRef = doc(db, 'users', uid);
+    const progressRef = doc(db, 'users', uid, 'progress', objectiveId);
 
-    // Get existing progress (would come from database)
-    const existingProgress: UserProgress[string] = {
+    // 1. Calculate XP Gained
+    const xpGained = calculateXP(correct, timeSpent, attempts);
+
+    // 2. Fetch current Objective Progress
+    const progressSnap = await getDoc(progressRef);
+    const currentData = progressSnap.exists() ? progressSnap.data() : {
       mastery: 0,
-      attempts: attempts || 1,
-      lastAttempt: new Date().toISOString(),
-      stability: 0,
-      totalTime: timeSpent || 0,
-      correctCount: correct ? 1 : 0,
-      incorrectCount: correct ? 0 : 1,
+      attempts: 0,
+      correctCount: 0,
+      streak: 0
     };
 
-    // Update progress
-    existingProgress.mastery = calculateMastery(existingProgress);
-    existingProgress.stability = calculateStability(existingProgress);
+    // 3. Update Objective Stats
+    const newAttempts = (currentData.attempts || 0) + 1;
+    const newCorrect = (currentData.correctCount || 0) + (correct ? 1 : 0);
+    const currentStreak = correct ? (currentData.streak || 0) + 1 : 0; // Objective-specific streak
+
+    // Simple mastery calculation: heavily weighted by recent streak
+    let newMastery = (correct ? (currentData.mastery || 0) + 5 : (currentData.mastery || 0) - 2);
+    newMastery = Math.min(100, Math.max(0, newMastery));
+
+    // 4. Update Mastery Document
+    await setDoc(progressRef, {
+      objectiveId,
+      mastery: newMastery,
+      attempts: newAttempts,
+      correctCount: newCorrect,
+      streak: currentStreak,
+      lastAttempt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+
+    // 5. Update User Global Stats (XP, Daily Goal, User Streak)
+    const userSnap = await getDoc(userRef);
+    const userData = userSnap.data();
+
+    // Check for global streak update (if daily goal crossed)
+    const currentDailyXP = (userData?.xp_today || 0) + xpGained;
+    const dailyGoal = userData?.dailyGoal || 500;
+
+    // Streak logic handled in daily reset, but we update XP here
+    await updateDoc(userRef, {
+      xp: increment(xpGained),
+      xp_today: increment(xpGained),
+      lastActive: new Date().toISOString(),
+      // Update local subject progress (denormalized for UI speed)
+      [`subjectProgress.${objectiveId}`]: newMastery
+    });
 
     return NextResponse.json({
-      objectiveId,
-      updatedProgress: existingProgress,
-      recommendations: {
-        shouldReview: existingProgress.mastery < 70,
-        shouldAdvance: existingProgress.mastery >= 85 && existingProgress.stability >= 70,
-        nextDifficulty: existingProgress.mastery >= 90 ? 'increase' : 'maintain'
+      success: true,
+      xpGained,
+      newMastery,
+      dailyProgress: {
+        current: currentDailyXP,
+        goal: dailyGoal,
+        percent: Math.round((currentDailyXP / dailyGoal) * 100)
       }
     });
+
   } catch (error: any) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });

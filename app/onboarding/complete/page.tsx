@@ -54,7 +54,7 @@ export default function OnboardingCompletePage() {
             Your learning path is ready!
           </BrightHeading>
           <p className="text-[var(--text-secondary)] text-lg">
-            We&apos;ll adjust as you improve.
+            We'll adjust as you improve.
           </p>
         </div>
 

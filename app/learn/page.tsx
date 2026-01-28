@@ -36,6 +36,14 @@ interface LearningModule {
 
 import { Suspense } from 'react'
 
+// Helper to get horizontal offset in pixels for a node index
+const getHorizontalOffset = (index: number, nodeType: NodeType) => {
+  if (nodeType === 'boss') return 0
+  if (index % 4 === 1) return -120 // Shifted left
+  if (index % 4 === 3) return 120  // Shifted right
+  return 0 // Centered
+}
+
 export default function LearnPage() {
   return (
     <Suspense fallback={
@@ -289,7 +297,7 @@ function LearnContent() {
         )}
 
         {/* Path Container */}
-        <div className="relative flex flex-col items-center space-y-8">
+        <div className="relative flex flex-col items-center">
 
           {loading && (
             <div className="text-center py-10">
@@ -339,22 +347,18 @@ function LearnContent() {
           )}
 
           {!loading && !error && learningModules.map((module, index) => {
-            // Check if this is the module to animate unlocking (the first 'current' one)
+            // Check if this is the module to animate unlocking
             const isUnlocking = shouldAnimateUnlock && module.status === 'current' && index > 0;
             const isNext = module.status === 'current' || (module.status === 'locked' && index > 0 && learningModules[index - 1].status === 'completed');
 
-            // Determine path direction for connector
-            let pathVariant: 'straight' | 'left' | 'right' = 'straight';
-            if (index % 4 === 0) pathVariant = 'left';       // 0 -> 1 goes left-ish
-            if (index % 4 === 1) pathVariant = 'straight';   // 1 -> 2 straight
-            if (index % 4 === 2) pathVariant = 'right';      // 2 -> 3 goes right-ish
-            if (index % 4 === 3) pathVariant = 'straight';   // 3 -> 4 straight
+            // Find offsets for pathing
+            const currentOffset = getHorizontalOffset(index, module.nodeType);
+            const nextModule = index < learningModules.length - 1 ? learningModules[index + 1] : null;
+            const nextOffset = nextModule ? getHorizontalOffset(index + 1, nextModule.nodeType) : 0;
 
             // Section Header every 5 modules
             const showHeader = index % 5 === 0;
             const moduleNum = Math.floor(index / 5) + 1;
-
-            // Determine header theme based on module number
             const headerTheme = moduleNum === 1 ? 'startup' : moduleNum === 2 ? 'growth' : moduleNum === 3 ? 'mastery' : 'default';
 
             return (
@@ -382,7 +386,8 @@ function LearnContent() {
                     fromIndex={index}
                     isCompleted={module.status === 'completed'}
                     isNext={isNext}
-                    variant={pathVariant}
+                    fromOffset={currentOffset}
+                    toOffset={nextOffset}
                   />
                 )}
               </div>
@@ -393,7 +398,7 @@ function LearnContent() {
 
         {/* Development Tools */}
         <div className="mt-20 border-t border-[var(--border-subtle)] pt-10 text-center">
-          <p className="text-[var(--text-muted)] text-xs uppercase tracking-widest mb-4">Development Options</p>
+          <p className="text-[var(--text-muted)] text-xs uppercase tracking-widest mb-4">Reset Learning Map?</p>
           <BrightButton
             variant="danger"
             size="sm"

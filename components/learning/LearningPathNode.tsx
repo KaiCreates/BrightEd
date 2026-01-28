@@ -126,10 +126,10 @@ export default function LearningPathNode({
     const isCompleted = status === 'completed'
 
     // Calculate offset for "winding" effect
-    let alignClass = ''
+    let xOffset = 0
     if (nodeType !== 'boss') {
-        if (index % 4 === 1) alignClass = '-ml-32'
-        if (index % 4 === 3) alignClass = 'ml-32'
+        if (index % 4 === 1) xOffset = -120
+        if (index % 4 === 3) xOffset = 120
     }
 
     const href = !isLocked
@@ -212,7 +212,8 @@ export default function LearningPathNode({
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, type: 'spring', stiffness: 200 }}
-                className={`relative z-10 ${alignClass}`}
+                style={{ transform: `translateX(${xOffset}px)` }}
+                className="relative z-10"
             >
                 <Link href={href} className={`group relative flex flex-col items-center ${isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
@@ -284,7 +285,8 @@ export default function LearningPathNode({
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, type: isUnlocking ? 'spring' : 'tween', stiffness: isUnlocking ? 200 : undefined }}
-            className={`relative z-10 ${alignClass}`}
+            style={{ transform: `translateX(${xOffset}px)` }}
+            className="relative z-10"
         >
             {/* Unlock Celebration Ring */}
             {isUnlocking && (
@@ -363,10 +365,10 @@ export default function LearningPathNode({
                             <span
                                 key={i}
                                 className={`text-sm transition-all ${i < stars
-                                        ? nodeType === 'crunch' ? 'text-purple-400'
-                                            : nodeType === 'maintenance' ? 'text-gray-400'
-                                                : 'text-[var(--brand-accent)]'
-                                        : 'text-[var(--text-muted)] opacity-30'
+                                    ? nodeType === 'crunch' ? 'text-purple-400'
+                                        : nodeType === 'maintenance' ? 'text-gray-400'
+                                            : 'text-[var(--brand-accent)]'
+                                    : 'text-[var(--text-muted)] opacity-30'
                                     }`}
                             >
                                 ★

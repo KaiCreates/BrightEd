@@ -116,8 +116,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         // STREAK & ACTIVE LOGIC
                         const now = new Date();
                         const lastActive = data.lastActive ? new Date(data.lastActive) : new Date(0);
-                        if ((now.getTime() - lastActive.getTime()) > 3600000) { // 1 hour
-                            updateDoc(userRef, { lastActive: now.toISOString() }).catch(console.error);
+                        const isNewDay = now.getDate() !== lastActive.getDate() ||
+                            now.getMonth() !== lastActive.getMonth() ||
+                            now.getFullYear() !== lastActive.getFullYear();
+
+                        // Update lastActive if > 1 hour or if it's a new day (to trigger resets)
+                        if ((now.getTime() - lastActive.getTime()) > 3600000 || isNewDay) {
+                            const updates: any = { lastActive: now.toISOString() };
+
+                            // Reset daily XP if it's a new day
+                            if (isNewDay) {
+                                updates.xp_today = 0;
+                                data.xp_today = 0; // Optimistic update
+                            }
+
+                            updateDoc(userRef, updates).catch(console.error);
                         }
 
                         // Robust name resolution

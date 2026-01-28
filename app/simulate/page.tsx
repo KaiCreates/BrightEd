@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import DragDropQuestion from '@/app/components/DragDropQuestion'
 import FormulaBuilder from '@/app/components/FormulaBuilder'
 import MathDiagram from '@/app/components/MathDiagram'
@@ -289,7 +290,7 @@ export default function SimulatePage() {
       } else {
         updatedSteps[1] = {
           ...updatedSteps[1],
-          content: `You selected "${step.options?.[answerIndex]}". That&apos;s not quite right. The correct answer is "${step.options?.[step.correctAnswer || 0]}". Let&apos;s learn why.`,
+          content: `You selected "${step.options?.[answerIndex]}". That's not quite right. The correct answer is "${step.options?.[step.correctAnswer || 0]}". Let's learn why.`,
           storyElement: '📚 Learning opportunity!'
         }
       }
@@ -449,20 +450,27 @@ export default function SimulatePage() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <BrightLayer variant="glass" padding="lg" className="max-w-2xl w-full text-center relative z-10 border-[var(--brand-accent)] border-2">
+          <BrightLayer variant="glass" padding="lg" className="max-w-2xl w-full text-center relative z-10 border-[var(--brand-accent)] border-2 !overflow-visible">
             {/* OWL MASCOT */}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-              className="absolute -top-20 left-1/2 transform -translate-x-1/2"
+              className="absolute -top-24 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
             >
-              <div className="w-40 h-40 bg-[var(--bg-primary)] rounded-full p-2 shadow-xl flex items-center justify-center border-4 border-[var(--brand-accent)]">
-                <span className="text-7xl">🦉</span>
+              <div className="w-48 h-48 bg-[var(--bg-primary)] rounded-full p-6 shadow-2xl flex items-center justify-center border-4 border-[var(--brand-accent)] relative group">
+                <div className="absolute inset-0 bg-[var(--brand-accent)]/10 rounded-full blur-xl group-hover:bg-[var(--brand-accent)]/20 transition-colors" />
+                <Image
+                  src="/BrightEdLogo.png"
+                  alt="BrightEd Owl"
+                  width={140}
+                  height={140}
+                  className="object-contain relative z-10 drop-shadow-xl animate-float-slow"
+                />
               </div>
             </motion.div>
 
-            <div className="mt-16">
+            <div className="mt-28">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -477,7 +485,7 @@ export default function SimulatePage() {
               </BrightHeading>
 
               <p className="text-xl text-[var(--text-secondary)] mb-8 font-medium">
-                &quot;Hoo-ray! You&apos;ve mastered key concepts in {objectiveInfo?.subject || 'this subject'}. Keep flying high!&quot;
+                &quot;Hoo-ray! You've mastered key concepts in {objectiveInfo?.subject || 'this subject'}. Keep flying high!&quot;
               </p>
 
               <BrightLayer variant="elevated" className="mb-8 border border-[var(--brand-accent)]/50 bg-[var(--brand-accent)]/10">

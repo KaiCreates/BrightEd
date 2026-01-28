@@ -119,7 +119,7 @@ export default function LoginPage() {
             </BrightButton>
 
             <p className="text-center text-sm text-[var(--text-secondary)]">
-              Don&apos;t have an account?{' '}
+              Don't have an account?{' '}
               <Link href="/signup" className="text-[var(--brand-primary)] font-bold hover:underline">
                 Sign up
               </Link>
