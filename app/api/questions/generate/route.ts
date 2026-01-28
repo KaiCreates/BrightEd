@@ -38,6 +38,14 @@ function normalizeOptionKey(s: string): string {
     .replace(/\s+/g, ' ');
 }
 
+function normalizeSubjectKey(s: string): string {
+  return String(s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
+}
+
 function hasDuplicateOptions(options: string[]): boolean {
   const seen = new Set<string>();
   for (const opt of options) {
@@ -311,6 +319,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
   try {
     const questionsRef = adminDb.collection('questions');
     let usedSubjectFallback = false;
+    const subjectKey = subjectId ? normalizeSubjectKey(subjectId) : null;
 
     // 1. Try querying by 'objectiveId' field
     let snapshot = await questionsRef
@@ -346,9 +355,23 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     // Avoid serving cross-objective questions (misaligned with learning path)
     if (usedSubjectFallback) return [];
 
-    const subjectFiltered = subjectId
-      ? rows.filter((q: any) => !q?.subjectId || q.subjectId === subjectId)
-      : rows;
+    let subjectFiltered = rows;
+
+    if (subjectKey) {
+      const filteredBySubject = rows.filter((q: any) => {
+        if (!q?.subjectId && !q?.subjectName) return true;
+        const qSubjectIdKey = q?.subjectId ? normalizeSubjectKey(String(q.subjectId)) : '';
+        const qSubjectNameKey = q?.subjectName ? normalizeSubjectKey(String(q.subjectName)) : '';
+        return qSubjectIdKey === subjectKey || qSubjectNameKey === subjectKey;
+      });
+
+      // If objectiveId matched but subject key didn't, do NOT wipe the pool.
+      // This happens when the client sends subject display-name (e.g. "Principles of Business")
+      // but Firestore stores a slug (e.g. "principles_of_business").
+      if (filteredBySubject.length > 0) {
+        subjectFiltered = filteredBySubject;
+      }
+    }
 
     const base = typeof targetDifficulty === 'number' && Number.isFinite(targetDifficulty) ? targetDifficulty : 5;
     const minDiff = Math.max(1, base - 5);
