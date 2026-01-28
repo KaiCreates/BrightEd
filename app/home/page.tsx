@@ -143,7 +143,7 @@ export default function HomePage() {
             'Make Today Count',
         ]
         setWelcomeText(options[Math.floor(Math.random() * options.length)] || 'Keep Shining')
-    }, [user?.uid])
+    }, [user])
 
     function getSubjectIcon(subject: string): string {
         const lower = subject.toLowerCase()

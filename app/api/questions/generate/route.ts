@@ -188,6 +188,14 @@ export async function GET(request: NextRequest) {
       .map((q: any) => sanitizeQuestionCandidate(q, objectiveId))
       .filter(Boolean);
 
+    if ((candidates || []).length > 0 && sanitizedCandidates.length === 0) {
+      console.warn('[questions/generate] All candidates rejected by sanitization', {
+        objectiveId,
+        subjectId,
+        fetched: (candidates || []).length,
+      });
+    }
+
     candidates = sanitizedCandidates;
 
     // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
@@ -340,20 +348,40 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     }
 
     // 3. Fallback: Query by Subject ID (we will NOT serve cross-objective questions)
-    if (snapshot.empty && subjectId) {
+    if (snapshot.empty && (subjectId || subjectKey)) {
       usedSubjectFallback = true;
-      snapshot = await questionsRef
-        .where('subjectId', '==', subjectId)
-        .limit(50)
-        .get();
+      if (subjectKey) {
+        snapshot = await questionsRef
+          .where('subjectId', '==', subjectKey)
+          .limit(50)
+          .get();
+      }
+
+      // Secondary fallback for older data where subjectName is used but subjectId differs
+      if (snapshot.empty && subjectId) {
+        snapshot = await questionsRef
+          .where('subjectName', '==', subjectId)
+          .limit(50)
+          .get();
+      }
     }
 
     if (snapshot.empty) return [];
 
     const rows = snapshot.docs.map((doc): any => ({ id: doc.id, ...doc.data() }));
 
-    // Avoid serving cross-objective questions (misaligned with learning path)
-    if (usedSubjectFallback) return [];
+    // If we used a subject fallback query, filter back down to the requested objective.
+    // This prevents cross-objective questions while still allowing retrieval when schema/indexing is inconsistent.
+    if (usedSubjectFallback) {
+      const objectiveFiltered = rows.filter((q: any) => {
+        const qObj = String(q?.objectiveId || '');
+        const docId = String(q?.id || '');
+        return qObj === objectiveId || docId.startsWith(`${objectiveId}_`) || docId.startsWith(objectiveId);
+      });
+
+      if (objectiveFiltered.length === 0) return [];
+      return processRows(objectiveFiltered, objectiveId);
+    }
 
     let subjectFiltered = rows;
 
