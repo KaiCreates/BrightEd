@@ -565,7 +565,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           <div className="bg-white p-8 max-w-sm w-full text-center shadow-2xl rounded-3xl border-b-8 border-gray-200">
             <div className="w-20 h-20 bg-yellow-100 text-yellow-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 border-4 border-yellow-200">💾</div>
             <h3 className="text-2xl font-black mb-2 text-slate-800">Save your work?</h3>
-            <p className="text-slate-500 font-bold mb-8 leading-relaxed">Don't lose your progress! Save to your digital binder.</p>
+            <p className="text-slate-500 font-bold mb-8 leading-relaxed">Don&apos;t lose your progress! Save to your digital binder.</p>
 
             <div className="space-y-3">
               <button onClick={() => onClose({ mode: 'save' })} className="duo-btn duo-btn-primary w-full py-4 text-lg">

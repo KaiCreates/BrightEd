@@ -153,7 +153,7 @@ export default function DiagnosticPage() {
           <BrightHeading level={2} className="mb-4">Calibration Mode</BrightHeading>
           <p className="text-[var(--text-secondary)] mb-8">
             This quiz adapts to you in real-time. If you get one right, it gets harder.
-            Don't worry if you miss some — that's how we find your edge.
+            Don&apos;t worry if you miss some — that&apos;s how we find your edge.
           </p>
           <BrightButton onClick={startDiagnostic} size="lg" className="w-full">
             Begin Calibration
@@ -208,9 +208,7 @@ export default function DiagnosticPage() {
                   className="h-full bg-gradient-to-r from-blue-500 to-[var(--brand-primary)]"
                 />
               </div>
-              <p className="mt-4 text-sm font-medium">
-                We've unlocked the <strong>{stats.generalLevel > 6 ? 'Advanced' : 'Foundational'}</strong> learning path based on your performance.
-              </p>
+              We&apos;ve unlocked the <strong>{stats.generalLevel > 6 ? 'Advanced' : 'Foundational'}</strong> learning path based on your performance.
             </div>
 
             <BrightButton

@@ -53,9 +53,7 @@ export default function OnboardingCompletePage() {
           <BrightHeading level={1} className="mb-2">
             Your learning path is ready!
           </BrightHeading>
-          <p className="text-[var(--text-secondary)] text-lg">
-            We'll adjust as you improve.
-          </p>
+          We&apos;ll adjust as you improve.
         </div>
 
         <BrightLayer variant="secondary" padding="md" className="mb-6 text-left">

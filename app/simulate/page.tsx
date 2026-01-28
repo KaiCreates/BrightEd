@@ -485,7 +485,7 @@ export default function SimulatePage() {
               </BrightHeading>
 
               <p className="text-xl text-[var(--text-secondary)] mb-8 font-medium">
-                &quot;Hoo-ray! You've mastered key concepts in {objectiveInfo?.subject || 'this subject'}. Keep flying high!&quot;
+                &quot;Hoo-ray! You&apos;ve mastered key concepts in {objectiveInfo?.subject || 'this subject'}. Keep flying high!&quot;
               </p>
 
               <BrightLayer variant="elevated" className="mb-8 border border-[var(--brand-accent)]/50 bg-[var(--brand-accent)]/10">
