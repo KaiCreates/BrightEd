@@ -135,6 +135,8 @@ export async function POST(request: NextRequest) {
         // 6. Atomic Persistence (NABLE State + Legacy Stats)
         const userRef = adminDb.collection('users').doc(userId);
 
+        let responseProgress: { objectiveId: string; stars: number; completed: boolean } | null = null;
+
         await adminDb.runTransaction(async (transaction) => {
             const userDoc = await transaction.get(userRef);
             if (!userDoc.exists) throw new Error("User not found");
@@ -180,8 +182,20 @@ export async function POST(request: NextRequest) {
             else if (objMastery >= 0.6 && objConfidence >= 0.4) calculatedStars = 2;
             else if (objMastery >= 0.3) calculatedStars = 1;
 
-            // STICKY STARS: Only go up, never down (prevents frustration)
-            const newStars = Math.max(objProgress.stars || 0, calculatedStars);
+            // STARS (Unlock mechanic): increment by 1 per correct answer (max 3)
+            // This matches the client UX and guarantees objectives unlock reliably.
+            const prevStars = typeof objProgress.stars === 'number' ? objProgress.stars : 0;
+            const earnedThisAttempt = isCorrect ? 1 : 0;
+            const starsByAttempts = Math.min(3, prevStars + earnedThisAttempt);
+
+            // Keep mastery-based stars as a floor (optional), but never decrease.
+            const newStars = Math.max(prevStars, calculatedStars, starsByAttempts);
+
+            responseProgress = {
+                objectiveId,
+                stars: newStars,
+                completed: newStars >= 3
+            };
 
             // Rewards - Base XP for correct, Bonus for Star Increase
             const starIncrease = Math.max(0, newStars - (objProgress.stars || 0));
@@ -273,8 +287,11 @@ export async function POST(request: NextRequest) {
         // 7. Response
         return NextResponse.json({
             ...nableResponse,
-            // Include legacy star data for frontend animations if needed
-            starsEarned: isCorrect ? 1 : 0
+            progress: responseProgress || {
+                objectiveId,
+                stars: 0,
+                completed: false
+            }
         });
 
     } catch (error: any) {

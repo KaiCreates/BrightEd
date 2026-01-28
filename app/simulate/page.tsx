@@ -258,6 +258,20 @@ export default function SimulatePage() {
 
       if (nableRes.ok) {
         const nableData = await nableRes.json()
+
+        const nextStars = nableData?.progress?.stars
+        if (typeof nextStars === 'number') {
+          if (nextStars > earnedStars) {
+            setStarJustEarned(true)
+            setTimeout(() => setStarJustEarned(false), 1500)
+          }
+          setEarnedStars(nextStars)
+        }
+
+        if (nableData?.progress?.completed === true) {
+          setIsComplete(true)
+        }
+
         setNableResponse({
           recommendedUIMood: nableData.recommendedUIMood || 'Encouraging',
           errorClassification: nableData.errorClassification,
@@ -346,29 +360,9 @@ export default function SimulatePage() {
   const handleComplete = async () => {
     if (!user) return
 
-    // Determine if answer was correct
-    const correct = isAnswerCorrect !== null ? isAnswerCorrect : (selectedAnswer === step.correctAnswer)
-
-    // Calculate new stars based on current earned stars
-    let newStars = earnedStars;
-
-    if (correct && earnedStars < 3) {
-      // Only increment stars on correct answer and if not already at max
-      newStars = earnedStars + 1;
-
-      // IMMEDIATELY update local state (optimistic update)
-      setEarnedStars(newStars);
-
-      // Trigger star animation
-      setStarJustEarned(true);
-      setTimeout(() => setStarJustEarned(false), 1500);
-    }
-
-    // Progress/XP/Mastery/Streak are persisted by the server during answer evaluation.
-    // We only update local UI state here.
-
-    // Check if we've completed the objective (3 stars)
-    if (newStars >= 3) {
+    // Stars/progress are persisted by the server during answer evaluation.
+    // We only advance the flow here.
+    if (earnedStars >= 3) {
       // Celebration! Node completed
       setIsComplete(true);
       setLoading(false);
@@ -383,7 +377,7 @@ export default function SimulatePage() {
     setTimeout(async () => {
       try {
         // Fetch next question with new variation
-        const nextVariation = newStars + 1;
+        const nextVariation = earnedStars + 1;
         const subjectParam = subjectId ? `&subjectId=${encodeURIComponent(subjectId)}` : '';
         const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
         const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${nextVariation}&useAI=false${subjectParam}${masteryParam}`);

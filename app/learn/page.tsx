@@ -95,7 +95,8 @@ function LearnContent() {
           const progressRes = await fetch(`/api/progress?userId=${uid}`, {
             headers: {
               'Authorization': `Bearer ${token}`
-            }
+            },
+            cache: 'no-store'
           })
           if (progressRes.ok) {
             const progressJson = await progressRes.json()

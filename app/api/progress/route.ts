@@ -18,9 +18,16 @@ export async function GET(request: NextRequest) {
     const userSnap = await userRef.get();
     const data = userSnap.exists ? (userSnap.data() || {}) : {};
 
-    return NextResponse.json({
-      progress: data.progress || {},
-    });
+    return NextResponse.json(
+      {
+        progress: data.progress || {},
+      },
+      {
+        headers: {
+          'Cache-Control': 'no-store',
+        },
+      }
+    );
   } catch (error: any) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
