@@ -729,3 +729,618 @@ html {
     animation: peekIn 5s ease-in-out forwards;
   }
 }
+
+/* ============================================================================
+   DUOLINGO-STYLE GAMIFICATION UI
+   ============================================================================ */
+
+/* Duolingo-inspired progress bar with shine effect */
+.duo-progress-bar {
+  background: var(--bg-secondary);
+  border-radius: 9999px;
+  height: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.duo-progress-fill {
+  background: linear-gradient(90deg, #58cc02 0%, #89e219 100%);
+  height: 100%;
+  border-radius: 9999px;
+  position: relative;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duo-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  border-radius: 9999px 9999px 0 0;
+}
+
+/* Duolingo-style XP burst animation */
+@keyframes xpBurst {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.duo-xp-burst {
+  animation: xpBurst 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Streak flame animation */
+@keyframes flameWiggle {
+
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.duo-streak-flame {
+  animation: flameWiggle 0.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Heart/life indicator */
+.duo-heart {
+  color: #ff4b4b;
+  filter: drop-shadow(0 2px 4px rgba(255, 75, 75, 0.3));
+  transition: transform 0.2s ease;
+}
+
+.duo-heart:hover {
+  transform: scale(1.2);
+}
+
+/* Lesson node (Duolingo tree-style) */
+.duo-node {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.duo-node::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.duo-node.completed {
+  background: linear-gradient(180deg, #58cc02 0%, #46a302 100%);
+  color: white;
+}
+
+.duo-node.current {
+  background: linear-gradient(180deg, #1cb0f6 0%, #0095d9 100%);
+  color: white;
+  animation: breathing 2s ease-in-out infinite;
+}
+
+.duo-node.current::before {
+  border-color: rgba(28, 176, 246, 0.4);
+}
+
+.duo-node.locked {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.duo-node:not(.locked):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.duo-node:not(.locked):active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Crown badge for completed sections */
+.duo-crown {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(180deg, #ffc800 0%, #ff9600 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Duolingo-style button */
+.duo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.duo-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.duo-btn-primary {
+  background: linear-gradient(180deg, #58cc02 0%, #4dba00 100%);
+  color: white;
+  box-shadow: 0 4px 0 0 #3d9400;
+}
+
+.duo-btn-primary:hover {
+  background: linear-gradient(180deg, #61d804 0%, #58cc02 100%);
+}
+
+.duo-btn-secondary {
+  background: linear-gradient(180deg, #1cb0f6 0%, #0095d9 100%);
+  color: white;
+  box-shadow: 0 4px 0 0 #0076ab;
+}
+
+.duo-btn-outline {
+  background: transparent;
+  color: var(--brand-primary);
+  border: 2px solid var(--brand-primary);
+  box-shadow: 0 4px 0 0 rgba(var(--brand-primary-rgb), 0.3);
+}
+
+/* ============================================================================
+   MOBILE UI FIXES — Onboarding & Evaluation
+   ============================================================================ */
+
+/* Make everything touch-friendly */
+button,
+.nav-link,
+.action-item,
+.clickable {
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Universal minimum touch targets */
+@media (pointer: coarse) {
+
+  button,
+  a,
+  .clickable,
+  .nav-item,
+  .option-btn {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Ensure the NABLE evaluation modal is always on top */
+.evaluation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: var(--bg-primary);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Evaluation container mobile fix */
+.evaluation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Dynamic viewport height for mobile */
+  padding: 20px;
+  padding-bottom: 120px;
+  /* Prevent bottom nav overlap */
+}
+
+/* Stack options vertically on mobile, side-by-side on tablet */
+.question-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .question-options {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .question-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Large action buttons for mobile thumbs */
+.next-btn-mobile,
+.eval-btn,
+.mobile-action-btn {
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 24px;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  font-weight: 700;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: white;
+  border: none;
+  position: relative;
+  z-index: 100;
+}
+
+/* Responsive text sizing using clamp */
+.question-text {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  line-height: 1.5;
+}
+
+.heading-responsive {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.subheading-responsive {
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  line-height: 1.5;
+}
+
+/* Mobile active states (replace hover for touch devices) */
+@media (hover: none) and (pointer: coarse) {
+
+  button:hover,
+  .btn:hover,
+  .card:hover {
+    /* Remove hover effects on mobile - they don't work well */
+  }
+
+  button:active,
+  .btn:active,
+  .card:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+
+  .duo-node:active {
+    transform: translateY(2px) scale(0.98);
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE LAYOUT UTILITIES
+   ============================================================================ */
+
+/* Safe area insets for notched devices */
+.safe-padding {
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* Responsive containers */
+.container-responsive {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    max-width: 640px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+  }
+}
+
+/* Hide scrollbars but maintain scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Responsive grid that works on all screens */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Stack on mobile, row on desktop */
+.stack-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .stack-mobile {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ============================================================================
+   DUOLINGO-STYLE CARDS
+   ============================================================================ */
+
+.duo-card {
+  background: var(--bg-elevated);
+  border-radius: 24px;
+  padding: 20px;
+  border: 2px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duo-card:hover {
+  border-color: var(--brand-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+}
+
+.duo-card-success {
+  border-color: #58cc02;
+  background: linear-gradient(135deg, rgba(88, 204, 2, 0.05) 0%, rgba(88, 204, 2, 0.1) 100%);
+}
+
+.duo-card-error {
+  border-color: #ff4b4b;
+  background: linear-gradient(135deg, rgba(255, 75, 75, 0.05) 0%, rgba(255, 75, 75, 0.1) 100%);
+}
+
+/* Stat card with icon */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--bg-elevated);
+  border-radius: 20px;
+  border: 2px solid var(--border-subtle);
+  min-width: 100px;
+}
+
+.stat-card-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.stat-card-value {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ============================================================================
+   CELEBRATION ANIMATIONS
+   ============================================================================ */
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.3) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-confetti {
+  animation: confetti 3s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-star-pop {
+  animation: star-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Subtle bounce for CTAs */
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+
+  .duo-btn,
+  .duo-node,
+  .duo-card {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  .duo-progress-fill,
+  .duo-node,
+  .duo-btn,
+  .animate-bounce-subtle,
+  .animate-star-pop,
+  .animate-bounce-in {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.duo-btn:focus-visible,
+.duo-node:focus-visible,
+.duo-card:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 3px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--brand-primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 10000;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 0;
+}

@@ -41,6 +41,9 @@ export interface UserData {
     learningGoal?: string;
     intent?: string;
     onboardingCompleted?: boolean;
+    diagnosticCompleted?: boolean;
+    diagnosticCompletedAt?: string;
+    diagnosticStats?: any;
     createdAt?: string;
     updatedAt?: string;
     skills?: {

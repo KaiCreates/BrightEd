@@ -242,15 +242,30 @@ export default function DiagnosticPage() {
             <BrightButton
               onClick={async () => {
                 if (!user) return
-                const mastery = Math.max(0.1, Math.min(1, stats.generalLevel / 10))
-                await updateDoc(doc(db, 'users', user.uid), {
-                  mastery,
-                  diagnosticStats: stats,
-                  diagnosticCompleted: true,
-                  diagnosticCompletedAt: new Date().toISOString(),
-                  updatedAt: new Date().toISOString(),
-                })
-                router.push('/home')
+
+                try {
+                  const mastery = Math.max(0.1, Math.min(1, stats.generalLevel / 10))
+                  await updateDoc(doc(db, 'users', user.uid), {
+                    mastery,
+                    diagnosticStats: stats,
+                    diagnosticCompleted: true,
+                    diagnosticCompletedAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                  })
+
+                  // Sync to localStorage for instant access on next load
+                  localStorage.setItem('brighted_diagnostic_complete', 'true')
+                  localStorage.setItem('onboarding_status', 'complete')
+
+                  const { toast } = await import('react-hot-toast')
+                  toast.success('Profile ready! Welcome to BrightEd 🎉')
+
+                  router.push('/home')
+                } catch (error) {
+                  console.error('Failed to save diagnostic:', error)
+                  const { toast } = await import('react-hot-toast')
+                  toast.error('Failed to save progress. Please try again.')
+                }
               }}
               className="w-full"
               size="lg"
@@ -275,23 +290,30 @@ export default function DiagnosticPage() {
   const progress = ((currentQuestionIdx + 1) / questions.length) * 100
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] flex items-center justify-center p-4 pb-24 relative overflow-hidden transition-colors duration-300 safe-padding">
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[var(--brand-secondary)]/10 rounded-full blur-[120px]" />
 
       <div className="w-full max-w-2xl relative z-10 transition-colors duration-300">
-        <div className="mb-8">
+        {/* Duolingo-style Progress Bar */}
+        <div className="mb-6 md:mb-8">
           <div className="flex justify-between items-end mb-3 px-2">
             <div>
-              <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-[0.2em] mb-1">Diagnostic Mode</p>
-              <h3 className="text-[var(--text-primary)] font-black text-lg">Question {currentQuestionIdx + 1} <span className="text-[var(--text-muted)]">/ {questions.length}</span></h3>
+              <p className="text-[var(--text-muted)] text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-1">Diagnostic Mode</p>
+              <h3 className="text-[var(--text-primary)] font-black text-base md:text-lg">
+                Question {currentQuestionIdx + 1} <span className="text-[var(--text-muted)]">/ {questions.length}</span>
+              </h3>
             </div>
-            <span className="text-[var(--brand-primary)] font-black text-sm">{Math.round(progress)}%</span>
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--brand-primary)] font-black text-sm md:text-base">{Math.round(progress)}%</span>
+              <span className="text-xl duo-streak-flame">🧠</span>
+            </div>
           </div>
-          <div className="w-full bg-[var(--bg-secondary)] rounded-full h-1.5 overflow-hidden p-[2px] border border-[var(--border-subtle)]">
+          {/* Duolingo-style progress bar */}
+          <div className="duo-progress-bar">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
-              className="bg-[var(--brand-primary)] h-full rounded-full shadow-[0_0_10px_var(--brand-primary)]/30"
+              className="duo-progress-fill"
             />
           </div>
         </div>
@@ -303,8 +325,8 @@ export default function DiagnosticPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
           >
-            <BrightLayer variant="elevated" padding="lg">
-              <div className="flex gap-2 mb-6">
+            <BrightLayer variant="elevated" padding="lg" className="evaluation-container !min-h-0 !p-4 md:!p-8">
+              <div className="flex flex-wrap gap-2 mb-4 md:mb-6">
                 {question.tags.map(tag => (
                   <span key={tag} className="px-3 py-1 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest rounded-full">
                     {tag}
@@ -312,22 +334,23 @@ export default function DiagnosticPage() {
                 ))}
               </div>
 
-              <BrightHeading level={2} className="mb-10 leading-tight">
+              <BrightHeading level={2} className="mb-8 md:mb-10 leading-tight question-text">
                 {question.question}
               </BrightHeading>
 
-              <div className="grid gap-4">
+              {/* Question Options - Stack on mobile */}
+              <div className="grid gap-3 md:gap-4 question-options">
                 {question.options.map((option, index) => (
                   <button
                     key={index}
                     onClick={() => handleAnswer(index)}
-                    className="group relative w-full text-left p-6 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-3xl hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/5 transition-all duration-300"
+                    className="group relative w-full text-left p-4 md:p-6 bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] rounded-2xl md:rounded-3xl hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/5 active:scale-[0.98] transition-all duration-300 min-h-[60px]"
                   >
-                    <div className="flex items-center gap-5">
-                      <div className="w-10 h-10 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-muted)] font-black group-hover:bg-[var(--brand-primary)] group-hover:text-white group-hover:border-[var(--brand-primary)] transition-all">
+                    <div className="flex items-center gap-4 md:gap-5">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-[var(--bg-primary)] border-2 border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-muted)] font-black text-sm md:text-base group-hover:bg-[var(--brand-primary)] group-hover:text-white group-hover:border-[var(--brand-primary)] transition-all shrink-0">
                         {String.fromCharCode(65 + index)}
                       </div>
-                      <span className="text-lg font-bold text-[var(--text-primary)] group-hover:text-[var(--brand-primary)] transition-colors">
+                      <span className="text-base md:text-lg font-bold text-[var(--text-primary)] group-hover:text-[var(--brand-primary)] transition-colors">
                         {option}
                       </span>
                     </div>

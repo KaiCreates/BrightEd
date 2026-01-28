@@ -244,12 +244,12 @@ function LearnContent() {
   }, [selectedSubject, user, userData, authLoading, router])
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] pb-24 relative overflow-hidden">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] pb-24 md:pb-24 relative overflow-hidden safe-padding">
       {/* Background Decor */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[var(--brand-primary)]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[var(--brand-secondary)]/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
+      <div className="max-w-2xl mx-auto px-4 py-6 md:py-8 relative z-10">
 
         {/* Header Area */}
         <div className="text-center mb-10">

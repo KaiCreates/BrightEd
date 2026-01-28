@@ -14,12 +14,12 @@ export default function CsecRoadmapMissionsPage() {
   }, [selectedId]);
 
   return (
-    <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+    <div className="min-h-screen min-h-[100dvh] bg-[#050B14] relative overflow-hidden safe-padding pb-32">
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--brand-primary)]/12 via-transparent to-[#050B14]" />
       <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(45,212,191,0.10),transparent_55%),radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.08),transparent_60%)]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 pt-24">
-        <div className="flex items-center justify-between mb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-8 pt-20 md:pt-24">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <Link
             href="/practicals"
             className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400 hover:text-white transition-colors"
@@ -29,24 +29,24 @@ export default function CsecRoadmapMissionsPage() {
           <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">BrightOS / Technology Practicality</div>
         </div>
 
-        <div className="mb-10">
+        <div className="mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--brand-primary)]">CSEC Roadmap</span>
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-400">50 Missions</span>
           </div>
-          <h1 className="mt-6 text-4xl md:text-5xl font-black text-white tracking-tight leading-none">
+          <h1 className="mt-6 text-3xl md:text-5xl font-black text-white tracking-tight leading-none heading-responsive">
             BrightOS CSEC Roadmap
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] via-teal-400 to-emerald-400">
               Practical Mission Library
             </span>
           </h1>
-          <p className="mt-4 text-zinc-400 max-w-3xl">
+          <p className="mt-4 text-zinc-400 max-w-3xl text-sm md:text-base">
             Select a mission and launch the full BrightOS live system. Wallpapers are randomized from your
             <span className="text-zinc-200 font-semibold"> BrightOS Wallpapers</span> folder.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[420px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[420px_1fr] grid-responsive">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] overflow-hidden">
             <div className="p-6 border-b border-white/10">
               <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Mission List</div>
@@ -59,29 +59,28 @@ export default function CsecRoadmapMissionsPage() {
                   const completion = getMissionCompletion(`brightos:csec:${m.id}`);
                   const completed = Boolean(completion);
                   return (
-                <button
-                  key={m.id}
-                  onClick={() => setSelectedId(m.id)}
-                  className={`w-full text-left px-6 py-4 border-b border-white/5 transition-colors ${
-                    selectedId === m.id ? 'bg-white/[0.05]' : ''
-                  } ${completed ? 'opacity-60 hover:opacity-80' : 'hover:bg-white/[0.04]'}`}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">{m.id}</div>
-                      <div className="mt-1 text-white font-black">{m.title}</div>
-                      <div className="mt-1 text-xs text-zinc-400">Rank {m.rank} • {m.csec_alignment.section}</div>
-                      {completed && (
-                        <div className="mt-2 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-300">
-                          Completed • +{completion?.xpEarned ?? 0} XP
+                    <button
+                      key={m.id}
+                      onClick={() => setSelectedId(m.id)}
+                      className={`w-full text-left px-6 py-4 border-b border-white/5 transition-colors ${selectedId === m.id ? 'bg-white/[0.05]' : ''
+                        } ${completed ? 'opacity-60 hover:opacity-80' : 'hover:bg-white/[0.04]'}`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">{m.id}</div>
+                          <div className="mt-1 text-white font-black">{m.title}</div>
+                          <div className="mt-1 text-xs text-zinc-400">Rank {m.rank} • {m.csec_alignment.section}</div>
+                          {completed && (
+                            <div className="mt-2 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-300">
+                              Completed • +{completion?.xpEarned ?? 0} XP
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                    <div className="shrink-0 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--brand-primary)]">
-                      Launch →
-                    </div>
-                  </div>
-                </button>
+                        <div className="shrink-0 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--brand-primary)]">
+                          Launch →
+                        </div>
+                      </div>
+                    </button>
                   );
                 })()
               ))}

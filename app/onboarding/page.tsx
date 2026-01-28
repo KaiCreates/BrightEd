@@ -118,6 +118,13 @@ export default function OnboardingPage() {
         return
       }
 
+      // Set session flag to track evaluation is in progress
+      localStorage.setItem('onboarding_status', 'in_progress')
+      localStorage.setItem('brighted_onboarding_complete', 'true')
+
+      // Clear any stale redirects
+      sessionStorage.removeItem('redirect_target')
+
       const userRef = doc(db, 'users', user.uid)
       const formLevel = parseInt((data.currentForm || '').replace('Form ', '') || '3')
       const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim()
@@ -202,6 +209,7 @@ export default function OnboardingPage() {
         }
       }
 
+      toast.success('Profile saved! Starting diagnostic...')
       router.push('/onboarding/diagnostic')
     } catch (error) {
       console.error('Error saving onboarding data:', error)
@@ -211,7 +219,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4">
+    <div className="min-h-screen min-h-[100dvh] relative flex items-center justify-center p-4 pb-20 safe-padding">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[var(--brand-primary)] opacity-5 rounded-full blur-[120px]" />

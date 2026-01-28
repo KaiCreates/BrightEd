@@ -23,20 +23,20 @@ export default function PracticalsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+    <div className="min-h-screen min-h-[100dvh] bg-[#050B14] relative overflow-hidden pb-24 safe-padding">
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--brand-primary)]/10 via-transparent to-[#050B14]" />
-      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8 pt-24 md:pt-32">
-        <div className="mb-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8 pt-20 md:pt-32">
+        <div className="mb-8 md:mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[var(--brand-primary)]">Practicals</span>
           </div>
-          <h1 className="mt-6 text-5xl md:text-6xl font-black text-white tracking-tight leading-none">
+          <h1 className="mt-6 text-4xl md:text-6xl font-black text-white tracking-tight leading-none heading-responsive">
             Learn by breaking.
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-primary)] via-teal-400 to-emerald-400">
               Fix by thinking.
             </span>
           </h1>
-          <p className="mt-4 text-zinc-400 max-w-2xl">
+          <p className="mt-4 text-zinc-400 max-w-2xl text-base md:text-xl">
             High-fidelity simulations where the interface reacts to system state. You are the technician.
           </p>
         </div>

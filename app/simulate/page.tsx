@@ -511,12 +511,12 @@ export default function SimulatePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden flex flex-col">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] relative overflow-hidden flex flex-col safe-padding pb-20">
       {/* Background Ambience */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--brand-primary)]/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--brand-secondary)]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[var(--brand-primary)]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[var(--brand-secondary)]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 w-full flex-1 flex flex-col">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 relative z-10 w-full flex-1 flex flex-col">
         {/* Progress Header */}
         <BrightLayer variant="glass" padding="sm" className="mb-6 flex justify-between items-center sticky top-4 z-50 backdrop-blur-xl">
           <div className="flex items-center gap-4">

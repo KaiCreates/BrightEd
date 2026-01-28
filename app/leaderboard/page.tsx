@@ -88,17 +88,17 @@ export default function LeaderboardPage() {
     }, [activeTab, user]);
 
     return (
-        <div className="min-h-screen bg-[var(--bg-primary)] py-12 px-4">
-            <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] py-8 pb-24 md:py-12 safe-padding">
+            <div className="container-responsive">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 md:mb-12"
                 >
-                    <BrightHeading level={1} className="mb-4">
+                    <BrightHeading level={1} className="mb-4 heading-responsive">
                         Hall of Fame 🏆
                     </BrightHeading>
-                    <p className="text-[var(--text-secondary)] text-lg">
+                    <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-xl mx-auto">
                         See where you stand among the top performers and businesses.
                     </p>
                 </motion.div>
@@ -110,8 +110,8 @@ export default function LeaderboardPage() {
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`flex-1 py-4 px-2 rounded-2xl font-black uppercase tracking-wider transition-all relative z-10 ${activeTab === tab
-                                    ? 'text-white'
-                                    : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+                                ? 'text-white'
+                                : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                                 }`}
                         >
                             {activeTab === tab && (

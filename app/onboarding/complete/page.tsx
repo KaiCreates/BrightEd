@@ -24,7 +24,7 @@ export default function OnboardingCompletePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] flex items-center justify-center p-4 safe-padding pb-20">
       <BrightLayer variant="glass" padding="lg" className="max-w-xl w-full text-center">
         <div className="mb-8">
           <motion.div

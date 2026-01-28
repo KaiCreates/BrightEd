@@ -547,7 +547,7 @@ function CommandCenterContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
+    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] relative overflow-hidden safe-padding pb-32">
       <DashboardAmbience cashBalance={business!.cashBalance} />
 
       <BusinessSectionNav />
@@ -556,16 +556,16 @@ function CommandCenterContent() {
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
             <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Operations</div>
-            <BrightHeading level={2} className="leading-tight">
+            <BrightHeading level={2} className="leading-tight heading-responsive">
               {business!.businessName}
             </BrightHeading>
           </div>
           <div className="flex items-center gap-4">
-            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30">
+            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 backdrop-blur-md">
               <div className="text-[9px] font-black uppercase tracking-widest text-[var(--text-muted)]">Sim Time</div>
               <div className="font-mono font-black text-[var(--text-primary)] tabular-nums">{simHour}:00</div>
             </div>
-            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30">
+            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 backdrop-blur-md">
               <div className="text-[9px] font-black uppercase tracking-widest text-[var(--text-muted)]">Type</div>
               <div className="font-black text-[var(--state-success)] truncate max-w-[180px]">{businessType?.name ?? 'Business'}</div>
             </div>
@@ -574,7 +574,7 @@ function CommandCenterContent() {
 
         {business && (
           <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-4 max-w-sm">
+            <div className="lg:col-span-4 max-w-sm mx-auto w-full">
               <BusinessCard3D
                 businessName={business.businessName}
                 tier="Startup"
@@ -586,7 +586,7 @@ function CommandCenterContent() {
             </div>
 
             <div className="lg:col-span-8 flex flex-col gap-6 w-full">
-              <div className="flex justify-end items-center gap-4">
+              <div className="flex flex-wrap justify-end items-center gap-4">
                 <BrightButton
                   variant="ghost"
                   size="sm"
@@ -595,7 +595,7 @@ function CommandCenterContent() {
                     const btn = document.getElementById('pause-btn-text');
                     if (btn) btn.innerText = isPausedRef.current ? 'RESUME OPERATION' : 'PAUSE OPERATION';
                   }}
-                  className="text-[var(--text-muted)] hover:text-white border border-[var(--border-subtle)]"
+                  className="text-[var(--text-muted)] hover:text-white border border-[var(--border-subtle)] flex-1 sm:flex-none justify-center"
                 >
                   <span className="mr-2">⏸</span> <span id="pause-btn-text">PAUSE OPERATION</span>
                 </BrightButton>
@@ -607,7 +607,7 @@ function CommandCenterContent() {
                       await deleteDoc(doc(db, 'businesses', business.id));
                     }
                   }}
-                  className="bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500 hover:text-white"
+                  className="bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500 hover:text-white flex-1 sm:flex-none justify-center"
                 >
                   SHUTDOWN
                 </BrightButton>
