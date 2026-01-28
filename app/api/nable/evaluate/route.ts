@@ -216,11 +216,13 @@ export async function POST(request: NextRequest) {
                 [`mastery.${objectiveId}`]: objMastery, // Direct access map
                 // ATOMIC UPDATES: Use FieldValue.increment to prevent race conditions
                 xp: admin.firestore.FieldValue.increment(xpGain),
+                xp_today: admin.firestore.FieldValue.increment(xpGain),
                 bCoins: admin.firestore.FieldValue.increment(bCoinGain),
                 streak: nextStreak,
                 lastStreakDay: shouldIncrementStreak ? todayKey : lastStreakDay,
                 lastLearningDay: todayKey,
                 lastLearningAt: admin.firestore.FieldValue.serverTimestamp(),
+                lastActive: now.toISOString(),
                 activeDays30: nextActiveDays30,
                 consistency,
                 globalMastery,

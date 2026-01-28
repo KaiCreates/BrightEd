@@ -14,6 +14,7 @@ export default function HomePage() {
     const router = useRouter()
     const { user, userData, loading: authLoading } = useAuth()
     const [learningPath, setLearningPath] = useState<any[]>([])
+    const [welcomeText, setWelcomeText] = useState<string>('Keep Shining')
 
     const [leaderPreview, setLeaderPreview] = useState<{
         xpTop: { name: string; value: number } | null
@@ -129,6 +130,21 @@ export default function HomePage() {
         }
     }, [authLoading, user])
 
+    useEffect(() => {
+        if (!user) return
+        const options = [
+            'Keep Shining',
+            'You’ve Got This',
+            'Let’s Level Up',
+            'Today Is Yours',
+            'Small Steps, Big Wins',
+            'Stay Locked In',
+            'Build Your Future',
+            'Make Today Count',
+        ]
+        setWelcomeText(options[Math.floor(Math.random() * options.length)] || 'Keep Shining')
+    }, [user?.uid])
+
     function getSubjectIcon(subject: string): string {
         const lower = subject.toLowerCase()
         if (lower.includes('math')) return '📐'
@@ -152,6 +168,11 @@ export default function HomePage() {
         if (lower.includes('it') || lower.includes('information')) return 'bg-indigo-500'
         return 'bg-gray-500'
     }
+
+    const dailyGoal = userData?.dailyGoal || 500
+    const xpToday = userData?.xp_today || 0
+    const dailyGoalPercent = dailyGoal > 0 ? Math.min(100, Math.round((xpToday / dailyGoal) * 100)) : 0
+    const dailyGoalRemaining = Math.max(0, dailyGoal - xpToday)
 
     if (authLoading) {
         return (
@@ -182,11 +203,11 @@ export default function HomePage() {
                                         Live Status: Learning
                                     </div>
                                     <BrightHeading level={1} className="mb-4 text-center md:text-left leading-tight">
-                                        Keep Shining, <span className="text-[var(--brand-primary)]">{userData?.firstName || 'Explorer'}</span>! 🚀
+                                        {welcomeText}, <span className="text-[var(--brand-primary)]">{userData?.firstName || 'Explorer'}</span>! 🚀
                                     </BrightHeading>
                                     <p className="text-[var(--text-secondary)] font-medium text-lg md:text-xl text-center md:text-left mb-6 leading-relaxed">
                                         {learningPath.length > 0
-                                            ? `You're crushing ${learningPath[0]?.subject}. Just ${500 - (userData?.xp_today || 0)} more XP to hit your daily goal!`
+                                            ? `You're crushing ${learningPath[0]?.subject}. Just ${dailyGoalRemaining} more XP to hit your daily goal!`
                                             : 'Your journey to financial mastery starts here. Ready for today\'s challenge?'}
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full">
@@ -274,13 +295,13 @@ export default function HomePage() {
                         </div>
 
                         {/* Learning Path Preview */}
-                        {learningPath.length > 0 && (
-                            <div className="relative">
-                                <div className="absolute left-10 top-20 bottom-0 w-1 bg-gradient-to-b from-[var(--brand-primary)] to-transparent opacity-20 hidden sm:block" />
-                                <BrightHeading level={2} className="mb-8 pl-2 flex items-center gap-4">
-                                    <span className="bg-[var(--brand-primary)] text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg shadow-[var(--brand-primary)]/40">📍</span>
-                                    Your Active Missions
-                                </BrightHeading>
+                        <div className="relative">
+                            <div className="absolute left-10 top-20 bottom-0 w-1 bg-gradient-to-b from-[var(--brand-primary)] to-transparent opacity-20 hidden sm:block" />
+                            <BrightHeading level={2} className="mb-8 pl-2 flex items-center gap-4">
+                                <span className="bg-[var(--brand-primary)] text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg shadow-[var(--brand-primary)]/40">📍</span>
+                                Your Active Missions
+                            </BrightHeading>
+                            {learningPath.length > 0 ? (
                                 <div className="space-y-6">
                                     {learningPath.map((skill, index) => (
                                         <Link
@@ -340,8 +361,20 @@ export default function HomePage() {
                                         </Link>
                                     ))}
                                 </div>
-                            </div>
-                        )}
+                            ) : (
+                                <BrightLayer variant="elevated" padding="md" className="border-b-[8px] border-[var(--border-subtle)]">
+                                    <div className="space-y-4 text-center">
+                                        <BrightHeading level={3} className="text-2xl">Your missions are loading</BrightHeading>
+                                        <p className="text-[var(--text-muted)] text-sm font-bold">Jump into a lesson to generate your first mission preview.</p>
+                                        <Link href="/learn" className="inline-block">
+                                            <BrightButton variant="primary" size="lg" className="border-b-[6px] border-[#1F7A85] active:border-b-0 active:translate-y-[6px]">
+                                                Start Learning
+                                            </BrightButton>
+                                        </Link>
+                                    </div>
+                                </BrightLayer>
+                            )}
+                        </div>
                     </div>
 
                     {/* Sidebar */}
@@ -373,7 +406,7 @@ export default function HomePage() {
                                             fill="none"
                                             strokeLinecap="round"
                                             initial={{ strokeDashoffset: 2 * Math.PI * 85 }}
-                                            animate={{ strokeDashoffset: 2 * Math.PI * 85 * (1 - Math.min(1, (userData?.xp_today || 0) / (userData?.dailyGoal || 500))) }}
+                                            animate={{ strokeDashoffset: 2 * Math.PI * 85 * (1 - Math.min(1, xpToday / dailyGoal)) }}
                                             transition={{ duration: 1.5, ease: "easeOut" }}
                                             strokeDasharray={`${2 * Math.PI * 85}`}
                                             className="drop-shadow-[0_0_10px_rgba(255,165,0,0.5)]"
@@ -381,13 +414,13 @@ export default function HomePage() {
                                     </svg>
                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                                         <span className="text-5xl font-black text-white tracking-tighter">
-                                            {Math.round(((userData?.xp_today || 0) / (userData?.dailyGoal || 500)) * 100)}%
+                                            {dailyGoalPercent}%
                                         </span>
                                         <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-[0.3em]">Missions Clear</span>
                                     </div>
                                 </div>
                                 <div className="mt-8 text-center bg-white/5 rounded-2xl p-4">
-                                    <p className="text-white font-bold text-sm">{(userData?.xp_today || 0)} / {(userData?.dailyGoal || 500)} XP</p>
+                                    <p className="text-white font-bold text-sm">{xpToday} / {dailyGoal} XP</p>
                                     <p className="text-[var(--text-muted)] text-[10px] uppercase font-black tracking-widest mt-1">Today&apos;s Progress</p>
                                 </div>
                             </BrightLayer>

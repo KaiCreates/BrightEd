@@ -78,25 +78,32 @@ function LearnContent() {
       return
     }
 
+    const currentUser = user
+
     async function fetchLearningPath() {
       try {
         setLoading(true)
         // Get user's selected subjects from onboarding (prefer Firestore userData; fallback to localStorage)
         const onboardingData = localStorage.getItem('brighted_onboarding')
 
-        // Fetch progress directly from Firestore (Client SDK has Auth)
-        const { collection, getDocs } = await import('firebase/firestore');
-        const { db } = await import('@/lib/firebase');
-
-        const uid = user?.uid || '';
-
-        const progressRef = collection(db, 'users', uid, 'progress');
-        const progressSnapshot = await getDocs(progressRef);
-        const userProgress: Record<string, any> = {};
-
-        progressSnapshot.forEach(doc => {
-          userProgress[doc.id] = doc.data();
-        });
+        // Fetch progress from server canonical source.
+        // Note: gameplay writes progress into users/{uid}.progress.{objectiveId} (NOT a subcollection).
+        const uid = currentUser.uid
+        const token = await currentUser.getIdToken();
+        let userProgress: Record<string, any> = {}
+        try {
+          const progressRes = await fetch(`/api/progress?userId=${uid}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          if (progressRes.ok) {
+            const progressJson = await progressRes.json()
+            userProgress = progressJson?.progress && typeof progressJson.progress === 'object' ? progressJson.progress : {}
+          }
+        } catch {
+          userProgress = {}
+        }
 
 
         let userSubjects: string[] = []
@@ -109,7 +116,6 @@ function LearnContent() {
         }
 
         // Fetch learning path with subject separation
-        const token = await user?.getIdToken();
         const params = new URLSearchParams({})
         if (userSubjects.length > 0) params.set('subjects', userSubjects.join(','))
 
