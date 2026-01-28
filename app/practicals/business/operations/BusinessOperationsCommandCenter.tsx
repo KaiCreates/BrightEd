@@ -353,15 +353,20 @@ function CommandCenterContent() {
           return next;
         });
 
-        if (business.employees && business.employees.length > 0 && now - lastWageAccrualRef.current >= 30000) {
+        if (business.employees && business.employees.length > 0 && now - lastWageAccrualRef.current >= 360000) {
           lastWageAccrualRef.current = now;
           const bizRef = doc(db, 'businesses', business.id);
           const updatedEmployees = business.employees.map((emp: any) => {
-            const hourlyWage = Math.floor(emp.salaryPerDay / 8);
+            // Wage accumulates every 6 minutes (representing 1 sim hour)
+            // Daily wage is split over ~12 hours of operation
+            const hourlyWage = Math.floor(emp.salaryPerDay / 12);
+
+            // Unpaid wages pile up
             const newUnpaid = (emp.unpaidWages || 0) + hourlyWage;
 
-            let moraleDrop = newUnpaid > 0 ? 1 : 0;
-            if (newUnpaid > emp.salaryPerDay * 2) moraleDrop += 2;
+            // Morale only drops if wages are severely overdue (> 2 days worth)
+            let moraleDrop = 0;
+            if (newUnpaid > emp.salaryPerDay * 2) moraleDrop = 5;
 
             return {
               ...emp,
@@ -374,6 +379,7 @@ function CommandCenterContent() {
           });
 
           updateDoc(bizRef, { employees: updatedEmployees });
+          showInterrupt('mendy', 'Payroll updated. Check HR to pay staff.', 'neutral');
         }
 
         const activeCount = orders.filter((o) => o.status === 'accepted' || o.status === 'in_progress').length;

@@ -321,17 +321,23 @@ export function generateOrdersForTick(
         !p.requiresInventory || (businessState.inventory?.[p.inventoryItemId || ''] || 0) > 0
     ).length;
 
-    // Scale demand by % of catalog in stock. 0 stock = 0 customers.
-    const stockMultiplier = productsInStock / Math.max(1, businessType.products.length);
-    if (stockMultiplier === 0) return [];
+    // Scale demand by % of catalog in stock.
+    // FIX: Ensure new businesses with minimal stock still get "browsing" traffic or basic demand.
+    // Minimum 0.2 (20%) traffic even with 0 stock to allow "lost sales" feedback.
+    const stockRatio = productsInStock / Math.max(1, businessType.products.length);
+    const stockMultiplier = Math.max(0.2, stockRatio);
 
     // 3. DEMAND CALCULATION
     const hourlyMultiplier = getHourlyDemandMultiplier(config, simHour);
-    const repMultiplier = getReputationMultiplier(config, businessState.reputation);
+
+    // FIX: Boost low reputation floor to ensure new businesses get a chance
+    const repMultiplier = Math.max(0.5, getReputationMultiplier(config, businessState.reputation));
+
     const saturationMultiplier = getSaturationMultiplier(businessState.cashBalance);
 
     // Theoretical 1M Market Pool influence
-    const baseRate = config.baseOrdersPerHour * (tickMinutes / 60);
+    // FIX: Ensure baseRate is never effectively zero due to multipliers
+    const baseRate = Math.max(1, config.baseOrdersPerHour) * (tickMinutes / 60);
     const expectedOrders = baseRate * hourlyMultiplier * repMultiplier * saturationMultiplier * stockMultiplier;
 
     // 4. GENERATION

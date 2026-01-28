@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { verifyAuth } from '@/lib/auth-server';
+import { FieldPath } from 'firebase-admin/firestore';
 import {
   recommend,
   loadState,
@@ -54,7 +55,9 @@ export async function GET(request: NextRequest) {
     );
 
     // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
-    // If the pool is small, we relax the "recent attempts" exclusion to avoid "out of questions".
+    // However, if we run out of new questions, we MUST repeat them rather than showing an error.
+    let isReviewMode = false;
+
     if (userId && candidates && candidates.length > 0) {
       const correctIds = new Set<string>();
       const attemptIds = new Set<string>();
@@ -72,8 +75,9 @@ export async function GET(request: NextRequest) {
         // ignore (no index / no permissions)
       }
 
+      let attemptsSnap: FirebaseFirestore.QuerySnapshot | null = null;
       try {
-        const attemptsSnap = await adminDb
+        attemptsSnap = await adminDb
           .collection('users')
           .doc(userId)
           .collection('question_attempts')
@@ -89,20 +93,42 @@ export async function GET(request: NextRequest) {
         // ignore
       }
 
+      // Priority 1: Questions never answered correctly
       const withoutCorrect = candidates.filter((q: any) => {
         const qid = q?.questionId || q?.id;
         return !(typeof qid === 'string' && correctIds.has(qid));
       });
 
+      // Priority 2: Questions never attempted at all (fresh)
       const withoutAttempts = withoutCorrect.filter((q: any) => {
         const qid = q?.questionId || q?.id;
         return !(typeof qid === 'string' && attemptIds.has(qid));
       });
 
-      candidates = withoutAttempts.length > 0 ? withoutAttempts : withoutCorrect;
+      if (withoutAttempts.length > 0) {
+        candidates = withoutAttempts;
+      } else if (withoutCorrect.length > 0) {
+        candidates = withoutCorrect; // Retry wrong answers
+      } else {
+        // Priority 3: Review Mode (Repeat correct questions if that's all we have)
+        // We do strictly nothing here to candidates, effectively resetting the pool to full
+        // but we flag it for the UI/Evaluation logic if needed.
+        isReviewMode = true;
+
+        // Filter out the *immediately* previous question to avoid back-to-back repeats if possible
+        if (attemptsSnap && !attemptsSnap.empty) {
+          const lastAttemptDoc = attemptsSnap.docs[0];
+          const lastQid = lastAttemptDoc.get('questionId');
+          if (lastQid) {
+            const notLast = candidates.filter((q: any) => (q.questionId || q.id) !== lastQid);
+            if (notLast.length > 0) candidates = notLast;
+          }
+        }
+      }
     }
 
     if (!candidates || candidates.length === 0) {
+      // This only happens if the DB is truly empty for this objective
       return NextResponse.json(createFallbackResponse(objectiveId, subjectId), { status: 200 });
     }
 
@@ -110,12 +136,13 @@ export async function GET(request: NextRequest) {
     let selectedQuestion: any = null;
 
     if (nableState && userId) {
+      // Pass isReviewMode to recommendation engine if supported, or just let it pick
       const result = recommend(
         nableState,
         {
           userId,
           subject: subjectId || 'General',
-          excludeQuestionIds: [] // Can be populated from state.sessionQuestions
+          excludeQuestionIds: []
         },
         candidates as ContentItem[]
       );
@@ -149,14 +176,27 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     // Migrate to Firestore
     const questionsRef = adminDb.collection('questions');
 
-    // In-memory filtering approach (safer against missing indexes for now)
-    // In production, you'd want a composite index on objectiveId + difficulty
+    // 1. Try querying by 'objectiveId' field
     let snapshot = await questionsRef
       .where('objectiveId', '==', objectiveId)
       .limit(50)
       .get();
 
-    // Fallback: if no objective-scoped questions exist yet, pull from the subject pool.
+    // 2. Fallback: Query by Document ID prefix (e.g. 'POB-00001' matches 'POB-00001_0')
+    // This handles imported data where the ID is correct but the 'objectiveId' field might be missing
+    if (snapshot.empty && objectiveId) {
+      // Create a range query for document IDs starting with the objectiveId
+      const startId = objectiveId;
+      const endId = objectiveId + '\uf8ff';
+
+      snapshot = await questionsRef
+        .where(FieldPath.documentId(), '>=', startId)
+        .where(FieldPath.documentId(), '<', endId)
+        .limit(50)
+        .get();
+    }
+
+    // 3. Fallback: Query by Subject ID
     if (snapshot.empty && subjectId) {
       snapshot = await questionsRef
         .where('subjectId', '==', subjectId)
