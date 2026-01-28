@@ -19,6 +19,8 @@ interface SimulationStep {
   content: string
   options?: string[]
   correctAnswer?: number
+  subSkills?: string[]
+  questionDifficulty?: number
   storyElement?: string
   questionType?: 'multiple-choice' | 'drag-drop' | 'formula-builder'
   interactiveData?: {
@@ -250,8 +252,8 @@ export default function SimulatePage() {
           correctAnswer: step.correctAnswer || 0,
           options: step.options || [],
           timeToAnswer,
-          subSkills: [objectiveId, subjectId].filter(Boolean),
-          questionDifficulty: objectiveInfo?.difficulty || 5,
+          subSkills: Array.isArray(step.subSkills) && step.subSkills.length > 0 ? step.subSkills : [objectiveId].filter(Boolean),
+          questionDifficulty: step.questionDifficulty || objectiveInfo?.difficulty || 5,
           knowledgeGraph: nableState?.knowledgeGraph || {} // CRITICAL: Pass current knowledge state
         })
       })

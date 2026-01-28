@@ -7,7 +7,14 @@ import {
   loadState,
   createInitialState,
   NABLEState,
-  ContentItem
+  ContentItem,
+  normalizeQuestion,
+  padOptions,
+  isAllOfAbove,
+  isNoneOfAbove,
+  isEmptyOption,
+  isMarksOnly,
+  isLetterOnly
 } from '@/lib/nable';
 
 // Timeouts for database operations
@@ -20,6 +27,121 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
       setTimeout(() => reject(new Error('Operation timed out')), timeoutMs)
     ),
   ]);
+}
+
+function normalizeOptionKey(s: string): string {
+  return String(s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/\s+/g, ' ');
+}
+
+function hasDuplicateOptions(options: string[]): boolean {
+  const seen = new Set<string>();
+  for (const opt of options) {
+    const key = normalizeOptionKey(opt);
+    if (!key) return true;
+    if (seen.has(key)) return true;
+    seen.add(key);
+  }
+  return false;
+}
+
+function coerceCorrectAnswerIndex(raw: unknown, optionCount: number): number | null {
+  if (optionCount <= 0) return null;
+
+  let idx: number | null = null;
+  if (typeof raw === 'number' && Number.isFinite(raw)) {
+    idx = Math.trunc(raw);
+  } else if (typeof raw === 'string') {
+    const t = raw.trim();
+    if (/^[A-D]$/i.test(t)) {
+      idx = t.toUpperCase().charCodeAt(0) - 65;
+    } else if (/^\d+$/.test(t)) {
+      idx = parseInt(t, 10);
+    }
+  }
+
+  if (idx === null) return null;
+
+  if (idx >= 0 && idx < optionCount) return idx;
+  if (idx >= 1 && idx <= optionCount) return idx - 1;
+  return null;
+}
+
+function coerceCorrectAnswerFromText(raw: unknown, options: string[]): number | null {
+  if (typeof raw !== 'string') return null;
+  const needle = normalizeOptionKey(raw);
+  if (!needle) return null;
+
+  for (let i = 0; i < options.length; i++) {
+    if (normalizeOptionKey(options[i]) === needle) return i;
+  }
+  return null;
+}
+
+function sanitizeQuestionCandidate(row: any, objectiveId: string) {
+  const rawOptions = Array.isArray(row?.options)
+    ? row.options
+    : typeof row?.options === 'string'
+      ? (() => {
+        try {
+          return JSON.parse(row.options);
+        } catch {
+          return [];
+        }
+      })()
+      : [];
+
+  const padded = padOptions(rawOptions, 4);
+  const normalized = normalizeQuestion(padded);
+
+  const normalizedOptions = normalized.normalizedOptions;
+  const hasMeta = normalizedOptions.some((opt) => isAllOfAbove(opt) || isNoneOfAbove(opt));
+  if (!normalized.isValid || hasMeta) return null;
+
+  if (hasDuplicateOptions(normalizedOptions)) return null;
+  if (normalizedOptions.some((opt) => isEmptyOption(opt) || isMarksOnly(opt) || isLetterOnly(opt))) return null;
+  if (normalizedOptions.some((opt) => /^\[Option\s+[A-D]\s+-\s+/i.test(opt))) return null;
+
+  const coercedCorrect =
+    coerceCorrectAnswerIndex(row?.correctAnswer, normalizedOptions.length) ??
+    coerceCorrectAnswerFromText(row?.correctAnswer, normalizedOptions);
+  if (coercedCorrect === null) return null;
+  const correctText = normalizedOptions[coercedCorrect] || '';
+  if (/^\[Option\s+[A-D]\s+-\s+/i.test(correctText)) return null;
+
+  const rawDifficulty = typeof row?.difficulty === 'number' && Number.isFinite(row.difficulty)
+    ? row.difficulty
+    : (typeof row?.difficultyWeight === 'number' && Number.isFinite(row.difficultyWeight)
+      ? row.difficultyWeight
+      : 5);
+
+  const difficulty = (!('difficultyWeight' in (row || {})) && rawDifficulty >= 1 && rawDifficulty <= 3)
+    ? rawDifficulty * 3
+    : rawDifficulty;
+
+  return {
+    ...row,
+    objectiveId: row.objectiveId || objectiveId,
+    questionId: row.questionId || row.id || `${objectiveId}_${Math.random()}`,
+    options: normalizedOptions,
+    correctAnswer: coercedCorrect,
+    difficulty,
+    difficultyWeight: typeof row?.difficultyWeight === 'number' && Number.isFinite(row.difficultyWeight)
+      ? row.difficultyWeight
+      : difficulty,
+    contentType: row.contentType || 'standard',
+    distractorSimilarity: typeof row?.distractorSimilarity === 'number' && Number.isFinite(row.distractorSimilarity)
+      ? row.distractorSimilarity
+      : 0.5,
+    expectedTime: typeof row?.expectedTime === 'number' && Number.isFinite(row.expectedTime)
+      ? row.expectedTime
+      : 45,
+    subSkills: Array.isArray(row?.subSkills) && row.subSkills.length > 0 ? row.subSkills : [objectiveId],
+  };
 }
 
 export async function GET(request: NextRequest) {
@@ -49,10 +171,16 @@ export async function GET(request: NextRequest) {
     // Variation 1 = Easy, 2 = Medium, 3 = Hard
     const targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
 
-    let candidates = await withTimeout(
+    let candidates: any[] = await withTimeout<any[]>(
       fetchCandidatesFromDB(objectiveId, targetDifficulty, subjectId),
       DB_TIMEOUT
     );
+
+    const sanitizedCandidates = (candidates || [])
+      .map((q: any) => sanitizeQuestionCandidate(q, objectiveId))
+      .filter(Boolean);
+
+    candidates = sanitizedCandidates;
 
     // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
     // However, if we run out of new questions, we MUST repeat them rather than showing an error.
@@ -136,17 +264,26 @@ export async function GET(request: NextRequest) {
     let selectedQuestion: any = null;
 
     if (nableState && userId) {
-      // Pass isReviewMode to recommendation engine if supported, or just let it pick
-      const result = recommend(
-        nableState,
-        {
-          userId,
-          subject: subjectId || 'General',
-          excludeQuestionIds: []
-        },
-        candidates as ContentItem[]
-      );
-      selectedQuestion = result.question;
+      const exclude: string[] = [];
+      for (let i = 0; i < Math.min(5, candidates.length); i++) {
+        const result = recommend(
+          nableState,
+          {
+            userId,
+            subject: subjectId || 'General',
+            excludeQuestionIds: exclude
+          },
+          candidates as ContentItem[]
+        );
+        const qid = (result.question as any)?.questionId;
+        const match = qid ? candidates.find((c: any) => (c.questionId || c.id) === qid) : null;
+        if (match) {
+          selectedQuestion = match;
+          break;
+        }
+        if (qid) exclude.push(qid);
+        else break;
+      }
     }
 
     // 4. Fallback: Closest Difficulty Match
@@ -155,13 +292,12 @@ export async function GET(request: NextRequest) {
         ? (nableState.lastDifficulty || targetDifficulty)
         : targetDifficulty;
 
-      selectedQuestion = candidates.sort((a, b) =>
-        Math.abs((a.difficulty || 5) - idealDifficulty) - Math.abs((b.difficulty || 5) - idealDifficulty)
+      selectedQuestion = candidates.sort((a: any, b: any) =>
+        Math.abs((a.difficultyWeight || a.difficulty || 5) - idealDifficulty) - Math.abs((b.difficultyWeight || b.difficulty || 5) - idealDifficulty)
       )[0];
     }
 
     return NextResponse.json(formatResponse(selectedQuestion, objectiveId, subjectId));
-
   } catch (error: any) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
@@ -173,8 +309,8 @@ export async function GET(request: NextRequest) {
 
 async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number, subjectId: string | null) {
   try {
-    // Migrate to Firestore
     const questionsRef = adminDb.collection('questions');
+    let usedSubjectFallback = false;
 
     // 1. Try querying by 'objectiveId' field
     let snapshot = await questionsRef
@@ -182,10 +318,8 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
       .limit(50)
       .get();
 
-    // 2. Fallback: Query by Document ID prefix (e.g. 'POB-00001' matches 'POB-00001_0')
-    // This handles imported data where the ID is correct but the 'objectiveId' field might be missing
+    // 2. Fallback: Query by Document ID prefix
     if (snapshot.empty && objectiveId) {
-      // Create a range query for document IDs starting with the objectiveId
       const startId = objectiveId;
       const endId = objectiveId + '\uf8ff';
 
@@ -196,8 +330,9 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
         .get();
     }
 
-    // 3. Fallback: Query by Subject ID
+    // 3. Fallback: Query by Subject ID (we will NOT serve cross-objective questions)
     if (snapshot.empty && subjectId) {
+      usedSubjectFallback = true;
       snapshot = await questionsRef
         .where('subjectId', '==', subjectId)
         .limit(50)
@@ -208,17 +343,24 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
 
     const rows = snapshot.docs.map((doc): any => ({ id: doc.id, ...doc.data() }));
 
-    const minDiff = targetDifficulty - 2;
-    const maxDiff = targetDifficulty + 2;
+    // Avoid serving cross-objective questions (misaligned with learning path)
+    if (usedSubjectFallback) return [];
 
-    const filtered = rows.filter((q: any) => {
-      const d = q?.difficulty || 5;
+    const subjectFiltered = subjectId
+      ? rows.filter((q: any) => !q?.subjectId || q.subjectId === subjectId)
+      : rows;
+
+    const base = typeof targetDifficulty === 'number' && Number.isFinite(targetDifficulty) ? targetDifficulty : 5;
+    const minDiff = Math.max(1, base - 5);
+    const maxDiff = Math.min(10, base + 5);
+
+    const filtered = subjectFiltered.filter((q: any) => {
+      const d = q?.difficultyWeight ?? q?.difficulty ?? 5;
       return d >= minDiff && d <= maxDiff;
     });
 
     if (filtered.length === 0) {
-      // Return all if no specific difficulty match found (fallback)
-      return processRows(rows, objectiveId);
+      return processRows(subjectFiltered, objectiveId);
     }
 
     return processRows(filtered, objectiveId);
@@ -229,15 +371,18 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
 }
 
 function processRows(rows: any[], objectiveId: string) {
-  return rows.map(row => {
+  return rows.map((row) => {
     try {
-      // Firestore data is already an object, no need to parse like SQLite rows
       return {
         ...row,
         questionId: row.id || row.questionId || `${objectiveId}_${Math.random()}`,
-        difficulty: row.difficulty || 5, // Ensure difficulty exists
+        objectiveId: row.objectiveId || objectiveId,
+        difficulty: row.difficulty || row.difficultyWeight || 5,
+        difficultyWeight: row.difficultyWeight || row.difficulty || 5,
+        contentType: row.contentType || 'standard',
+        distractorSimilarity: row.distractorSimilarity ?? 0.5,
+        expectedTime: row.expectedTime ?? 45,
         subSkills: row.subSkills || [objectiveId],
-        // Ensure options is an array (JSON parsed if string, though Firestore stores arrays)
         options: typeof row.options === 'string' ? JSON.parse(row.options) : (row.options || []),
       };
     } catch (e) {
@@ -257,6 +402,8 @@ function formatResponse(question: any, objectiveId: string, subjectId: string | 
         content: question.question || question.questionText || "Question text missing",
         options: question.options || [],
         correctAnswer: question.correctAnswer ?? 0,
+        subSkills: question.subSkills || [objectiveId],
+        questionDifficulty: question.difficultyWeight || question.difficulty || 5,
         storyElement: question.storyElement || 'Challenge',
         questionType: question.questionType || 'multiple-choice',
         interactiveData: question.interactiveData || {}
@@ -271,7 +418,7 @@ function formatResponse(question: any, objectiveId: string, subjectId: string | 
     objective: {
       id: objectiveId,
       subject: subjectId || question.subjectId || 'Subject',
-      difficulty: question.difficulty || 5,
+      difficulty: question.difficultyWeight || question.difficulty || 5,
       title: question.topic || objectiveId
     }
   };

@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
         // 5. Fetch Question Pool from DB (Instead of Mock)
         // Optimization: Fetch only questions relevant to the current subject
         const questionsSnapshot = await adminDb.collection('questions')
-            .where('subject', '==', subject)
+            .where('subjectId', '==', subject)
             .limit(50) // Fetch a reasonable pool for the engine to pick from
             .get();
 
@@ -70,11 +70,11 @@ export async function GET(request: NextRequest) {
             return {
                 questionId: doc.id,
                 objectiveId: data.objectiveId,
-                difficultyWeight: data.difficulty || 5,
-                subSkills: data.subSkills || [],
+                difficultyWeight: data.difficultyWeight ?? data.difficulty ?? 5,
+                subSkills: Array.isArray(data.subSkills) ? data.subSkills : [],
                 contentType: data.contentType || 'standard',
-                distractorSimilarity: data.distractorSimilarity || 0.5,
-                expectedTime: data.expectedTime || 45
+                distractorSimilarity: data.distractorSimilarity ?? 0.5,
+                expectedTime: data.expectedTime ?? 45
             };
         });
 
