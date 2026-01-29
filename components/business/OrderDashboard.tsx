@@ -238,6 +238,11 @@ function OrderCard({
         demanding: '🧐',
     };
 
+    // Extract narrative if available
+    const narrative = (order as any).narrative;
+    const narrativeData = (order as any).narrativeData;
+    const consequenceMessage = (order as any).consequenceMessage;
+
     return (
         <BrightLayer
             variant="glass"
@@ -290,6 +295,35 @@ function OrderCard({
                     </div>
                 ))}
             </div>
+
+            {/* Narrative Context */}
+            {narrative && isPending && (
+                <div className="bg-[var(--brand-primary)]/5 border border-[var(--brand-primary)]/20 rounded-xl p-3 mb-4">
+                    <div className="text-[9px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-2">
+                        📖 Context
+                    </div>
+                    <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed italic">
+                        {narrative}
+                    </p>
+                    {narrativeData?.urgencyReason && (
+                        <div className="mt-2 text-[10px] text-[var(--state-warning)] font-bold">
+                            ⚡ {narrativeData.urgencyReason}
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {/* Consequence Message (for completed orders) */}
+            {consequenceMessage && order.status === 'completed' && (
+                <div className="bg-[var(--state-success)]/5 border border-[var(--state-success)]/20 rounded-xl p-3 mb-4">
+                    <div className="text-[9px] font-black uppercase tracking-widest text-[var(--state-success)] mb-2">
+                        ✨ Outcome
+                    </div>
+                    <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                        {consequenceMessage}
+                    </p>
+                </div>
+            )}
 
             {/* Status Feedback */}
             <div className="flex items-center justify-between mt-auto">

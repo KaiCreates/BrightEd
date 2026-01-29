@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { useAuth } from './auth-context';
 import { db, realtimeDb, isFirebaseReady } from './firebase';
 import {
@@ -11,6 +11,7 @@ import {
     query,
     where,
     orderBy,
+    limit,
     getDocs,
     onSnapshot,
     addDoc,
@@ -21,7 +22,7 @@ import {
     serverTimestamp,
     Timestamp
 } from 'firebase/firestore';
-import { ref, onDisconnect, set, onValue, off } from 'firebase/database';
+import { ref, onDisconnect, set, onValue, query as rtdbQuery, orderByChild, limitToLast } from 'firebase/database';
 
 const SUBJECT_LOUNGES = [
     { name: 'Principles of Business', subject: 'Principles of Business', icon: '💼' },
@@ -47,6 +48,7 @@ interface Message {
     text: string;
     senderId: string;
     senderName?: string;
+    senderAvatarUrl?: string;
     businessPrestige?: number;
     timestamp: Timestamp | null;
     fileUrl?: string;
@@ -73,6 +75,7 @@ interface SocialHubContextType {
     rooms: Room[];
     messages: Message[];
     onlineUsers: { [uid: string]: { name: string; lastSeen: number } };
+    typingUsers: Array<{ uid: string; name: string }>;
     dmWindows: DMWindow[];
     blockedUsers: string[];
     mutedUsers: string[];
@@ -81,6 +84,7 @@ interface SocialHubContextType {
     joinRoom: (code: string) => Promise<boolean>;
     sendMessage: (text: string, fileUrl?: string, options?: Partial<Pick<Message, 'kind' | 'bountyPoints' | 'whiteboardId' | 'whiteboardName' | 'whiteboardThumbnailUrl'>>) => Promise<void>;
     sendDM: (userId: string, text: string) => Promise<void>;
+    setTyping: (isTyping: boolean) => Promise<void>;
     addReaction: (messageId: string, emoji: string) => Promise<void>;
     editMessage: (messageId: string, newText: string) => Promise<void>;
     deleteMessage: (messageId: string) => Promise<void>;
@@ -107,11 +111,13 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
     const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; lastSeen: number } }>({});
+    const [typingUsers, setTypingUsers] = useState<Array<{ uid: string; name: string }>>([]);
     const [dmWindows, setDmWindows] = useState<DMWindow[]>([]);
     const [blockedUsers, setBlockedUsers] = useState<string[]>([]);
     const [mutedUsers, setMutedUsers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [lastMessageTime, setLastMessageTime] = useState<number>(0);
+    const typingWriteRef = useRef<{ lastAt: number; lastState: boolean }>({ lastAt: 0, lastState: false });
 
     // Initialize subject lounges
     useEffect(() => {
@@ -207,13 +213,14 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!activeRoom || !user || !isFirebaseReady || !db) {
             setMessages([]);
+            setTypingUsers([]);
             return;
         }
 
         try {
             const messagesRef = collection(db, 'rooms', activeRoom.id, 'messages');
-            // Get all messages ordered by timestamp
-            const q = query(messagesRef, orderBy('timestamp', 'asc'));
+            // Cost control: only subscribe to recent messages
+            const q = query(messagesRef, orderBy('timestamp', 'desc'), limit(80));
 
             const unsubscribe = onSnapshot(
                 q,
@@ -229,7 +236,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                             }
                         }
                     });
-                    setMessages(msgs);
+                    setMessages(msgs.reverse());
                 },
                 (error) => {
                     console.error('Error loading messages:', error);
@@ -243,6 +250,64 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             setMessages([]);
         }
     }, [activeRoom, user, blockedUsers, mutedUsers]);
+
+    // Typing indicator (Realtime DB)
+    useEffect(() => {
+        if (!activeRoom || !user || !userData || !isFirebaseReady || !realtimeDb) {
+            setTypingUsers([]);
+            return;
+        }
+
+        const typingRoomRef = ref(realtimeDb, `typing/${activeRoom.id}`);
+        const unsubscribeTyping = onValue(typingRoomRef, (snapshot) => {
+            const val = snapshot.val() || {};
+            const now = Date.now();
+
+            const next: Array<{ uid: string; name: string }> = [];
+            Object.keys(val).forEach((uid) => {
+                if (uid === user.uid) return;
+                const entry = val[uid];
+                const ts = typeof entry?.ts === 'number' ? entry.ts : 0;
+                if (now - ts > 5000) return;
+                next.push({ uid, name: entry?.name || 'Student' });
+            });
+
+            setTypingUsers(next);
+        });
+
+        return () => {
+            unsubscribeTyping();
+        };
+    }, [activeRoom, user, userData]);
+
+    const setTyping = useCallback(async (isTyping: boolean) => {
+        if (!activeRoom || !user || !userData || !isFirebaseReady || !realtimeDb) return;
+
+        const typingRef = ref(realtimeDb, `typing/${activeRoom.id}/${user.uid}`);
+
+        const now = Date.now();
+        const minIntervalMs = 2500;
+        const prev = typingWriteRef.current;
+        const sameState = prev.lastState === isTyping;
+        const tooSoon = now - prev.lastAt < minIntervalMs;
+
+        if (!isTyping) {
+            if (prev.lastState === false) return;
+            typingWriteRef.current = { lastAt: now, lastState: false };
+            await set(typingRef, null);
+            return;
+        }
+
+        if (sameState && tooSoon) return;
+        typingWriteRef.current = { lastAt: now, lastState: true };
+
+        await set(typingRef, {
+            name: userData.firstName || userData.displayName || 'Student',
+            ts: Date.now(),
+        });
+
+        onDisconnect(typingRef).set(null);
+    }, [activeRoom, user, userData]);
 
     // Presence system with Realtime Database using .info/connected
     useEffect(() => {
@@ -271,9 +336,11 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             }
         });
 
-        // Listen to all online users (including current user)
+        // Cost control: only listen to the most recently active users
         const onlineRef = ref(realtimeDb, 'presence');
-        const unsubscribeOnline = onValue(onlineRef, (snapshot) => {
+        const onlineQuery = rtdbQuery(onlineRef, orderByChild('lastSeen'), limitToLast(50));
+
+        const unsubscribeOnline = onValue(onlineQuery, (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 const online: { [uid: string]: { name: string; lastSeen: number } } = {};
@@ -431,6 +498,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             text,
             senderId: user.uid,
             senderName: userData?.firstName || 'User',
+            senderAvatarUrl: userData?.avatarUrl || null,
             businessPrestige,
             timestamp: serverTimestamp(),
             fileUrl: fileUrl || null,
@@ -462,9 +530,10 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             text,
             senderId: user.uid,
             senderName: userData?.firstName || 'User',
+            senderAvatarUrl: userData?.avatarUrl || null,
             timestamp: serverTimestamp()
         });
-    }, [user, userData?.firstName]);
+    }, [user, userData?.firstName, userData?.avatarUrl]);
 
     const addReaction = useCallback(async (messageId: string, emoji: string) => {
         if (!user || !activeRoom) return;
@@ -663,6 +732,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                 rooms,
                 messages,
                 onlineUsers,
+                typingUsers,
                 dmWindows,
                 blockedUsers,
                 mutedUsers,
@@ -671,6 +741,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                 joinRoom,
                 sendMessage,
                 sendDM,
+                setTyping,
                 addReaction,
                 editMessage,
                 deleteMessage,

@@ -264,6 +264,7 @@ export async function fetchBusinessState(businessId: string): Promise<BusinessSt
         inventory: data.inventory ?? {},
         employees: data.employees ?? [],
         marketState: data.marketState ?? { items: [], lastRestock: '', nextRestock: '' },
+        customerProfiles: data.customerProfiles ?? {},
         recruitmentPool: data.recruitmentPool ?? [],
         lastRecruitmentTime: data.lastRecruitmentTime ?? '',
         lastPayrollTime: data.lastPayrollTime ?? '',
@@ -301,6 +302,8 @@ export async function updateBusinessFinancials(
         totalRevenueDelta?: number;
         totalExpenses?: number;
         totalExpensesDelta?: number;
+        customerProfiles?: Record<string, any>;
+        customerProfileUpdate?: { customerId: string; profile: any };
     }
 ) {
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
@@ -371,6 +374,14 @@ export async function updateBusinessFinancials(
     }
 
     if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
+
+    // Customer profiles
+    if (updates.customerProfileUpdate !== undefined) {
+        const { customerId, profile } = updates.customerProfileUpdate;
+        firestoreUpdates[`customerProfiles.${customerId}`] = profile;
+    } else if (updates.customerProfiles !== undefined) {
+        firestoreUpdates.customerProfiles = updates.customerProfiles;
+    }
 
     await updateDoc(docRef, firestoreUpdates);
 }

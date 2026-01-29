@@ -41,7 +41,7 @@ export function BrightButton({
         <motion.button
             whileTap={{ scale: 0.97 }}
             className={`
-        relative inline-flex items-center justify-center font-black uppercase tracking-[0.2em] rounded-2xl transition-all 
+        relative inline-flex items-center justify-center font-black uppercase tracking-[0.2em] rounded-[var(--radius-pill)] transition-all 
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variants[variant]} ${sizes[size]} ${className}
       `}
@@ -92,7 +92,7 @@ export function BrightLayer({
 
     return (
         <div
-            className={`rounded-[2rem] overflow-hidden transition-colors ${variants[variant]} ${paddings[padding]} ${className}`}
+            className={`rounded-[var(--radius-main)] overflow-hidden transition-colors ${variants[variant]} ${paddings[padding]} ${className}`}
             {...props}
         >
             {children}

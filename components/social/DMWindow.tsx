@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useSocialHub } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
 import { UserSocialBadge } from './UserSocialBadge';
 import { BrightButton } from '@/components/system';
 import { db } from '@/lib/firebase';
-import { collection, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, Timestamp, limit } from 'firebase/firestore';
 import ReactMarkdown from 'react-markdown';
 
 interface DMWindowProps {
@@ -22,7 +23,7 @@ interface DMWindowProps {
 export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMinimize }: DMWindowProps) {
     const { sendDM } = useSocialHub();
     const { user } = useAuth();
-    const [messages, setMessages] = useState<Array<{ id: string; text: string; senderId: string; timestamp: Timestamp | null }>>([]);
+    const [messages, setMessages] = useState<Array<{ id: string; text: string; senderId: string; senderAvatarUrl?: string; timestamp: Timestamp | null }>>([]);
     const [messageText, setMessageText] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -30,22 +31,23 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
         if (!roomId || !user) return;
 
         const messagesRef = collection(db, 'dms', roomId, 'messages');
-        const q = query(messagesRef, orderBy('timestamp', 'asc'));
+        const q = query(messagesRef, orderBy('timestamp', 'desc'), limit(80));
 
         const unsubscribe = onSnapshot(
             q,
             (snapshot) => {
-                const msgs: Array<{ id: string; text: string; senderId: string; timestamp: Timestamp | null }> = [];
+                const msgs: Array<{ id: string; text: string; senderId: string; senderAvatarUrl?: string; timestamp: Timestamp | null }> = [];
                 snapshot.forEach((doc) => {
                     const data = doc.data();
                     msgs.push({
                         id: doc.id,
                         text: data.text || '',
                         senderId: data.senderId || '',
+                        senderAvatarUrl: data.senderAvatarUrl || undefined,
                         timestamp: data.timestamp || null
                     });
                 });
-                setMessages(msgs);
+                setMessages(msgs.reverse());
             },
             (error) => {
                 console.error('Error loading DM messages:', error);
@@ -129,21 +131,35 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
                         key={message.id}
                         className={`flex ${message.senderId === user?.uid ? 'justify-end' : 'justify-start'}`}
                     >
-                        <div
-                            className={`
-                                max-w-[80%] rounded-xl p-3
-                                ${message.senderId === user?.uid
-                                    ? 'bg-[var(--brand-primary)]/20 text-[var(--text-primary)]'
-                                    : 'bg-white/5 text-[var(--text-primary)]'
-                                }
-                            `}
-                        >
-                            <div className="prose prose-invert max-w-none text-sm">
-                                <ReactMarkdown>{message.text}</ReactMarkdown>
+                        <div className={`flex items-end gap-2 ${message.senderId === user?.uid ? 'flex-row-reverse' : 'flex-row'}`}>
+                            <div className="w-8 h-8 shrink-0">
+                                <div className="relative w-8 h-8 rounded-full bg-white/5 border border-white/10 overflow-hidden">
+                                    {message.senderAvatarUrl ? (
+                                        <Image src={message.senderAvatarUrl} alt="Avatar" fill sizes="32px" className="object-cover" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-xs font-black text-[var(--text-primary)]">
+                                            {(userName || 'U').charAt(0).toUpperCase()}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                            <p className="text-xs text-[var(--text-muted)] mt-1">
-                                {message.timestamp?.toDate().toLocaleTimeString()}
-                            </p>
+
+                            <div
+                                className={`
+                                    max-w-[80%] rounded-[var(--radius-bubble)] p-3
+                                    ${message.senderId === user?.uid
+                                        ? 'bg-[var(--brand-primary)]/20 text-[var(--text-primary)]'
+                                        : 'bg-white/5 text-[var(--text-primary)]'
+                                    }
+                                `}
+                            >
+                                <div className="prose prose-invert max-w-none text-sm">
+                                    <ReactMarkdown>{message.text}</ReactMarkdown>
+                                </div>
+                                <p className="text-xs text-[var(--text-muted)] mt-1">
+                                    {message.timestamp?.toDate().toLocaleTimeString()}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 ))}

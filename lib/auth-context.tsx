@@ -51,6 +51,19 @@ export interface UserData {
         logic: number;
         math: number;
     };
+
+    avatarUrl?: string;
+    avatarProvider?: 'cloudinary' | 'firebase';
+    avatarPath?: string;
+    avatarPublicId?: string;
+    avatarMeta?: {
+        width?: number;
+        height?: number;
+        bytes?: number;
+        format?: string;
+        contentType?: string;
+    };
+    avatarUpdatedAt?: string;
 }
 
 interface AuthContextType {

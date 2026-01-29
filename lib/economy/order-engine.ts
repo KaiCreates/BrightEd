@@ -16,6 +16,8 @@ import {
     BusinessType,
 } from './economy-types';
 import { getBusinessType } from './business-templates';
+import { generateOrderNarrative, generateConsequenceMessage } from './order-narratives';
+import { CustomerProfile, updateCustomerLoyalty, calculateLoyaltyBonus, createCustomerProfile } from './loyalty-system';
 
 // ============================================================================
 // ORDER GENERATION
@@ -229,18 +231,24 @@ function generatePaymentTerms(customerType: CustomerType, businessCategory: stri
 }
 
 /**
- * Generate a single order
+ * Generate a single order with narrative context
  */
 export function generateOrder(
     businessType: BusinessType,
     businessState: BusinessState,
-    simHour: number
+    simHour: number,
+    customerProfiles?: Map<string, CustomerProfile>
 ): Order {
     const config = businessType.demandConfig;
 
     // Select customer
     const customerType = selectCustomerType(config);
     const customerName = randomCustomerName();
+    const customerId = `cust_${Math.random().toString(36).slice(2, 10)}`;
+
+    // Check if returning customer
+    const existingCustomer = customerProfiles?.get(customerId);
+    const isReturning = existingCustomer && existingCustomer.totalOrders > 0;
 
     // Quality tier based on reputation and customer
     let qualityTier: QualityTier = 'standard';
@@ -253,6 +261,13 @@ export function generateOrder(
     // Select items (stock-aware)
     const items = selectOrderItems(businessType.products, config.avgItemsPerOrder, qualityTier, businessState.inventory);
     const { total, cost } = calculateOrderTotals(items);
+
+    // Apply loyalty bonus if returning customer
+    let finalTotal = total;
+    if (existingCustomer && existingCustomer.loyaltyScore > 0) {
+        const { newTotal } = calculateLoyaltyBonus(total, existingCustomer.loyaltyScore);
+        finalTotal = newTotal;
+    }
 
     // Generate deadline and expiry
     const deadline = generateDeadline(businessType, items);
@@ -267,23 +282,22 @@ export function generateOrder(
     if (customerType === 'vip') moods.push('demanding');
     const customerMood = moods[Math.floor(Math.random() * moods.length)];
 
-    // Loyalty level (based on reputation)
+    // Loyalty level
     let loyaltyLevel: Order['loyaltyLevel'] = 'new';
-    const loyaltyRoll = Math.random() * 100;
-    const baseLoyaltyChance = businessState.reputation / 2; // 0-50%
-    if (loyaltyRoll < baseLoyaltyChance) {
-        loyaltyLevel = loyaltyRoll < (baseLoyaltyChance / 3) ? 'loyal' : 'regular';
+    if (existingCustomer) {
+        if (existingCustomer.loyaltyScore >= 50) loyaltyLevel = 'loyal';
+        else if (existingCustomer.loyaltyScore >= 25) loyaltyLevel = 'regular';
     }
 
-    return {
+    const order: Order = {
         id: generateId(),
         businessId: businessState.id,
-        customerId: `cust_${Math.random().toString(36).slice(2, 10)}`,
+        customerId,
         customerName,
         customerType,
         customerMood,
         items,
-        totalAmount: total,
+        totalAmount: finalTotal,
         costAmount: cost,
         status: 'pending',
         deadline,
@@ -295,6 +309,13 @@ export function generateOrder(
         loyaltyLevel,
         createdAt: new Date().toISOString(),
     };
+
+    // Generate narrative context
+    const narrative = generateOrderNarrative(order, businessType.category);
+    (order as any).narrative = narrative.context;
+    (order as any).narrativeData = narrative;
+
+    return order;
 }
 
 /**
@@ -305,7 +326,8 @@ export function generateOrdersForTick(
     businessState: BusinessState,
     simHour: number,
     activeOrderCount: number, // Total current orders (pending + accepted + in_progress)
-    tickMinutes: number = 15
+    tickMinutes: number = 15,
+    customerProfiles?: Map<string, CustomerProfile>
 ): Order[] {
     const config = businessType.demandConfig;
     const maxCap = config.maxConcurrentCustomers || config.maxConcurrentOrders;
@@ -347,7 +369,7 @@ export function generateOrdersForTick(
     while (remaining > 0 && orders.length < 10) {
         if (Math.random() < remaining) {
             if (activeOrderCount + orders.length < maxCap) {
-                const newOrder = generateOrder(businessType, businessState, simHour);
+                const newOrder = generateOrder(businessType, businessState, simHour, customerProfiles);
                 if (newOrder.items.length > 0) {
                     orders.push(newOrder);
                 }
@@ -466,16 +488,36 @@ export function generateReview(
 }
 
 /**
- * Complete an order with quality score
+ * Complete an order with quality score and loyalty tracking
  */
 export function completeOrder(
     order: Order,
     qualityScore: number, // 0-100
-    businessType?: BusinessType // Optional, but needed for inventory deduction
-): { order: Order; payment: number; tip: number; inventoryDeductions: Record<string, number>; review: { rating: number; text: string } } {
+    businessType?: BusinessType, // Optional, but needed for inventory deduction
+    customerProfile?: CustomerProfile // Optional, for loyalty tracking
+): { 
+    order: Order; 
+    payment: number; 
+    tip: number; 
+    inventoryDeductions: Record<string, number>; 
+    review: { rating: number; text: string };
+    loyaltyUpdate?: {
+        customerId: string;
+        oldScore: number;
+        newScore: number;
+        change: number;
+        tierChanged: boolean;
+        message: string;
+    };
+} {
     if (order.status !== 'in_progress' && order.status !== 'accepted') {
         throw new Error(`Cannot complete order in status: ${order.status}`);
     }
+
+    // Check if on time
+    const deadline = new Date(order.deadline);
+    const now = new Date();
+    const onTime = now <= deadline;
 
     // Calculate payment based on quality
     let paymentPercent = 1.0;
@@ -517,6 +559,38 @@ export function completeOrder(
 
     const review = generateReview(order, qualityScore);
 
+    // Update customer loyalty
+    let loyaltyUpdate;
+    if (customerProfile) {
+        const result = updateCustomerLoyalty(
+            customerProfile,
+            order.id,
+            qualityScore,
+            onTime,
+            order.totalAmount
+        );
+
+        loyaltyUpdate = {
+            customerId: customerProfile.id,
+            oldScore: customerProfile.loyaltyScore,
+            newScore: result.updatedCustomer.loyaltyScore,
+            change: result.loyaltyChange,
+            tierChanged: result.tierChanged,
+            message: result.message,
+        };
+
+        // Generate consequence message if narrative exists
+        if ((order as any).narrativeData) {
+            const consequenceMsg = generateConsequenceMessage(
+                (order as any).narrativeData,
+                qualityScore,
+                onTime,
+                result.loyaltyChange
+            );
+            (order as any).consequenceMessage = consequenceMsg;
+        }
+    }
+
     return {
         order: {
             ...order,
@@ -525,15 +599,14 @@ export function completeOrder(
             qualityDelivered: qualityScore,
             paidAmount: payment,
             tipAmount: tip,
-            // For now, we treat completion as payment collected.
-            // This avoids confusing "invoice" behavior and fixes missing cash updates.
             isCollected: true,
             collectedAt: new Date().toISOString(),
         },
         payment,
         tip,
         inventoryDeductions,
-        review
+        review,
+        loyaltyUpdate,
     };
 }
 

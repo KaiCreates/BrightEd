@@ -250,6 +250,17 @@ export interface BusinessState {
     inventory: Record<string, number>; // ItemId -> Quantity
     marketState: MarketState;
 
+    // NEW: Customer Relationships
+    customerProfiles?: Record<string, {
+        id: string;
+        name: string;
+        loyaltyScore: number;
+        currentTier: number;
+        lastOrderDate: string;
+        totalOrders: number;
+        lifetimeValue: number;
+    }>;
+
     // Recruitment
     recruitmentPool: Employee[];
     lastRecruitmentTime: string;
@@ -287,6 +298,20 @@ export interface Review {
 
 export type JobRole = 'manager' | 'specialist' | 'speedster' | 'trainee';
 
+export interface SkillProgress {
+    level: number;           // 1-5
+    experience: number;      // Current XP
+    experienceToNext: number; // XP needed for next level
+    totalExperience?: number; // Lifetime XP in this skill
+}
+
+export type Specialization = 
+    | 'speed_specialist'     // 25% faster fulfillment
+    | 'quality_master'       // 25% quality boost
+    | 'customer_relations'   // Better loyalty impact
+    | 'inventory_expert'     // Reduced waste
+    | 'multitasker';         // Can handle 2 orders simultaneously
+
 export interface Employee {
     id: string;
     name: string;
@@ -297,8 +322,13 @@ export interface Employee {
         quality: number;  // 0-100, boosts quality score base
         morale: number;   // 0-100, affects reliability
     };
+    skills: Record<string, SkillProgress>; // Skill progression system
+    specialization?: Specialization;       // Unlocked at skill level 3
+    specializationUnlockedAt?: string;
+    tasksCompleted: number;                // Track experience
     unpaidWages: number;
     hiredAt: string;
+    currentAssignment?: string;            // Current order/task ID
 }
 
 // ============================================================================

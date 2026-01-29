@@ -4,6 +4,7 @@ import { ConditionalNavigation } from '@/components/ConditionalNavigation'
 import { ConditionalMain } from '@/components/ConditionalMain'
 import { ThemeProvider } from '@/lib/theme-context'
 import { AuthProvider } from '@/lib/auth-context'
+import { ConsoleBrandSplash } from '@/components/ConsoleBrandSplash'
 
 export const metadata: Metadata = {
   title: 'BrightEd - Adaptive Learning for CXC',
@@ -36,6 +37,7 @@ export default function RootLayout({
           <AuthProvider>
             <BusinessProvider>
               <ThemeProvider>
+                <ConsoleBrandSplash />
                 <Toaster position="top-right" toastOptions={{
                   duration: 4000,
                   style: {

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { SocialHubProvider, useSocialHub } from '@/lib/social-hub-context'
 import { useAuth } from '@/lib/auth-context'
 import { DMWindow } from '@/components/social/DMWindow'
@@ -70,6 +71,51 @@ function getRoomId(districtId: string, channelId: string) {
   return `community_${districtId}_${channelId}`
 }
 
+function isSameGroup(prev: any | null, cur: any) {
+  if (!prev) return false
+  if (prev.senderId !== cur.senderId) return false
+  const prevTs = prev.timestamp?.toDate?.() as Date | undefined
+  const curTs = cur.timestamp?.toDate?.() as Date | undefined
+  if (!prevTs || !curTs) return false
+  return curTs.getTime() - prevTs.getTime() < 2 * 60 * 1000
+}
+
+function TypingIndicator({ names }: { names: string[] }) {
+  if (names.length === 0) return null
+  const label = names.length === 1 ? `${names[0]} is typing` : `${names[0]} and ${names.length - 1} others are typing`
+  return (
+    <div className="px-4 pb-2">
+      <div className="inline-flex items-center gap-2 px-3 py-2 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke backdrop-blur-md">
+        <span className="text-xs font-semibold text-[var(--text-secondary)]">{label}</span>
+        <span className="inline-flex items-end gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--hero)]" style={{ animation: 'bounce 1s infinite', animationDelay: '0ms' }} />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--hero)]" style={{ animation: 'bounce 1s infinite', animationDelay: '150ms' }} />
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--hero)]" style={{ animation: 'bounce 1s infinite', animationDelay: '300ms' }} />
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function RankPill({ rank }: { rank: number }) {
+  if (rank === 1) {
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-[var(--radius-pill)] text-[10px] font-black uppercase tracking-widest text-black bg-gradient-to-r from-yellow-400 to-orange-400 shadow-[0_0_16px_rgba(255,191,0,0.20)]">
+        <span aria-hidden="true">👑</span>
+        #1 Scholar
+      </span>
+    )
+  }
+  if (rank <= 10) {
+    return (
+      <span className="inline-flex items-center px-2 py-1 rounded-[var(--radius-pill)] text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r from-slate-300/30 to-indigo-400/30 border border-white/10">
+        Top 10
+      </span>
+    )
+  }
+  return null
+}
+
 function CommunityHubInner() {
   const {
     activeRoom,
@@ -84,6 +130,8 @@ function CommunityHubInner() {
     closeDM,
     toggleDMMinimize,
     onlineUsers,
+    typingUsers,
+    setTyping,
     blockUser,
     unblockUser,
     muteUser,
@@ -97,13 +145,15 @@ function CommunityHubInner() {
     joinRoom,
   } = useSocialHub()
 
-  const { user } = useAuth()
+  const { user, userData } = useAuth()
 
   const [activeDistrictId, setActiveDistrictId] = useState<DistrictId>('lobby')
   const [activeChannelId, setActiveChannelId] = useState<string>(DISTRICTS[0].channels[0]?.id || 'announcements')
 
   const [messageText, setMessageText] = useState('')
   const [isOffline, setIsOffline] = useState(false)
+
+  const [rankByUserId, setRankByUserId] = useState<Record<string, number>>({})
 
   const [isWhiteboardOpen, setIsWhiteboardOpen] = useState(false)
   const [whiteboardSeed, setWhiteboardSeed] = useState(0)
@@ -159,6 +209,16 @@ function CommunityHubInner() {
   const [editingText, setEditingText] = useState('')
 
   const [showReactionsFor, setShowReactionsFor] = useState<string | null>(null)
+  const [mobileActionsFor, setMobileActionsFor] = useState<string | null>(null)
+
+  const xpPct = useMemo(() => {
+    const xp = typeof userData?.xp === 'number' ? userData.xp : 0
+    const levelSize = 1000
+    const prev = Math.floor(xp / levelSize) * levelSize
+    const next = prev + levelSize
+    const pct = next === prev ? 0 : (xp - prev) / (next - prev)
+    return Math.max(0, Math.min(1, pct))
+  }, [userData?.xp])
 
   const activeDistrict = useMemo(() => DISTRICTS.find((d) => d.id === activeDistrictId) || DISTRICTS[0], [activeDistrictId])
   const channels = activeDistrict.channels
@@ -185,6 +245,52 @@ function CommunityHubInner() {
   }, [messages.length])
 
   useEffect(() => {
+    let cancelled = false
+
+    const fetchRanks = async () => {
+      if (!user) return
+      try {
+        const cacheKey = 'brighted_rank_xp_top10'
+        const cacheRaw = typeof window !== 'undefined' ? sessionStorage.getItem(cacheKey) : null
+        if (cacheRaw) {
+          const cached = JSON.parse(cacheRaw)
+          if (cached?.at && Date.now() - Number(cached.at) < 10 * 60 * 1000 && cached?.map) {
+            if (!cancelled) setRankByUserId(cached.map)
+            return
+          }
+        }
+
+        const token = await user.getIdToken()
+        const res = await fetch('/api/leaderboards?' + new URLSearchParams({ type: 'xp', limit: '10' }), {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!res.ok) return
+        const payload = await res.json()
+        const entries = Array.isArray(payload?.entries) ? payload.entries : []
+        const map: Record<string, number> = {}
+        entries.forEach((e: any) => {
+          if (e?.id) map[String(e.id)] = Number(e.rank) || 0
+        })
+        if (!cancelled) setRankByUserId(map)
+        try {
+          sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), map }))
+        } catch {
+          // ignore
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    fetchRanks()
+    const t = window.setInterval(fetchRanks, 10 * 60_000)
+    return () => {
+      cancelled = true
+      window.clearInterval(t)
+    }
+  }, [user])
+
+  useEffect(() => {
     const channel = channels.find((c) => c.id === activeChannelId) || channels[0]
     if (!channel) return
 
@@ -205,12 +311,29 @@ function CommunityHubInner() {
     if (!messageText.trim()) return
 
     try {
+      await setTyping(false)
       await sendMessage(messageText)
       setMessageText('')
     } catch (err: any) {
       alert(err?.message || 'Failed to send message')
     }
   }
+
+  useEffect(() => {
+    if (!activeRoom?.id) return
+    if (!user?.uid) return
+    if (!messageText.trim()) {
+      setTyping(false).catch(() => { })
+      return
+    }
+
+    setTyping(true).catch(() => { })
+    const t = window.setTimeout(() => {
+      setTyping(false).catch(() => { })
+    }, 2000)
+
+    return () => window.clearTimeout(t)
+  }, [activeRoom?.id, messageText, setTyping, user?.uid])
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -337,7 +460,7 @@ function CommunityHubInner() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-[calc(100vh-96px)] w-full bg-slate-950 text-gray-300 relative">
+    <div className="min-h-[calc(100vh-96px)] w-full text-[var(--text-primary)] relative">
       {isOffline && (
         <div className="w-full bg-red-500/10 border-b border-red-500/20 text-red-200 text-xs font-bold uppercase tracking-widest px-4 py-2">
           Offline. Trying to reconnect...
@@ -356,13 +479,13 @@ function CommunityHubInner() {
 
         {/* DRAWER CONTAINER (Districts + Channels) */}
         <div className={`
-          fixed inset-y-0 left-0 z-50 flex h-full bg-slate-950 
+          fixed inset-y-0 left-0 z-50 flex h-full
           transition-transform duration-300 ease-in-out transform 
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
-          md:relative md:translate-x-0 md:bg-transparent
+          md:relative md:translate-x-0
         `}>
           {/* LEFT SIDEBAR: DISTRICTS */}
-          <aside className="w-20 bg-slate-950 border-r border-white/5 flex flex-col items-center py-4 gap-3 shrink-0">
+          <aside className="w-20 bg-[var(--bg-glass)] backdrop-blur-xl border-r border-white/10 flex flex-col items-center py-4 gap-3 shrink-0 nebula-stroke">
             {DISTRICTS.map((d) => {
               const isActive = d.id === activeDistrictId
               return (
@@ -372,11 +495,11 @@ function CommunityHubInner() {
                     setActiveDistrictId(d.id)
                     setActiveChannelId(d.channels[0]?.id || 'announcements')
                   }}
-                  className="relative w-12 h-12 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center"
+                  className="relative w-12 h-12 rounded-[var(--radius-main)] bg-white/[0.03] hover:bg-white/[0.06] transition-colors flex items-center justify-center"
                   aria-pressed={isActive}
                   aria-label={d.name}
                 >
-                  {isActive && <span className="absolute -left-3 top-2 bottom-2 w-1.5 rounded-full bg-cyan-400" />}
+                  {isActive && <span className="absolute -left-3 top-2 bottom-2 w-1.5 rounded-full bg-[var(--hero)]" />}
                   <span className="text-2xl">{d.icon}</span>
                 </button>
               )
@@ -384,13 +507,13 @@ function CommunityHubInner() {
           </aside>
 
           {/* SECONDARY SIDEBAR: CHANNELS */}
-          <aside className="w-60 bg-gray-900 border-r border-white/5 flex flex-col">
-            <div className="px-4 py-4 border-b border-white/5 flex justify-between items-center">
-              <h2 className="text-white font-black tracking-tight">{activeDistrict.name}</h2>
+          <aside className="w-60 bg-[var(--bg-glass)] backdrop-blur-xl border-r border-white/10 flex flex-col nebula-stroke">
+            <div className="px-4 py-4 border-b border-white/10 flex justify-between items-center">
+              <h2 className="text-[var(--text-primary)] font-black tracking-tight">{activeDistrict.name}</h2>
               {/* Close button for mobile inside drawer */}
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="md:hidden p-2 text-gray-400 hover:text-white"
+                className="md:hidden p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
               >
                 ✕
               </button>
@@ -405,9 +528,9 @@ function CommunityHubInner() {
                       setActiveChannelId(c.id)
                       setIsMobileMenuOpen(false) // Auto-close on mobile selection
                     }}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${isActive ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5'}`}
+                    className={`w-full text-left px-3 py-2 rounded-[var(--radius-main)] text-sm font-semibold transition-colors ${isActive ? 'bg-white/[0.06] text-[var(--text-primary)]' : 'text-[var(--text-secondary)] hover:bg-white/[0.03]'}`}
                   >
-                    <span className="text-gray-400">#</span> {c.name}
+                    <span className="text-[var(--text-muted)]">#</span> {c.name}
                   </button>
                 )
               })}
@@ -417,20 +540,20 @@ function CommunityHubInner() {
 
         {/* MAIN CHAT AREA */}
         <main className="flex-1 flex flex-col min-w-0 w-full">
-          <div className="px-4 py-3 md:px-5 md:py-4 border-b border-white/5 flex items-center justify-between bg-slate-950/80 backdrop-blur-md sticky top-0 z-10">
+          <div className="px-4 py-3 md:px-5 md:py-4 border-b border-white/5 flex items-center justify-between bg-[var(--bg-primary)]/80 backdrop-blur-md sticky top-0 z-10">
             <div className="flex items-center gap-3 min-w-0">
               {/* HAMBURGER BUTTON */}
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="md:hidden p-2 -ml-2 text-gray-300 hover:text-white rounded-lg active:bg-white/10"
+                className="md:hidden p-2 -ml-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-[var(--radius-main)] active:bg-white/[0.06]"
                 aria-label="Open menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
               </button>
 
               <div className="min-w-0">
-                <div className="text-white font-black truncate text-lg">{activeRoom?.name || '#channel'}</div>
-                <div className="text-xs text-gray-500 hidden sm:block">{activeDistrict.name}</div>
+                <div className="text-[var(--text-primary)] font-black truncate text-lg">{activeRoom?.name || '#channel'}</div>
+                <div className="text-xs text-[var(--text-muted)] hidden sm:block">{activeDistrict.name}</div>
               </div>
             </div>
 
@@ -443,220 +566,297 @@ function CommunityHubInner() {
                     alert('Thanks. Our moderation team will review.')
                   }
                 }}
-                className="text-xs px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-red-200 whitespace-nowrap"
+                className="text-xs px-3 py-2 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06] text-red-200 whitespace-nowrap"
               >
                 Report
               </button>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-            {messages.map((m) => {
-              const isMine = m.senderId === user?.uid
-              const isBounty = m.kind === 'bounty'
-              const isWhiteboard = m.kind === 'whiteboard'
+          <div className="flex-1 overflow-y-auto px-4 py-4" style={{ paddingBottom: '184px' }}>
+            <div className="space-y-3">
+              {messages.map((m, idx) => {
+                const prev = idx > 0 ? messages[idx - 1] : null
+                const groupStart = !isSameGroup(prev, m)
+                const isMine = m.senderId === user?.uid
+                const isBounty = m.kind === 'bounty'
+                const isWhiteboard = m.kind === 'whiteboard'
+                const rank = rankByUserId[m.senderId] || 0
 
-              return (
-                <div
-                  key={m.id}
-                  className={`rounded-xl border p-4 bg-white/5 ${isBounty ? 'border-yellow-500/60' : 'border-white/10'
-                    }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <div className="text-white font-bold truncate">{m.senderName || 'User'}</div>
-                        <div className="text-xs text-gray-500">{m.timestamp?.toDate().toLocaleTimeString()}</div>
-                        {isBounty && (
-                          <div className="text-[10px] font-black uppercase tracking-widest text-yellow-400 border border-yellow-500/30 bg-yellow-500/10 px-2 py-0.5 rounded">
-                            Bounty {m.bountyPoints ? `${m.bountyPoints} RP` : ''}
+                const auraClass = rank === 1 ? 'aura-glow aura-gold' : rank === 2 ? 'aura-glow aura-silver' : rank === 3 ? 'aura-glow aura-bronze' : ''
+
+                const bubbleBase = `nebula-stroke bg-white/[0.03] backdrop-blur-md border border-white/10 ${auraClass}`
+                const bubbleCornersMine = 'rounded-[var(--radius-bubble)] rounded-tr-md'
+                const bubbleCornersOther = 'rounded-[var(--radius-bubble)] rounded-tl-md'
+
+                const wrapperJustify = isMine ? 'justify-end' : 'justify-start'
+
+                return (
+                  <div key={m.id} className={`flex ${wrapperJustify}`}>
+                    <div className={`flex items-end gap-2 max-w-full ${isMine ? 'flex-row-reverse' : 'flex-row'}`}>
+                      <div className="w-10 shrink-0">
+                        {groupStart ? (
+                          <div className={`relative w-10 h-10 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center text-sm font-black ${rank <= 3 && rank > 0 ? 'ring-2 ring-[var(--hero)]/20' : ''}`}>
+                            {m.senderAvatarUrl ? (
+                              <Image
+                                src={m.senderAvatarUrl}
+                                alt="Avatar"
+                                fill
+                                sizes="40px"
+                                className="object-cover"
+                              />
+                            ) : (
+                              (m.senderName || 'U').charAt(0).toUpperCase()
+                            )}
+                            {m.senderId === user?.uid ? (
+                              <div className="absolute left-1 right-1 -bottom-0.5 h-[2px] rounded-full bg-white/10 overflow-hidden">
+                                <div className="h-full bg-[var(--hero)]" style={{ width: `${Math.round(xpPct * 100)}%` }} />
+                              </div>
+                            ) : null}
                           </div>
+                        ) : (
+                          <div className="w-10 h-10" />
                         )}
                       </div>
 
-                      {editingId === m.id ? (
-                        <div className="mt-2">
-                          <textarea
-                            value={editingText}
-                            onChange={(e) => setEditingText(e.target.value)}
-                            className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-100"
-                            rows={3}
-                          />
-                          <div className="mt-2 flex gap-2">
-                            <button
-                              onClick={handleCommitEdit}
-                              className="text-xs px-3 py-2 rounded-lg bg-cyan-500/20 text-cyan-200 hover:bg-cyan-500/30"
-                            >
-                              Save
-                            </button>
-                            <button
-                              onClick={() => {
-                                setEditingId(null)
-                                setEditingText('')
-                              }}
-                              className="text-xs px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="mt-2 text-sm text-gray-200 whitespace-pre-wrap">{m.text}</div>
-                      )}
-
-                      {m.fileUrl && (
-                        <div className="mt-3">
-                          <a
-                            href={m.fileUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-black/30 border border-white/10 hover:bg-black/40"
-                          >
-                            <span>📎</span>
-                            <span className="text-cyan-300">{m.text.replace('📎 ', '')}</span>
-                          </a>
-                        </div>
-                      )}
-
-                      {isWhiteboard && (
-                        <div className="mt-3 border border-white/10 rounded-lg p-3 bg-black/20">
-                          <div className="flex items-center justify-between gap-3">
-                            <div className="min-w-0">
-                              <div className="text-white font-bold truncate">{m.whiteboardName || 'Whiteboard'}</div>
-                              <div className="text-xs text-gray-500">Whiteboard Preview</div>
+                      <div className={`flex flex-col ${isMine ? 'items-end' : 'items-start'}`}>
+                        {groupStart ? (
+                          <div className={`mb-1 flex items-center gap-2 ${isMine ? 'justify-end' : 'justify-start'}`}>
+                            <div className="flex items-center gap-2">
+                              <div className="text-sm font-black text-[var(--text-primary)] truncate">{m.senderName || 'User'}</div>
+                              {rank > 0 ? <RankPill rank={rank} /> : null}
+                              {isBounty && (
+                                <div className="text-[10px] font-black uppercase tracking-widest text-yellow-300 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 rounded-[var(--radius-pill)]">
+                                  Bounty {m.bountyPoints ? `${m.bountyPoints} RP` : ''}
+                                </div>
+                              )}
                             </div>
+                            <div className="text-[10px] text-[var(--text-muted)] whitespace-nowrap">{m.timestamp?.toDate().toLocaleTimeString()}</div>
+                          </div>
+                        ) : null}
+
+                        <div className={`group relative inline-block max-w-[85vw] sm:max-w-[70%] ${bubbleBase} ${isMine ? bubbleCornersMine : bubbleCornersOther} ${isBounty ? 'border-yellow-500/40' : ''} ${groupStart ? '' : 'mt-1'}`}>
+                          <div className="px-4 py-3">
+                            {editingId === m.id ? (
+                              <div>
+                                <textarea
+                                  value={editingText}
+                                  onChange={(e) => setEditingText(e.target.value)}
+                                  className="w-full bg-black/20 border border-white/10 rounded-[var(--radius-main)] px-3 py-2 text-sm text-[var(--text-primary)]"
+                                  rows={3}
+                                />
+                                <div className="mt-2 flex gap-2 justify-end">
+                                  <button
+                                    onClick={handleCommitEdit}
+                                    className="text-xs px-3 py-2 rounded-[var(--radius-pill)] bg-[var(--hero)]/10 text-[var(--hero)] nebula-stroke hover:bg-[var(--hero)]/15"
+                                  >
+                                    Save
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setEditingId(null)
+                                      setEditingText('')
+                                    }}
+                                    className="text-xs px-3 py-2 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06] text-[var(--text-secondary)]"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="text-sm text-[var(--text-primary)] whitespace-pre-wrap">{m.text}</div>
+                            )}
+
+                            {m.fileUrl && (
+                              <div className="mt-3">
+                                <a
+                                  href={m.fileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-[var(--radius-pill)] bg-black/20 border border-white/10 hover:bg-black/30"
+                                >
+                                  <span>📎</span>
+                                  <span className="text-[var(--hero)]">{m.text.replace('📎 ', '')}</span>
+                                </a>
+                              </div>
+                            )}
+
+                            {isWhiteboard && (
+                              <div className="mt-3 border border-white/10 rounded-[var(--radius-main)] p-3 bg-black/10">
+                                <div className="flex items-center justify-between gap-3">
+                                  <div className="min-w-0">
+                                    <div className="text-[var(--text-primary)] font-bold truncate">{m.whiteboardName || 'Whiteboard'}</div>
+                                    <div className="text-xs text-[var(--text-muted)]">Whiteboard Preview</div>
+                                  </div>
+                                  <button
+                                    onClick={() => {
+                                      if (m.whiteboardId) {
+                                        openExistingWhiteboard(m.whiteboardId, m.whiteboardName)
+                                      }
+                                    }}
+                                    className="text-xs px-3 py-2 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06]"
+                                  >
+                                    Open
+                                  </button>
+                                </div>
+                                {m.whiteboardThumbnailUrl ? (
+                                  <div className="mt-3">
+                                    <Image
+                                      src={m.whiteboardThumbnailUrl}
+                                      alt="Whiteboard thumbnail"
+                                      width={360}
+                                      height={240}
+                                      className="w-full max-w-[360px] h-auto rounded-[var(--radius-main)] border border-white/10"
+                                      unoptimized
+                                    />
+                                  </div>
+                                ) : null}
+                              </div>
+                            )}
+
+                            <div className="mt-3 flex items-center gap-2 flex-wrap">
+                              {reactionsPalette.map((emoji) => {
+                                const count = m.reactions?.[emoji]?.length || 0
+                                const hasReacted = (m.reactions?.[emoji] || []).includes(user?.uid || '')
+                                if (showReactionsFor !== m.id && count === 0) return null
+
+                                return (
+                                  <button
+                                    key={emoji}
+                                    onClick={() => addReaction(m.id, emoji)}
+                                    className={`text-sm px-2 py-1 rounded-[var(--radius-pill)] border transition-colors ${hasReacted
+                                      ? 'border-[var(--hero)]/40 bg-[var(--hero)]/10 text-[var(--text-primary)]'
+                                      : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.06]'
+                                      }`}
+                                  >
+                                    {emoji} {count > 0 ? <span className="text-xs">{count}</span> : null}
+                                  </button>
+                                )
+                              })}
+
+                              <button
+                                onClick={() => setShowReactionsFor((prevId) => (prevId === m.id ? null : m.id))}
+                                className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                              >
+                                {showReactionsFor === m.id ? 'Done' : 'React'}
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className={`absolute -top-8 ${isMine ? 'right-2' : 'left-2'} hidden md:flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity`}>
                             <button
-                              onClick={() => {
-                                if (m.whiteboardId) {
-                                  openExistingWhiteboard(m.whiteboardId, m.whiteboardName)
-                                }
-                              }}
-                              className="text-xs px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10"
+                              onClick={() => openDM(m.senderId, m.senderName || 'User')}
+                              className="text-[10px] px-2 py-1 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06]"
                             >
-                              Open
+                              DM
+                            </button>
+
+                            {isMine ? (
+                              <>
+                                <button
+                                  onClick={() => handleStartEdit(m.id, m.text)}
+                                  className="text-[10px] px-2 py-1 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06]"
+                                  disabled={editingId === m.id}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(m.id)}
+                                  className="text-[10px] px-2 py-1 rounded-[var(--radius-pill)] bg-red-500/10 hover:bg-red-500/20 text-red-200"
+                                >
+                                  Delete
+                                </button>
+                              </>
+                            ) : (
+                              <>
+                                <button
+                                  onClick={() => reportMessage(m.id, 'Inappropriate content')}
+                                  className="text-[10px] px-2 py-1 rounded-[var(--radius-pill)] bg-white/[0.03] nebula-stroke hover:bg-white/[0.06] text-red-200"
+                                >
+                                  Report
+                                </button>
+                              </>
+                            )}
+                          </div>
+
+                          <div className={`absolute top-2 ${isMine ? 'left-2' : 'right-2'} md:hidden`}>
+                            <button
+                              onClick={() => setMobileActionsFor((curId) => (curId === m.id ? null : m.id))}
+                              className="w-8 h-8 rounded-[var(--radius-pill)] bg-white/[0.02] border border-white/10"
+                              aria-label="Actions"
+                            >
+                              ⋯
                             </button>
                           </div>
-                          {m.whiteboardThumbnailUrl ? (
-                            <div className="mt-3">
-                              <Image
-                                src={m.whiteboardThumbnailUrl}
-                                alt="Whiteboard thumbnail"
-                                width={360}
-                                height={240}
-                                className="w-full max-w-[360px] h-auto rounded border border-white/10"
-                                unoptimized
-                              />
+
+                          {mobileActionsFor === m.id ? (
+                            <div className={`md:hidden absolute top-12 ${isMine ? 'left-2' : 'right-2'} z-20 min-w-[160px] rounded-[var(--radius-main)] bg-[var(--bg-glass)] backdrop-blur-xl border border-white/10 nebula-stroke overflow-hidden`}>
+                              <button
+                                onClick={() => {
+                                  openDM(m.senderId, m.senderName || 'User')
+                                  setMobileActionsFor(null)
+                                }}
+                                className="w-full text-left px-4 py-3 text-sm hover:bg-white/[0.06]"
+                              >
+                                DM
+                              </button>
+
+                              {isMine ? (
+                                <>
+                                  <button
+                                    onClick={() => {
+                                      handleStartEdit(m.id, m.text)
+                                      setMobileActionsFor(null)
+                                    }}
+                                    className="w-full text-left px-4 py-3 text-sm hover:bg-white/[0.06]"
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      handleDelete(m.id)
+                                      setMobileActionsFor(null)
+                                    }}
+                                    className="w-full text-left px-4 py-3 text-sm text-red-200 hover:bg-red-500/10"
+                                  >
+                                    Delete
+                                  </button>
+                                </>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    reportMessage(m.id, 'Inappropriate content')
+                                    setMobileActionsFor(null)
+                                  }}
+                                  className="w-full text-left px-4 py-3 text-sm text-red-200 hover:bg-red-500/10"
+                                >
+                                  Report
+                                </button>
+                              )}
                             </div>
                           ) : null}
                         </div>
-                      )}
-
-                      <div className="mt-3 flex items-center gap-2 flex-wrap">
-                        {reactionsPalette.map((emoji) => {
-                          const count = m.reactions?.[emoji]?.length || 0
-                          const hasReacted = (m.reactions?.[emoji] || []).includes(user?.uid || '')
-                          if (showReactionsFor !== m.id && count === 0) return null
-
-                          return (
-                            <button
-                              key={emoji}
-                              onClick={() => addReaction(m.id, emoji)}
-                              className={`text-sm px-2 py-1 rounded-lg border transition-colors ${hasReacted
-                                ? 'border-cyan-400/50 bg-cyan-400/10 text-cyan-100'
-                                : 'border-white/10 bg-white/5 hover:bg-white/10'
-                                }`}
-                            >
-                              {emoji} {count > 0 ? <span className="text-xs">{count}</span> : null}
-                            </button>
-                          )
-                        })}
-
-                        <button
-                          onClick={() => setShowReactionsFor((prev) => (prev === m.id ? null : m.id))}
-                          className="text-xs text-gray-400 hover:text-gray-200"
-                        >
-                          {showReactionsFor === m.id ? 'Done' : 'React'}
-                        </button>
                       </div>
-                    </div>
-
-                    <div className="flex flex-col items-end gap-2 shrink-0">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => openDM(m.senderId, m.senderName || 'User')}
-                          className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10"
-                        >
-                          DM
-                        </button>
-
-                        {isMine ? (
-                          <>
-                            <button
-                              onClick={() => handleStartEdit(m.id, m.text)}
-                              className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10"
-                              disabled={editingId === m.id}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleDelete(m.id)}
-                              className="text-xs px-2 py-1 rounded bg-red-500/10 hover:bg-red-500/20 text-red-200"
-                            >
-                              Delete
-                            </button>
-                          </>
-                        ) : (
-                          <>
-                            <button
-                              onClick={() => reportMessage(m.id, 'Inappropriate content')}
-                              className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-red-200"
-                            >
-                              Report
-                            </button>
-                          </>
-                        )}
-                      </div>
-
-                      {!isMine && (
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => handleMuteToggle(m.senderId)}
-                            className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10"
-                          >
-                            {mutedUsers.includes(m.senderId) ? 'Unmute' : 'Mute'}
-                          </button>
-                          <button
-                            onClick={() => handleBlockToggle(m.senderId)}
-                            className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10"
-                          >
-                            {blockedUsers.includes(m.senderId) ? 'Unblock' : 'Block'}
-                          </button>
-                          <button
-                            onClick={() => reportUser(m.senderId, 'User reported from message')}
-                            className="text-xs px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-red-200"
-                          >
-                            Report User
-                          </button>
-                        </div>
-                      )}
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
 
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="border-t border-white/5 px-4 py-3">
+          <TypingIndicator names={typingUsers.map((u) => u.name)} />
+
+          <div className="hidden md:block border-t border-white/5 px-4 py-3">
             {fileUploading && (
               <div className="mb-3">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">Uploading...</span>
-                  <span className="text-xs font-bold text-cyan-300">{uploadProgress}%</span>
+                  <span className="text-xs text-[var(--text-secondary)]">Uploading...</span>
+                  <span className="text-xs font-bold text-[var(--hero)]">{uploadProgress}%</span>
                 </div>
                 <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden">
-                  <div className="h-full bg-cyan-400" style={{ width: `${uploadProgress}%` }} />
+                  <div className="h-full bg-[var(--hero)]" style={{ width: `${uploadProgress}%` }} />
                 </div>
               </div>
             )}
@@ -665,7 +865,7 @@ function CommunityHubInner() {
               <button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={fileUploading}
-                className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors disabled:opacity-50"
+                className="p-2 bg-white/[0.03] nebula-stroke rounded-[var(--radius-pill)] hover:bg-white/[0.06] transition-colors disabled:opacity-50"
                 aria-label="Upload file"
               >
                 📎
@@ -682,7 +882,7 @@ function CommunityHubInner() {
                 onClick={() => {
                   openNewWhiteboard()
                 }}
-                className="px-3 py-2 rounded-lg bg-cyan-500/20 text-cyan-100 hover:bg-cyan-500/30 text-xs font-black uppercase tracking-widest"
+                className="px-3 py-2 rounded-[var(--radius-pill)] bg-[var(--hero)]/10 text-[var(--hero)] hover:bg-[var(--hero)]/15 text-xs font-black uppercase tracking-widest"
               >
                 ✏️ Draw
               </button>
@@ -697,37 +897,106 @@ function CommunityHubInner() {
                   }
                 }}
                 placeholder="Type your message..."
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:border-cyan-400 text-gray-100 placeholder:text-gray-500"
+                className="flex-1 bg-white/[0.03] border border-white/10 rounded-[var(--radius-main)] px-4 py-3 text-sm resize-none focus:outline-none focus:border-[var(--hero)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 rows={2}
               />
 
               <button
                 onClick={handleSendMessage}
                 disabled={!messageText.trim() || fileUploading}
-                className="px-4 py-3 rounded-xl bg-white text-slate-950 font-black text-xs uppercase tracking-widest disabled:opacity-50"
+                className="px-4 py-3 rounded-[var(--radius-pill)] bg-[var(--hero)] text-black font-black text-xs uppercase tracking-widest disabled:opacity-50"
               >
                 Send
               </button>
             </div>
           </div>
+
+          <div className="md:hidden fixed left-0 right-0 bottom-[72px] px-4 z-40">
+            {fileUploading ? (
+              <div className="mb-2 px-3 py-2 rounded-[var(--radius-main)] bg-white/[0.03] border border-white/10">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-[var(--text-secondary)]">Uploading...</span>
+                  <span className="text-xs font-black text-[var(--hero)]">{uploadProgress}%</span>
+                </div>
+                <div className="mt-2 w-full bg-white/5 rounded-full h-2 overflow-hidden">
+                  <div className="h-full bg-[var(--hero)]" style={{ width: `${uploadProgress}%` }} />
+                </div>
+              </div>
+            ) : null}
+
+            <div className="flex items-end gap-2 px-3 py-3 rounded-[var(--radius-main)] bg-white/[0.03] backdrop-blur-xl border border-white/10 nebula-stroke">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={fileUploading}
+                className="w-10 h-10 rounded-[var(--radius-pill)] bg-white/[0.03] border border-white/10"
+                aria-label="Open attachments"
+              >
+                +
+              </button>
+
+              <textarea
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault()
+                    handleSendMessage()
+                  }
+                }}
+                placeholder="Type your message..."
+                className="flex-1 bg-transparent text-sm resize-none focus:outline-none text-[var(--text-primary)] placeholder:text-[var(--text-muted)] max-h-[96px]"
+                rows={1}
+              />
+
+              <button
+                onClick={handleSendMessage}
+                disabled={!messageText.trim() || fileUploading}
+                className="w-10 h-10 rounded-[var(--radius-pill)] bg-[var(--hero)] text-black font-black disabled:opacity-50"
+                aria-label="Send"
+              >
+                ➤
+              </button>
+            </div>
+          </div>
+
+          <div className="md:hidden fixed left-0 right-0 bottom-0 z-50 border-t border-white/10 bg-[var(--bg-primary)]/70 backdrop-blur-xl">
+            <div className="grid grid-cols-4 px-2 py-2">
+              <Link href="/community" className="flex flex-col items-center justify-center py-2 rounded-[var(--radius-main)] bg-white/[0.03] border border-white/10">
+                <div className="text-lg">💬</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)]">Chat</div>
+              </Link>
+              <Link href="/leaderboard" className="flex flex-col items-center justify-center py-2 rounded-[var(--radius-main)] hover:bg-white/[0.03]">
+                <div className="text-lg">🏆</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Board</div>
+              </Link>
+              <Link href="/practicals" className="flex flex-col items-center justify-center py-2 rounded-[var(--radius-main)] hover:bg-white/[0.03]">
+                <div className="text-lg">🎮</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Sim</div>
+              </Link>
+              <Link href="/profile" className="flex flex-col items-center justify-center py-2 rounded-[var(--radius-main)] hover:bg-white/[0.03]">
+                <div className="text-lg">👤</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Profile</div>
+              </Link>
+            </div>
+          </div>
         </main>
 
         {/* RIGHT PANEL: ACTIVE BENCH */}
-        <aside className="hidden lg:flex w-64 bg-slate-950 border-l border-white/5 p-4 flex-col gap-4">
+        <aside className="hidden lg:flex w-64 bg-[var(--bg-glass)] backdrop-blur-xl border-l border-white/10 p-4 flex-col gap-4 nebula-stroke">
           <button
             onClick={handleJoinStudyRoom}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-black text-xs uppercase tracking-widest"
+            className="w-full px-4 py-3 rounded-[var(--radius-main)] bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-[var(--text-primary)] font-black text-xs uppercase tracking-widest"
           >
             Join Study Room
           </button>
 
-          <div className="border border-white/10 rounded-xl p-4 bg-white/5">
-            <div className="text-white font-black mb-2">In Simulation</div>
-            <div className="text-sm text-gray-400">running Business Sim...</div>
+          <div className="border border-white/10 rounded-[var(--radius-main)] p-4 bg-white/[0.03]">
+            <div className="text-[var(--text-primary)] font-black mb-2">In Simulation</div>
+            <div className="text-sm text-[var(--text-muted)]">running Business Sim...</div>
           </div>
 
-          <div className="border border-white/10 rounded-xl p-4 bg-white/5 flex-1 overflow-hidden">
-            <div className="text-white font-black mb-3">Mentors</div>
+          <div className="border border-white/10 rounded-[var(--radius-main)] p-4 bg-white/[0.03] flex-1 overflow-hidden">
+            <div className="text-[var(--text-primary)] font-black mb-3">Mentors</div>
             <div className="space-y-2 overflow-y-auto max-h-[320px]">
               {Object.entries(onlineUsers)
                 .slice(0, 12)
@@ -735,13 +1004,14 @@ function CommunityHubInner() {
                   <button
                     key={uid}
                     onClick={() => openDM(uid, data.name)}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-white/5"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-[var(--radius-main)] hover:bg-white/[0.03]"
                   >
                     <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center text-xs font-black text-cyan-100">
+                      <div className="relative w-7 h-7 rounded-full bg-[var(--hero)]/10 border border-white/10 flex items-center justify-center text-xs font-black text-[var(--text-primary)]">
+                        <span className="absolute -right-0.5 -bottom-0.5 w-2.5 h-2.5 rounded-full bg-green-400 pulse-breath border border-[var(--bg-primary)]" />
                         {data.name?.charAt(0)?.toUpperCase() || 'U'}
                       </div>
-                      <div className="text-sm text-gray-200 truncate">{data.name}</div>
+                      <div className="text-sm text-[var(--text-secondary)] truncate">{data.name}</div>
                     </div>
                     <div className="text-xs text-green-400">Online</div>
                   </button>
