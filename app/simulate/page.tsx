@@ -13,7 +13,7 @@ import { useAuth } from '@/lib/auth-context'
 import { useQuestionLoader } from '@/app/hooks/useQuestionLoader'
 import { ScenarioBrief, DecisionCard } from '@/components/simulation'
 import { getProfessorBrightFeedback, FeedbackResponse } from '@/lib/professor-bright'
-import { StreakCelebration } from '@/components/learning'
+import { StreakCelebration, ProfessorBrightMascot } from '@/components/learning'
 
 interface SimulationStep {
   id: number
@@ -883,11 +883,22 @@ export default function SimulatePage() {
             </AnimatePresence>
           </div>
 
-          <div className="hidden md:block">
-            {/* Sidebar content could go here or be removed */}
-          </div>
         </div>
       </div>
+
+      {/* Professor Bright Pop-out Mascot */}
+      <ProfessorBrightMascot feedback={showFeedback ? professorFeedback : null} />
+
+      {/* Streak Celebration Overlay */}
+      <AnimatePresence>
+        {showStreakCelebration && (
+          <StreakCelebration
+            streak={nableResponse?.currentStreak || 0}
+            show={true}
+            onClose={() => setShowStreakCelebration(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
