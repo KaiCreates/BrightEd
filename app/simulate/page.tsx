@@ -12,6 +12,8 @@ import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
 import { useQuestionLoader } from '@/app/hooks/useQuestionLoader'
 import { ScenarioBrief, DecisionCard } from '@/components/simulation'
+import { getProfessorBrightFeedback, FeedbackResponse } from '@/lib/professor-bright'
+import { StreakCelebration } from '@/components/learning'
 
 interface SimulationStep {
   id: number
@@ -123,6 +125,11 @@ export default function SimulatePage() {
   const [showHint, setShowHint] = useState(false)
   const [hintContent, setHintContent] = useState<string>('')
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null)
+
+  // Professor Bright feedback and streak celebration
+  const [showStreakCelebration, setShowStreakCelebration] = useState(false)
+  const [professorFeedback, setProfessorFeedback] = useState<FeedbackResponse | null>(null)
+  const previousStreakRef = useRef<number>(0)
 
   // Generate variation based on timestamp and objective to ensure different questions
   // Used for ID generation
@@ -285,12 +292,35 @@ export default function SimulatePage() {
           masteryDelta: nableData.masteryDelta || {}
         })
 
+        // Generate Professor Bright feedback
+        const currentStreak = nableData.currentStreak || 0
+        const mastery = nableData.masteryDelta?.[objectiveId || ''] || 0.5
+        const feedback = getProfessorBrightFeedback(
+          isCorrect,
+          nableData.errorClassification,
+          currentStreak,
+          mastery,
+          timeToAnswer
+        )
+        setProfessorFeedback(feedback)
+
+        // Trigger streak celebration on milestones (5, 10, 15, 20)
+        const isMilestone = [5, 10, 15, 20].includes(currentStreak)
+        const wasNotAtMilestone = ![5, 10, 15, 20].includes(previousStreakRef.current)
+        if (isCorrect && isMilestone && wasNotAtMilestone) {
+          setShowStreakCelebration(true)
+        }
+        previousStreakRef.current = currentStreak
+
         // Show micro-lesson if needed (conceptual error)
         if (nableData.microLessonRequired && nableData.microLesson) {
           setShowMicroLesson(true)
         }
       }
     } catch (err) {
+      // Fallback: Generate feedback without NABLE data
+      const feedback = getProfessorBrightFeedback(isCorrect, null, 0, 0.5, timeToAnswer)
+      setProfessorFeedback(feedback)
       console.warn('NABLE evaluation failed:', err)
     }
 
@@ -516,6 +546,13 @@ export default function SimulatePage() {
 
   return (
     <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] relative overflow-hidden flex flex-col safe-padding pb-20">
+      {/* Streak Celebration Overlay */}
+      <StreakCelebration
+        streak={nableResponse?.currentStreak || 0}
+        show={showStreakCelebration}
+        onClose={() => setShowStreakCelebration(false)}
+      />
+
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[var(--brand-primary)]/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[var(--brand-secondary)]/5 rounded-full blur-[100px] pointer-events-none" />
@@ -690,14 +727,39 @@ export default function SimulatePage() {
                                           ? 'bg-green-500/10 border-green-500'
                                           : 'bg-amber-500/10 border-amber-500'}
                                       `}>
-                                        <h4 className={`text-xs font-black uppercase tracking-widest mb-1 ${isCorrect ? 'text-green-600' : 'text-amber-600'}`}>
-                                          {isCorrect ? 'SIMULATION SUCCESS' : 'CRITICAL INSIGHT'}
-                                        </h4>
-                                        <p className="text-sm text-[var(--text-secondary)]">
-                                          {isCorrect
+                                        {/* Professor Bright Header */}
+                                        <div className="flex items-center gap-2 mb-2">
+                                          {/* Professor Bright Sprite or Emoji */}
+                                          {professorFeedback?.spriteClass ? (
+                                            <div className="relative w-16 h-16 shrink-0 mr-2">
+                                              <div className={`owl-sprite ${professorFeedback.spriteClass}`} style={{ transform: 'scale(0.4)', transformOrigin: 'top left' }} />
+                                            </div>
+                                          ) : (
+                                            <span className="text-2xl">{professorFeedback?.emoji || (isCorrect ? '✨' : '📚')}</span>
+                                          )}
+
+                                          <h4 className={`text-xs font-black uppercase tracking-widest ${isCorrect ? 'text-green-600' : 'text-amber-600'}`}>
+                                            {professorFeedback?.tone === 'celebratory' ? 'BRILLIANT!' :
+                                              professorFeedback?.tone === 'challenging' ? 'KEEP PUSHING!' :
+                                                professorFeedback?.tone === 'supportive' ? 'LEARNING MOMENT' :
+                                                  isCorrect ? 'CORRECT!' : 'NOT QUITE'}
+                                          </h4>
+                                        </div>
+
+                                        {/* Professor Bright Message */}
+                                        <p className="text-sm text-[var(--text-secondary)] font-medium">
+                                          {professorFeedback?.message || (isCorrect
                                             ? "Excellent decision. This aligns with best practices."
-                                            : "This choice would lead to suboptimal outcomes in a real scenario."}
+                                            : "This choice would lead to suboptimal outcomes in a real scenario.")}
                                         </p>
+
+                                        {/* Professor Bright Tip */}
+                                        {professorFeedback?.tip && (
+                                          <div className="mt-2 flex items-start gap-2 text-xs text-[var(--text-muted)]">
+                                            <span>💡</span>
+                                            <span>{professorFeedback.tip}</span>
+                                          </div>
+                                        )}
 
                                         {/* Show NABLE Mastery Delta if correct */}
                                         {isCorrect && nableResponse?.masteryDelta && objectiveId && nableResponse.masteryDelta[objectiveId] > 0 && (

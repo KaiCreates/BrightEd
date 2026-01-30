@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { getCognitiveLevel, getLevelDotColor } from '@/lib/cognitive-levels'
 
 // =============================================================================
 // TYPES
@@ -17,6 +18,7 @@ export interface LearningPathNodeProps {
     nodeType: NodeType
     status: NodeStatus
     stars: number
+    mastery?: number // NEW: Mastery score 0-1
     icon: string
     color: string
     index: number
@@ -120,6 +122,7 @@ export default function LearningPathNode({
     icon,
     index,
     isUnlocking = false,
+    mastery, // NEW: Destructure mastery
 }: LearningPathNodeProps) {
     const config = NODE_STYLES[nodeType]
     const isLocked = status === 'locked'
@@ -373,6 +376,22 @@ export default function LearningPathNode({
                             >
                                 ★
                             </span>
+                        ))}
+                    </div>
+                )}
+
+                {/* Cognitive Level Dots - Only show if mastery is provided and node unlocked */}
+                {!isLocked && mastery !== undefined && (
+                    <div className="absolute -bottom-10 flex gap-1">
+                        {[1, 2, 3, 4].map((level) => (
+                            <div
+                                key={level}
+                                className="w-1.5 h-1.5 rounded-full shadow-sm"
+                                style={{
+                                    backgroundColor: getLevelDotColor(level as any, mastery),
+                                    opacity: getLevelDotColor(level as any, mastery).includes('var') ? 0.5 : 1
+                                }}
+                            />
                         ))}
                     </div>
                 )}

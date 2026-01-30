@@ -32,6 +32,7 @@ interface LearningModule {
   borderColor: string
   nodeType: NodeType // NEW: Node variant type
   lastVisited?: string // For maintenance detection
+  mastery?: number // NEW: Mastery score
 }
 
 import { Suspense } from 'react'
@@ -239,6 +240,7 @@ function LearnContent() {
               level: obj.difficulty || 1,
               status,
               stars,
+              mastery: progress?.mastery || 0, // Pass mastery (default to 0 if missing)
               nodeType,
               lastVisited: progress?.lastVisited,
               ...style
