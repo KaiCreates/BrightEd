@@ -9,12 +9,15 @@ import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
 import { db } from '@/lib/firebase'
 import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
+import { ProfessorBrightMascot } from '@/components/learning'
+import { FeedbackResponse } from '@/lib/professor-bright'
 
 export default function HomePage() {
     const router = useRouter()
     const { user, userData, loading: authLoading } = useAuth()
     const [learningPath, setLearningPath] = useState<any[]>([])
     const [welcomeText, setWelcomeText] = useState<string>('Keep Shining')
+    const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null)
 
     const [leaderPreview, setLeaderPreview] = useState<{
         xpTop: { name: string; value: number } | null
@@ -25,11 +28,25 @@ export default function HomePage() {
 
     useEffect(() => {
         if (authLoading) return
-
         if (!user) {
             router.push('/landing')
             return
         }
+
+        // Mascot Greeting
+        const timer = setTimeout(() => {
+            const streak = userData?.streak || 0
+            const firstName = userData?.firstName || 'Explorer'
+
+            setMascotFeedback({
+                tone: 'encouraging',
+                message: streak > 0
+                    ? `Day ${streak}! Keep that fire burning, ${firstName}! 🔥`
+                    : `Welcome back, ${firstName}! Ready to conquer the day? 🚀`,
+                emoji: streak > 0 ? '🔥' : '👋',
+                spriteClass: streak > 0 ? 'owl-magic' : 'owl-neutral'
+            })
+        }, 1500)
 
         // Fetch Learning Path Preview (Real-time data comes from userData)
         // Use AbortController to prevent duplicate calls
@@ -77,6 +94,7 @@ export default function HomePage() {
 
         return () => {
             abortController.abort();
+            clearTimeout(timer);
         };
 
     }, [user, userData, authLoading, router])
@@ -482,6 +500,8 @@ export default function HomePage() {
                 </div>
             </div>
 
+            {/* Professor Bright Pop-out Mascot */}
+            <ProfessorBrightMascot feedback={mascotFeedback} />
         </div>
     )
 }

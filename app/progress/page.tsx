@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { TopicMasteryDashboard, TopicMastery } from '@/components/learning'
 import { useAuth } from '@/lib/auth-context' // Assuming auth context exists
-import { StreakCelebration } from '@/components/learning'
+import { StreakCelebration, ProfessorBrightMascot } from '@/components/learning'
+import { FeedbackResponse } from '@/lib/professor-bright'
 
 export default function ProgressPage() {
     const router = useRouter()
@@ -20,6 +21,7 @@ export default function ProgressPage() {
         streak: 0,
         totalSkills: 0
     })
+    const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null)
 
     useEffect(() => {
         if (authLoading) return
@@ -62,6 +64,19 @@ export default function ProgressPage() {
                         streak: data.session?.currentStreak || 0,
                         totalSkills: data.overview?.totalSkillsTracked || 0
                     })
+
+                    // Mascot Feedback Logic
+                    const mastery = data.overview?.overallMastery || 0
+                    setTimeout(() => {
+                        setMascotFeedback({
+                            tone: mastery > 70 ? 'celebratory' : 'supportive',
+                            message: mastery > 70
+                                ? "Look at those stats! You're becoming a pro! 🌟"
+                                : "Consistency is key. Keep building that knowledge! 🧠",
+                            emoji: mastery > 70 ? '🌟' : '📈',
+                            spriteClass: mastery > 70 ? 'owl-happy' : 'owl-neutral'
+                        })
+                    }, 1000)
                 }
             } catch (error) {
                 console.error('Failed to fetch progress:', error)
@@ -149,6 +164,8 @@ export default function ProgressPage() {
                     </BrightLayer>
                 )}
             </div>
+            {/* Professor Bright Mascot */}
+            <ProfessorBrightMascot feedback={mascotFeedback} webMode={true} />
         </div>
     )
 }
@@ -159,7 +176,7 @@ function StatsCard({ label, value, icon, trend }: { label: string, value: string
             <span className="text-2xl mb-2">{icon}</span>
             <span className="text-sm text-[var(--text-muted)] uppercase tracking-wider font-bold mb-1">{label}</span>
             <span className={`text-2xl font-black ${trend === 'positive' ? 'text-green-500' :
-                    trend === 'negative' ? 'text-red-500' : 'text-[var(--text-primary)]'
+                trend === 'negative' ? 'text-red-500' : 'text-[var(--text-primary)]'
                 }`}>
                 {value}
             </span>

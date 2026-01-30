@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { LearningPathNode, SectionHeader, PathConnector, type NodeType } from '@/components/learning'
+import { LearningPathNode, SectionHeader, PathConnector, type NodeType, ProfessorBrightMascot } from '@/components/learning'
+import { FeedbackResponse } from '@/lib/professor-bright'
 
 interface SyllabusObjective {
   id: string
@@ -66,6 +67,7 @@ function LearnContent() {
   const onboardingCompleted = userData?.onboardingCompleted === true
 
   const [learningModules, setLearningModules] = useState<LearningModule[]>([])
+  const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [subjects, setSubjects] = useState<string[]>([])
@@ -249,6 +251,19 @@ function LearnContent() {
 
 
         setLearningModules(mappedModules)
+
+        // Mascot Greeting Logic
+        const completedCount = mappedModules.filter(m => m.status === 'completed').length
+        setTimeout(() => {
+          setMascotFeedback({
+            tone: completedCount > 5 ? 'celebratory' : 'encouraging',
+            message: completedCount > 0
+              ? `You've conquered ${completedCount} missions! Use that knowledge wisely.`
+              : "Every master was once a beginner. Start your first mission!",
+            emoji: completedCount > 0 ? '🦉' : '🗺️',
+            spriteClass: completedCount > 5 ? 'owl-happy' : 'owl-neutral'
+          })
+        }, 800)
       } catch (err) {
         console.error("Error fetching learning path:", err)
         setError(err instanceof Error ? err.message : 'Failed to load learning path.')
@@ -432,6 +447,9 @@ function LearnContent() {
           </BrightButton>
         </div>
       </div>
-    </div >
+
+      {/* Professor Bright Mascot */}
+      <ProfessorBrightMascot feedback={mascotFeedback} webMode={true} />
+    </div>
   )
 }
