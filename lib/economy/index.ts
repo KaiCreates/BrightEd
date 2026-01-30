@@ -19,3 +19,9 @@ export * from './firebase-db';
 
 // Hooks
 export * from './use-economy-business';
+
+// NEW: Enhanced systems
+export * from './pricing-engine';
+export * from './loyalty-system';
+export * from './employee-skills';
+export * from './order-narratives';

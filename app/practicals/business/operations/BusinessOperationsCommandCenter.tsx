@@ -12,6 +12,7 @@ import {
   DashboardAmbience
 } from '@/components/cinematic';
 import { OrderDashboard } from '@/components/business/OrderDashboard';
+import { LoyaltyDashboard } from '@/components/business/LoyaltyDashboard';
 import BusinessCard3D from '@/components/business/BusinessCard3D';
 import { useAuth } from '@/lib/auth-context';
 import { useBusiness } from '@/lib/business-context';
@@ -36,7 +37,12 @@ import {
   updateBusinessFinancials,
   updateOrderStatus,
   fetchActiveOrders,
-  collectDuePayments
+  collectDuePayments,
+  CustomerProfile,
+  createCustomerProfile,
+  updateEmployeeAfterTask,
+  initializeEmployeeSkills,
+  getLoyaltyTier
 } from '@/lib/economy';
 
 export default function BusinessOperationsCommandCenter() {
@@ -114,6 +120,7 @@ function CommandCenterContent() {
           inventory: data.inventory ?? {},
           employees: data.employees ?? [],
           marketState: data.marketState ?? { lastRestock: '', nextRestock: '', items: [] },
+          customerProfiles: data.customerProfiles ?? {},
           recruitmentPool: data.recruitmentPool ?? [],
           lastRecruitmentTime: data.lastRecruitmentTime ?? '',
           lastPayrollTime: data.lastPayrollTime ?? '',
@@ -262,6 +269,7 @@ function CommandCenterContent() {
               let completedCount = 0;
               let reputationDelta = 0;
               const inventoryDeltas: Record<string, number> = {};
+              const customerProfileUpdates: Record<string, any> = {};
 
               ordersToComplete.forEach((orderToProcess) => {
                 const reqInventory: Record<string, number> = {};
@@ -300,11 +308,21 @@ function CommandCenterContent() {
                   business.employees.length;
                 const qualityScore = Math.min(100, Math.floor(avgQuality + (Math.random() * 20 - 10)));
 
-                const { order: completed, payment, tip, inventoryDeductions } = completeOrder(
+                // Get or create customer profile
+                const customerProfiles = business.customerProfiles || {};
+                let customerProfile = customerProfiles[orderToProcess.customerId] as CustomerProfile | undefined;
+                if (!customerProfile) {
+                  customerProfile = createCustomerProfile(orderToProcess.customerId, orderToProcess.customerName);
+                }
+
+                const completionResult = completeOrder(
                   orderToProcess,
                   qualityScore,
-                  businessType
+                  businessType,
+                  customerProfile
                 );
+                
+                const { order: completed, payment, tip, inventoryDeductions, loyaltyUpdate } = completionResult;
 
                 const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
                 const reviewText = stars === 6 ? 'Fast service!' : 'Good auto-service.';
@@ -326,7 +344,45 @@ function CommandCenterContent() {
                   inventoryDeltas[itemId] = (inventoryDeltas[itemId] || 0) - qty;
                 });
 
+                // Track customer profile updates
+                if (loyaltyUpdate) {
+                  const updatedProfile: CustomerProfile = {
+                    ...customerProfile,
+                    loyaltyScore: loyaltyUpdate.newScore,
+                    currentTier: getLoyaltyTier(loyaltyUpdate.newScore).tier,
+                    lastOrderDate: new Date().toISOString(),
+                    totalOrders: customerProfile.totalOrders + 1,
+                    lifetimeValue: customerProfile.lifetimeValue + orderToProcess.totalAmount,
+                  };
+                  customerProfileUpdates[orderToProcess.customerId] = updatedProfile;
+                }
+
                 updateOrderStatus(business.id, orderToProcess.id, completed);
+              });
+
+              // Update customer profiles in batch
+              const profileUpdates: any = {};
+              Object.entries(customerProfileUpdates).forEach(([customerId, profile]) => {
+                profileUpdates[`customerProfiles.${customerId}`] = profile;
+              });
+
+              // Award XP to employees
+              const updatedEmployees = business.employees.map((emp: any) => {
+                if (!emp.skills || Object.keys(emp.skills).length === 0) {
+                  emp.skills = initializeEmployeeSkills(emp.role);
+                }
+                
+                const taskDifficulty = 'easy'; // Auto-work is easier
+                const primarySkill = emp.role === 'speedster' ? 'speed' : emp.role === 'specialist' ? 'quality' : 'customer_service';
+                const result = updateEmployeeAfterTask(emp, taskDifficulty, primarySkill);
+                
+                return result.updatedEmployee;
+              });
+
+              const bizRef = doc(db, 'businesses', business.id);
+              updateDoc(bizRef, {
+                ...profileUpdates,
+                employees: updatedEmployees
               });
 
               updateBusinessFinancials(business.id, {
@@ -383,7 +439,16 @@ function CommandCenterContent() {
         }
 
         const activeCount = orders.filter((o) => o.status === 'accepted' || o.status === 'in_progress').length;
-        const newOrders = generateOrdersForTick(businessType, business, simHour, activeCount, 15);
+        
+        // Convert customer profiles to Map
+        const customerProfilesMap = new Map<string, CustomerProfile>();
+        if (business.customerProfiles) {
+          Object.entries(business.customerProfiles).forEach(([id, profile]) => {
+            customerProfilesMap.set(id, profile as CustomerProfile);
+          });
+        }
+        
+        const newOrders = generateOrdersForTick(businessType, business, simHour, activeCount, 15, customerProfilesMap);
 
         if (newOrders.length > 0) {
           saveNewOrders(business.id, newOrders);
@@ -430,11 +495,22 @@ function CommandCenterContent() {
     if (!order) return;
 
     const qualityScore = customQuality ?? Math.floor(60 + Math.random() * 40);
-    const { order: completed, payment, tip, inventoryDeductions } = completeOrder(
+    
+    // Get or create customer profile
+    const customerProfiles = business.customerProfiles || {};
+    let customerProfile = customerProfiles[order.customerId] as CustomerProfile | undefined;
+    if (!customerProfile) {
+      customerProfile = createCustomerProfile(order.customerId, order.customerName);
+    }
+    
+    const completionResult = completeOrder(
       order,
       qualityScore,
-      businessType ?? undefined
+      businessType ?? undefined,
+      customerProfile
     );
+    
+    const { order: completed, payment, tip, inventoryDeductions, loyaltyUpdate } = completionResult;
 
     const currentInv = business.inventory || {};
     const insufficientStock = Object.entries(inventoryDeductions).some(
@@ -476,16 +552,58 @@ function CommandCenterContent() {
       inventoryDeltas[itemId] = (inventoryDeltas[itemId] || 0) - qty;
     });
 
-    await updateBusinessFinancials(business.id, {
+    // Update customer profile if loyalty changed
+    const updates: any = {
       cashDelta: payment + tip,
       totalRevenueDelta: payment + tip,
       reputation: Math.min(100, business.reputation + (stars >= 5 ? 2 : stars <= 2 ? -2 : 0)),
       ordersCompletedDelta: 1,
       reviews: [newReview, ...currentReviews].slice(0, 20),
       inventoryDeltas,
-    });
+    };
 
-    if (stars === 6) {
+    if (loyaltyUpdate) {
+      // Update the customer profile with new loyalty data
+      const updatedProfile: CustomerProfile = {
+        ...customerProfile,
+        loyaltyScore: loyaltyUpdate.newScore,
+        currentTier: getLoyaltyTier(loyaltyUpdate.newScore).tier,
+        lastOrderDate: new Date().toISOString(),
+        totalOrders: customerProfile.totalOrders + 1,
+        lifetimeValue: customerProfile.lifetimeValue + order.totalAmount,
+      };
+      
+      updates.customerProfileUpdate = {
+        customerId: order.customerId,
+        profile: updatedProfile
+      };
+    }
+
+    // Award XP to employees who worked on this order
+    if (business.employees && business.employees.length > 0) {
+      const taskDifficulty = order.totalAmount > 200 ? 'hard' : order.totalAmount > 100 ? 'medium' : 'easy';
+      const updatedEmployees = business.employees.map(emp => {
+        // Initialize skills if not present
+        if (!emp.skills || Object.keys(emp.skills).length === 0) {
+          emp.skills = initializeEmployeeSkills(emp.role);
+        }
+        
+        // Award XP based on role
+        const primarySkill = emp.role === 'speedster' ? 'speed' : emp.role === 'specialist' ? 'quality' : 'customer_service';
+        const result = updateEmployeeAfterTask(emp, taskDifficulty, primarySkill, ['speed', 'quality']);
+        
+        return result.updatedEmployee;
+      });
+
+      const bizRef = doc(db, 'businesses', business.id);
+      updateDoc(bizRef, { employees: updatedEmployees });
+    }
+
+    await updateBusinessFinancials(business.id, updates);
+
+    if (loyaltyUpdate && loyaltyUpdate.tierChanged) {
+      showInterrupt('luka', `${order.customerName} ${loyaltyUpdate.message}`, 'happy');
+    } else if (stars === 6) {
       showInterrupt('luka', `WOAH! A 6-Star Legendary Review from ${order.customerName}!`, 'happy');
     } else if (stars <= 2) {
       showInterrupt('keisha', `Ouch. ${order.customerName} left a ${stars}-star review.`, 'concerned');
@@ -659,6 +777,26 @@ function CommandCenterContent() {
                 </div>
               </BrightLayer>
             </div>
+
+            {/* Customer Loyalty Dashboard */}
+            {business && business.customerProfiles && Object.keys(business.customerProfiles).length > 0 && (
+              <div>
+                <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
+                  Customer Relationships
+                </BrightHeading>
+                <LoyaltyDashboard 
+                  customers={Object.values(business.customerProfiles).map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    loyaltyScore: p.loyaltyScore,
+                    currentTier: p.currentTier,
+                    lastOrderDate: p.lastOrderDate,
+                    totalOrders: p.totalOrders,
+                    lifetimeValue: p.lifetimeValue
+                  }))}
+                />
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-5 space-y-10">

@@ -5,8 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { MarketItem, BusinessState } from '@/lib/economy/economy-types';
-import { updateBusinessFinancials } from '@/lib/economy/firebase-db'; // We might need to export this or use context
+import { updateBusinessFinancials } from '@/lib/economy/firebase-db';
 import { ensureMarketRestock } from '@/lib/economy';
+import { 
+  SupplyDemandCurve, 
+  calculatePrice, 
+  getPricingResult, 
+  simulateMarketDemand 
+} from '@/lib/economy/pricing-engine';
 import { BCoinIcon } from '@/components/BCoinIcon';
 import { doc, updateDoc, Timestamp, increment } from 'firebase/firestore'; // Import directly for now or use db helper
 import { db } from '@/lib/firebase';
@@ -15,10 +21,47 @@ interface MarketplaceProps {
     business: BusinessState;
 }
 
+// Initialize supply/demand curves for market items
+const initializePricingCurves = (items: MarketItem[]): Map<string, SupplyDemandCurve> => {
+    const curves = new Map<string, SupplyDemandCurve>();
+    
+    items.forEach(item => {
+        curves.set(item.id, {
+            productId: item.id,
+            basePrice: item.price,
+            currentSupply: item.stock,
+            currentDemand: Math.floor(item.maxStock * 0.3), // Base demand at 30% of max stock
+            elasticity: 0.3, // Moderate price sensitivity
+            priceHistory: [{ timestamp: new Date().toISOString(), price: item.price }]
+        });
+    });
+    
+    return curves;
+};
+
 export default function Marketplace({ business }: MarketplaceProps) {
     const [timeLeft, setTimeLeft] = useState<string>('00:00');
     const [isRestocking, setIsRestocking] = useState(false);
+    const [pricingCurves, setPricingCurves] = useState<Map<string, SupplyDemandCurve>>(new Map());
     const anySrcLoader = ({ src }: { src: string }) => src;
+
+    // Initialize pricing curves when market items change
+    useEffect(() => {
+        if (business.marketState?.items && business.marketState.items.length > 0) {
+            const curves = initializePricingCurves(business.marketState.items);
+            
+            // Update demand based on time and reputation
+            const hour = new Date().getHours();
+            const demandMultiplier = simulateMarketDemand(hour, business.reputation);
+            
+            curves.forEach((curve, itemId) => {
+                const adjustedDemand = Math.floor(curve.currentDemand * demandMultiplier);
+                curves.set(itemId, { ...curve, currentDemand: adjustedDemand });
+            });
+            
+            setPricingCurves(curves);
+        }
+    }, [business.marketState?.items, business.reputation]);
 
     // Initial Restock Check
     useEffect(() => {
@@ -65,7 +108,9 @@ export default function Marketplace({ business }: MarketplaceProps) {
     }, [business.id, business.marketState?.nextRestock, isRestocking]);
 
     const handleBuy = async (item: MarketItem, quantity: number) => {
-        const cost = item.price * quantity;
+        const curve = pricingCurves.get(item.id);
+        const dynamicPrice = curve ? calculatePrice(curve) : item.price;
+        const cost = dynamicPrice * quantity;
 
         if (business.cashBalance < cost) {
             alert("Insufficient Bcoins!");
@@ -78,10 +123,24 @@ export default function Marketplace({ business }: MarketplaceProps) {
 
         const bizRef = doc(db, 'businesses', business.id);
 
-        // Update Marketplace Stock specifically within the marketState array
+        // Update Marketplace Stock and pricing curve
         const newMarketItems = marketItems.map(i =>
-            i.id === item.id ? { ...i, stock: i.stock - quantity } : i
+            i.id === item.id ? { ...i, stock: i.stock - quantity, price: Math.round(dynamicPrice) } : i
         );
+
+        // Update supply in pricing curve (supply decreased)
+        if (curve) {
+            const updatedCurve = {
+                ...curve,
+                currentSupply: Math.max(0, curve.currentSupply - quantity),
+                currentDemand: curve.currentDemand + Math.floor(quantity * 0.5), // Demand increases slightly
+                priceHistory: [
+                    ...curve.priceHistory.slice(-20),
+                    { timestamp: new Date().toISOString(), price: dynamicPrice }
+                ]
+            };
+            setPricingCurves(new Map(pricingCurves.set(item.id, updatedCurve)));
+        }
 
         // Deduct money and update inventory + marketplace state
         await updateDoc(bizRef, {
@@ -136,6 +195,12 @@ export default function Marketplace({ business }: MarketplaceProps) {
                         const stockPercent = (item.stock / item.maxStock) * 100;
                         const isLowStock = stockPercent < 30;
                         const isSoldOut = item.stock === 0;
+                        
+                        // Get dynamic pricing
+                        const curve = pricingCurves.get(item.id);
+                        const dynamicPrice = curve ? Math.round(calculatePrice(curve)) : item.price;
+                        const pricingResult = curve ? getPricingResult(curve) : null;
+                        const priceChanged = dynamicPrice !== item.price;
 
                         return (
                             <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden hover:border-[var(--brand-primary)] hover:shadow-lg transition-all duration-300">
@@ -166,25 +231,44 @@ export default function Marketplace({ business }: MarketplaceProps) {
                                     <div className={`absolute top-2 right-2 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border backdrop-blur-md ${isSoldOut ? 'bg-[var(--state-error)]/90 text-white border-[var(--state-error)]' : 'bg-black/50 text-white border-white/20'}`}>
                                         {isSoldOut ? 'Sold Out' : `${item.stock} left`}
                                     </div>
+                                    
+                                    {/* Price Trend Indicator */}
+                                    {pricingResult && pricingResult.trend !== 'stable' && (
+                                        <div className={`absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-black backdrop-blur-md ${pricingResult.trend === 'rising' ? 'bg-red-500/80 text-white' : 'bg-green-500/80 text-white'}`}>
+                                            {pricingResult.trend === 'rising' ? '📈' : '📉'}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Details */}
                                 <div className="p-4">
                                     <h4 className="font-bold text-[var(--text-primary)] text-sm mb-1 truncate" title={item.name}>{item.name}</h4>
-                                    <div className="flex items-baseline gap-1 mb-4">
-                                        <span className="text-[var(--brand-accent)] font-black text-base">฿{item.price}</span>
+                                    <div className="flex items-baseline gap-1 mb-1">
+                                        <span className={`font-black text-base ${priceChanged ? 'text-[var(--state-warning)]' : 'text-[var(--brand-accent)]'}`}>
+                                            ฿{dynamicPrice}
+                                        </span>
+                                        {priceChanged && (
+                                            <span className="text-[10px] text-[var(--text-muted)] line-through">
+                                                ฿{item.price}
+                                            </span>
+                                        )}
                                     </div>
+                                    {pricingResult && (
+                                        <p className="text-[9px] text-[var(--text-muted)] mb-3 italic">
+                                            {pricingResult.reason}
+                                        </p>
+                                    )}
 
                                     <div className="grid grid-cols-1 gap-2">
                                         <button
-                                            disabled={item.stock < 1 || business.cashBalance < item.price}
+                                            disabled={item.stock < 1 || business.cashBalance < dynamicPrice}
                                             onClick={() => handleBuy(item, 1)}
                                             className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             Purchase 1 Unit
                                         </button>
                                         <button
-                                            disabled={item.stock < 5 || business.cashBalance < item.price * 5}
+                                            disabled={item.stock < 5 || business.cashBalance < dynamicPrice * 5}
                                             onClick={() => handleBuy(item, 5)}
                                             className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
