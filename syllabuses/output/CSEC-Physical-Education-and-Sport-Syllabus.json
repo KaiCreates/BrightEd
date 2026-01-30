@@ -1,0 +1,4306 @@
+[
+  {
+    "id": "PHYS-00001",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "37 Arnold Road, King",
+    "content": "ston 5, Ja",
+    "specific_objectives": [
+      "Arnold Road, King"
+    ],
+    "content_items": [
+      "ston 5, Ja"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "arnold",
+      "king",
+      "road",
+      "ston"
+    ],
+    "hash": "1697342ce0",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.380806"
+  },
+  {
+    "id": "PHYS-00002",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Prince Road, Pine Pla",
+    "content": "ntation Ro",
+    "specific_objectives": [
+      "Prince Road, Pine Pla"
+    ],
+    "content_items": [
+      "ntation Ro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "ntation",
+      "pine",
+      "pla",
+      "prince",
+      "road"
+    ],
+    "hash": "2fab056821",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.380941"
+  },
+  {
+    "id": "PHYS-00003",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "RATIONALE ............",
+    "content": "..............",
+    "specific_objectives": [
+      "RATIONALE ............"
+    ],
+    "content_items": [
+      ".............."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "rationale"
+    ],
+    "hash": "4e980ab9b2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.627815"
+  },
+  {
+    "id": "PHYS-00004",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "AIMS ......................",
+    "content": "..............",
+    "specific_objectives": [
+      "AIMS ......................"
+    ],
+    "content_items": [
+      ".............."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "aims"
+    ],
+    "hash": "8973e00347",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.627890"
+  },
+  {
+    "id": "PHYS-00005",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "CORE .....................",
+    "content": "...............",
+    "specific_objectives": [
+      "CORE ....................."
+    ],
+    "content_items": [
+      "..............."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "core"
+    ],
+    "hash": "c7bb5c7ea7",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.628090"
+  },
+  {
+    "id": "PHYS-00006",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "OPTIONS ..............",
+    "content": "..............",
+    "specific_objectives": [
+      "OPTIONS .............."
+    ],
+    "content_items": [
+      ".............."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "options"
+    ],
+    "hash": "ba3777dd32",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.628148"
+  },
+  {
+    "id": "PHYS-00007",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "GLOSSARY ..............",
+    "content": "..............",
+    "specific_objectives": [
+      "GLOSSARY .............."
+    ],
+    "content_items": [
+      ".............."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "glossary"
+    ],
+    "hash": "ee44521063",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:26.628244"
+  },
+  {
+    "id": "PHYS-00008",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Movement is essential",
+    "content": "for d",
+    "specific_objectives": [
+      "Movement is essential"
+    ],
+    "content_items": [
+      "for d"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "essential",
+      "movement"
+    ],
+    "hash": "ec3c2230c7",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.007877"
+  },
+  {
+    "id": "PHYS-00009",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "is critical for quality hu",
+    "content": "man",
+    "specific_objectives": [
+      "is critical for quality hu"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "critical",
+      "man",
+      "quality"
+    ],
+    "hash": "6384927b29",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.007956"
+  },
+  {
+    "id": "PHYS-00010",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "process, contributes to",
+    "content": "an in",
+    "specific_objectives": [
+      "process, contributes to"
+    ],
+    "content_items": [
+      "an in"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "contributes",
+      "process"
+    ],
+    "hash": "e2b2d1b0e5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008027"
+  },
+  {
+    "id": "PHYS-00011",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "as a vehicle for the en",
+    "content": "hanc",
+    "specific_objectives": [
+      "as a vehicle for the en"
+    ],
+    "content_items": [],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "hanc",
+      "vehicle"
+    ],
+    "hash": "dbfddb94f3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008113"
+  },
+  {
+    "id": "PHYS-00012",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "learnt through a prope",
+    "content": "rly str",
+    "specific_objectives": [
+      "learnt through a prope"
+    ],
+    "content_items": [
+      "rly str"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "learnt",
+      "prope",
+      "rly",
+      "str",
+      "through"
+    ],
+    "hash": "d66fa839eb",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008178"
+  },
+  {
+    "id": "PHYS-00013",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "or informal rules tha",
+    "content": "t inv",
+    "specific_objectives": [
+      "or informal rules tha"
+    ],
+    "content_items": [
+      "t inv"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "informal",
+      "inv",
+      "rules",
+      "tha"
+    ],
+    "hash": "302578dcc6",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008242"
+  },
+  {
+    "id": "PHYS-00014",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "promoting healthy lif",
+    "content": "estyle",
+    "specific_objectives": [
+      "promoting healthy lif"
+    ],
+    "content_items": [
+      "estyle"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "estyle",
+      "healthy",
+      "lif",
+      "promoting"
+    ],
+    "hash": "fb0b2bde21",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008304"
+  },
+  {
+    "id": "PHYS-00015",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "international peace a",
+    "content": "nd un",
+    "specific_objectives": [
+      "international peace a"
+    ],
+    "content_items": [
+      "nd un"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "international",
+      "peace"
+    ],
+    "hash": "d8ae51af97",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008363"
+  },
+  {
+    "id": "PHYS-00016",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "have embraced shared",
+    "content": "valu",
+    "specific_objectives": [
+      "have embraced shared"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "embraced",
+      "have",
+      "shared",
+      "valu"
+    ],
+    "hash": "0047f3ca15",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008410"
+  },
+  {
+    "id": "PHYS-00017",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "The study of Physical E",
+    "content": "ducat",
+    "specific_objectives": [
+      "The study of Physical E"
+    ],
+    "content_items": [
+      "ducat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "ducat",
+      "physical",
+      "study"
+    ],
+    "hash": "23730bd4fa",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008476"
+  },
+  {
+    "id": "PHYS-00018",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "cooperatively in the t",
+    "content": "heore",
+    "specific_objectives": [
+      "cooperatively in the t"
+    ],
+    "content_items": [
+      "heore"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "cooperatively",
+      "heore"
+    ],
+    "hash": "0125a89acd",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008536"
+  },
+  {
+    "id": "PHYS-00019",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "developing critical life",
+    "content": "skills",
+    "specific_objectives": [
+      "developing critical life"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "critical",
+      "developing",
+      "life",
+      "skills"
+    ],
+    "hash": "1dcbaea38b",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008596"
+  },
+  {
+    "id": "PHYS-00020",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "experiences that facil",
+    "content": "itate",
+    "specific_objectives": [
+      "experiences that facil"
+    ],
+    "content_items": [
+      "itate"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "experiences",
+      "facil",
+      "itate"
+    ],
+    "hash": "673c80699f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008655"
+  },
+  {
+    "id": "PHYS-00021",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Twenty first century",
+    "content": "skills",
+    "specific_objectives": [
+      "Twenty first century"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "century",
+      "first",
+      "skills",
+      "twenty"
+    ],
+    "hash": "62310f3f7a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008712"
+  },
+  {
+    "id": "PHYS-00022",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "undertaking a course",
+    "content": "of st",
+    "specific_objectives": [
+      "undertaking a course"
+    ],
+    "content_items": [
+      "of st"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "course",
+      "undertaking"
+    ],
+    "hash": "6b47f40820",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008795"
+  },
+  {
+    "id": "PHYS-00023",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "intended to meet the",
+    "content": "needs",
+    "specific_objectives": [
+      "intended to meet the"
+    ],
+    "content_items": [
+      "needs"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "intended",
+      "meet",
+      "needs"
+    ],
+    "hash": "dc42943c05",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008853"
+  },
+  {
+    "id": "PHYS-00024",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "knowledge of Physical",
+    "content": "Educ",
+    "specific_objectives": [
+      "knowledge of Physical"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "educ",
+      "knowledge",
+      "physical"
+    ],
+    "hash": "0655c08ca7",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008910"
+  },
+  {
+    "id": "PHYS-00025",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "at a more universal l",
+    "content": "evel.",
+    "specific_objectives": [
+      "at a more universal l"
+    ],
+    "content_items": [
+      "evel."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "evel",
+      "more",
+      "universal"
+    ],
+    "hash": "dd2139237c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.008971"
+  },
+  {
+    "id": "PHYS-00026",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Physical Education a",
+    "content": "nd re",
+    "specific_objectives": [
+      "Physical Education a"
+    ],
+    "content_items": [
+      "nd re"
+    ],
+    "skills": [
+      "RE"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "education",
+      "physical"
+    ],
+    "hash": "2454b50ccf",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009031"
+  },
+  {
+    "id": "PHYS-00027",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "consideration the mul",
+    "content": "ticultu",
+    "specific_objectives": [
+      "consideration the mul"
+    ],
+    "content_items": [
+      "ticultu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "consideration",
+      "mul",
+      "ticultu"
+    ],
+    "hash": "2231cfe6ee",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009103"
+  },
+  {
+    "id": "PHYS-00028",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "to a wide range of exp",
+    "content": "erien",
+    "specific_objectives": [
+      "to a wide range of exp"
+    ],
+    "content_items": [
+      "erien"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "erien",
+      "exp",
+      "range",
+      "wide"
+    ],
+    "hash": "87b2c25fc5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009159"
+  },
+  {
+    "id": "PHYS-00029",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "This syllabus will cont",
+    "content": "ribute",
+    "specific_objectives": [
+      "This syllabus will cont"
+    ],
+    "content_items": [
+      "ribute"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "cont",
+      "ribute",
+      "syllabus",
+      "will"
+    ],
+    "hash": "66ed934935",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009222"
+  },
+  {
+    "id": "PHYS-00030",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "to control, improve, m",
+    "content": "ainta",
+    "specific_objectives": [
+      "to control, improve, m"
+    ],
+    "content_items": [
+      "ainta"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "ainta",
+      "control",
+      "improve"
+    ],
+    "hash": "a3a99dd7cc",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009308"
+  },
+  {
+    "id": "PHYS-00031",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "contribute to the healt",
+    "content": "h and",
+    "specific_objectives": [
+      "contribute to the healt"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "contribute",
+      "healt"
+    ],
+    "hash": "1765ad81c5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009369"
+  },
+  {
+    "id": "PHYS-00032",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "of Learning, this cours",
+    "content": "e of st",
+    "specific_objectives": [
+      "of Learning, this cours"
+    ],
+    "content_items": [
+      "e of st"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "cours",
+      "learning"
+    ],
+    "hash": "3c0e7d1771",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009434"
+  },
+  {
+    "id": "PHYS-00033",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "together and learn to",
+    "content": "transf",
+    "specific_objectives": [
+      "together",
+      "learn to"
+    ],
+    "content_items": [
+      "transf"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "learn",
+      "together",
+      "transf"
+    ],
+    "hash": "4c1c2dbdc3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.009492"
+  },
+  {
+    "id": "PHYS-00034",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Exercise Physiologist",
+    "content": "Sport Announcer",
+    "specific_objectives": [
+      "Exercise Physiologist"
+    ],
+    "content_items": [
+      "Sport Announcer"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "announcer",
+      "exercise",
+      "physiologist",
+      "sport"
+    ],
+    "hash": "5c43c3537c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.210125"
+  },
+  {
+    "id": "PHYS-00035",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Physical Education teacher/lecturer",
+    "content": "Sport Manager",
+    "specific_objectives": [
+      "Physical Education teacher/lecturer"
+    ],
+    "content_items": [
+      "Sport Manager"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "education",
+      "lecturer",
+      "manager",
+      "physical",
+      "sport",
+      "teacher"
+    ],
+    "hash": "72e4e94eda",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.210200"
+  },
+  {
+    "id": "PHYS-00036",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Physical Training Instructor",
+    "content": "Sport Medicine/Practitioner",
+    "specific_objectives": [
+      "Physical Training Instructor"
+    ],
+    "content_items": [
+      "Sport Medicine/Practitioner"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "instructor",
+      "medicine",
+      "physical",
+      "practitioner",
+      "sport",
+      "training"
+    ],
+    "hash": "d1994fc531",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.210254"
+  },
+  {
+    "id": "PHYS-00037",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "1. History and Development of Physical Education and Sport 2. Anatomy and Physiology 3. Fitness and Performance 4. Health and Nutrition 5. Trends and Social Issues",
+    "content": "A",
+    "specific_objectives": [
+      "History",
+      "Development of Physical Education",
+      "Sport 2. Anatomy",
+      "Physiology 3. Fitness",
+      "Performance 4. Health",
+      "Nutrition 5. Trends",
+      "Social Issues"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "anatomy",
+      "development",
+      "education",
+      "fitness",
+      "health",
+      "history",
+      "issues",
+      "nutrition",
+      "performance",
+      "physical",
+      "physiology",
+      "social"
+    ],
+    "hash": "fbdfffa2fe",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.386554"
+  },
+  {
+    "id": "PHYS-00038",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "The Physical Education and Sport syllabus will be examined at the General Proficiency only.",
+    "content": "Candidates",
+    "specific_objectives": [
+      "The Physical Education",
+      "Sport syllabus will be examined at the General Proficiency only."
+    ],
+    "content_items": [
+      "Candidates"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "candidates",
+      "education",
+      "examined",
+      "general",
+      "only",
+      "physical",
+      "proficiency",
+      "sport",
+      "syllabus",
+      "will"
+    ],
+    "hash": "69bd72d9b9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.433258"
+  },
+  {
+    "id": "PHYS-00039",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "will be awarded an overall grade reported on a 6-point scale. In addition to the ove",
+    "content": "rall grade,",
+    "specific_objectives": [
+      "will be awarded an overall grade reported on a 6-point scale. In addition to the ove"
+    ],
+    "content_items": [
+      "rall grade,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "addition",
+      "awarded",
+      "grade",
+      "ove",
+      "overall",
+      "point",
+      "rall",
+      "reported",
+      "scale",
+      "will"
+    ],
+    "hash": "aef7ae1d59",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.433342"
+  },
+  {
+    "id": "PHYS-00040",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "candidates’ performance will be reported by a letter grade under profile dimensions of:",
+    "content": "Theory and",
+    "specific_objectives": [
+      "candidates’ performance will be reported by a letter grade under profile dimensions of:"
+    ],
+    "content_items": [
+      "Theory"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "candidates",
+      "dimensions",
+      "grade",
+      "letter",
+      "performance",
+      "profile",
+      "reported",
+      "theory",
+      "under",
+      "will"
+    ],
+    "hash": "c5308985c3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.433433"
+  },
+  {
+    "id": "PHYS-00041",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "describe the structure and",
+    "content": "Cells",
+    "specific_objectives": [
+      "describe the structure"
+    ],
+    "content_items": [
+      "Cells"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 13,
+    "keywords": [
+      "cells",
+      "describe",
+      "structure"
+    ],
+    "hash": "7c434c8571",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463121"
+  },
+  {
+    "id": "PHYS-00042",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "analyse the structure and functions",
+    "content": "(ii)",
+    "specific_objectives": [
+      "analyse the structure",
+      "functions"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 13,
+    "keywords": [
+      "analyse",
+      "functions",
+      "structure"
+    ],
+    "hash": "b925d6c418",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463193"
+  },
+  {
+    "id": "PHYS-00043",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "of the systems of the human body.",
+    "content": "Bones: types, names,",
+    "specific_objectives": [
+      "of the systems of the human body."
+    ],
+    "content_items": [
+      "Bones: types, names,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "body",
+      "bones",
+      "human",
+      "names",
+      "systems",
+      "types"
+    ],
+    "hash": "d55d932f52",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463251"
+  },
+  {
+    "id": "PHYS-00044",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "Joints: types, names,",
+    "content": "structure",
+    "specific_objectives": [
+      "Joints: types, names,"
+    ],
+    "content_items": [
+      "structure"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "joints",
+      "names",
+      "structure",
+      "types"
+    ],
+    "hash": "f301810cfd",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463299"
+  },
+  {
+    "id": "PHYS-00045",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "major muscle groups,",
+    "content": "structure,",
+    "specific_objectives": [
+      "major muscle groups,"
+    ],
+    "content_items": [
+      "structure,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "groups",
+      "major",
+      "muscle",
+      "structure"
+    ],
+    "hash": "585b5ef458",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463365"
+  },
+  {
+    "id": "PHYS-00046",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "vessels), structure, f",
+    "content": "unction,",
+    "specific_objectives": [
+      "vessels), structure, f"
+    ],
+    "content_items": [
+      "unction,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "structure",
+      "unction",
+      "vessels"
+    ],
+    "hash": "04ac8c3cb3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463437"
+  },
+  {
+    "id": "PHYS-00047",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "function, respiratory",
+    "content": "rate, tid",
+    "specific_objectives": [
+      "function, respiratory"
+    ],
+    "content_items": [
+      "rate, tid"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "function",
+      "rate",
+      "respiratory",
+      "tid"
+    ],
+    "hash": "a43975d35e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463512"
+  },
+  {
+    "id": "PHYS-00048",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "Central, peripheral,",
+    "content": "autonomic",
+    "specific_objectives": [
+      "Central, peripheral,"
+    ],
+    "content_items": [
+      "autonomic"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "autonomic",
+      "central",
+      "peripheral"
+    ],
+    "hash": "08b170f704",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463582"
+  },
+  {
+    "id": "PHYS-00049",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "nervous tissue (senso",
+    "content": "ry, motor",
+    "specific_objectives": [
+      "nervous tissue (senso"
+    ],
+    "content_items": [
+      "ry, motor"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "motor",
+      "nervous",
+      "senso",
+      "tissue"
+    ],
+    "hash": "136ac33fce",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463625"
+  },
+  {
+    "id": "PHYS-00050",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "structure, function,",
+    "content": "volun",
+    "specific_objectives": [
+      "structure, function,"
+    ],
+    "content_items": [
+      "volun"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "function",
+      "structure",
+      "volun"
+    ],
+    "hash": "6c205a1f7e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463663"
+  },
+  {
+    "id": "PHYS-00051",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "Names of organs, stru",
+    "content": "cture, func",
+    "specific_objectives": [
+      "Names of organs, stru"
+    ],
+    "content_items": [
+      "cture, func"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "cture",
+      "func",
+      "names",
+      "organs",
+      "stru"
+    ],
+    "hash": "b62bda726f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463724"
+  },
+  {
+    "id": "PHYS-00052",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "regulation; homeostas",
+    "content": "is.",
+    "specific_objectives": [
+      "regulation",
+      "homeostas"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "homeostas",
+      "regulation"
+    ],
+    "hash": "2fe2e4b77a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463801"
+  },
+  {
+    "id": "PHYS-00053",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "and associated glands",
+    "content": ".",
+    "specific_objectives": [
+      "associated glands"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "associated",
+      "glands"
+    ],
+    "hash": "5ade4b3890",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.463858"
+  },
+  {
+    "id": "PHYS-00054",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "training and conditi",
+    "content": "oning;",
+    "specific_objectives": [
+      "training",
+      "conditi"
+    ],
+    "content_items": [
+      "oning"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 14,
+    "keywords": [
+      "conditi",
+      "oning",
+      "training"
+    ],
+    "hash": "f1c9979ba3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.717887"
+  },
+  {
+    "id": "PHYS-00055",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "Associative and Autono",
+    "content": "mous.",
+    "specific_objectives": [
+      "Associative",
+      "Autono"
+    ],
+    "content_items": [
+      "mous."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "associative",
+      "autono",
+      "mous"
+    ],
+    "hash": "62ce61c3a7",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.964754"
+  },
+  {
+    "id": "PHYS-00056",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "weather, playing surfac",
+    "content": "e.",
+    "specific_objectives": [
+      "weather, playing surfac"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "playing",
+      "surfac",
+      "weather"
+    ],
+    "hash": "df66ce89d9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.964861"
+  },
+  {
+    "id": "PHYS-00057",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "abduction/adduction, r",
+    "content": "otation,",
+    "specific_objectives": [
+      "abduction/adduction, r"
+    ],
+    "content_items": [
+      "otation,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "abduction",
+      "adduction",
+      "otation"
+    ],
+    "hash": "e2c3f4540e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.964947"
+  },
+  {
+    "id": "PHYS-00058",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "circumduction, inversio",
+    "content": "n/eversion,",
+    "specific_objectives": [
+      "circumduction, inversio"
+    ],
+    "content_items": [
+      "n/eversion,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "circumduction",
+      "eversion",
+      "inversio"
+    ],
+    "hash": "4952f6e196",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.964990"
+  },
+  {
+    "id": "PHYS-00059",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "propulsion, catching, re",
+    "content": "ceiving, landing.",
+    "specific_objectives": [
+      "propulsion, catching, re"
+    ],
+    "content_items": [
+      "ceiving, landing."
+    ],
+    "skills": [
+      "RE"
+    ],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "catching",
+      "ceiving",
+      "landing",
+      "propulsion"
+    ],
+    "hash": "8a889ef50c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.965099"
+  },
+  {
+    "id": "PHYS-00060",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "concussion, soft tissue",
+    "content": "injuries;",
+    "specific_objectives": [
+      "concussion, soft tissue"
+    ],
+    "content_items": [
+      "injuries"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "concussion",
+      "injuries",
+      "soft",
+      "tissue"
+    ],
+    "hash": "f104ebf734",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.965282"
+  },
+  {
+    "id": "PHYS-00061",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "fruits, vegetables, food from a",
+    "content": "nimals, fats",
+    "specific_objectives": [
+      "fruits, vegetables, food from a"
+    ],
+    "content_items": [
+      "nimals, fats"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 16,
+    "keywords": [
+      "fats",
+      "food",
+      "fruits",
+      "nimals",
+      "vegetables"
+    ],
+    "hash": "4febbe5369",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.192180"
+  },
+  {
+    "id": "PHYS-00062",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "- Skills (Individual performance)",
+    "content": "12",
+    "specific_objectives": [
+      "Skills (Individual performance)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "skills"
+    ],
+    "hash": "99862ed50b",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.993980"
+  },
+  {
+    "id": "PHYS-00063",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "- Application of skills in a competitive situation",
+    "content": "11",
+    "specific_objectives": [
+      "Application of skills in a competitive situation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "application",
+      "competitive",
+      "situation",
+      "skills"
+    ],
+    "hash": "7c423cf5e5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.172047"
+  },
+  {
+    "id": "PHYS-00064",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "- Tactics: application in a competitive situation",
+    "content": "11",
+    "specific_objectives": [
+      "Tactics: application in a competitive situation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "application",
+      "competitive",
+      "situation",
+      "tactics"
+    ],
+    "hash": "c1218d5ed5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.172187"
+  },
+  {
+    "id": "PHYS-00065",
+    "section": "section is: worth",
+    "subsection": "Unknown",
+    "objective": "- Laws/Rules of the game/ event and their application.",
+    "content": " Demonstrates advanced knowledge of the laws/rules of the game/event and their application all of the time.  Demonstrates good knowledge of the laws/rules of the game/event and their application most of the time.",
+    "specific_objectives": [
+      "Laws/Rules of the game/ event",
+      "their application."
+    ],
+    "content_items": [
+      " Demonstrates advanced knowledge of the laws/rules of the game/event",
+      "their application all of the time.  Demonstrates good knowledge of the laws/rules of the game/event",
+      "their application most of the time."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "advanced",
+      "all",
+      "application",
+      "demonstrates",
+      "event",
+      "game",
+      "good",
+      "knowledge",
+      "laws",
+      "most",
+      "rules",
+      "time"
+    ],
+    "hash": "be3a0b3690",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.172359"
+  },
+  {
+    "id": "PHYS-00066",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": " Demonstrates moderate knowledge of the laws/rules of the game/event and their application occasionally.  Demonstrates limited knowledge of the laws/rules of the game/event and their application.  Unable to demonstrate knowledge of the laws/rules of the game/event and their application.",
+    "content": "1 - 2 0",
+    "specific_objectives": [
+      " Demonstrates moderate knowledge of the laws/rules of the game/event",
+      "their application occasionally.  Demonstrates limited knowledge of the laws/rules of the game/event",
+      "their application.  Unable to demonstrate knowledge of the laws/rules of the game/event",
+      "their application."
+    ],
+    "content_items": [
+      "2 0"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 44,
+    "keywords": [
+      "application",
+      "demonstrate",
+      "demonstrates",
+      "event",
+      "game",
+      "knowledge",
+      "laws",
+      "limited",
+      "moderate",
+      "occasionally",
+      "rules",
+      "unable"
+    ],
+    "hash": "63ffe34885",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.332428"
+  },
+  {
+    "id": "PHYS-00067",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "The Class Project sh",
+    "content": "ould take t",
+    "specific_objectives": [
+      "The Class Project sh"
+    ],
+    "content_items": [
+      "ould take t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "class",
+      "ould",
+      "project",
+      "take"
+    ],
+    "hash": "427ce9bf1f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.555831"
+  },
+  {
+    "id": "PHYS-00068",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Skills (Individual performance)",
+    "content": "12",
+    "specific_objectives": [
+      "Skills (Individual performance)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 50,
+    "keywords": [
+      "skills"
+    ],
+    "hash": "7d5bb9ccba",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.496438"
+  },
+  {
+    "id": "PHYS-00069",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Application of skills in a competitive situation",
+    "content": "11",
+    "specific_objectives": [
+      "Application of skills in a competitive situation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 50,
+    "keywords": [
+      "application",
+      "competitive",
+      "situation",
+      "skills"
+    ],
+    "hash": "52abd052a3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.496565"
+  },
+  {
+    "id": "PHYS-00070",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Tactics: application in a competitive situation",
+    "content": "11",
+    "specific_objectives": [
+      "Tactics: application in a competitive situation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 51,
+    "keywords": [
+      "application",
+      "competitive",
+      "situation",
+      "tactics"
+    ],
+    "hash": "c6fb7320a2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.738586"
+  },
+  {
+    "id": "PHYS-00071",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Laws/Rules of the game/ event and their application.",
+    "content": " Demonstrates advanced knowledge of the laws/rules of the game/event and their application all of the time.  Demonstrates good knowledge of the laws/rules of the game/event and their application most of the time.  Demonstrates moderate knowledge of the laws/rules of the game/event and their application occasionally.  Demonstrates limited knowledge of the laws/rules of the game/event and their application.  Unable to demonstrate knowledge of the laws/rules of the game/event and their application.",
+    "specific_objectives": [
+      "Laws/Rules of the game/ event",
+      "their application."
+    ],
+    "content_items": [
+      " Demonstrates advanced knowledge of the laws/rules of the game/event",
+      "their application all of the time.  Demonstrates good knowledge of the laws/rules of the game/event",
+      "their application most of the time.  Demonstrates moderate knowledge of the laws/rules of the game/event",
+      "their application occasionally.  Demonstrates limited knowledge of the laws/rules of the game/event",
+      "their application.  Unable to demonstrate knowledge of the laws/rules of the game/event",
+      "their application."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 51,
+    "keywords": [
+      "advanced",
+      "all",
+      "application",
+      "demonstrate",
+      "demonstrates",
+      "event",
+      "game",
+      "good",
+      "knowledge",
+      "laws",
+      "limited",
+      "moderate"
+    ],
+    "hash": "9e3873566c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.738882"
+  },
+  {
+    "id": "PHYS-00072",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "BASIC PRINCIPLES  Posture and placement  Alignment  Flow of energy  Co-ordination  Balance  Control and mobility  Strength",
+    "content": "4 marks 2 marks 2 marks 1 mark 1 mark 1 mark 1 mark 12 marks",
+    "specific_objectives": [
+      "BASIC PRINCIPLES  Posture",
+      "placement  Alignment  Flow of energy  Co-ordination  Balance  Control",
+      "mobility  Strength"
+    ],
+    "content_items": [
+      "marks 2 marks 2 marks 1 mark 1 mark 1 mark 1 mark 12 marks"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "alignment",
+      "balance",
+      "basic",
+      "control",
+      "energy",
+      "flow",
+      "mark",
+      "marks",
+      "mobility",
+      "ordination",
+      "placement",
+      "posture"
+    ],
+    "hash": "4d32a6e87f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.953848"
+  },
+  {
+    "id": "PHYS-00073",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "THE BODY  Locomotion and elevation  Flexion  Rotation  Use of individual body parts - In isolation - In combination",
+    "content": "1 mark 1 mark 1 mark 4 marks 7 marks",
+    "specific_objectives": [
+      "THE BODY  Locomotion",
+      "elevation  Flexion  Rotation  Use of individual body parts - In isolation - In combination"
+    ],
+    "content_items": [
+      "mark 1 mark 1 mark 4 marks 7 marks"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "body",
+      "combination",
+      "elevation",
+      "flexion",
+      "individual",
+      "isolation",
+      "locomotion",
+      "mark",
+      "marks",
+      "parts",
+      "rotation",
+      "use"
+    ],
+    "hash": "4a2945fc27",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.953992"
+  },
+  {
+    "id": "PHYS-00074",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "DYNAMICS  Speed  Energy  Continuity  Rhythm",
+    "content": "1 mark 1 mark 1 mark 1 mark 4 marks",
+    "specific_objectives": [
+      "DYNAMICS  Speed  Energy  Continuity  Rhythm"
+    ],
+    "content_items": [
+      "mark 1 mark 1 mark 1 mark 4 marks"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "continuity",
+      "dynamics",
+      "energy",
+      "mark",
+      "marks",
+      "rhythm",
+      "speed"
+    ],
+    "hash": "f1cad9460f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.954078"
+  },
+  {
+    "id": "PHYS-00075",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "SPATIAL  Shaping  Projecting Body  Use of Space  Size  Level  Direction  Pathway",
+    "content": "1 mark 1 mark 1 mark 1 mark 1 mark 1 mark 1 mark 7 marks 30 MARKS",
+    "specific_objectives": [
+      "SPATIAL  Shaping  Projecting Body  Use of Space  Size  Level  Direction  Pathway"
+    ],
+    "content_items": [
+      "mark 1 mark 1 mark 1 mark 1 mark 1 mark 1 mark 7 marks 30 MARKS"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "body",
+      "direction",
+      "level",
+      "mark",
+      "marks",
+      "pathway",
+      "projecting",
+      "shaping",
+      "size",
+      "space",
+      "spatial",
+      "use"
+    ],
+    "hash": "d84bd7124b",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.954189"
+  },
+  {
+    "id": "PHYS-00076",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "DANCE COMPOSITION  Composing solo, duo and group dances  Exploration of dance ideas, styles and accompaniments  Selection and development of appropriate actions (spatial and dynamic).  Choreographic devices appropriate to chosen dance style  Expression and communication",
+    "content": "8 marks 6 marks 5 marks 5 marks 6 marks 30 MARKS",
+    "specific_objectives": [
+      "DANCE COMPOSITION  Composing solo, duo",
+      "group dances  Exploration of dance ideas, styles",
+      "accompaniments  Selection",
+      "development of appropriate actions (spatial",
+      "dynamic).  Choreographic devices appropriate to chosen dance style  Expression",
+      "communication"
+    ],
+    "content_items": [
+      "marks 6 marks 5 marks 5 marks 6 marks 30 MARKS"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "accompaniments",
+      "actions",
+      "appropriate",
+      "choreographic",
+      "chosen",
+      "communication",
+      "composing",
+      "composition",
+      "dance",
+      "dances",
+      "development",
+      "devices"
+    ],
+    "hash": "4474786dde",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.954425"
+  },
+  {
+    "id": "PHYS-00077",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "DANCE APPRECIATION  Type of dance  Style of dance  Number and gender of dancers  Theme  Dynamics  Costume and accompaniment  Structure and form  Interpretation of elements TOTAL",
+    "content": "3 marks 3 marks 3 marks 4 marks 3 marks 3 marks 3 marks 8 marks 30 MARKS 90 MARKS",
+    "specific_objectives": [
+      "DANCE APPRECIATION  Type of dance  Style of dance  Number",
+      "gender of dancers  Theme  Dynamics  Costume",
+      "accompaniment  Structure",
+      "form  Interpretation of elements TOTAL"
+    ],
+    "content_items": [
+      "marks 3 marks 3 marks 4 marks 3 marks 3 marks 3 marks 8 marks 30 MARKS 90 MARKS"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 53,
+    "keywords": [
+      "accompaniment",
+      "appreciation",
+      "costume",
+      "dance",
+      "dancers",
+      "dynamics",
+      "elements",
+      "form",
+      "gender",
+      "interpretation",
+      "marks",
+      "number"
+    ],
+    "hash": "1dc77d2859",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.102411"
+  },
+  {
+    "id": "PHYS-00078",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Alexander, K. and Taggert, A.",
+    "content": "Sport Education",
+    "specific_objectives": [
+      "Alexander, K.",
+      "Taggert, A."
+    ],
+    "content_items": [
+      "Sport Education"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "alexander",
+      "education",
+      "sport",
+      "taggert"
+    ],
+    "hash": "837bfd83c2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309113"
+  },
+  {
+    "id": "PHYS-00079",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Beashel, P., Taylor, J. and",
+    "content": "The World of Sp",
+    "specific_objectives": [
+      "Beashel, P., Taylor, J."
+    ],
+    "content_items": [
+      "The World of Sp"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "beashel",
+      "taylor",
+      "world"
+    ],
+    "hash": "6fa4fd8b61",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309213"
+  },
+  {
+    "id": "PHYS-00080",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Bulger, S., Mohr, D., Rairigh, R.,",
+    "content": "Sport Education",
+    "specific_objectives": [
+      "Bulger, S., Mohr, D., Rairigh, R.,"
+    ],
+    "content_items": [
+      "Sport Education"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "bulger",
+      "education",
+      "mohr",
+      "rairigh",
+      "sport"
+    ],
+    "hash": "6d765af731",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309294"
+  },
+  {
+    "id": "PHYS-00081",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Coe, E., Guest, V. and",
+    "content": "Fundamentals o",
+    "specific_objectives": [
+      "Coe, E., Guest, V."
+    ],
+    "content_items": [
+      "Fundamentals o"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "coe",
+      "fundamentals",
+      "guest"
+    ],
+    "hash": "11a20c7af0",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309366"
+  },
+  {
+    "id": "PHYS-00082",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Fountain, S. and Goodwin, L.",
+    "content": "P.E. to 16, Oxfor",
+    "specific_objectives": [
+      "Fountain, S.",
+      "Goodwin, L."
+    ],
+    "content_items": [
+      "P.E. to 16, Oxfor"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "fountain",
+      "goodwin",
+      "oxfor"
+    ],
+    "hash": "acce372d4e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309458"
+  },
+  {
+    "id": "PHYS-00083",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Gallagher, R., Fountain, S. and",
+    "content": "Physical Educati",
+    "specific_objectives": [
+      "Gallagher, R., Fountain, S."
+    ],
+    "content_items": [
+      "Physical Educati"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "educati",
+      "fountain",
+      "gallagher",
+      "physical"
+    ],
+    "hash": "f2054d474e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309522"
+  },
+  {
+    "id": "PHYS-00084",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Honeybourne, J., Hill, M. and",
+    "content": "P. E. for you, Glo",
+    "specific_objectives": [
+      "Honeybourne, J., Hill, M."
+    ],
+    "content_items": [
+      "P. E. for you, Glo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "glo",
+      "hill",
+      "honeybourne",
+      "you"
+    ],
+    "hash": "0e98c62a13",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309599"
+  },
+  {
+    "id": "PHYS-00085",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "Siedentop, D. Hastie, P. and",
+    "content": "Complete Guide",
+    "specific_objectives": [
+      "Siedentop, D. Hastie, P."
+    ],
+    "content_items": [
+      "Complete Guide"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "complete",
+      "guide",
+      "hastie",
+      "siedentop"
+    ],
+    "hash": "20c202c4c4",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309695"
+  },
+  {
+    "id": "PHYS-00086",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "particular structures relati",
+    "content": "onships or",
+    "specific_objectives": [
+      "particular structures relati"
+    ],
+    "content_items": [
+      "onships or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "onships",
+      "particular",
+      "relati",
+      "structures"
+    ],
+    "hash": "15007be53a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.550575"
+  },
+  {
+    "id": "PHYS-00087",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "each similarity and diffe",
+    "content": "rence stated",
+    "specific_objectives": [
+      "each similarity",
+      "diffe"
+    ],
+    "content_items": [
+      "rence stated"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "diffe",
+      "each",
+      "rence",
+      "similarity",
+      "stated"
+    ],
+    "hash": "1f3f2e07b3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.550751"
+  },
+  {
+    "id": "PHYS-00088",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "may be required for comp",
+    "content": "arisons which",
+    "specific_objectives": [
+      "may be required for comp"
+    ],
+    "content_items": [
+      "arisons which"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "arisons",
+      "comp",
+      "may",
+      "required",
+      "which"
+    ],
+    "hash": "a429455b39",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.550810"
+  },
+  {
+    "id": "PHYS-00089",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "draw a graph, histogram, p",
+    "content": "ie chart or",
+    "specific_objectives": [
+      "draw a graph, histogram, p"
+    ],
+    "content_items": [
+      "ie chart or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "chart",
+      "draw",
+      "graph",
+      "histogram"
+    ],
+    "hash": "385bf35856",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.550897"
+  },
+  {
+    "id": "PHYS-00090",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "representation using data",
+    "content": "or material",
+    "specific_objectives": [
+      "representation using data"
+    ],
+    "content_items": [
+      "or material"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "data",
+      "material",
+      "representation",
+      "using"
+    ],
+    "hash": "776bb6f635",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.550960"
+  },
+  {
+    "id": "PHYS-00091",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "provided or drawn from",
+    "content": "practical",
+    "specific_objectives": [
+      "provided or drawn from"
+    ],
+    "content_items": [
+      "practical"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "drawn",
+      "practical",
+      "provided"
+    ],
+    "hash": "8d5ffdb539",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551007"
+  },
+  {
+    "id": "PHYS-00092",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "investigations, build (for e",
+    "content": "xample, a",
+    "specific_objectives": [
+      "investigations, build (for e"
+    ],
+    "content_items": [
+      "xample, a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "build",
+      "investigations",
+      "xample"
+    ],
+    "hash": "a4a80074d2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551059"
+  },
+  {
+    "id": "PHYS-00093",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "model), draw scale diagram",
+    "content": ".",
+    "specific_objectives": [
+      "model), draw scale diagram"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "diagram",
+      "draw",
+      "model",
+      "scale"
+    ],
+    "hash": "3ca6284cfe",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551109"
+  },
+  {
+    "id": "PHYS-00094",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "two or more pieces of infor",
+    "content": "mation; use",
+    "specific_objectives": [
+      "two or more pieces of infor"
+    ],
+    "content_items": [
+      "mation"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "infor",
+      "mation",
+      "more",
+      "pieces",
+      "two",
+      "use"
+    ],
+    "hash": "37cc630386",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551180"
+  },
+  {
+    "id": "PHYS-00095",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "data to arrive at a conclusio",
+    "content": "n.",
+    "specific_objectives": [
+      "data to arrive at a conclusio"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 55,
+    "keywords": [
+      "arrive",
+      "conclusio",
+      "data"
+    ],
+    "hash": "4a42c760c2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551254"
+  },
+  {
+    "id": "PHYS-00096",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "extract from data by a set",
+    "content": "of",
+    "specific_objectives": [
+      "extract from data by a set"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "data",
+      "extract",
+      "set"
+    ],
+    "hash": "4480746a14",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811403"
+  },
+  {
+    "id": "PHYS-00097",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "logical steps some relationshi",
+    "content": "p,",
+    "specific_objectives": [
+      "logical steps some relationshi"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "logical",
+      "relationshi",
+      "some",
+      "steps"
+    ],
+    "hash": "3dc0c64cb9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811470"
+  },
+  {
+    "id": "PHYS-00098",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "information of the appearan",
+    "content": "ce",
+    "specific_objectives": [
+      "information of the appearan"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "appearan",
+      "information"
+    ],
+    "hash": "f8d6d5497a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811549"
+  },
+  {
+    "id": "PHYS-00099",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "or arrangement of a speci",
+    "content": "fic",
+    "specific_objectives": [
+      "or arrangement of a speci"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "arrangement",
+      "fic",
+      "speci"
+    ],
+    "hash": "bafe75ce15",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811602"
+  },
+  {
+    "id": "PHYS-00100",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "structure or the sequence of",
+    "content": "a",
+    "specific_objectives": [
+      "structure or the sequence of"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "sequence",
+      "structure"
+    ],
+    "hash": "31c8cd778a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811655"
+  },
+  {
+    "id": "PHYS-00101",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "appropriate practical detail.",
+    "content": "tests are to be conducte",
+    "specific_objectives": [
+      "appropriate practical detail."
+    ],
+    "content_items": [
+      "tests are to be conducte"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "appropriate",
+      "are",
+      "conducte",
+      "detail",
+      "practical",
+      "tests"
+    ],
+    "hash": "a35e064969",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811770"
+  },
+  {
+    "id": "PHYS-00102",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "outcomes should be cle",
+    "content": "arly stated",
+    "specific_objectives": [
+      "outcomes should be cle"
+    ],
+    "content_items": [
+      "arly stated"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "arly",
+      "cle",
+      "outcomes",
+      "should",
+      "stated"
+    ],
+    "hash": "e6fd8cdec8",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811840"
+  },
+  {
+    "id": "PHYS-00103",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "and/or the way in which d",
+    "content": "ata will be",
+    "specific_objectives": [
+      "/or the way in which d"
+    ],
+    "content_items": [
+      "ata will be"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "ata",
+      "way",
+      "which",
+      "will"
+    ],
+    "hash": "7c5ebe4f42",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811894"
+  },
+  {
+    "id": "PHYS-00104",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "argument with supporti",
+    "content": "ng",
+    "specific_objectives": [
+      "argument with supporti"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "argument",
+      "supporti"
+    ],
+    "hash": "9cf4c78afd",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.811953"
+  },
+  {
+    "id": "PHYS-00105",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "differentiate/distinguish",
+    "content": "State or explain briefly tho",
+    "specific_objectives": [
+      "differentiate/distinguish"
+    ],
+    "content_items": [
+      "State or explain briefly tho"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "briefly",
+      "differentiate",
+      "distinguish",
+      "explain",
+      "state",
+      "tho"
+    ],
+    "hash": "e933fa1c7a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812018"
+  },
+  {
+    "id": "PHYS-00106",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "items which can be used",
+    "content": "to",
+    "specific_objectives": [
+      "items which can be used"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "can",
+      "items",
+      "used",
+      "which"
+    ],
+    "hash": "8865965637",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812073"
+  },
+  {
+    "id": "PHYS-00107",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "define the items or place the",
+    "content": "m",
+    "specific_objectives": [
+      "define the items or place the"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "define",
+      "items",
+      "place"
+    ],
+    "hash": "6a3874704e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812120"
+  },
+  {
+    "id": "PHYS-00108",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "consider points both for a",
+    "content": "nd",
+    "specific_objectives": [
+      "consider points both for a"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "both",
+      "consider",
+      "points"
+    ],
+    "hash": "32fc78a460",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812186"
+  },
+  {
+    "id": "PHYS-00109",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "against; explain the relati",
+    "content": "ve",
+    "specific_objectives": [
+      "against",
+      "explain the relati"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 56,
+    "keywords": [
+      "against",
+      "explain",
+      "relati"
+    ],
+    "hash": "622fba2c0b",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812235"
+  },
+  {
+    "id": "PHYS-00110",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "from specimens or apparat",
+    "content": "us",
+    "specific_objectives": [
+      "from specimens or apparat"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "apparat",
+      "specimens"
+    ],
+    "hash": "aa476c4d13",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812308"
+  },
+  {
+    "id": "PHYS-00111",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "that shows an accura",
+    "content": "te",
+    "specific_objectives": [
+      "that shows an accura"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "accura",
+      "shows"
+    ],
+    "hash": "a98b05cb30",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812354"
+  },
+  {
+    "id": "PHYS-00112",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "relationship between the par",
+    "content": "ts.",
+    "specific_objectives": [
+      "relationship between the par"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "between",
+      "par",
+      "relationship"
+    ],
+    "hash": "33b92dd112",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812401"
+  },
+  {
+    "id": "PHYS-00113",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "relationship between comp",
+    "content": "onents.)",
+    "specific_objectives": [
+      "relationship between comp"
+    ],
+    "content_items": [
+      "onents.)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "between",
+      "comp",
+      "onents",
+      "relationship"
+    ],
+    "hash": "ea24c8890f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.812447"
+  },
+  {
+    "id": "PHYS-00114",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "both sides of an argume",
+    "content": "nt should be",
+    "specific_objectives": [
+      "both sides of an argume"
+    ],
+    "content_items": [
+      "nt should be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "argume",
+      "both",
+      "should",
+      "sides"
+    ],
+    "hash": "f12e249172",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062391"
+  },
+  {
+    "id": "PHYS-00115",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "appropriate examples",
+    "content": "or",
+    "specific_objectives": [
+      "appropriate examples"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "appropriate",
+      "examples"
+    ],
+    "hash": "e3abda9198",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062549"
+  },
+  {
+    "id": "PHYS-00116",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "procedures to observe,",
+    "content": "record",
+    "specific_objectives": [
+      "procedures to observe,"
+    ],
+    "content_items": [
+      "record"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "observe",
+      "procedures",
+      "record"
+    ],
+    "hash": "1c5f01c461",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062618"
+  },
+  {
+    "id": "PHYS-00117",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "structures or parts indica",
+    "content": "ted by",
+    "specific_objectives": [
+      "structures or parts indica"
+    ],
+    "content_items": [
+      "ted by"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "indica",
+      "parts",
+      "structures",
+      "ted"
+    ],
+    "hash": "a45240f54c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062709"
+  },
+  {
+    "id": "PHYS-00118",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "readings using appro",
+    "content": "priate",
+    "specific_objectives": [
+      "readings using appro"
+    ],
+    "content_items": [
+      "priate"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "appro",
+      "priate",
+      "readings",
+      "using"
+    ],
+    "hash": "7abb076c26",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062787"
+  },
+  {
+    "id": "PHYS-00119",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "reaction or change t",
+    "content": "aking",
+    "specific_objectives": [
+      "reaction or change t"
+    ],
+    "content_items": [
+      "aking"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "aking",
+      "change",
+      "reaction"
+    ],
+    "hash": "bb03e2ccff",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062917"
+  },
+  {
+    "id": "PHYS-00120",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "place; to examine and",
+    "content": "note",
+    "specific_objectives": [
+      "place",
+      "to examine"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "examine",
+      "note",
+      "place"
+    ],
+    "hash": "f763ec08ad",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.062976"
+  },
+  {
+    "id": "PHYS-00121",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "arrive at a likely conclusion",
+    "content": "or",
+    "specific_objectives": [
+      "arrive at a likely conclusion"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "arrive",
+      "conclusion",
+      "likely"
+    ],
+    "hash": "80137c7da9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.254833"
+  },
+  {
+    "id": "PHYS-00122",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "the full range of observati",
+    "content": "ons",
+    "specific_objectives": [
+      "the full range of observati"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "full",
+      "observati",
+      "ons",
+      "range"
+    ],
+    "hash": "beb4035836",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.254934"
+  },
+  {
+    "id": "PHYS-00123",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "made during a given procedu",
+    "content": "re.",
+    "specific_objectives": [
+      "made during a given procedu"
+    ],
+    "content_items": [],
+    "skills": [
+      "RE"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "during",
+      "given",
+      "made",
+      "procedu"
+    ],
+    "hash": "bcce6d02be",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.254998"
+  },
+  {
+    "id": "PHYS-00124",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "explain how one set of facts",
+    "content": "or",
+    "specific_objectives": [
+      "explain how one set of facts"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 2,
+    "page_number": 58,
+    "keywords": [
+      "explain",
+      "facts",
+      "how",
+      "one",
+      "set"
+    ],
+    "hash": "08e1f7af83",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255075"
+  },
+  {
+    "id": "PHYS-00125",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "data depend on others or",
+    "content": "are",
+    "specific_objectives": [
+      "data depend on others or"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "are",
+      "data",
+      "depend",
+      "others"
+    ],
+    "hash": "890ea67dcb",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255132"
+  },
+  {
+    "id": "PHYS-00126",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "diagram showing releva",
+    "content": "nt",
+    "specific_objectives": [
+      "diagram showing releva"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "diagram",
+      "releva",
+      "showing"
+    ],
+    "hash": "8c7796deb4",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255195"
+  },
+  {
+    "id": "PHYS-00127",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "from information or previo",
+    "content": "us",
+    "specific_objectives": [
+      "from information or previo"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "information",
+      "previo"
+    ],
+    "hash": "92126dd87c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255299"
+  },
+  {
+    "id": "PHYS-00128",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "suggest an hypothesis",
+    "content": "Provide a generalisation whi",
+    "specific_objectives": [
+      "suggest an hypothesis"
+    ],
+    "content_items": [
+      "Provide a generalisation whi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "generalisation",
+      "hypothesis",
+      "provide",
+      "suggest",
+      "whi"
+    ],
+    "hash": "0a49301032",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255384"
+  },
+  {
+    "id": "PHYS-00129",
+    "section": "module of: the Online Registration System",
+    "subsection": "marks",
+    "objective": "offers a likely explanation for",
+    "content": "a",
+    "specific_objectives": [
+      "offers a likely explanation for"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "explanation",
+      "likely",
+      "offers"
+    ],
+    "hash": "23cf337157",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.255437"
+  },
+  {
+    "id": "PHYS-00130",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(B) It is enclosed in",
+    "content": "vertebral",
+    "specific_objectives": [
+      "(B) It is enclosed in"
+    ],
+    "content_items": [
+      "vertebral"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "enclosed",
+      "vertebral"
+    ],
+    "hash": "3bb5347b49",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.940989"
+  },
+  {
+    "id": "PHYS-00131",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(D) It consists of bo",
+    "content": "nes",
+    "specific_objectives": [
+      "(D) It consists of bo"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "consists",
+      "nes"
+    ],
+    "hash": "9fa5c8f98d",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.941054"
+  },
+  {
+    "id": "PHYS-00132",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "memory loss following",
+    "content": "a blow to",
+    "specific_objectives": [
+      "memory loss following"
+    ],
+    "content_items": [
+      "a blow to"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "blow",
+      "following",
+      "loss",
+      "memory"
+    ],
+    "hash": "8f4498d747",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.941300"
+  },
+  {
+    "id": "PHYS-00133",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(B) wearing tight ge",
+    "content": "ar",
+    "specific_objectives": [
+      "(B) wearing tight ge"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "tight",
+      "wearing"
+    ],
+    "hash": "ff02ad649c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.941433"
+  },
+  {
+    "id": "PHYS-00134",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(C) exercising too so",
+    "content": "on after",
+    "specific_objectives": [
+      "(C) exercising too so"
+    ],
+    "content_items": [
+      "on after"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "after",
+      "exercising",
+      "too"
+    ],
+    "hash": "030cd6f108",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.941481"
+  },
+  {
+    "id": "PHYS-00135",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(D) drinking insuffic",
+    "content": "ient wate",
+    "specific_objectives": [
+      "(D) drinking insuffic"
+    ],
+    "content_items": [
+      "ient wate"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "drinking",
+      "ient",
+      "insuffic",
+      "wate"
+    ],
+    "hash": "686e510a9c",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.941523"
+  },
+  {
+    "id": "PHYS-00136",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "A professional footballer may us",
+    "content": "e a banned 45.",
+    "specific_objectives": [
+      "A professional footballer may us"
+    ],
+    "content_items": [
+      "e a banned 45."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "banned",
+      "footballer",
+      "may",
+      "professional"
+    ],
+    "hash": "afab110b16",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348416"
+  },
+  {
+    "id": "PHYS-00137",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(A) it is taken as medication",
+    "content": "prescribed",
+    "specific_objectives": [
+      "(A) it is taken as medication"
+    ],
+    "content_items": [
+      "prescribed"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "medication",
+      "prescribed",
+      "taken"
+    ],
+    "hash": "459be63577",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348504"
+  },
+  {
+    "id": "PHYS-00138",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(B) he/she stops using it at",
+    "content": "least one",
+    "specific_objectives": [
+      "(B) he/she stops using it at"
+    ],
+    "content_items": [
+      "least one"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "least",
+      "one",
+      "she",
+      "stops",
+      "using"
+    ],
+    "hash": "e411558268",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348578"
+  },
+  {
+    "id": "PHYS-00139",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "week before the comp",
+    "content": "etition",
+    "specific_objectives": [
+      "week before the comp"
+    ],
+    "content_items": [
+      "etition"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "before",
+      "comp",
+      "etition",
+      "week"
+    ],
+    "hash": "84fde480c0",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348632"
+  },
+  {
+    "id": "PHYS-00140",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(C) he/she is not represe",
+    "content": "nting the",
+    "specific_objectives": [
+      "(C) he/she is not represe"
+    ],
+    "content_items": [
+      "nting the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "not",
+      "nting",
+      "represe",
+      "she"
+    ],
+    "hash": "8a9ff399d3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348687"
+  },
+  {
+    "id": "PHYS-00141",
+    "section": "SECTION A: READ THE FOLLOWING INSTRUCTIONS CAREFULLY",
+    "subsection": "marks",
+    "objective": "(D) it is part of his religious",
+    "content": "or cultural",
+    "specific_objectives": [
+      "(D) it is part of his religious"
+    ],
+    "content_items": [
+      "or cultural"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "cultural",
+      "his",
+      "part",
+      "religious"
+    ],
+    "hash": "ca738778f7",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.348786"
+  },
+  {
+    "id": "PHYS-00142",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "abduction/adduction.",
+    "content": "This allo",
+    "specific_objectives": [
+      "abduction/adduction."
+    ],
+    "content_items": [
+      "This allo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "abduction",
+      "adduction",
+      "allo"
+    ],
+    "hash": "8655bd34f5",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053684"
+  },
+  {
+    "id": "PHYS-00143",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "arm when throwing the",
+    "content": "ball.",
+    "specific_objectives": [
+      "arm when throwing the"
+    ],
+    "content_items": [
+      "ball."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "arm",
+      "ball",
+      "throwing",
+      "when"
+    ],
+    "hash": "283752da0e",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053724"
+  },
+  {
+    "id": "PHYS-00144",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "This allows for the h",
+    "content": "and to be",
+    "specific_objectives": [
+      "This allows for the h"
+    ],
+    "content_items": [
+      "to be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "allows"
+    ],
+    "hash": "be01c1b86a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053773"
+  },
+  {
+    "id": "PHYS-00145",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "throwing the ball, an",
+    "content": "d pulled b",
+    "specific_objectives": [
+      "throwing the ball, an"
+    ],
+    "content_items": [
+      "d pulled b"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "ball",
+      "pulled",
+      "throwing"
+    ],
+    "hash": "5f621410ea",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053805"
+  },
+  {
+    "id": "PHYS-00146",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "allowing flexion and",
+    "content": "extension",
+    "specific_objectives": [
+      "allowing flexion"
+    ],
+    "content_items": [
+      "extension"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "allowing",
+      "extension",
+      "flexion"
+    ],
+    "hash": "dd55ae00d1",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053848"
+  },
+  {
+    "id": "PHYS-00147",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "directions allowing f",
+    "content": "or stabili",
+    "specific_objectives": [
+      "directions allowing f"
+    ],
+    "content_items": [
+      "or stabili"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "allowing",
+      "directions",
+      "stabili"
+    ],
+    "hash": "c200367cf6",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.053888"
+  },
+  {
+    "id": "PHYS-00148",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "The biceps muscles ex",
+    "content": "pand and the",
+    "specific_objectives": [
+      "The biceps muscles ex"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "biceps",
+      "muscles",
+      "pand"
+    ],
+    "hash": "4f84e65123",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.202896"
+  },
+  {
+    "id": "PHYS-00149",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "contract, generating",
+    "content": "the force whi",
+    "specific_objectives": [
+      "contract, generating"
+    ],
+    "content_items": [
+      "the force whi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "contract",
+      "force",
+      "generating",
+      "whi"
+    ],
+    "hash": "190d53fab3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.202962"
+  },
+  {
+    "id": "PHYS-00150",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "The biceps muscles co",
+    "content": "ntract and th",
+    "specific_objectives": [
+      "The biceps muscles co"
+    ],
+    "content_items": [
+      "ntract"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "biceps",
+      "muscles",
+      "ntract"
+    ],
+    "hash": "8c113dd2b9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203040"
+  },
+  {
+    "id": "PHYS-00151",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "hand then falls into",
+    "content": "a free positi",
+    "specific_objectives": [
+      "hand then falls into"
+    ],
+    "content_items": [
+      "a free positi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "falls",
+      "free",
+      "hand",
+      "into",
+      "positi",
+      "then"
+    ],
+    "hash": "73704ee1d9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203109"
+  },
+  {
+    "id": "PHYS-00152",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Requires no specializ",
+    "content": "ed equipment",
+    "specific_objectives": [
+      "Requires no specializ"
+    ],
+    "content_items": [
+      "ed equipment"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "equipment",
+      "requires",
+      "specializ"
+    ],
+    "hash": "3c40912ae9",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203207"
+  },
+  {
+    "id": "PHYS-00153",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Can be undertaken at",
+    "content": "no extra fina",
+    "specific_objectives": [
+      "Can be undertaken at"
+    ],
+    "content_items": [
+      "no extra fina"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "can",
+      "extra",
+      "fina",
+      "undertaken"
+    ],
+    "hash": "3dfab1ac6d",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203263"
+  },
+  {
+    "id": "PHYS-00154",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Can be undertaken in",
+    "content": "the sportsman",
+    "specific_objectives": [
+      "Can be undertaken in"
+    ],
+    "content_items": [
+      "the sportsman"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "can",
+      "sportsman",
+      "undertaken"
+    ],
+    "hash": "a2f564eedc",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203325"
+  },
+  {
+    "id": "PHYS-00155",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Strength is developed",
+    "content": "only at a sp",
+    "specific_objectives": [
+      "Strength is developed"
+    ],
+    "content_items": [
+      "only at a sp"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "developed",
+      "only",
+      "strength"
+    ],
+    "hash": "4c5a434d28",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203392"
+  },
+  {
+    "id": "PHYS-00156",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "not throughout the en",
+    "content": "tire range of",
+    "specific_objectives": [
+      "not throughout the en"
+    ],
+    "content_items": [
+      "tire range of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "not",
+      "range",
+      "throughout",
+      "tire"
+    ],
+    "hash": "f777bd44f2",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203440"
+  },
+  {
+    "id": "PHYS-00157",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Any other correct ans",
+    "content": "wer",
+    "specific_objectives": [
+      "Any other correct ans"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "ans",
+      "any",
+      "correct",
+      "other",
+      "wer"
+    ],
+    "hash": "3c45fcce73",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203502"
+  },
+  {
+    "id": "PHYS-00158",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "Peas, beans, legumes,",
+    "content": "soy",
+    "specific_objectives": [
+      "Peas, beans, legumes,"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "beans",
+      "legumes",
+      "peas",
+      "soy"
+    ],
+    "hash": "e8fba3db4d",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.203577"
+  },
+  {
+    "id": "PHYS-00159",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "damaged/torn/worn. Prote",
+    "content": "in is required",
+    "specific_objectives": [
+      "damaged/torn/worn. Prote"
+    ],
+    "content_items": [
+      "in is required"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "damaged",
+      "prote",
+      "required",
+      "torn",
+      "worn"
+    ],
+    "hash": "cd1d385cef",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334032"
+  },
+  {
+    "id": "PHYS-00160",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "and repair or repair and",
+    "content": "rebuild.",
+    "specific_objectives": [
+      "repair or repair"
+    ],
+    "content_items": [
+      "rebuild."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "rebuild",
+      "repair"
+    ],
+    "hash": "34945b44e4",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334097"
+  },
+  {
+    "id": "PHYS-00161",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "and may want to try it ou",
+    "content": "t.",
+    "specific_objectives": [
+      "may want to try it ou"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "may",
+      "try",
+      "want"
+    ],
+    "hash": "2c8c9a9abf",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334182"
+  },
+  {
+    "id": "PHYS-00162",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "which is healthy for spor",
+    "content": "t.",
+    "specific_objectives": [
+      "which is healthy for spor"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "healthy",
+      "spor",
+      "which"
+    ],
+    "hash": "d68ec31e3b",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334244"
+  },
+  {
+    "id": "PHYS-00163",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "and improve your sports s",
+    "content": "kills.",
+    "specific_objectives": [
+      "improve your sports s"
+    ],
+    "content_items": [
+      "kills."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "improve",
+      "kills",
+      "sports",
+      "your"
+    ],
+    "hash": "60153877f0",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334307"
+  },
+  {
+    "id": "PHYS-00164",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "who inspire young athlete",
+    "content": "s and act as ro",
+    "specific_objectives": [
+      "who inspire young athlete"
+    ],
+    "content_items": [
+      "act as ro"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "act",
+      "athlete",
+      "inspire",
+      "who",
+      "young"
+    ],
+    "hash": "3ac9a8aa30",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334382"
+  },
+  {
+    "id": "PHYS-00165",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "finds it easier to get sp",
+    "content": "onsorship.",
+    "specific_objectives": [
+      "finds it easier to get sp"
+    ],
+    "content_items": [
+      "onsorship."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "easier",
+      "finds",
+      "get",
+      "onsorship"
+    ],
+    "hash": "b3d66ba4b3",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334452"
+  },
+  {
+    "id": "PHYS-00166",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "2 marks EACH for any 3",
+    "content": "full explanati",
+    "specific_objectives": [
+      "marks EACH for any 3"
+    ],
+    "content_items": [
+      "full explanati"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "any",
+      "each",
+      "explanati",
+      "full",
+      "marks"
+    ],
+    "hash": "8e7acd9804",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334506"
+  },
+  {
+    "id": "PHYS-00167",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "captains to get results.",
+    "content": "They may be ho",
+    "specific_objectives": [
+      "captains to get results."
+    ],
+    "content_items": [
+      "They may be ho"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "captains",
+      "get",
+      "may",
+      "results",
+      "they"
+    ],
+    "hash": "5ab5a0dd84",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334586"
+  },
+  {
+    "id": "PHYS-00168",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "reported on, causing disa",
+    "content": "ffection to the",
+    "specific_objectives": [
+      "reported on, causing disa"
+    ],
+    "content_items": [
+      "ffection to the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "causing",
+      "disa",
+      "ffection",
+      "reported"
+    ],
+    "hash": "430b79f42a",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334659"
+  },
+  {
+    "id": "PHYS-00169",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "football to the discomfor",
+    "content": "t of non- lover",
+    "specific_objectives": [
+      "football to the discomfor"
+    ],
+    "content_items": [
+      "t of non- lover"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "discomfor",
+      "football",
+      "lover",
+      "non"
+    ],
+    "hash": "017969870d",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334731"
+  },
+  {
+    "id": "PHYS-00170",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "events to attract more vi",
+    "content": "ewers or reader",
+    "specific_objectives": [
+      "events to attract more vi"
+    ],
+    "content_items": [
+      "ewers or reader"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "attract",
+      "events",
+      "ewers",
+      "more",
+      "reader"
+    ],
+    "hash": "2e92092550",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334820"
+  },
+  {
+    "id": "PHYS-00171",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "be a form of social explo",
+    "content": "itation.",
+    "specific_objectives": [
+      "be a form of social explo"
+    ],
+    "content_items": [
+      "itation."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "explo",
+      "form",
+      "itation",
+      "social"
+    ],
+    "hash": "e2c43033c1",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334871"
+  },
+  {
+    "id": "PHYS-00172",
+    "section": "Section B: KEY AND MARK SCHEME",
+    "subsection": "marks",
+    "objective": "very difficult to attract",
+    "content": "sponsorship.",
+    "specific_objectives": [
+      "very difficult to attract"
+    ],
+    "content_items": [
+      "sponsorship."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "attract",
+      "difficult",
+      "sponsorship",
+      "very"
+    ],
+    "hash": "13066df21f",
+    "source_file": "CSEC-Physical-Education-and-Sport-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.334935"
+  }
+]

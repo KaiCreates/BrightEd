@@ -1,0 +1,7568 @@
+[
+  {
+    "id": "POB-00001",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "37 Arnold Road, King",
+    "content": "ston 5, Ja",
+    "specific_objectives": [
+      "Arnold Road, King"
+    ],
+    "content_items": [
+      "ston 5, Ja"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "arnold",
+      "king",
+      "road",
+      "ston"
+    ],
+    "hash": "1697342ce0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.313437"
+  },
+  {
+    "id": "POB-00002",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Prince Road, Pine Pla",
+    "content": "ntation Ro",
+    "specific_objectives": [
+      "Prince Road, Pine Pla"
+    ],
+    "content_items": [
+      "ntation Ro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "ntation",
+      "pine",
+      "pla",
+      "prince",
+      "road"
+    ],
+    "hash": "2fab056821",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.313572"
+  },
+  {
+    "id": "POB-00003",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "RATIONALE ..........................",
+    "content": ".",
+    "specific_objectives": [
+      "RATIONALE .........................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "rationale"
+    ],
+    "hash": "5fc6a5f50a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705618"
+  },
+  {
+    "id": "POB-00004",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "AIMS….. ...............................",
+    "content": ".",
+    "specific_objectives": [
+      "AIMS….. ..............................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "aims"
+    ],
+    "hash": "895dee450b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705726"
+  },
+  {
+    "id": "POB-00005",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "GENERAL OBJECTIVES .........",
+    "content": ".",
+    "specific_objectives": [
+      "GENERAL OBJECTIVES ........."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "general",
+      "objectives"
+    ],
+    "hash": "a32d00d82c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705784"
+  },
+  {
+    "id": "POB-00006",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SKILLS AND ABILITIES TO BE",
+    "content": "ASSESSED ................................................................................",
+    "specific_objectives": [
+      "SKILLS AND ABILITIES TO BE"
+    ],
+    "content_items": [
+      "ASSESSED ................................................................................"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "abilities",
+      "assessed",
+      "skills"
+    ],
+    "hash": "a24c596d7f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705855"
+  },
+  {
+    "id": "POB-00007",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "ORGANISATION OF THE SYL",
+    "content": "L",
+    "specific_objectives": [
+      "ORGANISATION OF THE SYL"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "organisation",
+      "syl"
+    ],
+    "hash": "61c962f8c8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705909"
+  },
+  {
+    "id": "POB-00008",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SUGGESTED TIMETABLE ALL",
+    "content": "OCATION .................................................................................",
+    "specific_objectives": [
+      "SUGGESTED TIMETABLE ALL"
+    ],
+    "content_items": [
+      "OCATION ................................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "all",
+      "ocation",
+      "suggested",
+      "timetable"
+    ],
+    "hash": "4651167434",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.705974"
+  },
+  {
+    "id": "POB-00009",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "APPROACHES TO TEACHING",
+    "content": "SYLLABUS ...............................................................................",
+    "specific_objectives": [
+      "APPROACHES TO TEACHING"
+    ],
+    "content_items": [
+      "SYLLABUS ..............................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "approaches",
+      "syllabus",
+      "teaching"
+    ],
+    "hash": "e89b315a78",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706040"
+  },
+  {
+    "id": "POB-00010",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "CERTIFICATION ...................",
+    "content": ".",
+    "specific_objectives": [
+      "CERTIFICATION ..................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "certification"
+    ],
+    "hash": "3513944883",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706095"
+  },
+  {
+    "id": "POB-00011",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "DEFINITION OF PROFILE DI",
+    "content": "MENSIONS ..............................................................................",
+    "specific_objectives": [
+      "DEFINITION OF PROFILE DI"
+    ],
+    "content_items": [
+      "MENSIONS .............................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "definition",
+      "mensions",
+      "profile"
+    ],
+    "hash": "0e7d1e2d46",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706161"
+  },
+  {
+    "id": "POB-00012",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "FORMAT OF THE EXAMINAT",
+    "content": "I",
+    "specific_objectives": [
+      "FORMAT OF THE EXAMINAT"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "examinat",
+      "format"
+    ],
+    "hash": "e4a47db4cd",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706213"
+  },
+  {
+    "id": "POB-00013",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR PRIVATE",
+    "content": "CANDIDATES ..........................................................................",
+    "specific_objectives": [
+      "REGULATIONS FOR PRIVATE"
+    ],
+    "content_items": [
+      "CANDIDATES .........................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "candidates",
+      "private",
+      "regulations"
+    ],
+    "hash": "6f02cca92b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706278"
+  },
+  {
+    "id": "POB-00014",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR RESIT C",
+    "content": "A",
+    "specific_objectives": [
+      "REGULATIONS FOR RESIT C"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "regulations",
+      "resit"
+    ],
+    "hash": "9dcead793d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706331"
+  },
+  {
+    "id": "POB-00015",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR THE JAN",
+    "content": "UARY SITTING ..........................................................................",
+    "specific_objectives": [
+      "REGULATIONS FOR THE JAN"
+    ],
+    "content_items": [
+      "UARY SITTING .........................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "jan",
+      "regulations",
+      "sitting",
+      "uary"
+    ],
+    "hash": "872e420c2e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706398"
+  },
+  {
+    "id": "POB-00016",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 1: THE NATURE OF",
+    "content": "BUSINESS ................................................................................",
+    "specific_objectives": [
+      "SECTION 1: THE NATURE OF"
+    ],
+    "content_items": [
+      "BUSINESS ................................................................................"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "business",
+      "nature",
+      "section"
+    ],
+    "hash": "d069195d49",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706465"
+  },
+  {
+    "id": "POB-00017",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 2: INTERNAL ORGA",
+    "content": "NISATIONAL ENVIRONMENT ..................................................",
+    "specific_objectives": [
+      "SECTION 2: INTERNAL ORGA"
+    ],
+    "content_items": [
+      "NISATIONAL ENVIRONMENT .................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "environment",
+      "internal",
+      "nisational",
+      "orga",
+      "section"
+    ],
+    "hash": "9f4105b35d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706551"
+  },
+  {
+    "id": "POB-00018",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 3: ESTABLISHING A",
+    "content": "BUSINESS ...............................................................................",
+    "specific_objectives": [
+      "SECTION 3: ESTABLISHING A"
+    ],
+    "content_items": [
+      "BUSINESS ..............................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "business",
+      "establishing",
+      "section"
+    ],
+    "hash": "8abba59b0a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706620"
+  },
+  {
+    "id": "POB-00019",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 4: LEGAL ASPECTS",
+    "content": "OF BUSINESS ...........................................................................",
+    "specific_objectives": [
+      "SECTION 4: LEGAL ASPECTS"
+    ],
+    "content_items": [
+      "OF BUSINESS ..........................................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "aspects",
+      "business",
+      "legal",
+      "section"
+    ],
+    "hash": "cb95405fa4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706688"
+  },
+  {
+    "id": "POB-00020",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 5: PRODUCTION ...",
+    "content": ".",
+    "specific_objectives": [
+      "SECTION 5: PRODUCTION ..."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "production",
+      "section"
+    ],
+    "hash": "ee3777b98e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706740"
+  },
+  {
+    "id": "POB-00021",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 6: MARKETING ......",
+    "content": ".",
+    "specific_objectives": [
+      "SECTION 6: MARKETING ......"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "marketing",
+      "section"
+    ],
+    "hash": "24c502ddb9",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706792"
+  },
+  {
+    "id": "POB-00022",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 7: LOGISTICS AND",
+    "content": "S",
+    "specific_objectives": [
+      "SECTION 7: LOGISTICS AND"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "logistics",
+      "section"
+    ],
+    "hash": "fb76a9b324",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706843"
+  },
+  {
+    "id": "POB-00023",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 8: BUSINESS FINA",
+    "content": "N",
+    "specific_objectives": [
+      "SECTION 8: BUSINESS FINA"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "business",
+      "fina",
+      "section"
+    ],
+    "hash": "65e9e1cd25",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706894"
+  },
+  {
+    "id": "POB-00024",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 9: ROLE OF GOVER",
+    "content": "NMENT IN AN ECONOMY .......................................................",
+    "specific_objectives": [
+      "SECTION 9: ROLE OF GOVER"
+    ],
+    "content_items": [
+      "NMENT IN AN ECONOMY ......................................................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "economy",
+      "gover",
+      "nment",
+      "role",
+      "section"
+    ],
+    "hash": "e3d8ee3a37",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.706960"
+  },
+  {
+    "id": "POB-00025",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION 10: TECHNOLOGY",
+    "content": "AND THE GLOBAL BUSINESS ENVIRONMENT ..........................",
+    "specific_objectives": [
+      "SECTION 10: TECHNOLOGY"
+    ],
+    "content_items": [
+      "AND THE GLOBAL BUSINESS ENVIRONMENT .........................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "business",
+      "environment",
+      "global",
+      "section",
+      "technology"
+    ],
+    "hash": "133b715783",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.707025"
+  },
+  {
+    "id": "POB-00026",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Teaching is expected to commen",
+    "content": "ce on the rev",
+    "specific_objectives": [
+      "Teaching is expected to commen"
+    ],
+    "content_items": [
+      "ce on the rev"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "commen",
+      "expected",
+      "rev",
+      "teaching"
+    ],
+    "hash": "5ad3083d51",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.802239"
+  },
+  {
+    "id": "POB-00027",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Please check the website, ww",
+    "content": "w.cxc.org for",
+    "specific_objectives": [
+      "Please check the website, ww"
+    ],
+    "content_items": [
+      "w.cxc.org for"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "check",
+      "cxc",
+      "org",
+      "please",
+      "website"
+    ],
+    "hash": "ec7c56e3ef",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.802352"
+  },
+  {
+    "id": "POB-00028",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Throughout the syllabus, this ic",
+    "content": "on represen",
+    "specific_objectives": [
+      "Throughout the syllabus, this ic"
+    ],
+    "content_items": [
+      "on represen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "represen",
+      "syllabus",
+      "throughout"
+    ],
+    "hash": "5be480d02b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:30.802418"
+  },
+  {
+    "id": "POB-00029",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Principles of Business focuses o",
+    "content": "n the theo",
+    "specific_objectives": [
+      "Principles of Business focuses o"
+    ],
+    "content_items": [
+      "n the theo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "business",
+      "focuses",
+      "principles",
+      "theo"
+    ],
+    "hash": "eb6055763c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.083762"
+  },
+  {
+    "id": "POB-00030",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "a framework to assist in more",
+    "content": "informed",
+    "specific_objectives": [
+      "a framework to assist in more"
+    ],
+    "content_items": [
+      "informed"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "assist",
+      "framework",
+      "informed",
+      "more"
+    ],
+    "hash": "deb5de7b8b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.083841"
+  },
+  {
+    "id": "POB-00031",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "An understanding of business",
+    "content": "principle",
+    "specific_objectives": [
+      "An understanding of business"
+    ],
+    "content_items": [
+      "principle"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "business",
+      "principle",
+      "understanding"
+    ],
+    "hash": "9d1fef5cd5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.083906"
+  },
+  {
+    "id": "POB-00032",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "productive members of soci",
+    "content": "ety. The",
+    "specific_objectives": [
+      "productive members of soci"
+    ],
+    "content_items": [
+      "ety. The"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "ety",
+      "members",
+      "productive",
+      "soci"
+    ],
+    "hash": "cd16baaf17",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.083967"
+  },
+  {
+    "id": "POB-00033",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "entrepreneurial and manageria",
+    "content": "l skills nec",
+    "specific_objectives": [
+      "entrepreneurial",
+      "manageria"
+    ],
+    "content_items": [
+      "l skills nec"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "entrepreneurial",
+      "manageria",
+      "nec",
+      "skills"
+    ],
+    "hash": "3531497f03",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084034"
+  },
+  {
+    "id": "POB-00034",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "dynamic business environmen",
+    "content": "t. The CS",
+    "specific_objectives": [
+      "dynamic business environmen"
+    ],
+    "content_items": [
+      "t. The CS"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "business",
+      "dynamic",
+      "environmen"
+    ],
+    "hash": "dc1803c26a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084100"
+  },
+  {
+    "id": "POB-00035",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "conducting research which he",
+    "content": "lps to im",
+    "specific_objectives": [
+      "conducting research which he"
+    ],
+    "content_items": [
+      "lps to im"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "conducting",
+      "lps",
+      "research",
+      "which"
+    ],
+    "hash": "20714003aa",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084164"
+  },
+  {
+    "id": "POB-00036",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "creates an awareness of busine",
+    "content": "ss ethics a",
+    "specific_objectives": [
+      "creates an awareness of busine"
+    ],
+    "content_items": [
+      "ss ethics a"
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 6,
+    "keywords": [
+      "awareness",
+      "busine",
+      "creates",
+      "ethics"
+    ],
+    "hash": "9ea6269b6f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084221"
+  },
+  {
+    "id": "POB-00037",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "The syllabus will not only provi",
+    "content": "de a good",
+    "specific_objectives": [
+      "The syllabus will not only provi"
+    ],
+    "content_items": [
+      "de a good"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "good",
+      "not",
+      "only",
+      "provi",
+      "syllabus",
+      "will"
+    ],
+    "hash": "d26fc3f27a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084289"
+  },
+  {
+    "id": "POB-00038",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "and professional levels, but",
+    "content": "will assis",
+    "specific_objectives": [
+      "professional levels, but"
+    ],
+    "content_items": [
+      "will assis"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "assis",
+      "levels",
+      "professional",
+      "will"
+    ],
+    "hash": "3cebcdc719",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084354"
+  },
+  {
+    "id": "POB-00039",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "competencies, attitudes and va",
+    "content": "lues that a",
+    "specific_objectives": [
+      "competencies, attitudes"
+    ],
+    "content_items": [
+      "lues that a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "attitudes",
+      "competencies",
+      "lues"
+    ],
+    "hash": "c2683a2f94",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084431"
+  },
+  {
+    "id": "POB-00040",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Additionally, it will inculcate t",
+    "content": "enets of t",
+    "specific_objectives": [
+      "Additionally, it will inculcate t"
+    ],
+    "content_items": [
+      "enets of t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "additionally",
+      "enets",
+      "inculcate",
+      "will"
+    ],
+    "hash": "6c0cdf8913",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084497"
+  },
+  {
+    "id": "POB-00041",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Heads of Government. That is,",
+    "content": "“someone",
+    "specific_objectives": [
+      "Heads of Government. That is,"
+    ],
+    "content_items": [
+      "“someone"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "government",
+      "heads",
+      "someone"
+    ],
+    "hash": "5adb780e7e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084570"
+  },
+  {
+    "id": "POB-00042",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "displays the creative imaginati",
+    "content": "on in its v",
+    "specific_objectives": [
+      "displays the creative imaginati"
+    ],
+    "content_items": [
+      "on in its v"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "creative",
+      "displays",
+      "imaginati",
+      "its"
+    ],
+    "hash": "0701c44286",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084635"
+  },
+  {
+    "id": "POB-00043",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "economic and entrepreneurial",
+    "content": "spheres.”",
+    "specific_objectives": [
+      "economic",
+      "entrepreneurial"
+    ],
+    "content_items": [
+      "spheres.”"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "economic",
+      "entrepreneurial",
+      "spheres"
+    ],
+    "hash": "822905c3c1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084716"
+  },
+  {
+    "id": "POB-00044",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "completion of this course of st",
+    "content": "udy stude",
+    "specific_objectives": [
+      "completion of this course of st"
+    ],
+    "content_items": [
+      "udy stude"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "completion",
+      "course",
+      "stude",
+      "udy"
+    ],
+    "hash": "fec4a6b634",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084782"
+  },
+  {
+    "id": "POB-00045",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "live together having been ex",
+    "content": "posed to",
+    "specific_objectives": [
+      "live together having been ex"
+    ],
+    "content_items": [
+      "posed to"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "been",
+      "having",
+      "live",
+      "posed",
+      "together"
+    ],
+    "hash": "c01f9bafc5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084844"
+  },
+  {
+    "id": "POB-00046",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "1. promote understandin",
+    "content": "g of theo",
+    "specific_objectives": [
+      "promote understandin"
+    ],
+    "content_items": [
+      "g of theo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "promote",
+      "theo",
+      "understandin"
+    ],
+    "hash": "2ded90d6d2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084924"
+  },
+  {
+    "id": "POB-00047",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "culturally-diversified ec",
+    "content": "onomic en",
+    "specific_objectives": [
+      "culturally-diversified ec"
+    ],
+    "content_items": [
+      "onomic en"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "culturally",
+      "diversified",
+      "onomic"
+    ],
+    "hash": "b5fa005439",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.084980"
+  },
+  {
+    "id": "POB-00048",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "2. provide knowledge of",
+    "content": "business",
+    "specific_objectives": [
+      "provide knowledge of"
+    ],
+    "content_items": [
+      "business"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "business",
+      "knowledge",
+      "provide"
+    ],
+    "hash": "8c0a74ed73",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085042"
+  },
+  {
+    "id": "POB-00049",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "economic environment",
+    "content": ";",
+    "specific_objectives": [
+      "economic environment"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "economic",
+      "environment"
+    ],
+    "hash": "50dcff4934",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085081"
+  },
+  {
+    "id": "POB-00050",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "3. provide the opportunit",
+    "content": "y for infor",
+    "specific_objectives": [
+      "provide the opportunit"
+    ],
+    "content_items": [
+      "y for infor"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "infor",
+      "opportunit",
+      "provide"
+    ],
+    "hash": "14ad5eca22",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085146"
+  },
+  {
+    "id": "POB-00051",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "critical thinking, proble",
+    "content": "m-solving,",
+    "specific_objectives": [
+      "critical thinking, proble"
+    ],
+    "content_items": [
+      "m-solving,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "critical",
+      "proble",
+      "solving",
+      "thinking"
+    ],
+    "hash": "07adfaf60c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085200"
+  },
+  {
+    "id": "POB-00052",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "4. nurture students’ creat",
+    "content": "ive and en",
+    "specific_objectives": [
+      "nurture students’ creat"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "creat",
+      "ive",
+      "nurture",
+      "students"
+    ],
+    "hash": "d47a5534f2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085279"
+  },
+  {
+    "id": "POB-00053",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "fully in the local, region",
+    "content": "al and glo",
+    "specific_objectives": [
+      "fully in the local, region"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "fully",
+      "glo",
+      "local",
+      "region"
+    ],
+    "hash": "73c3846b9d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085338"
+  },
+  {
+    "id": "POB-00054",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "5. sensitise students to th",
+    "content": "e need fo",
+    "specific_objectives": [
+      "sensitise students to th"
+    ],
+    "content_items": [
+      "e need fo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "need",
+      "sensitise",
+      "students"
+    ],
+    "hash": "82648a507f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085403"
+  },
+  {
+    "id": "POB-00055",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "6. enable students to acc",
+    "content": "ess and a",
+    "specific_objectives": [
+      "enable students to acc"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "acc",
+      "enable",
+      "ess",
+      "students"
+    ],
+    "hash": "86275e571f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085474"
+  },
+  {
+    "id": "POB-00056",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "solving problems in bus",
+    "content": "iness.",
+    "specific_objectives": [
+      "solving problems in bus"
+    ],
+    "content_items": [
+      "iness."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "bus",
+      "iness",
+      "problems",
+      "solving"
+    ],
+    "hash": "0f58c9370b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.085520"
+  },
+  {
+    "id": "POB-00057",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "present themselves i",
+    "content": "n the wo",
+    "specific_objectives": [
+      "present themselves i"
+    ],
+    "content_items": [
+      "n the wo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "present",
+      "themselves"
+    ],
+    "hash": "300daf4795",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.268583"
+  },
+  {
+    "id": "POB-00058",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "ORGANISATIONAL PRINCIPLE",
+    "content": "S",
+    "specific_objectives": [
+      "ORGANISATIONAL PRINCIPLE"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "organisational",
+      "principle"
+    ],
+    "hash": "42ba8b22c1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549347"
+  },
+  {
+    "id": "POB-00059",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "FINANCE, GOVERNMENT AND",
+    "content": "TECHNOLOGY",
+    "specific_objectives": [
+      "FINANCE, GOVERNMENT AND"
+    ],
+    "content_items": [
+      "TECHNOLOGY"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "finance",
+      "government",
+      "technology"
+    ],
+    "hash": "3d97042e12",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549492"
+  },
+  {
+    "id": "POB-00060",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "It is recommended that a min",
+    "content": "imum of five 40-mi",
+    "specific_objectives": [
+      "It is recommended that a min"
+    ],
+    "content_items": [
+      "imum of five 40-mi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "five",
+      "imum",
+      "min",
+      "recommended"
+    ],
+    "hash": "c3a1b98259",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549621"
+  },
+  {
+    "id": "POB-00061",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "the equivalent should be alloc",
+    "content": "ated to the syllabus",
+    "specific_objectives": [
+      "the equivalent should be alloc"
+    ],
+    "content_items": [
+      "ated to the syllabus"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "alloc",
+      "ated",
+      "equivalent",
+      "should",
+      "syllabus"
+    ],
+    "hash": "4c7981f50b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549676"
+  },
+  {
+    "id": "POB-00062",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "To facilitate students’ attainm",
+    "content": "ent of the objective",
+    "specific_objectives": [
+      "To facilitate students’ attainm"
+    ],
+    "content_items": [
+      "ent of the objective"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "attainm",
+      "ent",
+      "facilitate",
+      "objective",
+      "students"
+    ],
+    "hash": "87366291b4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549772"
+  },
+  {
+    "id": "POB-00063",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "1. The syllabus provides",
+    "content": "students with a gro",
+    "specific_objectives": [
+      "The syllabus provides"
+    ],
+    "content_items": [
+      "students with a gro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "gro",
+      "provides",
+      "students",
+      "syllabus"
+    ],
+    "hash": "e4c2b1d15c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549840"
+  },
+  {
+    "id": "POB-00064",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "and skills. The major",
+    "content": "focus of the syllabus",
+    "specific_objectives": [
+      "skills. The major"
+    ],
+    "content_items": [
+      "focus of the syllabus"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "focus",
+      "major",
+      "skills",
+      "syllabus"
+    ],
+    "hash": "444b856c3d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549902"
+  },
+  {
+    "id": "POB-00065",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "practices and skills to",
+    "content": "aid the understand",
+    "specific_objectives": [
+      "practices",
+      "skills to"
+    ],
+    "content_items": [
+      "aid the understand"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "aid",
+      "practices",
+      "skills",
+      "understand"
+    ],
+    "hash": "f3111693b7",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.549968"
+  },
+  {
+    "id": "POB-00066",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "2. Develop lessons using",
+    "content": "themes that encom",
+    "specific_objectives": [
+      "Develop lessons using"
+    ],
+    "content_items": [
+      "themes that encom"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "develop",
+      "encom",
+      "lessons",
+      "themes",
+      "using"
+    ],
+    "hash": "d14418e27a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550036"
+  },
+  {
+    "id": "POB-00067",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Therefore, during the",
+    "content": "delivery of instructio",
+    "specific_objectives": [
+      "Therefore, during the"
+    ],
+    "content_items": [
+      "delivery of instructio"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "delivery",
+      "during",
+      "instructio",
+      "therefore"
+    ],
+    "hash": "36fe108bbc",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550095"
+  },
+  {
+    "id": "POB-00068",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "syllabus that are relat",
+    "content": "ed, in order to indic",
+    "specific_objectives": [
+      "syllabus that are relat"
+    ],
+    "content_items": [
+      "ed, in order to indic"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "are",
+      "indic",
+      "order",
+      "relat",
+      "syllabus"
+    ],
+    "hash": "f709af9094",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550153"
+  },
+  {
+    "id": "POB-00069",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "3. Use a variety of met",
+    "content": "hodologies integrat",
+    "specific_objectives": [
+      "Use a variety of met"
+    ],
+    "content_items": [
+      "hodologies integrat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "hodologies",
+      "integrat",
+      "met",
+      "use",
+      "variety"
+    ],
+    "hash": "59ea1b684c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550214"
+  },
+  {
+    "id": "POB-00070",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "simulations, field tr",
+    "content": "ips, games, and",
+    "specific_objectives": [
+      "simulations, field tr"
+    ],
+    "content_items": [
+      "ips, games,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "field",
+      "games",
+      "ips",
+      "simulations"
+    ],
+    "hash": "40f78c1c7b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550271"
+  },
+  {
+    "id": "POB-00071",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "assignments and disc",
+    "content": "ussions on topical iss",
+    "specific_objectives": [
+      "assignments"
+    ],
+    "content_items": [
+      "ussions on topical iss"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "assignments",
+      "disc",
+      "iss",
+      "topical",
+      "ussions"
+    ],
+    "hash": "c5dd9b77d1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550333"
+  },
+  {
+    "id": "POB-00072",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "4. Use tangible and ph",
+    "content": "ysical examples as",
+    "specific_objectives": [
+      "Use tangible"
+    ],
+    "content_items": [
+      "ysical examples as"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "examples",
+      "tangible",
+      "use",
+      "ysical"
+    ],
+    "hash": "5c82c66110",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.550402"
+  },
+  {
+    "id": "POB-00073",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(a) state, list or identify business co",
+    "content": "ncepts, terms an",
+    "specific_objectives": [
+      "(a) state, list or identify business co"
+    ],
+    "content_items": [
+      "ncepts, terms an"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "business",
+      "identify",
+      "list",
+      "ncepts",
+      "state",
+      "terms"
+    ],
+    "hash": "af4e04a8d7",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754386"
+  },
+  {
+    "id": "POB-00074",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(b) define and explain business con",
+    "content": "cepts, principles,",
+    "specific_objectives": [
+      "(b) define",
+      "explain business con"
+    ],
+    "content_items": [
+      "cepts, principles,"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 9,
+    "keywords": [
+      "business",
+      "cepts",
+      "con",
+      "define",
+      "explain",
+      "principles"
+    ],
+    "hash": "68c5fb2e52",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754468"
+  },
+  {
+    "id": "POB-00075",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(c) demonstrate an understanding",
+    "content": "of basic business",
+    "specific_objectives": [
+      "(c) demonstrate an understanding"
+    ],
+    "content_items": [
+      "of basic business"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 9,
+    "keywords": [
+      "basic",
+      "business",
+      "demonstrate",
+      "understanding"
+    ],
+    "hash": "b5b11730f7",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754527"
+  },
+  {
+    "id": "POB-00076",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(a) apply business concepts and pri",
+    "content": "nciples to analys",
+    "specific_objectives": [
+      "(a) apply business concepts"
+    ],
+    "content_items": [
+      "nciples to analys"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 9,
+    "keywords": [
+      "analys",
+      "apply",
+      "business",
+      "concepts",
+      "nciples",
+      "pri"
+    ],
+    "hash": "afe8808d18",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754597"
+  },
+  {
+    "id": "POB-00077",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(b) apply business concepts, princip",
+    "content": "les and skills to",
+    "specific_objectives": [
+      "(b) apply business concepts, princip"
+    ],
+    "content_items": [
+      "skills to"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 9,
+    "keywords": [
+      "apply",
+      "business",
+      "concepts",
+      "les",
+      "princip",
+      "skills"
+    ],
+    "hash": "608d50fd65",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754657"
+  },
+  {
+    "id": "POB-00078",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(a) select, organise and interpret b",
+    "content": "usiness data pres",
+    "specific_objectives": [
+      "(a) select, organise",
+      "interpret b"
+    ],
+    "content_items": [
+      "usiness data pres"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 9,
+    "keywords": [
+      "data",
+      "interpret",
+      "organise",
+      "pres",
+      "select",
+      "usiness"
+    ],
+    "hash": "f240d31f1b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754734"
+  },
+  {
+    "id": "POB-00079",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(b) organise and present, logically",
+    "content": "and effectively,",
+    "specific_objectives": [
+      "(b) organise",
+      "present, logically"
+    ],
+    "content_items": [
+      "effectively,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "effectively",
+      "logically",
+      "organise",
+      "present"
+    ],
+    "hash": "202c1a8913",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754794"
+  },
+  {
+    "id": "POB-00080",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "verbal, graphical and numerical",
+    "content": "forms of commu",
+    "specific_objectives": [
+      "verbal, graphical",
+      "numerical"
+    ],
+    "content_items": [
+      "forms of commu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "commu",
+      "forms",
+      "graphical",
+      "numerical",
+      "verbal"
+    ],
+    "hash": "02081706ad",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:31.754844"
+  },
+  {
+    "id": "POB-00081",
+    "section": "SECTION 1: THE NATURE OF BUSINESS\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "instruments of payment;",
+    "content": "on instruments o",
+    "specific_objectives": [
+      "instruments of payment"
+    ],
+    "content_items": [
+      "on instruments o"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "instruments",
+      "payment"
+    ],
+    "hash": "764c441d38",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:32.511884"
+  },
+  {
+    "id": "POB-00082",
+    "section": "SECTION 1: THE NATURE OF BUSINESS\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "business organisations",
+    "content": "and",
+    "specific_objectives": [
+      "business organisations"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "business",
+      "organisations"
+    ],
+    "hash": "8ff829db73",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:32.511997"
+  },
+  {
+    "id": "POB-00083",
+    "section": "SECTION 1: THE NATURE OF BUSINESS",
+    "subsection": "Unknown",
+    "objective": "in business activities;",
+    "content": "communities, en",
+    "specific_objectives": [
+      "in business activities"
+    ],
+    "content_items": [
+      "communities, en"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "activities",
+      "business",
+      "communities"
+    ],
+    "hash": "92f67f347d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:32.697353"
+  },
+  {
+    "id": "POB-00084",
+    "section": "SECTION 1: THE NATURE OF BUSINESS",
+    "subsection": "Unknown",
+    "objective": "the stakeholders invol",
+    "content": "ved in",
+    "specific_objectives": [
+      "the stakeholders invol"
+    ],
+    "content_items": [
+      "ved in"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "invol",
+      "stakeholders",
+      "ved"
+    ],
+    "hash": "9ba81d19df",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:32.697451"
+  },
+  {
+    "id": "POB-00085",
+    "section": "SECTION 1: THE NATURE OF BUSINESS",
+    "subsection": "Unknown",
+    "objective": "business activities;",
+    "content": "(a) employe",
+    "specific_objectives": [
+      "business activities"
+    ],
+    "content_items": [
+      "(a) employe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "activities",
+      "business",
+      "employe"
+    ],
+    "hash": "a37a1041b0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:32.697504"
+  },
+  {
+    "id": "POB-00086",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "characteristics of a g",
+    "content": "ood leader;",
+    "specific_objectives": [
+      "characteristics of a g"
+    ],
+    "content_items": [
+      "ood leader"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "characteristics",
+      "leader",
+      "ood"
+    ],
+    "hash": "b3b236cd05",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.483163"
+  },
+  {
+    "id": "POB-00087",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "ability to make inte",
+    "content": "lligent deci",
+    "specific_objectives": [
+      "ability to make inte"
+    ],
+    "content_items": [
+      "lligent deci"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "ability",
+      "deci",
+      "inte",
+      "lligent",
+      "make"
+    ],
+    "hash": "860db20bc9",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.483233"
+  },
+  {
+    "id": "POB-00088",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "conflict within an or",
+    "content": "ganisation;",
+    "specific_objectives": [
+      "conflict within an or"
+    ],
+    "content_items": [
+      "ganisation"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "conflict",
+      "ganisation",
+      "within"
+    ],
+    "hash": "b1f75b411b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.483352"
+  },
+  {
+    "id": "POB-00089",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "staff relations in the",
+    "content": "workplace;",
+    "specific_objectives": [
+      "staff relations in the"
+    ],
+    "content_items": [
+      "workplace"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "relations",
+      "staff",
+      "workplace"
+    ],
+    "hash": "d4f3f7c8cd",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.483549"
+  },
+  {
+    "id": "POB-00090",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "employees in a busin",
+    "content": "ess;",
+    "specific_objectives": [
+      "employees in a busin"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "busin",
+      "employees",
+      "ess"
+    ],
+    "hash": "b1be859d56",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.483660"
+  },
+  {
+    "id": "POB-00091",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "the success of an organ",
+    "content": "isation;",
+    "specific_objectives": [
+      "the success of an organ"
+    ],
+    "content_items": [
+      "isation"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "isation",
+      "organ",
+      "success"
+    ],
+    "hash": "e13a7004ff",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.684683"
+  },
+  {
+    "id": "POB-00092",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "communication within",
+    "content": "an",
+    "specific_objectives": [
+      "communication within"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "communication",
+      "within"
+    ],
+    "hash": "c2bdb80bce",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.684798"
+  },
+  {
+    "id": "POB-00093",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "class, school, church, and c",
+    "content": "lubs.",
+    "specific_objectives": [
+      "class, school, church,"
+    ],
+    "content_items": [
+      "lubs."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "church",
+      "class",
+      "lubs",
+      "school"
+    ],
+    "hash": "eb9250a445",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.684973"
+  },
+  {
+    "id": "POB-00094",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "conflict within the school,",
+    "content": "citing an exampl",
+    "specific_objectives": [
+      "conflict within the school,"
+    ],
+    "content_items": [
+      "citing an exampl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "citing",
+      "conflict",
+      "exampl",
+      "school",
+      "within"
+    ],
+    "hash": "1466567a78",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685063"
+  },
+  {
+    "id": "POB-00095",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "mediation, arbitration, and",
+    "content": "(union) represen",
+    "specific_objectives": [
+      "mediation, arbitration,"
+    ],
+    "content_items": [
+      "(union) represen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "arbitration",
+      "mediation",
+      "represen"
+    ],
+    "hash": "0179c4d737",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685112"
+  },
+  {
+    "id": "POB-00096",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "employees and students in",
+    "content": "their school, and",
+    "specific_objectives": [
+      "employees",
+      "students in"
+    ],
+    "content_items": [
+      "their school,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "employees",
+      "school",
+      "students"
+    ],
+    "hash": "7d5b227898",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685199"
+  },
+  {
+    "id": "POB-00097",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "student and passed around",
+    "content": "the room until all",
+    "specific_objectives": [
+      "student",
+      "passed around"
+    ],
+    "content_items": [
+      "the room until all"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "all",
+      "around",
+      "passed",
+      "room",
+      "student",
+      "until"
+    ],
+    "hash": "0962ac1c86",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685305"
+  },
+  {
+    "id": "POB-00098",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "what they heard and the",
+    "content": "n report it to th",
+    "specific_objectives": [
+      "what they heard"
+    ],
+    "content_items": [
+      "n report it to th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "heard",
+      "report",
+      "they",
+      "what"
+    ],
+    "hash": "5c63a48d97",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685371"
+  },
+  {
+    "id": "POB-00099",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "statements/reports should",
+    "content": "be checked, an",
+    "specific_objectives": [
+      "statements/reports should"
+    ],
+    "content_items": [
+      "be checked, an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "checked",
+      "reports",
+      "should",
+      "statements"
+    ],
+    "hash": "90492e4b69",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685429"
+  },
+  {
+    "id": "POB-00100",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "strategies that may be use",
+    "content": "d to ensure that",
+    "specific_objectives": [
+      "strategies that may be use"
+    ],
+    "content_items": [
+      "d to ensure that"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "ensure",
+      "may",
+      "strategies",
+      "use"
+    ],
+    "hash": "c3ce76d383",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685490"
+  },
+  {
+    "id": "POB-00101",
+    "section": "SECTION 2: INTERNAL ORGANISATIONAL ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "base for studying effective",
+    "content": "communication w",
+    "specific_objectives": [
+      "base for studying effective"
+    ],
+    "content_items": [
+      "communication w"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "base",
+      "communication",
+      "effective",
+      "studying"
+    ],
+    "hash": "66f7c31cb1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.685539"
+  },
+  {
+    "id": "POB-00102",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "3. identify the characteristics of the typical entrepreneur;",
+    "content": "3. identify the characteristics of the",
+    "specific_objectives": [
+      "identify the characteristics of the typical entrepreneur"
+    ],
+    "content_items": [
+      "identify the characteristics of the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 21,
+    "keywords": [
+      "characteristics",
+      "entrepreneur",
+      "identify",
+      "typical"
+    ],
+    "hash": "a6aa8a3577",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:33.895137"
+  },
+  {
+    "id": "POB-00103",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "business when making decis",
+    "content": "ions.",
+    "specific_objectives": [
+      "business when making decis"
+    ],
+    "content_items": [
+      "ions."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "business",
+      "decis",
+      "ions",
+      "making",
+      "when"
+    ],
+    "hash": "a28d77a7b8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.077222"
+  },
+  {
+    "id": "POB-00104",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "establishment of busine",
+    "content": "sses;",
+    "specific_objectives": [
+      "establishment of busine"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "busine",
+      "establishment",
+      "sses"
+    ],
+    "hash": "48949d4695",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.290726"
+  },
+  {
+    "id": "POB-00105",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "conducting a feasibility",
+    "content": "study into",
+    "specific_objectives": [
+      "conducting a feasibility"
+    ],
+    "content_items": [
+      "study into"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "conducting",
+      "feasibility",
+      "into",
+      "study"
+    ],
+    "hash": "a01ae55bde",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.290817"
+  },
+  {
+    "id": "POB-00106",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "the establishing of a bus",
+    "content": "iness;",
+    "specific_objectives": [
+      "the establishing of a bus"
+    ],
+    "content_items": [
+      "iness"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "bus",
+      "establishing",
+      "iness"
+    ],
+    "hash": "0bfb7c54c8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.290881"
+  },
+  {
+    "id": "POB-00107",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "planning and the oper",
+    "content": "ation of a",
+    "specific_objectives": [
+      "planning",
+      "the oper"
+    ],
+    "content_items": [
+      "ation of a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "ation",
+      "oper",
+      "planning"
+    ],
+    "hash": "91cb38369e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.291001"
+  },
+  {
+    "id": "POB-00108",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "instituted by governme",
+    "content": "nts for the",
+    "specific_objectives": [
+      "instituted by governme"
+    ],
+    "content_items": [
+      "nts for the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "governme",
+      "instituted",
+      "nts"
+    ],
+    "hash": "d220ef77fd",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.291095"
+  },
+  {
+    "id": "POB-00109",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "different types of busin",
+    "content": "esses;",
+    "specific_objectives": [
+      "different types of busin"
+    ],
+    "content_items": [
+      "esses"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "busin",
+      "different",
+      "esses",
+      "types"
+    ],
+    "hash": "fcb8cde5d0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.291173"
+  },
+  {
+    "id": "POB-00110",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "property, stocks, bonds, m",
+    "content": "on",
+    "specific_objectives": [
+      "property, stocks, bonds, m"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 24,
+    "keywords": [
+      "bonds",
+      "property",
+      "stocks"
+    ],
+    "hash": "b9536487e5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.451146"
+  },
+  {
+    "id": "POB-00111",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "surrender on life insuranc",
+    "content": "e",
+    "specific_objectives": [
+      "surrender on life insuranc"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 24,
+    "keywords": [
+      "insuranc",
+      "life",
+      "surrender"
+    ],
+    "hash": "290d56826f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.451211"
+  },
+  {
+    "id": "POB-00112",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "motor vehicles, appliances;",
+    "content": "an",
+    "specific_objectives": [
+      "motor vehicles, appliances"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 24,
+    "keywords": [
+      "appliances",
+      "motor",
+      "vehicles"
+    ],
+    "hash": "68c4f7cade",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.451261"
+  },
+  {
+    "id": "POB-00113",
+    "section": "SECTION 3: ESTABLISHING A BUSINESS",
+    "subsection": "Unknown",
+    "objective": "To facilitate student",
+    "content": "s’ attainmen",
+    "specific_objectives": [
+      "To facilitate student"
+    ],
+    "content_items": [
+      "s’ attainmen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 24,
+    "keywords": [
+      "attainmen",
+      "facilitate",
+      "student"
+    ],
+    "hash": "3370f20149",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.451362"
+  },
+  {
+    "id": "POB-00114",
+    "section": "SECTION 4: LEGAL ASPECTS OF BUSINESS\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "may be terminated or",
+    "content": "discharged;",
+    "specific_objectives": [
+      "may be terminated or"
+    ],
+    "content_items": [
+      "discharged"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "discharged",
+      "may",
+      "terminated"
+    ],
+    "hash": "eff973270e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.838841"
+  },
+  {
+    "id": "POB-00115",
+    "section": "SECTION 4: LEGAL ASPECTS OF BUSINESS\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "necessary in business",
+    "content": "transactions;",
+    "specific_objectives": [
+      "necessary in business"
+    ],
+    "content_items": [
+      "transactions"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "business",
+      "necessary",
+      "transactions"
+    ],
+    "hash": "c73e6859e1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:34.839022"
+  },
+  {
+    "id": "POB-00116",
+    "section": "unit of: and productivity",
+    "subsection": "Unknown",
+    "objective": "4. explain the importance of productivity;",
+    "content": "4. explain the importance of",
+    "specific_objectives": [
+      "explain the importance of productivity"
+    ],
+    "content_items": [
+      "explain the importance of"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 29,
+    "keywords": [
+      "explain",
+      "importance",
+      "productivity"
+    ],
+    "hash": "43777469e6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.289629"
+  },
+  {
+    "id": "POB-00117",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "To facilitate students’ attainment of the objectives of th",
+    "content": "is Section, teac",
+    "specific_objectives": [
+      "To facilitate students’ attainment of the objectives of th"
+    ],
+    "content_items": [
+      "is Section, teac"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "attainment",
+      "facilitate",
+      "objectives",
+      "section",
+      "students",
+      "teac"
+    ],
+    "hash": "569d6bee9d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.879630"
+  },
+  {
+    "id": "POB-00118",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "to engage students in the teaching and learning activit",
+    "content": "ies below.",
+    "specific_objectives": [
+      "to engage students in the teaching",
+      "learning activit"
+    ],
+    "content_items": [
+      "ies below."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "activit",
+      "below",
+      "engage",
+      "ies",
+      "learning",
+      "students",
+      "teaching"
+    ],
+    "hash": "32a828bcfd",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.879726"
+  },
+  {
+    "id": "POB-00119",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "1. Students can make presentations on the Caribb",
+    "content": "ean industries",
+    "specific_objectives": [
+      "Students can make presentations on the Caribb"
+    ],
+    "content_items": [
+      "ean industries"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "can",
+      "caribb",
+      "ean",
+      "industries",
+      "make",
+      "presentations",
+      "students"
+    ],
+    "hash": "5b99dd1159",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.879802"
+  },
+  {
+    "id": "POB-00120",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "(a) The La Brea Pitch Lake in Trinidad and",
+    "content": "construction of",
+    "specific_objectives": [
+      "(a) The La Brea Pitch Lake in Trinidad"
+    ],
+    "content_items": [
+      "construction of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "brea",
+      "construction",
+      "lake",
+      "pitch",
+      "trinidad"
+    ],
+    "hash": "39899d5d59",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.879951"
+  },
+  {
+    "id": "POB-00121",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "(b) Mining of limestone and its use in",
+    "content": "manufacturing",
+    "specific_objectives": [
+      "(b) Mining of limestone",
+      "its use in"
+    ],
+    "content_items": [
+      "manufacturing"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "its",
+      "limestone",
+      "manufacturing",
+      "mining",
+      "use"
+    ],
+    "hash": "b9055f11b8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880053"
+  },
+  {
+    "id": "POB-00122",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "companies including Arawak Cement C",
+    "content": "ompany Limite",
+    "specific_objectives": [
+      "companies including Arawak Cement C"
+    ],
+    "content_items": [
+      "ompany Limite"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "arawak",
+      "cement",
+      "companies",
+      "including",
+      "limite",
+      "ompany"
+    ],
+    "hash": "b5ad6043c6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880122"
+  },
+  {
+    "id": "POB-00123",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Company Limited, Jamaica; TCL Guy",
+    "content": "ana Inc; and T",
+    "specific_objectives": [
+      "Company Limited, Jamaica",
+      "TCL Guy"
+    ],
+    "content_items": [
+      "ana Inc"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "ana",
+      "company",
+      "guy",
+      "inc",
+      "jamaica",
+      "limited",
+      "tcl"
+    ],
+    "hash": "068c804287",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880196"
+  },
+  {
+    "id": "POB-00124",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "(c) Beaches, national parks and tourism se",
+    "content": "rvices.",
+    "specific_objectives": [
+      "(c) Beaches, national parks",
+      "tourism se"
+    ],
+    "content_items": [
+      "rvices."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "beaches",
+      "national",
+      "parks",
+      "rvices",
+      "tourism"
+    ],
+    "hash": "cd2fe281c5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880271"
+  },
+  {
+    "id": "POB-00125",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "2. Have students identify a large business that",
+    "content": "they can stud",
+    "specific_objectives": [
+      "Have students identify a large business that"
+    ],
+    "content_items": [
+      "they can stud"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "business",
+      "can",
+      "have",
+      "identify",
+      "large",
+      "stud",
+      "students",
+      "they"
+    ],
+    "hash": "fd2122c37a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880345"
+  },
+  {
+    "id": "POB-00126",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "features based on the concepts and principles",
+    "content": "being taught in",
+    "specific_objectives": [
+      "features based on the concepts",
+      "principles"
+    ],
+    "content_items": [
+      "being taught in"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "based",
+      "being",
+      "concepts",
+      "features",
+      "principles",
+      "taught"
+    ],
+    "hash": "468e8da324",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880403"
+  },
+  {
+    "id": "POB-00127",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "3. Engage students in discussion about the level",
+    "content": "s of production.",
+    "specific_objectives": [
+      "Engage students in discussion about the level"
+    ],
+    "content_items": [
+      "s of production."
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 32,
+    "keywords": [
+      "about",
+      "discussion",
+      "engage",
+      "level",
+      "production",
+      "students"
+    ],
+    "hash": "20d689c865",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880471"
+  },
+  {
+    "id": "POB-00128",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "paid to differentiating between the surplus and",
+    "content": "export levels.",
+    "specific_objectives": [
+      "paid to differentiating between the surplus"
+    ],
+    "content_items": [
+      "export levels."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "between",
+      "differentiating",
+      "export",
+      "levels",
+      "paid",
+      "surplus"
+    ],
+    "hash": "c99ce5ebe2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880530"
+  },
+  {
+    "id": "POB-00129",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "4. Ask students to identify small businesses in th",
+    "content": "eir communitie",
+    "specific_objectives": [
+      "Ask students to identify small businesses in th"
+    ],
+    "content_items": [
+      "eir communitie"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "ask",
+      "businesses",
+      "communitie",
+      "eir",
+      "identify",
+      "small",
+      "students"
+    ],
+    "hash": "85928574b5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880598"
+  },
+  {
+    "id": "POB-00130",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "and the disadvantages. Teachers can discuss",
+    "content": "experiences w",
+    "specific_objectives": [
+      "the disadvantages. Teachers can discuss"
+    ],
+    "content_items": [
+      "experiences w"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 32,
+    "keywords": [
+      "can",
+      "disadvantages",
+      "discuss",
+      "experiences",
+      "teachers"
+    ],
+    "hash": "7c92ff3c9f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880662"
+  },
+  {
+    "id": "POB-00131",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "include mechanic shops, tradesmen and small",
+    "content": "contractors) es",
+    "specific_objectives": [
+      "include mechanic shops, tradesmen",
+      "small"
+    ],
+    "content_items": [
+      "contractors) es"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "contractors",
+      "include",
+      "mechanic",
+      "shops",
+      "small",
+      "tradesmen"
+    ],
+    "hash": "5ae442977b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880728"
+  },
+  {
+    "id": "POB-00132",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Bahaw, E. and Mollick, M. Comprehensive Ec",
+    "content": "onomics for C",
+    "specific_objectives": [
+      "Bahaw, E.",
+      "Mollick, M. Comprehensive Ec"
+    ],
+    "content_items": [
+      "onomics for C"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "bahaw",
+      "comprehensive",
+      "mollick",
+      "onomics"
+    ],
+    "hash": "c061e1aa16",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880822"
+  },
+  {
+    "id": "POB-00133",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Robinson, K. and Cooke, N. Economics for CSEC",
+    "content": "with SBA, Stud",
+    "specific_objectives": [
+      "Robinson, K.",
+      "Cooke, N. Economics for CSEC"
+    ],
+    "content_items": [
+      "with SBA, Stud"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "cooke",
+      "csec",
+      "economics",
+      "robinson",
+      "sba",
+      "stud"
+    ],
+    "hash": "4ac38812f4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.880911"
+  },
+  {
+    "id": "POB-00134",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Robinson, K. and Hamil, S. Principles of Busin",
+    "content": "ess for CSEC",
+    "specific_objectives": [
+      "Robinson, K.",
+      "Hamil, S. Principles of Busin"
+    ],
+    "content_items": [
+      "ess for CSEC"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "busin",
+      "csec",
+      "ess",
+      "hamil",
+      "principles",
+      "robinson"
+    ],
+    "hash": "d17c79716a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.881002"
+  },
+  {
+    "id": "POB-00135",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Exercises. Carlong P",
+    "content": "ublishers, 2011",
+    "specific_objectives": [
+      "Exercises. Carlong P"
+    ],
+    "content_items": [
+      "ublishers, 2011"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "carlong",
+      "exercises",
+      "ublishers"
+    ],
+    "hash": "0a1b09486c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.881058"
+  },
+  {
+    "id": "POB-00136",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Stephens-James, L. and Entrepreneurship f",
+    "content": "or Caribbean St",
+    "specific_objectives": [
+      "Stephens-James, L.",
+      "Entrepreneurship f"
+    ],
+    "content_items": [
+      "or Caribbean St"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "caribbean",
+      "entrepreneurship",
+      "james",
+      "stephens"
+    ],
+    "hash": "f886a7cabe",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.881139"
+  },
+  {
+    "id": "POB-00137",
+    "section": "SECTION 5: PRODUCTION",
+    "subsection": "Unknown",
+    "objective": "Stimpson, P. and Harvey, Y. Principles of Busine",
+    "content": "ss for CSEC. Nel",
+    "specific_objectives": [
+      "Stimpson, P.",
+      "Harvey, Y. Principles of Busine"
+    ],
+    "content_items": [
+      "ss for CSEC. Nel"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "busine",
+      "csec",
+      "harvey",
+      "nel",
+      "principles",
+      "stimpson"
+    ],
+    "hash": "3527eab502",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:35.881226"
+  },
+  {
+    "id": "POB-00138",
+    "section": "SECTION 6: MARKETING",
+    "subsection": "Unknown",
+    "objective": "SECTION 6: MARKETING (cont’d",
+    "content": ")",
+    "specific_objectives": [
+      "SECTION 6: MARKETING (cont’d"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 37,
+    "keywords": [
+      "marketing",
+      "section"
+    ],
+    "hash": "efec245fbb",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551361"
+  },
+  {
+    "id": "POB-00139",
+    "section": "SECTION 6: MARKETING",
+    "subsection": "Unknown",
+    "objective": "Robinson, K. and Hamil, S.",
+    "content": "Principles",
+    "specific_objectives": [
+      "Robinson, K.",
+      "Hamil, S."
+    ],
+    "content_items": [
+      "Principles"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 37,
+    "keywords": [
+      "hamil",
+      "principles",
+      "robinson"
+    ],
+    "hash": "e9a8efc41d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551444"
+  },
+  {
+    "id": "POB-00140",
+    "section": "SECTION 6: MARKETING",
+    "subsection": "Unknown",
+    "objective": "Stimpson, P. and Harvey, Y.",
+    "content": "Principles",
+    "specific_objectives": [
+      "Stimpson, P.",
+      "Harvey, Y."
+    ],
+    "content_items": [
+      "Principles"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 37,
+    "keywords": [
+      "harvey",
+      "principles",
+      "stimpson"
+    ],
+    "hash": "a1908abc8a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.551508"
+  },
+  {
+    "id": "POB-00141",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "logistics: forward an",
+    "content": "d reverse flow of",
+    "specific_objectives": [
+      "logistics: forward an"
+    ],
+    "content_items": [
+      "d reverse flow of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "flow",
+      "forward",
+      "logistics",
+      "reverse"
+    ],
+    "hash": "30289305de",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.729715"
+  },
+  {
+    "id": "POB-00142",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "goods; storage of goo",
+    "content": "ds; services such",
+    "specific_objectives": [
+      "goods",
+      "storage of goo"
+    ],
+    "content_items": [
+      "services such"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "goo",
+      "goods",
+      "services",
+      "storage",
+      "such"
+    ],
+    "hash": "4e9a9c7122",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.729787"
+  },
+  {
+    "id": "POB-00143",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN\nSPECIFIC OBJECTIVES CONTENT\nStudents should be able to",
+    "subsection": "Unknown",
+    "objective": "as insurance and rel",
+    "content": "ated information",
+    "specific_objectives": [
+      "as insurance"
+    ],
+    "content_items": [
+      "ated information"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "ated",
+      "information",
+      "insurance",
+      "rel"
+    ],
+    "hash": "634b3f3354",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.729850"
+  },
+  {
+    "id": "POB-00144",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "and intermodal transpo",
+    "content": "rt;",
+    "specific_objectives": [
+      "intermodal transpo"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "intermodal",
+      "transpo"
+    ],
+    "hash": "fe82abd776",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.900628"
+  },
+  {
+    "id": "POB-00145",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "entrepreneurship, fo",
+    "content": "r example,",
+    "specific_objectives": [
+      "entrepreneurship, fo"
+    ],
+    "content_items": [
+      "r example,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "entrepreneurship",
+      "example"
+    ],
+    "hash": "963875ef38",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.900878"
+  },
+  {
+    "id": "POB-00146",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "counterfeiting, produc",
+    "content": "t complexity,",
+    "specific_objectives": [
+      "counterfeiting, produc"
+    ],
+    "content_items": [
+      "t complexity,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "complexity",
+      "counterfeiting",
+      "produc"
+    ],
+    "hash": "2cecc8bd08",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.900950"
+  },
+  {
+    "id": "POB-00147",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "regulatory complexity,",
+    "content": "management",
+    "specific_objectives": [
+      "regulatory complexity,"
+    ],
+    "content_items": [
+      "management"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "complexity",
+      "management",
+      "regulatory"
+    ],
+    "hash": "43845fcb41",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.901007"
+  },
+  {
+    "id": "POB-00148",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "blunders, changing mark",
+    "content": "et conditions,",
+    "specific_objectives": [
+      "blunders, changing mark"
+    ],
+    "content_items": [
+      "et conditions,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "blunders",
+      "changing",
+      "conditions",
+      "mark"
+    ],
+    "hash": "5530e16a29",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.901059"
+  },
+  {
+    "id": "POB-00149",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "natural disasters, a",
+    "content": "nd political",
+    "specific_objectives": [
+      "natural disasters, a"
+    ],
+    "content_items": [
+      "nd political"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "disasters",
+      "natural",
+      "political"
+    ],
+    "hash": "4f1d6726a8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:36.901109"
+  },
+  {
+    "id": "POB-00150",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "SECTION 7: LOGISTICS AND SUPP",
+    "content": "LY",
+    "specific_objectives": [
+      "SECTION 7: LOGISTICS AND SUPP"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "logistics",
+      "section",
+      "supp"
+    ],
+    "hash": "a28afb6bd3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.321897"
+  },
+  {
+    "id": "POB-00151",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "10. outline the impact of inform",
+    "content": "ati",
+    "specific_objectives": [
+      "outline the impact of inform"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "ati",
+      "impact",
+      "inform",
+      "outline"
+    ],
+    "hash": "fa386de15a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.321992"
+  },
+  {
+    "id": "POB-00152",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "technology on logistics and s",
+    "content": "up",
+    "specific_objectives": [
+      "technology on logistics"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "logistics",
+      "technology"
+    ],
+    "hash": "8555f2e44f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322057"
+  },
+  {
+    "id": "POB-00153",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "Suggested Teaching and Learning A",
+    "content": "cti",
+    "specific_objectives": [
+      "Suggested Teaching",
+      "Learning A"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "cti",
+      "learning",
+      "suggested",
+      "teaching"
+    ],
+    "hash": "878d11e280",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322186"
+  },
+  {
+    "id": "POB-00154",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "To facilitate students’ attainment of t",
+    "content": "he",
+    "specific_objectives": [
+      "To facilitate students’ attainment of t"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "attainment",
+      "facilitate",
+      "students"
+    ],
+    "hash": "c81e1635a8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322277"
+  },
+  {
+    "id": "POB-00155",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "to engage students in the teaching a",
+    "content": "nd",
+    "specific_objectives": [
+      "to engage students in the teaching a"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "engage",
+      "students",
+      "teaching"
+    ],
+    "hash": "03c15a9438",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322335"
+  },
+  {
+    "id": "POB-00156",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "1. Invite guest speakers (such a",
+    "content": "s pr",
+    "specific_objectives": [
+      "Invite guest speakers (such a"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "guest",
+      "invite",
+      "speakers",
+      "such"
+    ],
+    "hash": "551ca13e0d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322399"
+  },
+  {
+    "id": "POB-00157",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "agencies which provide cour",
+    "content": "ier",
+    "specific_objectives": [
+      "agencies which provide cour"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "agencies",
+      "cour",
+      "ier",
+      "provide",
+      "which"
+    ],
+    "hash": "0cdf8b2ad6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322457"
+  },
+  {
+    "id": "POB-00158",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "how they operate and the im",
+    "content": "pa",
+    "specific_objectives": [
+      "how they operate",
+      "the im"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "how",
+      "operate",
+      "they"
+    ],
+    "hash": "f03b53ae31",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322515"
+  },
+  {
+    "id": "POB-00159",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "2. Arrange actual or virtual fie",
+    "content": "ld",
+    "specific_objectives": [
+      "Arrange actual or virtual fie"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "actual",
+      "arrange",
+      "fie",
+      "virtual"
+    ],
+    "hash": "af6e2b6836",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322579"
+  },
+  {
+    "id": "POB-00160",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "provide courier and haulage",
+    "content": "se",
+    "specific_objectives": [
+      "provide courier",
+      "haulage"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "courier",
+      "haulage",
+      "provide"
+    ],
+    "hash": "f527dfe4e2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322641"
+  },
+  {
+    "id": "POB-00161",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "impact they have on busines",
+    "content": "s.",
+    "specific_objectives": [
+      "impact they have on busines"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "busines",
+      "have",
+      "impact",
+      "they"
+    ],
+    "hash": "13b643b443",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322687"
+  },
+  {
+    "id": "POB-00162",
+    "section": "SECTION 7: LOGISTICS AND SUPPLY CHAIN",
+    "subsection": "Unknown",
+    "objective": "Mangan, J. and Lalwani, C.",
+    "content": "Glo",
+    "specific_objectives": [
+      "Mangan, J.",
+      "Lalwani, C."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "glo",
+      "lalwani",
+      "mangan"
+    ],
+    "hash": "22090bb0cf",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.322795"
+  },
+  {
+    "id": "POB-00163",
+    "section": "SECTION 8: BUSINESS FINANCE",
+    "subsection": "Unknown",
+    "objective": "capitalists, crowd f",
+    "content": "unding, angel inves",
+    "specific_objectives": [
+      "capitalists, crowd f"
+    ],
+    "content_items": [
+      "unding, angel inves"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 44,
+    "keywords": [
+      "angel",
+      "capitalists",
+      "crowd",
+      "inves",
+      "unding"
+    ],
+    "hash": "64975379e0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:37.830815"
+  },
+  {
+    "id": "POB-00164",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "access their accounts",
+    "content": "from home",
+    "specific_objectives": [
+      "access their accounts"
+    ],
+    "content_items": [
+      "from home"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "access",
+      "accounts",
+      "home"
+    ],
+    "hash": "dc38c46b47",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029435"
+  },
+  {
+    "id": "POB-00165",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "enables customers to",
+    "content": "check their",
+    "specific_objectives": [
+      "enables customers to"
+    ],
+    "content_items": [
+      "check their"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "check",
+      "customers",
+      "enables"
+    ],
+    "hash": "03f929ee37",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029529"
+  },
+  {
+    "id": "POB-00166",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "utility and other bills.",
+    "content": "Customers",
+    "specific_objectives": [
+      "utility",
+      "other bills."
+    ],
+    "content_items": [
+      "Customers"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "bills",
+      "customers",
+      "other",
+      "utility"
+    ],
+    "hash": "f8e44b8dee",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029611"
+  },
+  {
+    "id": "POB-00167",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "also use this facility",
+    "content": "to transfer",
+    "specific_objectives": [
+      "also use this facility"
+    ],
+    "content_items": [
+      "to transfer"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "also",
+      "facility",
+      "transfer",
+      "use"
+    ],
+    "hash": "069aaf132c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029669"
+  },
+  {
+    "id": "POB-00168",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "transactions via the",
+    "content": "World-wide",
+    "specific_objectives": [
+      "transactions via the"
+    ],
+    "content_items": [
+      "World-wide"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "transactions",
+      "via",
+      "wide",
+      "world"
+    ],
+    "hash": "8364d08276",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029764"
+  },
+  {
+    "id": "POB-00169",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "physical brick and m",
+    "content": "ortar store.",
+    "specific_objectives": [
+      "physical brick"
+    ],
+    "content_items": [
+      "ortar store."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 52,
+    "keywords": [
+      "brick",
+      "ortar",
+      "physical",
+      "store"
+    ],
+    "hash": "a279c25b6c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.029824"
+  },
+  {
+    "id": "POB-00170",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "describe the role of edu",
+    "content": "cation in",
+    "specific_objectives": [
+      "describe the role of edu"
+    ],
+    "content_items": [
+      "cation in"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 56,
+    "keywords": [
+      "cation",
+      "describe",
+      "edu",
+      "role"
+    ],
+    "hash": "e8f25dbd96",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.676660"
+  },
+  {
+    "id": "POB-00171",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "identify the functions o",
+    "content": "f major",
+    "specific_objectives": [
+      "identify the functions o"
+    ],
+    "content_items": [
+      "f major"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "functions",
+      "identify",
+      "major"
+    ],
+    "hash": "36125191d6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.676927"
+  },
+  {
+    "id": "POB-00172",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "economic institutions and",
+    "content": "systems;",
+    "specific_objectives": [
+      "economic institutions"
+    ],
+    "content_items": [
+      "systems"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "economic",
+      "institutions",
+      "systems"
+    ],
+    "hash": "9ac448ef18",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.676986"
+  },
+  {
+    "id": "POB-00173",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "explain how economic",
+    "content": "institutions",
+    "specific_objectives": [
+      "explain how economic"
+    ],
+    "content_items": [
+      "institutions"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 57,
+    "keywords": [
+      "economic",
+      "explain",
+      "how",
+      "institutions"
+    ],
+    "hash": "e91a66438b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.821662"
+  },
+  {
+    "id": "POB-00174",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "or trade agreements i",
+    "content": "mpact the",
+    "specific_objectives": [
+      "or trade agreements i"
+    ],
+    "content_items": [
+      "mpact the"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "agreements",
+      "mpact",
+      "trade"
+    ],
+    "hash": "b05c58f225",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.821744"
+  },
+  {
+    "id": "POB-00175",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "identify major economi",
+    "content": "c problems",
+    "specific_objectives": [
+      "identify major economi"
+    ],
+    "content_items": [
+      "c problems"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "economi",
+      "identify",
+      "major",
+      "problems"
+    ],
+    "hash": "128741f59f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.821819"
+  },
+  {
+    "id": "POB-00176",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "outline appropriate s",
+    "content": "olutions to",
+    "specific_objectives": [
+      "outline appropriate s"
+    ],
+    "content_items": [
+      "olutions to"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "appropriate",
+      "olutions",
+      "outline"
+    ],
+    "hash": "38b7f023ae",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.821916"
+  },
+  {
+    "id": "POB-00177",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "the major economic p",
+    "content": "roblems of",
+    "specific_objectives": [
+      "the major economic p"
+    ],
+    "content_items": [
+      "roblems of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "economic",
+      "major",
+      "roblems"
+    ],
+    "hash": "0bcbfbc1cc",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.821986"
+  },
+  {
+    "id": "POB-00178",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "explain the role, be",
+    "content": "nefits and",
+    "specific_objectives": [
+      "explain the role, be"
+    ],
+    "content_items": [
+      "nefits"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 57,
+    "keywords": [
+      "explain",
+      "nefits",
+      "role"
+    ],
+    "hash": "2291be601a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.822105"
+  },
+  {
+    "id": "POB-00179",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "impact of foreign invest",
+    "content": "ment.",
+    "specific_objectives": [
+      "impact of foreign invest"
+    ],
+    "content_items": [
+      "ment."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "foreign",
+      "impact",
+      "invest",
+      "ment"
+    ],
+    "hash": "3fd56a8bef",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:39.822161"
+  },
+  {
+    "id": "POB-00180",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "syllabus. It is intend",
+    "content": "ed to assist",
+    "specific_objectives": [
+      "syllabus. It is intend"
+    ],
+    "content_items": [
+      "ed to assist"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "assist",
+      "intend",
+      "syllabus"
+    ],
+    "hash": "89fc6d353c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.337873"
+  },
+  {
+    "id": "POB-00181",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "teachers are consist",
+    "content": "ent with th",
+    "specific_objectives": [
+      "teachers are consist"
+    ],
+    "content_items": [
+      "ent with th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "are",
+      "consist",
+      "ent",
+      "teachers"
+    ],
+    "hash": "c4690374e3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338156"
+  },
+  {
+    "id": "POB-00182",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "experience. This hel",
+    "content": "ps to build t",
+    "specific_objectives": [
+      "experience. This hel"
+    ],
+    "content_items": [
+      "ps to build t"
+    ],
+    "skills": [
+      "PS"
+    ],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "build",
+      "experience",
+      "hel"
+    ],
+    "hash": "db04850e0a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338281"
+  },
+  {
+    "id": "POB-00183",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SBA also facilitates",
+    "content": "the develop",
+    "specific_objectives": [
+      "SBA also facilitates"
+    ],
+    "content_items": [
+      "the develop"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "also",
+      "develop",
+      "facilitates",
+      "sba"
+    ],
+    "hash": "a6c6b7c84b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338346"
+  },
+  {
+    "id": "POB-00184",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "research project for",
+    "content": "school can",
+    "specific_objectives": [
+      "research project for"
+    ],
+    "content_items": [
+      "school can"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "can",
+      "project",
+      "research",
+      "school"
+    ],
+    "hash": "c0e3ae4914",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338452"
+  },
+  {
+    "id": "POB-00185",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "including data colle",
+    "content": "ction, analys",
+    "specific_objectives": [
+      "including data colle"
+    ],
+    "content_items": [
+      "ction, analys"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "analys",
+      "colle",
+      "ction",
+      "data",
+      "including"
+    ],
+    "hash": "88720f343b",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338515"
+  },
+  {
+    "id": "POB-00186",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "identified in the ma",
+    "content": "rk scheme.",
+    "specific_objectives": [
+      "identified in the ma"
+    ],
+    "content_items": [
+      "rk scheme."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "identified",
+      "scheme"
+    ],
+    "hash": "ca26dd475a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338600"
+  },
+  {
+    "id": "POB-00187",
+    "section": "SECTION 10: TECHNOLOGY AND THE GLOBAL BUSINESS ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(Principles of Accou",
+    "content": "nts, Principl",
+    "specific_objectives": [
+      "(Principles of Accou"
+    ],
+    "content_items": [
+      "nts, Principl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "accou",
+      "nts",
+      "principl",
+      "principles"
+    ],
+    "hash": "6943dd4d11",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.338680"
+  },
+  {
+    "id": "POB-00188",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Principles of Busine",
+    "content": "ss, and Ec",
+    "specific_objectives": [
+      "Principles of Busine"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 62,
+    "keywords": [
+      "busine",
+      "principles"
+    ],
+    "hash": "20d7f86851",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.704324"
+  },
+  {
+    "id": "POB-00189",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "A student’s report s",
+    "content": "hould be p",
+    "specific_objectives": [
+      "A student’s report s"
+    ],
+    "content_items": [
+      "hould be p"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 62,
+    "keywords": [
+      "hould",
+      "report",
+      "student"
+    ],
+    "hash": "be4b322968",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.704413"
+  },
+  {
+    "id": "POB-00190",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "The project should b",
+    "content": "e marked",
+    "specific_objectives": [
+      "The project should b"
+    ],
+    "content_items": [
+      "e marked"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 62,
+    "keywords": [
+      "marked",
+      "project",
+      "should"
+    ],
+    "hash": "79a1b58f5a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.704543"
+  },
+  {
+    "id": "POB-00191",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Interpretation and A",
+    "content": "nalysis (IA",
+    "specific_objectives": [
+      "Interpretation"
+    ],
+    "content_items": [
+      "nalysis (IA"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 62,
+    "keywords": [
+      "interpretation",
+      "nalysis"
+    ],
+    "hash": "08267b6570",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.704589"
+  },
+  {
+    "id": "POB-00192",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Topic/Issue/Problem  Topic/issue/problem is clearly stated – 1 mark (KC)  Topic/issue/problem accurately describes the project – 1 mark (KC)",
+    "content": "2",
+    "specific_objectives": [
+      "Topic/Issue/Problem  Topic/issue/problem is clearly stated – 1 mark (KC)  Topic/issue/problem accurately describes the project – 1 mark (KC)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 2,
+    "page_number": 63,
+    "keywords": [
+      "accurately",
+      "clearly",
+      "describes",
+      "issue",
+      "mark",
+      "problem",
+      "project",
+      "stated",
+      "topic"
+    ],
+    "hash": "495bb10b50",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.909386"
+  },
+  {
+    "id": "POB-00193",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Objectives  Objectives are clearly stated and linked to the topic/issue/problem – 1 mark (A)  Objectives are realistic – 1 mark (A)",
+    "content": "2",
+    "specific_objectives": [
+      "Objectives  Objectives are clearly stated",
+      "linked to the topic/issue/problem – 1 mark (A)  Objectives are realistic – 1 mark (A)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "are",
+      "clearly",
+      "issue",
+      "linked",
+      "mark",
+      "objectives",
+      "problem",
+      "realistic",
+      "stated",
+      "topic"
+    ],
+    "hash": "4b22910da2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.909524"
+  },
+  {
+    "id": "POB-00194",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Background/Overview  Includes a description of the topic/issue/problem - Description includes the history – 1 mark (KC) - Description includes the development – 1 mark (KC)  Establishes the need for research - Why/how is the topic/issue/problem important to student – 1 mark (A) - Impact of topic/issue/problem on society – 1 mark (A)",
+    "content": "2",
+    "specific_objectives": [
+      "Background/Overview  Includes a description of the topic/issue/problem - Description includes the history – 1 mark (KC) - Description includes the development – 1 mark (KC)  Establishes the need for research - Why/how is the topic/issue/problem important to student – 1 mark (A) - Impact of topic/issue/problem on society – 1 mark (A)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "background",
+      "description",
+      "development",
+      "establishes",
+      "history",
+      "how",
+      "impact",
+      "important",
+      "includes",
+      "issue",
+      "mark",
+      "need"
+    ],
+    "hash": "e479f822f0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.909735"
+  },
+  {
+    "id": "POB-00195",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Methodology  Data collection instrument clearly described – 1–2 marks (KC)  Data collection instrument appropriate for type of data – 1 mark (A)  Included at least two instruments of data collection – 1 mark (A)  Method of data collection clearly described – 1–2 marks (A)  Method of data collection adequately justified – 1–2 marks (IA)  Limitations of data collection method clearly stated – 1–2 marks (A)",
+    "content": "2",
+    "specific_objectives": [
+      "Methodology  Data collection instrument clearly described – 1–2 marks (KC)  Data collection instrument appropriate for type of data – 1 mark (A)  Included at least two instruments of data collection – 1 mark (A)  Method of data collection clearly described – 1–2 marks (A)  Method of data collection adequately justified – 1–2 marks (IA)  Limitations of data collection method clearly stated – 1–2 marks (A)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 2,
+    "page_number": 63,
+    "keywords": [
+      "adequately",
+      "appropriate",
+      "clearly",
+      "collection",
+      "data",
+      "described",
+      "included",
+      "instrument",
+      "instruments",
+      "justified",
+      "least",
+      "limitations"
+    ],
+    "hash": "fcdda2930f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.909988"
+  },
+  {
+    "id": "POB-00196",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Presentation and Analysis of Data  Data is presented an appropriate form using tables, charts, graphs – 1–2 marks (KC)",
+    "content": "2",
+    "specific_objectives": [
+      "Presentation",
+      "Analysis of Data  Data is presented an appropriate form using tables, charts, graphs – 1–2 marks (KC)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 1,
+    "page_number": 63,
+    "keywords": [
+      "analysis",
+      "appropriate",
+      "charts",
+      "data",
+      "form",
+      "graphs",
+      "marks",
+      "presentation",
+      "presented",
+      "tables",
+      "using"
+    ],
+    "hash": "b771f69a60",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:40.910109"
+  },
+  {
+    "id": "POB-00197",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Conclusion  Conclusion succinctly summarises the project – 1–2 marks(A)  Conclusion is logical and based on findings – 1–2 marks (A)",
+    "content": "4",
+    "specific_objectives": [
+      "Conclusion  Conclusion succinctly summarises the project – 1–2 marks(A)  Conclusion is logical",
+      "based on findings – 1–2 marks (A)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "based",
+      "conclusion",
+      "findings",
+      "logical",
+      "marks",
+      "project",
+      "succinctly",
+      "summarises"
+    ],
+    "hash": "62ecfe995a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.108265"
+  },
+  {
+    "id": "POB-00198",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Recommendation  Recommendations are realistic and informed by findings – 1–2 marks (IA)  Recommendations contribute to a better understanding of the topic/issue/problem –1–2 marks (IA)",
+    "content": "4",
+    "specific_objectives": [
+      "Recommendation  Recommendations are realistic",
+      "informed by findings – 1–2 marks (IA)  Recommendations contribute to a better understanding of the topic/issue/problem –1–2 marks (IA)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "are",
+      "better",
+      "contribute",
+      "findings",
+      "informed",
+      "issue",
+      "marks",
+      "problem",
+      "realistic",
+      "recommendation",
+      "recommendations",
+      "topic"
+    ],
+    "hash": "c7eb825f18",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.108423"
+  },
+  {
+    "id": "POB-00199",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Bibliography Bibliography contains names of authors, name of publisher(s), names and dates of publication, and are written in alphabetical order – 1 mark (KC)",
+    "content": "1",
+    "specific_objectives": [
+      "Bibliography Bibliography contains names of authors, name of publisher(s), names",
+      "dates of publication,",
+      "are written in alphabetical order – 1 mark (KC)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "alphabetical",
+      "are",
+      "authors",
+      "bibliography",
+      "contains",
+      "dates",
+      "mark",
+      "name",
+      "names",
+      "order",
+      "publication",
+      "publisher"
+    ],
+    "hash": "286bc94882",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.108561"
+  },
+  {
+    "id": "POB-00200",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Overall presentation  Consistently uses correct spelling and grammar – 1 mark (A)  Expression of ideas logical and unambiguous – 1 mark (A)",
+    "content": "2",
+    "specific_objectives": [
+      "Overall presentation  Consistently uses correct spelling",
+      "grammar – 1 mark (A)  Expression of ideas logical",
+      "unambiguous – 1 mark (A)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "consistently",
+      "correct",
+      "expression",
+      "grammar",
+      "ideas",
+      "logical",
+      "mark",
+      "overall",
+      "presentation",
+      "spelling",
+      "unambiguous",
+      "uses"
+    ],
+    "hash": "f5bf16f5bc",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.108683"
+  },
+  {
+    "id": "POB-00201",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "less than its real value,",
+    "content": "payment by the insurance company will be",
+    "specific_objectives": [
+      "less than its real value,"
+    ],
+    "content_items": [
+      "payment by the insurance company will be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "company",
+      "insurance",
+      "its",
+      "less",
+      "payment",
+      "real",
+      "than",
+      "value",
+      "will"
+    ],
+    "hash": "6789acf6f1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.417539"
+  },
+  {
+    "id": "POB-00202",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "that involves the transfer",
+    "content": "of ownershi",
+    "specific_objectives": [
+      "that involves the transfer"
+    ],
+    "content_items": [
+      "of ownershi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "involves",
+      "ownershi",
+      "transfer"
+    ],
+    "hash": "5b98aaea43",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762038"
+  },
+  {
+    "id": "POB-00203",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "services. Transactions are",
+    "content": "not require",
+    "specific_objectives": [
+      "services. Transactions are"
+    ],
+    "content_items": [
+      "not require"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "are",
+      "not",
+      "require",
+      "services",
+      "transactions"
+    ],
+    "hash": "a273ea4e16",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762085"
+  },
+  {
+    "id": "POB-00204",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "both sales and items like",
+    "content": "free downl",
+    "specific_objectives": [
+      "both sales",
+      "items like"
+    ],
+    "content_items": [
+      "free downl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "both",
+      "downl",
+      "free",
+      "items",
+      "like",
+      "sales"
+    ],
+    "hash": "01f76477c3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762125"
+  },
+  {
+    "id": "POB-00205",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "transactions made on the",
+    "content": "internet, Int",
+    "specific_objectives": [
+      "transactions made on the"
+    ],
+    "content_items": [
+      "internet, Int"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "int",
+      "internet",
+      "made",
+      "transactions"
+    ],
+    "hash": "3b1b6e5e76",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762156"
+  },
+  {
+    "id": "POB-00206",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Web, by email and even b",
+    "content": "y fax.",
+    "specific_objectives": [
+      "Web, by email",
+      "even b"
+    ],
+    "content_items": [
+      "y fax."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "email",
+      "even",
+      "fax",
+      "web"
+    ],
+    "hash": "68aaa61be8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762187"
+  },
+  {
+    "id": "POB-00207",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "and data flow often in a la",
+    "content": "rge distribu",
+    "specific_objectives": [
+      "data flow often in a la"
+    ],
+    "content_items": [
+      "rge distribu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "data",
+      "distribu",
+      "flow",
+      "often",
+      "rge"
+    ],
+    "hash": "c0d4a2a62c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762236"
+  },
+  {
+    "id": "POB-00208",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "and money to start a busin",
+    "content": "ess, bringing",
+    "specific_objectives": [
+      "money to start a busin"
+    ],
+    "content_items": [
+      "ess, bringing"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "bringing",
+      "busin",
+      "ess",
+      "money",
+      "start"
+    ],
+    "hash": "d0322eb6ae",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762282"
+  },
+  {
+    "id": "POB-00209",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "intention of generating we",
+    "content": "alth.",
+    "specific_objectives": [
+      "intention of generating we"
+    ],
+    "content_items": [
+      "alth."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "alth",
+      "generating",
+      "intention"
+    ],
+    "hash": "85e79978df",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762307"
+  },
+  {
+    "id": "POB-00210",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "resources of a firm or o",
+    "content": "rganization",
+    "specific_objectives": [
+      "resources of a firm or o"
+    ],
+    "content_items": [
+      "rganization"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "firm",
+      "resources",
+      "rganization"
+    ],
+    "hash": "f9144671ad",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762347"
+  },
+  {
+    "id": "POB-00211",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "smart phone, computer o",
+    "content": "r any other",
+    "specific_objectives": [
+      "smart phone, computer o"
+    ],
+    "content_items": [
+      "r any other"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "any",
+      "computer",
+      "other",
+      "phone",
+      "smart"
+    ],
+    "hash": "dd8e3b102e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762409"
+  },
+  {
+    "id": "POB-00212",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "operation requires a user",
+    "content": "to log in t",
+    "specific_objectives": [
+      "operation requires a user"
+    ],
+    "content_items": [
+      "to log in t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "log",
+      "operation",
+      "requires",
+      "user"
+    ],
+    "hash": "1223e9cd85",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762440"
+  },
+  {
+    "id": "POB-00213",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "transactions. This data",
+    "content": "is routed",
+    "specific_objectives": [
+      "transactions. This data"
+    ],
+    "content_items": [
+      "is routed"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "data",
+      "routed",
+      "transactions"
+    ],
+    "hash": "cdd2db4af9",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762474"
+  },
+  {
+    "id": "POB-00214",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "specialists. E-trade compa",
+    "content": "nies facilita",
+    "specific_objectives": [
+      "specialists. E-trade compa"
+    ],
+    "content_items": [
+      "nies facilita"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "compa",
+      "facilita",
+      "nies",
+      "specialists",
+      "trade"
+    ],
+    "hash": "80d276b24a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762505"
+  },
+  {
+    "id": "POB-00215",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "managing the portfolios",
+    "content": "of investors",
+    "specific_objectives": [
+      "managing the portfolios"
+    ],
+    "content_items": [
+      "of investors"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "investors",
+      "managing",
+      "portfolios"
+    ],
+    "hash": "aad572ac07",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762536"
+  },
+  {
+    "id": "POB-00216",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Factors of production",
+    "content": "The resources used by a fir",
+    "specific_objectives": [
+      "Factors of production"
+    ],
+    "content_items": [
+      "The resources used by a fir"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "factors",
+      "fir",
+      "production",
+      "resources",
+      "used"
+    ],
+    "hash": "ef72103103",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762579"
+  },
+  {
+    "id": "POB-00217",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "of the different aspects of",
+    "content": "operating a",
+    "specific_objectives": [
+      "of the different aspects of"
+    ],
+    "content_items": [
+      "operating a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "aspects",
+      "different",
+      "operating"
+    ],
+    "hash": "dfaaecf3fd",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762618"
+  },
+  {
+    "id": "POB-00218",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Financial institution",
+    "content": "An establishment that c",
+    "specific_objectives": [
+      "Financial institution"
+    ],
+    "content_items": [
+      "An establishment that c"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "establishment",
+      "financial",
+      "institution"
+    ],
+    "hash": "194fba041c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762651"
+  },
+  {
+    "id": "POB-00219",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "investments, loans and",
+    "content": "deposits. E",
+    "specific_objectives": [
+      "investments, loans"
+    ],
+    "content_items": [
+      "deposits. E"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "deposits",
+      "investments",
+      "loans"
+    ],
+    "hash": "efdf0f8800",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762679"
+  },
+  {
+    "id": "POB-00220",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "money to taking out loans",
+    "content": "and exchang",
+    "specific_objectives": [
+      "money to taking out loans"
+    ],
+    "content_items": [
+      "exchang"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "exchang",
+      "loans",
+      "money",
+      "out",
+      "taking"
+    ],
+    "hash": "329ff4a8b2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762710"
+  },
+  {
+    "id": "POB-00221",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "through financial instituti",
+    "content": "ons (www.in",
+    "specific_objectives": [
+      "through financial instituti"
+    ],
+    "content_items": [
+      "ons (www.in"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "financial",
+      "instituti",
+      "ons",
+      "through",
+      "www"
+    ],
+    "hash": "9e33715e94",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762740"
+  },
+  {
+    "id": "POB-00222",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "the capital structure of a",
+    "content": "firm, and",
+    "specific_objectives": [
+      "the capital structure of a"
+    ],
+    "content_items": [
+      "firm,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "capital",
+      "firm",
+      "structure"
+    ],
+    "hash": "d093851dd6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762779"
+  },
+  {
+    "id": "POB-00223",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "shareholders’ dividends in",
+    "content": "response t",
+    "specific_objectives": [
+      "shareholders’ dividends in"
+    ],
+    "content_items": [
+      "response t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "dividends",
+      "response",
+      "shareholders"
+    ],
+    "hash": "37d05c2e1a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762819"
+  },
+  {
+    "id": "POB-00224",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "interest and taxation varia",
+    "content": "tions.",
+    "specific_objectives": [
+      "interest",
+      "taxation varia"
+    ],
+    "content_items": [
+      "tions."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "interest",
+      "taxation",
+      "tions",
+      "varia"
+    ],
+    "hash": "9ffb1978e3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:41.762846"
+  },
+  {
+    "id": "POB-00225",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "one economy having co",
+    "content": "ntrol or",
+    "specific_objectives": [
+      "one economy having co"
+    ],
+    "content_items": [
+      "ntrol or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "economy",
+      "having",
+      "ntrol",
+      "one"
+    ],
+    "hash": "cbd94a727a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.011961"
+  },
+  {
+    "id": "POB-00226",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "business logo, name, a",
+    "content": "nd met",
+    "specific_objectives": [
+      "business logo, name, a"
+    ],
+    "content_items": [
+      "nd met"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "business",
+      "logo",
+      "met",
+      "name"
+    ],
+    "hash": "7cb5506ff7",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012085"
+  },
+  {
+    "id": "POB-00227",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(franchisees). The fran",
+    "content": "chisee",
+    "specific_objectives": [
+      "(franchisees). The fran"
+    ],
+    "content_items": [
+      "chisee"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "chisee",
+      "fran"
+    ],
+    "hash": "48f94c29b4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012152"
+  },
+  {
+    "id": "POB-00228",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "resources allocated via",
+    "content": "the mar",
+    "specific_objectives": [
+      "resources allocated via"
+    ],
+    "content_items": [
+      "the mar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "allocated",
+      "mar",
+      "resources",
+      "via"
+    ],
+    "hash": "e75f17649f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012252"
+  },
+  {
+    "id": "POB-00229",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "General-Purpose Software",
+    "content": "Software which is flexib",
+    "specific_objectives": [
+      "General-Purpose Software"
+    ],
+    "content_items": [
+      "Software which is flexib"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "flexib",
+      "general",
+      "purpose",
+      "software",
+      "which"
+    ],
+    "hash": "d2997f313e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012329"
+  },
+  {
+    "id": "POB-00230",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Geographic Information",
+    "content": "A computer system for c",
+    "specific_objectives": [
+      "Geographic Information"
+    ],
+    "content_items": [
+      "A computer system for c"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "computer",
+      "geographic",
+      "information",
+      "system"
+    ],
+    "hash": "cb4af6b2d5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012403"
+  },
+  {
+    "id": "POB-00231",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "of data on one map and",
+    "content": "enable",
+    "specific_objectives": [
+      "of data on one map"
+    ],
+    "content_items": [
+      "enable"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "data",
+      "enable",
+      "map",
+      "one"
+    ],
+    "hash": "253dd53637",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012494"
+  },
+  {
+    "id": "POB-00232",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "and understand pattern",
+    "content": "s and re",
+    "specific_objectives": [
+      "understand pattern"
+    ],
+    "content_items": [],
+    "skills": [
+      "RE"
+    ],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "pattern",
+      "understand"
+    ],
+    "hash": "ea8cb98ccf",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012553"
+  },
+  {
+    "id": "POB-00233",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Global Positioning Systems",
+    "content": "A space-based radio na",
+    "specific_objectives": [
+      "Global Positioning Systems"
+    ],
+    "content_items": [
+      "A space-based radio na"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "based",
+      "global",
+      "positioning",
+      "radio",
+      "space",
+      "systems"
+    ],
+    "hash": "92da34731e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012618"
+  },
+  {
+    "id": "POB-00234",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "providing critical posit",
+    "content": "ioning",
+    "specific_objectives": [
+      "providing critical posit"
+    ],
+    "content_items": [
+      "ioning"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "critical",
+      "ioning",
+      "posit",
+      "providing"
+    ],
+    "hash": "98bcccf6f4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012688"
+  },
+  {
+    "id": "POB-00235",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "commercial users aroun",
+    "content": "d the w",
+    "specific_objectives": [
+      "commercial users aroun"
+    ],
+    "content_items": [
+      "d the w"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "aroun",
+      "commercial",
+      "users"
+    ],
+    "hash": "1d7367748c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012738"
+  },
+  {
+    "id": "POB-00236",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "which do not harm the",
+    "content": "enviro",
+    "specific_objectives": [
+      "which do not harm the"
+    ],
+    "content_items": [
+      "enviro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "enviro",
+      "harm",
+      "not",
+      "which"
+    ],
+    "hash": "e75a642abb",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012810"
+  },
+  {
+    "id": "POB-00237",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "which is environmentall",
+    "content": "y friend",
+    "specific_objectives": [
+      "which is environmentall"
+    ],
+    "content_items": [
+      "y friend"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "environmentall",
+      "friend",
+      "which"
+    ],
+    "hash": "393086d8e4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012859"
+  },
+  {
+    "id": "POB-00238",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Gross National Product",
+    "content": "The total value of all go",
+    "specific_objectives": [
+      "Gross National Product"
+    ],
+    "content_items": [
+      "The total value of all go"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "all",
+      "gross",
+      "national",
+      "product",
+      "total",
+      "value"
+    ],
+    "hash": "227d9b043f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012923"
+  },
+  {
+    "id": "POB-00239",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Gross Domestic Product",
+    "content": "An indicator of how wel",
+    "specific_objectives": [
+      "Gross Domestic Product"
+    ],
+    "content_items": [
+      "An indicator of how wel"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "domestic",
+      "gross",
+      "how",
+      "indicator",
+      "product",
+      "wel"
+    ],
+    "hash": "e7e16b86a2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.012995"
+  },
+  {
+    "id": "POB-00240",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "obligation to pay for an",
+    "content": "y loss or",
+    "specific_objectives": [
+      "obligation to pay for an"
+    ],
+    "content_items": [
+      "y loss or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "loss",
+      "obligation",
+      "pay"
+    ],
+    "hash": "48020e75c8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.013074"
+  },
+  {
+    "id": "POB-00241",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "incurred by another ind",
+    "content": "ividual",
+    "specific_objectives": [
+      "incurred by another ind"
+    ],
+    "content_items": [
+      "ividual"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "another",
+      "incurred",
+      "ind",
+      "ividual"
+    ],
+    "hash": "8f8d27b591",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.013129"
+  },
+  {
+    "id": "POB-00242",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "principle that one shoul",
+    "content": "d not m",
+    "specific_objectives": [
+      "principle that one shoul"
+    ],
+    "content_items": [
+      "d not m"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "not",
+      "one",
+      "principle",
+      "shoul"
+    ],
+    "hash": "f776379621",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.013185"
+  },
+  {
+    "id": "POB-00243",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "be specific to aspects in",
+    "content": "the com",
+    "specific_objectives": [
+      "be specific to aspects in"
+    ],
+    "content_items": [
+      "the com"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "aspects",
+      "com",
+      "specific"
+    ],
+    "hash": "5d24ce94af",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.013270"
+  },
+  {
+    "id": "POB-00244",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Affairs, Citizens by Inves",
+    "content": "tment",
+    "specific_objectives": [
+      "Affairs, Citizens by Inves"
+    ],
+    "content_items": [
+      "tment"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "affairs",
+      "citizens",
+      "inves",
+      "tment"
+    ],
+    "hash": "d6a7f5d1f0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.013320"
+  },
+  {
+    "id": "POB-00245",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "representation using data",
+    "content": "or materia",
+    "specific_objectives": [
+      "representation using data"
+    ],
+    "content_items": [
+      "or materia"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "data",
+      "materia",
+      "representation",
+      "using"
+    ],
+    "hash": "080928eacb",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.784615"
+  },
+  {
+    "id": "POB-00246",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "investigations, build (for exa",
+    "content": "mple, a mod",
+    "specific_objectives": [
+      "investigations, build (for exa"
+    ],
+    "content_items": [
+      "mple, a mod"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "build",
+      "exa",
+      "investigations",
+      "mod",
+      "mple"
+    ],
+    "hash": "ae91097021",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.784689"
+  },
+  {
+    "id": "POB-00247",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "specific structure or a seque",
+    "content": "nce of a spe",
+    "specific_objectives": [
+      "specific structure or a seque"
+    ],
+    "content_items": [
+      "nce of a spe"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "nce",
+      "seque",
+      "spe",
+      "specific",
+      "structure"
+    ],
+    "hash": "92be5d058f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.784800"
+  },
+  {
+    "id": "POB-00248",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "used to define the items or p",
+    "content": "lace them i",
+    "specific_objectives": [
+      "used to define the items or p"
+    ],
+    "content_items": [
+      "lace them i"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "define",
+      "items",
+      "lace",
+      "them",
+      "used"
+    ],
+    "hash": "2cede279c1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.784924"
+  },
+  {
+    "id": "POB-00249",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "accurate relation between t",
+    "content": "he parts",
+    "specific_objectives": [
+      "accurate relation between t"
+    ],
+    "content_items": [
+      "he parts"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 74,
+    "keywords": [
+      "accurate",
+      "between",
+      "parts",
+      "relation"
+    ],
+    "hash": "2b19180fa6",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:42.785007"
+  },
+  {
+    "id": "POB-00250",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "taking place; to examine and no",
+    "content": "te scientifically",
+    "specific_objectives": [
+      "taking place",
+      "to examine"
+    ],
+    "content_items": [
+      "te scientifically"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "examine",
+      "place",
+      "scientifically",
+      "taking"
+    ],
+    "hash": "c2cad9dcdf",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:43.048421"
+  },
+  {
+    "id": "POB-00251",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "others or are determined by th",
+    "content": "em",
+    "specific_objectives": [
+      "others or are determined by th"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "are",
+      "determined",
+      "others"
+    ],
+    "hash": "34df29e7be",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:43.048507"
+  },
+  {
+    "id": "POB-00252",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "knowledge. (... a hypothesis;",
+    "content": "provide a generalisati",
+    "specific_objectives": [
+      "knowledge. (... a hypothesis"
+    ],
+    "content_items": [
+      "provide a generalisati"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "generalisati",
+      "hypothesis",
+      "knowledge",
+      "provide"
+    ],
+    "hash": "362557f1f5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:43.048572"
+  },
+  {
+    "id": "POB-00253",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "explanation for a set of data or",
+    "content": "observations.)",
+    "specific_objectives": [
+      "explanation for a set of data or"
+    ],
+    "content_items": [
+      "observations.)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 75,
+    "keywords": [
+      "data",
+      "explanation",
+      "observations",
+      "set"
+    ],
+    "hash": "5459c40fd4",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:43.048603"
+  },
+  {
+    "id": "POB-00254",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "Mark Scheme and Key: -",
+    "content": "Paper 01",
+    "specific_objectives": [
+      "Mark Scheme",
+      "Key: -"
+    ],
+    "content_items": [
+      "Paper 01"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 76,
+    "keywords": [
+      "key",
+      "mark",
+      "paper",
+      "scheme"
+    ],
+    "hash": "6c4e524c59",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:43.100582"
+  },
+  {
+    "id": "POB-00255",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "..................................................................................................................................",
+    "content": ".....",
+    "specific_objectives": [
+      ".................................................................................................................................."
+    ],
+    "content_items": [
+      "....."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 94,
+    "keywords": [],
+    "hash": "2004b82512",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:46.882951"
+  },
+  {
+    "id": "POB-00256",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "For complete definit",
+    "content": "ion of t",
+    "specific_objectives": [
+      "For complete definit"
+    ],
+    "content_items": [
+      "ion of t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 109,
+    "keywords": [
+      "complete",
+      "definit",
+      "ion"
+    ],
+    "hash": "67eb30a345",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.269880"
+  },
+  {
+    "id": "POB-00257",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "For partial definiti",
+    "content": "on 1 mar",
+    "specific_objectives": [
+      "For partial definiti"
+    ],
+    "content_items": [
+      "on 1 mar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 109,
+    "keywords": [
+      "definiti",
+      "mar",
+      "partial"
+    ],
+    "hash": "c1574449d3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.269920"
+  },
+  {
+    "id": "POB-00258",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "Any four reasons sta",
+    "content": "ted, 1 m",
+    "specific_objectives": [
+      "Any four reasons sta"
+    ],
+    "content_items": [
+      "ted, 1 m"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 109,
+    "keywords": [
+      "any",
+      "four",
+      "reasons",
+      "sta",
+      "ted"
+    ],
+    "hash": "92fc93b266",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.269993"
+  },
+  {
+    "id": "POB-00259",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "decision-making,(1)while a",
+    "content": "n autocrat",
+    "specific_objectives": [
+      "decision-making,(1)while a"
+    ],
+    "content_items": [
+      "n autocrat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "autocrat",
+      "decision",
+      "making",
+      "while"
+    ],
+    "hash": "8612754f6f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636392"
+  },
+  {
+    "id": "POB-00260",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "decisions without involving",
+    "content": "the workers",
+    "specific_objectives": [
+      "decisions without involving"
+    ],
+    "content_items": [
+      "the workers"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "decisions",
+      "involving",
+      "without",
+      "workers"
+    ],
+    "hash": "8023201631",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636463"
+  },
+  {
+    "id": "POB-00261",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "recommendations from worker",
+    "content": "s at all le",
+    "specific_objectives": [
+      "recommendations from worker"
+    ],
+    "content_items": [
+      "s at all le"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "all",
+      "recommendations",
+      "worker"
+    ],
+    "hash": "82656c50c3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636540"
+  },
+  {
+    "id": "POB-00262",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "workers feel like they have",
+    "content": "a say and",
+    "specific_objectives": [
+      "workers feel like they have"
+    ],
+    "content_items": [
+      "a say"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "feel",
+      "have",
+      "like",
+      "say",
+      "they",
+      "workers"
+    ],
+    "hash": "d704d5ef14",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636612"
+  },
+  {
+    "id": "POB-00263",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "important and valued. (1) An",
+    "content": "autocratic",
+    "specific_objectives": [
+      "important",
+      "valued. (1) An"
+    ],
+    "content_items": [
+      "autocratic"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "autocratic",
+      "important",
+      "valued"
+    ],
+    "hash": "00b516b46e",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636674"
+  },
+  {
+    "id": "POB-00264",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "hand, exerts a lot of control",
+    "content": "and does no",
+    "specific_objectives": [
+      "hand, exerts a lot of control"
+    ],
+    "content_items": [
+      "does no"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "control",
+      "does",
+      "exerts",
+      "hand",
+      "lot"
+    ],
+    "hash": "a56f4b94fa",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636733"
+  },
+  {
+    "id": "POB-00265",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "incidents to the extent nece",
+    "content": "ssary (1)",
+    "specific_objectives": [
+      "incidents to the extent nece"
+    ],
+    "content_items": [
+      "ssary (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "extent",
+      "incidents",
+      "nece",
+      "ssary"
+    ],
+    "hash": "8923bf792a",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636786"
+  },
+  {
+    "id": "POB-00266",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "not believe that he/she must",
+    "content": "have full c",
+    "specific_objectives": [
+      "not believe that he/she must"
+    ],
+    "content_items": [
+      "have full c"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "believe",
+      "full",
+      "have",
+      "must",
+      "not",
+      "she"
+    ],
+    "hash": "191933eea3",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636860"
+  },
+  {
+    "id": "POB-00267",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "decision making.(1)An autocr",
+    "content": "atic leader",
+    "specific_objectives": [
+      "decision making.(1)An autocr"
+    ],
+    "content_items": [
+      "atic leader"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "atic",
+      "autocr",
+      "decision",
+      "leader",
+      "making"
+    ],
+    "hash": "d370087cab",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636914"
+  },
+  {
+    "id": "POB-00268",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "threats and by instilling",
+    "content": "fear in wo",
+    "specific_objectives": [
+      "threats",
+      "by instilling"
+    ],
+    "content_items": [
+      "fear in wo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "fear",
+      "instilling",
+      "threats"
+    ],
+    "hash": "096914367d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.636969"
+  },
+  {
+    "id": "POB-00269",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "persons to work through cont",
+    "content": "rol and with",
+    "specific_objectives": [
+      "persons to work through cont"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "cont",
+      "persons",
+      "rol",
+      "through",
+      "work"
+    ],
+    "hash": "23bfb8aea8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.637024"
+  },
+  {
+    "id": "POB-00270",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "to workers points of view.(1",
+    "content": ")",
+    "specific_objectives": [
+      "to workers points of view.(1"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 112,
+    "keywords": [
+      "points",
+      "view",
+      "workers"
+    ],
+    "hash": "b86b1c916c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.637072"
+  },
+  {
+    "id": "POB-00271",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "is served by using a",
+    "content": "form",
+    "specific_objectives": [
+      "is served by using a"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 114,
+    "keywords": [
+      "form",
+      "served",
+      "using"
+    ],
+    "hash": "4e0e5f622f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:49.979811"
+  },
+  {
+    "id": "POB-00272",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "therefore a means of",
+    "content": "advertising",
+    "specific_objectives": [
+      "therefore a means of"
+    ],
+    "content_items": [
+      "advertising"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "advertising",
+      "means",
+      "therefore"
+    ],
+    "hash": "def5f229d2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034517"
+  },
+  {
+    "id": "POB-00273",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "Provision of custome",
+    "content": "r information",
+    "specific_objectives": [
+      "Provision of custome"
+    ],
+    "content_items": [
+      "r information"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "custome",
+      "information",
+      "provision"
+    ],
+    "hash": "0f73b86391",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034569"
+  },
+  {
+    "id": "POB-00274",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "Serving as a functio",
+    "content": "nal/keepsake c",
+    "specific_objectives": [
+      "Serving as a functio"
+    ],
+    "content_items": [
+      "nal/keepsake c"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "functio",
+      "keepsake",
+      "nal",
+      "serving"
+    ],
+    "hash": "9fe2930dc1",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034624"
+  },
+  {
+    "id": "POB-00275",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "For many manufacture",
+    "content": "rs who are com",
+    "specific_objectives": [
+      "For many manufacture"
+    ],
+    "content_items": [
+      "rs who are com"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "are",
+      "com",
+      "manufacture",
+      "many",
+      "who"
+    ],
+    "hash": "30fcd83f7f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034655"
+  },
+  {
+    "id": "POB-00276",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "that a package can b",
+    "content": "e reused. Pa",
+    "specific_objectives": [
+      "that a package can b"
+    ],
+    "content_items": [
+      "e reused. Pa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "can",
+      "package",
+      "reused"
+    ],
+    "hash": "cf01f1a563",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034685"
+  },
+  {
+    "id": "POB-00277",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "practical in that it",
+    "content": "provides a cu",
+    "specific_objectives": [
+      "practical in that it"
+    ],
+    "content_items": [
+      "provides a cu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "practical",
+      "provides"
+    ],
+    "hash": "8299782075",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034714"
+  },
+  {
+    "id": "POB-00278",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "used after consuming",
+    "content": "the item.",
+    "specific_objectives": [
+      "used after consuming"
+    ],
+    "content_items": [
+      "the item."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 115,
+    "keywords": [
+      "after",
+      "consuming",
+      "item",
+      "used"
+    ],
+    "hash": "511ad9a031",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.034738"
+  },
+  {
+    "id": "POB-00279",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "teachers and lecturer",
+    "content": "s for the cl",
+    "specific_objectives": [
+      "teachers",
+      "lecturer"
+    ],
+    "content_items": [
+      "s for the cl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "lecturer",
+      "teachers"
+    ],
+    "hash": "fe3c36bb15",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644778"
+  },
+  {
+    "id": "POB-00280",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "located where student",
+    "content": "s have easy,",
+    "specific_objectives": [
+      "located where student"
+    ],
+    "content_items": [
+      "s have easy,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "easy",
+      "have",
+      "located",
+      "student",
+      "where"
+    ],
+    "hash": "e653a3159d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644821"
+  },
+  {
+    "id": "POB-00281",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "be properly outfitte",
+    "content": "d with the",
+    "specific_objectives": [
+      "be properly outfitte"
+    ],
+    "content_items": [
+      "d with the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "outfitte",
+      "properly"
+    ],
+    "hash": "645715b5f8",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644852"
+  },
+  {
+    "id": "POB-00282",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "enhance for students",
+    "content": "learning. (1",
+    "specific_objectives": [
+      "enhance for students"
+    ],
+    "content_items": [
+      "learning. (1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "enhance",
+      "learning",
+      "students"
+    ],
+    "hash": "489249fe28",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644879"
+  },
+  {
+    "id": "POB-00283",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "empower trainers to e",
+    "content": "xecute train",
+    "specific_objectives": [
+      "empower trainers to e"
+    ],
+    "content_items": [
+      "xecute train"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "empower",
+      "train",
+      "trainers",
+      "xecute"
+    ],
+    "hash": "ccaf49866c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644920"
+  },
+  {
+    "id": "POB-00284",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "teachers/instructors",
+    "content": "in training (",
+    "specific_objectives": [
+      "teachers/instructors"
+    ],
+    "content_items": [
+      "in training ("
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "instructors",
+      "teachers",
+      "training"
+    ],
+    "hash": "f6ef08249d",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644955"
+  },
+  {
+    "id": "POB-00285",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "in facilitating train",
+    "content": "ing (1), enh",
+    "specific_objectives": [
+      "in facilitating train"
+    ],
+    "content_items": [
+      "ing (1), enh"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "enh",
+      "facilitating",
+      "ing",
+      "train"
+    ],
+    "hash": "c00d16b65c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.644994"
+  },
+  {
+    "id": "POB-00286",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "human resources of th",
+    "content": "e country (1",
+    "specific_objectives": [
+      "human resources of th"
+    ],
+    "content_items": [
+      "e country (1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "country",
+      "human",
+      "resources"
+    ],
+    "hash": "440ac72968",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.645021"
+  },
+  {
+    "id": "POB-00287",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "subsidize the traini",
+    "content": "ng (1) and b",
+    "specific_objectives": [
+      "subsidize the traini"
+    ],
+    "content_items": [
+      "ng (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "subsidize",
+      "traini"
+    ],
+    "hash": "b01902ee3f",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.645071"
+  },
+  {
+    "id": "POB-00288",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "time within the count",
+    "content": "ry when they",
+    "specific_objectives": [
+      "time within the count"
+    ],
+    "content_items": [
+      "ry when they"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "count",
+      "they",
+      "time",
+      "when",
+      "within"
+    ],
+    "hash": "399a5cd768",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.645098"
+  },
+  {
+    "id": "POB-00289",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "teachers (1) so that",
+    "content": "they meet th",
+    "specific_objectives": [
+      "teachers (1) so that"
+    ],
+    "content_items": [
+      "they meet th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "meet",
+      "teachers",
+      "they"
+    ],
+    "hash": "0c82935963",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.645138"
+  },
+  {
+    "id": "POB-00290",
+    "section": "unit of: a resource",
+    "subsection": "Unknown",
+    "objective": "as satisfy internatio",
+    "content": "nal standard",
+    "specific_objectives": [
+      "as satisfy internatio"
+    ],
+    "content_items": [
+      "nal standard"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "internatio",
+      "nal",
+      "satisfy",
+      "standard"
+    ],
+    "hash": "7c59950588",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.645162"
+  },
+  {
+    "id": "POB-00291",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "answer the questions t",
+    "content": "hat follow",
+    "specific_objectives": [
+      "answer the questions t"
+    ],
+    "content_items": [
+      "hat follow"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "answer",
+      "follow",
+      "hat",
+      "questions"
+    ],
+    "hash": "6111b5f0ac",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912058"
+  },
+  {
+    "id": "POB-00292",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "Ford Poplen started hi",
+    "content": "s metal cra",
+    "specific_objectives": [
+      "Ford Poplen started hi"
+    ],
+    "content_items": [
+      "s metal cra"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "cra",
+      "ford",
+      "metal",
+      "poplen",
+      "started"
+    ],
+    "hash": "43f1a713d0",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912127"
+  },
+  {
+    "id": "POB-00293",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "in a strictly residentia",
+    "content": "l commun",
+    "specific_objectives": [
+      "in a strictly residentia"
+    ],
+    "content_items": [
+      "l commun"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "commun",
+      "residentia",
+      "strictly"
+    ],
+    "hash": "1385733c53",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912168"
+  },
+  {
+    "id": "POB-00294",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "However, handcrafted",
+    "content": "metal so",
+    "specific_objectives": [
+      "However, handcrafted"
+    ],
+    "content_items": [
+      "metal so"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "handcrafted",
+      "however",
+      "metal"
+    ],
+    "hash": "71e89df1f2",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912201"
+  },
+  {
+    "id": "POB-00295",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "business, but he has",
+    "content": "not been",
+    "specific_objectives": [
+      "business, but he has"
+    ],
+    "content_items": [
+      "not been"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "been",
+      "business",
+      "has",
+      "not"
+    ],
+    "hash": "6ecfb9fe7c",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912236"
+  },
+  {
+    "id": "POB-00296",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "accountant to organiz",
+    "content": "e his finan",
+    "specific_objectives": [
+      "accountant to organiz"
+    ],
+    "content_items": [
+      "e his finan"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "accountant",
+      "finan",
+      "his",
+      "organiz"
+    ],
+    "hash": "9f1e4f9135",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912271"
+  },
+  {
+    "id": "POB-00297",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "finisher and a painter.",
+    "content": "He had t",
+    "specific_objectives": [
+      "finisher",
+      "a painter."
+    ],
+    "content_items": [
+      "He had t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "finisher",
+      "had",
+      "painter"
+    ],
+    "hash": "a1f1e1ab82",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912307"
+  },
+  {
+    "id": "POB-00298",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "and constant smell of",
+    "content": "paint com",
+    "specific_objectives": [
+      "constant smell of"
+    ],
+    "content_items": [
+      "paint com"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "com",
+      "constant",
+      "paint",
+      "smell"
+    ],
+    "hash": "cea77f1122",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912342"
+  },
+  {
+    "id": "POB-00299",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "pays a fixed amount w",
+    "content": "hich cove",
+    "specific_objectives": [
+      "pays a fixed amount w"
+    ],
+    "content_items": [
+      "hich cove"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "amount",
+      "cove",
+      "fixed",
+      "hich",
+      "pays"
+    ],
+    "hash": "ca913a9b82",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912373"
+  },
+  {
+    "id": "POB-00300",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "Complete the followin",
+    "content": "g business",
+    "specific_objectives": [
+      "Complete the followin"
+    ],
+    "content_items": [
+      "g business"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [
+      "business",
+      "complete",
+      "followin"
+    ],
+    "hash": "fc95b8f773",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912401"
+  },
+  {
+    "id": "POB-00301",
+    "section": "SECTION A: Ford Poplen started his metal craft business two years ago in a shed at the back of his parent",
+    "subsection": "Unknown",
+    "objective": "......................",
+    "content": ".................",
+    "specific_objectives": [
+      "......................"
+    ],
+    "content_items": [
+      "................."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 122,
+    "keywords": [],
+    "hash": "3ca02362d5",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:50.912453"
+  },
+  {
+    "id": "POB-00302",
+    "section": "SECTION C: The business appears to be doing well but it needs additional funding",
+    "subsection": "Unknown",
+    "objective": "Organizational chart",
+    "content": "showing",
+    "specific_objectives": [
+      "Organizational chart"
+    ],
+    "content_items": [
+      "showing"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 131,
+    "keywords": [
+      "chart",
+      "organizational",
+      "showing"
+    ],
+    "hash": "640376ee17",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:51.914167"
+  },
+  {
+    "id": "POB-00303",
+    "section": "SECTION C: The business appears to be doing well but it needs additional funding",
+    "subsection": "Unknown",
+    "objective": "For completing the ch",
+    "content": "art - 1",
+    "specific_objectives": [
+      "For completing the ch"
+    ],
+    "content_items": [
+      "art - 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 131,
+    "keywords": [
+      "art",
+      "completing"
+    ],
+    "hash": "b5444b1015",
+    "source_file": "CSEC-Principles-of-Business-Syllabus-.pdf",
+    "extraction_date": "2026-01-29T05:32:51.914236"
+  }
+]

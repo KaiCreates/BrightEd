@@ -33,6 +33,13 @@ function displayNameFromUser(data: any, fallbackId: string) {
   ) as string
 }
 
+/**
+ * Try to read from pre-aggregated leaderboards collection first.
+ * Falls back to direct user queries if cache doesn't exist.
+ * 
+ * Pre-aggregated leaderboards are updated every 15 minutes via:
+ * npx tsx scripts/aggregate-leaderboards.ts
+ */
 export async function GET(request: NextRequest) {
   try {
     await verifyAuth(request)
@@ -45,9 +52,81 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid leaderboard type' }, { status: 400 })
     }
 
+    // Determine the cache document ID based on type
+    let cacheDocId = 'global' // default for xp
+    if (type === 'streak') cacheDocId = 'global_streak'
+    else if (type === 'mastery') cacheDocId = 'global_mastery'
+    else if (type === 'schools') cacheDocId = 'global_schools'
+
+    // Try to read from pre-aggregated cache first (MUCH cheaper - 1 read vs 5000+)
+    try {
+      const cachedDoc = await adminDb.collection('leaderboards').doc(cacheDocId).get()
+
+      if (cachedDoc.exists) {
+        const data = cachedDoc.data()
+
+        if (type === 'schools' && data?.schools) {
+          // Schools leaderboard format
+          const schools = (data.schools as any[]).slice(0, limit).map((s, idx) => ({
+            id: s.schoolId,
+            name: s.schoolName,
+            value: s.totalXP,
+            subtext: `${s.studentCount} Students • ${Math.round((s.averageMastery || 0) * 100)}% Avg Mastery`,
+            rank: idx + 1,
+            icon: '🏫',
+            studentCount: s.studentCount,
+            averageMastery: s.averageMastery
+          }))
+
+          return NextResponse.json({
+            type,
+            entries: schools,
+            cached: true,
+            lastUpdated: data.lastUpdated?.toDate?.()?.toISOString() || null
+          }, {
+            headers: {
+              'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=1800' // 15 min cache
+            }
+          })
+        }
+
+        if (data?.users && Array.isArray(data.users)) {
+          // User leaderboard format
+          const entries = (data.users as any[]).slice(0, limit).map((user, idx) => ({
+            id: user.userId,
+            name: user.displayName || 'Explorer',
+            value: type === 'xp' ? user.xp : type === 'streak' ? user.streak : user.mastery,
+            subtext: type === 'xp'
+              ? `${user.streak || 0} Day Streak`
+              : type === 'streak'
+                ? `${user.xp || 0} XP`
+                : `${Math.round((user.mastery || 0) * 100)}% Mastery`,
+            rank: idx + 1,
+            icon: type === 'xp' ? '⚡' : type === 'streak' ? '🔥' : '🧠'
+          }))
+
+          return NextResponse.json({
+            type,
+            entries,
+            cached: true,
+            lastUpdated: data.lastUpdated?.toDate?.()?.toISOString() || null
+          }, {
+            headers: {
+              'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=1800' // 15 min cache
+            }
+          })
+        }
+      }
+    } catch (cacheError) {
+      // Cache read failed, fall through to direct query
+      console.warn('Leaderboard cache miss, falling back to direct query:', cacheError)
+    }
+
+    // FALLBACK: Direct query (expensive but ensures functionality)
+    // This runs if cache doesn't exist yet
     if (type === 'schools') {
       // Note: Firestore has no server-side group-by. This aggregates in memory.
-      // For large datasets, consider maintaining a dedicated `schools` collection.
+      // For large datasets, run aggregate-leaderboards.ts to pre-compute.
       const usersSnap = await adminDb.collection('users').get()
 
       const bySchool = new Map<
@@ -101,7 +180,7 @@ export async function GET(request: NextRequest) {
           }
         })
 
-      return NextResponse.json({ type, entries: schools })
+      return NextResponse.json({ type, entries: schools, cached: false })
     }
 
     const field = type === 'xp' ? 'xp' : type === 'streak' ? 'streak' : 'globalMastery'
@@ -131,7 +210,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    return NextResponse.json({ type, entries })
+    return NextResponse.json({ type, entries, cached: false })
   } catch (error: any) {
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 })

@@ -1,0 +1,6265 @@
+[
+  {
+    "id": "PHYS-00001",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "37 Arnold Road, King",
+    "content": "ston 5, Ja",
+    "specific_objectives": [
+      "Arnold Road, King"
+    ],
+    "content_items": [
+      "ston 5, Ja"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "arnold",
+      "king",
+      "road",
+      "ston"
+    ],
+    "hash": "1697342ce0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.605225"
+  },
+  {
+    "id": "PHYS-00002",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Prince Road, Pine Pla",
+    "content": "ntation Ro",
+    "specific_objectives": [
+      "Prince Road, Pine Pla"
+    ],
+    "content_items": [
+      "ntation Ro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "ntation",
+      "pine",
+      "pla",
+      "prince",
+      "road"
+    ],
+    "hash": "2fab056821",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.605346"
+  },
+  {
+    "id": "PHYS-00003",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "RATIONALE ………………………………………………………………………………………………………………………………………",
+    "content": "1",
+    "specific_objectives": [
+      "RATIONALE ………………………………………………………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "rationale"
+    ],
+    "hash": "739895a7fc",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846081"
+  },
+  {
+    "id": "PHYS-00004",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "AIMS…………………………………………………………………………………………………………………………………………………",
+    "content": "1",
+    "specific_objectives": [
+      "AIMS…………………………………………………………………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "aims"
+    ],
+    "hash": "520c9ea09e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846161"
+  },
+  {
+    "id": "PHYS-00005",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "CANDIDATE POPULATION…………………………………………………………………………………………………………………",
+    "content": "2",
+    "specific_objectives": [
+      "CANDIDATE POPULATION…………………………………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "candidate",
+      "population"
+    ],
+    "hash": "9e0f57fd34",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846232"
+  },
+  {
+    "id": "PHYS-00006",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SUGGESTED TIME-TABLE ALLOCATION …………………………………………………………………………………………….",
+    "content": "2",
+    "specific_objectives": [
+      "SUGGESTED TIME-TABLE ALLOCATION ……………………………………………………………………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "allocation",
+      "suggested",
+      "table",
+      "time"
+    ],
+    "hash": "c400c3fa88",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846305"
+  },
+  {
+    "id": "PHYS-00007",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "ORGANISATION OF THE SYLLABUS……………………………………………………………………………………………………",
+    "content": "3",
+    "specific_objectives": [
+      "ORGANISATION OF THE SYLLABUS……………………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "organisation",
+      "syllabus"
+    ],
+    "hash": "b2989f187b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846374"
+  },
+  {
+    "id": "PHYS-00008",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SUGGESTIONS FOR TEACHING THE SYLLABUS…………………………………………………………………………………..",
+    "content": "3",
+    "specific_objectives": [
+      "SUGGESTIONS FOR TEACHING THE SYLLABUS………………………………………………………………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "suggestions",
+      "syllabus",
+      "teaching"
+    ],
+    "hash": "1a1c5877c0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846448"
+  },
+  {
+    "id": "PHYS-00009",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "CERTIFICATION AND DEFINITION OF PROFILES………………………………………………………………………………….",
+    "content": "4",
+    "specific_objectives": [
+      "CERTIFICATION AND DEFINITION OF PROFILES…………………………………………………………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "certification",
+      "definition",
+      "profiles"
+    ],
+    "hash": "3891f92302",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846522"
+  },
+  {
+    "id": "PHYS-00010",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "FORMAT OF THE EXAMINATION……………………………………………………………………………………………………….",
+    "content": "5",
+    "specific_objectives": [
+      "FORMAT OF THE EXAMINATION………………………………………………………………………………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "examination",
+      "format"
+    ],
+    "hash": "3f0ba35030",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846590"
+  },
+  {
+    "id": "PHYS-00011",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR PRIVATE CANDIDATES CANDIDATES…………………………………………………………………..",
+    "content": "6",
+    "specific_objectives": [
+      "REGULATIONS FOR PRIVATE CANDIDATES CANDIDATES………………………………………………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "candidates",
+      "private",
+      "regulations"
+    ],
+    "hash": "6c77ab8666",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846666"
+  },
+  {
+    "id": "PHYS-00012",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR RESIT …………………………………………………………….…………………………………………………..",
+    "content": "6",
+    "specific_objectives": [
+      "REGULATIONS FOR RESIT …………………………………………………………….………………………………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "regulations",
+      "resit"
+    ],
+    "hash": "a0cdc2b250",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846731"
+  },
+  {
+    "id": "PHYS-00013",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "THE PRACTICAL APPROACH………………………………………………………………………………….…………………………..",
+    "content": "7",
+    "specific_objectives": [
+      "THE PRACTICAL APPROACH………………………………………………………………………………….………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "approach",
+      "practical"
+    ],
+    "hash": "53e4ce778e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846798"
+  },
+  {
+    "id": "PHYS-00014",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SECTION A: MECHANICS………………………………………………………………………………………………..…………………",
+    "content": "10",
+    "specific_objectives": [
+      "SECTION A: MECHANICS………………………………………………………………………………………………..…………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "mechanics",
+      "section"
+    ],
+    "hash": "f9f566cccc",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846865"
+  },
+  {
+    "id": "PHYS-00015",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY……………………………………..……………………………….",
+    "content": "21",
+    "specific_objectives": [
+      "SECTION B: THERMAL PHYSICS AND KINETIC THEORY……………………………………..………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "kinetic",
+      "physics",
+      "section",
+      "theory",
+      "thermal"
+    ],
+    "hash": "75ff7f6886",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.846941"
+  },
+  {
+    "id": "PHYS-00016",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SECTION C: WAVES AND OPTICS………………………………………………..…………………………………………………….",
+    "content": "28",
+    "specific_objectives": [
+      "SECTION C: WAVES AND OPTICS………………………………………………..……………………………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "optics",
+      "section",
+      "waves"
+    ],
+    "hash": "139e00b64d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847011"
+  },
+  {
+    "id": "PHYS-00017",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SECTION D: ELECTRICITY AND MAGNETISM………………..……………………………………………………………………",
+    "content": "35",
+    "specific_objectives": [
+      "SECTION D: ELECTRICITY AND MAGNETISM………………..……………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "electricity",
+      "magnetism",
+      "section"
+    ],
+    "hash": "c4e3e6e7fe",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847090"
+  },
+  {
+    "id": "PHYS-00018",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SECTION E: THE PHYSICS OF THE ATOM……………………………………………………………………………………………",
+    "content": "49",
+    "specific_objectives": [
+      "SECTION E: THE PHYSICS OF THE ATOM……………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "atom",
+      "physics",
+      "section"
+    ],
+    "hash": "d999b21251",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847162"
+  },
+  {
+    "id": "PHYS-00019",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "GUIDELINES FOR THE SCHOOL-BASED ASSESSMENT…………………………………………………………………………",
+    "content": "53",
+    "specific_objectives": [
+      "GUIDELINES FOR THE SCHOOL-BASED ASSESSMENT…………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "assessment",
+      "based",
+      "guidelines",
+      "school"
+    ],
+    "hash": "0c3c16e3a9",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847231"
+  },
+  {
+    "id": "PHYS-00020",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "LIST OF PHYSICAL QUANTITIES AND THEIR SYMBOLS………………………………………………………………………..",
+    "content": "75",
+    "specific_objectives": [
+      "LIST OF PHYSICAL QUANTITIES AND THEIR SYMBOLS……………………………………………………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "list",
+      "physical",
+      "quantities",
+      "symbols"
+    ],
+    "hash": "288bc5b7e8",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847304"
+  },
+  {
+    "id": "PHYS-00021",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "LIST OF GRAPHICAL SYMBOLS AS USED IN CIRCUIT DIAGRAMS………………………………………………………...",
+    "content": "76",
+    "specific_objectives": [
+      "LIST OF GRAPHICAL SYMBOLS AS USED IN CIRCUIT DIAGRAMS………………………………………………………..."
+    ],
+    "content_items": [],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "circuit",
+      "diagrams",
+      "graphical",
+      "list",
+      "symbols",
+      "used"
+    ],
+    "hash": "8f034103ef",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847379"
+  },
+  {
+    "id": "PHYS-00022",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "RECOMMENDED MINIMUM EQUIPMENT LIST………………………………………………………………………………….",
+    "content": "78",
+    "specific_objectives": [
+      "RECOMMENDED MINIMUM EQUIPMENT LIST…………………………………………………………………………………."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "equipment",
+      "list",
+      "minimum",
+      "recommended"
+    ],
+    "hash": "47c92f751f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847445"
+  },
+  {
+    "id": "PHYS-00023",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "RESOURCES………………………………………………………………………………………………………………………………………",
+    "content": "80",
+    "specific_objectives": [
+      "RESOURCES………………………………………………………………………………………………………………………………………"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "resources"
+    ],
+    "hash": "17c006e95c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847507"
+  },
+  {
+    "id": "PHYS-00024",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "GLOSSARY………………………………………………………………………………………………………………………………………..",
+    "content": "81",
+    "specific_objectives": [
+      "GLOSSARY……………………………………………………………………………………………………………………………………….."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "glossary"
+    ],
+    "hash": "21bf850115",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:28.847567"
+  },
+  {
+    "id": "PHYS-00025",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "The syllabus is desig",
+    "content": "ned for studen",
+    "specific_objectives": [
+      "The syllabus is desig"
+    ],
+    "content_items": [
+      "ned for studen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "desig",
+      "ned",
+      "studen",
+      "syllabus"
+    ],
+    "hash": "d9901402c7",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.445487"
+  },
+  {
+    "id": "PHYS-00026",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "The syllabus is arranged in fiv",
+    "content": "e sections, namel",
+    "specific_objectives": [
+      "The syllabus is arranged in fiv"
+    ],
+    "content_items": [
+      "e sections, namel"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "arranged",
+      "fiv",
+      "namel",
+      "sections",
+      "syllabus"
+    ],
+    "hash": "478cc2d4c4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.745825"
+  },
+  {
+    "id": "PHYS-00027",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "It is recommended that Secti",
+    "content": "on A be taught fi",
+    "specific_objectives": [
+      "It is recommended that Secti"
+    ],
+    "content_items": [
+      "on A be taught fi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "recommended",
+      "secti",
+      "taught"
+    ],
+    "hash": "20dc9c9831",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.745972"
+  },
+  {
+    "id": "PHYS-00028",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "The organisation of each sec",
+    "content": "tion in the syllab",
+    "specific_objectives": [
+      "The organisation of each sec"
+    ],
+    "content_items": [
+      "tion in the syllab"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "each",
+      "organisation",
+      "sec",
+      "syllab",
+      "tion"
+    ],
+    "hash": "3452cc74e3",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746044"
+  },
+  {
+    "id": "PHYS-00029",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "ensure that connections amo",
+    "content": "ng physical conc",
+    "specific_objectives": [
+      "ensure that connections amo"
+    ],
+    "content_items": [
+      "ng physical conc"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "amo",
+      "conc",
+      "connections",
+      "ensure",
+      "physical"
+    ],
+    "hash": "051e900896",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746108"
+  },
+  {
+    "id": "PHYS-00030",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "lessons stimulate the use of t",
+    "content": "he senses in lear",
+    "specific_objectives": [
+      "lessons stimulate the use of t"
+    ],
+    "content_items": [
+      "he senses in lear"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "lear",
+      "lessons",
+      "senses",
+      "stimulate",
+      "use"
+    ],
+    "hash": "54a9908d9d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746175"
+  },
+  {
+    "id": "PHYS-00031",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "and exciting investigative pro",
+    "content": "cess.",
+    "specific_objectives": [
+      "exciting investigative pro"
+    ],
+    "content_items": [
+      "cess."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "cess",
+      "exciting",
+      "investigative",
+      "pro"
+    ],
+    "hash": "fe50f25c58",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746235"
+  },
+  {
+    "id": "PHYS-00032",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "should be covered. Howev",
+    "content": "er, unfamiliar si",
+    "specific_objectives": [
+      "should be covered. Howev"
+    ],
+    "content_items": [
+      "er, unfamiliar si"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "covered",
+      "howev",
+      "should",
+      "unfamiliar"
+    ],
+    "hash": "0498981bbe",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746302"
+  },
+  {
+    "id": "PHYS-00033",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "This syllabus caters to varyin",
+    "content": "g teaching and",
+    "specific_objectives": [
+      "This syllabus caters to varyin"
+    ],
+    "content_items": [
+      "g teaching"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "caters",
+      "syllabus",
+      "teaching",
+      "varyin"
+    ],
+    "hash": "486771cd60",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746372"
+  },
+  {
+    "id": "PHYS-00034",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "the interrelatedness of conc",
+    "content": "epts. The fourth",
+    "specific_objectives": [
+      "the interrelatedness of conc"
+    ],
+    "content_items": [
+      "epts. The fourth"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "conc",
+      "epts",
+      "fourth",
+      "interrelatedness"
+    ],
+    "hash": "4ab169da63",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746444"
+  },
+  {
+    "id": "PHYS-00035",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Manipulation and Measurem",
+    "content": "ent (MM), Analy",
+    "specific_objectives": [
+      "Manipulation",
+      "Measurem"
+    ],
+    "content_items": [
+      "ent (MM), Analy"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "analy",
+      "ent",
+      "manipulation",
+      "measurem"
+    ],
+    "hash": "1a9b948129",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746513"
+  },
+  {
+    "id": "PHYS-00036",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "(PD) skills. Whenever possibl",
+    "content": "e, a practical app",
+    "specific_objectives": [
+      "(PD) skills. Whenever possibl"
+    ],
+    "content_items": [
+      "e, a practical app"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "app",
+      "possibl",
+      "practical",
+      "skills",
+      "whenever"
+    ],
+    "hash": "445e20382c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746579"
+  },
+  {
+    "id": "PHYS-00037",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "to the identification of varia",
+    "content": "bles and the use",
+    "specific_objectives": [
+      "to the identification of varia"
+    ],
+    "content_items": [
+      "the use"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "bles",
+      "identification",
+      "use",
+      "varia"
+    ],
+    "hash": "9c32abb381",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746647"
+  },
+  {
+    "id": "PHYS-00038",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "networking media to aid",
+    "content": "investigations a",
+    "specific_objectives": [
+      "networking media to aid"
+    ],
+    "content_items": [
+      "investigations a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "aid",
+      "investigations",
+      "media",
+      "networking"
+    ],
+    "hash": "9ad1b030a4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746706"
+  },
+  {
+    "id": "PHYS-00039",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "mathematical, data analysis",
+    "content": "and reporting sk",
+    "specific_objectives": [
+      "mathematical, data analysis"
+    ],
+    "content_items": [
+      "reporting sk"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "analysis",
+      "data",
+      "mathematical",
+      "reporting"
+    ],
+    "hash": "fabe8b8fd7",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746763"
+  },
+  {
+    "id": "PHYS-00040",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Column four also highlights",
+    "content": "connections be",
+    "specific_objectives": [
+      "Column four also highlights"
+    ],
+    "content_items": [
+      "connections be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "also",
+      "column",
+      "connections",
+      "four",
+      "highlights"
+    ],
+    "hash": "3cc183dbf8",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.746824"
+  },
+  {
+    "id": "PHYS-00041",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Biology, Mathematics and",
+    "content": "other related dis",
+    "specific_objectives": [
+      "Biology, Mathematics"
+    ],
+    "content_items": [
+      "other related dis"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "biology",
+      "dis",
+      "mathematics",
+      "other",
+      "related"
+    ],
+    "hash": "426f20a86b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.747016"
+  },
+  {
+    "id": "PHYS-00042",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "possible, students’ awarenes",
+    "content": "s of the effect of",
+    "specific_objectives": [
+      "possible, students’ awarenes"
+    ],
+    "content_items": [
+      "s of the effect of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "awarenes",
+      "effect",
+      "possible",
+      "students"
+    ],
+    "hash": "f2a9166ebf",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.747993"
+  },
+  {
+    "id": "PHYS-00043",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "vice versa should be encoura",
+    "content": "ged.",
+    "specific_objectives": [
+      "vice versa should be encoura"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "encoura",
+      "ged",
+      "should",
+      "versa",
+      "vice"
+    ],
+    "hash": "7e078ed2fa",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748072"
+  },
+  {
+    "id": "PHYS-00044",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "While classical Physics is sev",
+    "content": "eral hundred ye",
+    "specific_objectives": [
+      "While classical Physics is sev"
+    ],
+    "content_items": [
+      "eral hundred ye"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "classical",
+      "eral",
+      "hundred",
+      "physics",
+      "sev",
+      "while"
+    ],
+    "hash": "0a833abf5b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748168"
+  },
+  {
+    "id": "PHYS-00045",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "the modern technological er",
+    "content": "a we live in an",
+    "specific_objectives": [
+      "the modern technological er"
+    ],
+    "content_items": [
+      "a we live in an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "live",
+      "modern",
+      "technological"
+    ],
+    "hash": "0665f9f02a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748238"
+  },
+  {
+    "id": "PHYS-00046",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "linking the work of the classic",
+    "content": "al scientists to t",
+    "specific_objectives": [
+      "linking the work of the classic"
+    ],
+    "content_items": [
+      "al scientists to t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "classic",
+      "linking",
+      "scientists",
+      "work"
+    ],
+    "hash": "e712a0e910",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748301"
+  },
+  {
+    "id": "PHYS-00047",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Greater emphasis should be",
+    "content": "placed on the ap",
+    "specific_objectives": [
+      "Greater emphasis should be"
+    ],
+    "content_items": [
+      "placed on the ap"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "emphasis",
+      "greater",
+      "placed",
+      "should"
+    ],
+    "hash": "d324dfe972",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748376"
+  },
+  {
+    "id": "PHYS-00048",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "the factual materials, which",
+    "content": "encourage memo",
+    "specific_objectives": [
+      "the factual materials, which"
+    ],
+    "content_items": [
+      "encourage memo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "encourage",
+      "factual",
+      "materials",
+      "memo",
+      "which"
+    ],
+    "hash": "2127d161f8",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748439"
+  },
+  {
+    "id": "PHYS-00049",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "be made to relate the study",
+    "content": "of physical prin",
+    "specific_objectives": [
+      "be made to relate the study"
+    ],
+    "content_items": [
+      "of physical prin"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "made",
+      "physical",
+      "prin",
+      "relate",
+      "study"
+    ],
+    "hash": "4e8c404be0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748504"
+  },
+  {
+    "id": "PHYS-00050",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "relationship between the the",
+    "content": "ory and practical",
+    "specific_objectives": [
+      "relationship between the the"
+    ],
+    "content_items": [
+      "practical"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "between",
+      "ory",
+      "practical",
+      "relationship"
+    ],
+    "hash": "4611b38acd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:29.748568"
+  },
+  {
+    "id": "PHYS-00051",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "The role of the teacher is to facilit",
+    "content": "ate student",
+    "specific_objectives": [
+      "The role of the teacher is to facilit"
+    ],
+    "content_items": [
+      "ate student"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "ate",
+      "facilit",
+      "role",
+      "student",
+      "teacher"
+    ],
+    "hash": "89e66c4fb5",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001024"
+  },
+  {
+    "id": "PHYS-00052",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "will contribute to a more scien",
+    "content": "tifically liter",
+    "specific_objectives": [
+      "will contribute to a more scien"
+    ],
+    "content_items": [
+      "tifically liter"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "contribute",
+      "liter",
+      "more",
+      "scien",
+      "tifically",
+      "will"
+    ],
+    "hash": "70f6606e25",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001106"
+  },
+  {
+    "id": "PHYS-00053",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "CERTIFICATION AND DE",
+    "content": "FINITIO",
+    "specific_objectives": [
+      "CERTIFICATION AND DE"
+    ],
+    "content_items": [
+      "FINITIO"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "certification",
+      "finitio"
+    ],
+    "hash": "b2d63d677f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001169"
+  },
+  {
+    "id": "PHYS-00054",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "The syllabus will be examined for G",
+    "content": "eneral Profi",
+    "specific_objectives": [
+      "The syllabus will be examined for G"
+    ],
+    "content_items": [
+      "eneral Profi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "eneral",
+      "examined",
+      "profi",
+      "syllabus",
+      "will"
+    ],
+    "hash": "d5228290b9",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001235"
+  },
+  {
+    "id": "PHYS-00055",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "In addition to the overall grade, th",
+    "content": "ere will be",
+    "specific_objectives": [
+      "In addition to the overall grade, th"
+    ],
+    "content_items": [
+      "ere will be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "addition",
+      "ere",
+      "grade",
+      "overall",
+      "will"
+    ],
+    "hash": "c39bc88321",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001305"
+  },
+  {
+    "id": "PHYS-00056",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "1. Knowledge and Comprehe",
+    "content": "nsion.",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehe"
+    ],
+    "content_items": [
+      "nsion."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "comprehe",
+      "knowledge",
+      "nsion"
+    ],
+    "hash": "2691838ffe",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001364"
+  },
+  {
+    "id": "PHYS-00057",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Knowledge and Comprehension (K",
+    "content": "C)",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehension (K"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "comprehension",
+      "knowledge"
+    ],
+    "hash": "b14fd18f68",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001425"
+  },
+  {
+    "id": "PHYS-00058",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Analysis and Interpretation",
+    "content": "identify an",
+    "specific_objectives": [
+      "Analysis",
+      "Interpretation"
+    ],
+    "content_items": [
+      "identify an"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 8,
+    "keywords": [
+      "analysis",
+      "identify",
+      "interpretation"
+    ],
+    "hash": "2c2b14bfd1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.001617"
+  },
+  {
+    "id": "PHYS-00059",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Observation/Recording/",
+    "content": "select observa",
+    "specific_objectives": [
+      "Observation/Recording/"
+    ],
+    "content_items": [
+      "select observa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "observa",
+      "observation",
+      "recording",
+      "select"
+    ],
+    "hash": "752cbdc685",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255145"
+  },
+  {
+    "id": "PHYS-00060",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Manipulation/Measurement",
+    "content": "follow instruc",
+    "specific_objectives": [
+      "Manipulation/Measurement"
+    ],
+    "content_items": [
+      "follow instruc"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "follow",
+      "instruc",
+      "manipulation",
+      "measurement"
+    ],
+    "hash": "06f9838c16",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255317"
+  },
+  {
+    "id": "PHYS-00061",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Planning and Designing",
+    "content": "develop hyp",
+    "specific_objectives": [
+      "Planning",
+      "Designing"
+    ],
+    "content_items": [
+      "develop hyp"
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 9,
+    "keywords": [
+      "designing",
+      "develop",
+      "hyp",
+      "planning"
+    ],
+    "hash": "e9db4faf82",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255416"
+  },
+  {
+    "id": "PHYS-00062",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "(2 hours 30 minutes)",
+    "content": "and three exte",
+    "specific_objectives": [
+      "(2 hours 30 minutes)"
+    ],
+    "content_items": [
+      "three exte"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "exte",
+      "three"
+    ],
+    "hash": "c3f2002e81",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255674"
+  },
+  {
+    "id": "PHYS-00063",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "School-Based Assessment (SBA)",
+    "content": "candidate in th",
+    "specific_objectives": [
+      "School-Based Assessment (SBA)"
+    ],
+    "content_items": [
+      "candidate in th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "assessment",
+      "based",
+      "candidate",
+      "school"
+    ],
+    "hash": "a96b9f1b16",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255770"
+  },
+  {
+    "id": "PHYS-00064",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Assessment for Private",
+    "content": "This paper wil",
+    "specific_objectives": [
+      "Assessment for Private"
+    ],
+    "content_items": [
+      "This paper wil"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "assessment",
+      "paper",
+      "private",
+      "wil"
+    ],
+    "hash": "6aca0ed9b9",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.255916"
+  },
+  {
+    "id": "PHYS-00065",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "(2 hours and 10 minutes)",
+    "content": "and Interpreta",
+    "specific_objectives": [
+      "(2 hours",
+      "minutes)"
+    ],
+    "content_items": [
+      "Interpreta"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "interpreta"
+    ],
+    "hash": "eb42029d0b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.256010"
+  },
+  {
+    "id": "PHYS-00066",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Knowledge and Comprehension",
+    "content": "50",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehension"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "comprehension",
+      "knowledge"
+    ],
+    "hash": "41831c1645",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:30.516245"
+  },
+  {
+    "id": "PHYS-00067",
+    "section": "section in: the syllabus is designed to facilitate inquiry-based learning and to\nensure that connections among physical concepts are established",
+    "subsection": "Unknown",
+    "objective": "Student’s ability to",
+    "content": "prepare a",
+    "specific_objectives": [
+      "Student’s ability to"
+    ],
+    "content_items": [
+      "prepare a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 13,
+    "keywords": [
+      "ability",
+      "prepare",
+      "student"
+    ],
+    "hash": "73325afc9d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:31.018375"
+  },
+  {
+    "id": "PHYS-00068",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "straight line graph;",
+    "content": "the ‘best fit’ line.",
+    "specific_objectives": [
+      "straight line graph"
+    ],
+    "content_items": [
+      "the ‘best fit’ line."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "best",
+      "fit",
+      "graph",
+      "line",
+      "straight"
+    ],
+    "hash": "fba8f7e66b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:31.573011"
+  },
+  {
+    "id": "PHYS-00069",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "other vectors at rig",
+    "content": "ht",
+    "specific_objectives": [
+      "other vectors at rig"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 16,
+    "keywords": [
+      "other",
+      "rig",
+      "vectors"
+    ],
+    "hash": "e0544b0f2c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:31.845708"
+  },
+  {
+    "id": "PHYS-00070",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "gravitational forces",
+    "content": "Static electricit",
+    "specific_objectives": [
+      "gravitational forces"
+    ],
+    "content_items": [
+      "Static electricit"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 17,
+    "keywords": [
+      "electricit",
+      "forces",
+      "gravitational",
+      "static"
+    ],
+    "hash": "07a8409f79",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.160165"
+  },
+  {
+    "id": "PHYS-00071",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "bodies in equilibriu",
+    "content": "m.",
+    "specific_objectives": [
+      "bodies in equilibriu"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "bodies",
+      "equilibriu"
+    ],
+    "hash": "b7ab3e7ab4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.453293"
+  },
+  {
+    "id": "PHYS-00072",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "conservation of linear",
+    "content": "excluded.",
+    "specific_objectives": [
+      "conservation of linear"
+    ],
+    "content_items": [
+      "excluded."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "conservation",
+      "excluded",
+      "linear"
+    ],
+    "hash": "a613dd5b5a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.933354"
+  },
+  {
+    "id": "PHYS-00073",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "transformation(s) in",
+    "content": "limited to one-ste",
+    "specific_objectives": [
+      "transformation(s) in"
+    ],
+    "content_items": [
+      "limited to one-ste"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "limited",
+      "one",
+      "ste",
+      "transformation"
+    ],
+    "hash": "ea24496716",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.933548"
+  },
+  {
+    "id": "PHYS-00074",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "alternative sources,",
+    "content": "to include hydroe",
+    "specific_objectives": [
+      "alternative sources,"
+    ],
+    "content_items": [
+      "to include hydroe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "alternative",
+      "hydroe",
+      "include",
+      "sources"
+    ],
+    "hash": "f651d3c757",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.933780"
+  },
+  {
+    "id": "PHYS-00075",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "and its importance to",
+    "content": "geothermal ener",
+    "specific_objectives": [
+      "its importance to"
+    ],
+    "content_items": [
+      "geothermal ener"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "ener",
+      "geothermal",
+      "importance",
+      "its"
+    ],
+    "hash": "760b374b6d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:32.933833"
+  },
+  {
+    "id": "PHYS-00076",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "in given situations.",
+    "content": "x 100% input val",
+    "specific_objectives": [
+      "in given situations."
+    ],
+    "content_items": [
+      "x 100% input val"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "given",
+      "input",
+      "situations",
+      "val"
+    ],
+    "hash": "062e240afe",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.419662"
+  },
+  {
+    "id": "PHYS-00077",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "at a point in a fluid",
+    "content": "(for fluid pressur",
+    "specific_objectives": [
+      "at a point in a fluid"
+    ],
+    "content_items": [
+      "(for fluid pressur"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "fluid",
+      "point",
+      "pressur"
+    ],
+    "hash": "8787a42c16",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.419863"
+  },
+  {
+    "id": "PHYS-00078",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "to its depth and the",
+    "content": "(Pascal) Pa  Nm",
+    "specific_objectives": [
+      "to its depth"
+    ],
+    "content_items": [
+      "(Pascal) Pa  Nm"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "depth",
+      "its"
+    ],
+    "hash": "1a24ae7aab",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.419944"
+  },
+  {
+    "id": "PHYS-00079",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "principle to predict",
+    "content": "include rafts, boa",
+    "specific_objectives": [
+      "principle to predict"
+    ],
+    "content_items": [
+      "include rafts, boa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "boa",
+      "include",
+      "predict",
+      "principle",
+      "rafts"
+    ],
+    "hash": "bd7de83163",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.420090"
+  },
+  {
+    "id": "PHYS-00080",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "of Modern Physics\", and",
+    "content": "the \"father of",
+    "specific_objectives": [
+      "of Modern Physics\","
+    ],
+    "content_items": [
+      "the \"father of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "father",
+      "modern",
+      "physics"
+    ],
+    "hash": "5d66f1165e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.420311"
+  },
+  {
+    "id": "PHYS-00081",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "different contributions w",
+    "content": "ere to Science to",
+    "specific_objectives": [
+      "different contributions w"
+    ],
+    "content_items": [
+      "ere to Science to"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "contributions",
+      "different",
+      "ere",
+      "science"
+    ],
+    "hash": "0d18e6bdea",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.420372"
+  },
+  {
+    "id": "PHYS-00082",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "of the sun by extremely patient and detailed daily observations of the Sun. Explain",
+    "content": "why this",
+    "specific_objectives": [
+      "of the sun by extremely patient",
+      "detailed daily observations of the Sun. Explain"
+    ],
+    "content_items": [
+      "why this"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 23,
+    "keywords": [
+      "daily",
+      "detailed",
+      "explain",
+      "extremely",
+      "observations",
+      "patient",
+      "sun",
+      "why"
+    ],
+    "hash": "012a53ed42",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678080"
+  },
+  {
+    "id": "PHYS-00083",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "same time and observe if they land at the same time or not. Discussion should ensu",
+    "content": "e about",
+    "specific_objectives": [
+      "same time",
+      "observe if they land at the same time or not. Discussion should ensu"
+    ],
+    "content_items": [
+      "e about"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 2,
+    "page_number": 23,
+    "keywords": [
+      "about",
+      "discussion",
+      "ensu",
+      "land",
+      "not",
+      "observe",
+      "same",
+      "should",
+      "they",
+      "time"
+    ],
+    "hash": "9651743fa0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678224"
+  },
+  {
+    "id": "PHYS-00084",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "Million Mars Climate orbiter mission, which was launched in 1999 due to a mix up o",
+    "content": "f metric",
+    "specific_objectives": [
+      "Million Mars Climate orbiter mission, which was launched in 1999 due to a mix up o"
+    ],
+    "content_items": [
+      "f metric"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "climate",
+      "due",
+      "launched",
+      "mars",
+      "metric",
+      "million",
+      "mission",
+      "mix",
+      "orbiter",
+      "was",
+      "which"
+    ],
+    "hash": "4ba897acde",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678323"
+  },
+  {
+    "id": "PHYS-00085",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "and imperial units. The importance of units in Physics should be emphasised thro",
+    "content": "ugh this",
+    "specific_objectives": [
+      "imperial units. The importance of units in Physics should be emphasised thro"
+    ],
+    "content_items": [
+      "ugh this"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "emphasised",
+      "imperial",
+      "importance",
+      "physics",
+      "should",
+      "thro",
+      "ugh",
+      "units"
+    ],
+    "hash": "8d3a164b7c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678396"
+  },
+  {
+    "id": "PHYS-00086",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "ruler? Experiment and try to figure out why. Can you make a pencil easier to balance",
+    "content": "on your",
+    "specific_objectives": [
+      "ruler? Experiment",
+      "try to figure out why. Can you make a pencil easier to balance"
+    ],
+    "content_items": [
+      "on your"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "balance",
+      "can",
+      "easier",
+      "experiment",
+      "figure",
+      "make",
+      "out",
+      "pencil",
+      "ruler",
+      "try",
+      "why",
+      "you"
+    ],
+    "hash": "cc2caec8af",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678495"
+  },
+  {
+    "id": "PHYS-00087",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "finger by adding weight at the top? Explain. “Centre of gravity: Pencil balance” fro",
+    "content": "m ZOOM",
+    "specific_objectives": [
+      "finger by adding weight at the top? Explain. “Centre of gravity: Pencil balance” fro"
+    ],
+    "content_items": [
+      "m ZOOM"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 23,
+    "keywords": [
+      "adding",
+      "balance",
+      "centre",
+      "explain",
+      "finger",
+      "fro",
+      "gravity",
+      "pencil",
+      "top",
+      "weight",
+      "zoom"
+    ],
+    "hash": "a6a43d6863",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678586"
+  },
+  {
+    "id": "PHYS-00088",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "What will it take to make a floating toy submarine sink to the bottom of a bathtub?",
+    "content": "Conduct",
+    "specific_objectives": [
+      "What will it take to make a floating toy submarine sink to the bottom of a bathtub?"
+    ],
+    "content_items": [
+      "Conduct"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "bathtub",
+      "bottom",
+      "conduct",
+      "floating",
+      "make",
+      "sink",
+      "submarine",
+      "take",
+      "toy",
+      "what",
+      "will"
+    ],
+    "hash": "605bd0c45c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678685"
+  },
+  {
+    "id": "PHYS-00089",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "an experiment based on your understanding of the factors that influence an",
+    "content": "object's",
+    "specific_objectives": [
+      "an experiment based on your understanding of the factors that influence an"
+    ],
+    "content_items": [
+      "object's"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "based",
+      "experiment",
+      "factors",
+      "influence",
+      "object",
+      "understanding",
+      "your"
+    ],
+    "hash": "07aa16c324",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678748"
+  },
+  {
+    "id": "PHYS-00090",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "atmosphere. List the major meteor showers and see how many “shooting stars”",
+    "content": "you can",
+    "specific_objectives": [
+      "atmosphere. List the major meteor showers",
+      "see how many “shooting stars”"
+    ],
+    "content_items": [
+      "you can"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "atmosphere",
+      "can",
+      "how",
+      "list",
+      "major",
+      "many",
+      "meteor",
+      "see",
+      "shooting",
+      "showers",
+      "stars",
+      "you"
+    ],
+    "hash": "22c41b056a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678870"
+  },
+  {
+    "id": "PHYS-00091",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "sky scrapers and why they could not be built in the past. The tallest constructions of",
+    "content": "the past",
+    "specific_objectives": [
+      "sky scrapers",
+      "why they could not be built in the past. The tallest constructions of"
+    ],
+    "content_items": [
+      "the past"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "built",
+      "constructions",
+      "could",
+      "not",
+      "past",
+      "scrapers",
+      "sky",
+      "tallest",
+      "they",
+      "why"
+    ],
+    "hash": "2b4013de71",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.678968"
+  },
+  {
+    "id": "PHYS-00092",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "into two teams. Subsequent to the match, discuss from principles of Physics why the",
+    "content": "winning",
+    "specific_objectives": [
+      "into two teams. Subsequent to the match, discuss from principles of Physics why the"
+    ],
+    "content_items": [
+      "winning"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 23,
+    "keywords": [
+      "discuss",
+      "into",
+      "match",
+      "physics",
+      "principles",
+      "subsequent",
+      "teams",
+      "two",
+      "why",
+      "winning"
+    ],
+    "hash": "d7dbef1d53",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.679072"
+  },
+  {
+    "id": "PHYS-00093",
+    "section": "unit of: the\ngradient",
+    "subsection": "Unknown",
+    "objective": "team won and the losing team did not. Use the items listed in the paper “Physics of",
+    "content": "Cricket”",
+    "specific_objectives": [
+      "team won",
+      "the losing team did not. Use the items listed in the paper “Physics of"
+    ],
+    "content_items": [
+      "Cricket”"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 23,
+    "keywords": [
+      "cricket",
+      "did",
+      "items",
+      "listed",
+      "losing",
+      "not",
+      "paper",
+      "physics",
+      "team",
+      "use",
+      "won"
+    ],
+    "hash": "ad5f8db3ca",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:33.679169"
+  },
+  {
+    "id": "PHYS-00094",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "insulation properties",
+    "content": "conductivities of",
+    "specific_objectives": [
+      "insulation properties"
+    ],
+    "content_items": [
+      "conductivities of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 29,
+    "keywords": [
+      "conductivities",
+      "insulation",
+      "properties"
+    ],
+    "hash": "e6e4128425",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.907905"
+  },
+  {
+    "id": "PHYS-00095",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "of certain materials,",
+    "content": "different solids.",
+    "specific_objectives": [
+      "of certain materials,"
+    ],
+    "content_items": [
+      "different solids."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 29,
+    "keywords": [
+      "certain",
+      "different",
+      "materials",
+      "solids"
+    ],
+    "hash": "e1ba4cb76b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.907964"
+  },
+  {
+    "id": "PHYS-00096",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "disaster occurred in 2003, killing all persons on boa",
+    "content": "rd. Highlight the role of th",
+    "specific_objectives": [
+      "disaster occurred in 2003, killing all persons on boa"
+    ],
+    "content_items": [
+      "rd. Highlight the role of th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 30,
+    "keywords": [
+      "all",
+      "boa",
+      "disaster",
+      "highlight",
+      "killing",
+      "occurred",
+      "persons",
+      "role"
+    ],
+    "hash": "1e61133e33",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.158735"
+  },
+  {
+    "id": "PHYS-00097",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "could see in infrared, do a sketch of what the cla",
+    "content": "ssroom would look like th",
+    "specific_objectives": [
+      "could see in infrared, do a sketch of what the cla"
+    ],
+    "content_items": [
+      "ssroom would look like th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 30,
+    "keywords": [
+      "cla",
+      "could",
+      "infrared",
+      "like",
+      "look",
+      "see",
+      "sketch",
+      "ssroom",
+      "what",
+      "would"
+    ],
+    "hash": "788c275449",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.158900"
+  },
+  {
+    "id": "PHYS-00098",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "placed in rooms. In cold countries where will he",
+    "content": "aters be located in a room",
+    "specific_objectives": [
+      "placed in rooms. In cold countries where will he"
+    ],
+    "content_items": [
+      "aters be located in a room"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 30,
+    "keywords": [
+      "aters",
+      "cold",
+      "countries",
+      "located",
+      "placed",
+      "room",
+      "rooms",
+      "where",
+      "will"
+    ],
+    "hash": "d72b948561",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.158998"
+  },
+  {
+    "id": "PHYS-00099",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "phenomena happen as you get closer and closer",
+    "content": "to that temperature. De",
+    "specific_objectives": [
+      "phenomena happen as you get closer",
+      "closer"
+    ],
+    "content_items": [
+      "to that temperature. De"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 30,
+    "keywords": [
+      "closer",
+      "get",
+      "happen",
+      "phenomena",
+      "temperature",
+      "you"
+    ],
+    "hash": "75919cddf1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.159143"
+  },
+  {
+    "id": "PHYS-00100",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "highlighting the phenomena and its use in modern t",
+    "content": "echnology.",
+    "specific_objectives": [
+      "highlighting the phenomena",
+      "its use in modern t"
+    ],
+    "content_items": [
+      "echnology."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 30,
+    "keywords": [
+      "echnology",
+      "highlighting",
+      "its",
+      "modern",
+      "phenomena",
+      "use"
+    ],
+    "hash": "6dae428971",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.159209"
+  },
+  {
+    "id": "PHYS-00101",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "adapted from ZOOM, cast members use a homemade solar still to mimic this natural",
+    "content": "process,",
+    "specific_objectives": [
+      "adapted from ZOOM, cast members use a homemade solar still to mimic this natural"
+    ],
+    "content_items": [
+      "process,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 31,
+    "keywords": [
+      "adapted",
+      "cast",
+      "homemade",
+      "members",
+      "mimic",
+      "natural",
+      "process",
+      "solar",
+      "still",
+      "use",
+      "zoom"
+    ],
+    "hash": "7e4341b69a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.252070"
+  },
+  {
+    "id": "PHYS-00102",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "separating pure water from a saltwater mixture. The class can make this homema",
+    "content": "de solar",
+    "specific_objectives": [
+      "separating pure water from a saltwater mixture. The class can make this homema"
+    ],
+    "content_items": [
+      "de solar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 31,
+    "keywords": [
+      "can",
+      "class",
+      "homema",
+      "make",
+      "mixture",
+      "pure",
+      "saltwater",
+      "separating",
+      "solar",
+      "water"
+    ],
+    "hash": "0527de698e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.252154"
+  },
+  {
+    "id": "PHYS-00103",
+    "section": "SECTION B: THERMAL PHYSICS AND KINETIC THEORY",
+    "subsection": "Unknown",
+    "objective": "still as a project and see the processes of condensation and evaporation and its rele",
+    "content": "vance on",
+    "specific_objectives": [
+      "still as a project",
+      "see the processes of condensation",
+      "evaporation",
+      "its rele"
+    ],
+    "content_items": [
+      "vance on"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 31,
+    "keywords": [
+      "condensation",
+      "evaporation",
+      "its",
+      "processes",
+      "project",
+      "rele",
+      "see",
+      "still",
+      "vance"
+    ],
+    "hash": "c30275536c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.252245"
+  },
+  {
+    "id": "PHYS-00104",
+    "section": "SECTION C: WAVES AND OPTICS\nWave theory represents the branch of Physics that deals with wave processes",
+    "subsection": "Unknown",
+    "objective": "‘pitch’ and ‘loudness’",
+    "content": "Loudness - amplitud",
+    "specific_objectives": [
+      "‘pitch’",
+      "‘loudness’"
+    ],
+    "content_items": [
+      "Loudness - amplitud"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 33,
+    "keywords": [
+      "amplitud",
+      "loudness",
+      "pitch"
+    ],
+    "hash": "dcafda919d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.808380"
+  },
+  {
+    "id": "PHYS-00105",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "sound waves reflect,",
+    "content": "Refract – sound",
+    "specific_objectives": [
+      "sound waves reflect,"
+    ],
+    "content_items": [
+      "Refract – sound"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 34,
+    "keywords": [
+      "reflect",
+      "refract",
+      "sound",
+      "waves"
+    ],
+    "hash": "5899c73704",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.057604"
+  },
+  {
+    "id": "PHYS-00106",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "refract, diffract and",
+    "content": "travelling from air",
+    "specific_objectives": [
+      "refract, diffract"
+    ],
+    "content_items": [
+      "travelling from air"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 34,
+    "keywords": [
+      "air",
+      "diffract",
+      "refract",
+      "travelling"
+    ],
+    "hash": "727165e00b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.057675"
+  },
+  {
+    "id": "PHYS-00107",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "of their wavelengths;",
+    "content": "spectrum.",
+    "specific_objectives": [
+      "of their wavelengths"
+    ],
+    "content_items": [
+      "spectrum."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 34,
+    "keywords": [
+      "spectrum",
+      "wavelengths"
+    ],
+    "hash": "1594f4bcc6",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.057865"
+  },
+  {
+    "id": "PHYS-00108",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "theories of light held",
+    "content": "Newton, Young,",
+    "specific_objectives": [
+      "theories of light held"
+    ],
+    "content_items": [
+      "Newton, Young,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 34,
+    "keywords": [
+      "held",
+      "light",
+      "newton",
+      "theories",
+      "young"
+    ],
+    "hash": "95663dbef3",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.057979"
+  },
+  {
+    "id": "PHYS-00109",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "and the object size is",
+    "content": "(b) no parallax",
+    "specific_objectives": [
+      "the object size is"
+    ],
+    "content_items": [
+      "(b) no parallax"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 35,
+    "keywords": [
+      "object",
+      "parallax",
+      "size"
+    ],
+    "hash": "2f11e1d363",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.309901"
+  },
+  {
+    "id": "PHYS-00110",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "= image distance (v)",
+    "content": "Transformations,",
+    "specific_objectives": [
+      "= image distance (v)"
+    ],
+    "content_items": [
+      "Transformations,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 37,
+    "keywords": [
+      "distance",
+      "image",
+      "transformations"
+    ],
+    "hash": "bf2d67de7e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:36.756408"
+  },
+  {
+    "id": "PHYS-00111",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "examples and make a model to depict them as for a science centre display",
+    "content": ". Show ti",
+    "specific_objectives": [
+      "examples",
+      "make a model to depict them as for a science centre display"
+    ],
+    "content_items": [
+      ". Show ti"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "centre",
+      "depict",
+      "display",
+      "examples",
+      "make",
+      "model",
+      "science",
+      "show",
+      "them"
+    ],
+    "hash": "c76a9a0f4b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.006215"
+  },
+  {
+    "id": "PHYS-00112",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "acoustics. Students should write a report of the activity. Discuss the qualit",
+    "content": "y of a ba",
+    "specific_objectives": [
+      "acoustics. Students should write a report of the activity. Discuss the qualit"
+    ],
+    "content_items": [
+      "y of a ba"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 38,
+    "keywords": [
+      "acoustics",
+      "activity",
+      "discuss",
+      "qualit",
+      "report",
+      "should",
+      "students",
+      "write"
+    ],
+    "hash": "bdfe79eeec",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.006326"
+  },
+  {
+    "id": "PHYS-00113",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "located. How tsunami waves are formed and why are they so much larg",
+    "content": "er than n",
+    "specific_objectives": [
+      "located. How tsunami waves are formed",
+      "why are they so much larg"
+    ],
+    "content_items": [
+      "er than n"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "are",
+      "formed",
+      "how",
+      "larg",
+      "located",
+      "much",
+      "than",
+      "they",
+      "tsunami",
+      "waves",
+      "why"
+    ],
+    "hash": "6f1ac54238",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.009660"
+  },
+  {
+    "id": "PHYS-00114",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "This video segment from Nature examines the anatomy of the tsunami",
+    "content": "and the",
+    "specific_objectives": [
+      "This video segment from Nature examines the anatomy of the tsunami"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "anatomy",
+      "examines",
+      "nature",
+      "segment",
+      "tsunami",
+      "video"
+    ],
+    "hash": "e842754fa6",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.009752"
+  },
+  {
+    "id": "PHYS-00115",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "companions who have ventured deep into the caves but instead there",
+    "content": "is a large",
+    "specific_objectives": [
+      "companions who have ventured deep into the caves but instead there"
+    ],
+    "content_items": [
+      "is a large"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "caves",
+      "companions",
+      "deep",
+      "have",
+      "instead",
+      "into",
+      "large",
+      "there",
+      "ventured",
+      "who"
+    ],
+    "hash": "6604838b5a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.009855"
+  },
+  {
+    "id": "PHYS-00116",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "lurking. Write a short story of your adventure. Make sure you include the",
+    "content": "principles",
+    "specific_objectives": [
+      "lurking. Write a short story of your adventure. Make sure you include the"
+    ],
+    "content_items": [
+      "principles"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "adventure",
+      "include",
+      "lurking",
+      "make",
+      "principles",
+      "short",
+      "story",
+      "sure",
+      "write",
+      "you",
+      "your"
+    ],
+    "hash": "83213ef9f1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.009921"
+  },
+  {
+    "id": "PHYS-00117",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "behaves as a particle. Observe pictures with a digital camera and a trad",
+    "content": "itional fil",
+    "specific_objectives": [
+      "behaves as a particle. Observe pictures with a digital camera",
+      "a trad"
+    ],
+    "content_items": [
+      "itional fil"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "behaves",
+      "camera",
+      "digital",
+      "fil",
+      "itional",
+      "observe",
+      "particle",
+      "pictures",
+      "trad"
+    ],
+    "hash": "c6ee020675",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.010022"
+  },
+  {
+    "id": "PHYS-00118",
+    "section": "SECTION C: WAVES AND OPTICS",
+    "subsection": "Unknown",
+    "objective": "and compare the differences between them including how each forms the",
+    "content": "image.",
+    "specific_objectives": [
+      "compare the differences between them including how each forms the"
+    ],
+    "content_items": [
+      "image."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "between",
+      "compare",
+      "differences",
+      "each",
+      "forms",
+      "how",
+      "image",
+      "including",
+      "them"
+    ],
+    "hash": "53598768da",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.010086"
+  },
+  {
+    "id": "PHYS-00119",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM\nIn this section",
+    "subsection": "Unknown",
+    "objective": "In this section, Ele",
+    "content": "ctricity and",
+    "specific_objectives": [
+      "In this section, Ele"
+    ],
+    "content_items": [
+      "ctricity"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "ctricity",
+      "ele",
+      "section"
+    ],
+    "hash": "e158efde31",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.248516"
+  },
+  {
+    "id": "PHYS-00120",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM\nIn this section",
+    "subsection": "Unknown",
+    "objective": "principles and pheno",
+    "content": "mena. The im",
+    "specific_objectives": [
+      "principles",
+      "pheno"
+    ],
+    "content_items": [
+      "mena. The im"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "mena",
+      "pheno",
+      "principles"
+    ],
+    "hash": "733fcd698b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.248591"
+  },
+  {
+    "id": "PHYS-00121",
+    "section": "unit of: charge",
+    "subsection": "Unknown",
+    "objective": "alternating currents or",
+    "content": "Skill: AI.",
+    "specific_objectives": [
+      "alternating currents or"
+    ],
+    "content_items": [
+      "Skill: AI."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "alternating",
+      "currents",
+      "skill"
+    ],
+    "hash": "394e3a03fd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.694534"
+  },
+  {
+    "id": "PHYS-00122",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "conserving electrical",
+    "content": "need to conserve.",
+    "specific_objectives": [
+      "conserving electrical"
+    ],
+    "content_items": [
+      "need to conserve."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "conserve",
+      "conserving",
+      "electrical",
+      "need"
+    ],
+    "hash": "02f953dab0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.892454"
+  },
+  {
+    "id": "PHYS-00123",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "devices. Simple series",
+    "content": "suitability of",
+    "specific_objectives": [
+      "devices. Simple series"
+    ],
+    "content_items": [
+      "suitability of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "devices",
+      "series",
+      "simple",
+      "suitability"
+    ],
+    "hash": "583ef1e585",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.892669"
+  },
+  {
+    "id": "PHYS-00124",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "circuits with diode,",
+    "content": "components.",
+    "specific_objectives": [
+      "circuits with diode,"
+    ],
+    "content_items": [
+      "components."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "circuits",
+      "components",
+      "diode"
+    ],
+    "hash": "8c00b38430",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:37.892720"
+  },
+  {
+    "id": "PHYS-00125",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "unmagnetised object;",
+    "content": "charges.",
+    "specific_objectives": [
+      "unmagnetised object"
+    ],
+    "content_items": [
+      "charges."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "charges",
+      "object",
+      "unmagnetised"
+    ],
+    "hash": "ffbea9ecbb",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.765489"
+  },
+  {
+    "id": "PHYS-00126",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "magnetic field pattern",
+    "content": "p",
+    "specific_objectives": [
+      "magnetic field pattern"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "field",
+      "magnetic",
+      "pattern"
+    ],
+    "hash": "97b0720647",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.964536"
+  },
+  {
+    "id": "PHYS-00127",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "which demonstrates the",
+    "content": "o",
+    "specific_objectives": [
+      "which demonstrates the"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 48,
+    "keywords": [
+      "demonstrates",
+      "which"
+    ],
+    "hash": "e2216a34f3",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.964704"
+  },
+  {
+    "id": "PHYS-00128",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "existence of a force on a",
+    "content": "c",
+    "specific_objectives": [
+      "existence of a force on a"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "existence",
+      "force"
+    ],
+    "hash": "e58a78943d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.964752"
+  },
+  {
+    "id": "PHYS-00129",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "affect the force on a",
+    "content": "and on the magnitude",
+    "specific_objectives": [
+      "affect the force on a"
+    ],
+    "content_items": [
+      "on the magnitude"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "affect",
+      "force",
+      "magnitude"
+    ],
+    "hash": "abe41499e4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.156234"
+  },
+  {
+    "id": "PHYS-00130",
+    "section": "SECTION D: ELECTRICITY AND MAGNETISM",
+    "subsection": "Unknown",
+    "objective": "the magnitude of the",
+    "content": "flux experienced by",
+    "specific_objectives": [
+      "the magnitude of the"
+    ],
+    "content_items": [
+      "flux experienced by"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "experienced",
+      "flux",
+      "magnitude"
+    ],
+    "hash": "9af279510c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:39.156457"
+  },
+  {
+    "id": "PHYS-00131",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "energy in a nuclear Einstein’s equation:",
+    "content": "Algebra",
+    "specific_objectives": [
+      "energy in a nuclear Einstein’s equation:"
+    ],
+    "content_items": [
+      "Algebra"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "algebra",
+      "einstein",
+      "energy",
+      "equation",
+      "nuclear"
+    ],
+    "hash": "a46e326340",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.382001"
+  },
+  {
+    "id": "PHYS-00132",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "reaction to a change E = mc2.",
+    "content": "Compu",
+    "specific_objectives": [
+      "reaction to a change E = mc2."
+    ],
+    "content_items": [
+      "Compu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "change",
+      "compu",
+      "reaction"
+    ],
+    "hash": "5386b89416",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.382050"
+  },
+  {
+    "id": "PHYS-00133",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "the play, explain how energy from fusion can only o",
+    "content": "ccur naturally in the sun.",
+    "specific_objectives": [
+      "the play, explain how energy from fusion can only o"
+    ],
+    "content_items": [
+      "ccur naturally in the sun."
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 56,
+    "keywords": [
+      "can",
+      "ccur",
+      "energy",
+      "explain",
+      "fusion",
+      "how",
+      "naturally",
+      "only",
+      "play",
+      "sun"
+    ],
+    "hash": "c0849852e4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.382186"
+  },
+  {
+    "id": "PHYS-00134",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "working on nuclear energy. What are the challenge",
+    "content": "s and opportunities for it in the reg",
+    "specific_objectives": [
+      "working on nuclear energy. What are the challenge"
+    ],
+    "content_items": [
+      "opportunities for it in the reg"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 56,
+    "keywords": [
+      "are",
+      "challenge",
+      "energy",
+      "nuclear",
+      "opportunities",
+      "reg",
+      "what",
+      "working"
+    ],
+    "hash": "3f867f4672",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.382338"
+  },
+  {
+    "id": "PHYS-00135",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "School-Based Assessme",
+    "content": "nt (SBA) is",
+    "specific_objectives": [
+      "School-Based Assessme"
+    ],
+    "content_items": [
+      "nt (SBA) is"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assessme",
+      "based",
+      "school"
+    ],
+    "hash": "d362db8322",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674075"
+  },
+  {
+    "id": "PHYS-00136",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "syllabus. It is intended",
+    "content": "to assist st",
+    "specific_objectives": [
+      "syllabus. It is intended"
+    ],
+    "content_items": [
+      "to assist st"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assist",
+      "intended",
+      "syllabus"
+    ],
+    "hash": "a805f143dd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674155"
+  },
+  {
+    "id": "PHYS-00137",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "critical to the subject.",
+    "content": "The activit",
+    "specific_objectives": [
+      "critical to the subject."
+    ],
+    "content_items": [
+      "The activit"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "activit",
+      "critical",
+      "subject"
+    ],
+    "hash": "2c7cf84421",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674229"
+  },
+  {
+    "id": "PHYS-00138",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Practical Activities” and",
+    "content": "should for",
+    "specific_objectives": [
+      "Practical Activities”"
+    ],
+    "content_items": [
+      "should for"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "activities",
+      "practical",
+      "should"
+    ],
+    "hash": "29eb9f1b6f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674311"
+  },
+  {
+    "id": "PHYS-00139",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "objectives of the syllab",
+    "content": "us. Students",
+    "specific_objectives": [
+      "objectives of the syllab"
+    ],
+    "content_items": [
+      "us. Students"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "objectives",
+      "students",
+      "syllab"
+    ],
+    "hash": "1f4ba7da22",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674380"
+  },
+  {
+    "id": "PHYS-00140",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "During the course of s",
+    "content": "tudy of the",
+    "specific_objectives": [
+      "During the course of s"
+    ],
+    "content_items": [
+      "tudy of the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "course",
+      "during",
+      "tudy"
+    ],
+    "hash": "ce4f43370a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674446"
+  },
+  {
+    "id": "PHYS-00141",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "and demonstrate in un",
+    "content": "dertaking th",
+    "specific_objectives": [
+      "demonstrate in un"
+    ],
+    "content_items": [
+      "dertaking th"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 57,
+    "keywords": [
+      "demonstrate",
+      "dertaking"
+    ],
+    "hash": "d41ea1d161",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674509"
+  },
+  {
+    "id": "PHYS-00142",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "grades that are awarde",
+    "content": "d to studen",
+    "specific_objectives": [
+      "grades that are awarde"
+    ],
+    "content_items": [
+      "d to studen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "are",
+      "awarde",
+      "grades",
+      "studen"
+    ],
+    "hash": "9c3e784e6b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674566"
+  },
+  {
+    "id": "PHYS-00143",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "The guidelines provide",
+    "content": "d in this syll",
+    "specific_objectives": [
+      "The guidelines provide"
+    ],
+    "content_items": [
+      "d in this syll"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "guidelines",
+      "provide",
+      "syll"
+    ],
+    "hash": "920e7e6468",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674629"
+  },
+  {
+    "id": "PHYS-00144",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "and students in selecti",
+    "content": "ng assignme",
+    "specific_objectives": [
+      "students in selecti"
+    ],
+    "content_items": [
+      "ng assignme"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assignme",
+      "selecti",
+      "students"
+    ],
+    "hash": "24f1cb8cc1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674692"
+  },
+  {
+    "id": "PHYS-00145",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "also intended to assist",
+    "content": "teachers in",
+    "specific_objectives": [
+      "also intended to assist"
+    ],
+    "content_items": [
+      "teachers in"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "also",
+      "assist",
+      "intended",
+      "teachers"
+    ],
+    "hash": "7eb5327df1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674756"
+  },
+  {
+    "id": "PHYS-00146",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "component of the cour",
+    "content": "se. In orde",
+    "specific_objectives": [
+      "component of the cour"
+    ],
+    "content_items": [
+      "se. In orde"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "component",
+      "cour",
+      "orde"
+    ],
+    "hash": "ecb0c8064f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674819"
+  },
+  {
+    "id": "PHYS-00147",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "with the CXC standard",
+    "content": "s, the Cou",
+    "specific_objectives": [
+      "with the CXC standard"
+    ],
+    "content_items": [
+      "s, the Cou"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "cou",
+      "cxc",
+      "standard"
+    ],
+    "hash": "47b2adfac0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674881"
+  },
+  {
+    "id": "PHYS-00148",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "marked by each teache",
+    "content": "r.",
+    "specific_objectives": [
+      "marked by each teache"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "each",
+      "marked",
+      "teache"
+    ],
+    "hash": "56fd5635d2",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674920"
+  },
+  {
+    "id": "PHYS-00149",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "School-Based Assessme",
+    "content": "nt provides",
+    "specific_objectives": [
+      "School-Based Assessme"
+    ],
+    "content_items": [
+      "nt provides"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assessme",
+      "based",
+      "provides",
+      "school"
+    ],
+    "hash": "315d7e6197",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.674980"
+  },
+  {
+    "id": "PHYS-00150",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "needs of students. It",
+    "content": "facilitates f",
+    "specific_objectives": [
+      "needs of students. It"
+    ],
+    "content_items": [
+      "facilitates f"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "facilitates",
+      "needs",
+      "students"
+    ],
+    "hash": "e87269da3e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675039"
+  },
+  {
+    "id": "PHYS-00151",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "helps to build the self-",
+    "content": "confidence",
+    "specific_objectives": [
+      "helps to build the self-"
+    ],
+    "content_items": [
+      "confidence"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "build",
+      "confidence",
+      "helps",
+      "self"
+    ],
+    "hash": "d90b42fd5d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675097"
+  },
+  {
+    "id": "PHYS-00152",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Assessment further fac",
+    "content": "ilitates the d",
+    "specific_objectives": [
+      "Assessment further fac"
+    ],
+    "content_items": [
+      "ilitates the d"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assessment",
+      "fac",
+      "further",
+      "ilitates"
+    ],
+    "hash": "5e82bdf73c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675158"
+  },
+  {
+    "id": "PHYS-00153",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "more effectively in the",
+    "content": "ir chosen v",
+    "specific_objectives": [
+      "more effectively in the"
+    ],
+    "content_items": [
+      "ir chosen v"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "chosen",
+      "effectively",
+      "more"
+    ],
+    "hash": "526194becd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675215"
+  },
+  {
+    "id": "PHYS-00154",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "makes a significant and",
+    "content": "unique co",
+    "specific_objectives": [
+      "makes a significant"
+    ],
+    "content_items": [
+      "unique co"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "makes",
+      "significant",
+      "unique"
+    ],
+    "hash": "4a861fb195",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675273"
+  },
+  {
+    "id": "PHYS-00155",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "also provides an instru",
+    "content": "ment for tes",
+    "specific_objectives": [
+      "also provides an instru"
+    ],
+    "content_items": [
+      "ment for tes"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "also",
+      "instru",
+      "ment",
+      "provides",
+      "tes"
+    ],
+    "hash": "60434bde00",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675332"
+  },
+  {
+    "id": "PHYS-00156",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "SBA assessments shou",
+    "content": "ld be mad",
+    "specific_objectives": [
+      "SBA assessments shou"
+    ],
+    "content_items": [
+      "ld be mad"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "assessments",
+      "mad",
+      "sba",
+      "shou"
+    ],
+    "hash": "1785b100a9",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675404"
+  },
+  {
+    "id": "PHYS-00157",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "expected that the exer",
+    "content": "cises would",
+    "specific_objectives": [
+      "expected that the exer"
+    ],
+    "content_items": [
+      "cises would"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "cises",
+      "exer",
+      "expected",
+      "would"
+    ],
+    "hash": "05b3ccf4f0",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675463"
+  },
+  {
+    "id": "PHYS-00158",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "be made after candid",
+    "content": "ates have",
+    "specific_objectives": [
+      "be made after candid"
+    ],
+    "content_items": [
+      "ates have"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "after",
+      "ates",
+      "candid",
+      "have",
+      "made"
+    ],
+    "hash": "e2e959f07c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675522"
+  },
+  {
+    "id": "PHYS-00159",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "them. Sixteen practic",
+    "content": "als over the",
+    "specific_objectives": [
+      "them. Sixteen practic"
+    ],
+    "content_items": [
+      "als over the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "als",
+      "over",
+      "practic",
+      "sixteen",
+      "them"
+    ],
+    "hash": "e0c680d991",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675581"
+  },
+  {
+    "id": "PHYS-00160",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "candidates to develop",
+    "content": "their skills a",
+    "specific_objectives": [
+      "candidates to develop"
+    ],
+    "content_items": [
+      "their skills a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "candidates",
+      "develop",
+      "skills"
+    ],
+    "hash": "add09579cb",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675640"
+  },
+  {
+    "id": "PHYS-00161",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "include all of the follow",
+    "content": "ing:",
+    "specific_objectives": [
+      "include all of the follow"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "all",
+      "follow",
+      "include",
+      "ing"
+    ],
+    "hash": "497cda2bdd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675682"
+  },
+  {
+    "id": "PHYS-00162",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Each skill must be ass",
+    "content": "essed at le",
+    "specific_objectives": [
+      "Each skill must be ass"
+    ],
+    "content_items": [
+      "essed at le"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "ass",
+      "each",
+      "essed",
+      "must",
+      "skill"
+    ],
+    "hash": "c81a9368ed",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675805"
+  },
+  {
+    "id": "PHYS-00163",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "encouraged to do corr",
+    "content": "ections so t",
+    "specific_objectives": [
+      "encouraged to do corr"
+    ],
+    "content_items": [
+      "ections so t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 57,
+    "keywords": [
+      "corr",
+      "ections",
+      "encouraged"
+    ],
+    "hash": "72413d333f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:40.675865"
+  },
+  {
+    "id": "PHYS-00164",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Observation/ Recording/ Reporting",
+    "content": "1",
+    "specific_objectives": [
+      "Observation/ Recording/ Reporting"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 59,
+    "keywords": [
+      "observation",
+      "recording",
+      "reporting"
+    ],
+    "hash": "2ad8e7f873",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.099190"
+  },
+  {
+    "id": "PHYS-00165",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Planning and Designing",
+    "content": "2",
+    "specific_objectives": [
+      "Planning",
+      "Designing"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 59,
+    "keywords": [
+      "designing",
+      "planning"
+    ],
+    "hash": "d46cc7350a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.099257"
+  },
+  {
+    "id": "PHYS-00166",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Materials and Apparatus",
+    "content": "1 m",
+    "specific_objectives": [
+      "Materials",
+      "Apparatus"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "apparatus",
+      "materials"
+    ],
+    "hash": "8cfa70ead1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.206352"
+  },
+  {
+    "id": "PHYS-00167",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Controlled variables",
+    "content": "1 m",
+    "specific_objectives": [
+      "Controlled variables"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "controlled",
+      "variables"
+    ],
+    "hash": "25df6d5a99",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.206417"
+  },
+  {
+    "id": "PHYS-00168",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "Assumptions, Precautions/ Limitations",
+    "content": "1 m",
+    "specific_objectives": [
+      "Assumptions, Precautions/ Limitations"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 60,
+    "keywords": [
+      "assumptions",
+      "limitations",
+      "precautions"
+    ],
+    "hash": "78cec22cda",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.206476"
+  },
+  {
+    "id": "PHYS-00169",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "- Related to hypothesis",
+    "content": "1",
+    "specific_objectives": [
+      "Related to hypothesis"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "hypothesis",
+      "related"
+    ],
+    "hash": "711aeefb97",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393716"
+  },
+  {
+    "id": "PHYS-00170",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "MATERIALS AND APPARATU",
+    "content": "S",
+    "specific_objectives": [
+      "MATERIALS AND APPARATU"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "apparatu",
+      "materials"
+    ],
+    "hash": "59a0e9cd1b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393753"
+  },
+  {
+    "id": "PHYS-00171",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "- Appropriate materials and",
+    "content": "apparatus",
+    "specific_objectives": [
+      "Appropriate materials"
+    ],
+    "content_items": [
+      "apparatus"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "apparatus",
+      "appropriate",
+      "materials"
+    ],
+    "hash": "5ffbb7708f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393782"
+  },
+  {
+    "id": "PHYS-00172",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "- At least one manipulated o",
+    "content": "r responding variable",
+    "specific_objectives": [
+      "At least one manipulated o"
+    ],
+    "content_items": [
+      "r responding variable"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "least",
+      "manipulated",
+      "one",
+      "responding",
+      "variable"
+    ],
+    "hash": "fad73816ea",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393820"
+  },
+  {
+    "id": "PHYS-00173",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "-Controlled variable stated",
+    "content": "1",
+    "specific_objectives": [
+      "-Controlled variable stated"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "controlled",
+      "stated",
+      "variable"
+    ],
+    "hash": "2636888172",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393847"
+  },
+  {
+    "id": "PHYS-00174",
+    "section": "SECTION E: THE PHYSICS OF THE ATOM",
+    "subsection": "Unknown",
+    "objective": "ASSUMPTIONS/PRECAUTIO",
+    "content": "NS/POSSIBLE SOURCES OF",
+    "specific_objectives": [
+      "ASSUMPTIONS/PRECAUTIO"
+    ],
+    "content_items": [
+      "NS/POSSIBLE SOURCES OF"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 61,
+    "keywords": [
+      "assumptions",
+      "possible",
+      "precautio",
+      "sources"
+    ],
+    "hash": "0d464cf9eb",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:41.393886"
+  },
+  {
+    "id": "PHYS-00175",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(ii) Makes accurate recordings/obser",
+    "content": "vations.",
+    "specific_objectives": [
+      "(ii) Makes accurate recordings/obser"
+    ],
+    "content_items": [
+      "vations."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "accurate",
+      "makes",
+      "obser",
+      "recordings",
+      "vations"
+    ],
+    "hash": "797c969e82",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669224"
+  },
+  {
+    "id": "PHYS-00176",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iii) Uses appropriate format of prese",
+    "content": "ntation.",
+    "specific_objectives": [
+      "(iii) Uses appropriate format of prese"
+    ],
+    "content_items": [
+      "ntation."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "appropriate",
+      "format",
+      "ntation",
+      "prese",
+      "uses"
+    ],
+    "hash": "0e196b262b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669303"
+  },
+  {
+    "id": "PHYS-00177",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iv) Uses acceptable language/expres",
+    "content": "sion.",
+    "specific_objectives": [
+      "(iv) Uses acceptable language/expres"
+    ],
+    "content_items": [
+      "sion."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "acceptable",
+      "expres",
+      "language",
+      "sion",
+      "uses"
+    ],
+    "hash": "f40719d1dc",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669360"
+  },
+  {
+    "id": "PHYS-00178",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(v) Uses appropriate tables/diagrams",
+    "content": "/graphs.",
+    "specific_objectives": [
+      "(v) Uses appropriate tables/diagrams"
+    ],
+    "content_items": [
+      "/graphs."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "appropriate",
+      "diagrams",
+      "graphs",
+      "tables",
+      "uses"
+    ],
+    "hash": "bc51a09efa",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669414"
+  },
+  {
+    "id": "PHYS-00179",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(ii) Uses basic laboratory equipment",
+    "content": "correctly.",
+    "specific_objectives": [
+      "(ii) Uses basic laboratory equipment"
+    ],
+    "content_items": [
+      "correctly."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "basic",
+      "correctly",
+      "equipment",
+      "laboratory",
+      "uses"
+    ],
+    "hash": "29ce51a5ea",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669481"
+  },
+  {
+    "id": "PHYS-00180",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iii) Sets up electrical circuits correctly",
+    "content": ".",
+    "specific_objectives": [
+      "(iii) Sets up electrical circuits correctly"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "circuits",
+      "correctly",
+      "electrical",
+      "sets"
+    ],
+    "hash": "6ae76d24d7",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669535"
+  },
+  {
+    "id": "PHYS-00181",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(v) Prepares material for observation",
+    "content": "or investi",
+    "specific_objectives": [
+      "(v) Prepares material for observation"
+    ],
+    "content_items": [
+      "or investi"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "investi",
+      "material",
+      "observation",
+      "prepares"
+    ],
+    "hash": "0621ec2052",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669603"
+  },
+  {
+    "id": "PHYS-00182",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(i) Suggests appropriate hypotheses",
+    "content": ".",
+    "specific_objectives": [
+      "(i) Suggests appropriate hypotheses"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "appropriate",
+      "hypotheses",
+      "suggests"
+    ],
+    "hash": "872e29e216",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669660"
+  },
+  {
+    "id": "PHYS-00183",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(ii) Suggests suitable and feasible me",
+    "content": "thods for",
+    "specific_objectives": [
+      "(ii) Suggests suitable",
+      "feasible me"
+    ],
+    "content_items": [
+      "thods for"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "feasible",
+      "suggests",
+      "suitable",
+      "thods"
+    ],
+    "hash": "92816ef371",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669724"
+  },
+  {
+    "id": "PHYS-00184",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iii) Identifies and controls variables a",
+    "content": "ppropriat",
+    "specific_objectives": [
+      "(iii) Identifies",
+      "controls variables a"
+    ],
+    "content_items": [
+      "ppropriat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "controls",
+      "identifies",
+      "ppropriat",
+      "variables"
+    ],
+    "hash": "6c49419a39",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669783"
+  },
+  {
+    "id": "PHYS-00185",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iv) Takes account of possible sources",
+    "content": "of error o",
+    "specific_objectives": [
+      "(iv) Takes account of possible sources"
+    ],
+    "content_items": [
+      "of error o"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "account",
+      "error",
+      "possible",
+      "sources",
+      "takes"
+    ],
+    "hash": "971e3734a7",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669841"
+  },
+  {
+    "id": "PHYS-00186",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(i) Makes accurate calculations and l",
+    "content": "ogical infe",
+    "specific_objectives": [
+      "(i) Makes accurate calculations"
+    ],
+    "content_items": [
+      "ogical infe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "accurate",
+      "calculations",
+      "infe",
+      "makes",
+      "ogical"
+    ],
+    "hash": "8215f72023",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669909"
+  },
+  {
+    "id": "PHYS-00187",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iii) Evaluates data (including sources",
+    "content": "of error).",
+    "specific_objectives": [
+      "(iii) Evaluates data (including sources"
+    ],
+    "content_items": [
+      "of error)."
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 73,
+    "keywords": [
+      "data",
+      "evaluates"
+    ],
+    "hash": "90c4e5179e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.669964"
+  },
+  {
+    "id": "PHYS-00188",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "(iv) Identifies relationships and patter",
+    "content": "ns within",
+    "specific_objectives": [
+      "(iv) Identifies relationships",
+      "patter"
+    ],
+    "content_items": [
+      "ns within"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "identifies",
+      "patter",
+      "relationships",
+      "within"
+    ],
+    "hash": "a70deba10a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:43.670021"
+  },
+  {
+    "id": "PHYS-00189",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "ELECTRIC CURRENT LENGTH MASS TEMPERATURE: (KELVIN) (CELSIUS) TIME VOLUME AREA ANGLE DENSITY RELATIVE DENSITY FORCE MOMENT OF FORCE OR TORQUE DISPLACEMENT, DISTANCE SPEED, VELOCITY ACCELERATION MOMENTUM ENERGY WORK POTENTIAL ENERGY KINETIC ENERGY THERMAL ENERGY POWER PRESSURE SPECIFIC HEAT CAPACITY HEAT CAPACITY",
+    "content": " l m T  t V A    r F T s, x v a P E, W W E P E K E H P P c C",
+    "specific_objectives": [
+      "ELECTRIC CURRENT LENGTH MASS TEMPERATURE: (KELVIN) (CELSIUS) TIME VOLUME AREA ANGLE DENSITY RELATIVE DENSITY FORCE MOMENT OF FORCE OR TORQUE DISPLACEMENT, DISTANCE SPEED, VELOCITY ACCELERATION MOMENTUM ENERGY WORK POTENTIAL ENERGY KINETIC ENERGY THERMAL ENERGY POWER PRESSURE SPECIFIC HEAT CAPACITY HEAT CAPACITY"
+    ],
+    "content_items": [
+      " l m T  t V A    r F T s, x v a P E, W W E P E K E H P P c C"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 79,
+    "keywords": [
+      "acceleration",
+      "angle",
+      "area",
+      "capacity",
+      "current",
+      "density",
+      "displacement",
+      "distance",
+      "electric",
+      "energy",
+      "force",
+      "heat"
+    ],
+    "hash": "7a3790ffba",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.087087"
+  },
+  {
+    "id": "PHYS-00190",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "JUNCTION OF CONDUCTORS",
+    "content": "ELECTRIC MOTOR",
+    "specific_objectives": [
+      "JUNCTION OF CONDUCTORS"
+    ],
+    "content_items": [
+      "ELECTRIC MOTOR"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 80,
+    "keywords": [
+      "conductors",
+      "electric",
+      "junction",
+      "motor"
+    ],
+    "hash": "a6498c9e81",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.297679"
+  },
+  {
+    "id": "PHYS-00191",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "ONE WIRE CROSSING ANOTHER NO ELECTRICAL CONNECTION",
+    "content": "OR",
+    "specific_objectives": [
+      "ONE WIRE CROSSING ANOTHER NO ELECTRICAL CONNECTION"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 80,
+    "keywords": [
+      "another",
+      "connection",
+      "crossing",
+      "electrical",
+      "one",
+      "wire"
+    ],
+    "hash": "9316586e6a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.297745"
+  },
+  {
+    "id": "PHYS-00192",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "FILAMENT LAMP OR BULB",
+    "content": "OR",
+    "specific_objectives": [
+      "FILAMENT LAMP OR BULB"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 80,
+    "keywords": [
+      "bulb",
+      "filament",
+      "lamp"
+    ],
+    "hash": "7bce00cfcf",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.297787"
+  },
+  {
+    "id": "PHYS-00193",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "similar and differen",
+    "content": "t",
+    "specific_objectives": [
+      "similar",
+      "differen"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 82,
+    "keywords": [
+      "differen",
+      "similar"
+    ],
+    "hash": "95833939d2",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.612459"
+  },
+  {
+    "id": "PHYS-00194",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "Avison, J., Henry, D. and Neeranjan, D .",
+    "content": "Physics f",
+    "specific_objectives": [
+      "Avison, J., Henry, D.",
+      "Neeranjan, D ."
+    ],
+    "content_items": [
+      "Physics f"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "avison",
+      "henry",
+      "neeranjan",
+      "physics"
+    ],
+    "hash": "f7f9f90073",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.896965"
+  },
+  {
+    "id": "PHYS-00195",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "Farley, A. and Trotz, C.",
+    "content": "CXC Phy",
+    "specific_objectives": [
+      "Farley, A.",
+      "Trotz, C."
+    ],
+    "content_items": [
+      "CXC Phy"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "cxc",
+      "farley",
+      "phy",
+      "trotz"
+    ],
+    "hash": "b092a99d1d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.897044"
+  },
+  {
+    "id": "PHYS-00196",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "Jackson, B. and Whiteley, P.",
+    "content": "Physics f",
+    "specific_objectives": [
+      "Jackson, B.",
+      "Whiteley, P."
+    ],
+    "content_items": [
+      "Physics f"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "jackson",
+      "physics",
+      "whiteley"
+    ],
+    "hash": "48d72d4cbb",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:45.897106"
+  },
+  {
+    "id": "PHYS-00197",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "of p a r t i c u l a r s t r u c t u r e s , r e l",
+    "content": "a t i o nsh ips",
+    "specific_objectives": [
+      "of p a r t i c u l a r s t r u c t u r e s , r e l"
+    ],
+    "content_items": [
+      "a t i o nsh ips"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 85,
+    "keywords": [
+      "ips",
+      "nsh"
+    ],
+    "hash": "af8dcbf98c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.129895"
+  },
+  {
+    "id": "PHYS-00198",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "graph, histogram, pie",
+    "content": "chart or",
+    "specific_objectives": [
+      "graph, histogram, pie"
+    ],
+    "content_items": [
+      "chart or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 85,
+    "keywords": [
+      "chart",
+      "graph",
+      "histogram",
+      "pie"
+    ],
+    "hash": "a2ec078d14",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.130029"
+  },
+  {
+    "id": "PHYS-00199",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "representation using d",
+    "content": "ata or",
+    "specific_objectives": [
+      "representation using d"
+    ],
+    "content_items": [
+      "ata or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 85,
+    "keywords": [
+      "ata",
+      "representation",
+      "using"
+    ],
+    "hash": "4001e3304c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.130062"
+  },
+  {
+    "id": "PHYS-00200",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "investigations, build (for",
+    "content": "example, a",
+    "specific_objectives": [
+      "investigations, build (for"
+    ],
+    "content_items": [
+      "example, a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 85,
+    "keywords": [
+      "build",
+      "example",
+      "investigations"
+    ],
+    "hash": "0a89f71897",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.130093"
+  },
+  {
+    "id": "PHYS-00201",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "more pieces of informatio",
+    "content": "n; use data",
+    "specific_objectives": [
+      "more pieces of informatio"
+    ],
+    "content_items": [
+      "use data"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 85,
+    "keywords": [
+      "data",
+      "informatio",
+      "more",
+      "pieces",
+      "use"
+    ],
+    "hash": "7731b4d8c4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.130139"
+  },
+  {
+    "id": "PHYS-00202",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "by a set of logical steps some",
+    "content": "relationship,",
+    "specific_objectives": [
+      "by a set of logical steps some"
+    ],
+    "content_items": [
+      "relationship,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "logical",
+      "relationship",
+      "set",
+      "some",
+      "steps"
+    ],
+    "hash": "12010c5336",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313301"
+  },
+  {
+    "id": "PHYS-00203",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "the appearance or arrange",
+    "content": "ment of a",
+    "specific_objectives": [
+      "the appearance or arrange"
+    ],
+    "content_items": [
+      "ment of a"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "appearance",
+      "arrange",
+      "ment"
+    ],
+    "hash": "eed3e488c3",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313364"
+  },
+  {
+    "id": "PHYS-00204",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "specific structure or the seq",
+    "content": "uence of a",
+    "specific_objectives": [
+      "specific structure or the seq"
+    ],
+    "content_items": [
+      "uence of a"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "seq",
+      "specific",
+      "structure",
+      "uence"
+    ],
+    "hash": "563932bb02",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313400"
+  },
+  {
+    "id": "PHYS-00205",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "detail where necessary",
+    "content": "; KC}",
+    "specific_objectives": [
+      "detail where necessary"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "detail",
+      "necessary",
+      "where"
+    ],
+    "hash": "73bbdfbb90",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313460"
+  },
+  {
+    "id": "PHYS-00206",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "clearly stated the way",
+    "content": "in which data",
+    "specific_objectives": [
+      "clearly stated the way"
+    ],
+    "content_items": [
+      "in which data"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "clearly",
+      "data",
+      "stated",
+      "way",
+      "which"
+    ],
+    "hash": "5bff42ef59",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313516"
+  },
+  {
+    "id": "PHYS-00207",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "will be analyzed and pr",
+    "content": "esented; XS}",
+    "specific_objectives": [
+      "will be analyzed"
+    ],
+    "content_items": [
+      "esented"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "analyzed",
+      "esented",
+      "will"
+    ],
+    "hash": "173ddb4897",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313545"
+  },
+  {
+    "id": "PHYS-00208",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "argument with supporting rea",
+    "content": "sons",
+    "specific_objectives": [
+      "argument with supporting rea"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "argument",
+      "rea",
+      "sons",
+      "supporting"
+    ],
+    "hash": "49a853b600",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313590"
+  },
+  {
+    "id": "PHYS-00209",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "points both for an against;",
+    "content": "explain the",
+    "specific_objectives": [
+      "points both for an against"
+    ],
+    "content_items": [
+      "explain the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "against",
+      "both",
+      "explain",
+      "points"
+    ],
+    "hash": "83ac754664",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313648"
+  },
+  {
+    "id": "PHYS-00210",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "which shows accurate",
+    "content": "relationship",
+    "specific_objectives": [
+      "which shows accurate"
+    ],
+    "content_items": [
+      "relationship"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "accurate",
+      "relationship",
+      "shows",
+      "which"
+    ],
+    "hash": "9b174ead27",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313691"
+  },
+  {
+    "id": "PHYS-00211",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "based on given criteria",
+    "content": "reasons for a particu",
+    "specific_objectives": [
+      "based on given criteria"
+    ],
+    "content_items": [
+      "reasons for a particu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "based",
+      "criteria",
+      "given",
+      "particu",
+      "reasons"
+    ],
+    "hash": "e4e0ece05f",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313750"
+  },
+  {
+    "id": "PHYS-00212",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "view held; usually bot",
+    "content": "h sides of an",
+    "specific_objectives": [
+      "view held",
+      "usually bot"
+    ],
+    "content_items": [
+      "h sides of an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 86,
+    "keywords": [
+      "bot",
+      "held",
+      "sides",
+      "usually",
+      "view"
+    ],
+    "hash": "c5e53ef337",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.313787"
+  },
+  {
+    "id": "PHYS-00213",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "examples or diagrams, sketche",
+    "content": "s",
+    "specific_objectives": [
+      "examples or diagrams, sketche"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "diagrams",
+      "examples",
+      "sketche"
+    ],
+    "hash": "72d8baed10",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484052"
+  },
+  {
+    "id": "PHYS-00214",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "observe, record data and d",
+    "content": "raw logical",
+    "specific_objectives": [
+      "observe, record data"
+    ],
+    "content_items": [
+      "raw logical"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "data",
+      "logical",
+      "observe",
+      "raw",
+      "record"
+    ],
+    "hash": "df94816dcf",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484139"
+  },
+  {
+    "id": "PHYS-00215",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "reaction or change taking",
+    "content": "place; to",
+    "specific_objectives": [
+      "reaction or change taking"
+    ],
+    "content_items": [
+      "place"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "change",
+      "place",
+      "reaction",
+      "taking"
+    ],
+    "hash": "fc5d5eaa96",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484291"
+  },
+  {
+    "id": "PHYS-00216",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "examine and note scientifically",
+    "content": "would normally exclu",
+    "specific_objectives": [
+      "examine",
+      "note scientifically"
+    ],
+    "content_items": [
+      "would normally exclu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "examine",
+      "exclu",
+      "normally",
+      "note",
+      "scientifically",
+      "would"
+    ],
+    "hash": "b3716f8f9a",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484357"
+  },
+  {
+    "id": "PHYS-00217",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "likely conclusion or suggesti",
+    "content": "on possible",
+    "specific_objectives": [
+      "likely conclusion or suggesti"
+    ],
+    "content_items": [
+      "on possible"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "conclusion",
+      "likely",
+      "possible",
+      "suggesti"
+    ],
+    "hash": "ba03996694",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484434"
+  },
+  {
+    "id": "PHYS-00218",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "range of observations made d",
+    "content": "uring a given",
+    "specific_objectives": [
+      "range of observations made d"
+    ],
+    "content_items": [
+      "uring a given"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "given",
+      "made",
+      "observations",
+      "range",
+      "uring"
+    ],
+    "hash": "247f64fbca",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.484512"
+  },
+  {
+    "id": "PHYS-00219",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "one set of facts or data",
+    "content": "depend o",
+    "specific_objectives": [
+      "one set of facts or data"
+    ],
+    "content_items": [
+      "depend o"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "data",
+      "depend",
+      "facts",
+      "one",
+      "set"
+    ],
+    "hash": "420b5f2861",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602432"
+  },
+  {
+    "id": "PHYS-00220",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "or are determined by the",
+    "content": "m",
+    "specific_objectives": [
+      "or are determined by the"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "are",
+      "determined"
+    ],
+    "hash": "fbcde245c1",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602499"
+  },
+  {
+    "id": "PHYS-00221",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "relevant proportions and",
+    "content": "any impo",
+    "specific_objectives": [
+      "relevant proportions"
+    ],
+    "content_items": [
+      "any impo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "any",
+      "impo",
+      "proportions",
+      "relevant"
+    ],
+    "hash": "659d2b1c81",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602570"
+  },
+  {
+    "id": "PHYS-00222",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "terms omitting explanati",
+    "content": "ons",
+    "specific_objectives": [
+      "terms omitting explanati"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "explanati",
+      "omitting",
+      "ons",
+      "terms"
+    ],
+    "hash": "0a1d2bda16",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602638"
+  },
+  {
+    "id": "PHYS-00223",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "information provided",
+    "content": "or",
+    "specific_objectives": [
+      "information provided"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "information",
+      "provided"
+    ],
+    "hash": "c122a55d58",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602709"
+  },
+  {
+    "id": "PHYS-00224",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "knowledge. (... an hyp",
+    "content": "othesis; p",
+    "specific_objectives": [
+      "knowledge. (... an hyp"
+    ],
+    "content_items": [
+      "othesis"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "hyp",
+      "knowledge",
+      "othesis"
+    ],
+    "hash": "775803ad70",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602770"
+  },
+  {
+    "id": "PHYS-00225",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "generalisation which",
+    "content": "offers",
+    "specific_objectives": [
+      "generalisation which"
+    ],
+    "content_items": [
+      "offers"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "generalisation",
+      "offers",
+      "which"
+    ],
+    "hash": "e97d0bddd8",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:46.602819"
+  },
+  {
+    "id": "PHYS-00226",
+    "section": "unit for: pressure",
+    "subsection": "Unknown",
+    "objective": "N then the transfo P,",
+    "content": "rmer is a",
+    "specific_objectives": [
+      "N then the transfo P,"
+    ],
+    "content_items": [
+      "rmer is a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 98,
+    "keywords": [
+      "rmer",
+      "then",
+      "transfo"
+    ],
+    "hash": "df2414a688",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:47.880168"
+  },
+  {
+    "id": "PHYS-00227",
+    "section": "unit for: pressure",
+    "subsection": "Unknown",
+    "objective": "constant in a parall",
+    "content": "el circuit?",
+    "specific_objectives": [
+      "constant in a parall"
+    ],
+    "content_items": [
+      "el circuit?"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 98,
+    "keywords": [
+      "circuit",
+      "constant",
+      "parall"
+    ],
+    "hash": "e33ebabde9",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:47.880316"
+  },
+  {
+    "id": "PHYS-00228",
+    "section": "unit for: pressure",
+    "subsection": "Unknown",
+    "objective": "in the periodic tabl",
+    "content": "e the first element",
+    "specific_objectives": [
+      "in the periodic tabl"
+    ],
+    "content_items": [
+      "e the first element"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 98,
+    "keywords": [
+      "element",
+      "first",
+      "periodic",
+      "tabl"
+    ],
+    "hash": "440f655c98",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:47.880637"
+  },
+  {
+    "id": "PHYS-00229",
+    "section": "unit for: resistance",
+    "subsection": "Unknown",
+    "objective": "_________________________________________________________________",
+    "content": "_____",
+    "specific_objectives": [
+      "_________________________________________________________________"
+    ],
+    "content_items": [
+      "_____"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [],
+    "hash": "942afc19ff",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:48.810658"
+  },
+  {
+    "id": "PHYS-00230",
+    "section": "unit for: resistance",
+    "subsection": "Unknown",
+    "objective": "the three resistors in 2(a) are each 2Ω, what is the total effective resistance",
+    "content": "in",
+    "specific_objectives": [
+      "the three resistors in 2(a) are each 2Ω, what is the total effective resistance"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [
+      "are",
+      "each",
+      "effective",
+      "resistance",
+      "resistors",
+      "three",
+      "total",
+      "what"
+    ],
+    "hash": "02be792053",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:48.810801"
+  },
+  {
+    "id": "PHYS-00231",
+    "section": "unit for: resistance",
+    "subsection": "Unknown",
+    "objective": "The voltage supplied by the two-cell battery is 3V. What is the reading o",
+    "content": "n the",
+    "specific_objectives": [
+      "The voltage supplied by the two-cell battery is 3V. What is the reading o"
+    ],
+    "content_items": [
+      "n the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [
+      "battery",
+      "cell",
+      "reading",
+      "supplied",
+      "two",
+      "voltage",
+      "what"
+    ],
+    "hash": "c45056148b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:48.810977"
+  },
+  {
+    "id": "PHYS-00232",
+    "section": "unit for: resistance",
+    "subsection": "Unknown",
+    "objective": "_______________________________________________________________",
+    "content": "_____",
+    "specific_objectives": [
+      "_______________________________________________________________"
+    ],
+    "content_items": [
+      "_____"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [],
+    "hash": "ade686963e",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:48.811060"
+  },
+  {
+    "id": "PHYS-00233",
+    "section": "unit for: resistance",
+    "subsection": "Unknown",
+    "objective": "If the ammeter is replaced by one which has a resistance of 3 Ω, calculat",
+    "content": "e the",
+    "specific_objectives": [
+      "If the ammeter is replaced by one which has a resistance of 3 Ω, calculat"
+    ],
+    "content_items": [
+      "e the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [
+      "ammeter",
+      "calculat",
+      "has",
+      "one",
+      "replaced",
+      "resistance",
+      "which"
+    ],
+    "hash": "bccdae4d95",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:48.811262"
+  },
+  {
+    "id": "PHYS-00234",
+    "section": "SECTION B: Attempt ALL questions\nYou MUST write your answers in the space provided after each question",
+    "subsection": "Unknown",
+    "objective": "1 (a) (b) (c) (d) (e)",
+    "content": "L-Label axes ( 1 ) A-correct Axes Length on y-axis and load on x-axis (1) S-scales (1) P-Plots 6-5 correct -3 4-3 correct -2 2-1 correct -1 Best fit line (1) Large ∆ (1) (1) Correct read offs = = (1) gradient formula = ( 1 ) Answer = 0.55 ± 0.05 mmN-1 ( 1 ) (1) Spring’s constant = = 1.81 Nmm-1 (1) Spring’s length = 16.3 mm (1) Original length = 16.3 mm New Length of spring = Original length + Extension (1) = 16.3 mm + 9 mm (1) = 25.3 mm (1)",
+    "specific_objectives": [
+      "(a) (b) (c) (d) (e)"
+    ],
+    "content_items": [
+      "L-Label axes ( 1 ) A-correct Axes Length on y-axis",
+      "load on x-axis (1) S-scales (1) P-Plots 6-5 correct -3 4-3 correct -2 2-1 correct -1 Best fit line (1) Large ∆ (1) (1) Correct read offs = = (1) gradient formula = ( 1 ) Answer = 0.55 ± 0.05 mmN-1 ( 1 ) (1) Spring’s constant = = 1.81 Nmm-1 (1) Spring’s length = 16.3 mm (1) Original length = 16.3 mm New Length of spring = Original length + Extension (1) = 16.3 mm + 9 mm (1) = 25.3 mm (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 118,
+    "keywords": [
+      "answer",
+      "axes",
+      "axis",
+      "best",
+      "constant",
+      "correct",
+      "extension",
+      "fit",
+      "formula",
+      "gradient",
+      "label",
+      "large"
+    ],
+    "hash": "6a764f23a4",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:49.888055"
+  },
+  {
+    "id": "PHYS-00235",
+    "section": "unit of: resistance is the Ohm",
+    "subsection": "Unknown",
+    "objective": "2a. b (i) (ii) (c) (i) (ii) (iii)",
+    "content": "(1) Resistance = V/I. (1) The unit of resistance is the Ohm[Ω]. It must offer no resistance to (1) current flow - the circuit must function as if the ammeter is not in (1) the circuit. 1/R = 1/R + 1/R + 1/R (1) T 1 2 3 1/R = ½ + ½ + ½ T 1/R = 3/2 T R = 2/3Ω or 0.67 Ω (1) T (1) V = IR I = V/R = (1) (1) R = 3Ω + 0.67Ω = 3.67Ω T (1) I = 3V/3.67Ω (1) = 0.82A (1)",
+    "specific_objectives": [
+      "2a. b (i) (ii) (c) (i) (ii) (iii)"
+    ],
+    "content_items": [
+      "(1) Resistance = V/I. (1) The unit of resistance is the Ohm[Ω]. It must offer no resistance to (1) current flow - the circuit must function as if the ammeter is not in (1) the circuit. 1/R = 1/R + 1/R + 1/R (1) T 1 2 3 1/R = ½ + ½ + ½ T 1/R = 3/2 T R = 2/3Ω or 0.67 Ω (1) T (1) V = IR I = V/R = (1) (1) R = 3Ω + 0.67Ω = 3.67Ω T (1) I = 3V/3.67Ω (1) = 0.82A (1)"
+    ],
+    "skills": [
+      "AS",
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 120,
+    "keywords": [
+      "ammeter",
+      "circuit",
+      "current",
+      "flow",
+      "function",
+      "must",
+      "not",
+      "offer",
+      "ohm",
+      "resistance",
+      "unit"
+    ],
+    "hash": "e0eb05af31",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.143273"
+  },
+  {
+    "id": "PHYS-00236",
+    "section": "unit of: resistance is the Ohm",
+    "subsection": "Unknown",
+    "objective": "(a) (b) (c) (i) (ii) (iii) (d) (i) (ii) (iii) (e)",
+    "content": "For propagation of transverse waves, the displacement of the medium is perpendicular to the direction of motion while for propagation of longitudinal waves, the displacement of the medium is parallel to the propagation of the wave. Examples: transverse wave - electromagnetic / water waves Longitudinal wave - sound waves Wavelength: The distance between successive crests or troughs of a wave Frequency: Number of waves per unit time Amplitude: This is the maximum displacement of the wave displacement (cm) 2 4 6 8 10 12 distance(cm) 1 mark for general sinusoidal shape 1 mark for crossing at 3 cm and ending on 6 cm Frequency = Number of waves / time = 1 / 4 f = 0.25 /seconds (1) (1) (1) marks for equation, substitution, correct answer Amplitude of the wave = 4 cm (1) Example in medical testing: ultrasound in prenatal care (1) Example in industry: testing of materials for defects (1)",
+    "specific_objectives": [
+      "(a) (b) (c) (i) (ii) (iii) (d) (i) (ii) (iii) (e)"
+    ],
+    "content_items": [
+      "For propagation of transverse waves, the displacement of the medium is perpendicular to the direction of motion while for propagation of longitudinal waves, the displacement of the medium is parallel to the propagation of the wave. Examples: transverse wave - electromagnetic / water waves Longitudinal wave - sound waves Wavelength: The distance between successive crests or troughs of a wave Frequency: Number of waves per unit time Amplitude: This is the maximum displacement of the wave displacement (cm) 2 4 6 8 10 12 distance(cm) 1 mark for general sinusoidal shape 1 mark for crossing at 3 cm",
+      "ending on 6 cm Frequency = Number of waves / time = 1 / 4 f = 0.25 /seconds (1) (1) (1) marks for equation, substitution, correct answer Amplitude of the wave = 4 cm (1) Example in medical testing: ultrasound in prenatal care (1) Example in industry: testing of materials for defects (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 121,
+    "keywords": [
+      "amplitude",
+      "answer",
+      "between",
+      "care",
+      "correct",
+      "crests",
+      "crossing",
+      "defects",
+      "direction",
+      "displacement",
+      "distance",
+      "electromagnetic"
+    ],
+    "hash": "4fe2f46e52",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.259932"
+  },
+  {
+    "id": "PHYS-00237",
+    "section": "unit of: resistance is the Ohm",
+    "subsection": "Unknown",
+    "objective": "(b) (i) (ii) (iii) (c)",
+    "content": "1 mark for stating: L, M and N are inputs 1 mark for stating: A is an AND gate 1 mark for stating: B is an AND gate 1 mark for stating: A is an OR gate 1 mark for correctly completing the outputs of X using gates the student suggested in (b) (ii) 1 mark for correctly completing the outputs of Y using gates the student suggested in (b) (ii) 1 mark for correctly completing the outputs of Z using gates the student suggested in (b) (ii) THE TRUTH TABLE FOR THE COMBINATION OF THE LOGIC GATES IN b(ii) IS SHOWN BELOW. Input Output L M N X Y Z 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 1 0 1 1 1 0 0 0 0 0 1 0 1 0 0 0 1 1 0 1 0 1 1 1 1 1 1 1 2 marks for stating two or more points from the list below: 1 mark for stating one point from the list below:  Lap tops have become lighter.  Lap tops have become faster.  Built-in video camera and microphones are standard in lap tops.",
+    "specific_objectives": [
+      "(b) (i) (ii) (iii) (c)"
+    ],
+    "content_items": [
+      "mark for stating: L, M",
+      "N are inputs 1 mark for stating: A is an AND gate 1 mark for stating: B is an AND gate 1 mark for stating: A is an OR gate 1 mark for correctly completing the outputs of X using gates the student suggested in (b) (ii) 1 mark for correctly completing the outputs of Y using gates the student suggested in (b) (ii) 1 mark for correctly completing the outputs of Z using gates the student suggested in (b) (ii) THE TRUTH TABLE FOR THE COMBINATION OF THE LOGIC GATES IN b(ii) IS SHOWN BELOW. Input Output L M N X Y Z 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 1 0 1 1 1 0 0 0 0 0 1 0 1 0 0 0 1 1 0 1 0 1 1 1 1 1 1 1 2 marks for stating two or more points from the list below: 1 mark for stating one point from the list below:  Lap tops have become lighter.  Lap tops have become faster.  Built-in video camera",
+      "microphones are standard in lap tops."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 123,
+    "keywords": [
+      "are",
+      "become",
+      "below",
+      "built",
+      "camera",
+      "combination",
+      "completing",
+      "correctly",
+      "faster",
+      "gate",
+      "gates",
+      "have"
+    ],
+    "hash": "fd9235046d",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.506517"
+  },
+  {
+    "id": "PHYS-00238",
+    "section": "unit of: resistance is the Ohm",
+    "subsection": "Unknown",
+    "objective": " They can connect to the internet from locations where internet is available wirelessly.  Laptops are more efficient  Online communication/games/facebook/social Or any other acceptable response",
+    "content": "2",
+    "specific_objectives": [
+      " They can connect to the internet from locations where internet is available wirelessly.  Laptops are more efficient  Online communication/games/facebook/social Or any other acceptable response"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 124,
+    "keywords": [
+      "acceptable",
+      "any",
+      "are",
+      "available",
+      "can",
+      "communication",
+      "connect",
+      "efficient",
+      "facebook",
+      "games",
+      "internet",
+      "laptops"
+    ],
+    "hash": "5c50494c1b",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.549630"
+  },
+  {
+    "id": "PHYS-00239",
+    "section": "unit of: resistance is the Ohm",
+    "subsection": "Unknown",
+    "objective": "(a)(i) (ii) (b)(i) (ii) (iii)",
+    "content": "States/list equipment used:  , , and  source;  Detector: GM tube or Cloud Chamber  Metre rule; States all three (2) (2) States any 2 (1) (1) States none (0) (0) Procedure of experiment  Places GM tube in front of source, or: Places source inside cloud (1) chamber;  Moves GM tube away from source until no radiation is detected, or: (1) Observes/identifies tracks formed inside chamber  Measures distance between GM tube and source, or: (1) Measures length of tracks Identifies  radiation is undeflected (1) Beta-decay equation: a g (1) ; g (2) [1 for Mg and 1 for atomic number and atomic mass] Length of time:  Identifies/calculates that of the (1) gra s sample remains: gra s  Identifies/calculates that of (1) sample remains:  Identifies/calculate that 3 half (1) ( ) lives have elapsed: (1)  Calculates length of time: = rs ours (1) Discussion of safety measure  States 1 appropriate safety Measure  Presents reasoned argument why (1) safety measure must be observed (1) argument reasoning",
+    "specific_objectives": [
+      "(a)(i) (ii) (b)(i) (ii) (iii)"
+    ],
+    "content_items": [
+      "States/list equipment used:  , ,",
+      " source",
+      " Detector: GM tube or Cloud Chamber  Metre rule",
+      "States all three (2) (2) States any 2 (1) (1) States none (0) (0) Procedure of experiment  Places GM tube in front of source, or: Places source inside cloud (1) chamber",
+      " Moves GM tube away from source until no radiation is detected, or: (1) Observes/identifies tracks formed inside chamber  Measures distance between GM tube",
+      "source, or: (1) Measures length of tracks Identifies  radiation is undeflected (1) Beta-decay equation: a g (1)",
+      "g (2) [1 for Mg",
+      "for atomic number",
+      "atomic mass] Length of time:  Identifies/calculates that of the (1) gra s sample remains: gra s  Identifies/calculates that of (1) sample remains:  Identifies/calculate that 3 half (1) ( ) lives have elapsed: (1)  Calculates length of time: = rs ours (1) Discussion of safety measure  States 1 appropriate safety Measure  Presents reasoned argument why (1) safety measure must be observed (1) argument reasoning"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 125,
+    "keywords": [
+      "all",
+      "any",
+      "appropriate",
+      "argument",
+      "atomic",
+      "away",
+      "beta",
+      "between",
+      "calculate",
+      "calculates",
+      "chamber",
+      "cloud"
+    ],
+    "hash": "ef2f0e52bd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.761115"
+  },
+  {
+    "id": "PHYS-00240",
+    "section": "unit mass: of a",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (b) (i) (ii) (iii) (iv)",
+    "content": "Heat required to change the unit mass of a liquid to a gas (1) without a temperature change (1). melting, boiling, evaporation electrical heat Energy supplied = Pt (1) = 1500 x 98 (1) = 147 000 J (1) Heat energy = mcΔθ (1) 147 000 = 0.5 x c x 70 (1) Specific heat capacity,c = 4200J KgoC (1) Pt = ml (1) 1500 x 150 = 0.1 x l (1) S.l.h.of vaporisation,l = 2 250 000 JKg-1 (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (b) (i) (ii) (iii) (iv)"
+    ],
+    "content_items": [
+      "Heat required to change the unit mass of a liquid to a gas (1) without a temperature change (1). melting, boiling, evaporation electrical heat Energy supplied = Pt (1) = 1500 x 98 (1) = 147 000 J (1) Heat energy = mcΔθ (1) 147 000 = 0.5 x c x 70 (1) Specific heat capacity,c = 4200J KgoC (1) Pt = ml (1) 1500 x 150 = 0.1 x l (1) S.l.h.of vaporisation,l = 2 250 000 JKg-1 (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 126,
+    "keywords": [
+      "boiling",
+      "capacity",
+      "change",
+      "electrical",
+      "energy",
+      "evaporation",
+      "gas",
+      "heat",
+      "jkg",
+      "kgoc",
+      "liquid",
+      "mass"
+    ],
+    "hash": "cd0799d729",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.867692"
+  },
+  {
+    "id": "PHYS-00241",
+    "section": "unit mass: of a",
+    "subsection": "Unknown",
+    "objective": "write your answer in",
+    "content": "the sp",
+    "specific_objectives": [
+      "write your answer in"
+    ],
+    "content_items": [
+      "the sp"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 127,
+    "keywords": [
+      "answer",
+      "write",
+      "your"
+    ],
+    "hash": "e25d06babd",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:50.954386"
+  },
+  {
+    "id": "PHYS-00242",
+    "section": "unit mass: of a",
+    "subsection": "Unknown",
+    "objective": "Thermocouple emf E (mV)",
+    "content": "0.1",
+    "specific_objectives": [
+      "Thermocouple emf E (mV)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 130,
+    "keywords": [
+      "emf",
+      "thermocouple"
+    ],
+    "hash": "e03e1a5280",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:51.129042"
+  },
+  {
+    "id": "PHYS-00243",
+    "section": "unit mass: of a",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (a) (ii) (b)",
+    "content": "L-Label axes (1) A-Correct orientation of axes (1) S-Scales (1) P-Plots: (3) 6 – 5 correct – 3 4 – 3 correct – 2 2 – 1 correct – 1 Best line (1) Large  (1) Correct read offs (1) (3) Gradient formula = (2 s.f.) Answer = _____0.001 (1) Read off correct value of T (1)",
+    "specific_objectives": [
+      "(a) (i) (a) (ii) (b)"
+    ],
+    "content_items": [
+      "L-Label axes (1) A-Correct orientation of axes (1) S-Scales (1) P-Plots: (3) 6 – 5 correct – 3 4 – 3 correct – 2 2 – 1 correct – 1 Best line (1) Large  (1) Correct read offs (1) (3) Gradient formula = (2 s.f.) Answer = _____0.001 (1) Read off correct value of T (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 137,
+    "keywords": [
+      "answer",
+      "axes",
+      "best",
+      "correct",
+      "formula",
+      "gradient",
+      "label",
+      "large",
+      "line",
+      "off",
+      "offs",
+      "orientation"
+    ],
+    "hash": "e169f9a211",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:51.537102"
+  },
+  {
+    "id": "PHYS-00244",
+    "section": "unit mass: of a",
+    "subsection": "Unknown",
+    "objective": "(a) (b) (c) (d) (e) (f)",
+    "content": "Clear objective/aim: To investigate the relationship between i and r. or (1) To measure r for various i List of equipment  Glass block;  Ray box/plotting pins;  Protractor; 4-3 items (2)  Ruler 2-1 items (1) Procedure: 4 steps (3)  Draws outline of block or reference 3 step (2) lines and normal; 2-1 step (1)  Shines ray of light for various angles i; App. Seq. (1)  Marks path of light;  Measures angles r. Manipulation of data  States that i and r are compared; or (1)  States that a graph of r vs. i is plotted and explains the use of the graph in the analysis of i and r; or  Any other reasonable analysis of data Precaution (1) States one reasonable precaution Limitation States one reasonable limitation of method (1)",
+    "specific_objectives": [
+      "(a) (b) (c) (d) (e) (f)"
+    ],
+    "content_items": [
+      "Clear objective/aim: To investigate the relationship between i",
+      "r. or (1) To measure r for various i List of equipment  Glass block",
+      " Ray box/plotting pins",
+      " Protractor",
+      "4-3 items (2)  Ruler 2-1 items (1) Procedure: 4 steps (3)  Draws outline of block or reference 3 step (2) lines",
+      "normal",
+      "2-1 step (1)  Shines ray of light for various angles i",
+      "App. Seq. (1)  Marks path of light",
+      " Measures angles r. Manipulation of data  States that i",
+      "r are compared",
+      "or (1)  States that a graph of r vs. i is plotted",
+      "explains the use of the graph in the analysis of i",
+      "or  Any other reasonable analysis of data Precaution (1) States one reasonable precaution Limitation States one reasonable limitation of method (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 138,
+    "keywords": [
+      "aim",
+      "analysis",
+      "angles",
+      "any",
+      "app",
+      "are",
+      "between",
+      "block",
+      "box",
+      "clear",
+      "compared",
+      "data"
+    ],
+    "hash": "9ae8158a2c",
+    "source_file": "CSEC-Physics-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:51.672035"
+  }
+]

@@ -1,0 +1,5331 @@
+[
+  {
+    "id": "BIO-00001",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "37 Arnold Road, King",
+    "content": "ston 5, Ja",
+    "specific_objectives": [
+      "Arnold Road, King"
+    ],
+    "content_items": [
+      "ston 5, Ja"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "arnold",
+      "king",
+      "road",
+      "ston"
+    ],
+    "hash": "1697342ce0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:03.741234"
+  },
+  {
+    "id": "BIO-00002",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Prince Road, Pine Pla",
+    "content": "ntation Ro",
+    "specific_objectives": [
+      "Prince Road, Pine Pla"
+    ],
+    "content_items": [
+      "ntation Ro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "ntation",
+      "pine",
+      "pla",
+      "prince",
+      "road"
+    ],
+    "hash": "2fab056821",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:03.741365"
+  },
+  {
+    "id": "BIO-00003",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "RATIONALE ............................................................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "RATIONALE ............................................................................................................................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "rationale"
+    ],
+    "hash": "de89055f65",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.015607"
+  },
+  {
+    "id": "BIO-00004",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "AIMS…. ..................................................................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "AIMS…. .................................................................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "aims"
+    ],
+    "hash": "302113bbb9",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.015734"
+  },
+  {
+    "id": "BIO-00005",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SUGGESTED TIMETABLE ALLOCATION ..................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "SUGGESTED TIMETABLE ALLOCATION .................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "allocation",
+      "suggested",
+      "timetable"
+    ],
+    "hash": "7bd9775987",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.015820"
+  },
+  {
+    "id": "BIO-00006",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "ORGANISATION OF THE SYLLABUS .......................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "ORGANISATION OF THE SYLLABUS ......................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "organisation",
+      "syllabus"
+    ],
+    "hash": "b6ac7b9331",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.015916"
+  },
+  {
+    "id": "BIO-00007",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "APPROACHES TO TEACHING THE SYLLABUS .........................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "APPROACHES TO TEACHING THE SYLLABUS ........................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "approaches",
+      "syllabus",
+      "teaching"
+    ],
+    "hash": "28ca59daf7",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.015993"
+  },
+  {
+    "id": "BIO-00008",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "CERTIFICATION ......................................................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "CERTIFICATION ......................................................................................................................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "certification"
+    ],
+    "hash": "76071238bd",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016068"
+  },
+  {
+    "id": "BIO-00009",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "DEFINITION OF PROFILE DIMENSIONS ..................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "DEFINITION OF PROFILE DIMENSIONS .................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "definition",
+      "dimensions",
+      "profile"
+    ],
+    "hash": "cebf9cb29c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016141"
+  },
+  {
+    "id": "BIO-00010",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "FORMAT OF THE EXAMINATION ...........................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "FORMAT OF THE EXAMINATION ..........................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "examination",
+      "format"
+    ],
+    "hash": "11ec29bfb3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016221"
+  },
+  {
+    "id": "BIO-00011",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR PRIVATE CANDIDATES ...........................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "REGULATIONS FOR PRIVATE CANDIDATES ..........................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "candidates",
+      "private",
+      "regulations"
+    ],
+    "hash": "874ba62ab3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016292"
+  },
+  {
+    "id": "BIO-00012",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR RESIT CANDIDATES ................................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "REGULATIONS FOR RESIT CANDIDATES ................................................................................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "candidates",
+      "regulations",
+      "resit"
+    ],
+    "hash": "cf0f249738",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016362"
+  },
+  {
+    "id": "BIO-00013",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "REGULATIONS FOR THE JANUARY SITTING ...........................................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "REGULATIONS FOR THE JANUARY SITTING ..........................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "january",
+      "regulations",
+      "sitting"
+    ],
+    "hash": "af87b25f51",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016432"
+  },
+  {
+    "id": "BIO-00014",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION A: LIVING ORGANISMS AND THE ENVIRONMENT..................................................................",
+    "content": "..",
+    "specific_objectives": [
+      "SECTION A: LIVING ORGANISMS AND THE ENVIRONMENT.................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "environment",
+      "living",
+      "organisms",
+      "section"
+    ],
+    "hash": "e88ad4c61b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016503"
+  },
+  {
+    "id": "BIO-00015",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION B: LIFE PROCESSESS ................................................................................................................",
+    "content": "1",
+    "specific_objectives": [
+      "SECTION B: LIFE PROCESSESS ................................................................................................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "life",
+      "processess",
+      "section"
+    ],
+    "hash": "3d80492e4c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016578"
+  },
+  {
+    "id": "BIO-00016",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION C: HEREDITY AND VARIATION .................................................................................................",
+    "content": "2",
+    "specific_objectives": [
+      "SECTION C: HEREDITY AND VARIATION ................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "heredity",
+      "section",
+      "variation"
+    ],
+    "hash": "97aa49d546",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016650"
+  },
+  {
+    "id": "BIO-00017",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION D: DISEASE AND THEIR IMPACT ON HUMANS .........................................................................",
+    "content": "2",
+    "specific_objectives": [
+      "SECTION D: DISEASE AND THEIR IMPACT ON HUMANS ........................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "disease",
+      "humans",
+      "impact",
+      "section"
+    ],
+    "hash": "02607aae83",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016721"
+  },
+  {
+    "id": "BIO-00018",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT ............................................",
+    "content": "3",
+    "specific_objectives": [
+      "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT ............................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "environment",
+      "health",
+      "impact",
+      "practices",
+      "section"
+    ],
+    "hash": "640627cc29",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016793"
+  },
+  {
+    "id": "BIO-00019",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "BIOLOGY ................................................................................................................................................",
+    "content": "3",
+    "specific_objectives": [
+      "BIOLOGY ................................................................................................................................................"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "biology"
+    ],
+    "hash": "c95050fc2e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016872"
+  },
+  {
+    "id": "BIO-00020",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "RESOURCES ...........................................................................................................................................",
+    "content": "3",
+    "specific_objectives": [
+      "RESOURCES ..........................................................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "resources"
+    ],
+    "hash": "ee617aea6b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.016960"
+  },
+  {
+    "id": "BIO-00021",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "GLOSSARY..............................................................................................................................................",
+    "content": "4",
+    "specific_objectives": [
+      "GLOSSARY.............................................................................................................................................."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 3,
+    "keywords": [
+      "glossary"
+    ],
+    "hash": "bda1a2838d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:04.017027"
+  },
+  {
+    "id": "BIO-00022",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "critical thinking; t",
+    "content": "he inno",
+    "specific_objectives": [
+      "critical thinking"
+    ],
+    "content_items": [
+      "he inno"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "critical",
+      "inno",
+      "thinking"
+    ],
+    "hash": "15d34159ca",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.014115"
+  },
+  {
+    "id": "BIO-00023",
+    "section": "Section E: The impact of health practices on the environment",
+    "subsection": "Unknown",
+    "objective": "critical thinking, crea",
+    "content": "tivity and c",
+    "specific_objectives": [
+      "critical thinking, crea"
+    ],
+    "content_items": [
+      "tivity"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "crea",
+      "critical",
+      "thinking",
+      "tivity"
+    ],
+    "hash": "5fad2f7ce5",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.417307"
+  },
+  {
+    "id": "BIO-00024",
+    "section": "Section E: The impact of health practices on the environment",
+    "subsection": "Unknown",
+    "objective": "technology (ICT); and",
+    "content": ",",
+    "specific_objectives": [
+      "technology (ICT)"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "technology"
+    ],
+    "hash": "1282612f03",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.417407"
+  },
+  {
+    "id": "BIO-00025",
+    "section": "Section E: The impact of health practices on the environment",
+    "subsection": "Unknown",
+    "objective": "*Denotes Specific Objectiv",
+    "content": "es that are",
+    "specific_objectives": [
+      "*Denotes Specific Objectiv"
+    ],
+    "content_items": [
+      "es that are"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "are",
+      "denotes",
+      "objectiv",
+      "specific"
+    ],
+    "hash": "cae4fd6d7b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.417639"
+  },
+  {
+    "id": "BIO-00026",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "It is recommended tha",
+    "content": "t Section A be",
+    "specific_objectives": [
+      "It is recommended tha"
+    ],
+    "content_items": [
+      "t Section A be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "recommended",
+      "section",
+      "tha"
+    ],
+    "hash": "df3f9961e7",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684248"
+  },
+  {
+    "id": "BIO-00027",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "students and ensure th",
+    "content": "at their lesso",
+    "specific_objectives": [
+      "students",
+      "ensure th"
+    ],
+    "content_items": [
+      "at their lesso"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "ensure",
+      "lesso",
+      "students"
+    ],
+    "hash": "31938d9667",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684330"
+  },
+  {
+    "id": "BIO-00028",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "learning process. This",
+    "content": "will help stude",
+    "specific_objectives": [
+      "learning process. This"
+    ],
+    "content_items": [
+      "will help stude"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "help",
+      "learning",
+      "process",
+      "stude",
+      "will"
+    ],
+    "hash": "f1d0d488d6",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684391"
+  },
+  {
+    "id": "BIO-00029",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "should be covered. H",
+    "content": "owever, unf",
+    "specific_objectives": [
+      "should be covered. H"
+    ],
+    "content_items": [
+      "owever, unf"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "covered",
+      "owever",
+      "should",
+      "unf"
+    ],
+    "hash": "59ed3cbc76",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684452"
+  },
+  {
+    "id": "BIO-00030",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "examination questions",
+    "content": ".",
+    "specific_objectives": [
+      "examination questions"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "examination",
+      "questions"
+    ],
+    "hash": "82efa0822c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684488"
+  },
+  {
+    "id": "BIO-00031",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "This syllabus caters to v",
+    "content": "arying teachi",
+    "specific_objectives": [
+      "This syllabus caters to v"
+    ],
+    "content_items": [
+      "arying teachi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "arying",
+      "caters",
+      "syllabus",
+      "teachi"
+    ],
+    "hash": "07b37ee173",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684547"
+  },
+  {
+    "id": "BIO-00032",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "interrelatedness of co",
+    "content": "ncepts. Every",
+    "specific_objectives": [
+      "interrelatedness of co"
+    ],
+    "content_items": [
+      "ncepts. Every"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "every",
+      "interrelatedness",
+      "ncepts"
+    ],
+    "hash": "989dfdbaba",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684602"
+  },
+  {
+    "id": "BIO-00033",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "principles to the envir",
+    "content": "onment. An",
+    "specific_objectives": [
+      "principles to the envir"
+    ],
+    "content_items": [
+      "onment. An"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "envir",
+      "onment",
+      "principles"
+    ],
+    "hash": "311c2f80c4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684657"
+  },
+  {
+    "id": "BIO-00034",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "teaching of concepts t",
+    "content": "o encourage",
+    "specific_objectives": [
+      "teaching of concepts t"
+    ],
+    "content_items": [
+      "o encourage"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "concepts",
+      "encourage",
+      "teaching"
+    ],
+    "hash": "9cc2a4b3cb",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684724"
+  },
+  {
+    "id": "BIO-00035",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "The role of the teache",
+    "content": "r is to facilita",
+    "specific_objectives": [
+      "The role of the teache"
+    ],
+    "content_items": [
+      "r is to facilita"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "facilita",
+      "role",
+      "teache"
+    ],
+    "hash": "bfdb2ea81e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684805"
+  },
+  {
+    "id": "BIO-00036",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "will contribute to a mo",
+    "content": "re scientifical",
+    "specific_objectives": [
+      "will contribute to a mo"
+    ],
+    "content_items": [
+      "re scientifical"
+    ],
+    "skills": [
+      "RE"
+    ],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "contribute",
+      "scientifical",
+      "will"
+    ],
+    "hash": "6178939541",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684870"
+  },
+  {
+    "id": "BIO-00037",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "decisions regarding the",
+    "content": "world in whi",
+    "specific_objectives": [
+      "decisions regarding the"
+    ],
+    "content_items": [
+      "world in whi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "decisions",
+      "regarding",
+      "whi",
+      "world"
+    ],
+    "hash": "b0acc13faf",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.684919"
+  },
+  {
+    "id": "BIO-00038",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "The syllabus is offere",
+    "content": "d for Genera",
+    "specific_objectives": [
+      "The syllabus is offere"
+    ],
+    "content_items": [
+      "d for Genera"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "genera",
+      "offere",
+      "syllabus"
+    ],
+    "hash": "a3227b22db",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.685006"
+  },
+  {
+    "id": "BIO-00039",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "indicated on the certifi",
+    "content": "cate by an ov",
+    "specific_objectives": [
+      "indicated on the certifi"
+    ],
+    "content_items": [
+      "cate by an ov"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "cate",
+      "certifi",
+      "indicated"
+    ],
+    "hash": "815b7a65a2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.685071"
+  },
+  {
+    "id": "BIO-00040",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "for each of two profile",
+    "content": "dimensions,",
+    "specific_objectives": [
+      "for each of two profile"
+    ],
+    "content_items": [
+      "dimensions,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "dimensions",
+      "each",
+      "profile",
+      "two"
+    ],
+    "hash": "acc5c30c94",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.685129"
+  },
+  {
+    "id": "BIO-00041",
+    "section": "Section A: be taught first",
+    "subsection": "Unknown",
+    "objective": "On completion of the sy",
+    "content": "llabus, studen",
+    "specific_objectives": [
+      "On completion of the sy"
+    ],
+    "content_items": [
+      "llabus, studen"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "completion",
+      "llabus",
+      "studen"
+    ],
+    "hash": "c426003be4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:05.685207"
+  },
+  {
+    "id": "BIO-00042",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Knowledge and Comprehension (KC)",
+    "content": "60",
+    "specific_objectives": [
+      "Knowledge",
+      "Comprehension (KC)"
+    ],
+    "content_items": [],
+    "skills": [
+      "KC"
+    ],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "comprehension",
+      "knowledge"
+    ],
+    "hash": "c6d0723063",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.258838"
+  },
+  {
+    "id": "BIO-00043",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Use of Knowledge (UK)",
+    "content": "-",
+    "specific_objectives": [
+      "Use of Knowledge (UK)"
+    ],
+    "content_items": [],
+    "skills": [
+      "UK"
+    ],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "knowledge",
+      "use"
+    ],
+    "hash": "124fa5383a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.258911"
+  },
+  {
+    "id": "BIO-00044",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "TOTAL RAW [WEIGHTED] MARKS",
+    "content": "60",
+    "specific_objectives": [
+      "TOTAL RAW [WEIGHTED] MARKS"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 9,
+    "keywords": [
+      "marks",
+      "raw",
+      "total",
+      "weighted"
+    ],
+    "hash": "c052c1f10d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.258984"
+  },
+  {
+    "id": "BIO-00045",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Resit candidates mus",
+    "content": "t complete Pa",
+    "specific_objectives": [
+      "Resit candidates mus"
+    ],
+    "content_items": [
+      "t complete Pa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "candidates",
+      "complete",
+      "mus",
+      "resit"
+    ],
+    "hash": "40b725b65c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.348539"
+  },
+  {
+    "id": "BIO-00046",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "immediately following",
+    "content": "the first sitti",
+    "specific_objectives": [
+      "immediately following"
+    ],
+    "content_items": [
+      "the first sitti"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "first",
+      "following",
+      "immediately",
+      "sitti"
+    ],
+    "hash": "01ee35cdc2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.348644"
+  },
+  {
+    "id": "BIO-00047",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "SBA scores should reg",
+    "content": "ister as “Resi",
+    "specific_objectives": [
+      "SBA scores should reg"
+    ],
+    "content_items": [
+      "ister as “Resi"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 10,
+    "keywords": [
+      "ister",
+      "reg",
+      "resi",
+      "sba",
+      "scores",
+      "should"
+    ],
+    "hash": "7a62fd72d9",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:06.348725"
+  },
+  {
+    "id": "BIO-00048",
+    "section": "SECTION A: LIVING ORGANISMS AND THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "investigations on os",
+    "content": "mosis and",
+    "specific_objectives": [
+      "investigations on os"
+    ],
+    "content_items": [
+      "mosis"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "investigations",
+      "mosis"
+    ],
+    "hash": "106ca43cc1",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:07.153452"
+  },
+  {
+    "id": "BIO-00049",
+    "section": "SECTION A: LIVING ORGANISMS AND THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "other living organism",
+    "content": "s depend",
+    "specific_objectives": [
+      "other living organism"
+    ],
+    "content_items": [
+      "s depend"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "depend",
+      "living",
+      "organism",
+      "other"
+    ],
+    "hash": "9b6b273af6",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:07.153687"
+  },
+  {
+    "id": "BIO-00050",
+    "section": "SECTION A: LIVING ORGANISMS AND THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "on plants directly or",
+    "content": "indirectly",
+    "specific_objectives": [
+      "on plants directly or"
+    ],
+    "content_items": [
+      "indirectly"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "directly",
+      "indirectly",
+      "plants"
+    ],
+    "hash": "5aaa91fcb7",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:07.153740"
+  },
+  {
+    "id": "BIO-00051",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(b) Water soluble - B,",
+    "content": "C.",
+    "specific_objectives": [
+      "(b) Water soluble - B,"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "soluble",
+      "water"
+    ],
+    "hash": "54e6ea9cbf",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.254807"
+  },
+  {
+    "id": "BIO-00052",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "malnutrition (kwashiorkor,",
+    "content": "marasmus).",
+    "specific_objectives": [
+      "malnutrition (kwashiorkor,"
+    ],
+    "content_items": [
+      "marasmus)."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "malnutrition"
+    ],
+    "hash": "c8333515e4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.255081"
+  },
+  {
+    "id": "BIO-00053",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include the sources and eff",
+    "content": "ects of hidde",
+    "specific_objectives": [
+      "Include the sources"
+    ],
+    "content_items": [
+      "ects of hidde"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "ects",
+      "eff",
+      "hidde",
+      "include",
+      "sources"
+    ],
+    "hash": "db27ba953d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.255141"
+  },
+  {
+    "id": "BIO-00054",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include determination of",
+    "content": "waist circumf",
+    "specific_objectives": [
+      "Include determination of"
+    ],
+    "content_items": [
+      "waist circumf"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "circumf",
+      "determination",
+      "include",
+      "waist"
+    ],
+    "hash": "c9f79886e3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.255235"
+  },
+  {
+    "id": "BIO-00055",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "of BMI and waist circu",
+    "content": "mference to",
+    "specific_objectives": [
+      "of BMI",
+      "waist circu"
+    ],
+    "content_items": [
+      "mference to"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "bmi",
+      "circu",
+      "mference",
+      "waist"
+    ],
+    "hash": "5a3591d211",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.255289"
+  },
+  {
+    "id": "BIO-00056",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "obesity; factors and implica",
+    "content": "tions of obes",
+    "specific_objectives": [
+      "obesity",
+      "factors",
+      "implica"
+    ],
+    "content_items": [
+      "tions of obes"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 15,
+    "keywords": [
+      "factors",
+      "implica",
+      "obes",
+      "obesity",
+      "tions"
+    ],
+    "hash": "0454b2aeaf",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:08.255353"
+  },
+  {
+    "id": "BIO-00057",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include osmosis, diffus",
+    "content": "ion and active",
+    "specific_objectives": [
+      "Include osmosis, diffus"
+    ],
+    "content_items": [
+      "active"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 17,
+    "keywords": [
+      "active",
+      "diffus",
+      "include",
+      "ion",
+      "osmosis"
+    ],
+    "hash": "a65ade8fe2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.034784"
+  },
+  {
+    "id": "BIO-00058",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Objec",
+    "content": "tive A6).",
+    "specific_objectives": [
+      "(Link to Specific Objec"
+    ],
+    "content_items": [
+      "tive A6)."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 17,
+    "keywords": [],
+    "hash": "335aafa203",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.034841"
+  },
+  {
+    "id": "BIO-00059",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Objec",
+    "content": "tive D4).",
+    "specific_objectives": [
+      "(Link to Specific Objec"
+    ],
+    "content_items": [
+      "tive D4)."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 17,
+    "keywords": [],
+    "hash": "c84c5908c0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.035140"
+  },
+  {
+    "id": "BIO-00060",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "description of industrial",
+    "content": "and domest",
+    "specific_objectives": [
+      "description of industrial"
+    ],
+    "content_items": [
+      "domest"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "description",
+      "domest",
+      "industrial"
+    ],
+    "hash": "6368571e08",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.462722"
+  },
+  {
+    "id": "BIO-00061",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "anaerobic respiration;",
+    "content": "oxygen de",
+    "specific_objectives": [
+      "anaerobic respiration"
+    ],
+    "content_items": [
+      "oxygen de"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "anaerobic",
+      "oxygen",
+      "respiration"
+    ],
+    "hash": "591db36b93",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.462790"
+  },
+  {
+    "id": "BIO-00062",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "chemical equations to",
+    "content": "represent t",
+    "specific_objectives": [
+      "chemical equations to"
+    ],
+    "content_items": [
+      "represent t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "chemical",
+      "equations",
+      "represent"
+    ],
+    "hash": "a242eb5ca0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.462842"
+  },
+  {
+    "id": "BIO-00063",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "aerobic and anaerobic",
+    "content": "respiration.",
+    "specific_objectives": [
+      "aerobic",
+      "anaerobic"
+    ],
+    "content_items": [
+      "respiration."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "aerobic",
+      "anaerobic",
+      "respiration"
+    ],
+    "hash": "374d0d6576",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.462892"
+  },
+  {
+    "id": "BIO-00064",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include the compariso",
+    "content": "n of the am",
+    "specific_objectives": [
+      "Include the compariso"
+    ],
+    "content_items": [
+      "n of the am"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "compariso",
+      "include"
+    ],
+    "hash": "1c28ca2f45",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.462945"
+  },
+  {
+    "id": "BIO-00065",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "released in both aerobi",
+    "content": "c and anaero",
+    "specific_objectives": [
+      "released in both aerobi"
+    ],
+    "content_items": [
+      "anaero"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "aerobi",
+      "anaero",
+      "both",
+      "released"
+    ],
+    "hash": "0f4949da30",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463000"
+  },
+  {
+    "id": "BIO-00066",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "in the transfer of e",
+    "content": "nergy;",
+    "specific_objectives": [
+      "in the transfer of e"
+    ],
+    "content_items": [
+      "nergy"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "nergy",
+      "transfer"
+    ],
+    "hash": "fa1bd0251a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463089"
+  },
+  {
+    "id": "BIO-00067",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "carcinogenic propertie",
+    "content": "s and reduc",
+    "specific_objectives": [
+      "carcinogenic propertie"
+    ],
+    "content_items": [
+      "reduc"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "carcinogenic",
+      "propertie",
+      "reduc"
+    ],
+    "hash": "fe695b957e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463212"
+  },
+  {
+    "id": "BIO-00068",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "carrying capacity of",
+    "content": "the blood; h",
+    "specific_objectives": [
+      "carrying capacity of"
+    ],
+    "content_items": [
+      "the blood"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "blood",
+      "capacity",
+      "carrying"
+    ],
+    "hash": "c820ef30d0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463265"
+  },
+  {
+    "id": "BIO-00069",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "heart disease. Interpret",
+    "content": "ation of data",
+    "specific_objectives": [
+      "heart disease. Interpret"
+    ],
+    "content_items": [
+      "ation of data"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 18,
+    "keywords": [
+      "ation",
+      "data",
+      "disease",
+      "heart",
+      "interpret"
+    ],
+    "hash": "a58794b9b6",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463316"
+  },
+  {
+    "id": "BIO-00070",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Objecti",
+    "content": "ves D11 and",
+    "specific_objectives": [
+      "(Link to Specific Objecti"
+    ],
+    "content_items": [
+      "ves D11"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 18,
+    "keywords": [
+      "link",
+      "objecti",
+      "specific",
+      "ves"
+    ],
+    "hash": "3d61db3287",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.463373"
+  },
+  {
+    "id": "BIO-00071",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "need to be transport",
+    "content": "ed around",
+    "specific_objectives": [
+      "need to be transport"
+    ],
+    "content_items": [
+      "ed around"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "around",
+      "need",
+      "transport"
+    ],
+    "hash": "2b2481c164",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.878619"
+  },
+  {
+    "id": "BIO-00072",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "blood to its function;",
+    "content": "platelets. Diffe",
+    "specific_objectives": [
+      "blood to its function"
+    ],
+    "content_items": [
+      "platelets. Diffe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "blood",
+      "diffe",
+      "function",
+      "its",
+      "platelets"
+    ],
+    "hash": "fd68170dbb",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.878725"
+  },
+  {
+    "id": "BIO-00073",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "lymphocytes to their",
+    "content": "functions;",
+    "specific_objectives": [
+      "lymphocytes to their"
+    ],
+    "content_items": [
+      "functions"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "functions",
+      "lymphocytes"
+    ],
+    "hash": "19c0a37a0a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.878808"
+  },
+  {
+    "id": "BIO-00074",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "capillaries to their",
+    "content": "functions;",
+    "specific_objectives": [
+      "capillaries to their"
+    ],
+    "content_items": [
+      "functions"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "capillaries",
+      "functions"
+    ],
+    "hash": "4356d3d99c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.878896"
+  },
+  {
+    "id": "BIO-00075",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "heart to their functio",
+    "content": "ns;",
+    "specific_objectives": [
+      "heart to their functio"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 19,
+    "keywords": [
+      "functio",
+      "heart"
+    ],
+    "hash": "d3a4538589",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:09.878973"
+  },
+  {
+    "id": "BIO-00076",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "each group, precauti",
+    "content": "on in transfu",
+    "specific_objectives": [
+      "each group, precauti"
+    ],
+    "content_items": [
+      "on in transfu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "each",
+      "group",
+      "precauti",
+      "transfu"
+    ],
+    "hash": "ee1d35ebf9",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.257635"
+  },
+  {
+    "id": "BIO-00077",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "importance of blood c",
+    "content": "lotting;",
+    "specific_objectives": [
+      "importance of blood c"
+    ],
+    "content_items": [
+      "lotting"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "blood",
+      "importance",
+      "lotting"
+    ],
+    "hash": "b551039377",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.257742"
+  },
+  {
+    "id": "BIO-00078",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Objectiv",
+    "content": "e C6 [haemophil",
+    "specific_objectives": [
+      "(Link to Specific Objectiv"
+    ],
+    "content_items": [
+      "e C6 [haemophil"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "haemophil",
+      "link",
+      "objectiv",
+      "specific"
+    ],
+    "hash": "4621a2eb7d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.257815"
+  },
+  {
+    "id": "BIO-00079",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Objectiv",
+    "content": "es B3.7 and D9).",
+    "specific_objectives": [
+      "(Link to Specific Objectiv"
+    ],
+    "content_items": [
+      "es B3.7"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [],
+    "hash": "168f67bc60",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.257905"
+  },
+  {
+    "id": "BIO-00080",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "represent data on di",
+    "content": "seases of",
+    "specific_objectives": [
+      "represent data on di"
+    ],
+    "content_items": [
+      "seases of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "data",
+      "represent",
+      "seases"
+    ],
+    "hash": "e50d1e9c0d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.257977"
+  },
+  {
+    "id": "BIO-00081",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "the circulatory system",
+    "content": ";",
+    "specific_objectives": [
+      "the circulatory system"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "circulatory",
+      "system"
+    ],
+    "hash": "65be4113cf",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.258018"
+  },
+  {
+    "id": "BIO-00082",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include labelling of diag",
+    "content": "rams.",
+    "specific_objectives": [
+      "Include labelling of diag"
+    ],
+    "content_items": [
+      "rams."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "diag",
+      "include",
+      "labelling",
+      "rams"
+    ],
+    "hash": "e5be5733b7",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.258121"
+  },
+  {
+    "id": "BIO-00083",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "cage, sternum, pelvic g",
+    "content": "irdle, femur, tibi",
+    "specific_objectives": [
+      "cage, sternum, pelvic g"
+    ],
+    "content_items": [
+      "irdle, femur, tibi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "cage",
+      "femur",
+      "irdle",
+      "pelvic",
+      "sternum",
+      "tibi"
+    ],
+    "hash": "a76692c7d7",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.258225"
+  },
+  {
+    "id": "BIO-00084",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "patella, tarsals, metatar",
+    "content": "sals and phalang",
+    "specific_objectives": [
+      "patella, tarsals, metatar"
+    ],
+    "content_items": [
+      "phalang"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "metatar",
+      "patella",
+      "phalang",
+      "sals",
+      "tarsals"
+    ],
+    "hash": "bf519ed0d0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.258280"
+  },
+  {
+    "id": "BIO-00085",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "skeleton to its functio",
+    "content": "ns;",
+    "specific_objectives": [
+      "skeleton to its functio"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 20,
+    "keywords": [
+      "functio",
+      "its",
+      "skeleton"
+    ],
+    "hash": "6127551d22",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.258352"
+  },
+  {
+    "id": "BIO-00086",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "excretion in human bein",
+    "content": "gs;",
+    "specific_objectives": [
+      "excretion in human bein"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "bein",
+      "excretion",
+      "human"
+    ],
+    "hash": "9487b41d81",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.984526"
+  },
+  {
+    "id": "BIO-00087",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "kidney to their function",
+    "content": ";",
+    "specific_objectives": [
+      "kidney to their function"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 22,
+    "keywords": [
+      "function",
+      "kidney"
+    ],
+    "hash": "5ed5f26626",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:10.984655"
+  },
+  {
+    "id": "BIO-00088",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Asexual: mitosis, id",
+    "content": "entical offspring, o",
+    "specific_objectives": [
+      "Asexual: mitosis, id"
+    ],
+    "content_items": [
+      "entical offspring, o"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 25,
+    "keywords": [
+      "asexual",
+      "entical",
+      "mitosis",
+      "offspring"
+    ],
+    "hash": "935ac1b689",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.121390"
+  },
+  {
+    "id": "BIO-00089",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Ob",
+    "content": "jectives C3 and C5)",
+    "specific_objectives": [
+      "(Link to Specific Ob"
+    ],
+    "content_items": [
+      "jectives C3"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 25,
+    "keywords": [],
+    "hash": "1b40adf990",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.121461"
+  },
+  {
+    "id": "BIO-00090",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Ob",
+    "content": "jective D10).",
+    "specific_objectives": [
+      "(Link to Specific Ob"
+    ],
+    "content_items": [
+      "jective D10)."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 25,
+    "keywords": [],
+    "hash": "175e015627",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.121564"
+  },
+  {
+    "id": "BIO-00091",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Ob",
+    "content": "jective B6.15).",
+    "specific_objectives": [
+      "(Link to Specific Ob"
+    ],
+    "content_items": [
+      "jective B6.15)."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 25,
+    "keywords": [],
+    "hash": "f86633b5d1",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.121649"
+  },
+  {
+    "id": "BIO-00092",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "Include the role of o",
+    "content": "xytocin.",
+    "specific_objectives": [
+      "Include the role of o"
+    ],
+    "content_items": [
+      "xytocin."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 25,
+    "keywords": [
+      "include",
+      "role",
+      "xytocin"
+    ],
+    "hash": "d081de52eb",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.121808"
+  },
+  {
+    "id": "BIO-00093",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "methods prevent pregn",
+    "content": "ancy;",
+    "specific_objectives": [
+      "methods prevent pregn"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "ancy",
+      "methods",
+      "pregn",
+      "prevent"
+    ],
+    "hash": "315dbaf705",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.488744"
+  },
+  {
+    "id": "BIO-00094",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "disadvantages of birth",
+    "content": "control",
+    "specific_objectives": [
+      "disadvantages of birth"
+    ],
+    "content_items": [
+      "control"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "birth",
+      "control",
+      "disadvantages"
+    ],
+    "hash": "a1431322d3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.488815"
+  },
+  {
+    "id": "BIO-00095",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "to represent data on di",
+    "content": "seases of",
+    "specific_objectives": [
+      "to represent data on di"
+    ],
+    "content_items": [
+      "seases of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "data",
+      "represent",
+      "seases"
+    ],
+    "hash": "8f96e7151b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.488966"
+  },
+  {
+    "id": "BIO-00096",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "the reproductive system",
+    "content": ".",
+    "specific_objectives": [
+      "the reproductive system"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 26,
+    "keywords": [
+      "reproductive",
+      "system"
+    ],
+    "hash": "9bc94e091f",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.489023"
+  },
+  {
+    "id": "BIO-00097",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "of the structures of",
+    "content": "different o",
+    "specific_objectives": [
+      "of the structures of"
+    ],
+    "content_items": [
+      "different o"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "different",
+      "structures"
+    ],
+    "hash": "14ef2072ad",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925119"
+  },
+  {
+    "id": "BIO-00098",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "topics. This type of a",
+    "content": "ctivity may",
+    "specific_objectives": [
+      "topics. This type of a"
+    ],
+    "content_items": [
+      "ctivity may"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "ctivity",
+      "may",
+      "topics",
+      "type"
+    ],
+    "hash": "4033833bfd",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925212"
+  },
+  {
+    "id": "BIO-00099",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "and digestive system",
+    "content": "of animals",
+    "specific_objectives": [
+      "digestive system"
+    ],
+    "content_items": [
+      "of animals"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "animals",
+      "digestive",
+      "system"
+    ],
+    "hash": "9da2bd9e0d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925309"
+  },
+  {
+    "id": "BIO-00100",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "videos/pictures) to e",
+    "content": "ncourage t",
+    "specific_objectives": [
+      "videos/pictures) to e"
+    ],
+    "content_items": [
+      "ncourage t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "ncourage",
+      "pictures",
+      "videos"
+    ],
+    "hash": "26ef8b6144",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925467"
+  },
+  {
+    "id": "BIO-00101",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "diabetes and analyse",
+    "content": "them.",
+    "specific_objectives": [
+      "diabetes",
+      "analyse"
+    ],
+    "content_items": [
+      "them."
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 27,
+    "keywords": [
+      "analyse",
+      "diabetes",
+      "them"
+    ],
+    "hash": "e285422afc",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925560"
+  },
+  {
+    "id": "BIO-00102",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "hypertension, diabet",
+    "content": "es, and car",
+    "specific_objectives": [
+      "hypertension, diabet"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "car",
+      "diabet",
+      "hypertension"
+    ],
+    "hash": "d373373688",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925629"
+  },
+  {
+    "id": "BIO-00103",
+    "section": "SECTION B: LIFE PROCESSESS",
+    "subsection": "Unknown",
+    "objective": "concentration in bloo",
+    "content": "d and osm",
+    "specific_objectives": [
+      "concentration in bloo"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 27,
+    "keywords": [
+      "bloo",
+      "concentration",
+      "osm"
+    ],
+    "hash": "1b1b7c64ed",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:12.925714"
+  },
+  {
+    "id": "BIO-00104",
+    "section": "SECTION D: DISEASES AND THEIR IMPACT ON HUMANS",
+    "subsection": "Unknown",
+    "objective": "Include causes, sign",
+    "content": "s/symptoms, treat",
+    "specific_objectives": [
+      "Include causes, sign"
+    ],
+    "content_items": [
+      "s/symptoms, treat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "causes",
+      "include",
+      "sign",
+      "symptoms",
+      "treat"
+    ],
+    "hash": "129eb3dda0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:14.655719"
+  },
+  {
+    "id": "BIO-00105",
+    "section": "SECTION D: DISEASES AND THEIR IMPACT ON HUMANS",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Ob",
+    "content": "jectives B1.12 and B",
+    "specific_objectives": [
+      "(Link to Specific Ob"
+    ],
+    "content_items": [
+      "jectives B1.12"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "jectives",
+      "link",
+      "specific"
+    ],
+    "hash": "ae423cb703",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:14.656037"
+  },
+  {
+    "id": "BIO-00106",
+    "section": "SECTION D: DISEASES AND THEIR IMPACT ON HUMANS",
+    "subsection": "Unknown",
+    "objective": "cervical, breast, ov",
+    "content": "arian, uterine, colon",
+    "specific_objectives": [
+      "cervical, breast, ov"
+    ],
+    "content_items": [
+      "arian, uterine, colon"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 32,
+    "keywords": [
+      "arian",
+      "breast",
+      "cervical",
+      "colon",
+      "uterine"
+    ],
+    "hash": "01522641d4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:14.656110"
+  },
+  {
+    "id": "BIO-00107",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "(Link to Specific Obj",
+    "content": "ective A1",
+    "specific_objectives": [
+      "(Link to Specific Obj"
+    ],
+    "content_items": [
+      "ective A1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 37,
+    "keywords": [
+      "ective",
+      "link",
+      "obj",
+      "specific"
+    ],
+    "hash": "7294dc9c21",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:17.257756"
+  },
+  {
+    "id": "BIO-00108",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "by this syllabus. It",
+    "content": "is intended",
+    "specific_objectives": [
+      "by this syllabus. It"
+    ],
+    "content_items": [
+      "is intended"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "intended",
+      "syllabus"
+    ],
+    "hash": "e84908b9c3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248285"
+  },
+  {
+    "id": "BIO-00109",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "attitudes that are a",
+    "content": "ssociated wit",
+    "specific_objectives": [
+      "attitudes that are a"
+    ],
+    "content_items": [
+      "ssociated wit"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "are",
+      "attitudes",
+      "ssociated",
+      "wit"
+    ],
+    "hash": "07504d8b0b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248364"
+  },
+  {
+    "id": "BIO-00110",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "syllabus. Group work",
+    "content": "is encourage",
+    "specific_objectives": [
+      "syllabus. Group work"
+    ],
+    "content_items": [
+      "is encourage"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "encourage",
+      "group",
+      "syllabus",
+      "work"
+    ],
+    "hash": "d733879a83",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248440"
+  },
+  {
+    "id": "BIO-00111",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "assist teachers in a",
+    "content": "warding mark",
+    "specific_objectives": [
+      "assist teachers in a"
+    ],
+    "content_items": [
+      "warding mark"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "assist",
+      "mark",
+      "teachers",
+      "warding"
+    ],
+    "hash": "a4668964e2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248646"
+  },
+  {
+    "id": "BIO-00112",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "This helps to build t",
+    "content": "he self-confid",
+    "specific_objectives": [
+      "This helps to build t"
+    ],
+    "content_items": [
+      "he self-confid"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "build",
+      "confid",
+      "helps",
+      "self"
+    ],
+    "hash": "b0991b22b2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248837"
+  },
+  {
+    "id": "BIO-00113",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "facilitates the devel",
+    "content": "opment of",
+    "specific_objectives": [
+      "facilitates the devel"
+    ],
+    "content_items": [
+      "opment of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "devel",
+      "facilitates",
+      "opment"
+    ],
+    "hash": "b9b1c2ef3a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248899"
+  },
+  {
+    "id": "BIO-00114",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "therefore, makes a s",
+    "content": "ignificant and",
+    "specific_objectives": [
+      "therefore, makes a s"
+    ],
+    "content_items": [
+      "ignificant"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "ignificant",
+      "makes",
+      "therefore"
+    ],
+    "hash": "2f839ee0f9",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.248983"
+  },
+  {
+    "id": "BIO-00115",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "provided in this sylla",
+    "content": "bus are intend",
+    "specific_objectives": [
+      "provided in this sylla"
+    ],
+    "content_items": [
+      "bus are intend"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "are",
+      "bus",
+      "intend",
+      "provided",
+      "sylla"
+    ],
+    "hash": "1f95d44dec",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249083"
+  },
+  {
+    "id": "BIO-00116",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "guided research proj",
+    "content": "ect for school",
+    "specific_objectives": [
+      "guided research proj"
+    ],
+    "content_items": [
+      "ect for school"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "ect",
+      "guided",
+      "proj",
+      "research",
+      "school"
+    ],
+    "hash": "f829a55566",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249172"
+  },
+  {
+    "id": "BIO-00117",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "Candidates will be r",
+    "content": "equired to co",
+    "specific_objectives": [
+      "Candidates will be r"
+    ],
+    "content_items": [
+      "equired to co"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "candidates",
+      "equired",
+      "will"
+    ],
+    "hash": "690add76db",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249237"
+  },
+  {
+    "id": "BIO-00118",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "related or environme",
+    "content": "ntal issue and",
+    "specific_objectives": [
+      "related or environme"
+    ],
+    "content_items": [
+      "ntal issue"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "environme",
+      "issue",
+      "ntal",
+      "related"
+    ],
+    "hash": "349527b281",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249301"
+  },
+  {
+    "id": "BIO-00119",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "to collect data, analy",
+    "content": "se and interpr",
+    "specific_objectives": [
+      "to collect data, analy"
+    ],
+    "content_items": [
+      "interpr"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "analy",
+      "collect",
+      "data",
+      "interpr"
+    ],
+    "hash": "055e0209c4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249366"
+  },
+  {
+    "id": "BIO-00120",
+    "section": "SECTION E: THE IMPACT OF HEALTH PRACTICES ON THE ENVIRONMENT",
+    "subsection": "Unknown",
+    "objective": "In the research proje",
+    "content": "ct, students sh",
+    "specific_objectives": [
+      "In the research proje"
+    ],
+    "content_items": [
+      "ct, students sh"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 38,
+    "keywords": [
+      "proje",
+      "research",
+      "students"
+    ],
+    "hash": "ca2bdeccd4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.249416"
+  },
+  {
+    "id": "BIO-00121",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "individual report on",
+    "content": "a project",
+    "specific_objectives": [
+      "individual report on"
+    ],
+    "content_items": [
+      "a project"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "individual",
+      "project",
+      "report"
+    ],
+    "hash": "5bb15894a4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.527624"
+  },
+  {
+    "id": "BIO-00122",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "electronically via t",
+    "content": "he SBA da",
+    "specific_objectives": [
+      "electronically via t"
+    ],
+    "content_items": [
+      "he SBA da"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "electronically",
+      "sba",
+      "via"
+    ],
+    "hash": "a05d21ae99",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.527970"
+  },
+  {
+    "id": "BIO-00123",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "A student’s report s",
+    "content": "hould be",
+    "specific_objectives": [
+      "A student’s report s"
+    ],
+    "content_items": [
+      "hould be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "hould",
+      "report",
+      "student"
+    ],
+    "hash": "123c935015",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.528068"
+  },
+  {
+    "id": "BIO-00124",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "in the order prescri",
+    "content": "bed below:",
+    "specific_objectives": [
+      "in the order prescri"
+    ],
+    "content_items": [
+      "bed below:"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "bed",
+      "below",
+      "order",
+      "prescri"
+    ],
+    "hash": "bede5aa3c9",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.528118"
+  },
+  {
+    "id": "BIO-00125",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "1. Background/Overview of Issue • Provides a clear, detailed description of a current health-related or environmental issue • Description is detailed but lacks clarity",
+    "content": "MA RKS (2) 2 1",
+    "specific_objectives": [
+      "Background/Overview of Issue",
+      "Provides a clear, detailed description of a current health-related or environmental issue",
+      "Description is detailed but lacks clarity"
+    ],
+    "content_items": [
+      "MA RKS (2) 2 1"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 40,
+    "keywords": [
+      "background",
+      "clarity",
+      "clear",
+      "current",
+      "description",
+      "detailed",
+      "environmental",
+      "health",
+      "issue",
+      "lacks",
+      "overview",
+      "provides"
+    ],
+    "hash": "bb9339862d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.726365"
+  },
+  {
+    "id": "BIO-00126",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "2. Problem Statement • Research problem is stated clearly • Research problem is in an appropriate form – an observation or question",
+    "content": "(2) 1 1",
+    "specific_objectives": [
+      "Problem Statement",
+      "Research problem is stated clearly",
+      "Research problem is in an appropriate form – an observation or question"
+    ],
+    "content_items": [
+      "(2) 1 1"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 40,
+    "keywords": [
+      "appropriate",
+      "clearly",
+      "form",
+      "observation",
+      "problem",
+      "question",
+      "research",
+      "stated",
+      "statement"
+    ],
+    "hash": "00b82a9710",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.726509"
+  },
+  {
+    "id": "BIO-00127",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "3. Research Objective • Objective of the research is linked to the issue • Objective of the research is realistic/feasible",
+    "content": "(2) 1 1",
+    "specific_objectives": [
+      "Research Objective",
+      "Objective of the research is linked to the issue",
+      "Objective of the research is realistic/feasible"
+    ],
+    "content_items": [
+      "(2) 1 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 40,
+    "keywords": [
+      "feasible",
+      "issue",
+      "linked",
+      "objective",
+      "realistic",
+      "research"
+    ],
+    "hash": "508d129386",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.726631"
+  },
+  {
+    "id": "BIO-00128",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "4. Methodology • Sample used is identified and clearly described • Data collection instrument is identified and clearly described • Method of data collection is identified and clearly described • Method of data collection is adequately justified • ONE limitation of data collection method clearly stated",
+    "content": "(8 ) 2 2 2 1 1",
+    "specific_objectives": [
+      "Methodology",
+      "Sample used is identified",
+      "clearly described",
+      "Data collection instrument is identified",
+      "clearly described",
+      "Method of data collection is identified",
+      "clearly described",
+      "Method of data collection is adequately justified",
+      "ONE limitation of data collection method clearly stated"
+    ],
+    "content_items": [
+      "(8 ) 2 2 2 1 1"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 40,
+    "keywords": [
+      "adequately",
+      "clearly",
+      "collection",
+      "data",
+      "described",
+      "identified",
+      "instrument",
+      "justified",
+      "limitation",
+      "method",
+      "methodology",
+      "one"
+    ],
+    "hash": "dd4d4699c2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.726841"
+  },
+  {
+    "id": "BIO-00129",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "5. Pre s e n t a t ion of D at a • Data is presented in an appropriate form using tables, graphs and charts • Data is presented in at least TWO forms • Form(s) used for presentation of data is correctly labelled • Data presented are accurate",
+    "content": "(5) 1 2 1 1",
+    "specific_objectives": [
+      "Pre s e n t a t ion of D at a",
+      "Data is presented in an appropriate form using tables, graphs",
+      "charts",
+      "Data is presented in at least TWO forms",
+      "Form(s) used for presentation of data is correctly labelled",
+      "Data presented are accurate"
+    ],
+    "content_items": [
+      "(5) 1 2 1 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 40,
+    "keywords": [
+      "accurate",
+      "appropriate",
+      "are",
+      "charts",
+      "correctly",
+      "data",
+      "form",
+      "forms",
+      "graphs",
+      "ion",
+      "labelled",
+      "least"
+    ],
+    "hash": "c590c8d40b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.727033"
+  },
+  {
+    "id": "BIO-00130",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "6. Analysis and Interpretation of Data • Data is analyzed using appropriate calculations/statistics/themes • Data is summarized accurately • At least TWO statements of findings based on data presented • Findings are consistent with analyses",
+    "content": "MA RKS (5 ) 1 1 2 1",
+    "specific_objectives": [
+      "Analysis",
+      "Interpretation of Data",
+      "Data is analyzed using appropriate calculations/statistics/themes",
+      "Data is summarized accurately",
+      "At least TWO statements of findings based on data presented",
+      "Findings are consistent with analyses"
+    ],
+    "content_items": [
+      "MA RKS (5 ) 1 1 2 1"
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 41,
+    "keywords": [
+      "accurately",
+      "analyses",
+      "analysis",
+      "analyzed",
+      "appropriate",
+      "are",
+      "based",
+      "calculations",
+      "consistent",
+      "data",
+      "findings",
+      "interpretation"
+    ],
+    "hash": "2d3e3d452a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.925729"
+  },
+  {
+    "id": "BIO-00131",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "7. Conclusion • Conclusion succinctly summarizes the project • Conclusion is logical and based on findings",
+    "content": "(2) 1 1",
+    "specific_objectives": [
+      "Conclusion",
+      "Conclusion succinctly summarizes the project",
+      "Conclusion is logical",
+      "based on findings"
+    ],
+    "content_items": [
+      "(2) 1 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "based",
+      "conclusion",
+      "findings",
+      "logical",
+      "project",
+      "succinctly",
+      "summarizes"
+    ],
+    "hash": "ef911d7d34",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.925861"
+  },
+  {
+    "id": "BIO-00132",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "8. Recommendations • At least TWO recommendations proposed • Recommendations are realistic • Recommendations are informed by findings",
+    "content": "(4) 2 1 1",
+    "specific_objectives": [
+      "Recommendations",
+      "At least TWO recommendations proposed",
+      "Recommendations are realistic",
+      "Recommendations are informed by findings"
+    ],
+    "content_items": [
+      "(4) 2 1 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "are",
+      "findings",
+      "informed",
+      "least",
+      "proposed",
+      "realistic",
+      "recommendations",
+      "two"
+    ],
+    "hash": "506ec64a2a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.925990"
+  },
+  {
+    "id": "BIO-00133",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "9. Reflection: Candidate states the following information: • TWO lessons learnt after undertaking the project. • ONE way in which the lesson learnt could be applied to his/her personal life. • ONE way in which the project could be improved. • ONE social impact and ONE economic impact the issue could have on his/her school or community if not rectified.",
+    "content": "(6) 2 1 1 2",
+    "specific_objectives": [
+      "Reflection: Candidate states the following information:",
+      "TWO lessons learnt after undertaking the project.",
+      "ONE way in which the lesson learnt could be applied to his/her personal life.",
+      "ONE way in which the project could be improved.",
+      "ONE social impact",
+      "ONE economic impact the issue could have on his/her school or community if not rectified."
+    ],
+    "content_items": [
+      "(6) 2 1 1 2"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 41,
+    "keywords": [
+      "after",
+      "applied",
+      "candidate",
+      "community",
+      "could",
+      "economic",
+      "following",
+      "have",
+      "her",
+      "his",
+      "impact",
+      "improved"
+    ],
+    "hash": "11c4835952",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:18.926231"
+  },
+  {
+    "id": "BIO-00134",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "The research project is",
+    "content": "worth 20%",
+    "specific_objectives": [
+      "The research project is"
+    ],
+    "content_items": [
+      "worth 20%"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "project",
+      "research",
+      "worth"
+    ],
+    "hash": "535ccf3c83",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.166826"
+  },
+  {
+    "id": "BIO-00135",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "guidance at all stages o",
+    "content": "f the projec",
+    "specific_objectives": [
+      "guidance at all stages o"
+    ],
+    "content_items": [
+      "f the projec"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "all",
+      "guidance",
+      "projec",
+      "stages"
+    ],
+    "hash": "2e278f2ec8",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.166913"
+  },
+  {
+    "id": "BIO-00136",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "the assessment criteria",
+    "content": "should be d",
+    "specific_objectives": [
+      "the assessment criteria"
+    ],
+    "content_items": [
+      "should be d"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "assessment",
+      "criteria",
+      "should"
+    ],
+    "hash": "dc5a1511b6",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.166972"
+  },
+  {
+    "id": "BIO-00137",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "School-Based Assessme",
+    "content": "nt tasks s",
+    "specific_objectives": [
+      "School-Based Assessme"
+    ],
+    "content_items": [
+      "nt tasks s"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "assessme",
+      "based",
+      "school",
+      "tasks"
+    ],
+    "hash": "74ef7f77de",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167038"
+  },
+  {
+    "id": "BIO-00138",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "supervised and marked",
+    "content": "by the teac",
+    "specific_objectives": [
+      "supervised",
+      "marked"
+    ],
+    "content_items": [
+      "by the teac"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "marked",
+      "supervised",
+      "teac"
+    ],
+    "hash": "f1a19528e4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167118"
+  },
+  {
+    "id": "BIO-00139",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "and assessment should",
+    "content": "be conduct",
+    "specific_objectives": [
+      "assessment should"
+    ],
+    "content_items": [
+      "be conduct"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "assessment",
+      "conduct",
+      "should"
+    ],
+    "hash": "a3745a0147",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167183"
+  },
+  {
+    "id": "BIO-00140",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "improvement. Although",
+    "content": "some of t",
+    "specific_objectives": [
+      "improvement. Although"
+    ],
+    "content_items": [
+      "some of t"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "although",
+      "improvement",
+      "some"
+    ],
+    "hash": "1a722df43a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167244"
+  },
+  {
+    "id": "BIO-00141",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "of normal school time,",
+    "content": "the teache",
+    "specific_objectives": [
+      "of normal school time,"
+    ],
+    "content_items": [
+      "the teache"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "normal",
+      "school",
+      "teache",
+      "time"
+    ],
+    "hash": "a53e998edf",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167306"
+  },
+  {
+    "id": "BIO-00142",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "student’s own work. Th",
+    "content": "e teacher",
+    "specific_objectives": [
+      "student’s own work. Th"
+    ],
+    "content_items": [
+      "e teacher"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "own",
+      "student",
+      "teacher",
+      "work"
+    ],
+    "hash": "2b86f1861f",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167374"
+  },
+  {
+    "id": "BIO-00143",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "An early start to planni",
+    "content": "ng project w",
+    "specific_objectives": [
+      "An early start to planni"
+    ],
+    "content_items": [
+      "ng project w"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "early",
+      "planni",
+      "project",
+      "start"
+    ],
+    "hash": "b13195172a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167615"
+  },
+  {
+    "id": "BIO-00144",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "project work (agreed by",
+    "content": "both teach",
+    "specific_objectives": [
+      "project work (agreed by"
+    ],
+    "content_items": [
+      "both teach"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "agreed",
+      "both",
+      "project",
+      "teach",
+      "work"
+    ],
+    "hash": "57dc6fff15",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167678"
+  },
+  {
+    "id": "BIO-00145",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Teachers should ensure",
+    "content": "that the pr",
+    "specific_objectives": [
+      "Teachers should ensure"
+    ],
+    "content_items": [
+      "that the pr"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "ensure",
+      "should",
+      "teachers"
+    ],
+    "hash": "b7e97af543",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167747"
+  },
+  {
+    "id": "BIO-00146",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "systematic monitoring",
+    "content": "and evaluat",
+    "specific_objectives": [
+      "systematic monitoring"
+    ],
+    "content_items": [
+      "evaluat"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "evaluat",
+      "monitoring",
+      "systematic"
+    ],
+    "hash": "43922f90b4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167817"
+  },
+  {
+    "id": "BIO-00147",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "This will guard against",
+    "content": "plagiarism a",
+    "specific_objectives": [
+      "This will guard against"
+    ],
+    "content_items": [
+      "plagiarism a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "against",
+      "guard",
+      "plagiarism",
+      "will"
+    ],
+    "hash": "9f326a8549",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167880"
+  },
+  {
+    "id": "BIO-00148",
+    "section": "module on: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Authenticity can also be",
+    "content": "ensured by",
+    "specific_objectives": [
+      "Authenticity can also be"
+    ],
+    "content_items": [
+      "ensured by"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 42,
+    "keywords": [
+      "also",
+      "authenticity",
+      "can",
+      "ensured"
+    ],
+    "hash": "83fbcb52ca",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.167931"
+  },
+  {
+    "id": "BIO-00149",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Fosbery, R., Alleyne,",
+    "content": "T., Brown, M.",
+    "specific_objectives": [
+      "Fosbery, R., Alleyne,"
+    ],
+    "content_items": [
+      "T., Brown, M."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "alleyne",
+      "brown",
+      "fosbery"
+    ],
+    "hash": "b037f07e3b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.607878"
+  },
+  {
+    "id": "BIO-00150",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Fosbery, R. and Give",
+    "content": "ns, P.",
+    "specific_objectives": [
+      "Fosbery, R."
+    ],
+    "content_items": [
+      "ns, P."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "fosbery",
+      "give"
+    ],
+    "hash": "9cc69d45f1",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.607976"
+  },
+  {
+    "id": "BIO-00151",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "Fullick, A. and Ragoo",
+    "content": "birsingh, D.",
+    "specific_objectives": [
+      "Fullick, A.",
+      "Ragoo"
+    ],
+    "content_items": [
+      "birsingh, D."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 43,
+    "keywords": [
+      "birsingh",
+      "fullick",
+      "ragoo"
+    ],
+    "hash": "c13e8b13d8",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.608052"
+  },
+  {
+    "id": "BIO-00152",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "D: Disease and Their Impact on Humans",
+    "content": "Infectious disease activity: https://www.windows2universe.org/?page=/teacher_resources/infect ious_disease.html Mosquito-borne disease: https://www.hhmi.org/biointeractive/stopping-mosquito-borne- disease Malaria: https://www.hhmi.org/biointeractive/stopping-mosquito-borne- disease Infection prevention: http://www.pkids.org/infection_protection/infectious_disease_works hop.html Cancer basics: https://www.cancer.org/cancer/cancer-basics.html What is cancer? http://www.scholastic.com/browse/article.jsp?id=3751444 Games - drug use and effects https://teens.drugabuse.gov/games https://www.educationworld.com/a_tech/archives/webquest.shtml",
+    "specific_objectives": [
+      "D: Disease",
+      "Their Impact on Humans"
+    ],
+    "content_items": [
+      "Infectious disease activity: https://www.windows2universe.org/?page=/teacher_resources/infect ious_disease.html Mosquito-borne disease: https://www.hhmi.org/biointeractive/stopping-mosquito-borne- disease Malaria: https://www.hhmi.org/biointeractive/stopping-mosquito-borne- disease Infection prevention: http://www.pkids.org/infection_protection/infectious_disease_works hop.html Cancer basics: https://www.cancer.org/cancer/cancer-basics.html What is cancer? http://www.scholastic.com/browse/article.jsp?id=3751444 Games - drug use",
+      "effects https://teens.drugabuse.gov/games https://www.educationworld.com/a_tech/archives/webquest.shtml"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 44,
+    "keywords": [
+      "activity",
+      "archives",
+      "article",
+      "basics",
+      "biointeractive",
+      "borne",
+      "browse",
+      "cancer",
+      "com",
+      "disease",
+      "drug",
+      "drugabuse"
+    ],
+    "hash": "8204d3e366",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.794195"
+  },
+  {
+    "id": "BIO-00153",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "E: The Impact of Health Practices on the Environment",
+    "content": "Human impact on the environment",
+    "specific_objectives": [
+      "E: The Impact of Health Practices on the Environment"
+    ],
+    "content_items": [
+      "Human impact on the environment"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "environment",
+      "health",
+      "human",
+      "impact",
+      "practices"
+    ],
+    "hash": "b32773432d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:19.847348"
+  },
+  {
+    "id": "BIO-00154",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "importance of particul",
+    "content": "ar",
+    "specific_objectives": [
+      "importance of particul"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "importance",
+      "particul"
+    ],
+    "hash": "84c1cff9d3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.315928"
+  },
+  {
+    "id": "BIO-00155",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "structures relationships",
+    "content": "or",
+    "specific_objectives": [
+      "structures relationships"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "relationships",
+      "structures"
+    ],
+    "hash": "75045f1893",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.315997"
+  },
+  {
+    "id": "BIO-00156",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "histogram, pie chart or oth",
+    "content": "er",
+    "specific_objectives": [
+      "histogram, pie chart or oth"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "chart",
+      "histogram",
+      "oth",
+      "pie"
+    ],
+    "hash": "6cf1e7ca24",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316191"
+  },
+  {
+    "id": "BIO-00157",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "representation using data",
+    "content": "or",
+    "specific_objectives": [
+      "representation using data"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "data",
+      "representation",
+      "using"
+    ],
+    "hash": "281ea6768a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316243"
+  },
+  {
+    "id": "BIO-00158",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "material provided or draw",
+    "content": "n",
+    "specific_objectives": [
+      "material provided or draw"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "draw",
+      "material",
+      "provided"
+    ],
+    "hash": "633db044bc",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316292"
+  },
+  {
+    "id": "BIO-00159",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "from practical investigation",
+    "content": "s,",
+    "specific_objectives": [
+      "from practical investigation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "investigation",
+      "practical"
+    ],
+    "hash": "e5456d7995",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316340"
+  },
+  {
+    "id": "BIO-00160",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "build (for example, a mode",
+    "content": "l),",
+    "specific_objectives": [
+      "build (for example, a mode"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "build"
+    ],
+    "hash": "fec90545ea",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316392"
+  },
+  {
+    "id": "BIO-00161",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "between two or more piec",
+    "content": "es",
+    "specific_objectives": [
+      "between two or more piec"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "between",
+      "more",
+      "piec",
+      "two"
+    ],
+    "hash": "56a4b22d61",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316454"
+  },
+  {
+    "id": "BIO-00162",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "of information; use data",
+    "content": "to",
+    "specific_objectives": [
+      "of information",
+      "use data"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 46,
+    "keywords": [
+      "data",
+      "information",
+      "use"
+    ],
+    "hash": "91fc2eb809",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.316502"
+  },
+  {
+    "id": "BIO-00163",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "evidence; direct attentio",
+    "content": "n to.",
+    "specific_objectives": [
+      "evidence",
+      "direct attentio"
+    ],
+    "content_items": [
+      "n to."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "attentio",
+      "direct",
+      "evidence"
+    ],
+    "hash": "47e1ddf674",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876459"
+  },
+  {
+    "id": "BIO-00164",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "from data by a set of l",
+    "content": "ogical steps",
+    "specific_objectives": [
+      "from data by a set of l"
+    ],
+    "content_items": [
+      "ogical steps"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "data",
+      "ogical",
+      "set",
+      "steps"
+    ],
+    "hash": "3c10603858",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876567"
+  },
+  {
+    "id": "BIO-00165",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "some relationship, f",
+    "content": "ormula or",
+    "specific_objectives": [
+      "some relationship, f"
+    ],
+    "content_items": [
+      "ormula or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "ormula",
+      "relationship",
+      "some"
+    ],
+    "hash": "6b74efd909",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876621"
+  },
+  {
+    "id": "BIO-00166",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "information of the appe",
+    "content": "arance or",
+    "specific_objectives": [
+      "information of the appe"
+    ],
+    "content_items": [
+      "arance or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "appe",
+      "arance",
+      "information"
+    ],
+    "hash": "bb2835f04e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876701"
+  },
+  {
+    "id": "BIO-00167",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "arrangement of a specif",
+    "content": "ic structure",
+    "specific_objectives": [
+      "arrangement of a specif"
+    ],
+    "content_items": [
+      "ic structure"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "arrangement",
+      "specif",
+      "structure"
+    ],
+    "hash": "d3e7f14621",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876757"
+  },
+  {
+    "id": "BIO-00168",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "or the sequence of a spe",
+    "content": "cific",
+    "specific_objectives": [
+      "or the sequence of a spe"
+    ],
+    "content_items": [
+      "cific"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "cific",
+      "sequence",
+      "spe"
+    ],
+    "hash": "24582df94e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876812"
+  },
+  {
+    "id": "BIO-00169",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "argument with supporti",
+    "content": "ng reasons.",
+    "specific_objectives": [
+      "argument with supporti"
+    ],
+    "content_items": [
+      "ng reasons."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "argument",
+      "reasons",
+      "supporti"
+    ],
+    "hash": "1e7d39dc52",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.876993"
+  },
+  {
+    "id": "BIO-00170",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "differentiate/distinguish",
+    "content": "State or explain bri",
+    "specific_objectives": [
+      "differentiate/distinguish"
+    ],
+    "content_items": [
+      "State or explain bri"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "bri",
+      "differentiate",
+      "distinguish",
+      "explain",
+      "state"
+    ],
+    "hash": "bf63a00b1a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877055"
+  },
+  {
+    "id": "BIO-00171",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "which can be used to",
+    "content": "define the",
+    "specific_objectives": [
+      "which can be used to"
+    ],
+    "content_items": [
+      "define the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "can",
+      "define",
+      "used",
+      "which"
+    ],
+    "hash": "0018f69a27",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877117"
+  },
+  {
+    "id": "BIO-00172",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "items or place them int",
+    "content": "o separate",
+    "specific_objectives": [
+      "items or place them int"
+    ],
+    "content_items": [
+      "o separate"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "int",
+      "items",
+      "place",
+      "separate",
+      "them"
+    ],
+    "hash": "fe5d15b19d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877168"
+  },
+  {
+    "id": "BIO-00173",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "consider points both for",
+    "content": "and against;",
+    "specific_objectives": [
+      "consider points both for"
+    ],
+    "content_items": [
+      "against"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "against",
+      "both",
+      "consider",
+      "points"
+    ],
+    "hash": "c83fc9c8f4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877239"
+  },
+  {
+    "id": "BIO-00174",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "explain the relative merit",
+    "content": "s of a case.",
+    "specific_objectives": [
+      "explain the relative merit"
+    ],
+    "content_items": [
+      "s of a case."
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 47,
+    "keywords": [
+      "case",
+      "explain",
+      "merit",
+      "relative"
+    ],
+    "hash": "47848c8ed6",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877290"
+  },
+  {
+    "id": "BIO-00175",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "specimens or apparatus",
+    "content": "that shows",
+    "specific_objectives": [
+      "specimens or apparatus"
+    ],
+    "content_items": [
+      "that shows"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "apparatus",
+      "shows",
+      "specimens"
+    ],
+    "hash": "a0d028909f",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877361"
+  },
+  {
+    "id": "BIO-00176",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "an accurate relationshi",
+    "content": "p between",
+    "specific_objectives": [
+      "an accurate relationshi"
+    ],
+    "content_items": [
+      "p between"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "accurate",
+      "between",
+      "relationshi"
+    ],
+    "hash": "1128bc34aa",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:20.877415"
+  },
+  {
+    "id": "BIO-00177",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "judgments based on giv",
+    "content": "en criteria.",
+    "specific_objectives": [
+      "judgments based on giv"
+    ],
+    "content_items": [
+      "en criteria."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "based",
+      "criteria",
+      "giv",
+      "judgments"
+    ],
+    "hash": "d1f0b09fb4",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.418569"
+  },
+  {
+    "id": "BIO-00178",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "appropriate examples o",
+    "content": "r diagrams,",
+    "specific_objectives": [
+      "appropriate examples o"
+    ],
+    "content_items": [
+      "r diagrams,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "appropriate",
+      "diagrams",
+      "examples"
+    ],
+    "hash": "ca531a5ad1",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.418755"
+  },
+  {
+    "id": "BIO-00179",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "procedures to observe, r",
+    "content": "ecord data",
+    "specific_objectives": [
+      "procedures to observe, r"
+    ],
+    "content_items": [
+      "ecord data"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "data",
+      "ecord",
+      "observe",
+      "procedures"
+    ],
+    "hash": "8aa92e5067",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.418825"
+  },
+  {
+    "id": "BIO-00180",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "and draw logical conclusi",
+    "content": "ons.",
+    "specific_objectives": [
+      "draw logical conclusi"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "conclusi",
+      "draw",
+      "logical",
+      "ons"
+    ],
+    "hash": "1251480f3d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.418877"
+  },
+  {
+    "id": "BIO-00181",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "parts indicated by pointer",
+    "content": "s.",
+    "specific_objectives": [
+      "parts indicated by pointer"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "indicated",
+      "parts",
+      "pointer"
+    ],
+    "hash": "e27f31b738",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.418947"
+  },
+  {
+    "id": "BIO-00182",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "using appropriate instrum",
+    "content": "ent.",
+    "specific_objectives": [
+      "using appropriate instrum"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "appropriate",
+      "ent",
+      "instrum",
+      "using"
+    ],
+    "hash": "f117dddc2a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.419011"
+  },
+  {
+    "id": "BIO-00183",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "characterise a specimen,",
+    "content": "reaction or",
+    "specific_objectives": [
+      "characterise a specimen,"
+    ],
+    "content_items": [
+      "reaction or"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "characterise",
+      "reaction",
+      "specimen"
+    ],
+    "hash": "480ec3776e",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.419104"
+  },
+  {
+    "id": "BIO-00184",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "change taking place; to e",
+    "content": "xamine and",
+    "specific_objectives": [
+      "change taking place"
+    ],
+    "content_items": [
+      "xamine"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "change",
+      "place",
+      "taking",
+      "xamine"
+    ],
+    "hash": "c6248428e8",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.419162"
+  },
+  {
+    "id": "BIO-00185",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "note scientifically.",
+    "content": "would normally",
+    "specific_objectives": [
+      "note scientifically."
+    ],
+    "content_items": [
+      "would normally"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 48,
+    "keywords": [
+      "normally",
+      "note",
+      "scientifically",
+      "would"
+    ],
+    "hash": "b937c700bd",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.419212"
+  },
+  {
+    "id": "BIO-00186",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "at a likely conclusion o",
+    "content": "r suggest a",
+    "specific_objectives": [
+      "at a likely conclusion o"
+    ],
+    "content_items": [
+      "r suggest a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "conclusion",
+      "likely",
+      "suggest"
+    ],
+    "hash": "e9662d85f0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839233"
+  },
+  {
+    "id": "BIO-00187",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "full range of observat",
+    "content": "ions made",
+    "specific_objectives": [
+      "full range of observat"
+    ],
+    "content_items": [
+      "ions made"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "full",
+      "ions",
+      "made",
+      "observat",
+      "range"
+    ],
+    "hash": "7d98e70772",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839341"
+  },
+  {
+    "id": "BIO-00188",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "during a given procedure.",
+    "content": "investigated whe",
+    "specific_objectives": [
+      "during a given procedure."
+    ],
+    "content_items": [
+      "investigated whe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "during",
+      "given",
+      "investigated",
+      "procedure",
+      "whe"
+    ],
+    "hash": "bb18fbfa1d",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839404"
+  },
+  {
+    "id": "BIO-00189",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "explain how one set of f",
+    "content": "acts or data",
+    "specific_objectives": [
+      "explain how one set of f"
+    ],
+    "content_items": [
+      "acts or data"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 2,
+    "page_number": 49,
+    "keywords": [
+      "acts",
+      "data",
+      "explain",
+      "how",
+      "one",
+      "set"
+    ],
+    "hash": "f81efec2e0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839496"
+  },
+  {
+    "id": "BIO-00190",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "depend on others or are",
+    "content": "determined",
+    "specific_objectives": [
+      "depend on others or are"
+    ],
+    "content_items": [
+      "determined"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "are",
+      "depend",
+      "determined",
+      "others"
+    ],
+    "hash": "0647503685",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839550"
+  },
+  {
+    "id": "BIO-00191",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "showing relevant prop",
+    "content": "ortions and",
+    "specific_objectives": [
+      "showing relevant prop"
+    ],
+    "content_items": [
+      "ortions"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "ortions",
+      "prop",
+      "relevant",
+      "showing"
+    ],
+    "hash": "b6ec7662ea",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839616"
+  },
+  {
+    "id": "BIO-00192",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "terms, omitting explanati",
+    "content": "on.",
+    "specific_objectives": [
+      "terms, omitting explanati"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "explanati",
+      "omitting",
+      "terms"
+    ],
+    "hash": "5116eaafc3",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839679"
+  },
+  {
+    "id": "BIO-00193",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "information or previous k",
+    "content": "nowledge.",
+    "specific_objectives": [
+      "information or previous k"
+    ],
+    "content_items": [
+      "nowledge."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "information",
+      "nowledge",
+      "previous"
+    ],
+    "hash": "042d93ec98",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839745"
+  },
+  {
+    "id": "BIO-00194",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "suggest an hypothesis",
+    "content": "Provide a generalisation",
+    "specific_objectives": [
+      "suggest an hypothesis"
+    ],
+    "content_items": [
+      "Provide a generalisation"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "generalisation",
+      "hypothesis",
+      "provide",
+      "suggest"
+    ],
+    "hash": "9c8699bc08",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839823"
+  },
+  {
+    "id": "BIO-00195",
+    "section": "module of: the Online Registration System",
+    "subsection": "Unknown",
+    "objective": "a likely explanation for a",
+    "content": "set of data",
+    "specific_objectives": [
+      "a likely explanation for a"
+    ],
+    "content_items": [
+      "set of data"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 49,
+    "keywords": [
+      "data",
+      "explanation",
+      "likely",
+      "set"
+    ],
+    "hash": "ab157dbb33",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:21.839874"
+  },
+  {
+    "id": "BIO-00196",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "A: LIVING ORGANISMS AND THE ENVIRONMENT",
+    "content": "2",
+    "specific_objectives": [
+      "A: LIVING ORGANISMS AND THE ENVIRONMENT"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 50,
+    "keywords": [
+      "environment",
+      "living",
+      "organisms"
+    ],
+    "hash": "7b59cc2fce",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:22.062094"
+  },
+  {
+    "id": "BIO-00197",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "C: HEREDITY AND VARIATION",
+    "content": "1",
+    "specific_objectives": [
+      "C: HEREDITY AND VARIATION"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 50,
+    "keywords": [
+      "heredity",
+      "variation"
+    ],
+    "hash": "ab0bff4311",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:22.062352"
+  },
+  {
+    "id": "BIO-00198",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "Caribbean Secondary Edu",
+    "content": "catio",
+    "specific_objectives": [
+      "Caribbean Secondary Edu"
+    ],
+    "content_items": [
+      "catio"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 53,
+    "keywords": [
+      "caribbean",
+      "catio",
+      "edu",
+      "secondary"
+    ],
+    "hash": "cee6a814ed",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:22.567029"
+  },
+  {
+    "id": "BIO-00199",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "Mark Scheme and Key: -",
+    "content": "Paper",
+    "specific_objectives": [
+      "Mark Scheme",
+      "Key: -"
+    ],
+    "content_items": [
+      "Paper"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 53,
+    "keywords": [
+      "key",
+      "mark",
+      "paper",
+      "scheme"
+    ],
+    "hash": "a56264718f",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:22.567166"
+  },
+  {
+    "id": "BIO-00200",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "present on its surfa",
+    "content": "ce",
+    "specific_objectives": [
+      "present on its surfa"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 59,
+    "keywords": [
+      "its",
+      "present",
+      "surfa"
+    ],
+    "hash": "90b8124091",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:24.997677"
+  },
+  {
+    "id": "BIO-00201",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "microbes to other or",
+    "content": "ganis",
+    "specific_objectives": [
+      "microbes to other or"
+    ],
+    "content_items": [
+      "ganis"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 67,
+    "keywords": [
+      "ganis",
+      "microbes",
+      "other"
+    ],
+    "hash": "130bbb42b2",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.370914"
+  },
+  {
+    "id": "BIO-00202",
+    "section": "SECTION SPECIFIC: PRACTICAL ACTIVITIES\nOBJECTIVES\nA",
+    "subsection": "Unknown",
+    "objective": "Peelings/garden trimmings",
+    "content": "6",
+    "specific_objectives": [
+      "Peelings/garden trimmings"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "garden",
+      "peelings",
+      "trimmings"
+    ],
+    "hash": "138368909c",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:27.542762"
+  },
+  {
+    "id": "BIO-00203",
+    "section": "SECTION B: Answer ALL questions in this section",
+    "subsection": "Unknown",
+    "objective": "(a) (b) (c) (i) (ii)",
+    "content": "A: Combustion (1) B: Cellular Respiration (1) C: Death (1) water (1) – reactant oxygen (1) products sugars/glucose (1) An increase in sea surface temperature (1) results in an increase in the intensity of hurricanes (1). OR Sea surface temperature is directly (1) proportional (1) to the intensity of hurricanes. An increase in CO levels results in 2 global warming (1) which causes surface sea temperatures to rise (1) resulting in more intense hurricanes (1)",
+    "specific_objectives": [
+      "(a) (b) (c) (i) (ii)"
+    ],
+    "content_items": [
+      "A: Combustion (1) B: Cellular Respiration (1) C: Death (1) water (1) – reactant oxygen (1) products sugars/glucose (1) An increase in sea surface temperature (1) results in an increase in the intensity of hurricanes (1). OR Sea surface temperature is directly (1) proportional (1) to the intensity of hurricanes. An increase in CO levels results in 2 global warming (1) which causes surface sea temperatures to rise (1) resulting in more intense hurricanes (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 100,
+    "keywords": [
+      "causes",
+      "cellular",
+      "combustion",
+      "death",
+      "directly",
+      "global",
+      "glucose",
+      "hurricanes",
+      "increase",
+      "intense",
+      "intensity",
+      "levels"
+    ],
+    "hash": "7b70e0e29b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.048885"
+  },
+  {
+    "id": "BIO-00204",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: A 8, A 13",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: A 8, A 13"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 101,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "5d67da658a",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.189327"
+  },
+  {
+    "id": "BIO-00205",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (iii) (iv) (b) (i) (ii) (iii) (iv)",
+    "content": "Blood pressure is the force needed (1) to pump blood to all parts of the body (1) Systole: contractions of the heart chambers (1) Diastole: relaxation of the heart chambers (1) 120 – systole (1)  Lack of physical activity/exercise  Stress  Smoking/tobacco use  Abuse of alcohol  High cholesterol  Poor diet (high salt, high fat)  Obesity John’s diet is rich in saturated fats (1) and high in salt (1). These factors contribute to hardening of the walls of the arteries (1) in addition to plaque formation (1) thus resulting in high blood pressure. James, although he smokes, not eating meat means he has a lower risk of plaque formation (1) therefore, resulting in a lower blood pressure. John’s heart rate increases (1) and at the end of the exercise it does not return to its basal rate (1). James heart rate is consistently lower than John’s (1). The possibility of John developing heart disease (1) may explain why his heart did not return to its basal rate. John can change his diet (1) or begin an exercise program (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (iii) (iv) (b) (i) (ii) (iii) (iv)"
+    ],
+    "content_items": [
+      "Blood pressure is the force needed (1) to pump blood to all parts of the body (1) Systole: contractions of the heart chambers (1) Diastole: relaxation of the heart chambers (1) 120 – systole (1)  Lack of physical activity/exercise  Stress  Smoking/tobacco use  Abuse of alcohol  High cholesterol  Poor diet (high salt, high fat)  Obesity John’s diet is rich in saturated fats (1)",
+      "high in salt (1). These factors contribute to hardening of the walls of the arteries (1) in addition to plaque formation (1) thus resulting in high blood pressure. James, although he smokes, not eating meat means he has a lower risk of plaque formation (1) therefore, resulting in a lower blood pressure. John’s heart rate increases (1)",
+      "at the end of the exercise it does not return to its basal rate (1). James heart rate is consistently lower than John’s (1). The possibility of John developing heart disease (1) may explain why his heart did not return to its basal rate. John can change his diet (1) or begin an exercise program (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 102,
+    "keywords": [
+      "abuse",
+      "activity",
+      "addition",
+      "alcohol",
+      "all",
+      "although",
+      "arteries",
+      "basal",
+      "begin",
+      "blood",
+      "body",
+      "can"
+    ],
+    "hash": "ac038a796b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.396603"
+  },
+  {
+    "id": "BIO-00206",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: B. 3.7; B. 3.11, D. 9",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: B. 3.7",
+      "B. 3.11, D. 9"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 102,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "c9c655d6b5",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.396689"
+  },
+  {
+    "id": "BIO-00207",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (iii) (b) (i) (ii) (iii)",
+    "content": "Macronutrients: Carbohydrates, Fats, Proteins (Any 1) Micronutrients: Any one vitamin or mineral named Carbon, Hydrogen, Oxygen (Any 1) Any ground provision (sweet potato, eddo, yam) Any grain (oats, corn, barley, wheat, rice) Malnutrition is a state of health that occurs when there is a lack of balance in the diet caused either by a shortage of certain nutrients (1) or by eating too many nutrients (1). Benita has anorexia nervosa (1) Benny has bulimia nervosa (1).  Muscle loss and wastage(1) due to a lack of protein in the diet (1)  Lethargy (1) due to a lack of carbohydrates and fats in the diet (1)  Brittle bones (1) due to a lack of calcium (1)  Swelling in his hands and feet (1) due to a lack of protein/electrolyte imbalance (1)  Irregular heartbeat (1) due to insufficient electrolytes (1)  Mental alertness (1) as a result of a lack of vitamins and minerals in the diet (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (iii) (b) (i) (ii) (iii)"
+    ],
+    "content_items": [
+      "Macronutrients: Carbohydrates, Fats, Proteins (Any 1) Micronutrients: Any one vitamin or mineral named Carbon, Hydrogen, Oxygen (Any 1) Any ground provision (sweet potato, eddo, yam) Any grain (oats, corn, barley, wheat, rice) Malnutrition is a state of health that occurs when there is a lack of balance in the diet caused either by a shortage of certain nutrients (1) or by eating too many nutrients (1). Benita has anorexia nervosa (1) Benny has bulimia nervosa (1).  Muscle loss",
+      "wastage(1) due to a lack of protein in the diet (1)  Lethargy (1) due to a lack of carbohydrates",
+      "fats in the diet (1)  Brittle bones (1) due to a lack of calcium (1)  Swelling in his hands",
+      "feet (1) due to a lack of protein/electrolyte imbalance (1)  Irregular heartbeat (1) due to insufficient electrolytes (1)  Mental alertness (1) as a result of a lack of vitamins",
+      "minerals in the diet (1)"
+    ],
+    "skills": [
+      "AS",
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 103,
+    "keywords": [
+      "alertness",
+      "anorexia",
+      "any",
+      "balance",
+      "benita",
+      "benny",
+      "bones",
+      "brittle",
+      "bulimia",
+      "calcium",
+      "carbohydrates",
+      "carbon"
+    ],
+    "hash": "7b32085601",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.572568"
+  },
+  {
+    "id": "BIO-00208",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: B1.1, 1.2, B1.11, B 6.15",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: B1.1, 1.2, B1.11, B 6.15"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 104,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "714528740f",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.657762"
+  },
+  {
+    "id": "BIO-00209",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (b) (i) (ii) (iii) (c) (i) (ii)",
+    "content": "At the equator of the cell/ at the middle of the cell (1) Chromosomes are duplicated (1) and are held together at a central point by a centromere (1) Sex linked Female 1, 8 or 14 Colour blindness, Haemophilia Because GMOs can be grown under extreme conditions(1), they may out compete native plants for resources (1) If farmers are not growing native plants, fewer viable seeds will be produced (1) for the growth of subsequent crops (1) Accept any other reasonable response. GMOs  Give a higher yield (1)  Are resistant to pests(1)  Can tolerate poor soil conditions (1)  Drought resistant(1)  Produce crops where ripening is delayed (1)  May provide tastier fruits and vegetables (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (b) (i) (ii) (iii) (c) (i) (ii)"
+    ],
+    "content_items": [
+      "At the equator of the cell/ at the middle of the cell (1) Chromosomes are duplicated (1)",
+      "are held together at a central point by a centromere (1) Sex linked Female 1, 8 or 14 Colour blindness, Haemophilia Because GMOs can be grown under extreme conditions(1), they may out compete native plants for resources (1) If farmers are not growing native plants, fewer viable seeds will be produced (1) for the growth of subsequent crops (1) Accept any other reasonable response. GMOs  Give a higher yield (1)  Are resistant to pests(1)  Can tolerate poor soil conditions (1)  Drought resistant(1)  Produce crops where ripening is delayed (1)  May provide tastier fruits",
+      "vegetables (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "accept",
+      "any",
+      "are",
+      "because",
+      "blindness",
+      "can",
+      "cell",
+      "central",
+      "centromere",
+      "chromosomes",
+      "colour",
+      "compete"
+    ],
+    "hash": "1a48c0b2ca",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.818235"
+  },
+  {
+    "id": "BIO-00210",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: C 4,5, 7, 12",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: C 4,5, 7, 12"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 106,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "88c55ab96b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:34.915932"
+  },
+  {
+    "id": "BIO-00211",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (iii) (b)",
+    "content": "C a n c e r is the abnormal uncontrolled (1) division of cells (1) Prostate, Cervix, Breasts, Lung (Any 2) Surgical removal of growth/tumour (1) Radiation therapy to destroy the Tumour (1) Chemotherapy (1)  In Situation I, influenza is considered to be a pandemic disease (1) because it was spread over a wide geographic area/worldwide (1) and every time the disease is manifested, it is considered a new disease (1)  In Situation II, leptospirosis is considered to be an epidemic disease (1) because it was localised/spread over a small geographical area/neighbourhood (1) and there were an unusual number of cases that occurred at the same time (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (iii) (b)"
+    ],
+    "content_items": [
+      "C a n c e r is the abnormal uncontrolled (1) division of cells (1) Prostate, Cervix, Breasts, Lung (Any 2) Surgical removal of growth/tumour (1) Radiation therapy to destroy the Tumour (1) Chemotherapy (1)  In Situation I, influenza is considered to be a pandemic disease (1) because it was spread over a wide geographic area/worldwide (1)",
+      "every time the disease is manifested, it is considered a new disease (1)  In Situation II, leptospirosis is considered to be an epidemic disease (1) because it was localised/spread over a small geographical area/neighbourhood (1)",
+      "there were an unusual number of cases that occurred at the same time (1)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 107,
+    "keywords": [
+      "abnormal",
+      "area",
+      "because",
+      "breasts",
+      "cases",
+      "cells",
+      "cervix",
+      "chemotherapy",
+      "considered",
+      "destroy",
+      "disease",
+      "division"
+    ],
+    "hash": "cfad6dc1ed",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.061739"
+  },
+  {
+    "id": "BIO-00212",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: D.10; D.11",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: D.10"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 108,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "ebbd4ccb53",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.176068"
+  },
+  {
+    "id": "BIO-00213",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "(a) (i) (ii) (b) (i)",
+    "content": "Landfills are lined (1) to prevent water contamination dumps are not lined (1). Landfills are covered with dirt (1) while dumps are found on the open ground (1). Landfills contain nonhazardous waste (1)while dumps are a mixture hazardous and nonhazardous waste (1). Landfills are controlled and highly regulated (1) while dumps are unregulated (1).  Contamination of ground water  Provides home for vectors  Produces an unpleasant smell  Produces carbon dioxide and methane gas which contribute to global warming Your proposal should include the following points:  The council could implement a new waste disposal policy which requires residents to sort their garbage at home into the categories of waste (1)  Recycling companies could be invited to collect the sorted waste (1) OR residents can place their sorted waste into appropriate recycling bins (1)  The council could impose fines for non-compliance with the new policy (1)  Recycling bins could be placed at various locations within the village to encourage the proper disposal of plastics, paper and metals(1)  Organic waste can be composted and the compost sold or used for fertilizing the village’s gardens/parks (1)",
+    "specific_objectives": [
+      "(a) (i) (ii) (b) (i)"
+    ],
+    "content_items": [
+      "Landfills are lined (1) to prevent water contamination dumps are not lined (1). Landfills are covered with dirt (1) while dumps are found on the open ground (1). Landfills contain nonhazardous waste (1)while dumps are a mixture hazardous",
+      "nonhazardous waste (1). Landfills are controlled",
+      "highly regulated (1) while dumps are unregulated (1).  Contamination of ground water  Provides home for vectors  Produces an unpleasant smell  Produces carbon dioxide",
+      "methane gas which contribute to global warming Your proposal should include the following points:  The council could implement a new waste disposal policy which requires residents to sort their garbage at home into the categories of waste (1)  Recycling companies could be invited to collect the sorted waste (1) OR residents can place their sorted waste into appropriate recycling bins (1)  The council could impose fines for non-compliance with the new policy (1)  Recycling bins could be placed at various locations within the village to encourage the proper disposal of plastics, paper",
+      "metals(1)  Organic waste can be composted",
+      "the compost sold or used for fertilizing the village’s gardens/parks (1)"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 109,
+    "keywords": [
+      "appropriate",
+      "are",
+      "bins",
+      "can",
+      "carbon",
+      "categories",
+      "collect",
+      "companies",
+      "compliance",
+      "compost",
+      "composted",
+      "contain"
+    ],
+    "hash": "9263d67b54",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.339983"
+  },
+  {
+    "id": "BIO-00214",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Syllabus Objectives: E 14,15,21",
+    "content": "6",
+    "specific_objectives": [
+      "Syllabus Objectives: E 14,15,21"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 110,
+    "keywords": [
+      "objectives",
+      "syllabus"
+    ],
+    "hash": "9772db79c0",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:35.471861"
+  },
+  {
+    "id": "BIO-00215",
+    "section": "unit to: use more\nenergy",
+    "subsection": "Unknown",
+    "objective": "Total Suspended Sediments",
+    "content": "",
+    "specific_objectives": [
+      "Total Suspended Sediments"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 130,
+    "keywords": [
+      "sediments",
+      "suspended",
+      "total"
+    ],
+    "hash": "2288d0aa1b",
+    "source_file": "CSEC-Human-and-Social-Biology-Syllabus.pdf",
+    "extraction_date": "2026-01-29T05:32:38.673392"
+  }
+]

@@ -1,0 +1,5497 @@
+[
+  {
+    "id": "GEN-00001",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "37 Arnold Road, King",
+    "content": "ston 5, Ja",
+    "specific_objectives": [
+      "Arnold Road, King"
+    ],
+    "content_items": [
+      "ston 5, Ja"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "arnold",
+      "king",
+      "road",
+      "ston"
+    ],
+    "hash": "1697342ce0",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:24.862454"
+  },
+  {
+    "id": "GEN-00002",
+    "section": "General",
+    "subsection": "Unknown",
+    "objective": "Prince Road, Pine Pla",
+    "content": "ntation Ro",
+    "specific_objectives": [
+      "Prince Road, Pine Pla"
+    ],
+    "content_items": [
+      "ntation Ro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 2,
+    "keywords": [
+      "ntation",
+      "pine",
+      "pla",
+      "prince",
+      "road"
+    ],
+    "hash": "2fab056821",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:24.862582"
+  },
+  {
+    "id": "GEN-00003",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "Music education contrib",
+    "content": "utes to the en",
+    "specific_objectives": [
+      "Music education contrib"
+    ],
+    "content_items": [
+      "utes to the en"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "contrib",
+      "education",
+      "music",
+      "utes"
+    ],
+    "hash": "477a070080",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634599"
+  },
+  {
+    "id": "GEN-00004",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "social skills. As a part o",
+    "content": "f general educ",
+    "specific_objectives": [
+      "social skills. As a part o"
+    ],
+    "content_items": [
+      "f general educ"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "educ",
+      "general",
+      "part",
+      "skills",
+      "social"
+    ],
+    "hash": "eb221a28f8",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634683"
+  },
+  {
+    "id": "GEN-00005",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "different aptitudes and",
+    "content": "abilities, inc",
+    "specific_objectives": [
+      "different aptitudes"
+    ],
+    "content_items": [
+      "abilities, inc"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "abilities",
+      "aptitudes",
+      "different",
+      "inc"
+    ],
+    "hash": "0e962cfecf",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634746"
+  },
+  {
+    "id": "GEN-00006",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "challenged. The nature",
+    "content": "of Music educ",
+    "specific_objectives": [
+      "challenged. The nature"
+    ],
+    "content_items": [
+      "of Music educ"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "challenged",
+      "educ",
+      "music",
+      "nature"
+    ],
+    "hash": "7e651c09db",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634809"
+  },
+  {
+    "id": "GEN-00007",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "own learning, work tog",
+    "content": "ether with oth",
+    "specific_objectives": [
+      "own learning, work tog"
+    ],
+    "content_items": [
+      "ether with oth"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "ether",
+      "learning",
+      "oth",
+      "own",
+      "tog",
+      "work"
+    ],
+    "hash": "9cb8e5be1a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634876"
+  },
+  {
+    "id": "GEN-00008",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "of performers, compose",
+    "content": "rs and audien",
+    "specific_objectives": [
+      "of performers, compose"
+    ],
+    "content_items": [
+      "audien"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "audien",
+      "compose",
+      "performers"
+    ],
+    "hash": "87a34d4865",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.634946"
+  },
+  {
+    "id": "GEN-00009",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "self and others as stude",
+    "content": "nts work inde",
+    "specific_objectives": [
+      "others as stude"
+    ],
+    "content_items": [
+      "nts work inde"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "inde",
+      "nts",
+      "others",
+      "self",
+      "stude",
+      "work"
+    ],
+    "hash": "24856b1f32",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635018"
+  },
+  {
+    "id": "GEN-00010",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "contributions of others.",
+    "content": "Students wh",
+    "specific_objectives": [
+      "contributions of others."
+    ],
+    "content_items": [
+      "Students wh"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "contributions",
+      "others",
+      "students"
+    ],
+    "hash": "c44046822b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635080"
+  },
+  {
+    "id": "GEN-00011",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "as they are engaged in a",
+    "content": "ctivities to refi",
+    "specific_objectives": [
+      "as they are engaged in a"
+    ],
+    "content_items": [
+      "ctivities to refi"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "are",
+      "ctivities",
+      "engaged",
+      "refi",
+      "they"
+    ],
+    "hash": "ac429f0158",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635148"
+  },
+  {
+    "id": "GEN-00012",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "problem-solving and t",
+    "content": "echnological",
+    "specific_objectives": [
+      "problem-solving"
+    ],
+    "content_items": [
+      "echnological"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "echnological",
+      "problem",
+      "solving"
+    ],
+    "hash": "f52b9d045c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635209"
+  },
+  {
+    "id": "GEN-00013",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "technologically driven;",
+    "content": "these skills",
+    "specific_objectives": [
+      "technologically driven"
+    ],
+    "content_items": [
+      "these skills"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "driven",
+      "skills",
+      "technologically",
+      "these"
+    ],
+    "hash": "7bc8b1b3e6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635267"
+  },
+  {
+    "id": "GEN-00014",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "employment and entrep",
+    "content": "reneurial ven",
+    "specific_objectives": [
+      "employment",
+      "entrep"
+    ],
+    "content_items": [
+      "reneurial ven"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "employment",
+      "entrep",
+      "reneurial",
+      "ven"
+    ],
+    "hash": "7d061e7888",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635327"
+  },
+  {
+    "id": "GEN-00015",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "In offering the CSEC® M",
+    "content": "usic syllabus,",
+    "specific_objectives": [
+      "In offering the CSEC® M"
+    ],
+    "content_items": [
+      "usic syllabus,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "csec",
+      "offering",
+      "syllabus",
+      "usic"
+    ],
+    "hash": "3e13f73687",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635405"
+  },
+  {
+    "id": "GEN-00016",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "for the development of",
+    "content": "a practical an",
+    "specific_objectives": [
+      "for the development of"
+    ],
+    "content_items": [
+      "a practical an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "development",
+      "practical"
+    ],
+    "hash": "5998bd2487",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635466"
+  },
+  {
+    "id": "GEN-00017",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "basis for further studie",
+    "content": "s in teaching,",
+    "specific_objectives": [
+      "basis for further studie"
+    ],
+    "content_items": [
+      "s in teaching,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "basis",
+      "further",
+      "studie",
+      "teaching"
+    ],
+    "hash": "638f554d50",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635520"
+  },
+  {
+    "id": "GEN-00018",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "The syllabus is rooted in",
+    "content": "Caribbean mu",
+    "specific_objectives": [
+      "The syllabus is rooted in"
+    ],
+    "content_items": [
+      "Caribbean mu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "caribbean",
+      "rooted",
+      "syllabus"
+    ],
+    "hash": "18e8480d81",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635581"
+  },
+  {
+    "id": "GEN-00019",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "cultures. Further, the",
+    "content": "syllabus enab",
+    "specific_objectives": [
+      "cultures. Further, the"
+    ],
+    "content_items": [
+      "syllabus enab"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "cultures",
+      "enab",
+      "further",
+      "syllabus"
+    ],
+    "hash": "416cae5669",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635640"
+  },
+  {
+    "id": "GEN-00020",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "development of Caribbe",
+    "content": "an musical cul",
+    "specific_objectives": [
+      "development of Caribbe"
+    ],
+    "content_items": [
+      "an musical cul"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "caribbe",
+      "cul",
+      "development",
+      "musical"
+    ],
+    "hash": "8587186349",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635702"
+  },
+  {
+    "id": "GEN-00021",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "that constitutes world",
+    "content": "music. Teache",
+    "specific_objectives": [
+      "that constitutes world"
+    ],
+    "content_items": [
+      "music. Teache"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "constitutes",
+      "music",
+      "teache",
+      "world"
+    ],
+    "hash": "81ba3ab995",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635763"
+  },
+  {
+    "id": "GEN-00022",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "strategies which include",
+    "content": "guided quest",
+    "specific_objectives": [
+      "strategies which include"
+    ],
+    "content_items": [
+      "guided quest"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "guided",
+      "include",
+      "quest",
+      "strategies",
+      "which"
+    ],
+    "hash": "ef98054535",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635823"
+  },
+  {
+    "id": "GEN-00023",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "will enable students to",
+    "content": "gain a level",
+    "specific_objectives": [
+      "will enable students to"
+    ],
+    "content_items": [
+      "gain a level"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "enable",
+      "gain",
+      "level",
+      "students",
+      "will"
+    ],
+    "hash": "03af42e776",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635886"
+  },
+  {
+    "id": "GEN-00024",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "practical skills and apply",
+    "content": "the theories",
+    "specific_objectives": [
+      "practical skills",
+      "apply"
+    ],
+    "content_items": [
+      "the theories"
+    ],
+    "skills": [],
+    "difficulty": 2,
+    "page_number": 5,
+    "keywords": [
+      "apply",
+      "practical",
+      "skills",
+      "theories"
+    ],
+    "hash": "7d819fda30",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.635939"
+  },
+  {
+    "id": "GEN-00025",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "The syllabus also contr",
+    "content": "ibutes to the",
+    "specific_objectives": [
+      "The syllabus also contr"
+    ],
+    "content_items": [
+      "ibutes to the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "also",
+      "contr",
+      "ibutes",
+      "syllabus"
+    ],
+    "hash": "21301280d6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636004"
+  },
+  {
+    "id": "GEN-00026",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "Person as articulated by",
+    "content": "the CARICO",
+    "specific_objectives": [
+      "Person as articulated by"
+    ],
+    "content_items": [
+      "the CARICO"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "articulated",
+      "carico",
+      "person"
+    ],
+    "hash": "8732cece8b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636066"
+  },
+  {
+    "id": "GEN-00027",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "emotional security with",
+    "content": "a high level of",
+    "specific_objectives": [
+      "emotional security with"
+    ],
+    "content_items": [
+      "a high level of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "emotional",
+      "high",
+      "level",
+      "security"
+    ],
+    "hash": "a08d075b46",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636127"
+  },
+  {
+    "id": "GEN-00028",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "living in harmony with",
+    "content": "the social env",
+    "specific_objectives": [
+      "living in harmony with"
+    ],
+    "content_items": [
+      "the social env"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "env",
+      "harmony",
+      "living",
+      "social"
+    ],
+    "hash": "3f3731611b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636188"
+  },
+  {
+    "id": "GEN-00029",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "entrepreneurial spheres",
+    "content": "in all other ar",
+    "specific_objectives": [
+      "entrepreneurial spheres"
+    ],
+    "content_items": [
+      "in all other ar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "all",
+      "entrepreneurial",
+      "other",
+      "spheres"
+    ],
+    "hash": "e730dfb847",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636249"
+  },
+  {
+    "id": "GEN-00030",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "holistic wellbeing of self",
+    "content": "and others, w",
+    "specific_objectives": [
+      "holistic wellbeing of self"
+    ],
+    "content_items": [
+      "others, w"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "holistic",
+      "others",
+      "self",
+      "wellbeing"
+    ],
+    "hash": "90c5ae1cd9",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636323"
+  },
+  {
+    "id": "GEN-00031",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "This holistic developme",
+    "content": "nt of students",
+    "specific_objectives": [
+      "This holistic developme"
+    ],
+    "content_items": [
+      "nt of students"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "developme",
+      "holistic",
+      "students"
+    ],
+    "hash": "c748eda4d6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636390"
+  },
+  {
+    "id": "GEN-00032",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "These are learning to k",
+    "content": "now, learning",
+    "specific_objectives": [
+      "These are learning to k"
+    ],
+    "content_items": [
+      "now, learning"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "are",
+      "learning",
+      "now",
+      "these"
+    ],
+    "hash": "09d6e63c96",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636456"
+  },
+  {
+    "id": "GEN-00033",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "transform one’s self and",
+    "content": "society.",
+    "specific_objectives": [
+      "transform one’s self"
+    ],
+    "content_items": [
+      "society."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 5,
+    "keywords": [
+      "one",
+      "self",
+      "society",
+      "transform"
+    ],
+    "hash": "d122d38b34",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.636526"
+  },
+  {
+    "id": "GEN-00034",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "The skills and knowled",
+    "content": "ge acquired",
+    "specific_objectives": [
+      "The skills",
+      "knowled"
+    ],
+    "content_items": [
+      "ge acquired"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "acquired",
+      "knowled",
+      "skills"
+    ],
+    "hash": "ee9c8f7908",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.843072"
+  },
+  {
+    "id": "GEN-00035",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "employed in a variety",
+    "content": "of profession",
+    "specific_objectives": [
+      "employed in a variety"
+    ],
+    "content_items": [
+      "of profession"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "employed",
+      "profession",
+      "variety"
+    ],
+    "hash": "a54bbfdf6b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.843141"
+  },
+  {
+    "id": "GEN-00036",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "Instrument Repair Te",
+    "content": "chnician",
+    "specific_objectives": [
+      "Instrument Repair Te"
+    ],
+    "content_items": [
+      "chnician"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "chnician",
+      "instrument",
+      "repair"
+    ],
+    "hash": "68911568be",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.843234"
+  },
+  {
+    "id": "GEN-00037",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "It is recommended tha",
+    "content": "t a minimum",
+    "specific_objectives": [
+      "It is recommended tha"
+    ],
+    "content_items": [
+      "t a minimum"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "minimum",
+      "recommended",
+      "tha"
+    ],
+    "hash": "c392bca05b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.843349"
+  },
+  {
+    "id": "GEN-00038",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "allocated to the teachi",
+    "content": "ng of music.",
+    "specific_objectives": [
+      "allocated to the teachi"
+    ],
+    "content_items": [
+      "ng of music."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 6,
+    "keywords": [
+      "allocated",
+      "music",
+      "teachi"
+    ],
+    "hash": "e34018dd81",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:25.843410"
+  },
+  {
+    "id": "GEN-00039",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "The syllabus is organised",
+    "content": "into fo",
+    "specific_objectives": [
+      "The syllabus is organised"
+    ],
+    "content_items": [
+      "into fo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "into",
+      "organised",
+      "syllabus"
+    ],
+    "hash": "e1aebce32d",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148507"
+  },
+  {
+    "id": "GEN-00040",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "SECTION 1: Listening and",
+    "content": "Appraisi",
+    "specific_objectives": [
+      "SECTION 1: Listening"
+    ],
+    "content_items": [
+      "Appraisi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "appraisi",
+      "listening",
+      "section"
+    ],
+    "hash": "0181276f0a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148601"
+  },
+  {
+    "id": "GEN-00041",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "SECTION 2: Listening and",
+    "content": "Appraisi",
+    "specific_objectives": [
+      "SECTION 2: Listening"
+    ],
+    "content_items": [
+      "Appraisi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "appraisi",
+      "listening",
+      "section"
+    ],
+    "hash": "f907eb4f58",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148668"
+  },
+  {
+    "id": "GEN-00042",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "For the effective teaching",
+    "content": "of the",
+    "specific_objectives": [
+      "For the effective teaching"
+    ],
+    "content_items": [
+      "of the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "effective",
+      "teaching"
+    ],
+    "hash": "b6c0b2c75c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148759"
+  },
+  {
+    "id": "GEN-00043",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "students to interact with",
+    "content": "experts",
+    "specific_objectives": [
+      "students to interact with"
+    ],
+    "content_items": [
+      "experts"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "experts",
+      "interact",
+      "students"
+    ],
+    "hash": "c553778c55",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148831"
+  },
+  {
+    "id": "GEN-00044",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "audiences alone and with",
+    "content": "others",
+    "specific_objectives": [
+      "audiences alone"
+    ],
+    "content_items": [
+      "others"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "alone",
+      "audiences",
+      "others"
+    ],
+    "hash": "2fa8bfdc29",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148902"
+  },
+  {
+    "id": "GEN-00045",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "in the teaching of this Sy",
+    "content": "llabus s",
+    "specific_objectives": [
+      "in the teaching of this Sy"
+    ],
+    "content_items": [
+      "llabus s"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "llabus",
+      "teaching"
+    ],
+    "hash": "c4b5eb4317",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.148967"
+  },
+  {
+    "id": "GEN-00046",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "allowing students to ma",
+    "content": "ke musi",
+    "specific_objectives": [
+      "allowing students to ma"
+    ],
+    "content_items": [
+      "ke musi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "allowing",
+      "musi",
+      "students"
+    ],
+    "hash": "2a1e9a4394",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149041"
+  },
+  {
+    "id": "GEN-00047",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "conductor's cues and to",
+    "content": "musica",
+    "specific_objectives": [
+      "conductor's cues"
+    ],
+    "content_items": [
+      "musica"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "conductor",
+      "cues",
+      "musica"
+    ],
+    "hash": "6ca176fdce",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149107"
+  },
+  {
+    "id": "GEN-00048",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "perform with instrument",
+    "content": "s to dev",
+    "specific_objectives": [
+      "perform with instrument"
+    ],
+    "content_items": [
+      "s to dev"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "dev",
+      "instrument",
+      "perform"
+    ],
+    "hash": "8fe1ae1615",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149181"
+  },
+  {
+    "id": "GEN-00049",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "It is also expected that th",
+    "content": "e curric",
+    "specific_objectives": [
+      "It is also expected that th"
+    ],
+    "content_items": [
+      "e curric"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "also",
+      "curric",
+      "expected"
+    ],
+    "hash": "295c7c51ef",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149249"
+  },
+  {
+    "id": "GEN-00050",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "will offer a sustained pro",
+    "content": "gramme",
+    "specific_objectives": [
+      "will offer a sustained pro"
+    ],
+    "content_items": [
+      "gramme"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "gramme",
+      "offer",
+      "pro",
+      "sustained",
+      "will"
+    ],
+    "hash": "42feaeade5",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149324"
+  },
+  {
+    "id": "GEN-00051",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "2. composition of si",
+    "content": "mple pie",
+    "specific_objectives": [
+      "composition of si"
+    ],
+    "content_items": [
+      "mple pie"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "composition",
+      "mple",
+      "pie"
+    ],
+    "hash": "ff87149241",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149450"
+  },
+  {
+    "id": "GEN-00052",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "4. playing of instru",
+    "content": "ments. O",
+    "specific_objectives": [
+      "playing of instru"
+    ],
+    "content_items": [
+      "ments. O"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 7,
+    "keywords": [
+      "instru",
+      "ments",
+      "playing"
+    ],
+    "hash": "a19a5ac058",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.149562"
+  },
+  {
+    "id": "GEN-00053",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "Listening and Appraisin",
+    "content": "g (LIAP):",
+    "specific_objectives": [
+      "Listening",
+      "Appraisin"
+    ],
+    "content_items": [
+      "g (LIAP):"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 8,
+    "keywords": [
+      "appraisin",
+      "listening"
+    ],
+    "hash": "e5caf56ebd",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.439127"
+  },
+  {
+    "id": "GEN-00054",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "One instrumental or vocal",
+    "content": "piece",
+    "specific_objectives": [
+      "One instrumental or vocal"
+    ],
+    "content_items": [
+      "piece"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "instrumental",
+      "one",
+      "piece",
+      "vocal"
+    ],
+    "hash": "68a2129069",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.975850"
+  },
+  {
+    "id": "GEN-00055",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "performed in a group of two (2",
+    "content": ") to six",
+    "specific_objectives": [
+      "performed in a group of two (2"
+    ],
+    "content_items": [
+      ") to six"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "group",
+      "performed",
+      "six",
+      "two"
+    ],
+    "hash": "b1df6fec42",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.975919"
+  },
+  {
+    "id": "GEN-00056",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "(6) players. The ensemble piec",
+    "content": "e must",
+    "specific_objectives": [
+      "(6) players. The ensemble piec"
+    ],
+    "content_items": [
+      "e must"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "ensemble",
+      "must",
+      "piec",
+      "players"
+    ],
+    "hash": "609722175c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.975974"
+  },
+  {
+    "id": "GEN-00057",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "be 3–5 minutes in duration.",
+    "content": "The",
+    "specific_objectives": [
+      "be 3–5 minutes in duration."
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "duration",
+      "minutes"
+    ],
+    "hash": "e700c93ccc",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976036"
+  },
+  {
+    "id": "GEN-00058",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "candidate being examined",
+    "content": "must",
+    "specific_objectives": [
+      "candidate being examined"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "being",
+      "candidate",
+      "examined",
+      "must"
+    ],
+    "hash": "be3c5a43e0",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976086"
+  },
+  {
+    "id": "GEN-00059",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "perform a clear and distinguisha",
+    "content": "ble role",
+    "specific_objectives": [
+      "perform a clear",
+      "distinguisha"
+    ],
+    "content_items": [
+      "ble role"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "ble",
+      "clear",
+      "distinguisha",
+      "perform",
+      "role"
+    ],
+    "hash": "bf657561fc",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976143"
+  },
+  {
+    "id": "GEN-00060",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "Candidates may present a",
+    "content": "second",
+    "specific_objectives": [
+      "Candidates may present a"
+    ],
+    "content_items": [
+      "second"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "candidates",
+      "may",
+      "present",
+      "second"
+    ],
+    "hash": "c1e088a2b4",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976196"
+  },
+  {
+    "id": "GEN-00061",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "instrument for the ensemble pie",
+    "content": "ce. The",
+    "specific_objectives": [
+      "instrument for the ensemble pie"
+    ],
+    "content_items": [
+      "ce. The"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "ensemble",
+      "instrument",
+      "pie"
+    ],
+    "hash": "245be72ca4",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976246"
+  },
+  {
+    "id": "GEN-00062",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "instrument chosen must be pla",
+    "content": "yed at",
+    "specific_objectives": [
+      "instrument chosen must be pla"
+    ],
+    "content_items": [
+      "yed at"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "chosen",
+      "instrument",
+      "must",
+      "pla",
+      "yed"
+    ],
+    "hash": "393d0da325",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976295"
+  },
+  {
+    "id": "GEN-00063",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "the same level as the one used",
+    "content": "in the",
+    "specific_objectives": [
+      "the same level as the one used"
+    ],
+    "content_items": [
+      "in the"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "level",
+      "one",
+      "same",
+      "used"
+    ],
+    "hash": "0f85b8fd41",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976347"
+  },
+  {
+    "id": "GEN-00064",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "solo performance. (12",
+    "content": "marks)",
+    "specific_objectives": [
+      "solo performance. (12"
+    ],
+    "content_items": [
+      "marks)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 11,
+    "keywords": [
+      "performance",
+      "solo"
+    ],
+    "hash": "0f56f93948",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:26.976391"
+  },
+  {
+    "id": "GEN-00065",
+    "section": "SECTION 3: Performing\nSECTION",
+    "subsection": "Unknown",
+    "objective": "Listening and Appraising (LIAP)",
+    "content": "60 (Weighted 120)",
+    "specific_objectives": [
+      "Listening",
+      "Appraising (LIAP)"
+    ],
+    "content_items": [
+      "(Weighted 120)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 12,
+    "keywords": [
+      "appraising",
+      "listening"
+    ],
+    "hash": "92b258a64c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:27.224786"
+  },
+  {
+    "id": "GEN-00066",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "techniques; play with acc",
+    "content": "eptable em",
+    "specific_objectives": [
+      "techniques",
+      "play with acc"
+    ],
+    "content_items": [
+      "eptable em"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "acc",
+      "eptable",
+      "play",
+      "techniques"
+    ],
+    "hash": "61ab149d2e",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195533"
+  },
+  {
+    "id": "GEN-00067",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "foundation, intermediate",
+    "content": "or advance",
+    "specific_objectives": [
+      "foundation, intermediate"
+    ],
+    "content_items": [
+      "or advance"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "advance",
+      "foundation",
+      "intermediate"
+    ],
+    "hash": "252b6c9167",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195634"
+  },
+  {
+    "id": "GEN-00068",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "appropriate level of perfo",
+    "content": "rmance:",
+    "specific_objectives": [
+      "appropriate level of perfo"
+    ],
+    "content_items": [
+      "rmance:"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "appropriate",
+      "level",
+      "perfo",
+      "rmance"
+    ],
+    "hash": "2813f08621",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195705"
+  },
+  {
+    "id": "GEN-00069",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "(ii) play scales, arpeg",
+    "content": "gios and te",
+    "specific_objectives": [
+      "(ii) play scales, arpeg"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "arpeg",
+      "gios",
+      "play",
+      "scales"
+    ],
+    "hash": "e7b2859949",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195782"
+  },
+  {
+    "id": "GEN-00070",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "(iii) memorise techni",
+    "content": "cal studies,",
+    "specific_objectives": [
+      "(iii) memorise techni"
+    ],
+    "content_items": [
+      "cal studies,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "cal",
+      "memorise",
+      "studies",
+      "techni"
+    ],
+    "hash": "0f56e47db4",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195829"
+  },
+  {
+    "id": "GEN-00071",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "(i) play rehearsed pi",
+    "content": "eces with fl",
+    "specific_objectives": [
+      "(i) play rehearsed pi"
+    ],
+    "content_items": [
+      "eces with fl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "eces",
+      "play",
+      "rehearsed"
+    ],
+    "hash": "2b3b6aef20",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195905"
+  },
+  {
+    "id": "GEN-00072",
+    "section": "SECTION 3: PERFORMING",
+    "subsection": "Unknown",
+    "objective": "(ii) play with appropr",
+    "content": "iate interp",
+    "specific_objectives": [
+      "(ii) play with appropr"
+    ],
+    "content_items": [
+      "iate interp"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 28,
+    "keywords": [
+      "appropr",
+      "iate",
+      "interp",
+      "play"
+    ],
+    "hash": "7a1f5255af",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:30.195957"
+  },
+  {
+    "id": "GEN-00073",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "tessitura, level of p",
+    "content": "erformance",
+    "specific_objectives": [
+      "tessitura, level of p"
+    ],
+    "content_items": [
+      "erformance"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 39,
+    "keywords": [
+      "erformance",
+      "level",
+      "tessitura"
+    ],
+    "hash": "754600790b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:32.344111"
+  },
+  {
+    "id": "GEN-00074",
+    "section": "SECTION 4: COMPOSING",
+    "subsection": "Unknown",
+    "objective": "Levels and Instruments",
+    "content": "Foundation Basic technical skills on the instrument (descant or treble) ABRSM Grade 2 minimum",
+    "specific_objectives": [
+      "Levels",
+      "Instruments"
+    ],
+    "content_items": [
+      "Foundation Basic technical skills on the instrument (descant or treble) ABRSM Grade 2 minimum"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 44,
+    "keywords": [
+      "abrsm",
+      "basic",
+      "foundation",
+      "grade",
+      "instrument",
+      "instruments",
+      "levels",
+      "minimum",
+      "skills",
+      "technical"
+    ],
+    "hash": "ba3d35fa9c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:33.549065"
+  },
+  {
+    "id": "GEN-00075",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "expressions and dynamic changes",
+    "content": "and accompaniment; varied dynamics",
+    "specific_objectives": [
+      "expressions",
+      "dynamic changes"
+    ],
+    "content_items": [
+      "accompaniment",
+      "varied dynamics"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 45,
+    "keywords": [
+      "accompaniment",
+      "changes",
+      "dynamic",
+      "dynamics",
+      "expressions",
+      "varied"
+    ],
+    "hash": "f84e98a482",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:33.791522"
+  },
+  {
+    "id": "GEN-00076",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "It is the responsibilit",
+    "content": "y of the teac",
+    "specific_objectives": [
+      "It is the responsibilit"
+    ],
+    "content_items": [
+      "y of the teac"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "responsibilit",
+      "teac"
+    ],
+    "hash": "6c183264f3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.154791"
+  },
+  {
+    "id": "GEN-00077",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "guidelines for candid",
+    "content": "ates. Candida",
+    "specific_objectives": [
+      "guidelines for candid"
+    ],
+    "content_items": [
+      "ates. Candida"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "ates",
+      "candid",
+      "candida",
+      "guidelines"
+    ],
+    "hash": "d68df9a7a3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.154874"
+  },
+  {
+    "id": "GEN-00078",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "files. The teacher mu",
+    "content": "st also sensitis",
+    "specific_objectives": [
+      "files. The teacher mu"
+    ],
+    "content_items": [
+      "st also sensitis"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "also",
+      "files",
+      "sensitis",
+      "teacher"
+    ],
+    "hash": "3e40a73e89",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.155052"
+  },
+  {
+    "id": "GEN-00079",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "assistance in preparin",
+    "content": "g for it. For ex",
+    "specific_objectives": [
+      "assistance in preparin"
+    ],
+    "content_items": [
+      "g for it. For ex"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "assistance",
+      "preparin"
+    ],
+    "hash": "1c4fd09794",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.155123"
+  },
+  {
+    "id": "GEN-00080",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "labelled and cued for",
+    "content": "listening – it",
+    "specific_objectives": [
+      "labelled",
+      "cued for"
+    ],
+    "content_items": [
+      "listening – it"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "cued",
+      "labelled",
+      "listening"
+    ],
+    "hash": "a200e262d5",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.155212"
+  },
+  {
+    "id": "GEN-00081",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "themselves and their",
+    "content": "compositions",
+    "specific_objectives": [
+      "themselves",
+      "their"
+    ],
+    "content_items": [
+      "compositions"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "compositions",
+      "themselves"
+    ],
+    "hash": "8a78df98f3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.155274"
+  },
+  {
+    "id": "GEN-00082",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The following informa",
+    "content": "tion must be",
+    "specific_objectives": [
+      "The following informa"
+    ],
+    "content_items": [
+      "tion must be"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 47,
+    "keywords": [
+      "following",
+      "informa",
+      "must",
+      "tion"
+    ],
+    "hash": "5b7ae7e8d1",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:34.155414"
+  },
+  {
+    "id": "GEN-00083",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "Paper 03 is the School-Bas",
+    "content": "ed Assessment (SB",
+    "specific_objectives": [
+      "Paper 03 is the School-Bas"
+    ],
+    "content_items": [
+      "ed Assessment (SB"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "assessment",
+      "bas",
+      "paper",
+      "school"
+    ],
+    "hash": "535761ac3c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731197"
+  },
+  {
+    "id": "GEN-00084",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "the course covered by this",
+    "content": "syllabus. It is inte",
+    "specific_objectives": [
+      "the course covered by this"
+    ],
+    "content_items": [
+      "syllabus. It is inte"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "course",
+      "covered",
+      "inte",
+      "syllabus"
+    ],
+    "hash": "3b94dafbac",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731292"
+  },
+  {
+    "id": "GEN-00085",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "attitudes that are critical to",
+    "content": "the subject. The a",
+    "specific_objectives": [
+      "attitudes that are critical to"
+    ],
+    "content_items": [
+      "the subject. The a"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "are",
+      "attitudes",
+      "critical",
+      "subject"
+    ],
+    "hash": "05b67332c9",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731384"
+  },
+  {
+    "id": "GEN-00086",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "form part of the learning",
+    "content": "activities to enable",
+    "specific_objectives": [
+      "form part of the learning"
+    ],
+    "content_items": [
+      "activities to enable"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "activities",
+      "enable",
+      "form",
+      "learning",
+      "part"
+    ],
+    "hash": "0cb9cae800",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731475"
+  },
+  {
+    "id": "GEN-00087",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "Students are encouraged t",
+    "content": "o work in groups.",
+    "specific_objectives": [
+      "Students are encouraged t"
+    ],
+    "content_items": [
+      "o work in groups."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "are",
+      "encouraged",
+      "groups",
+      "students",
+      "work"
+    ],
+    "hash": "9db6c4e293",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731528"
+  },
+  {
+    "id": "GEN-00088",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "During the course of study",
+    "content": ", students obtain",
+    "specific_objectives": [
+      "During the course of study"
+    ],
+    "content_items": [
+      ", students obtain"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "course",
+      "during",
+      "obtain",
+      "students",
+      "study"
+    ],
+    "hash": "f847d6a44f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731593"
+  },
+  {
+    "id": "GEN-00089",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "these in their SBA assignme",
+    "content": "nts. These marks",
+    "specific_objectives": [
+      "these in their SBA assignme"
+    ],
+    "content_items": [
+      "nts. These marks"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "assignme",
+      "marks",
+      "nts",
+      "sba",
+      "these"
+    ],
+    "hash": "627ea68697",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731662"
+  },
+  {
+    "id": "GEN-00090",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "to students for their perfor",
+    "content": "mance in the exam",
+    "specific_objectives": [
+      "to students for their perfor"
+    ],
+    "content_items": [
+      "mance in the exam"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "exam",
+      "mance",
+      "perfor",
+      "students"
+    ],
+    "hash": "9a0ace3157",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731717"
+  },
+  {
+    "id": "GEN-00091",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The guidelines provided for",
+    "content": "selecting appropr",
+    "specific_objectives": [
+      "The guidelines provided for"
+    ],
+    "content_items": [
+      "selecting appropr"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "appropr",
+      "guidelines",
+      "provided",
+      "selecting"
+    ],
+    "hash": "cf22580350",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731783"
+  },
+  {
+    "id": "GEN-00092",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "selecting assignments that",
+    "content": "are valid for the pu",
+    "specific_objectives": [
+      "selecting assignments that"
+    ],
+    "content_items": [
+      "are valid for the pu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "are",
+      "assignments",
+      "selecting",
+      "valid"
+    ],
+    "hash": "9e31b96bee",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731868"
+  },
+  {
+    "id": "GEN-00093",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "are intended to assist teach",
+    "content": "ers in awarding ma",
+    "specific_objectives": [
+      "are intended to assist teach"
+    ],
+    "content_items": [
+      "ers in awarding ma"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "are",
+      "assist",
+      "awarding",
+      "ers",
+      "intended",
+      "teach"
+    ],
+    "hash": "a9b89d3850",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.731938"
+  },
+  {
+    "id": "GEN-00094",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "of the course. In order to e",
+    "content": "nsure that the sco",
+    "specific_objectives": [
+      "of the course. In order to e"
+    ],
+    "content_items": [
+      "nsure that the sco"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "course",
+      "nsure",
+      "order",
+      "sco"
+    ],
+    "hash": "000cb26170",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732009"
+  },
+  {
+    "id": "GEN-00095",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "the Council undertakes the",
+    "content": "moderation of a sa",
+    "specific_objectives": [
+      "the Council undertakes the"
+    ],
+    "content_items": [
+      "moderation of a sa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "council",
+      "moderation",
+      "undertakes"
+    ],
+    "hash": "7448a42a8c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732075"
+  },
+  {
+    "id": "GEN-00096",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The School-Based Assessm",
+    "content": "ent provides an op",
+    "specific_objectives": [
+      "The School-Based Assessm"
+    ],
+    "content_items": [
+      "ent provides an op"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "assessm",
+      "based",
+      "ent",
+      "provides",
+      "school"
+    ],
+    "hash": "d90031a99d",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732145"
+  },
+  {
+    "id": "GEN-00097",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "needs of students. It facilit",
+    "content": "ates feedback to th",
+    "specific_objectives": [
+      "needs of students. It facilit"
+    ],
+    "content_items": [
+      "ates feedback to th"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "ates",
+      "facilit",
+      "feedback",
+      "needs",
+      "students"
+    ],
+    "hash": "872c101bcb",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732212"
+  },
+  {
+    "id": "GEN-00098",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "to build the self-confidence",
+    "content": "of the students as",
+    "specific_objectives": [
+      "to build the self-confidence"
+    ],
+    "content_items": [
+      "of the students as"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "build",
+      "confidence",
+      "self",
+      "students"
+    ],
+    "hash": "b6c7902ad5",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732278"
+  },
+  {
+    "id": "GEN-00099",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "the development of essent",
+    "content": "ial investigative an",
+    "specific_objectives": [
+      "the development of essent"
+    ],
+    "content_items": [
+      "ial investigative an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "development",
+      "essent",
+      "ial",
+      "investigative"
+    ],
+    "hash": "82dc18dfbc",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732341"
+  },
+  {
+    "id": "GEN-00100",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "effectively in his or her chos",
+    "content": "en vocation. The S",
+    "specific_objectives": [
+      "effectively in his or her chos"
+    ],
+    "content_items": [
+      "en vocation. The S"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "chos",
+      "effectively",
+      "her",
+      "his",
+      "vocation"
+    ],
+    "hash": "0c510f3737",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732407"
+  },
+  {
+    "id": "GEN-00101",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "to the development of rele",
+    "content": "vant skills of the s",
+    "specific_objectives": [
+      "to the development of rele"
+    ],
+    "content_items": [
+      "vant skills of the s"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "development",
+      "rele",
+      "skills",
+      "vant"
+    ],
+    "hash": "04b8832f2d",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732473"
+  },
+  {
+    "id": "GEN-00102",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "testing and rewarding stud",
+    "content": "ents’ achievement",
+    "specific_objectives": [
+      "testing",
+      "rewarding stud"
+    ],
+    "content_items": [
+      "ents’ achievement"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "achievement",
+      "ents",
+      "rewarding",
+      "stud",
+      "testing"
+    ],
+    "hash": "7780681c3f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732538"
+  },
+  {
+    "id": "GEN-00103",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The assessments should",
+    "content": "be made in the",
+    "specific_objectives": [
+      "The assessments should"
+    ],
+    "content_items": [
+      "be made in the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "assessments",
+      "made",
+      "should"
+    ],
+    "hash": "4d26e8e2eb",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732604"
+  },
+  {
+    "id": "GEN-00104",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "Assessments should only",
+    "content": "be made after ca",
+    "specific_objectives": [
+      "Assessments should only"
+    ],
+    "content_items": [
+      "be made after ca"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "after",
+      "assessments",
+      "made",
+      "only",
+      "should"
+    ],
+    "hash": "da692f4e83",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732683"
+  },
+  {
+    "id": "GEN-00105",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "opportunity to develop the",
+    "content": "m. Skills that are",
+    "specific_objectives": [
+      "opportunity to develop the"
+    ],
+    "content_items": [
+      "m. Skills that are"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "are",
+      "develop",
+      "opportunity",
+      "skills"
+    ],
+    "hash": "e634a53771",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732753"
+  },
+  {
+    "id": "GEN-00106",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "therefore, not be neglecte",
+    "content": "d.",
+    "specific_objectives": [
+      "therefore, not be neglecte"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "neglecte",
+      "not",
+      "therefore"
+    ],
+    "hash": "faf4186fc3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732791"
+  },
+  {
+    "id": "GEN-00107",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The Music course is an int",
+    "content": "egral component",
+    "specific_objectives": [
+      "The Music course is an int"
+    ],
+    "content_items": [
+      "egral component"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "component",
+      "course",
+      "egral",
+      "int",
+      "music"
+    ],
+    "hash": "5d2237698b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732854"
+  },
+  {
+    "id": "GEN-00108",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "(TVET) programme offered",
+    "content": "by the Council. It",
+    "specific_objectives": [
+      "(TVET) programme offered"
+    ],
+    "content_items": [
+      "by the Council. It"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "council",
+      "offered",
+      "programme"
+    ],
+    "hash": "5240344262",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732929"
+  },
+  {
+    "id": "GEN-00109",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "Candidates will be awarde",
+    "content": "d and overall grade",
+    "specific_objectives": [
+      "Candidates will be awarde"
+    ],
+    "content_items": [
+      "overall grade"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "awarde",
+      "candidates",
+      "grade",
+      "overall",
+      "will"
+    ],
+    "hash": "797b26e8a4",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.732995"
+  },
+  {
+    "id": "GEN-00110",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "In addition to the overall g",
+    "content": "rade, candidate p",
+    "specific_objectives": [
+      "In addition to the overall g"
+    ],
+    "content_items": [
+      "rade, candidate p"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "addition",
+      "candidate",
+      "overall",
+      "rade"
+    ],
+    "hash": "91c34378e2",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733061"
+  },
+  {
+    "id": "GEN-00111",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "1. Listening and Appr",
+    "content": "aisal (LIAP)",
+    "specific_objectives": [
+      "Listening"
+    ],
+    "content_items": [
+      "aisal (LIAP)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "aisal",
+      "appr",
+      "listening"
+    ],
+    "hash": "e826e00ff7",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733119"
+  },
+  {
+    "id": "GEN-00112",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "The CVQ is an award whic",
+    "content": "h represents the",
+    "specific_objectives": [
+      "The CVQ is an award whic"
+    ],
+    "content_items": [
+      "h represents the"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "award",
+      "cvq",
+      "represents",
+      "whic"
+    ],
+    "hash": "059d68e599",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733197"
+  },
+  {
+    "id": "GEN-00113",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "essential (core) work prac",
+    "content": "tices of an occupa",
+    "specific_objectives": [
+      "essential (core) work prac"
+    ],
+    "content_items": [
+      "tices of an occupa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "essential",
+      "occupa",
+      "prac",
+      "tices",
+      "work"
+    ],
+    "hash": "3858de8969",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733262"
+  },
+  {
+    "id": "GEN-00114",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "the Regional Qualifications",
+    "content": "Framework. It ai",
+    "specific_objectives": [
+      "the Regional Qualifications"
+    ],
+    "content_items": [
+      "Framework. It ai"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "framework",
+      "qualifications",
+      "regional"
+    ],
+    "hash": "0f9bce9db9",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733324"
+  },
+  {
+    "id": "GEN-00115",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "seeks to facilitate the mov",
+    "content": "ement of skilled c",
+    "specific_objectives": [
+      "seeks to facilitate the mov"
+    ],
+    "content_items": [
+      "ement of skilled c"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "ement",
+      "facilitate",
+      "mov",
+      "seeks",
+      "skilled"
+    ],
+    "hash": "8ae6fad83a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733387"
+  },
+  {
+    "id": "GEN-00116",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "quality profile and invest",
+    "content": "ment attractivene",
+    "specific_objectives": [
+      "quality profile",
+      "invest"
+    ],
+    "content_items": [
+      "ment attractivene"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "attractivene",
+      "invest",
+      "ment",
+      "profile",
+      "quality"
+    ],
+    "hash": "c7114ac3c2",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733454"
+  },
+  {
+    "id": "GEN-00117",
+    "section": "section constitute: exemplar material\nonly",
+    "subsection": "Unknown",
+    "objective": "harmonising TVET system",
+    "content": "s across the regio",
+    "specific_objectives": [
+      "harmonising TVET system"
+    ],
+    "content_items": [
+      "s across the regio"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 54,
+    "keywords": [
+      "across",
+      "harmonising",
+      "regio",
+      "system",
+      "tvet"
+    ],
+    "hash": "aed2143580",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:35.733519"
+  },
+  {
+    "id": "GEN-00118",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "for successful complet",
+    "content": "ion of each as",
+    "specific_objectives": [
+      "for successful complet"
+    ],
+    "content_items": [
+      "ion of each as"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "complet",
+      "each",
+      "ion",
+      "successful"
+    ],
+    "hash": "7eda2b3c47",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.631963"
+  },
+  {
+    "id": "GEN-00119",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "letter should be provi",
+    "content": "ded to suppor",
+    "specific_objectives": [
+      "letter should be provi"
+    ],
+    "content_items": [
+      "ded to suppor"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "ded",
+      "letter",
+      "provi",
+      "should",
+      "suppor"
+    ],
+    "hash": "27010b33df",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632126"
+  },
+  {
+    "id": "GEN-00120",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "these can be achieved",
+    "content": ".",
+    "specific_objectives": [
+      "these can be achieved"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "achieved",
+      "can",
+      "these"
+    ],
+    "hash": "dbd32d391f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632195"
+  },
+  {
+    "id": "GEN-00121",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "completion, by the tea",
+    "content": "cher, thereby",
+    "specific_objectives": [
+      "completion, by the tea"
+    ],
+    "content_items": [
+      "cher, thereby"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "cher",
+      "completion",
+      "tea",
+      "thereby"
+    ],
+    "hash": "c6e67dc45b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632318"
+  },
+  {
+    "id": "GEN-00122",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "and meet the official d",
+    "content": "eadline.",
+    "specific_objectives": [
+      "meet the official d"
+    ],
+    "content_items": [
+      "eadline."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "eadline",
+      "meet",
+      "official"
+    ],
+    "hash": "fdf696de86",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632371"
+  },
+  {
+    "id": "GEN-00123",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "of musical knowledge,",
+    "content": "as well as the",
+    "specific_objectives": [
+      "of musical knowledge,"
+    ],
+    "content_items": [
+      "as well as the"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "knowledge",
+      "musical",
+      "well"
+    ],
+    "hash": "7fcb6f9742",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632463"
+  },
+  {
+    "id": "GEN-00124",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "The acceptable forma",
+    "content": "t is CDs/readil",
+    "specific_objectives": [
+      "The acceptable forma"
+    ],
+    "content_items": [
+      "t is CDs/readil"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 58,
+    "keywords": [
+      "acceptable",
+      "cds",
+      "forma",
+      "readil"
+    ],
+    "hash": "651e4baa71",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:36.632555"
+  },
+  {
+    "id": "GEN-00125",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "Duration: The length of sound",
+    "content": "Metre:",
+    "specific_objectives": [
+      "Duration: The length of sound"
+    ],
+    "content_items": [
+      "Metre:"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "duration",
+      "length",
+      "metre",
+      "sound"
+    ],
+    "hash": "52c165b3e6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:37.580543"
+  },
+  {
+    "id": "GEN-00126",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• Note values and their corresponding rests (silence) • Groupings of notes and Rests in various metres • Pause (fermata) • Dotted Rhythm • Dotted rhythm • Triplet • Duplet • Phrase length and shape • Phrase structure • Augmentation • Dimunition",
+    "content": "Simple Time signatures: • Simple duple • Simple triple • Simple quadruple Compound Time Signatures: • Compound duple • Compound triple • Compound quadruple • Regular metre • Irregular metre • Mixed metres",
+    "specific_objectives": [
+      "Note values",
+      "their corresponding rests (silence)",
+      "Groupings of notes",
+      "Rests in various metres",
+      "Pause (fermata)",
+      "Dotted Rhythm",
+      "Dotted rhythm",
+      "Triplet",
+      "Duplet",
+      "Phrase length",
+      "shape",
+      "Phrase structure",
+      "Augmentation",
+      "Dimunition"
+    ],
+    "content_items": [
+      "Simple Time signatures:",
+      "Simple duple",
+      "Simple triple",
+      "Simple quadruple Compound Time Signatures:",
+      "Compound duple",
+      "Compound triple",
+      "Compound quadruple",
+      "Regular metre",
+      "Irregular metre",
+      "Mixed metres"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 64,
+    "keywords": [
+      "augmentation",
+      "compound",
+      "corresponding",
+      "dimunition",
+      "dotted",
+      "duple",
+      "duplet",
+      "groupings",
+      "irregular",
+      "length",
+      "metre",
+      "metres"
+    ],
+    "hash": "c2360ea4d9",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:37.580907"
+  },
+  {
+    "id": "GEN-00127",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "Notation: A system of writing music including",
+    "content": "Pitch: “The highness and lowness of musical",
+    "specific_objectives": [
+      "Notation: A system of writing music including"
+    ],
+    "content_items": [
+      "Pitch: “The highness",
+      "lowness of musical"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 65,
+    "keywords": [
+      "highness",
+      "including",
+      "lowness",
+      "music",
+      "musical",
+      "notation",
+      "pitch",
+      "system",
+      "writing"
+    ],
+    "hash": "979d14523b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:37.706982"
+  },
+  {
+    "id": "GEN-00128",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• Bar lines, double bar lines • The Treble, Bass and Alto Staves/Clefs • Notes on Ledger lines • Pitch names on the staff (A, B, C, D, E, F, G) • Sharp, flat, natural, double sharp, double flats • Key signatures- major and minor keys • Indefinite pitch/graphic notation/Key Ornaments (trills, turns, mordents, appoggiatura, grace note/acciaccatura)",
+    "content": "• Movement by step, skip, leap, repeats • Melodic intervals (simple and compound intervals) • Major, minor, perfect, augmented, diminished intervals • Half and whole steps • Chromatic pitch movement • Whole tone scale • Tone row • Pentatonic scale • Circle of Fifths • Diatonic major and minor scales • Diatonic major and minor scales • Blues scale • Raga • Phrase and phrase structure • Melodic contour/ melodic shape • Melodic sequence • Transposition • Technical names of notes in a key: - Tonic - Supertonic - Mediant - Sub-dominant - Submediant - Leading note",
+    "specific_objectives": [
+      "Bar lines, double bar lines",
+      "The Treble, Bass",
+      "Alto Staves/Clefs",
+      "Notes on Ledger lines",
+      "Pitch names on the staff (A, B, C, D, E, F, G)",
+      "Sharp, flat, natural, double sharp, double flats",
+      "Key signatures- major",
+      "minor keys",
+      "Indefinite pitch/graphic notation/Key Ornaments (trills, turns, mordents, appoggiatura, grace note/acciaccatura)"
+    ],
+    "content_items": [
+      "Movement by step, skip, leap, repeats",
+      "Melodic intervals (simple",
+      "compound intervals)",
+      "Major, minor, perfect, augmented, diminished intervals",
+      "whole steps",
+      "Chromatic pitch movement",
+      "Whole tone scale",
+      "Tone row",
+      "Pentatonic scale",
+      "Circle of Fifths",
+      "Diatonic major",
+      "minor scales",
+      "Diatonic major",
+      "minor scales",
+      "Blues scale",
+      "Phrase",
+      "phrase structure",
+      "Melodic contour/ melodic shape",
+      "Melodic sequence",
+      "Transposition",
+      "Technical names of notes in a key: - Tonic - Supertonic - Mediant - Sub-dominant - Submediant - Leading note"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 65,
+    "keywords": [
+      "alto",
+      "augmented",
+      "bar",
+      "bass",
+      "blues",
+      "chromatic",
+      "circle",
+      "clefs",
+      "contour",
+      "diatonic",
+      "diminished",
+      "dominant"
+    ],
+    "hash": "a661ed5e0c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:37.707539"
+  },
+  {
+    "id": "GEN-00129",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• Consonance • Dissonance • Triads • Pedal, drone, ostinato • Harmonic intervals (major, minor, perfect, augmented, diminished • modal • atonal • Chords built upon the scale: • Root position, First inversion, 2nd inversion • Inversions in major and minor keys • Dominant seventh • Arpeggiation/Broken chords • Chord progression • Cadences: • Perfect/authentic • Imperfect, plagal, interrupted/surprise • Transposition • Modulation to subdominant, dominant • Relative major, or minor",
+    "content": "• Light, heavy, thick, dense, smooth, rough • Monophonic • Homophonic • Polyphonic • Contrapuntal • Melody and accompaniment • Solo, unison • Doubling with harmony • In two, three, four-part harmony • Tutti • Counter melody • descant",
+    "specific_objectives": [
+      "Consonance",
+      "Dissonance",
+      "Triads",
+      "Pedal, drone, ostinato",
+      "Harmonic intervals (major, minor, perfect, augmented, diminished",
+      "modal",
+      "atonal",
+      "Chords built upon the scale:",
+      "Root position, First inversion, 2nd inversion",
+      "Inversions in major",
+      "minor keys",
+      "Dominant seventh",
+      "Arpeggiation/Broken chords",
+      "Chord progression",
+      "Cadences:",
+      "Perfect/authentic",
+      "Imperfect, plagal, interrupted/surprise",
+      "Transposition",
+      "Modulation to subdominant, dominant",
+      "Relative major, or minor"
+    ],
+    "content_items": [
+      "Light, heavy, thick, dense, smooth, rough",
+      "Monophonic",
+      "Homophonic",
+      "Polyphonic",
+      "Contrapuntal",
+      "Melody",
+      "accompaniment",
+      "Solo, unison",
+      "Doubling with harmony",
+      "In two, three, four-part harmony",
+      "Tutti",
+      "Counter melody",
+      "descant"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 66,
+    "keywords": [
+      "accompaniment",
+      "arpeggiation",
+      "atonal",
+      "augmented",
+      "authentic",
+      "broken",
+      "built",
+      "cadences",
+      "chord",
+      "chords",
+      "consonance",
+      "contrapuntal"
+    ],
+    "hash": "659326dfa3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:37.833692"
+  },
+  {
+    "id": "GEN-00130",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• Pianissimo • Piano • Fortissimo • Forte • Mezzo piano • Mezzo forte • Crescendo • Decrescendo or diminuendo • Subito",
+    "content": "• Adagio • Largo, lento • Andante • Moderato • Allegro • Allegretto • Vivace, vivo • Presto • Accelerando • Ritardando, rallentando • ritenuto • Rubato • Ad lib • Poco, poco a poco • Meno mosso • Piu mosso • A tempo, tempo primo",
+    "specific_objectives": [
+      "Pianissimo",
+      "Piano",
+      "Fortissimo",
+      "Forte",
+      "Mezzo piano",
+      "Mezzo forte",
+      "Crescendo",
+      "Decrescendo or diminuendo",
+      "Subito"
+    ],
+    "content_items": [
+      "Adagio",
+      "Largo, lento",
+      "Andante",
+      "Moderato",
+      "Allegro",
+      "Allegretto",
+      "Vivace, vivo",
+      "Presto",
+      "Accelerando",
+      "Ritardando, rallentando",
+      "ritenuto",
+      "Rubato",
+      "Ad lib",
+      "Poco, poco a poco",
+      "Meno mosso",
+      "Piu mosso",
+      "A tempo, tempo primo"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 67,
+    "keywords": [
+      "accelerando",
+      "adagio",
+      "allegretto",
+      "allegro",
+      "andante",
+      "crescendo",
+      "decrescendo",
+      "diminuendo",
+      "forte",
+      "fortissimo",
+      "largo",
+      "lento"
+    ],
+    "hash": "51924b4cdf",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.025274"
+  },
+  {
+    "id": "GEN-00131",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• repetition • sequence • imitation • ornaments • Call and response • Breaks and fills • Canon • Riff • Ostinato • Loop • Pedal • Drone • Ground bass • Improvisation • Antiphonal • Aleatoric • da capo • cadenza",
+    "content": "• Introduction, intro • Coda, outro • Binary • Ternary • Strophic • Verse and chorus • Through-composed • Chorus/refrain • Ritornello • Rondo • Sonata • Air and recitative and aria",
+    "specific_objectives": [
+      "repetition",
+      "sequence",
+      "imitation",
+      "ornaments",
+      "response",
+      "Breaks",
+      "fills",
+      "Canon",
+      "Ostinato",
+      "Pedal",
+      "Drone",
+      "Ground bass",
+      "Improvisation",
+      "Antiphonal",
+      "Aleatoric",
+      "da capo",
+      "cadenza"
+    ],
+    "content_items": [
+      "Introduction, intro",
+      "Coda, outro",
+      "Binary",
+      "Ternary",
+      "Strophic",
+      "Verse",
+      "chorus",
+      "Through-composed",
+      "Chorus/refrain",
+      "Ritornello",
+      "Rondo",
+      "Sonata",
+      "recitative"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 67,
+    "keywords": [
+      "air",
+      "aleatoric",
+      "antiphonal",
+      "aria",
+      "bass",
+      "binary",
+      "breaks",
+      "cadenza",
+      "call",
+      "canon",
+      "capo",
+      "chorus"
+    ],
+    "hash": "4c5ec26d49",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.025625"
+  },
+  {
+    "id": "GEN-00132",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "treble soprano alto tenor baritone bass falsetto Vocal Combinations: A capella soloist duet, trio quartet ensemble choir, male, female mixed choir back-ups chorus",
+    "content": "Orchestral strings: Violin, viola, cello, double bass Harp Guitar Cuarto Mandolin Banjo Sitar Electric guitar Bass guitar",
+    "specific_objectives": [
+      "treble soprano alto tenor baritone bass falsetto Vocal Combinations: A capella soloist duet, trio quartet ensemble choir, male, female mixed choir back-ups chorus"
+    ],
+    "content_items": [
+      "Orchestral strings: Violin, viola, cello, double bass Harp Guitar Cuarto Mandolin Banjo Sitar Electric guitar Bass guitar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 68,
+    "keywords": [
+      "alto",
+      "back",
+      "banjo",
+      "baritone",
+      "bass",
+      "capella",
+      "cello",
+      "choir",
+      "chorus",
+      "combinations",
+      "cuarto",
+      "double"
+    ],
+    "hash": "b040a84eb3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.169157"
+  },
+  {
+    "id": "GEN-00133",
+    "section": "section of: the syllabus",
+    "subsection": "Unknown",
+    "objective": "• Baroque • Classical • Romantic • Impressionist • 20 Century/Avant garde • Modern",
+    "content": "• Western Art/Classical • Jazz/Blues • Gospel • Pop • Folk: African, Caribbean, East Indian, Latin American, North American, British (World Music)",
+    "specific_objectives": [
+      "Baroque",
+      "Classical",
+      "Romantic",
+      "Impressionist",
+      "Century/Avant garde",
+      "Modern"
+    ],
+    "content_items": [
+      "Western Art/Classical",
+      "Jazz/Blues",
+      "Gospel",
+      "Folk: African, Caribbean, East Indian, Latin American, North American, British (World Music)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 69,
+    "keywords": [
+      "african",
+      "american",
+      "art",
+      "avant",
+      "baroque",
+      "blues",
+      "british",
+      "caribbean",
+      "century",
+      "classical",
+      "east",
+      "folk"
+    ],
+    "hash": "b48c9fb3f3",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.284974"
+  },
+  {
+    "id": "GEN-00134",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "of structural and expressive",
+    "content": "elements.",
+    "specific_objectives": [
+      "of structural",
+      "expressive"
+    ],
+    "content_items": [
+      "elements."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "elements",
+      "expressive",
+      "structural"
+    ],
+    "hash": "1d41af81e0",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480231"
+  },
+  {
+    "id": "GEN-00135",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "incorporate changes in ele",
+    "content": "ments such as r",
+    "specific_objectives": [
+      "incorporate changes in ele"
+    ],
+    "content_items": [
+      "ments such as r"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "changes",
+      "ele",
+      "incorporate",
+      "ments",
+      "such"
+    ],
+    "hash": "b28abc0702",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480320"
+  },
+  {
+    "id": "GEN-00136",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "pattern, utilizing blue notes",
+    "content": "and soulful lyri",
+    "specific_objectives": [
+      "pattern, utilizing blue notes"
+    ],
+    "content_items": [
+      "soulful lyri"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "blue",
+      "lyri",
+      "notes",
+      "pattern",
+      "soulful",
+      "utilizing"
+    ],
+    "hash": "7ce75d4c09",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480417"
+  },
+  {
+    "id": "GEN-00137",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "plays an accompanied solo",
+    "content": "passage; impro",
+    "specific_objectives": [
+      "plays an accompanied solo"
+    ],
+    "content_items": [
+      "passage",
+      "impro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "accompanied",
+      "impro",
+      "passage",
+      "plays",
+      "solo"
+    ],
+    "hash": "3d5d448a89",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480498"
+  },
+  {
+    "id": "GEN-00138",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "chorus sings another line",
+    "content": "(response) alte",
+    "specific_objectives": [
+      "chorus sings another line"
+    ],
+    "content_items": [
+      "(response) alte"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "alte",
+      "another",
+      "chorus",
+      "line",
+      "sings"
+    ],
+    "hash": "47ae34c07a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480578"
+  },
+  {
+    "id": "GEN-00139",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "common in work songs, fie",
+    "content": "ld hollers, soul",
+    "specific_objectives": [
+      "common in work songs, fie"
+    ],
+    "content_items": [
+      "ld hollers, soul"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "common",
+      "fie",
+      "hollers",
+      "songs",
+      "soul",
+      "work"
+    ],
+    "hash": "8ec68a4f64",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480639"
+  },
+  {
+    "id": "GEN-00140",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "can also be done with instru",
+    "content": "ments.",
+    "specific_objectives": [
+      "can also be done with instru"
+    ],
+    "content_items": [
+      "ments."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "also",
+      "can",
+      "done",
+      "instru",
+      "ments"
+    ],
+    "hash": "d184420141",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480691"
+  },
+  {
+    "id": "GEN-00141",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "through a piece, or a sectio",
+    "content": "n of a piece of",
+    "specific_objectives": [
+      "through a piece, or a sectio"
+    ],
+    "content_items": [
+      "n of a piece of"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "piece",
+      "sectio",
+      "through"
+    ],
+    "hash": "7e456a9d57",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480859"
+  },
+  {
+    "id": "GEN-00142",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "MUSIC harmony, tone colo",
+    "content": "ur, form, dyna",
+    "specific_objectives": [
+      "MUSIC harmony, tone colo"
+    ],
+    "content_items": [
+      "ur, form, dyna"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "colo",
+      "dyna",
+      "form",
+      "harmony",
+      "music",
+      "tone"
+    ],
+    "hash": "6565f8e511",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.480965"
+  },
+  {
+    "id": "GEN-00143",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "help to define its presence a",
+    "content": "nd impact.",
+    "specific_objectives": [
+      "help to define its presence a"
+    ],
+    "content_items": [
+      "nd impact."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 70,
+    "keywords": [
+      "define",
+      "help",
+      "impact",
+      "its",
+      "presence"
+    ],
+    "hash": "9eb70410d8",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.481014"
+  },
+  {
+    "id": "GEN-00144",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "blowing air into a tube. E",
+    "content": "xamples: rec",
+    "specific_objectives": [
+      "blowing air into a tube. E"
+    ],
+    "content_items": [
+      "xamples: rec"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "air",
+      "blowing",
+      "into",
+      "rec",
+      "tube",
+      "xamples"
+    ],
+    "hash": "06ab9b6f7b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.706801"
+  },
+  {
+    "id": "GEN-00145",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "causing strings to vibrate,",
+    "content": "either by pl",
+    "specific_objectives": [
+      "causing strings to vibrate,"
+    ],
+    "content_items": [
+      "either by pl"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "causing",
+      "either",
+      "strings",
+      "vibrate"
+    ],
+    "hash": "efaa951245",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.706899"
+  },
+  {
+    "id": "GEN-00146",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "or drawing a bow across t",
+    "content": "hem (as in a",
+    "specific_objectives": [
+      "or drawing a bow across t"
+    ],
+    "content_items": [
+      "hem (as in a"
+    ],
+    "skills": [
+      "AS",
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "across",
+      "bow",
+      "drawing",
+      "hem"
+    ],
+    "hash": "fb7a9d7d0c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.706964"
+  },
+  {
+    "id": "GEN-00147",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "electronic means. Exampl",
+    "content": "es: electron",
+    "specific_objectives": [
+      "electronic means. Exampl"
+    ],
+    "content_items": [
+      "es: electron"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "electron",
+      "electronic",
+      "exampl",
+      "means"
+    ],
+    "hash": "c3bf3a7556",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707039"
+  },
+  {
+    "id": "GEN-00148",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "by the stretching of a skin",
+    "content": "over a hollo",
+    "specific_objectives": [
+      "by the stretching of a skin"
+    ],
+    "content_items": [
+      "over a hollo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "hollo",
+      "over",
+      "skin",
+      "stretching"
+    ],
+    "hash": "7c16609624",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707115"
+  },
+  {
+    "id": "GEN-00149",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "of resonator. Examples: c",
+    "content": "onga, bongo",
+    "specific_objectives": [
+      "of resonator. Examples: c"
+    ],
+    "content_items": [
+      "onga, bongo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "bongo",
+      "examples",
+      "onga",
+      "resonator"
+    ],
+    "hash": "cc0247691a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707171"
+  },
+  {
+    "id": "GEN-00150",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "material it is made of – th",
+    "content": "at is, it is “s",
+    "specific_objectives": [
+      "material it is made of – th"
+    ],
+    "content_items": [
+      "at is, it is “s"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "made",
+      "material"
+    ],
+    "hash": "8399d5a56f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707271"
+  },
+  {
+    "id": "GEN-00151",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "suggests. Examples: sha",
+    "content": "kers, claves,",
+    "specific_objectives": [
+      "suggests. Examples: sha"
+    ],
+    "content_items": [
+      "kers, claves,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "claves",
+      "examples",
+      "kers",
+      "sha",
+      "suggests"
+    ],
+    "hash": "71a41a1ad4",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707329"
+  },
+  {
+    "id": "GEN-00152",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "small percussion instrum",
+    "content": "ents, which",
+    "specific_objectives": [
+      "small percussion instrum"
+    ],
+    "content_items": [
+      "ents, which"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "ents",
+      "instrum",
+      "percussion",
+      "small",
+      "which"
+    ],
+    "hash": "34eb4a9f43",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707383"
+  },
+  {
+    "id": "GEN-00153",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "Jazz, Latin-American, Clas",
+    "content": "sical.",
+    "specific_objectives": [
+      "Jazz, Latin-American, Clas"
+    ],
+    "content_items": [
+      "sical."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "american",
+      "clas",
+      "jazz",
+      "latin",
+      "sical"
+    ],
+    "hash": "e1ac8702ff",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707453"
+  },
+  {
+    "id": "GEN-00154",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "to the performers how th",
+    "content": "e music shou",
+    "specific_objectives": [
+      "to the performers how th"
+    ],
+    "content_items": [
+      "e music shou"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "how",
+      "music",
+      "performers",
+      "shou"
+    ],
+    "hash": "3be06b8671",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707528"
+  },
+  {
+    "id": "GEN-00155",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "Black American, then took",
+    "content": "many diffe",
+    "specific_objectives": [
+      "Black American, then took"
+    ],
+    "content_items": [
+      "many diffe"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "american",
+      "black",
+      "diffe",
+      "many",
+      "then",
+      "took"
+    ],
+    "hash": "890fbbc6e6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707632"
+  },
+  {
+    "id": "GEN-00156",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "jazz, swing, bebop, rock.",
+    "content": "It features",
+    "specific_objectives": [
+      "jazz, swing, bebop, rock."
+    ],
+    "content_items": [
+      "It features"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "bebop",
+      "features",
+      "jazz",
+      "rock",
+      "swing"
+    ],
+    "hash": "4d104d9ce6",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707687"
+  },
+  {
+    "id": "GEN-00157",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "season in Jamaica, emplo",
+    "content": "ying fifes an",
+    "specific_objectives": [
+      "season in Jamaica, emplo"
+    ],
+    "content_items": [
+      "ying fifes an"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "emplo",
+      "fifes",
+      "jamaica",
+      "season",
+      "ying"
+    ],
+    "hash": "8c8426a34d",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707760"
+  },
+  {
+    "id": "GEN-00158",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "characterisations and cos",
+    "content": "tumes (inclu",
+    "specific_objectives": [
+      "characterisations"
+    ],
+    "content_items": [
+      "tumes (inclu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "characterisations",
+      "cos",
+      "inclu",
+      "tumes"
+    ],
+    "hash": "f955b35592",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707813"
+  },
+  {
+    "id": "GEN-00159",
+    "section": "section of: a piece of music",
+    "subsection": "Unknown",
+    "objective": "Thomas, St Mary and St C",
+    "content": "atherine.",
+    "specific_objectives": [
+      "Thomas, St Mary"
+    ],
+    "content_items": [
+      "atherine."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 71,
+    "keywords": [
+      "atherine",
+      "mary",
+      "thomas"
+    ],
+    "hash": "df2fce13bd",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.707879"
+  },
+  {
+    "id": "GEN-00160",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "aesthetic whole, usual",
+    "content": "ly in the sa",
+    "specific_objectives": [
+      "aesthetic whole, usual"
+    ],
+    "content_items": [
+      "ly in the sa"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "aesthetic",
+      "usual",
+      "whole"
+    ],
+    "hash": "370f788e8b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954390"
+  },
+  {
+    "id": "GEN-00161",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "aspect of music, in co",
+    "content": "ntrast to ha",
+    "specific_objectives": [
+      "aspect of music, in co"
+    ],
+    "content_items": [
+      "ntrast to ha"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "aspect",
+      "music",
+      "ntrast"
+    ],
+    "hash": "9796475ccf",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954466"
+  },
+  {
+    "id": "GEN-00162",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "aspect; melodies are c",
+    "content": "onstructed",
+    "specific_objectives": [
+      "aspect",
+      "melodies are c"
+    ],
+    "content_items": [
+      "onstructed"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "are",
+      "aspect",
+      "melodies",
+      "onstructed"
+    ],
+    "hash": "b76f9eabf1",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954531"
+  },
+  {
+    "id": "GEN-00163",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "fragments; polyphony",
+    "content": "results fro",
+    "specific_objectives": [
+      "fragments",
+      "polyphony"
+    ],
+    "content_items": [
+      "results fro"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "fragments",
+      "fro",
+      "polyphony",
+      "results"
+    ],
+    "hash": "01785669d2",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954595"
+  },
+  {
+    "id": "GEN-00164",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "formed by the interwe",
+    "content": "aving of two",
+    "specific_objectives": [
+      "formed by the interwe"
+    ],
+    "content_items": [
+      "aving of two"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "aving",
+      "formed",
+      "interwe",
+      "two"
+    ],
+    "hash": "2c1b44b3ad",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954650"
+  },
+  {
+    "id": "GEN-00165",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "rhumba, it has a 3 + 3 +",
+    "content": "2 pattern,",
+    "specific_objectives": [
+      "rhumba, it has a 3 + 3 +"
+    ],
+    "content_items": [
+      "pattern,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "has",
+      "pattern",
+      "rhumba"
+    ],
+    "hash": "c1ae3993a0",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954729"
+  },
+  {
+    "id": "GEN-00166",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "in today's dance hall m",
+    "content": "usic, especi",
+    "specific_objectives": [
+      "in today's dance hall m"
+    ],
+    "content_items": [
+      "usic, especi"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "dance",
+      "especi",
+      "hall",
+      "today",
+      "usic"
+    ],
+    "hash": "331b3d334b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954795"
+  },
+  {
+    "id": "GEN-00167",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "music in relation to app",
+    "content": "lied theory.",
+    "specific_objectives": [
+      "music in relation to app"
+    ],
+    "content_items": [
+      "lied theory."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "app",
+      "lied",
+      "music",
+      "relation",
+      "theory"
+    ],
+    "hash": "2e30670d8e",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.954866"
+  },
+  {
+    "id": "GEN-00168",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Original Composition",
+    "content": "An original piece of mu",
+    "specific_objectives": [
+      "Original Composition"
+    ],
+    "content_items": [
+      "An original piece of mu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "composition",
+      "original",
+      "piece"
+    ],
+    "hash": "89737a8a3a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955046"
+  },
+  {
+    "id": "GEN-00169",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "these) that is repeated",
+    "content": "throughout",
+    "specific_objectives": [
+      "these) that is repeated"
+    ],
+    "content_items": [
+      "throughout"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "repeated",
+      "these",
+      "throughout"
+    ],
+    "hash": "903c20a0b8",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955142"
+  },
+  {
+    "id": "GEN-00170",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "of music. The term is",
+    "content": "derived fr",
+    "specific_objectives": [
+      "of music. The term is"
+    ],
+    "content_items": [
+      "derived fr"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "derived",
+      "music",
+      "term"
+    ],
+    "hash": "50f46dac85",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955207"
+  },
+  {
+    "id": "GEN-00171",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "religious songs in Tri",
+    "content": "nidadian S",
+    "specific_objectives": [
+      "religious songs in Tri"
+    ],
+    "content_items": [
+      "nidadian S"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "nidadian",
+      "religious",
+      "songs",
+      "tri"
+    ],
+    "hash": "14688d5104",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955294"
+  },
+  {
+    "id": "GEN-00172",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Christmas; the music s",
+    "content": "o produced.",
+    "specific_objectives": [
+      "Christmas",
+      "the music s"
+    ],
+    "content_items": [
+      "o produced."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "christmas",
+      "music",
+      "produced"
+    ],
+    "hash": "2a2a1a5aff",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955352"
+  },
+  {
+    "id": "GEN-00173",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "in Indian music as a ba",
+    "content": "sis for impro",
+    "specific_objectives": [
+      "in Indian music as a ba"
+    ],
+    "content_items": [
+      "sis for impro"
+    ],
+    "skills": [
+      "AS"
+    ],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "impro",
+      "indian",
+      "music",
+      "sis"
+    ],
+    "hash": "56b89d1dde",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955430"
+  },
+  {
+    "id": "GEN-00174",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "of North India. Raga",
+    "content": "s are asso",
+    "specific_objectives": [
+      "of North India. Raga"
+    ],
+    "content_items": [
+      "s are asso"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "are",
+      "asso",
+      "india",
+      "north",
+      "raga"
+    ],
+    "hash": "b0eaca7d0e",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955487"
+  },
+  {
+    "id": "GEN-00175",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "peacefulness or lonelin",
+    "content": "ess, and als",
+    "specific_objectives": [
+      "peacefulness or lonelin"
+    ],
+    "content_items": [],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "als",
+      "ess",
+      "lonelin",
+      "peacefulness"
+    ],
+    "hash": "2ea3b06f60",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955546"
+  },
+  {
+    "id": "GEN-00176",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "strong accentuation of",
+    "content": "the second",
+    "specific_objectives": [
+      "strong accentuation of"
+    ],
+    "content_items": [
+      "the second"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "accentuation",
+      "second",
+      "strong"
+    ],
+    "hash": "c292ffa790",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955618"
+  },
+  {
+    "id": "GEN-00177",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Its most internationall",
+    "content": "y acclaimed",
+    "specific_objectives": [
+      "Its most internationall"
+    ],
+    "content_items": [
+      "y acclaimed"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "acclaimed",
+      "internationall",
+      "its",
+      "most"
+    ],
+    "hash": "e16547225f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955672"
+  },
+  {
+    "id": "GEN-00178",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "harmonies and the blue",
+    "content": "s. Also kno",
+    "specific_objectives": [
+      "harmonies",
+      "the blue"
+    ],
+    "content_items": [
+      "s. Also kno"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "also",
+      "blue",
+      "harmonies",
+      "kno"
+    ],
+    "hash": "a36c9c2a67",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955764"
+  },
+  {
+    "id": "GEN-00179",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "alterations in shape or",
+    "content": "pitch level in",
+    "specific_objectives": [
+      "alterations in shape or"
+    ],
+    "content_items": [
+      "pitch level in"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 72,
+    "keywords": [
+      "alterations",
+      "level",
+      "pitch",
+      "shape"
+    ],
+    "hash": "e4c0f0b6aa",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:38.955850"
+  },
+  {
+    "id": "GEN-00180",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "A Cuban dance in tim 8",
+    "content": "e (3 + 3 +",
+    "specific_objectives": [
+      "A Cuban dance in tim 8"
+    ],
+    "content_items": [
+      "e (3 + 3 +"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "cuban",
+      "dance",
+      "tim"
+    ],
+    "hash": "cfab3ab7c0",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:39.006180"
+  },
+  {
+    "id": "GEN-00181",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "rhythm and syncopation",
+    "content": ".",
+    "specific_objectives": [
+      "rhythm",
+      "syncopation"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "rhythm",
+      "syncopation"
+    ],
+    "hash": "e1c57b33f1",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:39.006255"
+  },
+  {
+    "id": "GEN-00182",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "music. It is played with",
+    "content": "the fingers",
+    "specific_objectives": [
+      "music. It is played with"
+    ],
+    "content_items": [
+      "the fingers"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 73,
+    "keywords": [
+      "fingers",
+      "music",
+      "played"
+    ],
+    "hash": "efa11afc7c",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:39.006353"
+  },
+  {
+    "id": "GEN-00183",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Publications Incorpo",
+    "content": "rated, 1",
+    "specific_objectives": [
+      "Publications Incorpo"
+    ],
+    "content_items": [
+      "rated, 1"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 77,
+    "keywords": [
+      "incorpo",
+      "publications",
+      "rated"
+    ],
+    "hash": "452e4a5806",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:39.739049"
+  },
+  {
+    "id": "GEN-00184",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Mostly syllabic, at a modera",
+    "content": "te tempo",
+    "specific_objectives": [
+      "Mostly syllabic, at a modera"
+    ],
+    "content_items": [
+      "te tempo"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 81,
+    "keywords": [
+      "modera",
+      "mostly",
+      "syllabic",
+      "tempo"
+    ],
+    "hash": "d3fb5d3c35",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.148478"
+  },
+  {
+    "id": "GEN-00185",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Mainly conjunct movement",
+    "content": "–range of",
+    "specific_objectives": [
+      "Mainly conjunct movement"
+    ],
+    "content_items": [
+      "–range of"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 81,
+    "keywords": [
+      "conjunct",
+      "mainly",
+      "movement",
+      "range"
+    ],
+    "hash": "2eeb4b0ab1",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.148522"
+  },
+  {
+    "id": "GEN-00186",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Accompaniment doubles the",
+    "content": "voices",
+    "specific_objectives": [
+      "Accompaniment doubles the"
+    ],
+    "content_items": [
+      "voices"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 81,
+    "keywords": [
+      "accompaniment",
+      "doubles",
+      "voices"
+    ],
+    "hash": "1d378aad68",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.148553"
+  },
+  {
+    "id": "GEN-00187",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Phrases of moderate length",
+    "content": "requiring",
+    "specific_objectives": [
+      "Phrases of moderate length"
+    ],
+    "content_items": [
+      "requiring"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 81,
+    "keywords": [
+      "length",
+      "moderate",
+      "phrases",
+      "requiring"
+    ],
+    "hash": "64395ed548",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.148594"
+  },
+  {
+    "id": "GEN-00188",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Melody has steps, skips and occasio",
+    "content": "nal leaps,",
+    "specific_objectives": [
+      "Melody has steps, skips",
+      "occasio"
+    ],
+    "content_items": [
+      "nal leaps,"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 83,
+    "keywords": [
+      "has",
+      "leaps",
+      "melody",
+      "nal",
+      "occasio",
+      "skips",
+      "steps"
+    ],
+    "hash": "450fba6c33",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.250158"
+  },
+  {
+    "id": "GEN-00189",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Accompaniment does not double vo",
+    "content": "ice",
+    "specific_objectives": [
+      "Accompaniment does not double vo"
+    ],
+    "content_items": [],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 83,
+    "keywords": [
+      "accompaniment",
+      "does",
+      "double",
+      "ice",
+      "not"
+    ],
+    "hash": "1c5ef6f2c7",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.250203"
+  },
+  {
+    "id": "GEN-00190",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Variety of complex rhythm patterns",
+    "content": "including",
+    "specific_objectives": [
+      "Variety of complex rhythm patterns"
+    ],
+    "content_items": [
+      "including"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 83,
+    "keywords": [
+      "complex",
+      "including",
+      "patterns",
+      "rhythm",
+      "variety"
+    ],
+    "hash": "74f11bbe15",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.250238"
+  },
+  {
+    "id": "GEN-00191",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Contrasting dynamics and other exp",
+    "content": "ressive qu",
+    "specific_objectives": [
+      "Contrasting dynamics",
+      "other exp"
+    ],
+    "content_items": [
+      "ressive qu"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 83,
+    "keywords": [
+      "contrasting",
+      "dynamics",
+      "exp",
+      "other",
+      "ressive"
+    ],
+    "hash": "8b6c030a64",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.250278"
+  },
+  {
+    "id": "GEN-00192",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Intervals include scalar movement and ar",
+    "content": "peggic",
+    "specific_objectives": [
+      "Intervals include scalar movement"
+    ],
+    "content_items": [
+      "peggic"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "include",
+      "intervals",
+      "movement",
+      "peggic",
+      "scalar"
+    ],
+    "hash": "04b3abb85b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.290862"
+  },
+  {
+    "id": "GEN-00193",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Articulation involves staccato, legato and",
+    "content": "scalar",
+    "specific_objectives": [
+      "Articulation involves staccato, legato"
+    ],
+    "content_items": [
+      "scalar"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "articulation",
+      "involves",
+      "legato",
+      "scalar",
+      "staccato"
+    ],
+    "hash": "c2719a3a8f",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.290947"
+  },
+  {
+    "id": "GEN-00194",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "• Key-signatures are limited to a maximum",
+    "content": "of two",
+    "specific_objectives": [
+      "Key-signatures are limited to a maximum"
+    ],
+    "content_items": [
+      "of two"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 84,
+    "keywords": [
+      "are",
+      "key",
+      "limited",
+      "maximum",
+      "signatures",
+      "two"
+    ],
+    "hash": "00978adc8a",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.291023"
+  },
+  {
+    "id": "GEN-00195",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Caribbean Folk: Mento Parang Quadrille Kumina",
+    "content": "Caribbean Popular: Calypso Reggae Zouk Samba Chutney Soca",
+    "specific_objectives": [
+      "Caribbean Folk: Mento Parang Quadrille Kumina"
+    ],
+    "content_items": [
+      "Caribbean Popular: Calypso Reggae Zouk Samba Chutney Soca"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "calypso",
+      "caribbean",
+      "chutney",
+      "folk",
+      "kumina",
+      "mento",
+      "parang",
+      "popular",
+      "quadrille",
+      "reggae",
+      "samba",
+      "soca"
+    ],
+    "hash": "70d2c1cd26",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.680519"
+  },
+  {
+    "id": "GEN-00196",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Early Baroque- 1600-1640) -Homophonic texture, dissonance. Middle Baroque” 1640-1680- Major and minor tonality established forming basis of compositions; Emphasis on instrumental music. Late Baroque- (1680-1750 ) Ornamented and elaborate Abundance of Polyphony, often dense textures. Dominant to tonic chord relationship established. Clear triads; seventh chords, diminished triads.",
+    "content": "Henry Purcell (1659- 1695) Antonio Vivaldi (1678- 1741) Johann S Bach 1685- 1750 George F Handel (1685- 1759",
+    "specific_objectives": [
+      "Early Baroque- 1600-1640) -Homophonic texture, dissonance. Middle Baroque” 1640-1680- Major",
+      "minor tonality established forming basis of compositions",
+      "Emphasis on instrumental music. Late Baroque- (1680-1750 ) Ornamented",
+      "elaborate Abundance of Polyphony, often dense textures. Dominant to tonic chord relationship established. Clear triads",
+      "seventh chords, diminished triads."
+    ],
+    "content_items": [
+      "Henry Purcell (1659- 1695) Antonio Vivaldi (1678- 1741) Johann S Bach 1685- 1750 George F Handel (1685- 1759"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 87,
+    "keywords": [
+      "abundance",
+      "antonio",
+      "bach",
+      "baroque",
+      "basis",
+      "chord",
+      "chords",
+      "clear",
+      "compositions",
+      "dense",
+      "diminished",
+      "dissonance"
+    ],
+    "hash": "04187ac125",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.680909"
+  },
+  {
+    "id": "GEN-00197",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Development of the orchestra and instruments- mainly strings, flute and bassoon. Accompaniment by the bass continuo or figured bass played by harpsichord or organ; cello or bassoon accompanying instruments One basic mood expressed in instrumental music. Main keyboard instruments- organ, harpsichord. Dynamics generally sudden (terraced dynamics). Continuous and expansive melody.",
+    "content": "Cantata No. 140: Awake a Voice is Calling Us. Handel’s Music for the Royal fireworks The Messiah,” Hallelujah Chorus” For Unto Us a Child is Born",
+    "specific_objectives": [
+      "Development of the orchestra",
+      "instruments- mainly strings, flute",
+      "bassoon. Accompaniment by the bass continuo or figured bass played by harpsichord or organ",
+      "cello or bassoon accompanying instruments One basic mood expressed in instrumental music. Main keyboard instruments- organ, harpsichord. Dynamics generally sudden (terraced dynamics). Continuous",
+      "expansive melody."
+    ],
+    "content_items": [
+      "Cantata No. 140: Awake a Voice is Calling Us. Handel’s Music for the Royal fireworks The Messiah,” Hallelujah Chorus” For Unto Us a Child is Born"
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "accompaniment",
+      "accompanying",
+      "awake",
+      "basic",
+      "bass",
+      "bassoon",
+      "born",
+      "calling",
+      "cantata",
+      "cello",
+      "child",
+      "chorus"
+    ],
+    "hash": "11c0287143",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.860260"
+  },
+  {
+    "id": "GEN-00198",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Simplification of ornamentation. Tuneful melodies and simple harmonies. Contrasts in mood and theme. Less dense textures to more homophonic with greater flexibility. Balanced form and symmetrical phrases in structure. Variety of rhythmic patterns to include unexpected pauses, syncopations frequent changes from long notes to shorter notes. Gradual dynamic shading to include frequent crescendos and decrescendos. The Piano replaces harpsichord. An expanded orchestra- greater variety of tone colour.",
+    "content": "Joseph Haydn (1732- 1809) Wolfgang A Mozart (1756-1791) Ludwig V Beethoven ( 1770-1827)",
+    "specific_objectives": [
+      "Simplification of ornamentation. Tuneful melodies",
+      "simple harmonies. Contrasts in mood",
+      "theme. Less dense textures to more homophonic with greater flexibility. Balanced form",
+      "symmetrical phrases in structure. Variety of rhythmic patterns to include unexpected pauses, syncopations frequent changes from long notes to shorter notes. Gradual dynamic shading to include frequent crescendos",
+      "decrescendos. The Piano replaces harpsichord. An expanded orchestra- greater variety of tone colour."
+    ],
+    "content_items": [
+      "Joseph Haydn (1732- 1809) Wolfgang A Mozart (1756-1791) Ludwig V Beethoven ( 1770-1827)"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 88,
+    "keywords": [
+      "balanced",
+      "beethoven",
+      "changes",
+      "colour",
+      "contrasts",
+      "crescendos",
+      "decrescendos",
+      "dense",
+      "dynamic",
+      "expanded",
+      "flexibility",
+      "form"
+    ],
+    "hash": "6b678ad804",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.860471"
+  },
+  {
+    "id": "GEN-00199",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "PROJECT ONE – LIAP I MUSICAL PERFORMANCE",
+    "content": "Record on a readily available and easily portable storage device the music (20-30 minutes in duration) presented in a live performance. Compare and contrast the structural and expressive elements and comment on the socio-cultural significance of the music. MAIN TASK: Analyse the music heard in a live performance.",
+    "specific_objectives": [
+      "PROJECT ONE – LIAP I MUSICAL PERFORMANCE"
+    ],
+    "content_items": [
+      "Record on a readily available",
+      "easily portable storage device the music (20-30 minutes in duration) presented in a live performance. Compare",
+      "contrast the structural",
+      "expressive elements",
+      "comment on the socio-cultural significance of the music. MAIN TASK: Analyse the music heard in a live performance."
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 89,
+    "keywords": [
+      "analyse",
+      "available",
+      "comment",
+      "compare",
+      "contrast",
+      "cultural",
+      "device",
+      "easily",
+      "elements",
+      "expressive",
+      "heard",
+      "liap"
+    ],
+    "hash": "eceb9c7a66",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.997283"
+  },
+  {
+    "id": "GEN-00200",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "PROJECT TWO – LIAP 11 MUSICAL ADVERTISEMENT",
+    "content": "Using a readily available and easily portable storage device, record from radio or television, eight (8) musical advertisements (approximately 6-10 minutes in duration). Analyse the structural and expressive elements of the music and comment on its socio-cultural significance with reference to the effectiveness of its appeal.",
+    "specific_objectives": [
+      "PROJECT TWO – LIAP 11 MUSICAL ADVERTISEMENT"
+    ],
+    "content_items": [
+      "Using a readily available",
+      "easily portable storage device, record from radio or television, eight (8) musical advertisements (approximately 6-10 minutes in duration). Analyse the structural",
+      "expressive elements of the music",
+      "comment on its socio-cultural significance with reference to the effectiveness of its appeal."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 89,
+    "keywords": [
+      "advertisement",
+      "advertisements",
+      "analyse",
+      "appeal",
+      "available",
+      "comment",
+      "cultural",
+      "device",
+      "easily",
+      "effectiveness",
+      "eight",
+      "elements"
+    ],
+    "hash": "6091c349ea",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:40.997433"
+  },
+  {
+    "id": "GEN-00201",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "MAIN TASK: Analyse the music from eight (8) musical advertisements.",
+    "content": "• Discuss instrumentation and analyse the examples in relation to the elements detailed in the Mark Scheme on pages 38-43 of the Syllabus.",
+    "specific_objectives": [
+      "MAIN TASK: Analyse the music from eight (8) musical advertisements."
+    ],
+    "content_items": [
+      "Discuss instrumentation",
+      "analyse the examples in relation to the elements detailed in the Mark Scheme on pages 38-43 of the Syllabus."
+    ],
+    "skills": [],
+    "difficulty": 3,
+    "page_number": 90,
+    "keywords": [
+      "advertisements",
+      "analyse",
+      "detailed",
+      "discuss",
+      "eight",
+      "elements",
+      "examples",
+      "instrumentation",
+      "main",
+      "mark",
+      "music",
+      "musical"
+    ],
+    "hash": "d59b7ebe57",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:41.149308"
+  },
+  {
+    "id": "GEN-00202",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "PROJECT THREE – LIAP 111 CARIBBEAN PERFORMER/COMPOSER",
+    "content": "Investigate the music of a prominent Caribbean performer or composer by interviewing the artiste to gain information on career development, influences, method and mode of performing or composing and achievements. Record on a readily available and easily portable storage device works (10-20 minutes in duration) by this performer or composer. Analyse the music in terms of structural and expressive elements and comment on its socio- cultural significance. MAIN TASK: Analyse the music of a (living) Caribbean performer/composer.",
+    "specific_objectives": [
+      "PROJECT THREE – LIAP 111 CARIBBEAN PERFORMER/COMPOSER"
+    ],
+    "content_items": [
+      "Investigate the music of a prominent Caribbean performer or composer by interviewing the artiste to gain information on career development, influences, method",
+      "mode of performing or composing",
+      "achievements. Record on a readily available",
+      "easily portable storage device works (10-20 minutes in duration) by this performer or composer. Analyse the music in terms of structural",
+      "expressive elements",
+      "comment on its socio- cultural significance. MAIN TASK: Analyse the music of a (living) Caribbean performer/composer."
+    ],
+    "skills": [
+      "OR"
+    ],
+    "difficulty": 1,
+    "page_number": 90,
+    "keywords": [
+      "achievements",
+      "analyse",
+      "artiste",
+      "available",
+      "career",
+      "caribbean",
+      "comment",
+      "composer",
+      "composing",
+      "cultural",
+      "development",
+      "device"
+    ],
+    "hash": "7c73e299e8",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:41.149519"
+  },
+  {
+    "id": "GEN-00203",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "II Vecchio Castello (The Old Castle)",
+    "content": "Promenade",
+    "specific_objectives": [
+      "II Vecchio Castello (The Old Castle)"
+    ],
+    "content_items": [
+      "Promenade"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 91,
+    "keywords": [
+      "castello",
+      "promenade",
+      "vecchio"
+    ],
+    "hash": "52bf059939",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:41.192447"
+  },
+  {
+    "id": "GEN-00204",
+    "section": "section of: a piece\nof music",
+    "subsection": "Unknown",
+    "objective": "Mark Scheme and Key: -",
+    "content": "Paper 01",
+    "specific_objectives": [
+      "Mark Scheme",
+      "Key: -"
+    ],
+    "content_items": [
+      "Paper 01"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 92,
+    "keywords": [
+      "key",
+      "mark",
+      "paper",
+      "scheme"
+    ],
+    "hash": "6c4e524c59",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:41.234772"
+  },
+  {
+    "id": "GEN-00205",
+    "section": "section of: the excerpt is a",
+    "subsection": "Unknown",
+    "objective": "Items 46 – 60 refer to the following musical",
+    "content": "score",
+    "specific_objectives": [
+      "Items 46 – 60 refer to the following musical"
+    ],
+    "content_items": [
+      "score"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "following",
+      "items",
+      "musical",
+      "refer",
+      "score"
+    ],
+    "hash": "ca9ab1158b",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:42.352323"
+  },
+  {
+    "id": "GEN-00206",
+    "section": "section of: the excerpt is a",
+    "subsection": "Unknown",
+    "objective": "Excerpt D consists of ONE short sketch. The excerpt",
+    "content": "will b",
+    "specific_objectives": [
+      "Excerpt D consists of ONE short sketch. The excerpt"
+    ],
+    "content_items": [
+      "will b"
+    ],
+    "skills": [],
+    "difficulty": 1,
+    "page_number": 105,
+    "keywords": [
+      "consists",
+      "excerpt",
+      "one",
+      "short",
+      "sketch",
+      "will"
+    ],
+    "hash": "a8c9643bc8",
+    "source_file": "CSEC-Music-Syllabus-Amended.pdf",
+    "extraction_date": "2026-01-29T05:32:42.352402"
+  }
+]

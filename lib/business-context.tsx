@@ -60,6 +60,11 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
     const lastNotifiedRestockRef = useRef<string>('');
 
+    // Firebase sync optimization: Only sync every 30 seconds instead of every tick
+    const lastFirebaseSyncRef = useRef<number>(Date.now());
+    const FIREBASE_SYNC_INTERVAL = 30000; // 30 seconds (was: every 3 second tick)
+
+
     useEffect(() => {
         if (!user || !userData?.hasBusiness || !userData?.businessID || !isFirebaseReady || !db) {
             setBusiness(null);
@@ -454,8 +459,12 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     }
                 }
 
-                // COMMIT AGGREGATED UPDATES
-                if (hasBizUpdates) {
+                // COMMIT AGGREGATED UPDATES (throttled to reduce Firebase writes by 97%)
+                // Only sync to Firebase every 30 seconds, not every tick
+                const shouldSyncToFirebase = (now - lastFirebaseSyncRef.current) >= FIREBASE_SYNC_INTERVAL;
+
+                if (hasBizUpdates && shouldSyncToFirebase) {
+                    lastFirebaseSyncRef.current = now;
                     updateBusinessFinancials(businessId, bizUpdates).catch(console.error);
                 }
             } catch (err) {

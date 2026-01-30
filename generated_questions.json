@@ -1,0 +1,92 @@
+[
+  {
+    "id": "AGRI-00008_b92f4fb5",
+    "objectiveId": "AGRI-00008",
+    "subjectId": "general",
+    "subjectName": "General",
+    "topic": "the Caribbean; a region consisting",
+    "difficulty": 1,
+    "difficultyLabel": "easy",
+    "questionText": "Which phrase best describes the primary geographic composition of the Caribbean region?",
+    "options": [
+      "A chain of mainly small islands and coastal territories",
+      "One large continuous landmass in the Atlantic Ocean",
+      "A group of large mountainous countries in South America",
+      "An isolated single island surrounded by polar ice"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The Caribbean is defined geographically as an archipelago consisting predominantly of small island states and coastal mainland territories bounded by the Caribbean Sea. Option B incorrectly suggests a continental landmass like Australia, which contradicts the fragmented island nature of the region. Option C confuses the Caribbean with South American continental states, while Option D introduces polar characteristics that are geographically impossible for this tropical region.",
+    "storyElement": "Challenge",
+    "tags": [
+      "caribbean",
+      "consisting",
+      "mainly",
+      "region",
+      "small"
+    ],
+    "metadata": {
+      "generatedBy": "ollama:kimi-k2.5:cloud",
+      "timestamp": "2026-01-29T09:37:26"
+    }
+  },
+  {
+    "id": "AGRI-00008_7c75a252",
+    "objectiveId": "AGRI-00008",
+    "subjectId": "general",
+    "subjectName": "General",
+    "topic": "the Caribbean; a region consisting",
+    "difficulty": 1,
+    "difficultyLabel": "easy",
+    "questionText": "How are the majority of independent territories in the Caribbean region officially classified by size and development status?",
+    "options": [
+      "Small Island Developing States",
+      "Large continental nations",
+      "Subcontinental landmasses",
+      "Polar territories"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The majority of Caribbean territories are classified as Small Island Developing States (SIDS) due to their limited land area, small populations, and specific economic vulnerability challenges. Option B incorrectly describes continental-sized countries like Brazil or Canada, which are not Caribbean territories. Option C refers to large landmasses like India or Arabia, while Option D describes Arctic or Antarctic regions with no relevance to the tropical Caribbean.",
+    "storyElement": "Challenge",
+    "tags": [
+      "caribbean",
+      "consisting",
+      "mainly",
+      "region",
+      "small"
+    ],
+    "metadata": {
+      "generatedBy": "ollama:kimi-k2.5:cloud",
+      "timestamp": "2026-01-29T09:37:26"
+    }
+  },
+  {
+    "id": "AGRI-00008_d5be178c",
+    "objectiveId": "AGRI-00008",
+    "subjectId": "general",
+    "subjectName": "General",
+    "topic": "the Caribbean; a region consisting",
+    "difficulty": 1,
+    "difficultyLabel": "easy",
+    "questionText": "The Caribbean region consists mainly of which type of geographic landforms?",
+    "options": [
+      "Numerous small islands and cays in a tropical sea",
+      "Vast desert plains and inland sand dunes",
+      "A single peninsula attached to North America",
+      "Large glaciers and frozen tundra landscapes"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The Caribbean is fundamentally an archipelagic region comprising thousands of small islands, islets, and cays scattered across the Caribbean Sea within a tropical climate zone. Option B describes desert geography characteristic of regions like the Sahara or Arabian Peninsula, not the Caribbean's environment. Option C inaccurately describes the region as a single land bridge like Florida, ignoring the multiple distinct island chains. Option D describes polar environments found in Greenland or Antarctica, which contrast sharply with the Caribbean's tropical climate.",
+    "storyElement": "Challenge",
+    "tags": [
+      "caribbean",
+      "consisting",
+      "mainly",
+      "region",
+      "small"
+    ],
+    "metadata": {
+      "generatedBy": "ollama:kimi-k2.5:cloud",
+      "timestamp": "2026-01-29T09:37:26"
+    }
+  }
+]
