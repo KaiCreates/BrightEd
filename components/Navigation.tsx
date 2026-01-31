@@ -13,7 +13,6 @@ const navItems = [
   { href: '/home', label: 'Home', icon: '🏠' },
   { href: '/community', label: 'Community', icon: '💬' },
   { href: '/learn', label: 'Learn', icon: '📚' },
-  { href: '/simulate', label: 'Simulate', icon: '🎮' },
   { href: '/practicals', label: 'Practicals', icon: '🧪' },
   { href: '/leaderboard', label: 'Rankings', icon: '🏆' },
   { href: '/progress', label: 'Progress', icon: '📈' },

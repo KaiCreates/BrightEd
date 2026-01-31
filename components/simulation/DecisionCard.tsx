@@ -21,82 +21,73 @@ export default function DecisionCard({
     onSelect,
     disabled
 }: DecisionCardProps) {
-    // Determine state colors
+    // Determine state colors (Duolingo Style)
     let borderColor = 'border-[var(--border-subtle)]'
-    let bgColor = 'bg-[var(--bg-primary)]'
+    let bottomBorderColor = 'border-b-[#e5e5e5]'
+    let bgColor = 'bg-[var(--bg-elevated)]'
     let textColor = 'text-[var(--text-primary)]'
-    let shadow = ''
+    let numberBg = 'bg-white border-2 border-[var(--border-subtle)]'
+    let numberText = 'text-[var(--text-muted)]'
 
+    // State logic
     if (showResult) {
         if (isCorrect) {
-            borderColor = 'border-[var(--state-success)]'
-            bgColor = 'bg-green-500/5'
-            textColor = 'text-green-700' // Ensure visibility
-            shadow = 'shadow-[0_0_20px_rgba(34,197,94,0.2)]'
+            borderColor = 'border-[#58CC02]'
+            bottomBorderColor = 'border-b-[#46A302]'
+            bgColor = 'bg-[#D7FFB8]'
+            textColor = 'text-[#46A302]'
+            numberBg = 'bg-[#58CC02] border-[#58CC02]'
+            numberText = 'text-white'
         } else if (isSelected) {
-            borderColor = 'border-[var(--state-error)]'
-            bgColor = 'bg-red-500/5'
-            textColor = 'text-red-700'
+            borderColor = 'border-[#FF4B4B]'
+            bottomBorderColor = 'border-b-[#D33131]'
+            bgColor = 'bg-[#FFDFE0]'
+            textColor = 'text-[#D33131]'
+            numberBg = 'bg-[#FF4B4B] border-[#FF4B4B]'
+            numberText = 'text-white'
         } else {
-            // Faded state for unselected wrong answers
-            bgColor = 'bg-[var(--bg-secondary)]'
-            textColor = 'text-[var(--text-muted)] opacity-50'
+            bgColor = 'opacity-40 grayscale-[0.5]'
         }
     } else if (isSelected) {
-        // Selected but not confirmed yet (simulate locking in)
-        borderColor = 'border-[var(--brand-primary)] border-2' // Thicker border
-        shadow = 'shadow-[0_0_15px_rgba(var(--brand-primary-rgb),0.3)]'
+        borderColor = 'border-[#84D8FF]'
+        bottomBorderColor = 'border-b-[#1CB0F6]'
+        bgColor = 'bg-[#DDF4FF]'
+        textColor = 'text-[#1899D6]'
+        numberBg = 'bg-white border-[#84D8FF]'
+        numberText = 'text-[#1899D6]'
     }
 
     return (
         <motion.button
             onClick={onSelect}
             disabled={disabled}
-            whileHover={!disabled && !showResult ? { scale: 1.01, y: -2 } : {}}
-            whileTap={!disabled && !showResult ? { scale: 0.98 } : {}}
+            whileTap={!disabled && !showResult ? { scale: 0.96 } : {}}
             className={`
-        relative w-full text-left group
-        p-6 rounded-xl border-2 transition-all duration-300
-        ${borderColor} ${bgColor} ${shadow}
-        ${!disabled && !showResult ? 'hover:border-[var(--brand-primary)] hover:shadow-lg hover:bg-[var(--bg-secondary)]' : ''}
-      `}
+                relative w-full text-left group
+                p-4 md:p-5 rounded-2xl border-2 border-b-4 transition-all duration-200
+                ${borderColor} ${bottomBorderColor} ${bgColor} ${textColor}
+                ${!disabled && !showResult ? 'hover:bg-black/5 active:border-b-2 active:translate-y-[2px]' : ''}
+                ${isSelected && !showResult ? 'translate-y-[2px] border-b-2' : ''}
+                ${showResult ? 'cursor-default' : 'cursor-pointer'}
+            `}
         >
-            <div className="flex items-start gap-4">
-                {/* Selection Indicator (Radio-like) */}
+            <div className="flex items-center gap-4">
+                {/* Option Number/Letter */}
                 <div className={`
-          mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all
-          ${showResult && isCorrect
-                        ? 'border-[var(--state-success)] bg-[var(--state-success)] text-white'
-                        : showResult && isSelected && !isCorrect
-                            ? 'border-[var(--state-error)] bg-[var(--state-error)] text-white'
-                            : isSelected
-                                ? 'border-[var(--brand-primary)]'
-                                : 'border-[var(--border-subtle)] group-hover:border-[var(--brand-primary)]'
-                    }
-        `}>
-                    {showResult ? (
-                        isCorrect ? '✓' : isSelected ? '✕' : ''
-                    ) : (
-                        isSelected && <motion.div layoutId="selection-dot" className="w-3 h-3 rounded-full bg-[var(--brand-primary)]" />
-                    )}
+                    w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center font-black text-lg
+                    transition-colors duration-200 shrink-0
+                    ${numberBg} ${numberText}
+                    ${!showResult && !isSelected ? 'group-hover:bg-[var(--border-subtle)] shadow-[0_2px_0_rgba(0,0,0,0.1)]' : ''}
+                `}>
+                    {index + 1}
                 </div>
 
                 {/* Option Text */}
                 <div className="flex-1">
-                    <span className={`text-[10px] font-black uppercase tracking-[0.2em] block mb-1 opacity-50 ${textColor}`}>
-                        OPTION {String.fromCharCode(65 + index)}
-                    </span>
-                    <span className={`text-base md:text-lg font-medium leading-snug ${textColor}`}>
+                    <span className="text-base md:text-lg font-bold leading-snug">
                         {option}
                     </span>
                 </div>
-
-                {/* Hidden hover arrow */}
-                {!disabled && !showResult && !isSelected && (
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[var(--brand-primary)]">
-                        →
-                    </div>
-                )}
             </div>
         </motion.button>
     )

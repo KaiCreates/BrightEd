@@ -414,7 +414,7 @@ export default function HomePage() {
                                     {learningPath.map((skill, index) => (
                                         <Link
                                             key={index}
-                                            href={`/simulate?objectiveId=${skill.objectiveId}&subject=${encodeURIComponent(skill.subject)}`}
+                                            href={`/lesson?objectiveId=${skill.objectiveId}&subject=${encodeURIComponent(skill.subject)}`}
                                             className="block"
                                         >
                                             <motion.div

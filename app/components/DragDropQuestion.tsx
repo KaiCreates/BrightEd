@@ -205,13 +205,14 @@ export default function DragDropQuestion({
                 e.preventDefault()
                 handleDrop(index)
               }}
-              className={`min-h-[80px] p-4 rounded-xl border-2 transition-all ${dragOverIndex === index
-                ? 'border-teal-light bg-teal-light/20 scale-105'
+              className={`min-h-[60px] p-3 rounded-2xl border-2 transition-all ${dragOverIndex === index
+                ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5 scale-105'
                 : item
-                  ? 'border-teal-light bg-teal-light/10'
-                  : 'border-dashed border-gray-300 bg-gray-50 hover:border-teal-light hover:bg-gray-100'
-                } ${isComplete && isCorrect ? 'border-green-500 bg-green-50' : ''} ${isComplete && !isCorrect ? 'border-red-300' : ''
-                }`}
+                  ? 'border-[var(--border-subtle)] bg-[var(--bg-elevated)] border-b-4'
+                  : 'border-dashed border-[var(--border-subtle)] bg-[var(--bg-secondary)]'
+                } ${isComplete && isCorrect ? 'border-[#58CC02] border-b-[#46A302] bg-[#D7FFB8]' : ''} 
+                  ${isComplete && isCorrect === false ? 'border-[#FF4B4B] border-b-[#D33131] bg-[#FFDFE0]' : ''}
+                `}
               layout
               transition={{ duration: 0.2 }}
             >
@@ -224,10 +225,7 @@ export default function DragDropQuestion({
                   layout
                 >
                   <div className="flex items-center gap-2 flex-1">
-                    <span className="text-xs font-bold text-gray-400">
-                      {index + 1}.
-                    </span>
-                    <span className="font-medium text-navy-dark">
+                    <span className="font-bold text-[var(--text-primary)]">
                       {item.content}
                     </span>
                   </div>
@@ -282,9 +280,9 @@ export default function DragDropQuestion({
                   whileHover={{ scale: isComplete ? 1 : 1.05 }}
                   whileTap={{ scale: isComplete ? 1 : 0.95 }}
                   layout
-                  className={`px-4 py-3 bg-gradient-to-r from-purple-light to-purple-lavender text-white rounded-lg font-medium shadow-md transition-all ${isComplete
+                  className={`px-6 py-3 bg-[var(--bg-elevated)] border-2 border-b-4 border-[var(--border-subtle)] text-[var(--text-primary)] rounded-2xl font-black shadow-sm transition-all ${isComplete
                     ? 'cursor-not-allowed opacity-50'
-                    : 'cursor-move hover:shadow-lg active:shadow-sm'
+                    : 'cursor-move hover:bg-[var(--bg-secondary)] active:border-b-2 active:translate-y-[2px]'
                     }`}
                 >
                   {item.content}

@@ -127,11 +127,6 @@ function validateInput(body: any): { subjects: string[], userProgress: UserProgr
 }
 
 /**
- * Groups objectives by subject and removes duplicates
- * @param objectives - All syllabus objectives
- * @returns Objectives grouped by subject with duplicates removed
- */
-/**
  * Derives subject from objective ID prefix
  */
 function getSubjectFromId(id: string): string {
@@ -450,8 +445,12 @@ export async function POST(request: NextRequest) {
     // Limit each subject to max objectives
     const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
     for (const [subject, path] of Object.entries(paths)) {
-      const shouldFilterByQuestions = objectiveIdsWithQuestions.size >= 100;
-      const filtered = shouldFilterByQuestions
+      // Only filter if THIS subject has questions. 
+      // This prevents hiding syllabus for subjects that are WIP (like POA) when others (Chem) have many questions.
+      const subjectMatchCount = path.filter(o => objectiveIdsWithQuestions.has(o.id)).length;
+      const isLive = subjectMatchCount >= 5; // Threshold to consider subject "live"
+
+      const filtered = isLive
         ? path.filter((o) => objectiveIdsWithQuestions.has(o.id))
         : path;
       limitedPaths[subject] = filtered.slice(0, MAX_OBJECTIVES_PER_SUBJECT);
@@ -526,8 +525,11 @@ export async function GET(request: NextRequest) {
     // Limit each subject to max objectives
     const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
     for (const [subject, path] of Object.entries(paths)) {
-      const shouldFilterByQuestions = objectiveIdsWithQuestions.size >= 100;
-      const filtered = shouldFilterByQuestions
+      // Only filter if THIS subject has questions.
+      const subjectMatchCount = path.filter(o => objectiveIdsWithQuestions.has(o.id)).length;
+      const isLive = subjectMatchCount >= 5; // Threshold to consider subject "live"
+
+      const filtered = isLive
         ? path.filter((o) => objectiveIdsWithQuestions.has(o.id))
         : path;
       limitedPaths[subject] = filtered.slice(0, MAX_OBJECTIVES_PER_SUBJECT);

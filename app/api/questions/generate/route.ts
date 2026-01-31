@@ -437,7 +437,7 @@ function createFallbackResponse(objectiveId: string, subjectId: string | null) {
       {
         id: 1,
         type: 'decision',
-        content: `We're out of new questions for ${objectiveId}. Would you like to review what you've learned?`,
+        content: `You've reached the end of the available questions for this module! We're constantly adding more content to BrightEd.`,
         options: ['Back to Map', 'Try Again'],
         correctAnswer: 0,
         storyElement: 'End of Path',

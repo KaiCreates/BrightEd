@@ -6,7 +6,7 @@ import { useAuth } from '@/lib/auth-context'
 
 const PUBLIC_PATHS = new Set<string>(['/', '/landing', '/login', '/signup', '/welcome'])
 const ONBOARDING_PATHS = ['/onboarding']
-const PROTECTED_PATHS = ['/home', '/community', '/learn', '/simulate', '/leaderboard', '/profile', '/achievements', '/practicals', '/progress']
+const PROTECTED_PATHS = ['/home', '/community', '/learn', '/simulate', '/lesson', '/leaderboard', '/profile', '/achievements', '/practicals', '/progress']
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const router = useRouter()

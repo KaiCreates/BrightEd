@@ -124,7 +124,7 @@ export default function LearningPathNode({
     }
 
     const href = !isLocked
-        ? `/simulate?objectiveId=${id}&subjectId=${encodeURIComponent(subject)}`
+        ? `/lesson?objectiveId=${id}&subjectId=${encodeURIComponent(subject)}`
         : '#'
 
     // ==========================================================================

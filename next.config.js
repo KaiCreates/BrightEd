@@ -20,6 +20,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.firebasestorage.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'api.dicebear.com',
+        pathname: '/**',
+      },
     ],
   },
   webpack: (config, { isServer }) => {
@@ -37,6 +42,15 @@ const nextConfig = {
       ],
     };
     return config
+  },
+  async redirects() {
+    return [
+      {
+        source: '/simulate',
+        destination: '/lesson',
+        permanent: true,
+      },
+    ]
   },
 }
 

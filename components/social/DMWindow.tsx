@@ -97,7 +97,7 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
             initial={{ y: 100, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 100, opacity: 0, scale: 0.95 }}
-            className="fixed bottom-4 right-4 w-96 h-[500px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50 flex flex-col"
+            className="fixed bottom-4 right-4 w-96 h-[500px] bg-[var(--bg-glass)] backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden"
         >
             {/* Header */}
             <div className="p-4 border-b border-white/10 flex items-center justify-between">
@@ -132,12 +132,12 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
                         className={`flex ${message.senderId === user?.uid ? 'justify-end' : 'justify-start'}`}
                     >
                         <div className={`flex items-end gap-2 ${message.senderId === user?.uid ? 'flex-row-reverse' : 'flex-row'}`}>
-                            <div className="w-8 h-8 shrink-0">
-                                <div className="relative w-8 h-8 rounded-full bg-white/5 border border-white/10 overflow-hidden">
+                            <div className="w-10 h-10 shrink-0">
+                                <div className="relative w-10 h-10 rounded-xl bg-[var(--bg-secondary)] border-b-[3px] border-black/20 overflow-hidden flex items-center justify-center">
                                     {message.senderAvatarUrl ? (
-                                        <Image src={message.senderAvatarUrl} alt="Avatar" fill sizes="32px" className="object-cover" />
+                                        <Image src={message.senderAvatarUrl} alt="Avatar" fill sizes="40px" className="object-cover" />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-xs font-black text-[var(--text-primary)]">
+                                        <div className="w-full h-full flex items-center justify-center text-sm font-black text-[var(--text-primary)]">
                                             {(userName || 'U').charAt(0).toUpperCase()}
                                         </div>
                                     )}
@@ -146,17 +146,17 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
 
                             <div
                                 className={`
-                                    max-w-[80%] rounded-[var(--radius-bubble)] p-3
+                                    max-w-[80%] rounded-2xl p-4 border-b-[4px]
                                     ${message.senderId === user?.uid
-                                        ? 'bg-[var(--brand-primary)]/20 text-[var(--text-primary)]'
-                                        : 'bg-white/5 text-[var(--text-primary)]'
+                                        ? 'bg-[#1CB0F6] border-[#1899D6]'
+                                        : 'bg-[#37464F] border-[#202F36]'
                                     }
                                 `}
                             >
-                                <div className="prose prose-invert max-w-none text-sm">
+                                <div className="prose prose-invert max-w-none text-sm font-bold text-white">
                                     <ReactMarkdown>{message.text}</ReactMarkdown>
                                 </div>
-                                <p className="text-xs text-[var(--text-muted)] mt-1">
+                                <p className={`text-[10px] uppercase font-black mt-2 text-white/40`}>
                                     {message.timestamp?.toDate().toLocaleTimeString()}
                                 </p>
                             </div>
@@ -166,9 +166,8 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <div className="p-4 border-t border-white/10">
-                <div className="flex gap-2">
+            <div className="p-4 border-t border-white/5 bg-black/5">
+                <div className="flex gap-2 items-end">
                     <textarea
                         value={messageText}
                         onChange={(e) => setMessageText(e.target.value)}
@@ -179,17 +178,16 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
                             }
                         }}
                         placeholder="Type a message..."
-                        className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm resize-none focus:outline-none focus:border-[var(--brand-primary)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
-                        rows={2}
+                        className="flex-1 bg-white/[0.03] border border-white/10 rounded-2xl px-4 py-3 text-sm resize-none focus:outline-none focus:border-[var(--brand-primary)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] min-h-[50px]"
+                        rows={1}
                     />
-                    <BrightButton
-                        variant="primary"
-                        size="sm"
+                    <button
                         onClick={handleSend}
                         disabled={!messageText.trim()}
+                        className="h-12 px-6 rounded-2xl bg-[var(--brand-primary)] border-b-[4px] border-[#1899D6] text-white font-black text-[10px] uppercase tracking-widest transition-all hover:brightness-110 active:border-b-0 active:translate-y-[4px] disabled:opacity-50"
                     >
                         Send
-                    </BrightButton>
+                    </button>
                 </div>
             </div>
         </motion.div>

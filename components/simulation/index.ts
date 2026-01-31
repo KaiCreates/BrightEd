@@ -1,2 +1,6 @@
-export { default as ScenarioBrief } from './ScenarioBrief'
 export { default as DecisionCard } from './DecisionCard'
+export { default as ScenarioBrief } from './ScenarioBrief'
+export * from './DuoProgressBar'
+export * from './DuoSessionLayout'
+export * from './DuoActionBar'
+export * from './DuoMascotBubble'
