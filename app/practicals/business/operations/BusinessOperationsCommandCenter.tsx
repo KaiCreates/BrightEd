@@ -632,7 +632,7 @@ function CommandCenterContent() {
       return (
         <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden flex items-center justify-center">
           <DashboardAmbience cashBalance={0} />
-          <BrightLayer variant="glass" padding="xl" className="max-w-md w-full text-center border-red-500/30">
+          <BrightLayer variant="glass" padding="lg" className="max-w-md w-full text-center border-red-500/30">
             <div className="text-4xl mb-4">⚠️</div>
             <BrightHeading level={3} className="mb-2">Data Sync Error</BrightHeading>
             <p className="text-[var(--text-secondary)] mb-6 text-sm">
