@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 
 const PUBLIC_PATHS = new Set<string>(['/', '/landing', '/login', '/signup', '/welcome'])
-const ONBOARDING_PATHS = ['/onboarding']
+const ONBOARDING_PATHS = ['/welcome']
 const PROTECTED_PATHS = ['/home', '/community', '/learn', '/simulate', '/lesson', '/leaderboard', '/profile', '/achievements', '/practicals', '/progress']
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
@@ -18,8 +18,8 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     if (loading) return
 
     const isPublic = PUBLIC_PATHS.has(pathname) || pathname.startsWith('/welcome')
-    const isOnboarding = pathname.startsWith('/onboarding')
-    const isDiagnostic = pathname === '/onboarding/diagnostic' || pathname.startsWith('/onboarding/diagnostic')
+    const isOnboarding = pathname.startsWith('/welcome') && !pathname.includes('/diagnostic')
+    const isDiagnostic = pathname.includes('/welcome/diagnostic')
     const isProtected = PROTECTED_PATHS.some(p => pathname.startsWith(p))
 
     // Not logged in
@@ -45,7 +45,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     if (!onboardingDone) {
       // User hasn't completed basic onboarding
       if (!isOnboarding || isDiagnostic) {
-        router.replace('/onboarding')
+        router.replace('/welcome')
         setIsChecking(false)
         return
       }
@@ -53,21 +53,21 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
       // Onboarding done, but diagnostic not done
       if (isProtected || pathname === '/') {
         // Block protected routes, force to diagnostic
-        router.replace('/onboarding/diagnostic')
+        router.replace('/welcome/diagnostic')
         setIsChecking(false)
         return
       }
       // Allow access to diagnostic page
       if (isOnboarding && !isDiagnostic) {
         // If they try to go back to regular onboarding, push to diagnostic
-        router.replace('/onboarding/diagnostic')
+        router.replace('/welcome/diagnostic')
         setIsChecking(false)
         return
       }
     } else {
       // Both complete - user has full access
       // Redirect away from onboarding and diagnostic if fully done
-      if (isOnboarding) {
+      if (isOnboarding || isDiagnostic) {
         router.replace('/home')
         setIsChecking(false)
         return

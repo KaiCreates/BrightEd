@@ -6,14 +6,5 @@ import { useRouter } from 'next/navigation';
 import LandingDuolingo from '@/components/landing/LandingDuolingo';
 
 export default function RootPage() {
-  const { user, loading } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!loading && user) {
-      router.push('/home');
-    }
-  }, [user, loading, router]);
-
   return <LandingDuolingo />;
 }

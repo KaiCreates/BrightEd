@@ -363,7 +363,7 @@ function LearnContent() {
             <BrightLayer variant="elevated" className="border-l-4 border-l-red-500 text-center max-w-md">
               <p className="text-red-500 font-bold mb-4">{error}</p>
               {!onboardingCompleted ? (
-                <Link href="/onboarding" className="block w-full">
+                <Link href="/welcome" className="block w-full">
                   <BrightButton size="md" variant="primary" className="w-full">
                     Complete Onboarding
                   </BrightButton>
@@ -385,7 +385,7 @@ function LearnContent() {
             <div className="text-center py-10">
               <p className="text-[var(--text-secondary)] mb-4">No learning objectives available.</p>
               {!onboardingCompleted ? (
-                <Link href="/onboarding" className="text-[var(--brand-primary)] hover:underline font-black">
+                <Link href="/welcome" className="text-[var(--brand-primary)] hover:underline font-black">
                   Complete onboarding to get started
                 </Link>
               ) : (

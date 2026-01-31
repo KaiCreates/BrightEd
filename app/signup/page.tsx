@@ -72,12 +72,14 @@ export default function SignUpPage() {
     subjects: subjectsParam?.split(',') || []
   })
 
-  // Redirect if already logged in
+  // Redirect handled by AuthGate
+  /*
   useEffect(() => {
     if (!authLoading && user) {
       router.push('/home')
     }
   }, [user, authLoading, router])
+  */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

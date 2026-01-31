@@ -4,6 +4,9 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BrightHeading, BrightButton, BrightLayer } from '@/components/system'
+import { useAuth } from '@/lib/auth-context'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 import Link from 'next/link'
 
 // --- Definitions ---
@@ -389,6 +392,7 @@ const StepPlacement = ({ onChoice }: { onChoice: (type: 'scratch') => void }) =>
 
 function WelcomeContent() {
     const router = useRouter()
+    const { user } = useAuth()
     const searchParams = useSearchParams()
     const step = (searchParams && searchParams.get('step')) || 'selection'
     const profIndex = parseInt((searchParams && searchParams.get('si')) || '0')
@@ -492,6 +496,26 @@ function WelcomeContent() {
     const onComplete = async (to: string) => {
         await logMetadata()
 
+        // If user is already logged in, update their profile
+        if (user) {
+            try {
+                await updateDoc(doc(db, 'users', user.uid), {
+                    subjects: selectedSubjects,
+                    examTrack: examType || 'CSEC',
+                    country: selectedCountry || 'Trinidad and Tobago',
+                    school: selectedSchool || null,
+                    formLevel: formLevel || '3',
+                    source: source || 'other',
+                    proficiencies: proficiencies,
+                    onboardingCompleted: true,
+                    onboardingCompletedAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                })
+            } catch (err) {
+                console.error('Failed to update user profile:', err)
+            }
+        }
+
         const params = new URLSearchParams()
         params.set('subjects', selectedSubjects.join(','))
         if (examType) params.set('exam', examType)
@@ -592,7 +616,7 @@ function WelcomeContent() {
                         )}
                         {step === 'placement' && (
                             <StepPlacement
-                                onChoice={() => onComplete('/signup')}
+                                onChoice={() => onComplete(user ? '/welcome/diagnostic' : '/signup')}
                             />
                         )}
                     </motion.div>

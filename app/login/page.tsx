@@ -16,11 +16,14 @@ export default function LoginPage() {
     password: ''
   });
 
+  // Redirect handled by AuthGate
+  /*
   useEffect(() => {
     if (!authLoading && user) {
       router.push('/home');
     }
   }, [user, authLoading, router]);
+  */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

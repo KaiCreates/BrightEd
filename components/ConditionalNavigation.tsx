@@ -5,8 +5,8 @@ import { Navigation } from './Navigation'
 
 export function ConditionalNavigation() {
   const pathname = usePathname()
-  const isOnboardingPage = pathname?.startsWith('/onboarding')
-  const isLandingPage = pathname === '/' || pathname === '/landing' || pathname === '/signup' || pathname === '/login' || pathname?.startsWith('/welcome')
+  const isOnboardingPage = pathname?.startsWith('/welcome')
+  const isLandingPage = pathname === '/' || pathname === '/signup' || pathname === '/login' || (pathname?.startsWith('/welcome') && !pathname?.startsWith('/welcome/diagnostic'))
   const isImmersivePractical = pathname?.startsWith('/practicals/technology-practicality')
 
   // Hide navigation on onboarding pages
