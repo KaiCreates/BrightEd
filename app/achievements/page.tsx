@@ -34,6 +34,20 @@ export default function AchievementsPage() {
 
         // Check which achievements are unlocked
         const checkAchievements = async () => {
+            let isTop10 = false;
+            try {
+                const token = await user.getIdToken();
+                const res = await fetch('/api/leaderboards?type=xp&limit=10', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    isTop10 = (data.entries || []).some((e: any) => e.id === user.uid);
+                }
+            } catch (err) {
+                console.error('Failed to check rank', err);
+            }
+
             const userRef = doc(db, 'users', user.uid);
             const userSnap = await getDoc(userRef);
             const userDoc = userSnap.data() || {};
@@ -103,8 +117,7 @@ export default function AchievementsPage() {
                         shouldUnlock = userDoc.unlockedAchievements?.includes('night-owl') || false;
                         break;
                     case 'top-rank':
-                        // Check if user is in top 10 (simulated check here, usually done via ranking system)
-                        shouldUnlock = false; // Placeholder
+                        shouldUnlock = isTop10;
                         break;
                 }
 

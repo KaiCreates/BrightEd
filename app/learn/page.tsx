@@ -90,7 +90,7 @@ function LearnContent() {
     if (authLoading) return
     if (!user) {
       // Redirect if not logged in
-      router.push('/landing')
+      router.push('/')
       return
     }
 

@@ -8,14 +8,14 @@ export default function LandingDuolingo() {
     const { user } = useAuth();
 
     // Custom "Chunky" Button Styles to match reference
-    const primaryBtnClass = "bg-[var(--state-success)] hover:bg-[#46a302] text-white border-b-4 border-[#46a302] active:border-b-0 active:translate-y-1 font-extrabold tracking-widest uppercase rounded-2xl px-10 py-4 text-base transition-all w-full sm:w-auto text-center cursor-pointer";
-    const secondaryBtnClass = "bg-white hover:bg-slate-50 text-[var(--brand-primary)] border-2 border-slate-200 border-b-4 active:border-b-2 active:translate-y-[2px] font-extrabold tracking-widest uppercase rounded-2xl px-10 py-4 text-base transition-all w-full sm:w-auto text-center cursor-pointer";
+    const primaryBtnClass = "bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 font-extrabold tracking-widest uppercase rounded-2xl px-10 py-4 text-base transition-all w-full sm:w-auto text-center cursor-pointer";
+    const secondaryBtnClass = "bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--brand-secondary)] border-2 border-[var(--border-subtle)] border-b-4 active:border-b-2 active:translate-y-[2px] font-extrabold tracking-widest uppercase rounded-2xl px-10 py-4 text-base transition-all w-full sm:w-auto text-center cursor-pointer";
 
     return (
-        <div className="min-h-screen bg-white text-[#4b4b4b] font-sans selection:bg-[var(--brand-primary)] selection:text-white overflow-x-hidden">
+        <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans selection:bg-[var(--brand-secondary)] selection:text-white overflow-x-hidden transition-colors duration-300">
 
             {/* 1. Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-slate-100 h-[70px] flex items-center justify-center px-4 transition-all">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-primary)]/90 backdrop-blur-md border-b-[2px] border-[var(--border-subtle)] h-[70px] flex items-center justify-center px-4 transition-all">
                 <div className="w-full max-w-[980px] flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3 group">
                         <div className="w-10 h-10 relative transition-transform group-hover:scale-110">
@@ -24,7 +24,7 @@ export default function LandingDuolingo() {
                         Using sprite for consistency. */}
                             <div className="owl-sprite owl-happy" style={{ transform: 'scale(0.25)', transformOrigin: 'top left', width: '150px', height: '150px', position: 'absolute', top: 0, left: 0 }} />
                         </div>
-                        <span className="font-heading font-extrabold text-3xl text-[var(--state-success)] tracking-tighter ml-8">BrightEd</span>
+                        <span className="font-heading font-extrabold text-3xl text-[var(--brand-secondary)] tracking-tighter ml-8">BrightEd</span>
                     </Link>
 
                     <div className="hidden sm:block text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-600 cursor-pointer transition-colors">
@@ -44,15 +44,15 @@ export default function LandingDuolingo() {
                         transition={{ duration: 0.5 }}
                         className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex-shrink-0"
                     >
-                        <div className="absolute inset-0 bg-[var(--brand-primary)]/10 rounded-full blur-[60px] animate-pulse-slow" />
+                        <div className="absolute inset-0 bg-[var(--brand-secondary)]/10 rounded-full blur-[60px] animate-pulse-slow" />
                         {/* Large Sprite Display */}
                         <div className="owl-sprite owl-happy w-full h-full" style={{ transform: 'scale(2.5)', transformOrigin: 'center' }} />
                     </motion.div>
 
                     {/* Hero Content */}
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-lg">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-[#4b4b4b] leading-tight mb-8">
-                            The free, fun, and effective way to learn <span className="text-[var(--state-success)]">business & tech</span>.
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-[var(--text-primary)] leading-tight mb-8">
+                            The free, fun, and effective way to learn <span className="text-[var(--brand-secondary)]">business & tech</span>.
                         </h1>
 
                         <div className="flex flex-col gap-4 w-full sm:max-w-xs">
@@ -70,7 +70,7 @@ export default function LandingDuolingo() {
             {/* 3. Feature Sections (Alternating) */}
 
             {/* Feature 1: Free. Fun. Effective. */}
-            <section className="py-24 border-t-2 border-slate-100">
+            <section className="py-24 border-t-2 border-[var(--border-subtle)]">
                 <div className="w-full max-w-[980px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="order-2 md:order-1">
                         <motion.div
@@ -83,24 +83,24 @@ export default function LandingDuolingo() {
                         </motion.div>
                     </div>
                     <div className="order-1 md:order-2 text-center md:text-left">
-                        <h2 className="text-[var(--state-success)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
+                        <h2 className="text-[var(--brand-secondary)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
                             free. fun. effective.
                         </h2>
-                        <p className="text-lg text-[#777] font-medium leading-relaxed">
-                            Learning with BrightEd is fun, and <span className="text-[var(--brand-primary)] font-bold cursor-pointer underline decoration-2 underline-offset-4">research shows that it works</span>! With quick, bite-sized simulations, you&apos;ll earn points and unlock new levels while gaining real-world skills.
+                        <p className="text-lg text-[var(--text-secondary)] font-medium leading-relaxed">
+                            Learning with BrightEd is fun, and <span className="text-[var(--brand-secondary)] font-bold cursor-pointer underline decoration-2 underline-offset-4">research shows that it works</span>! With quick, bite-sized simulations, you&apos;ll earn points and unlock new levels while gaining real-world skills.
                         </p>
                     </div>
                 </div>
             </section>
 
             {/* Feature 2: Backed by Science */}
-            <section className="py-24 border-t-2 border-slate-100">
+            <section className="py-24 border-t-2 border-[var(--border-subtle)]">
                 <div className="w-full max-w-[980px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="order-1 text-center md:text-left">
-                        <h2 className="text-[var(--brand-primary)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
+                        <h2 className="text-[var(--brand-secondary)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
                             backed by science.
                         </h2>
-                        <p className="text-lg text-[#777] font-medium leading-relaxed">
+                        <p className="text-lg text-[var(--text-secondary)] font-medium leading-relaxed">
                             We use a combination of research-backed teaching methods and delightful content to create courses that effectively teach reading, writing, listening, and speaking skills!
                         </p>
                     </div>
@@ -118,7 +118,7 @@ export default function LandingDuolingo() {
             </section>
 
             {/* Feature 3: Stay Motivated */}
-            <section className="py-24 border-t-2 border-slate-100">
+            <section className="py-24 border-t-2 border-[var(--border-subtle)]">
                 <div className="w-full max-w-[980px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="order-2 md:order-1">
                         <motion.div
@@ -134,7 +134,7 @@ export default function LandingDuolingo() {
                         <h2 className="text-[var(--state-warning)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
                             stay motivated.
                         </h2>
-                        <p className="text-lg text-[#777] font-medium leading-relaxed">
+                        <p className="text-lg text-[var(--text-secondary)] font-medium leading-relaxed">
                             We make it easy to form a habit of learning with game-like features, fun challenges, and reminders from our friendly mascot, Professor Bright.
                         </p>
                     </div>
@@ -142,13 +142,13 @@ export default function LandingDuolingo() {
             </section>
 
             {/* Feature 4: Personalized Learning */}
-            <section className="py-24 border-t-2 border-slate-100">
+            <section className="py-24 border-t-2 border-[var(--border-subtle)]">
                 <div className="w-full max-w-[980px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="order-1 text-center md:text-left">
                         <h2 className="text-[var(--brand-secondary)] font-heading font-extrabold text-3xl md:text-5xl mb-6">
                             personalized learning.
                         </h2>
-                        <p className="text-lg text-[#777] font-medium leading-relaxed">
+                        <p className="text-lg text-[var(--text-secondary)] font-medium leading-relaxed">
                             Combining the best of AI and business science, lessons are tailored to help you learn at just the right level and pace.
                         </p>
                     </div>
@@ -166,9 +166,9 @@ export default function LandingDuolingo() {
             </section>
 
             {/* 4. Learn Anytime Section */}
-            <section className="py-32 bg-[#f0f9ff] border-t-2 border-slate-100 flex justify-center items-center text-center px-4">
+            <section className="py-32 bg-[var(--bg-secondary)] border-t-2 border-[var(--border-subtle)] flex justify-center items-center text-center px-4">
                 <div className="max-w-4xl">
-                    <h2 className="text-[var(--brand-primary)] font-heading font-extrabold text-4xl md:text-6xl mb-12">
+                    <h2 className="text-[var(--brand-secondary)] font-heading font-extrabold text-4xl md:text-6xl mb-12">
                         learn anytime, anywhere.
                     </h2>
 
@@ -192,7 +192,7 @@ export default function LandingDuolingo() {
             </section>
 
             {/* 5. Footer */}
-            <footer className="bg-[var(--brand-primary)] text-white py-20 px-4">
+            <footer className="bg-[var(--brand-secondary)] text-white py-20 px-4">
                 <div className="max-w-[980px] mx-auto text-center">
                     <div className="font-heading font-extrabold text-3xl mb-8">BrightEd</div>
                     <div className="flex flex-wrap justify-center gap-6 md:gap-12 font-bold opacity-80 mb-12">

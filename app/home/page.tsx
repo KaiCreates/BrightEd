@@ -56,7 +56,7 @@ export default function HomePage() {
     useEffect(() => {
         if (authLoading) return
         if (!user) {
-            router.push('/landing')
+            router.push('/')
             return
         }
 

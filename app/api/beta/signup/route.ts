@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { adminDb } from '@/lib/firebase-admin';
 import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
+import { sanitizeText, sanitizeEmail } from '@/lib/sanitize';
 
 const BetaSignupSchema = z.object({
   fullName: z.string().min(2).max(80),
@@ -26,12 +27,13 @@ export async function POST(request: NextRequest) {
 
     const { fullName, email, role, subjects, motivation } = parsed.data;
 
+    // Sanitize user inputs to prevent XSS
     await adminDb.collection('beta_applications').add({
-      fullName,
-      email: email.toLowerCase(),
+      fullName: sanitizeText(fullName, 80),
+      email: sanitizeEmail(email),
       role,
-      subjects: subjects.map((s) => s.trim()).filter(Boolean),
-      motivation,
+      subjects: subjects.map((s) => sanitizeText(s, 60)).filter(Boolean),
+      motivation: sanitizeText(motivation, 1200),
       status: 'new',
       createdAt: new Date().toISOString(),
     });

@@ -39,6 +39,15 @@ const SOURCES = [
     { id: 'other', name: 'Other', icon: '✨' },
 ]
 
+const EXAM_TYPES = [
+    { id: 'csec', name: 'CSEC', desc: 'Caribbean Secondary Education Certificate', icon: '📚' },
+    { id: 'cape', name: 'CAPE', desc: 'Caribbean Advanced Proficiency Examination', icon: '🎓' },
+]
+
+// Schools data imported from JSON
+import schoolsData from '@/data/schools.json'
+const COUNTRIES = Object.keys(schoolsData) as (keyof typeof schoolsData)[]
+
 const PROFICIENCY_LEVELS = [
     { id: '1', label: "I'm new to this", desc: "Starting from ground zero", icon: '🌱' },
     { id: '2', label: "I know some basics", desc: "I can handle simple concepts", icon: '🌿' },
@@ -82,28 +91,28 @@ const MascotOwl = ({ pose = 'owl-happy', size = 'sm' }: { pose?: string, size?: 
 }
 
 const StepHeader = ({ progress, onBack }: { progress: number, onBack?: () => void }) => (
-    <header className="fixed top-0 left-0 w-full bg-white z-50 px-6 py-4 flex items-center justify-center border-b-2 border-slate-100">
+    <header className="fixed top-0 left-0 w-full bg-[var(--bg-primary)]/90 backdrop-blur-md z-50 px-6 py-4 flex items-center justify-center border-b-2 border-[var(--border-subtle)]">
         <div className="max-w-5xl w-full flex items-center gap-4">
             <div className="flex items-center gap-2 mr-2">
                 <MascotOwl pose="owl-happy" size="sm" />
-                <span className="font-heading font-extrabold text-xl text-[var(--state-success)] tracking-tighter hidden sm:block">BrightEd</span>
+                <span className="font-heading font-extrabold text-xl text-[var(--brand-secondary)] tracking-tighter hidden sm:block">BrightEd</span>
             </div>
 
             {onBack && (
-                <button onClick={onBack} className="text-slate-400 hover:text-slate-600 transition-colors">
+                <button onClick={onBack} className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                 </button>
             )}
-            <div className="flex-1 h-4 bg-slate-100 rounded-full overflow-hidden">
+            <div className="flex-1 h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
                 <motion.div
-                    className="h-full bg-[var(--state-success)]"
+                    className="h-full bg-[var(--brand-secondary)]"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.5 }}
                     style={{ boxShadow: '0 4px 0 rgba(0,0,0,0.1) inset' }}
                 />
             </div>
-            <button className="text-slate-300 hover:text-slate-500 font-bold uppercase tracking-widest text-xs ml-4">
+            <button className="text-[var(--text-muted)] hover:text-[var(--text-secondary)] font-bold uppercase tracking-widest text-xs ml-4">
                 Help
             </button>
         </div>
@@ -114,8 +123,8 @@ const StepSubjectSelection = ({ selected, onToggle, onNext }: { selected: string
     <div className="max-w-4xl mx-auto pt-28 pb-32">
         <div className="flex flex-col items-center gap-4 mb-10">
             <MascotOwl pose="owl-happy" size="md" />
-            <h1 className="text-3xl font-extrabold text-slate-700 text-center">I want to learn...</h1>
-            <p className="text-slate-400 font-bold">Pick one or more subjects to get started!</p>
+            <h1 className="text-3xl font-extrabold text-[var(--text-primary)] text-center">I want to learn...</h1>
+            <p className="text-[var(--text-secondary)] font-bold">Pick one or more subjects to get started!</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4">
@@ -126,15 +135,15 @@ const StepSubjectSelection = ({ selected, onToggle, onNext }: { selected: string
                         key={s.id}
                         onClick={() => onToggle(s.id)}
                         className={`relative p-6 rounded-3xl border-2 transition-all flex flex-col items-center gap-3 active:translate-y-1 group ${isSelected
-                            ? 'border-[var(--brand-primary)] bg-blue-50 text-blue-700'
-                            : 'border-slate-200 bg-white hover:border-slate-300 text-slate-600'
+                            ? 'border-[var(--brand-secondary)] bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)]'
+                            : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:border-[var(--brand-secondary)]/50 text-[var(--text-secondary)]'
                             }`}
-                        style={{ boxShadow: isSelected ? 'none' : '0 4px 0 #e2e8f0' }}
+                        style={{ boxShadow: isSelected ? 'none' : '0 4px 0 var(--border-subtle)' }}
                     >
                         <span className="text-4xl group-hover:scale-110 transition-transform">{s.icon}</span>
                         <span className="font-bold text-base text-center">{s.name}</span>
                         {isSelected && (
-                            <div className="absolute top-2 right-2 bg-[var(--brand-primary)] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                            <div className="absolute top-2 right-2 bg-[var(--brand-secondary)] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
                                 ✓
                             </div>
                         )}
@@ -143,11 +152,11 @@ const StepSubjectSelection = ({ selected, onToggle, onNext }: { selected: string
             })}
         </div>
 
-        <div className="fixed bottom-0 left-0 w-full bg-white border-t-2 border-slate-100 p-6 flex justify-center z-50">
+        <div className="fixed bottom-0 left-0 w-full bg-[var(--bg-primary)] border-t-2 border-[var(--border-subtle)] p-6 flex justify-center z-50">
             <button
                 onClick={onNext}
                 disabled={selected.length === 0}
-                className="max-w-md w-full bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase shadow-lg shadow-green-100"
+                className="max-w-md w-full bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-4 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase shadow-lg shadow-indigo-500/10"
             >
                 CONTINUE
             </button>
@@ -159,9 +168,9 @@ const StepSourceSelection = ({ onSelect }: { onSelect: (id: string) => void }) =
     <div className="max-w-2xl mx-auto pt-28">
         <div className="flex flex-col items-center gap-6 mb-12">
             <MascotOwl pose="owl-smart" size="lg" />
-            <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 relative shadow-sm max-w-sm">
-                <p className="font-extrabold text-slate-700 text-xl text-center">How did you hear about BrightEd?</p>
-                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-l-2 border-b-2 border-slate-200 rotate-45" />
+            <div className="bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl p-6 relative shadow-sm max-w-sm">
+                <p className="font-extrabold text-[var(--text-primary)] text-xl text-center">How did you hear about BrightEd?</p>
+                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--bg-elevated)] border-l-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
             </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4">
@@ -169,7 +178,7 @@ const StepSourceSelection = ({ onSelect }: { onSelect: (id: string) => void }) =
                 <button
                     key={s.id}
                     onClick={() => onSelect(s.id)}
-                    className="p-5 rounded-2xl border-2 border-slate-200 bg-white hover:bg-slate-50 flex items-center gap-4 transition-all active:translate-y-1 border-b-4 font-bold text-slate-600 hover:text-slate-900 group"
+                    className="p-5 rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex items-center gap-4 transition-all active:translate-y-1 border-b-4 font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] group"
                 >
                     <span className="text-3xl group-hover:scale-110 transition-transform">{s.icon}</span>
                     <span className="text-lg">{s.name}</span>
@@ -179,13 +188,162 @@ const StepSourceSelection = ({ onSelect }: { onSelect: (id: string) => void }) =
     </div>
 )
 
+const StepExamSelection = ({ onSelect }: { onSelect: (id: string) => void }) => (
+    <div className="max-w-2xl mx-auto pt-28">
+        <div className="flex flex-col items-center gap-6 mb-12">
+            <MascotOwl pose="owl-studying" size="lg" />
+            <div className="bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl p-6 relative shadow-sm max-w-sm">
+                <p className="font-extrabold text-[var(--text-primary)] text-xl text-center">What exam are you preparing for?</p>
+                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--bg-elevated)] border-l-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
+            </div>
+        </div>
+        <div className="flex flex-col gap-4 px-4">
+            {EXAM_TYPES.map((e) => (
+                <button
+                    key={e.id}
+                    onClick={() => onSelect(e.id)}
+                    className="p-6 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex items-center gap-6 transition-all active:translate-y-1 border-b-4 text-left group"
+                >
+                    <span className="text-4xl group-hover:scale-110 transition-transform">{e.icon}</span>
+                    <div>
+                        <p className="font-extrabold text-[var(--text-primary)] text-xl">{e.name}</p>
+                        <p className="text-[var(--text-secondary)] font-bold">{e.desc}</p>
+                    </div>
+                </button>
+            ))}
+        </div>
+    </div>
+)
+
+const FORM_LEVELS = [
+    { id: '1', label: 'Form 1' },
+    { id: '2', label: 'Form 2' },
+    { id: '3', label: 'Form 3' },
+    { id: '4', label: 'Form 4' },
+    { id: '5', label: 'Form 5' },
+    { id: '6L', label: 'Lower 6' },
+    { id: '6U', label: 'Upper 6' },
+]
+
+const StepFormSelection = ({ onSelect }: { onSelect: (id: string) => void }) => (
+    <div className="max-w-2xl mx-auto pt-28">
+        <div className="flex flex-col items-center gap-6 mb-12">
+            <MascotOwl pose="owl-thinking" size="lg" />
+            <div className="bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl p-6 relative shadow-sm max-w-sm">
+                <p className="font-extrabold text-[var(--text-primary)] text-xl text-center">Which form are you in?</p>
+                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--bg-elevated)] border-l-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
+            </div>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4">
+            {FORM_LEVELS.map((f) => (
+                <button
+                    key={f.id}
+                    onClick={() => onSelect(f.id)}
+                    className="p-6 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex flex-col items-center justify-center transition-all active:translate-y-1 border-b-4 group"
+                >
+                    <span className="text-xl font-extrabold text-[var(--text-primary)]">{f.label}</span>
+                </button>
+            ))}
+        </div>
+    </div>
+)
+
+const StepSchoolSelection = ({
+    selectedCountry,
+    selectedSchool,
+    onCountryChange,
+    onSchoolChange,
+    onNext
+}: {
+    selectedCountry: string,
+    selectedSchool: string,
+    onCountryChange: (c: string) => void,
+    onSchoolChange: (s: string) => void,
+    onNext: () => void
+}) => {
+    const schools = selectedCountry ? (schoolsData as Record<string, string[]>)[selectedCountry] || [] : []
+    const [searchTerm, setSearchTerm] = useState('')
+    const filteredSchools = schools.filter(s => s.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    return (
+        <div className="max-w-2xl mx-auto pt-28 pb-32">
+            <div className="flex flex-col items-center gap-6 mb-8">
+                <MascotOwl pose="owl-thinking" size="lg" />
+                <div className="bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl p-6 relative shadow-sm max-w-sm">
+                    <p className="font-extrabold text-[var(--text-primary)] text-xl text-center">What school do you attend?</p>
+                    <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--bg-elevated)] border-l-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
+                </div>
+            </div>
+
+            <div className="px-4 space-y-6">
+                {/* Country Selection */}
+                <div>
+                    <label className="block text-sm font-bold text-[var(--text-muted)] mb-2 uppercase tracking-widest">Country</label>
+                    <select
+                        value={selectedCountry}
+                        onChange={(e) => { onCountryChange(e.target.value); onSchoolChange(''); setSearchTerm('') }}
+                        className="w-full p-4 rounded-2xl bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] text-[var(--text-primary)] font-bold focus:border-[var(--brand-secondary)] focus:outline-none transition-colors"
+                    >
+                        <option value="">Select your country...</option>
+                        {COUNTRIES.map((c) => (
+                            <option key={c} value={c}>{c}</option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* School Selection */}
+                {selectedCountry && (
+                    <div>
+                        <label className="block text-sm font-bold text-[var(--text-muted)] mb-2 uppercase tracking-widest">School</label>
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Search for your school..."
+                            className="w-full p-4 rounded-2xl bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] text-[var(--text-primary)] font-bold focus:border-[var(--brand-secondary)] focus:outline-none transition-colors mb-3"
+                        />
+                        <div className="max-h-64 overflow-y-auto rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
+                            {filteredSchools.map((school) => (
+                                <button
+                                    key={school}
+                                    onClick={() => { onSchoolChange(school); setSearchTerm(school) }}
+                                    className={`w-full p-4 text-left font-bold transition-colors border-b border-[var(--border-subtle)] last:border-b-0 ${selectedSchool === school
+                                        ? 'bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)]'
+                                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)]'
+                                        }`}
+                                >
+                                    {school}
+                                    {selectedSchool === school && <span className="float-right">✓</span>}
+                                </button>
+                            ))}
+                            {filteredSchools.length === 0 && (
+                                <div className="p-4 text-center text-[var(--text-muted)] font-bold">No schools found</div>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="fixed bottom-0 left-0 w-full bg-[var(--bg-primary)] border-t-2 border-[var(--border-subtle)] p-6 flex justify-center z-50">
+                <button
+                    onClick={onNext}
+                    disabled={!selectedSchool}
+                    className="max-w-md w-full bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-4 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase shadow-lg shadow-indigo-500/10"
+                >
+                    CONTINUE
+                </button>
+            </div>
+        </div>
+    )
+}
+
 const StepProficiency = ({ subject, onSelect }: { subject: string, onSelect: (id: string) => void }) => (
     <div className="max-w-2xl mx-auto pt-28">
         <div className="flex flex-col items-center gap-6 mb-12">
             <MascotOwl pose="owl-reading" size="lg" />
-            <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 relative shadow-sm max-w-sm">
-                <p className="font-extrabold text-slate-700 text-xl text-center">How much <span className="text-[var(--brand-primary)]">{subject}</span> do you know?</p>
-                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-l-2 border-b-2 border-slate-200 rotate-45" />
+            <div className="bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl p-6 relative shadow-sm max-w-sm">
+                <p className="font-extrabold text-[var(--text-primary)] text-xl text-center">How much <span className="text-[var(--brand-secondary)]">{subject}</span> do you know?</p>
+                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-[var(--bg-elevated)] border-l-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
             </div>
         </div>
         <div className="flex flex-col gap-4 px-4">
@@ -193,12 +351,12 @@ const StepProficiency = ({ subject, onSelect }: { subject: string, onSelect: (id
                 <button
                     key={l.id}
                     onClick={() => onSelect(l.id)}
-                    className="p-6 rounded-3xl border-2 border-slate-200 bg-white hover:bg-slate-50 flex items-center gap-6 transition-all active:translate-y-1 border-b-4 text-left group"
+                    className="p-6 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex items-center gap-6 transition-all active:translate-y-1 border-b-4 text-left group"
                 >
                     <span className="text-4xl group-hover:scale-110 transition-transform">{l.icon}</span>
                     <div>
-                        <p className="font-extrabold text-slate-700 text-lg">{l.label}</p>
-                        <p className="text-slate-400 font-bold">{l.desc}</p>
+                        <p className="font-extrabold text-[var(--text-primary)] text-lg">{l.label}</p>
+                        <p className="text-[var(--text-secondary)] font-bold">{l.desc}</p>
                     </div>
                 </button>
             ))}
@@ -209,18 +367,18 @@ const StepProficiency = ({ subject, onSelect }: { subject: string, onSelect: (id
 const StepPlacement = ({ onChoice }: { onChoice: (type: 'scratch') => void }) => (
     <div className="max-w-2xl mx-auto pt-28 text-center px-4">
         <MascotOwl pose="owl-happy" size="md" />
-        <h1 className="text-3xl font-extrabold text-slate-700 mt-6 mb-4">Now let&apos;s find the best place to start!</h1>
-        <p className="text-slate-400 font-bold mb-12 text-lg">We&apos;ll do a quick evaluation with easy questions to calibrate your learning path.</p>
+        <h1 className="text-3xl font-extrabold text-[var(--text-primary)] mt-6 mb-4">Now let&apos;s find the best place to start!</h1>
+        <p className="text-[var(--text-secondary)] font-bold mb-12 text-lg">We&apos;ll do a quick evaluation with easy questions to calibrate your learning path.</p>
 
         <div className="flex flex-col gap-6 max-w-md mx-auto">
             <button
                 onClick={() => onChoice('scratch')}
-                className="group p-8 rounded-3xl border-2 border-slate-200 bg-white hover:bg-slate-50 flex items-center gap-8 transition-all active:translate-y-1 border-b-4 text-left"
+                className="group p-8 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex items-center gap-8 transition-all active:translate-y-1 border-b-4 text-left"
             >
-                <div className="w-16 h-16 bg-[var(--brand-primary)]/10 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">🚀</div>
+                <div className="w-16 h-16 bg-[var(--brand-secondary)]/10 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">🚀</div>
                 <div>
-                    <h3 className="text-xl font-extrabold text-slate-700">Start Evaluation</h3>
-                    <p className="text-slate-400 font-bold">Begin with simple questions to find your level.</p>
+                    <h3 className="text-xl font-extrabold text-[var(--text-primary)]">Start Evaluation</h3>
+                    <p className="text-[var(--text-secondary)] font-bold">Begin with simple questions to find your level.</p>
                 </div>
             </button>
         </div>
@@ -235,10 +393,33 @@ function WelcomeContent() {
     const step = (searchParams && searchParams.get('step')) || 'selection'
     const profIndex = parseInt((searchParams && searchParams.get('si')) || '0')
 
-    // Local state for results
-    const [selectedSubjects, setSelectedSubjects] = useState<string[]>([])
-    const [source, setSource] = useState<string | null>(null)
-    const [proficiencies, setProficiencies] = useState<Record<string, string>>({})
+    const [selectedSubjects, setSelectedSubjects] = useState<string[]>(() => {
+        const subs = searchParams?.get('subjects')
+        return subs ? subs.split(',').filter(Boolean) : []
+    })
+    const [examType, setExamType] = useState<string | null>(() =>
+        searchParams?.get('exam') || null
+    )
+    const [selectedCountry, setSelectedCountry] = useState<string>(() =>
+        searchParams?.get('country') || ''
+    )
+    const [selectedSchool, setSelectedSchool] = useState<string>(() =>
+        searchParams?.get('school') || ''
+    )
+    const [source, setSource] = useState<string | null>(() =>
+        searchParams?.get('source') || null
+    )
+    const [formLevel, setFormLevel] = useState<string | null>(() =>
+        searchParams?.get('form') || null
+    )
+    const [proficiencies, setProficiencies] = useState<Record<string, string>>(() => {
+        try {
+            const lvls = searchParams?.get('lvls')
+            return lvls ? JSON.parse(lvls) : {}
+        } catch (e) {
+            return {}
+        }
+    })
 
     const toggleSubject = (id: string) => {
         setSelectedSubjects(prev =>
@@ -246,9 +427,46 @@ function WelcomeContent() {
         )
     }
 
-    const nextStep = (next: string) => {
-        router.push(`/welcome?step=${next}`)
+    const nextStep = (next: string, extraParams?: Record<string, string>) => {
+        const params = new URLSearchParams(searchParams?.toString() || '')
+        params.set('step', next)
+        if (selectedSubjects.length > 0) {
+            params.set('subjects', selectedSubjects.join(','))
+        }
+        if (extraParams) {
+            Object.entries(extraParams).forEach(([k, v]) => params.set(k, v))
+        }
+        router.push(`/welcome?${params.toString()}`)
     }
+
+    // Sync state from URL params on load/change
+    useEffect(() => {
+        const subjectsParam = searchParams?.get('subjects')
+        if (subjectsParam) {
+            const subs = subjectsParam.split(',')
+            if (JSON.stringify(subs) !== JSON.stringify(selectedSubjects)) {
+                setSelectedSubjects(subs)
+            }
+        }
+
+        const lvlsParam = searchParams?.get('lvls')
+        if (lvlsParam) {
+            try {
+                const parsed = JSON.parse(lvlsParam)
+                if (JSON.stringify(parsed) !== JSON.stringify(proficiencies)) {
+                    setProficiencies(parsed)
+                }
+            } catch (e) {
+                console.error("Failed to parse lvls from URL", e)
+            }
+        }
+
+        const sourceParam = searchParams?.get('source')
+        if (sourceParam && sourceParam !== source) {
+            setSource(sourceParam)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams])
 
     const goBack = () => {
         router.back()
@@ -276,16 +494,18 @@ function WelcomeContent() {
 
         const params = new URLSearchParams()
         params.set('subjects', selectedSubjects.join(','))
+        if (examType) params.set('exam', examType)
+        if (selectedCountry) params.set('country', selectedCountry)
+        if (selectedSchool) params.set('school', selectedSchool)
+        if (formLevel) params.set('form', formLevel)
         if (source) params.set('source', source)
-        // For the next steps (diagnostic/signup), we might just send the first subject as "current" 
-        // or a consolidated level. For now, let's just pass the data.
         params.set('lvls', JSON.stringify(proficiencies))
 
         router.push(`${to}?${params.toString()}`)
     }
 
     // Determine progress
-    const stepsOrder = ['selection', 'source', 'proficiency', 'placement']
+    const stepsOrder = ['selection', 'exam', 'school', 'form', 'source', 'proficiency', 'placement']
     const currentIndex = stepsOrder.indexOf(step)
 
     // Calculate total mini-steps if in proficiency
@@ -296,7 +516,7 @@ function WelcomeContent() {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--bg-primary)]">
             <StepHeader progress={displayProgress} onBack={currentIndex > 0 ? goBack : undefined} />
 
             <main className="p-6">
@@ -312,12 +532,41 @@ function WelcomeContent() {
                             <StepSubjectSelection
                                 selected={selectedSubjects}
                                 onToggle={toggleSubject}
-                                onNext={() => nextStep('source')}
+                                onNext={() => nextStep('exam')}
+                            />
+                        )}
+                        {step === 'exam' && (
+                            <StepExamSelection
+                                onSelect={(id) => {
+                                    setExamType(id)
+                                    nextStep('school', { exam: id })
+                                }}
+                            />
+                        )}
+
+                        {step === 'school' && (
+                            <StepSchoolSelection
+                                selectedCountry={selectedCountry}
+                                selectedSchool={selectedSchool}
+                                onCountryChange={setSelectedCountry}
+                                onSchoolChange={setSelectedSchool}
+                                onNext={() => nextStep('form', { country: selectedCountry, school: selectedSchool })}
+                            />
+                        )}
+                        {step === 'form' && (
+                            <StepFormSelection
+                                onSelect={(id) => {
+                                    setFormLevel(id)
+                                    nextStep('source', { form: id })
+                                }}
                             />
                         )}
                         {step === 'source' && (
                             <StepSourceSelection
-                                onSelect={(id) => { setSource(id); nextStep('proficiency') }}
+                                onSelect={(id) => {
+                                    setSource(id);
+                                    nextStep('proficiency', { source: id })
+                                }}
                             />
                         )}
                         {step === 'proficiency' && (
@@ -325,18 +574,25 @@ function WelcomeContent() {
                                 subject={selectedSubjects[profIndex] || "Learning"}
                                 onSelect={(id) => {
                                     const subj = selectedSubjects[profIndex]
-                                    setProficiencies(prev => ({ ...prev, [subj]: id }))
+                                    const nextProficiencies = { ...proficiencies, [subj]: id }
+                                    setProficiencies(nextProficiencies)
+
                                     if (profIndex < selectedSubjects.length - 1) {
-                                        router.push(`/welcome?step=proficiency&si=${profIndex + 1}`)
+                                        nextStep('proficiency', {
+                                            si: (profIndex + 1).toString(),
+                                            lvls: JSON.stringify(nextProficiencies)
+                                        })
                                     } else {
-                                        nextStep('placement')
+                                        nextStep('placement', {
+                                            lvls: JSON.stringify(nextProficiencies)
+                                        })
                                     }
                                 }}
                             />
                         )}
                         {step === 'placement' && (
                             <StepPlacement
-                                onChoice={() => onComplete('/welcome/diagnostic')}
+                                onChoice={() => onComplete('/signup')}
                             />
                         )}
                     </motion.div>

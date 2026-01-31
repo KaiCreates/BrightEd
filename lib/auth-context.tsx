@@ -30,6 +30,7 @@ export interface UserData {
     fullName?: string;
     username?: string;
     displayName?: string;
+    bio?: string;
     school?: string;
     schoolId?: string;
     schoolLocked?: boolean;
@@ -132,6 +133,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         let unsubscribeSnapshot: (() => void) | undefined;
 
         const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
+            if (unsubscribeSnapshot) {
+                unsubscribeSnapshot();
+                unsubscribeSnapshot = undefined;
+            }
+
+            setLoading(true);
             setUser(currentUser);
 
             if (currentUser) {

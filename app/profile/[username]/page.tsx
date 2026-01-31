@@ -26,12 +26,6 @@ export default function UserProfilePage() {
     const username = params?.username as string;
 
     useEffect(() => {
-        if (isOwner) {
-            router.push('/profile');
-        }
-    }, [isOwner, router]);
-
-    useEffect(() => {
         if (authLoading) return;
 
         const fetchProfile = async () => {
@@ -237,9 +231,29 @@ export default function UserProfilePage() {
                                     </BrightHeading>
                                     <p className="text-xl font-bold text-[var(--text-muted)] mb-4">@{username}</p>
 
-                                    <div className="flex items-center justify-center md:justify-start gap-2 mb-6 text-[var(--text-secondary)] font-medium">
+                                    <div className="flex items-center justify-center md:justify-start gap-2 mb-2 text-[var(--text-secondary)] font-medium">
                                         <span>📅 Joined {JOIN_DATE}</span>
                                     </div>
+
+                                    {(profileData.school || profileData.country) && (
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6 text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+                                            {profileData.formLevel && (
+                                                <span className="bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] px-2 py-1 rounded border border-[var(--brand-primary)]/20">
+                                                    Form {profileData.formLevel}
+                                                </span>
+                                            )}
+                                            {profileData.school && (
+                                                <span className="flex items-center gap-1">
+                                                    🏫 {profileData.school}
+                                                </span>
+                                            )}
+                                            {profileData.country && (
+                                                <span className="flex items-center gap-1 opacity-70">
+                                                    📍 {profileData.country}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
 
                                     <div className="flex items-center justify-center md:justify-start gap-4 mb-6">
                                         <div className="flex items-center gap-6">
@@ -264,18 +278,47 @@ export default function UserProfilePage() {
                                             </BrightButton>
                                         )}
                                     </div>
+
+                                    {/* Owner-Only Action Buttons */}
+                                    {isOwner && (
+                                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                            <Link href={`/profile/${username}/avatar`}>
+                                                <BrightButton variant="outline" size="sm" className="gap-2">
+                                                    ✏️ Edit Avatar
+                                                </BrightButton>
+                                            </Link>
+                                            <Link href={`/profile/${username}/settings`}>
+                                                <BrightButton variant="outline" size="sm" className="gap-2">
+                                                    ⚙️ Settings
+                                                </BrightButton>
+                                            </Link>
+                                            {profileData.hasBusiness && (
+                                                <Link href="/business">
+                                                    <BrightButton variant="primary" size="sm" className="gap-2">
+                                                        🏢 My Business
+                                                    </BrightButton>
+                                                </Link>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </section>
 
                         <hr className="border-white/5" />
 
-                        {/* Statistics Grid */}
+                        {/* Statistics Grid - Expanded for Owners */}
                         <section>
                             <BrightHeading level={2} className="mb-6">Statistics</BrightHeading>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className={`grid gap-4 ${isOwner ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2'}`}>
                                 <StatCard icon="🔥" label="Day Streak" value={profileData.streak || 0} color="text-orange-500" />
                                 <StatCard icon="⚡" label="Total XP" value={profileData.xp?.toLocaleString() || 0} color="text-yellow-500" />
+                                {isOwner && (
+                                    <>
+                                        <StatCard icon="💰" label="B-Coins" value={profileData.bCoins?.toLocaleString() || 0} color="text-green-500" />
+                                        <StatCard icon="🧠" label="Mastery" value={`${Math.round((profileData.globalMastery || 0) * 100)}%`} color="text-purple-500" />
+                                    </>
+                                )}
                             </div>
                         </section>
 

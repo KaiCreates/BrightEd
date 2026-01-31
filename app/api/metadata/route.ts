@@ -1,34 +1,59 @@
-import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { NextRequest, NextResponse } from 'next/server'
+import { verifyAuth } from '@/lib/auth-server'
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit'
+import { z } from 'zod'
 
-export async function POST(req: Request) {
+const MetadataSchema = z.object({
+    subjects: z.array(z.string().min(1).max(100)).max(20).optional(),
+    source: z.string().min(1).max(200).optional(),
+    proficiencies: z.record(z.string(), z.string()).optional(),
+    timestamp: z.string().max(50).optional(),
+})
+
+export async function POST(request: NextRequest) {
     try {
-        const data = await req.json()
-        const { subjects, source, proficiencies, timestamp } = data
+        // Rate limit: 10 requests per minute per IP
+        const limiter = rateLimit(request, 10, 60000)
+        if (!limiter.success) return handleRateLimit(limiter.retryAfter!)
 
-        const metadataDir = path.join(process.cwd(), 'metadata')
+        // Require authentication
+        const decodedToken = await verifyAuth(request)
+        const userId = decodedToken.uid
 
-        // Ensure directory exists (just in case)
-        if (!fs.existsSync(metadataDir)) {
-            fs.mkdirSync(metadataDir, { recursive: true })
+        const body = await request.json()
+        const result = MetadataSchema.safeParse(body)
+
+        if (!result.success) {
+            return NextResponse.json(
+                { error: 'Invalid data', details: result.error.format() },
+                { status: 400 }
+            )
         }
 
-        const fileName = `user_${Date.now()}.json`
-        const filePath = path.join(metadataDir, fileName)
+        const { subjects, source, proficiencies, timestamp } = result.data
 
-        const content = JSON.stringify({
-            subjects,
+        // Log metadata (in production, you might store this differently)
+        console.log(`[Metadata] User ${userId} saved preferences:`, {
+            subjects: subjects?.length || 0,
             source,
-            proficiencies,
-            timestamp: timestamp || new Date().toISOString()
-        }, null, 2)
+            timestamp: timestamp || new Date().toISOString(),
+        })
 
-        fs.writeFileSync(filePath, content)
-
-        return NextResponse.json({ success: true, fileName })
-    } catch (error) {
+        // Instead of writing to filesystem (security risk), we just acknowledge receipt
+        // In production, this could be stored in Firestore under the user's document
+        return NextResponse.json({
+            success: true,
+            message: 'Metadata received',
+            userId,
+        })
+    } catch (error: any) {
+        if (error.message?.includes('Unauthorized')) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        }
         console.error('Metadata API error:', error)
-        return NextResponse.json({ success: false, error: 'Failed to save metadata' }, { status: 500 })
+        return NextResponse.json(
+            { error: 'Failed to save metadata' },
+            { status: 500 }
+        )
     }
 }

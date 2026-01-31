@@ -10,6 +10,8 @@ import { useAuth } from '@/lib/auth-context'
 // --- Types & Constants ---
 
 const SignUpSchema = z.object({
+  firstName: z.string().min(2, 'First name is too short'),
+  lastName: z.string().min(2, 'Last name is too short'),
   email: z.string().email('Invalid email address').min(1, 'Email is required'),
   password: z.string().min(6, 'Password must be at least 6 characters').max(100, 'Password too long'),
   username: z.string().min(3, 'Username must be at least 3 characters').max(30, 'Username too long').regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
@@ -62,6 +64,8 @@ export default function SignUpPage() {
   const hasSubjects = !!subjectsParam
 
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     username: '',
@@ -95,6 +99,8 @@ export default function SignUpPage() {
     try {
       // Validate form
       const validationResult = SignUpSchema.safeParse({
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
         email: formData.email.trim(),
         password: formData.password,
         username: formData.username.trim(),
@@ -115,7 +121,7 @@ export default function SignUpPage() {
       const newUser = userCredential.user
 
       // Update display name immediately
-      await updateProfile(newUser, { displayName: validatedData.username })
+      await updateProfile(newUser, { displayName: `${validatedData.firstName} ${validatedData.lastName}` })
 
       // 2. Prepare User Data (Bypassing Onboarding)
       const userDocRef = doc(db, 'users', newUser.uid)
@@ -123,6 +129,12 @@ export default function SignUpPage() {
       const lvlsParam = searchParams?.get('lvls')
       const diagnosticMastery = searchParams?.get('mastery')
       const diagStatsParam = searchParams?.get('diag_stats')
+
+      // Capture Onboarding Data
+      const examParam = searchParams?.get('exam')
+      const schoolParam = searchParams?.get('school')
+      const countryParam = searchParams?.get('country')
+      const formParam = searchParams?.get('form')
 
       let proficiencyMap: Record<string, string> = {}
       try {
@@ -142,6 +154,9 @@ export default function SignUpPage() {
       await setDoc(userDocRef, {
         uid: newUser.uid,
         username: validatedData.username,
+        firstName: validatedData.firstName,
+        lastName: validatedData.lastName,
+        displayName: `${validatedData.firstName} ${validatedData.lastName}`,
         email: validatedData.email,
         mastery: diagnosticMastery ? parseFloat(diagnosticMastery) : 0.1,
         streak: 1,
@@ -159,9 +174,10 @@ export default function SignUpPage() {
         onboardingCompletedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        examTrack: 'CSEC',
-        formLevel: 3,
-        country: 'Trinidad and Tobago'
+        examTrack: examParam || 'CSEC',
+        formLevel: formParam || '3',
+        country: countryParam || 'Trinidad and Tobago',
+        school: schoolParam || null
       })
 
       // 3. Initialize Learning Path
@@ -197,7 +213,10 @@ export default function SignUpPage() {
         console.error("Failed to init learning path:", pathError)
       }
 
-      router.push('/home')
+      const diagParams = new URLSearchParams()
+      diagParams.set('subjects', formData.subjects.join(','))
+      diagParams.set('lvls', lvlsParam || '{}')
+      router.push(`/welcome/diagnostic?${diagParams.toString()}`)
     } catch (err: any) {
       console.error('Signup Error:', err)
       setError(err.message || 'An error occurred during signup')
@@ -207,12 +226,12 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#4b4b4b] font-sans flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans flex items-center justify-center p-4">
 
       {/* Header / Logo */}
       <div className="absolute top-6 left-6 flex items-center gap-2">
         <MascotOwl pose="owl-happy" size="sm" />
-        <span className="font-heading font-extrabold text-2xl text-[var(--state-success)] tracking-tighter">BrightEd</span>
+        <span className="font-heading font-extrabold text-2xl text-[var(--brand-secondary)] tracking-tighter">BrightEd</span>
       </div>
 
       <AnimatePresence mode="wait">
@@ -225,12 +244,12 @@ export default function SignUpPage() {
           >
             <MascotOwl pose="owl-smart" size="lg" />
             <div>
-              <h2 className="text-3xl font-extrabold text-slate-700">Ready to learn?</h2>
-              <p className="text-slate-400 font-bold mt-2">First, let&apos;s pick your subjects!</p>
+              <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Ready to learn?</h2>
+              <p className="text-[var(--text-secondary)] font-bold mt-2">First, let&apos;s pick your subjects!</p>
             </div>
             <Link
               href="/welcome"
-              className="bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold px-12 py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-green-100"
+              className="bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold px-12 py-4 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-indigo-500/10"
             >
               GET STARTED
             </Link>
@@ -246,15 +265,33 @@ export default function SignUpPage() {
               <div className="flex justify-center mb-4">
                 <MascotOwl pose="owl-happy" size="md" />
               </div>
-              <h2 className="text-3xl font-extrabold text-slate-700">Create your profile</h2>
-              <p className="text-slate-400 font-bold mt-2">To save your progress!</p>
+              <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Create your profile</h2>
+              <p className="text-[var(--text-secondary)] font-bold mt-2">To save your progress!</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="w-full p-4 rounded-2xl border-2 border-[var(--border-subtle)] focus:border-[var(--brand-secondary)] bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold outline-none transition-all"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="w-full p-4 rounded-2xl border-2 border-[var(--border-subtle)] focus:border-[var(--brand-secondary)] bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold outline-none transition-all"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  required
+                />
+              </div>
               <input
                 type="text"
                 placeholder="Username"
-                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
+                className="w-full p-4 rounded-2xl border-2 border-[var(--border-subtle)] focus:border-[var(--brand-secondary)] bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold outline-none transition-all"
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 required
@@ -262,7 +299,7 @@ export default function SignUpPage() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
+                className="w-full p-4 rounded-2xl border-2 border-[var(--border-subtle)] focus:border-[var(--brand-secondary)] bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold outline-none transition-all"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
@@ -270,7 +307,7 @@ export default function SignUpPage() {
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
+                className="w-full p-4 rounded-2xl border-2 border-[var(--border-subtle)] focus:border-[var(--brand-secondary)] bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold outline-none transition-all"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
@@ -285,14 +322,14 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase mt-4 shadow-lg shadow-green-100"
+                className="w-full bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-4 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase mt-4 shadow-lg shadow-indigo-500/10"
               >
                 {loading ? 'CREATING...' : 'CREATE ACCOUNT'}
               </button>
             </form>
 
-            <p className="text-center mt-8 text-slate-400 font-bold">
-              Already have an account? <Link href="/login" className="text-[var(--brand-primary)]">Log in</Link>
+            <p className="text-center mt-8 text-[var(--text-muted)] font-bold">
+              Already have an account? <Link href="/login" className="text-[var(--brand-secondary)]">Log in</Link>
             </p>
           </motion.div>
         )}

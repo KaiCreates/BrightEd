@@ -159,6 +159,8 @@ export async function GET(request: NextRequest) {
     const subjectId = searchParams.get('subjectId');
     const variation = parseInt(searchParams.get('variation') || '1');
     const masteryParam = parseFloat(searchParams.get('mastery') || '0.5');
+    const streak = parseInt(searchParams.get('streak') || '0');
+    const errors = parseInt(searchParams.get('errors') || '0');
 
     if (!objectiveId) {
       return NextResponse.json({ error: 'Missing objectiveId' }, { status: 400 });
@@ -177,7 +179,11 @@ export async function GET(request: NextRequest) {
 
     // 2. Fetch Candidates with Target Difficulty
     // Variation 1 = Easy, 2 = Medium, 3 = Hard
-    const targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
+    let targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
+
+    // Apply real-time adaptation
+    if (streak >= 3) targetDifficulty = Math.min(10, targetDifficulty + 2);
+    if (errors >= 2) targetDifficulty = Math.max(1, targetDifficulty - 2);
 
     let candidates: any[] = await withTimeout<any[]>(
       fetchCandidatesFromDB(objectiveId, targetDifficulty, subjectId),

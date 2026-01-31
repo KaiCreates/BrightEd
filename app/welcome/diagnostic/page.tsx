@@ -22,47 +22,37 @@ interface DiagnosticQuestion {
 
 const ADAPTIVE_BANK: Record<string, DiagnosticQuestion[]> = {
     Mathematics: [
-        { id: 'm_easy_1', difficulty: 2, tags: ['math', 'arithmetic'], question: 'Solve: 15 - (3 × 2)', options: ['24', '9', '6', '12'], correctAnswer: 1 },
-        { id: 'm_easy_2', difficulty: 3, tags: ['math', 'algebra'], question: 'If x + 5 = 12, what is x?', options: ['5', '7', '17', '60'], correctAnswer: 1 },
-        { id: 'm_med_1', difficulty: 5, tags: ['math', 'fractions'], question: 'Which is largest?', options: ['1/2', '3/5', '4/9', '0.55'], correctAnswer: 1 },
-        { id: 'm_med_2', difficulty: 6, tags: ['math', 'geometry'], question: 'Area of a triangle with base 10 and height 5?', options: ['50', '25', '15', '100'], correctAnswer: 1 },
-        { id: 'm_hard_1', difficulty: 8, tags: ['math', 'functions'], question: 'f(x) = 2x + 1. Find f(f(2)).', options: ['5', '11', '9', '10'], correctAnswer: 1 },
-        { id: 'm_hard_2', difficulty: 9, tags: ['math', 'trigonometry'], question: 'sin(90°) = ?', options: ['0', '1', '0.5', 'Undefined'], correctAnswer: 1 },
+        { id: 'm_easy_1', difficulty: 2, tags: ['math'], question: 'What is the sum of 1/4 and 1/2?', options: ['3/4', '2/6', '1/6', '1/8'], correctAnswer: 0 },
+        { id: 'm_med_1', difficulty: 5, tags: ['math', 'geometry'], question: 'If the radius of a circle is 7, what is its approximate circumference? (Use π ≈ 22/7)', options: ['22', '44', '154', '49'], correctAnswer: 1 },
+        { id: 'm_hard_1', difficulty: 8, tags: ['math', 'algebra'], question: 'Simplify: (x^2 - 4) / (x + 2)', options: ['x + 2', 'x - 2', 'x^2', '4'], correctAnswer: 1 },
     ],
     'Principles of Business': [
-        { id: 'pob_easy_1', difficulty: 2, tags: ['business', 'types'], question: 'In a sole proprietorship, the owner has:', options: ['Unlimited Liability', 'No Liability', 'Shared Liability', 'State Liability'], correctAnswer: 0 },
-        { id: 'pob_med_1', difficulty: 5, tags: ['business', 'management'], question: 'Which of these is a democratic leadership style?', options: ['Autocratic', 'Participative', 'Laissez-faire', 'Dictatorial'], correctAnswer: 1 },
-        { id: 'pob_hard_1', difficulty: 8, tags: ['business', 'finance'], question: 'The Working Capital ratio is calculated as:', options: ['Assets - Liabilities', 'Current Assets / Current Liabilities', 'Gross Profit / Sales', 'Debt / Equity'], correctAnswer: 1 },
+        { id: 'pob_easy_1', difficulty: 3, tags: ['business'], question: 'Which is a primary function of management?', options: ['Planning', 'Manufacturing', 'Spending', 'Competing'], correctAnswer: 0 },
+        { id: 'pob_med_1', difficulty: 6, tags: ['business', 'marketing'], question: 'The "Four Ps" of marketing are Product, Price, Place, and:', options: ['Personnel', 'Promotion', 'Packaging', 'Profit'], correctAnswer: 1 },
+        { id: 'pob_hard_1', difficulty: 9, tags: ['business', 'logistics'], question: 'A document allowing a buyer to take possession of goods before payment is:', options: ['Invoice', 'Bill of Lading', 'Credit Note', 'Debit Note'], correctAnswer: 1 },
     ],
-    Economics: [
-        { id: 'eco_easy_1', difficulty: 3, tags: ['economics', 'scarcity'], question: 'The basic economic problem is:', options: ['Inflation', 'Scarcity', 'Unemployment', 'Taxes'], correctAnswer: 1 },
-        { id: 'eco_med_1', difficulty: 6, tags: ['economics', 'market'], question: 'In a perfectly competitive market, products are:', options: ['Unique', 'Homogeneous', 'Branded', 'Expensive'], correctAnswer: 1 },
-        { id: 'eco_hard_1', difficulty: 9, tags: ['economics', 'macro'], question: 'Fiscal policy primarily involves changes in:', options: ['Interest rates', 'Money supply', 'Govt spending & tax', 'Exchange rates'], correctAnswer: 2 },
+    'Principles of Accounts': [
+        { id: 'poa_easy_1', difficulty: 3, tags: ['accounts'], question: 'The accounting equation is: Assets = Liabilities + ___', options: ['Expenses', 'Capital', 'Revenue', 'Drawings'], correctAnswer: 1 },
+        { id: 'poa_med_1', difficulty: 6, tags: ['accounts'], question: 'Which account usually has a debit balance?', options: ['Accounts Payable', 'Sales', 'Rent Expense', 'Bank Loan'], correctAnswer: 2 },
     ],
     'Information Technology': [
-        { id: 'it_easy_1', difficulty: 2, tags: ['it', 'hardware'], question: 'Which is an example of an input device?', options: ['Monitor', 'Printer', 'Mouse', 'Speaker'], correctAnswer: 2 },
-        { id: 'it_med_1', difficulty: 5, tags: ['it', 'data'], question: 'How many bits make up 1 Byte?', options: ['8', '1024', '4', '1'], correctAnswer: 0 },
-        { id: 'it_hard_1', difficulty: 8, tags: ['it', 'programming'], question: 'Which of the following is NOT a high-level language?', options: ['Python', 'Java', 'Assembly', 'C++'], correctAnswer: 2 },
+        { id: 'it_easy_1', difficulty: 3, tags: ['it'], question: 'What does HTTP stand for?', options: ['High Tech Text Protocol', 'HyperText Transfer Protocol', 'Helpful Tool Transfer Process', 'Hyper Transfer Text Path'], correctAnswer: 1 },
+        { id: 'it_med_1', difficulty: 6, tags: ['it', 'programming'], question: 'In programming, a logic error is also known as a:', options: ['Syntax Error', 'Runtime Error', 'Semantic Bug', 'Hardware Failure'], correctAnswer: 2 },
+        { id: 'it_hard_1', difficulty: 9, tags: ['it', 'networking'], question: 'Which layer of the OSI model is responsible for IP addressing?', options: ['Data Link', 'Transport', 'Network', 'Physical'], correctAnswer: 2 },
     ],
     'English A': [
-        { id: 'eng_easy_1', difficulty: 2, tags: ['english', 'grammar'], question: 'Choose the correct verb: "The team __ winning the game."', options: ['is', 'are', 'were', 'have'], correctAnswer: 0 },
-        { id: 'eng_med_1', difficulty: 5, tags: ['english', 'vocab'], question: 'What is a synonym for "Benevolent"?', options: ['Cruel', 'Kind', 'Wealthy', 'Gloomy'], correctAnswer: 1 },
-        { id: 'eng_hard_1', difficulty: 8, tags: ['english', 'analysis'], question: 'In literature, "Tone" refers to:', options: ['The writer\'s attitude', 'The volume of speech', 'The sentence structure', 'The plot sequence'], correctAnswer: 0 },
+        { id: 'eng_easy_1', difficulty: 3, tags: ['english'], question: 'Select the correctly spelled word:', options: ['Accomodate', 'Accommodate', 'Acommodate', 'Acomodate'], correctAnswer: 1 },
+        { id: 'eng_med_1', difficulty: 6, tags: ['english'], question: 'What is the "Thesis Statement" of an essay?', options: ['The conclusion', 'The central argument', 'A summary of facts', 'A list of references'], correctAnswer: 1 },
+    ],
+    'Physics': [
+        { id: 'phy_med_1', difficulty: 5, tags: ['physics'], question: 'Power is defined as the rate of doing:', options: ['Force', 'Work', 'Velocity', 'Acceleration'], correctAnswer: 1 },
+        { id: 'phy_hard_1', difficulty: 8, tags: ['physics'], question: 'What is the SI unit of Magnetic Flux?', options: ['Tesla', 'Weber', 'Henry', 'Farad'], correctAnswer: 1 },
+    ],
+    'Chemistry': [
+        { id: 'chem_med_1', difficulty: 6, tags: ['chemistry'], question: 'What is the pH of a neutral solution?', options: ['1', '14', '7', '0'], correctAnswer: 2 },
     ],
     Biology: [
-        { id: 'bio_easy_1', difficulty: 2, tags: ['biology', 'cells'], question: 'Which part of the cell is known as the "control center"?', options: ['Cell Wall', 'Cytoplasm', 'Nucleus', 'Vacuole'], correctAnswer: 2 },
-        { id: 'bio_med_1', difficulty: 5, tags: ['biology', 'transport'], question: 'The movement of water through a semi-permeable membrane is called:', options: ['Diffusion', 'Osmosis', 'Active Transport', 'Evaporation'], correctAnswer: 1 },
-        { id: 'bio_hard_1', difficulty: 8, tags: ['biology', 'environment'], question: 'Which gas is primarily responsible for the Greenhouse Effect?', options: ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Helium'], correctAnswer: 2 },
-    ],
-    'Social Studies': [
-        { id: 'soc_easy_1', difficulty: 2, tags: ['social', 'family'], question: 'A family consisting of parents and their children is a:', options: ['Extended Family', 'Nuclear Family', 'Single-parent Family', 'Blended Family'], correctAnswer: 1 },
-        { id: 'soc_med_1', difficulty: 5, tags: ['social', 'regional'], question: 'One of the main objectives of CARICOM is:', options: ['Individual defense', 'Economic cooperation', 'Language uniformity', 'Visual arts promotion'], correctAnswer: 1 },
-        { id: 'soc_hard_1', difficulty: 8, tags: ['social', 'development'], question: 'Sustainable development is best defined as:', options: ['Rapid industrialization', 'Meeting current needs without compromising the future', 'Maximizing resource extraction', 'Stopping all urban growth'], correctAnswer: 1 },
-    ],
-    'English B': [
-        { id: 'engb_easy_1', difficulty: 2, tags: ['englishb', 'literary'], question: 'Attributing human qualities to non-human things is called:', options: ['Metaphor', 'Simile', 'Personification', 'Irony'], correctAnswer: 2 },
-        { id: 'engb_med_1', difficulty: 5, tags: ['englishb', 'literary'], question: 'A direct comparison using "is" or "was" (e.g., "Life is a journey") is a:', options: ['Simile', 'Metaphor', 'Oxymoron', 'Onomatopoeia'], correctAnswer: 1 },
-        { id: 'engb_hard_1', difficulty: 8, tags: ['englishb', 'drama'], question: 'When the audience knows more than the characters, it is called:', options: ['Situational Irony', 'Verbal Irony', 'Dramatic Irony', 'Paradox'], correctAnswer: 2 },
+        { id: 'bio_med_1', difficulty: 6, tags: ['biology'], question: 'Which organelle is responsible for cellular respiration?', options: ['Ribosome', 'Mitochondria', 'Golgi Body', 'Lysosome'], correctAnswer: 1 },
     ],
 }
 
@@ -188,7 +178,7 @@ function DiagnosticContent() {
         params.set('mastery', mastery.toString())
 
         if (user) {
-            // Save to Firestore if logged in (unlikely in this flow, but good for safety)
+            // Save to Firestore since user is logged in
             try {
                 await updateDoc(doc(db, 'users', user.uid), {
                     mastery,
@@ -196,31 +186,31 @@ function DiagnosticContent() {
                     diagnosticCompleted: true,
                     diagnosticCompletedAt: new Date().toISOString(),
                 })
-                router.push('/home')
             } catch (e) {
-                console.error(e)
-                router.push(`/signup?${params.toString()}`)
+                console.error("Failed to save diag results:", e)
             }
+            router.push('/home')
         } else {
-            router.push(`/signup?${params.toString()}`)
+            // Fallback for unexpected session loss
+            router.push(`/home`)
         }
     }
 
     if (phase === 'ready') {
         return (
-            <div className="min-h-screen bg-white flex items-center justify-center p-4">
+            <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
                 <div className="text-center max-w-md w-full flex flex-col items-center gap-8">
                     <MascotOwl pose="owl-idea" size="lg" />
                     <div>
-                        <h1 className="text-3xl font-extrabold text-slate-700 mb-4">Quick Evaluation</h1>
-                        <p className="text-slate-400 font-bold mb-8">
+                        <h1 className="text-3xl font-extrabold text-[var(--text-primary)] mb-4">Quick Evaluation</h1>
+                        <p className="text-[var(--text-secondary)] font-bold mb-8">
                             This short evaluation helps us find the perfect starting point for you.
                             If it seems easy at first, don&apos;t worry—it&apos;s just calibrating!
                         </p>
                     </div>
                     <button
                         onClick={startDiagnostic}
-                        className="w-full bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-green-100"
+                        className="w-full bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-4 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-indigo-500/10"
                     >
                         START EVALUATION
                     </button>
@@ -231,49 +221,49 @@ function DiagnosticContent() {
 
     if (phase === 'analyzing') {
         return (
-            <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+            <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-4">
                 <div className="animate-spin-slow mb-8">
                     <MascotOwl pose="owl-thinking" size="lg" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-slate-700 mb-2">Finding your level...</h2>
-                <p className="text-slate-400 font-bold animate-pulse">Personalizing your learning path</p>
+                <h2 className="text-3xl font-extrabold text-[var(--text-primary)] mb-2">Finding your level...</h2>
+                <p className="text-[var(--text-secondary)] font-bold animate-pulse">Personalizing your learning path</p>
             </div>
         )
     }
 
     if (phase === 'complete') {
         return (
-            <div className="min-h-screen bg-white flex items-center justify-center p-4">
+            <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
                 <div className="text-center max-w-2xl w-full flex flex-col items-center gap-10">
                     <MascotOwl pose="owl-happy" size="lg" />
                     <div>
-                        <h2 className="text-4xl font-extrabold text-slate-700 mb-2">Evaluation Complete!</h2>
-                        <p className="text-slate-400 font-bold text-xl uppercase tracking-widest">Recommended Level: {stats.generalLevel.toFixed(1)}/10</p>
+                        <h2 className="text-4xl font-extrabold text-[var(--text-primary)] mb-2">Evaluation Complete!</h2>
+                        <p className="text-[var(--text-secondary)] font-bold text-xl uppercase tracking-widest">Recommended Level: {stats.generalLevel.toFixed(1)}/10</p>
                     </div>
 
-                    <div className="w-full bg-slate-50 p-8 rounded-3xl border-2 border-slate-100">
-                        <div className="flex justify-between text-xs font-black text-slate-400 uppercase tracking-tighter mb-3">
+                    <div className="w-full bg-[var(--bg-elevated)] p-8 rounded-3xl border-2 border-[var(--border-subtle)]">
+                        <div className="flex justify-between text-xs font-black text-[var(--text-muted)] uppercase tracking-tighter mb-3">
                             <span>Novice</span>
                             <span>Expert</span>
                         </div>
-                        <div className="h-6 bg-slate-200 rounded-full overflow-hidden relative border-b-4 border-slate-300">
+                        <div className="h-6 bg-[var(--bg-secondary)] rounded-full overflow-hidden relative border-b-4 border-[var(--border-subtle)]">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${stats.generalLevel * 10}%` }}
                                 transition={{ duration: 1.5, ease: "circOut" }}
-                                className="h-full bg-gradient-to-r from-blue-400 to-[var(--brand-primary)]"
+                                className="h-full bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)]"
                             />
                         </div>
-                        <p className="mt-6 text-slate-500 font-bold">
+                        <p className="mt-6 text-[var(--text-secondary)] font-bold">
                             We&apos;ve unlocked the <strong>{stats.generalLevel > 6 ? 'Advanced' : 'Foundational'}</strong> learning path based on your performance.
                         </p>
                     </div>
 
                     <button
                         onClick={handleComplete}
-                        className="w-full bg-[var(--brand-primary)] hover:bg-blue-600 text-white font-extrabold py-5 rounded-2xl border-b-4 border-blue-700 active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-blue-100"
+                        className="w-full bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-5 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-indigo-500/10"
                     >
-                        CREATE PROFILE TO SAVE RESULTS
+                        GO TO DASHBOARD
                     </button>
                 </div>
             </div>
@@ -285,21 +275,21 @@ function DiagnosticContent() {
     const progress = (questionIndex / 10) * 100
 
     return (
-        <div className="min-h-screen bg-white flex flex-col items-center p-6 pt-20">
+        <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center p-6 pt-20">
             <div className="w-full max-w-2xl mb-12">
                 <div className="flex justify-between items-end mb-3">
                     <div className="flex items-center gap-3">
                         <MascotOwl pose="owl-reading" size="sm" />
-                        <span className="text-xs font-black uppercase tracking-widest text-[var(--brand-primary)]">
+                        <span className="text-xs font-black uppercase tracking-widest text-[var(--brand-secondary)]">
                             Difficulty: {currentQuestion.difficulty}/10
                         </span>
                     </div>
                     <span className="text-sm font-black text-slate-300 uppercase">Step {questionIndex}/10</span>
                 </div>
-                <div className="h-4 bg-slate-100 rounded-full overflow-hidden border-b-2 border-slate-200">
+                <div className="h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden border-b-2 border-[var(--border-subtle)]">
                     <motion.div
                         animate={{ width: `${progress}%` }}
-                        className="h-full bg-[var(--state-success)]"
+                        className="h-full bg-[var(--brand-secondary)]"
                         style={{ boxShadow: '0 4px 0 rgba(0,0,0,0.1) inset' }}
                     />
                 </div>
@@ -313,9 +303,9 @@ function DiagnosticContent() {
                     exit={{ opacity: 0, x: -20 }}
                     className="w-full max-w-2xl"
                 >
-                    <div className="bg-white rounded-3xl p-8 mb-10 min-h-[160px] flex items-center justify-center border-2 border-slate-100 shadow-sm relative">
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-white border-r-2 border-b-2 border-slate-100 rotate-45" />
-                        <h2 className="text-3xl font-extrabold text-slate-700 text-center leading-tight">
+                    <div className="bg-[var(--bg-elevated)] rounded-3xl p-8 mb-10 min-h-[160px] flex items-center justify-center border-2 border-[var(--border-subtle)] shadow-sm relative">
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[var(--bg-elevated)] border-r-2 border-b-2 border-[var(--border-subtle)] rotate-45" />
+                        <h2 className="text-3xl font-extrabold text-[var(--text-primary)] text-center leading-tight">
                             {currentQuestion.question}
                         </h2>
                     </div>
@@ -325,12 +315,12 @@ function DiagnosticContent() {
                             <button
                                 key={idx}
                                 onClick={() => handleAnswer(idx)}
-                                className="w-full text-left py-6 px-8 rounded-2xl border-2 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 active:translate-y-1 border-b-4 flex items-center gap-6 group transition-all"
+                                className="w-full text-left py-6 px-8 rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] hover:border-[var(--brand-secondary)]/50 active:translate-y-1 border-b-4 flex items-center gap-6 group transition-all"
                             >
-                                <div className="w-10 h-10 rounded-xl bg-slate-50 border-2 border-slate-100 flex items-center justify-center font-black text-slate-400 group-hover:text-slate-600 transition-colors">
+                                <div className="w-10 h-10 rounded-xl bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] flex items-center justify-center font-black text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
                                     {String.fromCharCode(65 + idx)}
                                 </div>
-                                <span className="text-xl font-extrabold text-slate-600 group-hover:text-slate-800 transition-colors">{opt}</span>
+                                <span className="text-xl font-extrabold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">{opt}</span>
                             </button>
                         ))}
                     </div>

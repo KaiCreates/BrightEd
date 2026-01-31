@@ -408,6 +408,7 @@ function getObjectiveIdsWithQuestions(): Set<string> {
 // API ROUTES
 // ============================================================================
 import { verifyAuth } from '@/lib/auth-server';
+import { adminDb } from '@/lib/firebase-admin';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -428,6 +429,31 @@ export async function POST(request: NextRequest) {
     console.log('[Learning Path POST] Body parsed:', { subjects: body?.subjects?.length || 0 });
 
     const { subjects, userProgress } = validateInput(body);
+
+    let userId: string | null = null;
+    try {
+      const decoded = await verifyAuth(request);
+      userId = decoded.uid;
+    } catch (e) { /* ignore */ }
+
+    if (userId) {
+      try {
+        const progressSnap = await adminDb.collection('users').doc(userId).collection('progress').get();
+        progressSnap.forEach(doc => {
+          const data = doc.data();
+          userProgress[doc.id] = {
+            mastery: typeof data.mastery === 'number' ? data.mastery : 0,
+            attempts: typeof data.attempts === 'number' ? data.attempts : 0,
+            lastAttempt: data.lastAttempt || '',
+            stability: data.stability || 0
+          };
+        });
+        console.log(`[Learning Path POST] Hydrated ${progressSnap.size} progress records for ${userId}`);
+      } catch (err) {
+        console.error('[Learning Path POST] Failed to fetch user progress:', err);
+      }
+    }
+
     console.log('[Learning Path POST] Input validated:', { subjectsCount: subjects.length });
 
     console.log('[Learning Path POST] Loading syllabus data');
@@ -513,9 +539,32 @@ export async function GET(request: NextRequest) {
 
     const allObjectives = loadSyllabusData();
 
-    // Note: In production, fetch userProgress from database based on user session
-    // For now, returning paths without personalization
+    // Fetch userProgress from database based on user session
     const userProgress: UserProgress = {};
+
+    let userId: string | null = null;
+    try {
+      const decoded = await verifyAuth(request);
+      userId = decoded.uid;
+    } catch (e) { /* ignore */ }
+
+    if (userId) {
+      try {
+        const progressSnap = await adminDb.collection('users').doc(userId).collection('progress').get();
+        progressSnap.forEach(doc => {
+          const data = doc.data();
+          userProgress[doc.id] = {
+            mastery: typeof data.mastery === 'number' ? data.mastery : 0,
+            attempts: typeof data.attempts === 'number' ? data.attempts : 0,
+            lastAttempt: data.lastAttempt || '',
+            stability: data.stability || 0
+          };
+        });
+        console.log(`[Learning Path GET] Hydrated ${progressSnap.size} progress records for ${userId}`);
+      } catch (err) {
+        console.error('[Learning Path GET] Failed to fetch user progress:', err);
+      }
+    }
 
     // Generate paths separated by subject
     const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);

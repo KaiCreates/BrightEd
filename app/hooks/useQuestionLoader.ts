@@ -127,8 +127,11 @@ export function useQuestionLoader({
                 const subjectParam = subjectId ? `&subjectId=${encodeURIComponent(subjectId)}` : ''
                 const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
 
-                // TODO: Pass NABLE state to generation API once it supports it
-                const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${targetVariation}&useAI=true${subjectParam}${masteryParam}`)
+                // Pass real-time NABLE stats for immediate difficulty adaptation
+                // Use nableData directly to avoid React state update delay
+                const streak = nableData?.session?.currentStreak || 0;
+                const errors = nableData?.session?.consecutiveErrors || 0;
+                const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${targetVariation}&useAI=true${subjectParam}${masteryParam}&streak=${streak}&errors=${errors}`)
                 if (cancelled) return;
 
                 if (!res.ok) throw new Error('Failed to load question')

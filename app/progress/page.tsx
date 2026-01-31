@@ -52,8 +52,8 @@ export default function ProgressPage() {
                         topicName: formatTopicName(skill.id),
                         mastery: skill.mastery / 100,
                         subSkills: [], // If NABLE had hierarchy, we'd populate this
-                        questionsCompleted: skill.streak * 5, // Approximate based on streak
-                        totalQuestions: 100 // Placeholder target
+                        questionsCompleted: skill.streak * 5,
+                        totalQuestions: Math.max(100, (skill.streak * 5) + 20)
                     }))
 
                     setTopics(transformedTopics)
