@@ -1,183 +1,1507 @@
 [
-    {
-        "id": "Q-ENGL-01-001",
-        "topic_id": "ENG-UA-00001",
-        "type": "MCQ",
-        "difficulty": 1,
-        "question": "Which of the following best describes the 'main idea' of a passage?",
-        "options": [
-            {
-                "id": "a",
-                "text": "A minor detail in the first paragraph"
-            },
-            {
-                "id": "b",
-                "text": "The primary point or concept that the author wants to communicate"
-            },
-            {
-                "id": "c",
-                "text": "The author's biography"
-            },
-            {
-                "id": "d",
-                "text": "A list of all the characters in a story"
-            }
-        ],
-        "answer": "b",
-        "explanation": "The main idea represents the central focus around which all other details in the text are organized."
-    },
-    {
-        "id": "Q-ENGL-01-002",
-        "topic_id": "ENG-UA-00001",
-        "type": "DND",
-        "difficulty": 2,
-        "question": "Match the reading strategy to its purpose.",
-        "items": [
-            {
-                "text": "Skimming",
-                "category": "Quickly reading for a general overview"
-            },
-            {
-                "text": "Scanning",
-                "category": "Looking for specific keywords or pieces of information"
-            },
-            {
-                "text": "Critical Reading",
-                "category": "Analyzing the author's tone and bias"
-            }
-        ]
-    },
-    {
-        "id": "Q-ENGL-02-001",
-        "topic_id": "ENG-UB-00001",
-        "type": "MCQ",
-        "difficulty": 2,
-        "question": "In narrative writing, what is 'foreshadowing'?",
-        "options": [
-            {
-                "id": "a",
-                "text": "The conclusion of the story"
-            },
-            {
-                "id": "b",
-                "text": "A flashback to a character's childhood"
-            },
-            {
-                "id": "c",
-                "text": "Hints or clues about events that will happen later in the story"
-            },
-            {
-                "id": "d",
-                "text": "The use of extremely long descriptions"
-            }
-        ],
-        "answer": "c",
-        "explanation": "Foreshadowing is a literary device used to create suspense or prepare the reader for future developments."
-    },
-    {
-        "id": "Q-ENGL-03-001",
-        "topic_id": "ENG-UC-00001",
-        "type": "MCQ",
-        "difficulty": 3,
-        "question": "Identify the figure of speech used in the sentence: 'The wind whispered through the trees.'",
-        "options": [
-            {
-                "id": "a",
-                "text": "Metaphor"
-            },
-            {
-                "id": "b",
-                "text": "Simile"
-            },
-            {
-                "id": "c",
-                "text": "Personification"
-            },
-            {
-                "id": "d",
-                "text": "Hyperbole"
-            }
-        ],
-        "answer": "c",
-        "explanation": "Personification gives human qualities (whispering) to non-human things (the wind)."
-    },
-    {
-        "id": "Q-ENGL-04-001",
-        "topic_id": "ENG-UD-00004",
-        "type": "MCQ",
-        "difficulty": 2,
-        "question": "What is the purpose of an 'Expository' essay?",
-        "options": [
-            {
-                "id": "a",
-                "text": "To tell a fictional story"
-            },
-            {
-                "id": "b",
-                "text": "To express strong personal emotions"
-            },
-            {
-                "id": "c",
-                "text": "To inform or explain a topic in a logical and neutral manner"
-            },
-            {
-                "id": "d",
-                "text": "To persuade someone to change their political view"
-            }
-        ],
-        "answer": "c",
-        "explanation": "Expository writing focuses on clarifying or explaining a topic without the use of personal bias or persuasion."
-    },
-    {
-        "id": "Q-ENGL-05-001",
-        "topic_id": "ENG-UE-00002",
-        "type": "MCQ",
-        "difficulty": 2,
-        "question": "Which sentence shows the correct subject-verb agreement?",
-        "options": [
-            {
-                "id": "a",
-                "text": "The team of players are arriving early."
-            },
-            {
-                "id": "b",
-                "text": "The team of players is arriving early."
-            },
-            {
-                "id": "c",
-                "text": "The players is arriving early."
-            },
-            {
-                "id": "d",
-                "text": "The team are arrive early."
-            }
-        ],
-        "answer": "b",
-        "explanation": "The subject is 'team' (singular), not 'players' (which is the object of the preposition). Therefore, the verb must be 'is'."
-    },
-    {
-        "id": "Q-ENGL-05-002",
-        "topic_id": "ENG-UE-00002",
-        "type": "DND",
-        "difficulty": 2,
-        "question": "Match the transition word to its function.",
-        "items": [
-            {
-                "text": "However",
-                "category": "Contrast"
-            },
-            {
-                "text": "Therefore",
-                "category": "Consequence/Result"
-            },
-            {
-                "text": "In addition",
-                "category": "Adding information"
-            },
-            {
-                "text": "For example",
-                "category": "Illustration"
-            }
-        ]
-    }
+  {
+    "id": "Q-ENGL-01-001",
+    "topic_id": "ENG-UA-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "Which of the following best describes the 'main idea' of a passage?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A minor detail in the first paragraph"
+      },
+      {
+        "id": "b",
+        "text": "The primary point or concept that the author wants to communicate"
+      },
+      {
+        "id": "c",
+        "text": "The author's biography"
+      },
+      {
+        "id": "d",
+        "text": "A list of all the characters in a story"
+      }
+    ],
+    "answer": "b",
+    "explanation": "The main idea represents the central focus around which all other details in the text are organized."
+  },
+  {
+    "id": "Q-ENGL-01-002",
+    "topic_id": "ENG-UA-00001",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Match the reading strategy to its purpose.",
+    "items": [
+      {
+        "text": "Skimming",
+        "category": "Quickly reading for a general overview"
+      },
+      {
+        "text": "Scanning",
+        "category": "Looking for specific keywords or pieces of information"
+      },
+      {
+        "text": "Critical Reading",
+        "category": "Analyzing the author's tone and bias"
+      }
+    ]
+  },
+  {
+    "id": "Q-ENGL-02-001",
+    "topic_id": "ENG-UB-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "In narrative writing, what is 'foreshadowing'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The conclusion of the story"
+      },
+      {
+        "id": "b",
+        "text": "A flashback to a character's childhood"
+      },
+      {
+        "id": "c",
+        "text": "Hints or clues about events that will happen later in the story"
+      },
+      {
+        "id": "d",
+        "text": "The use of extremely long descriptions"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Foreshadowing is a literary device used to create suspense or prepare the reader for future developments."
+  },
+  {
+    "id": "Q-ENGL-03-001",
+    "topic_id": "ENG-UC-00001",
+    "type": "MCQ",
+    "difficulty": 3,
+    "question": "Identify the figure of speech used in the sentence: 'The wind whispered through the trees.'",
+    "options": [
+      {
+        "id": "a",
+        "text": "Metaphor"
+      },
+      {
+        "id": "b",
+        "text": "Simile"
+      },
+      {
+        "id": "c",
+        "text": "Personification"
+      },
+      {
+        "id": "d",
+        "text": "Hyperbole"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Personification gives human qualities (whispering) to non-human things (the wind)."
+  },
+  {
+    "id": "Q-ENGL-04-001",
+    "topic_id": "ENG-UD-00004",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "What is the purpose of an 'Expository' essay?",
+    "options": [
+      {
+        "id": "a",
+        "text": "To tell a fictional story"
+      },
+      {
+        "id": "b",
+        "text": "To express strong personal emotions"
+      },
+      {
+        "id": "c",
+        "text": "To inform or explain a topic in a logical and neutral manner"
+      },
+      {
+        "id": "d",
+        "text": "To persuade someone to change their political view"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Expository writing focuses on clarifying or explaining a topic without the use of personal bias or persuasion."
+  },
+  {
+    "id": "Q-ENGL-05-001",
+    "topic_id": "ENG-UE-00002",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which sentence shows the correct subject-verb agreement?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The team of players are arriving early."
+      },
+      {
+        "id": "b",
+        "text": "The team of players is arriving early."
+      },
+      {
+        "id": "c",
+        "text": "The players is arriving early."
+      },
+      {
+        "id": "d",
+        "text": "The team are arrive early."
+      }
+    ],
+    "answer": "b",
+    "explanation": "The subject is 'team' (singular), not 'players' (which is the object of the preposition). Therefore, the verb must be 'is'."
+  },
+  {
+    "id": "Q-ENGL-05-002",
+    "topic_id": "ENG-UE-00002",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Match the transition word to its function.",
+    "items": [
+      {
+        "text": "However",
+        "category": "Contrast"
+      },
+      {
+        "text": "Therefore",
+        "category": "Consequence/Result"
+      },
+      {
+        "text": "In addition",
+        "category": "Adding information"
+      },
+      {
+        "text": "For example",
+        "category": "Illustration"
+      }
+    ]
+  },
+  {
+    "question": "Classify the following expressions according to their register and dialectal variation.",
+    "type": "DND",
+    "categories": [
+      "Formal Register",
+      "Informal Register",
+      "Creole/Non-standard English"
+    ],
+    "items": [
+      {
+        "text": "commence",
+        "category": "Formal Register"
+      },
+      {
+        "text": "terminate",
+        "category": "Formal Register"
+      },
+      {
+        "text": "kick off",
+        "category": "Informal Register"
+      },
+      {
+        "text": "chill out",
+        "category": "Informal Register"
+      },
+      {
+        "text": "mi deh yah",
+        "category": "Creole/Non-standard English"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-f48040b0"
+  },
+  {
+    "question": "Distinguish between literal and figurative language use in the following phrases.",
+    "type": "DND",
+    "categories": [
+      "Literal Language",
+      "Figurative Language"
+    ],
+    "items": [
+      {
+        "text": "The temperature dropped to fifteen degrees",
+        "category": "Literal Language"
+      },
+      {
+        "text": "He runs one hundred metres in ten seconds",
+        "category": "Literal Language"
+      },
+      {
+        "text": "Her smile was a ray of sunshine",
+        "category": "Figurative Language"
+      },
+      {
+        "text": "Time is money",
+        "category": "Figurative Language"
+      },
+      {
+        "text": "The test was a piece of cake",
+        "category": "Figurative Language"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-0f421d09"
+  },
+  {
+    "question": "Identify which phrases contain alliteration as a striking word combination for descriptive effect.",
+    "type": "DND",
+    "categories": [
+      "Contains Alliteration",
+      "Does Not Contain Alliteration"
+    ],
+    "items": [
+      {
+        "text": "slippery slope",
+        "category": "Contains Alliteration"
+      },
+      {
+        "text": "whispering wind",
+        "category": "Contains Alliteration"
+      },
+      {
+        "text": "big brown bear",
+        "category": "Contains Alliteration"
+      },
+      {
+        "text": "crashing waves",
+        "category": "Does Not Contain Alliteration"
+      },
+      {
+        "text": "happy child",
+        "category": "Does Not Contain Alliteration"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-791b64cc"
+  },
+  {
+    "question": "Categorise the following expressions as fixed phrases (idioms) or literal phrases.",
+    "type": "DND",
+    "categories": [
+      "Fixed Phrase/Idiom",
+      "Literal Phrase"
+    ],
+    "items": [
+      {
+        "text": "kick the bucket",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "under the weather",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "raining cats and dogs",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "the bucket is blue",
+        "category": "Literal Phrase"
+      },
+      {
+        "text": "the weather is sunny",
+        "category": "Literal Phrase"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-f44c5151"
+  },
+  {
+    "question": "Classify these words according to the intensity of meaning conveyed (synonymous but differing in strength).",
+    "type": "DND",
+    "categories": [
+      "Strong Intensity",
+      "Mild Intensity"
+    ],
+    "items": [
+      {
+        "text": "devastated",
+        "category": "Strong Intensity"
+      },
+      {
+        "text": "ecstatic",
+        "category": "Strong Intensity"
+      },
+      {
+        "text": "furious",
+        "category": "Strong Intensity"
+      },
+      {
+        "text": "sad",
+        "category": "Mild Intensity"
+      },
+      {
+        "text": "happy",
+        "category": "Mild Intensity"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-655e847c"
+  },
+  {
+    "question": "A character in a Jamaican novel says: \"De rain comin' down in bucket-falls, man. We haffi run!\" What does the use of \"bucket-falls\" and \"haffi\" primarily convey about the speaker's voice?",
+    "options": [
+      "The speaker is uneducated and lacks proficiency in standard English",
+      "The speaker is using formal meteorological terminology to describe precipitation",
+      "The speaker is employing Creole to establish cultural authenticity and local identity",
+      "The speaker is confused about the actual volume of rainfall"
+    ],
+    "answer": 2,
+    "explanation": "The terms 'bucket-falls' (heavy rain) and 'haffi' (have to) are features of Jamaican Creole. This linguistic choice conveys cultural authenticity and regional identity rather than educational deficiency (a common misconception). Option B incorrectly identifies the register as formal, while D represents a literal misinterpretation of figurative language.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-b5420273"
+  },
+  {
+    "question": "In describing a performance at the Queen's Park Savannah, a writer notes: \"The steel pan notes danced like fireflies across the darkening stage.\" What effect does this figurative language create?",
+    "options": [
+      "It suggests the music was played randomly and without proper structure",
+      "It emphasizes the visual brightness, lightness, and lively movement of the musical notes",
+      "It proves that the performance was disrupted by actual insects",
+      "It indicates the musicians were playing in complete darkness without electricity"
+    ],
+    "answer": 1,
+    "explanation": "The simile 'like fireflies' creates a vivid image of light, movement, and magical quality, associating the music with natural beauty and ephemeral brightness. Option A misinterprets 'danced' as lack of control rather than graceful movement. Options C and D represent literal misreadings of figurative language.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-979df53a"
+  },
+  {
+    "question": "Consider the line: \"The whispering wind wove through the whispering willows.\" How does the alliteration of the 'w' sound contribute to the meaning of the description?",
+    "options": [
+      "It distracts the reader from the actual meaning of the sentence",
+      "It creates a harsh, jarring sound that suggests an approaching storm",
+      "It proves the author has a limited vocabulary of 'w' words",
+      "It reinforces the soft, continuous, breath-like sound of moving air"
+    ],
+    "answer": 3,
+    "explanation": "The repetition of the 'w' sound produces an onomatopoeic effect, mimicking the soft, sibilant quality of wind and enhancing the atmospheric description. Option B incorrectly suggests harshness (typically associated with plosive sounds like 'k' or 't'), while A and C represent misconceptions about the purpose of alliteration.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-8ce0e392"
+  },
+  {
+    "question": "Compare these two statements about a budget speech: 1) \"The Minister expounded his fiscal policy.\" 2) \"The Minister talked about money matters.\" What does the choice of \"expounded\" and \"fiscal policy\" convey in the first version?",
+    "options": [
+      "It creates a formal, authoritative tone suggesting expertise and official capacity",
+      "It demonstrates the speaker is deliberately trying to confuse the audience with big words",
+      "It communicates exactly the same information with no difference in tone or register",
+      "It indicates the Minister is speaking in a Caribbean Creole dialect"
+    ],
+    "answer": 0,
+    "explanation": "The Latinate 'expounded' and formal compound 'fiscal policy' establish a high register associated with authority, expertise, and official discourse. Option B represents a cynical misreading of formal register. Option C ignores the significant difference in formality and connotation between the registers. Option D is incorrect as the diction represents standard formal English.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-7b5b70b3"
+  },
+  {
+    "question": "In a Trinidadian novel, a grandmother says after a storm: \"Don't worry, child. We does pick up de pieces and start fresh when de hurricane pass.\" What does the fixed phrase \"pick up de pieces\" convey in this context?",
+    "options": [
+      "It refers literally to collecting broken pottery and debris from the ground",
+      "It describes a specific children's game played in the Caribbean after storms",
+      "It means to recover, rebuild, and restore order after a disaster or difficult experience",
+      "It suggests surrendering to defeat and abandoning one's home"
+    ],
+    "answer": 2,
+    "explanation": "'Pick up the pieces' is an idiomatic expression meaning to restore one's life or situation after destruction or trauma. In this Caribbean context of hurricane recovery, it conveys resilience. Option A represents a literal misinterpretation of the idiom. Option B invents a false cultural practice. Option D conveys the opposite meaning (resignation rather than resilience).",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-4a187f8c"
+  },
+  {
+    "question": "In a Caribbean novel, a market vendor calls out: 'Come buy mih fresh provision, de best in de whole island!' while a tourist brochure describes the same location as: 'Local agricultural products are available for purchase in the municipal market.' What does this contrast in linguistic choices primarily reveal about the two texts?",
+    "options": [
+      "The vendor is less educated than the brochure writer",
+      "The vendor creates cultural authenticity and personal connection, while the brochure maintains institutional distance",
+      "The brochure contains more factual information about the products",
+      "The vendor is attempting to deceive customers about the quality"
+    ],
+    "answer": 1,
+    "explanation": "The use of Creole ('mih', 'de') and direct address by the vendor establishes a warm, culturally-rooted connection with the local community, whereas the formal, passive construction of the brochure ('are available') creates an impersonal, bureaucratic distance typical of institutional communication.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-08155521"
+  },
+  {
+    "question": "A poet writes: 'The storm surged through the village, snapping slender saplings and shredding sugarcane stalks.' How does the alliteration in 'slender saplings' and 'shredding sugarcane' contribute to the meaning?",
+    "options": [
+      "It creates a musical, gentle rhythm that soothes the reader",
+      "It simply makes the description easier to remember through rhyme",
+      "It creates a harsh, hissing sound that mirrors the violence of the storm",
+      "It serves only as decorative wordplay with no meaningful effect"
+    ],
+    "answer": 2,
+    "explanation": "The repetition of the sibilant 's' sound produces a hissing, slicing quality that audibly suggests the tearing violence of the storm winds, reinforcing the destructive imagery through sound patterning that echoes the action described.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-050f66c3"
+  },
+  {
+    "question": "In a short story, a Barbadian protagonist writes to his grandmother in London: 'The city is a concrete jungle, cold and unforgiving,' but tells his new friends: 'Back home, we lived where the sea hugs the shore every morning.' What do these contrasting figurative choices convey?",
+    "options": [
+      "He views London as hostile but his homeland as nurturing and affectionate",
+      "He has forgotten the literal geography of his island",
+      "He believes London is actually covered in jungle vegetation",
+      "He is trying to impress his friends with sophisticated vocabulary"
+    ],
+    "answer": 0,
+    "explanation": "The metaphor 'concrete jungle' conveys hostility, danger, and lack of humanity, while the personification 'sea hugs the shore' suggests warmth, comfort, and emotional connection, revealing his alienation in London and nostalgic affection for his Caribbean home.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-29dff3f9"
+  },
+  {
+    "question": "A student writes to the Principal: 'I wish to request permission to absent myself from the institution on Friday.' In a WhatsApp message to a friend, the same student writes: 'Yow, me ah skip school Friday, yuh comin'?' What is the effect of this shift in linguistic choice?",
+    "options": [
+      "It changes the specific day mentioned in the message",
+      "It proves the student lacks proficiency in Standard English",
+      "It makes the message shorter due to character limitations only",
+      "It transforms a formal, respectful request into casual, rebellious defiance"
+    ],
+    "answer": 3,
+    "explanation": "The formal Latinate construction 'absent myself from the institution' conveys respect for authority and institutional protocols, whereas the phrasal verb 'skip school' with Creole markers ('yow', 'me ah') signals informal peer bonding and a casual, potentially rebellious attitude toward authority.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-bcc87a86"
+  },
+  {
+    "question": "During a debate on the economy, the Minister describes the situation as 'challenging,' while the opposition leader calls it 'catastrophic.' How does this difference in word choice affect meaning?",
+    "options": [
+      "The synonym choices convey different degrees of severity and emotional responses",
+      "They are referring to two completely different economic situations",
+      "The words mean exactly the same thing in formal political contexts",
+      "Only one speaker is using correct economic terminology"
+    ],
+    "answer": 0,
+    "explanation": "While both words acknowledge difficulty, 'challenging' suggests manageable obstacles requiring effort (minimizing severity), whereas 'catastrophic' implies disaster and systemic collapse (maximizing severity), demonstrating how synonyms carry different connotations that shape political narrative and emotional impact.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-e69544a1"
+  },
+  {
+    "question": "A Caribbean writer describes a market scene: 'The higglers hawked their wares with boisterous banter, their voices brazen and bright against the morning bustle.' What effect is created by the use of alliteration in 'boisterous banter' and 'brazen and bright'?",
+    "options": [
+      "It emphasizes the harsh, aggressive nature of the market sellers",
+      "It creates a musical, energetic quality that reflects the lively market atmosphere",
+      "It suggests the higglers are dishonest and attempting to deceive customers",
+      "It indicates the passage of time from morning to afternoon"
+    ],
+    "answer": 1,
+    "explanation": "The repetition of the 'b' sound produces a rhythmic, bouncing effect that audibly mirrors the energetic, vibrant environment of the Caribbean market. This phonetic pattern reinforces the liveliness and vigor of the higglers' interactions.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-353e131b"
+  },
+  {
+    "question": "In a Jamaican short story, a grandmother warns her grandson: 'Don't mek di duppy catch yuh out deh so late.' How does the use of Creole (dialect) in this statement contribute to the meaning?",
+    "options": [
+      "It creates cultural authenticity and conveys traditional wisdom with emotional immediacy",
+      "It indicates the grandmother lacks formal education and moral authority",
+      "It suggests the grandson is in immediate physical danger from criminals",
+      "It demonstrates the grandmother's deliberate refusal to speak Standard English"
+    ],
+    "answer": 0,
+    "explanation": "The use of Jamaican Creole ('duppy' referring to a ghost or spirit) grounds the text in authentic Caribbean cultural context. This linguistic choice conveys traditional folklore beliefs with intimacy and cultural resonance, rather than creating distance through formal language.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-32594b60"
+  },
+  {
+    "question": "A poet writes about a hurricane approaching Barbados: 'The furious wind flung fragments of frayed foliage frenziedly.' What is the primary effect of the alliterative pattern in this line?",
+    "options": [
+      "To suggest the wind is weak and ineffective against the trees",
+      "To mimic the chaotic, forceful movement of the storm through harsh consonant sounds",
+      "To indicate the season is autumn based on the foliage reference",
+      "To create a gentle, soothing atmosphere despite the storm description"
+    ],
+    "answer": 1,
+    "explanation": "The repetition of the fricative 'f' sound creates a forceful, breathy quality that audibly mimics the rushing, chaotic energy of hurricane winds. This striking word combination reinforces the violent, uncontrolled motion described in the scene.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-bac52c33"
+  },
+  {
+    "question": "A Trinidadian character reflects on his unemployment: 'After losing his job at the refinery, he felt like a fish out of water in his own village.' What does the fixed phrase 'fish out of water' convey in this context?",
+    "options": [
+      "He feels uncomfortable, out of place, and unable to function normally in his familiar environment",
+      "He enjoys swimming and fishing as hobbies to cope with stress",
+      "He has decided to move to a coastal community for new opportunities",
+      "He is literally suffocating due to the humid tropical climate"
+    ],
+    "answer": 0,
+    "explanation": "The idiom 'fish out of water' is a fixed phrase that figuratively describes someone feeling awkward and ill-at-ease in a situation where they previously felt comfortable. Here, it emphasizes the character's alienation and loss of identity after unemployment.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-a9442960"
+  },
+  {
+    "question": "In a description of a Barbadian plantation great house, the narrator states: 'The edifice stood aloof, austere and arrogant, surveying the cane fields with imperial indifference.' How do the specific word choices shape the reader's understanding of the building?",
+    "options": [
+      "They personify the building as cold, superior, and representative of colonial power structures",
+      "They suggest the house has been abandoned and is physically crumbling",
+      "They indicate the house is welcoming to tourists and preserves historical heritage positively",
+      "They describe the architectural style as modern, minimalist, and functional"
+    ],
+    "answer": 0,
+    "explanation": "The adjectives 'aloof,' 'austere,' and 'arrogant' carry connotations of cold superiority and dominance. Through personification ('surveying,' 'imperial'), these linguistic choices critique the building as a symbol of colonial authority, social hierarchy, and the dehumanizing distance of the plantation economy.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-b484826c"
+  },
+  {
+    "question": "In a Caribbean short story, a character describes a storm as 'De rain come down in sheets, battering de galvanize roof till it shake.' Later, the narrator observes: 'The precipitation descended vigorously upon the corrugated metal structure.' What does this contrast in linguistic choices primarily convey about the narrative perspective?",
+    "options": [
+      "The first speaker is uneducated while the narrator is highly educated",
+      "The shift from Creole to formal English highlights different emotional distances and cultural perspectives",
+      "The author is confused about which dialect is grammatically correct",
+      "The two descriptions refer to completely different weather events"
+    ],
+    "answer": 1,
+    "explanation": "The use of Creole ('De', 'galvanize', 'battering') creates immediacy, sensory immersion, and cultural authenticity, while the formal register ('precipitation', 'corrugated metal structure') establishes clinical, objective distance. This contrast demonstrates how linguistic choice controls reader empathy and perspective.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-3f9cec1a"
+  },
+  {
+    "question": "Read the following sentence from a Caribbean poem describing a hurricane: 'The wind was a vicious butcher, carving up the coastline with ruthless precision.' What meaning is conveyed through this figurative linguistic choice?",
+    "options": [
+      "The hurricane was literally an animate being with a profession",
+      "The author believes the storm was possessed by evil spirits",
+      "The metaphor emphasizes the storm's deliberate, violent destruction and predatory nature",
+      "The wind was actually cutting meat during the storm"
+    ],
+    "answer": 2,
+    "explanation": "The figurative comparison to a 'butcher' conveys the hurricane's methodical, brutal destruction through the striking word combination of 'vicious' and 'carving,' transforming natural disaster into intentional violence to emphasize catastrophic impact beyond literal description.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-d498f52d"
+  },
+  {
+    "question": "In the description 'salty spray splashed against the sun-bleached stones,' what effect does the alliteration of the 's' sound produce?",
+    "options": [
+      "It indicates the author made spelling errors",
+      "It creates a harsh, jarring noise that suggests danger",
+      "It mimics the soft, hissing sound of sea spray and creates a soothing atmosphere",
+      "It proves the stones are actually made of salt"
+    ],
+    "answer": 2,
+    "explanation": "The sibilant alliteration ('salty', 'spray', 'splashed', 'sun-bleached', 'stones') produces a soft, whispering sound quality that aurally mimics the gentle hiss of waves and wind, reinforcing the coastal atmosphere through phonetic patterning that appeals to the reader's auditory imagination.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-5e63f39a"
+  },
+  {
+    "question": "A journalist describes the same street gathering in Kingston as both a 'riot' and a 'peaceful assembly.' How does this choice of near-synonyms convey different meanings about the event?",
+    "options": [
+      "The words are identical in meaning and completely interchangeable",
+      "The journalist forgot which term they used in the first paragraph",
+      "'Riot' connotes violent chaos and lawlessness, while 'assembly' suggests legitimate democratic rights, revealing bias",
+      "Both terms indicate a musical celebration or festival"
+    ],
+    "answer": 2,
+    "explanation": "Although both refer to public gatherings, 'riot' carries negative connotations of mob violence and criminality, whereas 'peaceful assembly' suggests constitutional rights and order. The synonym choice manipulates reader perception and reveals the writer's ideological stance toward the event.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-e90fff6b"
+  },
+  {
+    "question": "In a Barbadian novel, a mother warns her daughter: 'Hard ears yuh won't hear, own way yuh gon feel.' What meaning does this fixed Creole phrase convey?",
+    "options": [
+      "The daughter has a medical condition affecting her ears",
+      "The mother is commenting on the physical texture of the daughter's ears",
+      "The daughter refuses to listen to advice and will suffer the consequences of her stubbornness",
+      "The daughter needs to wear ear protection"
+    ],
+    "answer": 2,
+    "explanation": "This Caribbean fixed phrase uses 'hard ears' figuratively to describe stubborn refusal to heed warnings, while 'own way yuh gon feel' predicts that defiance will lead to painful consequences. The idiomatic expression conveys cultural wisdom about obedience and experiential learning through linguistically distinct phrasing.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-81c1550f"
+  },
+  {
+    "question": "Categorize the following words according to their register: Formal, Informal, or Creole/Dialect.",
+    "type": "DND",
+    "categories": [
+      "Formal Register",
+      "Informal Register",
+      "Creole/Dialect"
+    ],
+    "items": [
+      {
+        "text": "Commence",
+        "category": "Formal Register"
+      },
+      {
+        "text": "Offspring",
+        "category": "Formal Register"
+      },
+      {
+        "text": "Start",
+        "category": "Informal Register"
+      },
+      {
+        "text": "Kids",
+        "category": "Informal Register"
+      },
+      {
+        "text": "Mek",
+        "category": "Creole/Dialect"
+      },
+      {
+        "text": "Pickney",
+        "category": "Creole/Dialect"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-e9f2bf19"
+  },
+  {
+    "question": "Determine whether each sentence expresses a Literal or Figurative meaning.",
+    "type": "DND",
+    "categories": [
+      "Literal Meaning",
+      "Figurative Meaning"
+    ],
+    "items": [
+      {
+        "text": "He kicked the bucket yesterday.",
+        "category": "Figurative Meaning"
+      },
+      {
+        "text": "He kicked the bucket down the road.",
+        "category": "Literal Meaning"
+      },
+      {
+        "text": "The concrete jungle was bustling with activity.",
+        "category": "Figurative Meaning"
+      },
+      {
+        "text": "The Amazon jungle is home to many species.",
+        "category": "Literal Meaning"
+      },
+      {
+        "text": "Time is money when running a business.",
+        "category": "Figurative Meaning"
+      },
+      {
+        "text": "The coins in his pocket made noise.",
+        "category": "Literal Meaning"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-6ef0e0b5"
+  },
+  {
+    "question": "Identify whether each expression is a Fixed Phrase/Idiom or a Literal Expression.",
+    "type": "DND",
+    "categories": [
+      "Fixed Phrase/Idiom",
+      "Literal Expression"
+    ],
+    "items": [
+      {
+        "text": "Break a leg at your audition tonight.",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "Be careful not to break the glass vase.",
+        "category": "Literal Expression"
+      },
+      {
+        "text": "It is raining cats and dogs outside.",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "It is raining heavily this afternoon.",
+        "category": "Literal Expression"
+      },
+      {
+        "text": "The new car cost an arm and a leg.",
+        "category": "Fixed Phrase/Idiom"
+      },
+      {
+        "text": "The surgery was expensive for the family.",
+        "category": "Literal Expression"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-beecfedb"
+  },
+  {
+    "question": "Classify these descriptive phrases as either using Alliteration (striking word combination) or Standard Description.",
+    "type": "DND",
+    "categories": [
+      "Alliteration",
+      "Standard Description"
+    ],
+    "items": [
+      {
+        "text": "The wild whistling wind",
+        "category": "Alliteration"
+      },
+      {
+        "text": "The strong wind blew",
+        "category": "Standard Description"
+      },
+      {
+        "text": "Slithering silent snake",
+        "category": "Alliteration"
+      },
+      {
+        "text": "The quiet reptile moved",
+        "category": "Standard Description"
+      },
+      {
+        "text": "Buzzing busy bees",
+        "category": "Alliteration"
+      },
+      {
+        "text": "The active insects worked",
+        "category": "Standard Description"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-bcaa23b6"
+  },
+  {
+    "question": "Sort these synonyms according to their connotation: Positive, Negative, or Neutral.",
+    "type": "DND",
+    "categories": [
+      "Positive Connotation",
+      "Negative Connotation",
+      "Neutral"
+    ],
+    "items": [
+      {
+        "text": "Slender",
+        "category": "Positive Connotation"
+      },
+      {
+        "text": "Skinny",
+        "category": "Negative Connotation"
+      },
+      {
+        "text": "Thin",
+        "category": "Neutral"
+      },
+      {
+        "text": "Aroma",
+        "category": "Positive Connotation"
+      },
+      {
+        "text": "Stench",
+        "category": "Negative Connotation"
+      },
+      {
+        "text": "Odour",
+        "category": "Neutral"
+      }
+    ],
+    "topic_id": "ENGL-UA-00001",
+    "id": "Q-ENGL-UA-00001-a991a150"
+  },
+  {
+    "question": "In a short story set in rural Jamaica, an elderly grandmother tells her grandchild: \"Mi chile, come yah so. De rain a fall hard-hard.\" What does the use of Creole linguistic structures primarily convey about the character and situation?",
+    "options": [
+      "The character lacks formal education and proper English skills",
+      "The character is expressing cultural identity and establishing intimate familiarity",
+      "The character is deliberately trying to obscure meaning from outsiders",
+      "The character is making grammatical errors due to haste"
+    ],
+    "answer": 1,
+    "explanation": "The use of Jamaican Creole ('mi chile', 'yah so', reduplication in 'hard-hard') signals authentic cultural identity and creates an intimate, nurturing tone appropriate for the familial relationship. This linguistic choice conveys belonging and emotional warmth rather than educational deficiency.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-40b9daf7"
+  },
+  {
+    "question": "A poet describes a fisherman as having \"hands rough as dried sea moss, face weathered as the bark of a grizzled gri-gri tree.\" How do these striking word combinations contribute to meaning?",
+    "options": [
+      "They suggest the fisherman suffers from skin disease requiring treatment",
+      "They create vivid synesthetic imagery appealing primarily to hearing",
+      "They root the character in his Caribbean environment through tangible local imagery",
+      "They indicate the narrator's disapproval of outdoor labor"
+    ],
+    "answer": 2,
+    "explanation": "The figurative comparisons to sea moss and the gri-gri tree (a Caribbean species) use specific local environmental references to convey the fisherman's deep connection to his island setting. The tactile imagery ('rough', 'weathered', 'bark') emphasizes his physical relationship with the sea through concrete, culturally-specific descriptors.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-91cee6f5"
+  },
+  {
+    "question": "Compare these two invitations: (1) \"I hereby request the pleasure of your company at the aforementioned ceremony\" and (2) \"We limin' by de beach Saturday evening\u2014pull up!\" What do these contrasting linguistic choices convey about register and social meaning?",
+    "options": [
+      "The first is casual while the second is highly formal",
+      "The second contains errors that make the meaning unclear",
+      "The first conveys social distance and ceremony; the second conveys casual Caribbean hospitality and inclusion",
+      "Both phrases are synonyms with identical social function"
+    ],
+    "answer": 2,
+    "explanation": "The first uses formal register ('hereby request', 'pleasure of your company') indicating social distance and institutional context. The second employs Caribbean informal register including the fixed phrase 'pull up' (meaning 'join us') and 'limin'' (socializing), conveying relaxed intimacy and cultural identity through linguistic solidarity.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-575126d6"
+  },
+  {
+    "question": "In the sentence \"The silvery slivers of sunlight slid across the still surface of the sea,\" how does the alliteration contribute to the descriptive effect?",
+    "options": [
+      "It creates a harsh, staccato rhythm suggesting storm conditions",
+      "It slows the reading pace to mirror the gentle, fluid movement of light on water",
+      "It distracts the reader from the actual meaning of the words",
+      "It proves the author is focused on alphabetical patterns rather than imagery"
+    ],
+    "answer": 1,
+    "explanation": "The repeated 's' sounds (silvery, slivers, sunlight, slid, still, surface, sea) create a soft, sibilant sound pattern that phonetically mimics the smooth, hushed movement of light on calm water. This striking word combination reinforces the tranquil mood through auditory imagery that matches the visual description.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-e025ae8f"
+  },
+  {
+    "question": "A community leader reflects on a hurricane relief effort by stating: \"Every mickle mek a muckle, and so we rebuild.\" What meaning is conveyed through this fixed phrase?",
+    "options": [
+      "The storm caused primarily financial damage involving coins and currency",
+      "Small individual contributions collectively create significant impact",
+      "The rebuilding process is confused and disorganized",
+      "The speaker is mixing up words due to trauma from the storm"
+    ],
+    "answer": 1,
+    "explanation": "This Caribbean fixed phrase (proverb) means that small amounts ('mickle') accumulate to make a large amount ('muckle'). It conveys that modest individual efforts combine to create substantial collective results, emphasizing community cooperation and cultural wisdom about shared labor during crisis recovery.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-821945fc"
+  },
+  {
+    "question": "Read the following description of a scene in Bridgetown: 'The bustling Bridgetown market buzzed with bright, bold Barbadians buying breadfruit by the bunch.' How does the alliteration of the 'b' sound contribute to the meaning conveyed?",
+    "options": [
+      "It creates a harsh, discordant tone suggesting conflict between vendors",
+      "It mimics the rhythmic, energetic atmosphere and lively pace of market activity",
+      "It emphasizes the bitterness of the breadfruit being sold",
+      "It indicates the shoppers are frustrated with high prices"
+    ],
+    "answer": 1,
+    "explanation": "The plosive 'b' sound produces a staccato, bustling rhythm that aurally represents the busy, energetic environment of the market. The alliteration creates a musical quality that reinforces the sense of vibrant community activity rather than suggesting negativity (options A, C, D) or literal taste qualities.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-33e2fd5c"
+  },
+  {
+    "question": "Compare these two statements about children's behavior at a school in Kingston: (Standard English) 'The children were very mischievous during the celebration.' (Creole) 'De pickney dem was real mischeevous during de celebration.' What additional layer of meaning does the Creole version convey that the Standard English version lacks?",
+    "options": [
+      "It suggests the speaker is uneducated and therefore unreliable",
+      "It creates cultural authenticity and signals insider knowledge of the local community",
+      "It changes the meaning to suggest the children were well-behaved",
+      "It indicates the children are from a different country"
+    ],
+    "answer": 1,
+    "explanation": "The use of Creole ('pickney dem' with the plural marker 'dem') situates the speaker within the cultural context, conveying authenticity, familiarity, and cultural solidarity. It does not indicate lack of education (a common misconception about Creole) but rather deliberate linguistic code-switching that adds cultural nuance and local identity to the description.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-b483396e"
+  },
+  {
+    "question": "Consider these two responses to a hurricane warning: (Formal) 'We must take immediate action to secure our properties and ensure our safety.' (Informal/Creole) 'We gotta batten down de hatches quick, quick before de storm hit.' How does the choice of linguistic structures affect the meaning conveyed?",
+    "options": [
+      "The formal version shows anger while the informal shows fear",
+      "The informal version with 'quick, quick' (reduplication) and fixed phrase 'batten down de hatches' conveys urgent practical wisdom and community solidarity",
+      "The formal version indicates the speaker does not understand hurricanes",
+      "The informal version suggests the speaker is not taking the threat seriously"
+    ],
+    "answer": 1,
+    "explanation": "The reduplication 'quick, quick' is a Caribbean linguistic feature that intensifies urgency, while 'batten down de hatches' (a nautical fixed phrase adapted locally) conveys practical, experiential knowledge. The informal register creates intimacy and shared cultural understanding of hurricane preparedness, rather than suggesting lack of seriousness (D) or education (C).",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-79db5faf"
+  },
+  {
+    "question": "A sports journalist writes: 'After winning the final match, the captain was on cloud nine, floating through the press conference with a grin that could light up Kingston.' What is the effect of these figurative linguistic choices?",
+    "options": [
+      "They suggest the captain is physically exhausted and disoriented",
+      "They convey the captain's euphoric emotional state and light-hearted confidence through hyperbole",
+      "They indicate the press conference was held at a high altitude location",
+      "They suggest the captain is disconnected from reality and arrogant"
+    ],
+    "answer": 1,
+    "explanation": "The idiom 'on cloud nine' and the verb 'floating' are figurative expressions indicating extreme happiness and elation. The hyperbolic 'grin that could light up Kingston' extends this figurative language to emphasize the captain's joy. These choices convey emotional state rather than literal physical conditions (C) or negative traits like arrogance (D).",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-98a32f91"
+  },
+  {
+    "question": "In a short story about fishermen in a Grenadian village, the narrator describes two characters: 'The old man was skinny from years of hard work, while the tourist was slender and elegant.' What is conveyed by these specific synonym choices?",
+    "options": [
+      "The words are interchangeable and create no difference in meaning",
+      "'Skinny' carries connotations of hardship/gauntness while 'slender' suggests refined health, creating social bias",
+      "'Skinny' is intended as a compliment while 'slender' is critical",
+      "The words refer to different species of fish the men caught"
+    ],
+    "answer": 1,
+    "explanation": "Though both words denote thinness, 'skinny' connotes deprivation, hardship, or lack (appropriate for the hardworking local fisherman), while 'slender' connotes graceful, desirable proportions (associated with the privileged tourist). This striking word combination creates implicit social commentary on class and labor through connotation rather than explicit statement.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-a8732001"
+  },
+  {
+    "question": "Read the following sentence from a Caribbean short story: 'De sea rough today,' the old fisherman muttered. 'Rough like a lion's back.' What does the use of 'De' instead of 'The' primarily convey about the speaker?",
+    "options": [
+      "The speaker has limited education and cannot speak Standard English correctly",
+      "The speaker is emphasizing the dangerous nature of the sea through repetition",
+      "The speaker is using an informal Caribbean English variety to establish cultural authenticity and voice",
+      "The speaker is attempting to confuse the listener about the actual weather conditions"
+    ],
+    "answer": 2,
+    "explanation": "The substitution of 'De' for 'The' reflects Caribbean Creole/English vernacular usage, a legitimate linguistic system that marks the speaker's cultural identity and regional background. This code choice establishes authenticity and voice rather than indicating linguistic deficiency.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-e1cb11a6"
+  },
+  {
+    "question": "Consider this description of a Trinidad carnival scene: 'The rhythmic revelers rocked to the rolling reggae rhythms, rustling their radiant regalia.' What is the effect of the alliteration of the 'r' sound in this passage?",
+    "options": [
+      "It creates a harsh, grating tone that suggests the crowd is angry and disruptive",
+      "It mimics the pulsing, continuous beat of the music and the swaying movement of the dancers",
+      "It deliberately slows the reader down to focus on the details of the costumes",
+      "It indicates that the author has a limited vocabulary containing only 'r' words"
+    ],
+    "answer": 1,
+    "explanation": "The repeated 'r' sound (liquid consonant) creates a rolling, resonant effect that phonetically reinforces the rhythmic, swaying motion of the dancers and the pulsating beat of the reggae music, producing a sonic texture that mirrors the scene's energy.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-a9e983f3"
+  },
+  {
+    "question": "In a Barbadian folk tale, a character says: 'Don't worry, I won't let the cat out of the bag about your surprise party.' What does the phrase 'let the cat out of the bag' mean in this context?",
+    "options": [
+      "The speaker is planning to bring an actual cat to the party as a gift",
+      "The speaker is warning about a dangerous animal that might escape",
+      "The speaker is promising to keep the secret and not reveal the surprise prematurely",
+      "The speaker is suggesting they will arrive at the party very quietly"
+    ],
+    "answer": 2,
+    "explanation": "'Let the cat out of the bag' is a fixed idiomatic phrase meaning to reveal a secret or disclose confidential information accidentally or prematurely. The speaker is using figurative language to promise secrecy, not referring to a literal feline.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-0b08eb6f"
+  },
+  {
+    "question": "Compare these two descriptions of the same Jamaican beach scene:\nVersion A: 'The tourists walked on the sand and looked at the water.'\nVersion B: 'The tourists trudged across the scorching sand and squinted at the blinding turquoise water.'\nHow does the linguistic choice in Version B differ from Version A in terms of meaning conveyed?",
+    "options": [
+      "Version B uses formal Standard English while Version A uses Jamaican Creole",
+      "Version B uses specific connotations and striking word combinations to suggest discomfort and intensity, while Version A is neutral and literal",
+      "Version B is less effective because it uses too many adjectives that distract from the main action",
+      "Version B indicates that the tourists are angry with each other, while Version A shows they are calm"
+    ],
+    "answer": 1,
+    "explanation": "Version B employs words with specific connotations ('trudged' suggesting effort/difficulty, 'scorching' suggesting heat/pain, 'squinted' suggesting bright light) and striking combinations to convey the physical discomfort and intensity of the experience, whereas Version A offers only a basic literal description without emotional or sensory nuance.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-2e77c56f"
+  },
+  {
+    "question": "A St. Lucian poet writes: 'The politician's promises were as hollow as a dry coconut shell.' What meaning is conveyed through this figurative comparison?",
+    "options": [
+      "The promises are natural, refreshing, and beneficial like coconut water",
+      "The promises are empty, insincere, and lack substance or genuine content",
+      "The promises are difficult to break or crack due to their strength",
+      "The promises are brown and rough on the exterior but sweet inside"
+    ],
+    "answer": 1,
+    "explanation": "The simile compares the promises to a coconut shell, which is empty (hollow) inside when dry. This figurative choice conveys that the promises lack substance, are insincere, and contain nothing of value, critiquing the politician's words as empty rhetoric rather than describing physical characteristics of a coconut.",
+    "topic_id": "ENGL-UA-00001",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00001-ef8f3b03"
+  },
+  {
+    "question": "Classify these examples as either syntactic or morphological changes that affect meaning.",
+    "type": "DND",
+    "categories": [
+      "Syntax",
+      "Morphology"
+    ],
+    "items": [
+      {
+        "text": "Changing word order from 'The boy hit the ball' to 'The ball was hit by the boy'",
+        "category": "Syntax"
+      },
+      {
+        "text": "Adding the suffix '-less' to 'hope' to create 'hopeless'",
+        "category": "Morphology"
+      },
+      {
+        "text": "Inverting subject and auxiliary verb to form the question 'Are you coming?'",
+        "category": "Syntax"
+      },
+      {
+        "text": "Adding -ed to 'walk' to indicate past tense",
+        "category": "Morphology"
+      }
+    ],
+    "topic_id": "ENGL-UA-00002",
+    "id": "Q-ENGL-UA-00002-2694eb9d"
+  },
+  {
+    "question": "Categorize these sentences by voice to demonstrate how syntactic structure affects emphasis and meaning.",
+    "type": "DND",
+    "categories": [
+      "Active Voice",
+      "Passive Voice"
+    ],
+    "items": [
+      {
+        "text": "The teacher praised the students.",
+        "category": "Active Voice"
+      },
+      {
+        "text": "The students were praised by the teacher.",
+        "category": "Passive Voice"
+      },
+      {
+        "text": "The cake was eaten by the children.",
+        "category": "Passive Voice"
+      },
+      {
+        "text": "The children ate the cake.",
+        "category": "Active Voice"
+      }
+    ],
+    "topic_id": "ENGL-UA-00002",
+    "id": "Q-ENGL-UA-00002-4f445094"
+  },
+  {
+    "question": "Identify whether these morphological processes are inflectional or derivational, noting how each affects word meaning and grammatical function.",
+    "type": "DND",
+    "categories": [
+      "Inflectional Morphology",
+      "Derivational Morphology"
+    ],
+    "items": [
+      {
+        "text": "Adding -s to form plurals (e.g., book/books)",
+        "category": "Inflectional Morphology"
+      },
+      {
+        "text": "Adding -ness to form nouns from adjectives (e.g., happy/happiness)",
+        "category": "Derivational Morphology"
+      },
+      {
+        "text": "Adding -ed to mark past tense (e.g., play/played)",
+        "category": "Inflectional Morphology"
+      },
+      {
+        "text": "Adding un- to reverse meaning (e.g., do/undo)",
+        "category": "Derivational Morphology"
+      }
+    ],
+    "topic_id": "ENGL-UA-00002",
+    "id": "Q-ENGL-UA-00002-7eae0491"
+  },
+  {
+    "question": "Classify these sentences by their syntactic structure to show how sentence complexity affects the presentation of meaning.",
+    "type": "DND",
+    "categories": [
+      "Simple Sentence",
+      "Compound Sentence",
+      "Complex Sentence"
+    ],
+    "items": [
+      {
+        "text": "The sun rose.",
+        "category": "Simple Sentence"
+      },
+      {
+        "text": "The sun rose, and the birds began to sing.",
+        "category": "Compound Sentence"
+      },
+      {
+        "text": "When the sun rose, the birds began to sing.",
+        "category": "Complex Sentence"
+      },
+      {
+        "text": "Because it was hot, we opened the window.",
+        "category": "Complex Sentence"
+      }
+    ],
+    "topic_id": "ENGL-UA-00002",
+    "id": "Q-ENGL-UA-00002-621a3f84"
+  },
+  {
+    "question": "Categorize these sentences by word order pattern to analyze how syntactic arrangement affects emphasis and meaning.",
+    "type": "DND",
+    "categories": [
+      "Standard Word Order",
+      "Inverted Word Order"
+    ],
+    "items": [
+      {
+        "text": "Never have I seen such beauty.",
+        "category": "Inverted Word Order"
+      },
+      {
+        "text": "I have never seen such beauty.",
+        "category": "Standard Word Order"
+      },
+      {
+        "text": "Into the darkness disappeared the train.",
+        "category": "Inverted Word Order"
+      },
+      {
+        "text": "The train disappeared into the darkness.",
+        "category": "Standard Word Order"
+      }
+    ],
+    "topic_id": "ENGL-UA-00002",
+    "id": "Q-ENGL-UA-00002-c97841ea"
+  },
+  {
+    "question": "Read the following pair of sentences set in a Caribbean fishing village: (1) 'The hurricane destroyed the village.' (2) 'The village destroyed the hurricane.' How does the syntactic structure affect the meaning?",
+    "options": [
+      "The word order changes the agent and recipient of the action, reversing who performs the destruction.",
+      "The morphology of 'destroyed' changes from transitive to intransitive between the sentences.",
+      "The sentences have identical meanings but differ only in emphasis.",
+      "The syntax indicates that both events occurred simultaneously at the same time."
+    ],
+    "answer": 0,
+    "explanation": "In sentence 1, 'hurricane' is the subject/agent and 'village' is the object/patient. In sentence 2, syntactic reversal makes 'village' the subject and 'hurricane' the object, completely altering the semantic roles and factual meaning despite using the exact same words.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-1a5c1652"
+  },
+  {
+    "question": "Compare these two sentences about labour in the sugar industry: (1) 'The sugar worker's strike lasted three days.' (2) 'The sugar workers strike the drum during Carnival.' How does morphological marking affect meaning?",
+    "options": [
+      "The word order alone determines the difference without any morphological change.",
+      "The apostrophe-s ('s) in the first indicates possession (the strike belonging to the worker), while the plural -s on 'workers' without an apostrophe in the second allows 'strike' to function as a verb.",
+      "Both sentences refer to industrial action and labour protests.",
+      "The suffix '-er' changes meaning from a person to an instrument or tool."
+    ],
+    "answer": 1,
+    "explanation": "The possessive clitic 's (morphological inflection) in the first creates a noun phrase indicating ownership/relation (a labour stoppage), while the plural suffix -s combined with zero possessive marking in the second allows 'strike' to function as a verb meaning 'to hit.' These morphological cues distinguish between a noun phrase and a verb phrase.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-78b8e273"
+  },
+  {
+    "question": "In the Trinidadian context: 'The old woman does sell mangoes by the roadside.' How does the morphological marker 'does' affect the aspectual meaning?",
+    "options": [
+      "It indicates a future action that will happen tomorrow.",
+      "It marks habitual or continuous aspect, showing the selling is a regular, customary activity rather than a single event.",
+      "It changes the sentence into a question asking about the location.",
+      "It indicates the woman is performing the action right now at this specific moment."
+    ],
+    "answer": 1,
+    "explanation": "In Caribbean English Creole, preverbal 'does' (or 'do') is an aspectual marker indicating habitual action\u2014something that regularly or characteristically occurs. This morphological feature distinguishes habitual aspect from progressive ('is selling') or simple past ('sold'), conveying that mango-selling is the woman's typical occupation.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-61cb8478"
+  },
+  {
+    "question": "Compare: 'She walk slow to the Guyanese market' versus 'She walks slowly to the Guyanese market.' How do the morphological differences affect meaning and register?",
+    "options": [
+      "The first uses the base adjective 'slow' indicating a permanent trait; the second uses the adverb 'slowly' (formed by suffix -ly) indicating manner, with inflections marking informal/Creole vs formal/Standard register.",
+      "Both sentences mean exactly the same thing with no difference in register or meaning.",
+      "The first indicates future tense while the second indicates present tense.",
+      "The suffix '-ly' changes the subject from singular to plural."
+    ],
+    "answer": 0,
+    "explanation": "The morphological derivation of 'slowly' (adjective + suffix -ly) creates an adverb describing the manner of walking, while 'slow' remains an adjective. Additionally, the zero marking on 'walk' (first sentence) reflects Caribbean Creole morphology, while the Standard English third-person singular '-s' on 'walks' signals a more formal linguistic register.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-7df3f1f6"
+  },
+  {
+    "question": "Examine these sentences about Jamaican folk tales: (1) 'Anansi tricked the tiger.' (2) 'Anansi did trick the tiger.' How does the morphological marking of tense affect the narrative meaning?",
+    "options": [
+      "The use of 'did' in the second sentence marks emphatic past tense, emphasizing that the tricking definitely occurred, often used for dramatic effect in oral storytelling.",
+      "The first sentence indicates future tense while the second indicates past tense.",
+      "The word 'did' changes the meaning so that Anansi failed to trick the tiger.",
+      "The syntax indicates the tiger performed the tricking in both sentences."
+    ],
+    "answer": 0,
+    "explanation": "In Caribbean English Creole and some folk narrative styles, preverbal 'did' functions as a tense marker emphasizing completed past action or adding dramatic emphasis (often translated as 'indeed' or 'definitely'). This morphological feature distinguishes simple past from emphatic past, affecting the narrative force and authenticity of the oral tradition.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-38fe501b"
+  },
+  {
+    "question": "Compare the syntax of the Standard English sentence 'She is going to the market' with the Caribbean Creole utterance 'She going market.' How does the morphological and syntactic reduction affect the core meaning?",
+    "options": [
+      "The Creole structure indicates past tense while the Standard English indicates present continuous tense",
+      "The Creole version omits the copula and preposition but maintains the same core meaning of movement toward a destination",
+      "The Creole syntax transforms the statement into a question requiring a response",
+      "The deletion of 'is' and 'to' changes the subject from third person singular to first person plural"
+    ],
+    "answer": 1,
+    "explanation": "The Creole syntax demonstrates morphological deletion of the copula 'is' and the preposition 'to,' while maintaining the syntactic arrangement of Subject-Verb-Object. Despite these reductions, the semantic meaning remains unchanged\u2014both convey that a female subject is traveling to a market location. This illustrates how Caribbean Creoles achieve economy of expression without loss of propositional meaning.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-775a4530"
+  },
+  {
+    "question": "In Jamaican Creole, the word 'likkle' (little) can become 'likklikkle' to mean 'very small' or 'tiny.' What morphological process is demonstrated here, and how does it affect meaning?",
+    "options": [
+      "Prefixation, which changes the word class from adjective to noun",
+      "Compounding, which creates a compound word with an entirely new unrelated meaning",
+      "Reduplication, which intensifies the quality described by the adjective",
+      "Suffixation, which indicates pluralization of the noun"
+    ],
+    "answer": 2,
+    "explanation": "Reduplication (repeating all or part of the base word) is a productive morphological process in Caribbean Creoles. By repeating 'likkle,' the speaker does not merely indicate small size but intensifies the quality to mean 'extremely small.' This morphological change affects semantic gradation, demonstrating how word formation processes in Caribbean languages can encode emphasis and degree.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-61c63682"
+  },
+  {
+    "question": "Analyze the syntactic difference between the active voice 'The emancipated slaves built the great houses' and the passive voice 'The great houses were built by the emancipated slaves.' How does this syntactic shift impact the historical meaning and emphasis?",
+    "options": [
+      "The passive voice deletes the agents entirely, suggesting the houses built themselves",
+      "The active voice emphasizes the agency and labor of the emancipated people, while the passive foregrounds the houses as the grammatical subject",
+      "The passive construction indicates that the building occurred more recently than in the active construction",
+      "Both sentences convey identical meaning with no difference in thematic emphasis or focus"
+    ],
+    "answer": 1,
+    "explanation": "Syntax determines thematic focus and agency. In the active construction, 'emancipated slaves' occupies the subject position, emphasizing their historical agency and labor. The passive construction syntactically promotes 'great houses' to subject position, shifting focus to the architectural objects rather than the human actors. This syntactic choice can obscure or highlight historical agency, affecting how readers interpret the relationship between laborers and colonial architecture in Caribbean history.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-dade678d"
+  },
+  {
+    "question": "In Trinidadian Creole, 'He walk' indicates present or habitual action, while 'He did walk' indicates completed past action. What does this morphological contrast reveal about how grammatical markers affect temporal meaning?",
+    "options": [
+      "The addition of the preverbal marker 'did' changes the temporal reference from present/habitual to past without changing the verb's internal form",
+      "The verb 'walk' undergoes internal vowel changes (morphophonemic alteration) to indicate past tense",
+      "The word order is inverted (Verb-Subject) to create the past tense meaning",
+      "The subject pronoun 'He' changes case to indicate the temporal shift"
+    ],
+    "answer": 0,
+    "explanation": "Unlike Standard English, which uses suffixation (-ed) for past tense, many Caribbean Creoles use preverbal markers (morphological particles placed before the verb). The base verb 'walk' remains morphologically unchanged, but the addition of 'did' before it marks the past tense. This demonstrates that meaning can be affected by morphological elements that are separate from the main verb, showing different grammatical strategies for encoding time across language varieties.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-ceea50a3"
+  },
+  {
+    "question": "Consider the sentence 'We don't need no education' (common in Caribbean varieties) versus 'We don't need any education' (Standard English). How does the morphological choice of 'no' versus 'any' combined with the syntactic placement interact to affect meaning?",
+    "options": [
+      "The double negative creates a positive meaning, suggesting that education is actually needed",
+      "The use of 'no' instead of 'any' creates negative concord, reinforcing rather than cancelling the negation for emphatic effect",
+      "The syntax places 'no' after the verb, which transforms the sentence into a question",
+      "The morphological change indicates that 'no education' refers to a specific type of education available only in the Caribbean"
+    ],
+    "answer": 1,
+    "explanation": "In many Caribbean English varieties, negative concord (using multiple negative elements in a clause) functions as agreement rather than logical cancellation. Morphologically selecting 'nobody/nothing/no' instead of 'anybody/anything/any,' and syntactically placing it after the negative auxiliary, creates an emphatic reinforcement of the negation. This contrasts with Standard English prescriptive grammar, where double negatives are avoided to prevent 'logical' cancellation, demonstrating how morphological and syntactic choices encode emphasis and solidarity in Caribbean discourse.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-cd11d698"
+  },
+  {
+    "question": "Consider these two sentences from a Caribbean folk tale: 'Anansi tricked Tiger' versus 'Tiger tricked Anansi.' How does the syntax affect the meaning?",
+    "options": [
+      "The morphology of the verb changes the tense of the action",
+      "The word order determines who is the trickster and who is the victim",
+      "The phonology of the proper nouns creates a rhythmic effect",
+      "The absence of articles changes the grammatical correctness"
+    ],
+    "answer": 1,
+    "explanation": "The syntax\u2014the specific order and arrangement of words\u2014determines the grammatical roles of subject and object. By reversing the positions of 'Anansi' and 'Tiger,' the meaning is completely inverted, changing who performs the action (trickster) and who receives it (victim), despite using the exact same words.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-e9a638b5"
+  },
+  {
+    "question": "In Caribbean English Creole, the verb 'go' can appear as 'go,' 'goin,' or 'gone.' How does this morphological variation primarily impact meaning?",
+    "options": [
+      "It changes the verb from intransitive to transitive",
+      "It indicates aspect or tense, specifying when or how the action occurs",
+      "It signals whether the speaker is educated or uneducated",
+      "It converts the word from a verb to an adverb"
+    ],
+    "answer": 1,
+    "explanation": "Morphological inflections (changes in word form) such as 'goin' (progressive aspect) or 'gone' (completive/perfect aspect) modify the temporal and aspectual meaning of the verb. These morphological changes specify whether the action is ongoing, completed, or habitual, rather than just indicating time.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-3a7d2e11"
+  },
+  {
+    "question": "Compare the active voice sentence 'The hurricane destroyed the cocoa estate' with its passive equivalent 'The cocoa estate was destroyed by the hurricane.' What is the primary syntactic effect on meaning?",
+    "options": [
+      "The passive voice makes the sentence grammatically incorrect in Standard English",
+      "The focus shifts from the agent (hurricane) to the affected party (estate), emphasizing the victim",
+      "The morphology of 'destroyed' changes from past participle to simple past tense",
+      "The word count increases, making the description more vivid and detailed"
+    ],
+    "answer": 1,
+    "explanation": "While the basic propositional meaning remains similar, the syntactic transformation to passive voice alters the information structure. The passive construction shifts emphasis to 'the cocoa estate' (the affected object), foregrounding the victim of the disaster rather than the agent, which is particularly significant in narrative contexts about natural disasters in the Caribbean.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-6fc3019f"
+  },
+  {
+    "question": "In the sentence 'The calypsonian's lyrics challenged the government,' how does the derivational suffix '-ian' function morphologically?",
+    "options": [
+      "It transforms the noun 'calypso' into a noun referring to a person who performs or creates calypso",
+      "It indicates the plural possessive form of multiple calypsos",
+      "It changes the word class from a concrete noun to an abstract noun",
+      "It signals that the word is borrowed from French Creole"
+    ],
+    "answer": 0,
+    "explanation": "The derivational morpheme '-ian' is a suffix that changes both the lexical category and meaning of the root word. It transforms 'calypso' (the musical genre) into 'calypsonian' (the human agent/performer), demonstrating how morphological changes create new lexical meanings and word classes.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-9845b8dc"
+  },
+  {
+    "question": "Consider the ambiguous headline: 'Flying fish sold in Bridgetown market stun tourists.' What syntactic issue creates multiple interpretations?",
+    "options": [
+      "The irregular morphology of the verb 'stun' creates tense confusion",
+      "The phrase is structurally ambiguous; it is unclear whether the fish stun tourists or if the market stuns tourists",
+      "The word order follows Jamaican Creole syntax rather than Barbadian Standard English",
+      "The preposition 'in' changes the case of the noun 'market'"
+    ],
+    "answer": 1,
+    "explanation": "This is an example of syntactic (structural) ambiguity. Without clear punctuation or syntactic markers (such as commas or relative pronouns), the phrase 'sold in Bridgetown market' could modify either 'flying fish' (meaning the fish stun tourists) or the entire clause could be read differently. The syntax allows for multiple grammatical interpretations, affecting whether the tourists are stunned by the fish or by something else entirely.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-e2fcf530"
+  },
+  {
+    "question": "Consider the following sentences: (1) 'The calypsonian entertained the audience' and (2) 'The audience entertained the calypsonian.' Despite using identical vocabulary, how does the syntax alter the meaning?",
+    "options": [
+      "The punctuation marks change the semantic relationship between the words",
+      "The word order changes who is performing the action and who is receiving it",
+      "The tone of the sentences changes the meaning from literal to figurative",
+      "The morphological endings on the nouns indicate different time periods"
+    ],
+    "answer": 1,
+    "explanation": "The syntax (word order) determines the thematic roles. In sentence (1), the calypsonian is the agent (subject) and the audience is the patient (object). In sentence (2), the syntactic reversal assigns the agent role to the audience. The morphology of the words remains unchanged, but the syntactic arrangement fundamentally alters the semantic interpretation of who is performing the entertainment.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-2168108c"
+  },
+  {
+    "question": "Which morphological modification to the underlined verb correctly changes the sentence from describing a habitual present action to a completed past action: 'The fishermen ____ the nets before sunrise'?",
+    "options": [
+      "casted",
+      "casting",
+      "cast",
+      "casts"
+    ],
+    "answer": 2,
+    "explanation": "While options A, B, and D represent common morphological errors or non-finite forms, 'cast' is the correct past tense form (though identical in spelling to the base form, it represents the morphological past tense realization). In Caribbean Creole, past time might be indicated by adverbs like 'before sunrise' without verb morphology, but Standard English requires this inflectional change to mark the action as completed in the past, thereby changing the temporal meaning of the utterance.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-f6cc1f2a"
+  },
+  {
+    "question": "In the context of Caribbean history, how does the addition of the prefix 'un-' to the root word 'free' in the term 'unfree labour' affect the meaning?",
+    "options": [
+      "It changes the word from an adjective to a noun",
+      "It indicates that the labour occurred in the past tense",
+      "It reverses or negates the meaning of the root word",
+      "It creates a plural form indicating multiple workers"
+    ],
+    "answer": 2,
+    "explanation": "The derivational morpheme 'un-' is a bound prefix that attaches to the adjective 'free' to create its semantic antonym 'unfree,' meaning 'not free' or 'in bondage.' This morphological process creates a word with opposite semantic value, essential for discussing systems like slavery and indentureship. Unlike inflectional morphology (which would change tense or number), this derivational morphology changes the lexical meaning itself.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-8cfe4f6e"
+  },
+  {
+    "question": "Compare the Creole sentence 'The ship sail yesterday' with its Standard English equivalent 'The ship sailed yesterday.' How does the morphological addition of '-ed' affect the meaning?",
+    "options": [
+      "It changes the number of the subject from singular to plural",
+      "It explicitly marks the action as having occurred in the past",
+      "It transforms the verb into a noun describing the activity",
+      "It indicates that the sailing is a habitual or ongoing action"
+    ],
+    "answer": 1,
+    "explanation": "The inflectional suffix '-ed' (realized phonologically in 'sailed') is a bound morpheme that marks past tense on regular verbs. In the Creole version, temporal meaning relies on the adverb 'yesterday,' but the Standard English morphological marking explicitly encodes past time on the verb itself. This grammatical morphology ensures the temporal meaning is anchored in the past regardless of contextual clues.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-baca1576"
+  },
+  {
+    "question": "The sentence 'The vendor saw the customer with the basket' demonstrates syntactic ambiguity. How does the structure allow for two different meanings?",
+    "options": [
+      "The word 'saw' can refer to a cutting tool or the past tense of 'see'",
+      "The prepositional phrase 'with the basket' can modify either the vendor or the customer",
+      "The verb 'saw' changes meaning depending on whether the vendor is indoors or outdoors",
+      "The morphology of 'basket' changes based on who is carrying it"
+    ],
+    "answer": 1,
+    "explanation": "This sentence exhibits structural (syntactic) ambiguity known as attachment ambiguity. The prepositional phrase 'with the basket' can be syntactically attached to either the noun phrase 'the vendor' (meaning the vendor possessed the basket) or the noun phrase 'the customer' (meaning the customer possessed the basket). The morphology of all words remains identical in both interpretations; only the syntactic parsing (which noun the prepositional phrase modifies) changes the meaning.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-6e3b64e9"
+  },
+  {
+    "question": "In the sentence 'The vendor sold the tourists handmade crafts,' reordering the elements to create 'The vendor sold handmade crafts to the tourists' produces a significant semantic shift. What aspect of meaning is primarily affected by this syntactic variation?",
+    "options": [
+      "The tense of the selling action, changing from past to present",
+      "The clarity of who received the items versus what was sold",
+      "The grammatical correctness, rendering one version ungrammatical",
+      "The morphological case marking on the nouns"
+    ],
+    "answer": 1,
+    "explanation": "This syntactic shift from a double object construction (indirect object directly following the verb) to a prepositional phrase changes how we interpret the semantic roles. The first structure could ambiguously suggest the tourists themselves were sold, while the prepositional structure unambiguously identifies 'tourists' as recipients and 'crafts' as the commodity, demonstrating how word order governs thematic relationships.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-0f584180"
+  },
+  {
+    "question": "Consider the words 'colonize' and 'decolonize' in the context of Caribbean historical discourse. How does the morphological manipulation affect the lexical meaning?",
+    "options": [
+      "It changes the word class from verb to noun",
+      "It creates an antonym through the addition of a derivational prefix",
+      "It indicates the plural form of the action",
+      "It shifts the tense from present to past continuous"
+    ],
+    "answer": 1,
+    "explanation": "The prefix 'de-' is a derivational morpheme that reverses or removes the action described by the root word. Unlike inflectional morphology (which would change tense or number without altering core meaning), this derivational process creates a semantic opposite, fundamentally changing the conceptual meaning from establishment to dismantlement of colonial structures.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-5dc8191c"
+  },
+  {
+    "question": "The sentence 'Visiting grandparents can be tedious' exhibits structural ambiguity. In Caribbean family structures where extended kinship networks are common, which two distinct meanings emerge from the syntactic uncertainty?",
+    "options": [
+      "Grandparents are currently visiting OR they will visit tomorrow",
+      "The act of visiting grandparents is tedious OR grandparents who visit are tedious",
+      "The grandparents are tedious people OR the visitors are tedious people",
+      "The sentence is grammatically incorrect OR acceptable in Creole only"
+    ],
+    "answer": 1,
+    "explanation": "This illustrates structural (syntactic) ambiguity. 'Visiting' can function as a gerund (where the act of making visits is tedious) or as a participle (where grandparents who are visiting possess the quality of being tedious). The identical surface structure masks two distinct deep structures, demonstrating how syntactic function determines semantic interpretation.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-16a78948"
+  },
+  {
+    "question": "In the sentence 'The cane cutter loaded the truck,' the suffix '-ed' on 'load' functions morphologically to affect meaning in what way?",
+    "options": [
+      "It transforms the verb into an adjective describing the truck",
+      "It marks the past tense, locating the action in completed time",
+      "It indicates that multiple trucks were loaded",
+      "It creates a negative imperative command"
+    ],
+    "answer": 1,
+    "explanation": "The '-ed' suffix is an inflectional morpheme indicating simple past tense. As an inflectional rather than derivational morpheme, it does not change the word class or core lexical meaning of 'load,' but rather specifies the temporal aspect\u2014signaling that the action was completed in the past relative to the time of speaking.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-35d899f2"
+  },
+  {
+    "question": "Compare: (1) 'The fisherman has repaired the nets' and (2) 'The fisherman had repaired the nets.' How do the syntactic choices regarding auxiliary verbs combined with morphological forms affect the temporal framework?",
+    "options": [
+      "They indicate repairs happening in different physical locations",
+      "They establish different temporal reference points relative to the present moment",
+      "They change the subject from singular fisherman to plural fishermen",
+      "They convert the sentences from active to passive voice"
+    ],
+    "answer": 1,
+    "explanation": "Sentence (1) uses the present perfect ('has' + past participle), connecting a past action to the present relevance. Sentence (2) uses the past perfect ('had' + past participle), indicating the repair occurred before a specific past reference point. The auxiliary selection (syntactic) combined with the participle morphology creates distinct aspectual and temporal meanings.",
+    "topic_id": "ENGL-UA-00002",
+    "type": "MCQ",
+    "id": "Q-ENGL-UA-00002-aece7b5d"
+  }
 ]

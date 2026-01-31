@@ -176,7 +176,7 @@ export default function SignUpPage() {
           let isFirstModule = true
 
           for (const [subj, objectives] of Object.entries(paths)) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line
             const objectivesList = objectives as any[]
             for (const obj of objectivesList) {
               const moduleRef = doc(progressRef, obj.id)
@@ -226,7 +226,7 @@ export default function SignUpPage() {
             <MascotOwl pose="owl-smart" size="lg" />
             <div>
               <h2 className="text-3xl font-extrabold text-slate-700">Ready to learn?</h2>
-              <p className="text-slate-400 font-bold mt-2">First, let's pick your subjects!</p>
+              <p className="text-slate-400 font-bold mt-2">First, let&apos;s pick your subjects!</p>
             </div>
             <Link
               href="/welcome"

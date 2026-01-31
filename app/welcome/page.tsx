@@ -209,8 +209,8 @@ const StepProficiency = ({ subject, onSelect }: { subject: string, onSelect: (id
 const StepPlacement = ({ onChoice }: { onChoice: (type: 'scratch') => void }) => (
     <div className="max-w-2xl mx-auto pt-28 text-center px-4">
         <MascotOwl pose="owl-happy" size="md" />
-        <h1 className="text-3xl font-extrabold text-slate-700 mt-6 mb-4">Now let's find the best place to start!</h1>
-        <p className="text-slate-400 font-bold mb-12 text-lg">We'll do a quick evaluation with easy questions to calibrate your learning path.</p>
+        <h1 className="text-3xl font-extrabold text-slate-700 mt-6 mb-4">Now let&apos;s find the best place to start!</h1>
+        <p className="text-slate-400 font-bold mb-12 text-lg">We&apos;ll do a quick evaluation with easy questions to calibrate your learning path.</p>
 
         <div className="flex flex-col gap-6 max-w-md mx-auto">
             <button

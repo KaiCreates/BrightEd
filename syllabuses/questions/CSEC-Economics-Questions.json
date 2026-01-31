@@ -7900,5 +7900,3315 @@
     ],
     "topic_id": "ECON-05-00001",
     "id": "Q-ECON-05-00001-c6efec17"
+  },
+  {
+    "question": "Which function of money allows a farmer in Barbados to sell his produce today and use the earnings to purchase fertilizer three months later without worrying about the produce spoiling?",
+    "options": [
+      "Medium of exchange",
+      "Unit of account",
+      "Store of value",
+      "Standard of deferred payment"
+    ],
+    "answer": 2,
+    "explanation": "The store of value function enables money to maintain its purchasing power over time, allowing the farmer to save today's earnings to buy fertilizer in the future. While standard of deferred payment involves credit transactions and debt settlement, this scenario describes preserving value for future spending.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-b440f14b"
+  },
+  {
+    "question": "In the Eastern Caribbean Currency Union (ECCU), the use of polymer banknotes rather than paper currency best illustrates which quality of money?",
+    "options": [
+      "Portability",
+      "Divisibility",
+      "Durability",
+      "Uniformity"
+    ],
+    "answer": 2,
+    "explanation": "Durability ensures money can withstand physical wear and tear during circulation. Polymer notes resist damage from the tropical Caribbean climate (high humidity and heat) better than paper currency, maintaining their physical integrity for longer periods.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-599438da"
+  },
+  {
+    "question": "When commercial banks in Jamaica face a temporary shortage of cash reserves, which institution typically acts as the 'lender of last resort'?",
+    "options": [
+      "The Jamaica Stock Exchange",
+      "The Bank of Jamaica",
+      "The Ministry of Finance",
+      "The International Monetary Fund"
+    ],
+    "answer": 1,
+    "explanation": "The Bank of Jamaica, as the central bank, serves as the lender of last resort by providing emergency liquidity to commercial banks facing temporary cash shortages. This function prevents bank runs and maintains stability in the financial system.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-1d4eb905"
+  },
+  {
+    "question": "Which of the following best describes the primary role of commercial banks as financial intermediaries in Caribbean economies?",
+    "options": [
+      "Issuing currency notes and coins for circulation",
+      "Channeling savings from depositors to borrowers for investment",
+      "Setting the cash reserve requirement for financial institutions",
+      "Regulating insurance companies and credit unions"
+    ],
+    "answer": 1,
+    "explanation": "Commercial banks act as financial intermediaries by accepting deposits from savers and lending these funds to borrowers (businesses and individuals) for consumption and investment. This mobilization of capital facilitates economic growth, unlike central banks which issue currency and set reserve requirements.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-924a123e"
+  },
+  {
+    "question": "In the Caribbean, credit unions differ from commercial banks as financial intermediaries primarily because credit unions:",
+    "options": [
+      "Are owned by shareholders seeking to maximize profits",
+      "Operate on a not-for-profit basis serving specific member groups",
+      "Are exempt from regulation by monetary authorities",
+      "Do not provide loans to their members"
+    ],
+    "answer": 1,
+    "explanation": "Credit unions are cooperative, member-owned financial intermediaries that operate on a not-for-profit basis, returning surplus earnings to members through dividends or reduced interest rates. This contrasts with commercial banks, which are profit-driven institutions owned by shareholders.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-7cdb81ab"
+  },
+  {
+    "question": "In a market in Kingston, Jamaica, a shopper observes that one mango is priced at $150 while a pineapple costs $450, enabling her to calculate that three mangoes offer better value than one pineapple. This scenario best illustrates money functioning as a:",
+    "options": [
+      "Medium of exchange",
+      "Unit of account",
+      "Store of value",
+      "Standard of deferred payment"
+    ],
+    "answer": 1,
+    "explanation": "Money as a unit of account (or measure of value) allows for the common denomination of prices, making it possible to compare the relative values of different goods and services. While medium of exchange involves the actual transfer of money for goods, the scenario specifically highlights the comparison of values.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-508d0cdb"
+  },
+  {
+    "question": "For the Eastern Caribbean dollar (EC$) to effectively facilitate daily transactions across the eight member territories of the Eastern Caribbean Currency Union (ECCU), which quality of money is most essential?",
+    "options": [
+      "Intrinsic value equal to its face value",
+      "General acceptability",
+      "Indivisibility into smaller units",
+      "Unlimited supply by commercial banks"
+    ],
+    "answer": 1,
+    "explanation": "General acceptability is the fundamental quality that ensures all parties within an economy will accept money in exchange for goods and services. Without confidence and universal acceptance, money cannot function effectively as a medium of exchange, regardless of its other characteristics.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-2b084450"
+  },
+  {
+    "question": "When the Central Bank of Trinidad and Tobago provides emergency short-term loans to commercial banks that are temporarily unable to meet their withdrawal obligations, it is performing its role as:",
+    "options": [
+      "Banker to the government",
+      "Lender of last resort",
+      "Agent for debt management",
+      "Custodian of private bank deposits"
+    ],
+    "answer": 1,
+    "explanation": "The 'lender of last resort' function involves central banks providing liquidity to solvent commercial banks facing temporary cash flow problems to prevent bank runs and maintain financial system stability. This differs from being banker to the government, which involves managing government accounts and issuing securities.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-52a52f89"
+  },
+  {
+    "question": "Which of the following is a primary function of commercial banks in Barbados, distinct from the functions performed by the Central Bank of Barbados?",
+    "options": [
+      "Issuing legal tender currency notes",
+      "Setting the statutory cash reserve requirement",
+      "Accepting demand deposits and extending overdraft facilities",
+      "Determining the country's foreign exchange rate policy"
+    ],
+    "answer": 2,
+    "explanation": "Commercial banks primarily act as financial intermediaries by mobilizing savings through deposit-taking and channeling these funds into loans and overdrafts for businesses and individuals. Currency issuance, reserve requirements, and exchange rate policy are exclusive functions of the central bank.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-ae36f18e"
+  },
+  {
+    "question": "A teacher in St. Lucia makes small monthly contributions to a credit union, which pools these funds with deposits from hundreds of other members to provide a substantial construction loan to a local hotel developer. This process primarily illustrates the role of financial intermediaries in:",
+    "options": [
+      "Regulating interest rates across the economy",
+      "Risk pooling and size transformation",
+      "Issuing government bonds to finance public debt",
+      "Controlling the money supply through open market operations"
+    ],
+    "answer": 1,
+    "explanation": "Financial intermediaries like credit unions perform size transformation by aggregating many small, short-term deposits to create fewer, larger, longer-term loans. This pooling of resources allows small savers to indirectly fund major investments that would otherwise be inaccessible, while also spreading risk across many depositors.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-fc15fbe5"
+  },
+  {
+    "question": "A vendor in the Kingston Public Market accepts Jamaican dollars for produce rather than requiring customers to trade other goods. Which function of money is primarily being demonstrated?",
+    "options": [
+      "Medium of exchange",
+      "Store of value",
+      "Unit of account",
+      "Standard of deferred payment"
+    ],
+    "answer": 0,
+    "explanation": "Money acting as a medium of exchange eliminates the inefficiencies of barter by allowing goods and services to be traded for currency rather than requiring a double coincidence of wants. While the other options are valid functions of money, the scenario specifically describes money facilitating transactions.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-5d38f534"
+  },
+  {
+    "question": "The Eastern Caribbean Central Bank (ECCB) maintains financial stability in the Currency Union by providing emergency loans to commercial banks facing temporary liquidity shortages. This function is known as:",
+    "options": [
+      "Open market operations",
+      "Lender of last resort",
+      "Moral suasion",
+      "Fiscal policy management"
+    ],
+    "answer": 1,
+    "explanation": "As the lender of last resort, the Central Bank prevents banking panics by providing liquidity to solvent but illiquid commercial banks. This differs from fiscal policy (managed by governments), open market operations (buying/selling securities), and moral suasion (persuasion without force).",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-2de06ad1"
+  },
+  {
+    "question": "Commercial banks in Trinidad and Tobago contribute to the expansion of the money supply through credit creation. This process occurs when banks:",
+    "options": [
+      "Print new TT dollar banknotes under license from the Central Bank",
+      "Lend out portions of excess reserves, creating new deposit money",
+      "Convert foreign currency deposits into local currency",
+      "Increase their vault cash holdings to meet withdrawal demands"
+    ],
+    "answer": 1,
+    "explanation": "Through fractional reserve banking, commercial banks create money by lending out deposits, which are then redeposited and lent again. Only the Central Bank (Central Bank of Trinidad and Tobago) can issue currency, making option A incorrect. Options C and D describe liquidity management, not money creation.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-20f96283"
+  },
+  {
+    "question": "Which quality of money best explains why the Barbadian dollar is minted in coins ranging from 5 cents to $1, and notes from $2 to $100?",
+    "options": [
+      "Durability",
+      "Portability",
+      "Divisibility",
+      "Uniformity"
+    ],
+    "answer": 2,
+    "explanation": "Divisibility allows money to be broken down into smaller units to facilitate transactions of varying values, enabling precise pricing. While durability (longevity) and portability (ease of carrying) are important qualities, the range of denominations specifically illustrates divisibility.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-feed7362"
+  },
+  {
+    "question": "Credit unions across the Caribbean serve as financial intermediaries that primarily reduce risk and improve economic efficiency by:",
+    "options": [
+      "Setting reserve requirements for commercial banks",
+      "Pooling small savings from members to finance large loans for housing and education",
+      "Determining the exchange rate between regional and international currencies",
+      "Issuing government bonds to finance budget deficits"
+    ],
+    "answer": 1,
+    "explanation": "Financial intermediaries like credit unions perform maturity transformation and risk pooling by aggregating small deposits to make larger, diversified loans. Setting reserve requirements and exchange rates are central bank functions, while issuing government bonds is a Ministry of Finance/treasury function.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-4bc669f9"
+  },
+  {
+    "question": "In the Eastern Caribbean Currency Union (ECCU), a construction company quotes the price of building a house as $250,000 EC rather than 800 bags of cement or 5,000 hours of labour. This illustrates which function of money?",
+    "options": [
+      "Medium of exchange",
+      "Unit of account",
+      "Store of value",
+      "Standard of deferred payment"
+    ],
+    "answer": 1,
+    "explanation": "The unit of account (measure of value) function allows goods and services to be priced in a common monetary unit, enabling easy comparison of values. By quoting the price in EC dollars rather than in goods or labour, the company is using money as a standard measure of value.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-41616d79"
+  },
+  {
+    "question": "Which of the following is NOT considered an essential quality of money that facilitates its effective use in Caribbean economies?",
+    "options": [
+      "Portability - easily carried and transferred between parties",
+      "Durability - ability to withstand physical wear and tear",
+      "Intrinsic value - the material must be worth the same as its face value",
+      "Divisibility - capability to be broken into smaller units for exact payments"
+    ],
+    "answer": 2,
+    "explanation": "Modern fiat currencies like the Eastern Caribbean Dollar do not require intrinsic value (where the material itself is worth the face value). Money operates on trust and government authority. The other options (portability, durability, divisibility) are essential qualities that ensure money can function effectively in daily transactions.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-a9b5b71a"
+  },
+  {
+    "question": "The Eastern Caribbean Central Bank (ECCB) acts as a 'lender of last resort' when it:",
+    "options": [
+      "Sets the minimum reserve requirements for commercial banks in the currency union",
+      "Provides emergency loans to solvent commercial banks facing temporary liquidity shortages",
+      "Issues new EC dollar currency notes and coins for circulation",
+      "Regulates interest rates charged on mortgages and personal loans"
+    ],
+    "answer": 1,
+    "explanation": "As lender of last resort, the central bank provides emergency liquidity to commercial banks that are solvent but temporarily unable to meet withdrawal demands or obtain funds from other sources. This prevents bank failures and maintains confidence in the banking system. Setting reserve requirements and issuing currency are separate central bank functions, while regulating specific loan rates is typically not a direct central bank function.",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-05-00001-ced3b872"
+  },
+  {
+    "question": "Which statement correctly distinguishes between GDP and GNP for a Caribbean country like Jamaica?",
+    "options": [
+      "GDP measures income earned by residents only, while GNP includes income earned by foreign tourists visiting the island",
+      "GDP measures the value of production within the country's borders, while GNP measures income earned by the country's residents regardless of where it is earned",
+      "GNP is always larger than GDP for Caribbean countries because of tourism revenues",
+      "GDP excludes the informal sector while GNP includes remittances from overseas"
+    ],
+    "answer": 1,
+    "explanation": "GDP measures output produced within a country's geographical boundaries, while GNP (Gross National Product) measures the total income earned by a country's residents, including income from abroad (such as remittances from Jamaicans working overseas) minus income earned by foreigners within the country. For many Caribbean nations, remittances are significant, meaning GNP often differs from GDP.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-163d7d68"
+  },
+  {
+    "question": "A sudden increase in the price of imported fuel causes a general rise in prices throughout Trinidad and Tobago. This is an example of:",
+    "options": [
+      "Demand-pull inflation caused by increased consumer spending on energy",
+      "Cost-push inflation caused by increased production costs",
+      "Structural inflation caused by inefficiencies in the energy sector",
+      "Hyperinflation caused by the government printing money to subsidize fuel"
+    ],
+    "answer": 1,
+    "explanation": "This is cost-push inflation. When essential input costs like fuel increase, production costs rise across the economy (affecting transportation, electricity, and manufacturing), causing producers to raise prices. Caribbean countries, being net importers of fuel, are particularly vulnerable to this type of imported inflation.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-7fd7ffbf"
+  },
+  {
+    "question": "In Barbados, many workers lose their jobs in the sugar industry due to mechanization and cannot find work in the growing tourism sector because they lack the necessary skills. This illustrates:",
+    "options": [
+      "Frictional unemployment while workers search for new jobs",
+      "Cyclical unemployment due to a recession in the economy",
+      "Seasonal unemployment related to crop harvest cycles",
+      "Structural unemployment caused by a mismatch between skills and industry requirements"
+    ],
+    "answer": 3,
+    "explanation": "Structural unemployment occurs when there is a fundamental mismatch between workers' skills/location and the requirements of available jobs, often due to technological change or industry decline. The shift from traditional agriculture to service industries in Caribbean economies frequently creates this type of long-term unemployment.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-2f584a22"
+  },
+  {
+    "question": "Which of the following is the MOST significant negative consequence of high inflation for retired pensioners living on fixed incomes in Caribbean territories?",
+    "options": [
+      "An increase in their real wages and purchasing power",
+      "A decrease in the purchasing power of their fixed income and savings",
+      "An appreciation of the local currency against the US dollar",
+      "An automatic increase in their pension payments to match inflation"
+    ],
+    "answer": 1,
+    "explanation": "Inflation erodes the purchasing power of money. Pensioners on fixed nominal incomes see their real income decline as prices rise, meaning they can afford fewer goods and services. This is particularly severe in Caribbean countries where many essential goods are imported and become more expensive with currency depreciation or global price increases.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-512699c6"
+  },
+  {
+    "question": "Why might GDP per capita be considered an inaccurate measure of living standards in a Caribbean country like Saint Lucia?",
+    "options": [
+      "It includes the value of all household production and subsistence farming",
+      "It accurately accounts for the distribution of income among all citizens",
+      "It excludes non-market activities and ignores income inequality",
+      "It measures only the output of the agricultural and tourism sectors"
+    ],
+    "answer": 2,
+    "explanation": "GDP per capita is an average measure that does not reveal how income is distributed among the population (masking poverty amid wealth). It also excludes non-market activities such as subsistence farming, informal sector work, and household production, which are significant in Caribbean economies. Additionally, it does not account for environmental degradation or leisure time.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-2950cf43"
+  },
+  {
+    "question": "Jamaica has a significant number of its citizens working as nurses in the United Kingdom. The income they earn abroad is sent home as remittances. Which statement correctly describes the relationship between Jamaica's GDP and GNP?",
+    "options": [
+      "GNP exceeds GDP because the income earned by the nurses in the UK is included in Jamaica's GNP but not its GDP",
+      "GDP exceeds GNP because remittances are counted in GDP but excluded from GNP",
+      "GNP is lower than GDP because the nurses are not producing goods and services within Jamaica",
+      "GDP and GNP are equal because remittances are excluded from both calculations"
+    ],
+    "answer": 0,
+    "explanation": "GNP (Gross National Product) measures the value of output produced by a country's nationals/citizens regardless of where the production takes place, while GDP measures production within the country's geographical borders. The salaries earned by Jamaican nurses in the UK represent compensation of employees from abroad (factor income), which is added to GDP to calculate GNP. Remittances themselves are transfer payments and are not included in either GDP or GNP, but the earned income that generates them is included in GNP.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-1ffb73b5"
+  },
+  {
+    "question": "Barbados imports most of its food and fuel. In 2022, global supply chain disruptions caused a 25% increase in the cost of these imports, leading to a rise in the domestic price level. What type of inflation is this?",
+    "options": [
+      "Demand-pull inflation caused by excessive consumer spending",
+      "Cost-push inflation resulting from increased production costs",
+      "Structural inflation due to inefficiencies in the tourism sector",
+      "Hyperinflation caused by the government printing money"
+    ],
+    "answer": 1,
+    "explanation": "Cost-push inflation occurs when the overall price level rises due to increases in the cost of wages and raw materials. For small open economies like Barbados that are heavily dependent on imports, rising international prices for essential inputs such as fuel and food create 'imported inflation.' This increases production costs for local businesses, which pass these costs on to consumers as higher prices, even without an increase in aggregate demand.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-272c7ad9"
+  },
+  {
+    "question": "In Antigua and Barbuda, many hotel workers are laid off between September and November when hurricane season reduces tourist arrivals. What is the most appropriate classification for this type of unemployment?",
+    "options": [
+      "Frictional unemployment as workers search for better jobs",
+      "Structural unemployment due to a mismatch between skills and available jobs",
+      "Cyclical unemployment caused by an economic recession",
+      "Seasonal unemployment resulting from regular fluctuations in demand"
+    ],
+    "answer": 3,
+    "explanation": "Seasonal unemployment occurs when workers are unemployed at certain times of the year because of regular, predictable patterns in production or demand. In Caribbean tourism-dependent economies, employment often follows seasonal patterns related to weather (hurricane season) and tourist arrival cycles. This differs from cyclical unemployment, which is caused by general downturns in the business cycle, and structural unemployment, which involves a fundamental mismatch between workers' skills and job requirements.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-f5169b30"
+  },
+  {
+    "question": "The nominal GDP of Trinidad and Tobago grew by 8% in 2023, while the inflation rate was 5%. Approximately what was the growth rate of real GDP?",
+    "options": [
+      "13%",
+      "3%",
+      "40%",
+      "-3%"
+    ],
+    "answer": 1,
+    "explanation": "Real GDP growth represents the actual increase in the physical volume of production, adjusted for price changes. Using the approximation formula: Real GDP Growth \u2248 Nominal GDP Growth - Inflation Rate. Therefore, 8% - 5% = 3%. This indicates that while the money value of output increased by 8%, only 3% of that growth represented actual increases in goods and services produced; the remaining 5% was due to rising prices.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-2fa8487b"
+  },
+  {
+    "question": "High rates of youth unemployment in Grenada have led many university graduates to migrate to Canada and the United States in search of work. What is the most significant economic consequence for Grenada?",
+    "options": [
+      "An immediate increase in GDP per capita",
+      "A reduction in the unemployment rate as workers leave the labour force",
+      "A loss of human capital or 'brain drain'",
+      "An increase in government tax revenue from remittances"
+    ],
+    "answer": 2,
+    "explanation": "Brain drain refers to the emigration of highly skilled or educated workers from a country, resulting in a loss of human capital. While the unemployment rate may statistically decrease when unemployed workers emigrate, and remittances may increase, the long-term economic consequence is the loss of investment in education and training without return. This reduces the country's productive capacity and potential for economic growth, particularly problematic for small Caribbean states that invest heavily in education.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-15f6ba9e"
+  },
+  {
+    "question": "A small open economy in the Caribbean has a significant number of its citizens working in the United States and Canada, sending remittances home regularly. Which statement best describes the relationship between its Gross Domestic Product (GDP) and Gross National Product (GNP)?",
+    "options": [
+      "GNP will be greater than GDP",
+      "GDP will be greater than GNP",
+      "GNP and GDP will be equal",
+      "GNP will be negative while GDP is positive"
+    ],
+    "answer": 0,
+    "explanation": "GNP measures income earned by a country's residents regardless of where the production occurs, while GDP measures production within the country's borders. When citizens work abroad and send income home, this represents factor income from abroad, making GNP = GDP + Net Factor Income from Abroad. Since the net factor income is positive, GNP exceeds GDP.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-80a84b85"
+  },
+  {
+    "question": "A Caribbean nation reports that its nominal GDP grew by 8% in 2023, while the inflation rate for the same period was 5%. What is the approximate growth rate of real GDP?",
+    "options": [
+      "13%",
+      "3%",
+      "40%",
+      "1.6%"
+    ],
+    "answer": 1,
+    "explanation": "Real GDP growth is approximately equal to nominal GDP growth minus the inflation rate (using the simple percentage change formula). Therefore: 8% - 5% = 3%. This adjustment removes the effect of rising prices to show the actual change in physical output of goods and services.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-4aa3d660"
+  },
+  {
+    "question": "In Barbados, workers from the sugar industry are being laid off due to mechanization of harvesting and increased global competition from larger producers. These workers lack the technical skills required for jobs in the growing tourism sector. What type of unemployment does this represent?",
+    "options": [
+      "Cyclical unemployment",
+      "Frictional unemployment",
+      "Structural unemployment",
+      "Seasonal unemployment"
+    ],
+    "answer": 2,
+    "explanation": "This is structural unemployment, which occurs when there is a fundamental mismatch between workers' skills/locations and job requirements, often caused by technological changes or shifts in industry composition. Unlike cyclical unemployment (caused by recession) or frictional (temporary between jobs), structural unemployment requires retraining or relocation to resolve.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-b3ad134b"
+  },
+  {
+    "question": "Jamaica experiences a sharp increase in the general price level after global oil prices rise significantly and the Jamaican dollar depreciates against the US dollar. As a major oil importer, this inflation is best classified as:",
+    "options": [
+      "Demand-pull inflation caused by excessive consumer spending",
+      "Cost-push inflation caused by increased production costs",
+      "Hyperinflation caused by monetary expansion",
+      "Deflation caused by reduced import capacity"
+    ],
+    "answer": 1,
+    "explanation": "This is cost-push inflation. For Caribbean countries that import most of their energy and raw materials, external supply shocks (like oil price increases or currency depreciation) raise production costs for businesses. These higher costs are passed on to consumers as higher prices, pushing the aggregate supply curve leftward, unlike demand-pull inflation which is caused by excessive aggregate demand.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-58f7f8bf"
+  },
+  {
+    "question": "Which of the following is a likely socio-economic consequence of persistently high unemployment rates in a Caribbean economy like Trinidad and Tobago?",
+    "options": [
+      "Increased government tax revenue from social welfare contributions",
+      "Appreciation of the domestic currency due to reduced imports",
+      "Increased crime rates and social instability",
+      "Automatic budget surplus due to reduced government spending"
+    ],
+    "answer": 2,
+    "explanation": "High unemployment leads to lost income, reduced consumer spending, and increased poverty. In Caribbean contexts, this often correlates with increased crime rates and social problems as desperate individuals turn to illegal activities. Additionally, governments typically face decreased tax revenue (from lower incomes) and increased welfare spending, leading to budget deficits rather than surpluses, while currencies usually depreciate due to reduced economic confidence.",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00001-c9ede344"
+  },
+  {
+    "question": "Categorize the following economic measures as either Fiscal Policy or Monetary Policy.",
+    "type": "DND",
+    "categories": [
+      "Fiscal Policy",
+      "Monetary Policy"
+    ],
+    "items": [
+      {
+        "text": "Increase in income tax rates",
+        "category": "Fiscal Policy"
+      },
+      {
+        "text": "Reduction in interest rates",
+        "category": "Monetary Policy"
+      },
+      {
+        "text": "Government spending on infrastructure",
+        "category": "Fiscal Policy"
+      },
+      {
+        "text": "Open market operations (selling bonds)",
+        "category": "Monetary Policy"
+      },
+      {
+        "text": "Increase in corporate tax",
+        "category": "Fiscal Policy"
+      },
+      {
+        "text": "Increase in cash reserve requirements",
+        "category": "Monetary Policy"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-228d5771"
+  },
+  {
+    "question": "Classify the following policy actions as either Expansionary or Contractionary.",
+    "type": "DND",
+    "categories": [
+      "Expansionary Policy",
+      "Contractionary Policy"
+    ],
+    "items": [
+      {
+        "text": "Increasing government expenditure on public works",
+        "category": "Expansionary Policy"
+      },
+      {
+        "text": "Raising central bank interest rates",
+        "category": "Contractionary Policy"
+      },
+      {
+        "text": "Reducing personal income tax",
+        "category": "Expansionary Policy"
+      },
+      {
+        "text": "Selling government securities in open market",
+        "category": "Contractionary Policy"
+      },
+      {
+        "text": "Decreasing the cash reserve ratio for banks",
+        "category": "Expansionary Policy"
+      },
+      {
+        "text": "Increasing budget surplus to reduce aggregate demand",
+        "category": "Contractionary Policy"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-8cff7f7c"
+  },
+  {
+    "question": "Sort the following taxes into Direct Taxes and Indirect Taxes.",
+    "type": "DND",
+    "categories": [
+      "Direct Tax",
+      "Indirect Tax"
+    ],
+    "items": [
+      {
+        "text": "Income tax on wages and salaries",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Value Added Tax (VAT) on consumer goods",
+        "category": "Indirect Tax"
+      },
+      {
+        "text": "Corporate profit tax",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Customs duties on imported goods",
+        "category": "Indirect Tax"
+      },
+      {
+        "text": "Property tax on real estate",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Excise tax on fuel and tobacco",
+        "category": "Indirect Tax"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-fa4d8fff"
+  },
+  {
+    "question": "Identify which institution is responsible for implementing each of the following economic actions: the Government/Ministry of Finance or the Central Bank.",
+    "type": "DND",
+    "categories": [
+      "Government/Ministry of Finance",
+      "Central Bank"
+    ],
+    "items": [
+      {
+        "text": "Preparing and presenting the annual national budget",
+        "category": "Government/Ministry of Finance"
+      },
+      {
+        "text": "Setting the minimum reserve requirements for commercial banks",
+        "category": "Central Bank"
+      },
+      {
+        "text": "Adjusting income tax brackets and rates",
+        "category": "Government/Ministry of Finance"
+      },
+      {
+        "text": "Changing the discount rate (bank rate)",
+        "category": "Central Bank"
+      },
+      {
+        "text": "Implementing public sector investment programs",
+        "category": "Government/Ministry of Finance"
+      },
+      {
+        "text": "Conducting open market operations",
+        "category": "Central Bank"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-30811fc9"
+  },
+  {
+    "question": "Distinguish between Automatic Stabilizers and Discretionary Policy measures.",
+    "type": "DND",
+    "categories": [
+      "Automatic Stabilizer",
+      "Discretionary Policy"
+    ],
+    "items": [
+      {
+        "text": "Progressive income tax system that adjusts with income levels",
+        "category": "Automatic Stabilizer"
+      },
+      {
+        "text": "Unemployment benefits paid during economic downturns",
+        "category": "Automatic Stabilizer"
+      },
+      {
+        "text": "Deliberate legislation to increase infrastructure spending",
+        "category": "Discretionary Policy"
+      },
+      {
+        "text": "Welfare payments that automatically increase when GDP falls",
+        "category": "Automatic Stabilizer"
+      },
+      {
+        "text": "Central bank's decision to lower interest rates to stimulate growth",
+        "category": "Discretionary Policy"
+      },
+      {
+        "text": "Government passing a new tax cut bill to boost consumption",
+        "category": "Discretionary Policy"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-380835a4"
+  },
+  {
+    "question": "The Government of Jamaica implements a $50 billion infrastructure spending programme and reduces personal income tax rates to stimulate economic growth during a recession. These actions represent:",
+    "options": [
+      "Contractionary monetary policy",
+      "Expansionary fiscal policy",
+      "Contractionary fiscal policy",
+      "Expansionary monetary policy"
+    ],
+    "answer": 1,
+    "explanation": "Government spending and taxation are fiscal policy tools, not monetary policy. Increasing expenditure and reducing taxes during a recession are expansionary measures aimed at boosting aggregate demand and stimulating economic growth.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-97338428"
+  },
+  {
+    "question": "In Barbados, the decision to raise the overnight lending rate to commercial banks to combat inflation is made by the:",
+    "options": [
+      "Ministry of Finance and Economic Affairs",
+      "Central Bank of Barbados",
+      "Caribbean Development Bank (CDB)",
+      "Barbados Revenue Authority"
+    ],
+    "answer": 1,
+    "explanation": "Monetary policy, which includes setting interest rates and controlling money supply, is the responsibility of the Central Bank. The Ministry of Finance handles fiscal policy (taxation and government spending), while the CDB is a regional development institution.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-59eebe16"
+  },
+  {
+    "question": "A Caribbean government increases Value Added Tax (VAT) rates while the Central Bank simultaneously reduces the statutory cash reserve requirement for commercial banks. This policy mix is likely to result in:",
+    "options": [
+      "A definite increase in aggregate demand",
+      "Conflicting effects on economic activity",
+      "A definite decrease in the money supply",
+      "Reduced government revenue collection"
+    ],
+    "answer": 1,
+    "explanation": "Increasing VAT is contractionary fiscal policy (reducing aggregate demand), while reducing reserve requirements is expansionary monetary policy (increasing lending and aggregate demand). These opposing actions create conflicting effects on the economy.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-376004db"
+  },
+  {
+    "question": "The Government of Trinidad and Tobago finances a large budget deficit by borrowing heavily from domestic commercial banks. A likely consequence of this strategy is:",
+    "options": [
+      "Increased private sector investment due to lower interest rates",
+      "Crowding out of private investment due to higher interest rates",
+      "Immediate reduction in the national debt",
+      "Decreased inflationary pressure in the economy"
+    ],
+    "answer": 1,
+    "explanation": "When governments borrow heavily from domestic financial institutions, they compete with the private sector for limited funds. This increased demand for loanable funds drives up interest rates, making borrowing more expensive for private investors\u2014a phenomenon known as 'crowding out'.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-8b829d74"
+  },
+  {
+    "question": "Which of the following would be classified as a monetary policy instrument used by the Bank of Jamaica?",
+    "options": [
+      "Increasing customs duties on imported motor vehicles",
+      "Reducing the statutory cash reserve requirement for commercial banks",
+      "Implementing a National Minimum Wage increase",
+      "Introducing a new environmental tax on manufacturing firms"
+    ],
+    "answer": 1,
+    "explanation": "Cash reserve requirements are a monetary policy tool used by central banks to control the money supply and credit creation by commercial banks. Customs duties, minimum wage legislation, and environmental taxes are all fiscal or supply-side policy measures.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-5ffaad5f"
+  },
+  {
+    "question": "A Caribbean government facing high unemployment and negative economic growth during a tourism downturn should most appropriately implement:",
+    "options": [
+      "Expansionary fiscal policy by increasing capital expenditure on infrastructure",
+      "Contractionary fiscal policy by increasing corporate taxes to boost revenue",
+      "Contractionary monetary policy by raising the cash reserve requirement",
+      "A balanced budget policy by cutting recurrent expenditure to match revenue"
+    ],
+    "answer": 0,
+    "explanation": "During a recession with high unemployment, governments use expansionary fiscal policy\u2014increasing spending and/or reducing taxes\u2014to stimulate aggregate demand. Option B would worsen the recession. Option C is monetary policy (controlled by the Central Bank, not government) and would reduce investment. Option D (austerity) would deepen the economic contraction.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-a0419d1e"
+  },
+  {
+    "question": "The Bank of Jamaica wishes to reduce inflationary pressures in the economy. Which monetary policy action would it most likely undertake?",
+    "options": [
+      "Decrease the statutory cash reserve requirement for commercial banks",
+      "Purchase government securities on the open market (open market purchases)",
+      "Increase the policy interest rate (repo rate)",
+      "Reduce personal income tax allowances"
+    ],
+    "answer": 2,
+    "explanation": "To fight inflation, central banks use contractionary monetary policy. Increasing the policy rate makes borrowing more expensive, reducing consumption and investment, thereby lowering inflationary pressures. Options A and B are expansionary monetary policies that would increase inflation. Option D is a fiscal policy tool controlled by the Ministry of Finance, not the Central Bank.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-e3ec62e2"
+  },
+  {
+    "question": "Which of the following best describes a budget deficit in the context of a Caribbean government's fiscal operations?",
+    "options": [
+      "When total government revenue exceeds total expenditure during a fiscal year",
+      "When total government expenditure exceeds total revenue during a fiscal year",
+      "When capital expenditure is exactly equal to recurrent expenditure",
+      "When tax revenue is sufficient to cover only debt servicing obligations"
+    ],
+    "answer": 1,
+    "explanation": "A budget deficit occurs when a government's total expenditures (both recurrent and capital) exceed its total revenues (taxes and non-tax revenue) in a given period. Option A describes a budget surplus. Option C describes a specific composition of spending, not a budget balance. Option D describes a partial coverage scenario but not the definition of a deficit.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-dbdcaaa3"
+  },
+  {
+    "question": "In the Eastern Caribbean Currency Union (ECCU), the Eastern Caribbean Central Bank (ECCB) maintains a fixed exchange rate of EC$2.70 to US$1.00. This policy constraint most significantly limits the effectiveness of:",
+    "options": [
+      "Fiscal policy, because member governments cannot issue sovereign bonds",
+      "Monetary policy, because interest rates must primarily defend the currency peg rather than target domestic inflation",
+      "Trade policy, because the ECCB determines common external tariffs for all members",
+      "Exchange rate policy, because the EC dollar floats freely against major currencies"
+    ],
+    "answer": 1,
+    "explanation": "Under a fixed exchange rate regime (like the ECCU's currency board arrangement), monetary policy independence is sacrificed. The central bank must set interest rates to maintain the peg to the US dollar, even if domestic conditions (like recession or inflation) suggest different rate levels. Fiscal policy remains available to national governments (though constrained by debt), and trade policy is set by individual governments or CARICOM, not the ECCB.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-5df7f22f"
+  },
+  {
+    "question": "The Government of Barbados significantly increases its domestic borrowing to finance a large budget deficit for road construction. What is the most likely effect on private sector investment in the short run?",
+    "options": [
+      "Crowding in, as improved roads automatically increase private sector productivity",
+      "Crowding out, as increased government borrowing raises interest rates and reduces private access to credit",
+      "Stagflation, as government spending always causes high inflation without growth",
+      "Currency depreciation, as government borrowing increases the supply of Barbadian dollars"
+    ],
+    "answer": 1,
+    "explanation": "Crowding out occurs when heavy government borrowing from the domestic financial market increases demand for loanable funds, driving up interest rates. This makes borrowing more expensive for private firms, reducing private investment. While infrastructure may eventually 'crowd in' investment (option A), the immediate financial effect is crowding out. Option C is incorrect because infrastructure spending typically boosts growth, and option D confuses fiscal borrowing with monetary expansion.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-07c9fead"
+  },
+  {
+    "question": "Drag each tax to the correct category: Direct Tax or Indirect Tax.",
+    "type": "DND",
+    "categories": [
+      "Direct Tax",
+      "Indirect Tax"
+    ],
+    "items": [
+      {
+        "text": "Income tax deducted from salaries",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Value Added Tax (VAT) on consumer goods",
+        "category": "Indirect Tax"
+      },
+      {
+        "text": "Corporate tax on company profits",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Customs duties on imported vehicles",
+        "category": "Indirect Tax"
+      },
+      {
+        "text": "Property tax on land and buildings",
+        "category": "Direct Tax"
+      },
+      {
+        "text": "Excise tax on gasoline and tobacco",
+        "category": "Indirect Tax"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-6af49c14"
+  },
+  {
+    "question": "Sort the following budget items into Government Revenue or Government Expenditure.",
+    "type": "DND",
+    "categories": [
+      "Government Revenue",
+      "Government Expenditure"
+    ],
+    "items": [
+      {
+        "text": "Collection of personal income taxes",
+        "category": "Government Revenue"
+      },
+      {
+        "text": "Spending on public healthcare services",
+        "category": "Government Expenditure"
+      },
+      {
+        "text": "Payment of salaries to civil servants",
+        "category": "Government Expenditure"
+      },
+      {
+        "text": "Profits from state-owned enterprises",
+        "category": "Government Revenue"
+      },
+      {
+        "text": "Interest payments on national debt",
+        "category": "Government Expenditure"
+      },
+      {
+        "text": "Customs duties collected at ports",
+        "category": "Government Revenue"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-a8b3cefe"
+  },
+  {
+    "question": "Match the policy tool to the correct authority: Central Bank or Government/Ministry of Finance.",
+    "type": "DND",
+    "categories": [
+      "Central Bank",
+      "Government/Ministry of Finance"
+    ],
+    "items": [
+      {
+        "text": "Setting the discount rate (bank rate)",
+        "category": "Central Bank"
+      },
+      {
+        "text": "Preparing and presenting the national budget",
+        "category": "Government/Ministry of Finance"
+      },
+      {
+        "text": "Conducting open market operations",
+        "category": "Central Bank"
+      },
+      {
+        "text": "Adjusting income tax brackets",
+        "category": "Government/Ministry of Finance"
+      },
+      {
+        "text": "Setting cash reserve requirements for commercial banks",
+        "category": "Central Bank"
+      },
+      {
+        "text": "Allocating funds to defense and security",
+        "category": "Government/Ministry of Finance"
+      }
+    ],
+    "topic_id": "ECON-06-00002",
+    "id": "Q-ECON-06-00002-384804eb"
+  },
+  {
+    "question": "The Government of Barbados implements a fiscal policy package that includes increasing expenditure on road construction and reducing corporate tax rates for small businesses. This policy combination is best described as:",
+    "options": [
+      "Contractionary fiscal policy aimed at reducing inflationary pressure",
+      "Expansionary fiscal policy aimed at stimulating aggregate demand",
+      "Monetary policy aimed at controlling interest rates in the commercial banking sector",
+      "Supply-side policy that will immediately reduce the government's budget deficit"
+    ],
+    "answer": 1,
+    "explanation": "This is expansionary fiscal policy. Increasing government spending directly boosts aggregate demand, while reducing corporate taxes increases firms' disposable income and incentivizes investment. Both measures are designed to stimulate economic growth, particularly during periods of low economic activity. Contractionary policy would involve tax increases or spending cuts.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-3873a864"
+  },
+  {
+    "question": "The Eastern Caribbean Central Bank (ECCB) raises the discount rate (bank rate) for commercial banks in the Eastern Caribbean Currency Union (ECCU). What is the most likely intended effect on the economy?",
+    "options": [
+      "To encourage commercial banks to increase lending to tourism sectors",
+      "To expand the money supply and stimulate consumer spending",
+      "To reduce inflationary pressure by making borrowing more expensive",
+      "To directly increase government revenue through higher tax collection"
+    ],
+    "answer": 2,
+    "explanation": "Raising the discount rate (the rate at which commercial banks borrow from the central bank) increases the cost of borrowing for commercial banks, who then pass this on to consumers and businesses through higher lending rates. This reduces borrowing and spending, thereby contracting the money supply and controlling inflation. This is a contractionary monetary policy tool.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-356a483c"
+  },
+  {
+    "question": "A Caribbean government replaces its progressive income tax system with a uniform 15% Value Added Tax (VAT) on all goods and services. Which statement accurately describes the likely impact on different income groups?",
+    "options": [
+      "High-income households will pay a larger percentage of their income in taxes than low-income households",
+      "The tax system becomes more progressive, improving vertical equity",
+      "Low-income households will pay a higher percentage of their income in taxes compared to high-income households",
+      "All households will pay exactly the same amount of tax regardless of income level"
+    ],
+    "answer": 2,
+    "explanation": "VAT is a regressive tax. Since low-income households spend a larger proportion of their income on consumption (rather than saving), they end up paying a higher percentage of their total income in VAT compared to high-income households who save more. This contrasts with progressive income taxes where higher earners pay a larger percentage.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-6355471b"
+  },
+  {
+    "question": "The Minister of Finance of Trinidad and Tobago announces that the government will finance its activities through a budget deficit. A budget deficit occurs when:",
+    "options": [
+      "Government expenditure exceeds government revenue in a given fiscal year",
+      "Government revenue exceeds government expenditure in a given fiscal year",
+      "The country's export earnings exceed its import payments",
+      "Tax revenue is exactly equal to government spending on public services"
+    ],
+    "answer": 0,
+    "explanation": "A budget deficit occurs when a government spends more than it collects in revenue (taxes and non-tax revenue) during a specific period, requiring borrowing to cover the shortfall. When revenue exceeds spending, this is a budget surplus. When they are equal, this is a balanced budget.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-2943a443"
+  },
+  {
+    "question": "Which of the following represents a tool of monetary policy available to the Bank of Jamaica, but NOT a tool of fiscal policy available to the Ministry of Finance?",
+    "options": [
+      "Adjusting personal income tax brackets and rates",
+      "Changing government expenditure on healthcare infrastructure",
+      "Conducting open market operations with government securities",
+      "Implementing customs duties on imported motor vehicles"
+    ],
+    "answer": 2,
+    "explanation": "Open market operations (buying or selling government securities to control money supply) are exclusively monetary policy tools conducted by central banks. Fiscal policy involves government decisions about taxation (options A and D) and government spending (option B), which are controlled by the Ministry of Finance, not the central bank.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-2587836e"
+  },
+  {
+    "question": "The government of a Caribbean island is experiencing a high inflation rate caused by excessive aggregate demand. Which combination of fiscal policy measures would be most appropriate to address this situation?",
+    "options": [
+      "Increase government spending on infrastructure and reduce income taxes",
+      "Lower interest rates and increase pension transfers",
+      "Decrease public expenditure and increase corporate taxes",
+      "Devalue the domestic currency and impose import quotas"
+    ],
+    "answer": 2,
+    "explanation": "To combat demand-pull inflation, the government should implement contractionary fiscal policy by decreasing spending and increasing taxes to reduce aggregate demand. Option A represents expansionary fiscal policy, Option B mixes monetary and fiscal policy, and Option D relates to exchange rate and trade policy.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-2387b39f"
+  },
+  {
+    "question": "In the Eastern Caribbean Currency Union (ECCU), which institution is primarily responsible for setting monetary policy and regulating the banking sector?",
+    "options": [
+      "The Ministry of Finance of each independent member state",
+      "The Eastern Caribbean Central Bank (ECCB)",
+      "The Caribbean Development Bank (CDB)",
+      "The Organisation of Eastern Caribbean States (OECS) Commission"
+    ],
+    "answer": 1,
+    "explanation": "The Eastern Caribbean Central Bank (ECCB) manages monetary policy for the eight ECCU member territories, maintains the Eastern Caribbean dollar's peg to the US dollar, and regulates commercial banks. Ministries of Finance handle fiscal policy, not monetary policy.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-38284977"
+  },
+  {
+    "question": "A commercial bank in Barbados holds $200 million in deposits. If the Central Bank raises the statutory cash reserve requirement from 5% to 8%, what is the immediate change in the bank's potential lending capacity?",
+    "options": [
+      "Increases by $6 million",
+      "Decreases by $6 million",
+      "Increases by $16 million",
+      "Decreases by $10 million"
+    ],
+    "answer": 1,
+    "explanation": "The increase in reserve requirement is 3% (8% - 5%). 3% of $200 million equals $6 million. This amount must now be held in reserve rather than being available for loans, thus reducing lending capacity by $6 million.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-92b07947"
+  },
+  {
+    "question": "The Government of Jamaica implements an expansionary budget with major infrastructure spending, while the Bank of Jamaica simultaneously raises the policy interest rate. What is the most likely economic outcome of this policy combination?",
+    "options": [
+      "A significant appreciation of the Jamaican dollar",
+      "Crowding out of private sector investment",
+      "An immediate reduction in the national debt",
+      "Hyperinflation due to excessive liquidity"
+    ],
+    "answer": 1,
+    "explanation": "When the government increases borrowing to finance expansionary fiscal policy while monetary policy raises interest rates, the cost of borrowing increases for both government and private firms. This can lead to crowding out, where government borrowing competes with and reduces private investment.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-ff24d7ce"
+  },
+  {
+    "question": "Which of the following represents a significant limitation of using fiscal policy as a stabilization tool in small Caribbean islands such as those in the Eastern Caribbean?",
+    "options": [
+      "High marginal propensity to import causing substantial leakage of spending from the circular flow",
+      "The inability of governments to collect taxes during economic downturns",
+      "Monetary policy automatically overrides all fiscal decisions",
+      "Fixed exchange rates prevent any government spending from affecting output"
+    ],
+    "answer": 0,
+    "explanation": "Small Caribbean economies are highly open, with high marginal propensities to import. When government spending increases, much of the income leaks out to purchase foreign goods, reducing the multiplier effect and making fiscal policy less effective than in closed economies.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-b130e0c6"
+  },
+  {
+    "question": "The Government of Guyana announces a 10% increase in public sector wages and a reduction in corporate tax rates to stimulate economic activity during a recession. This policy combination is best described as:",
+    "options": [
+      "Contractionary fiscal policy aimed at reducing inflation",
+      "Expansionary fiscal policy aimed at increasing aggregate demand",
+      "Contractionary monetary policy aimed at stabilizing the currency",
+      "Supply-side monetary policy aimed at increasing money supply"
+    ],
+    "answer": 1,
+    "explanation": "Increasing government spending (public wages) and cutting taxes are expansionary fiscal policy measures. These actions increase aggregate demand by putting more money into the hands of consumers and businesses, aiming to stimulate economic growth during a recession.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-c93a0ad6"
+  },
+  {
+    "question": "When the Bank of Jamaica raises the policy interest rate (the rate at which it lends to commercial banks), the most likely immediate effect on the economy is:",
+    "options": [
+      "Commercial banks decrease their lending rates to stimulate borrowing",
+      "Increased investment spending by domestic manufacturing firms",
+      "Higher borrowing costs for consumers and businesses, reducing consumption and investment",
+      "An immediate increase in the money supply through currency depreciation"
+    ],
+    "answer": 2,
+    "explanation": "When the central bank raises its policy rate, commercial banks typically pass on these higher costs to borrowers by increasing their lending rates. This makes loans more expensive for consumers and businesses, thereby discouraging borrowing and reducing consumption and investment, which helps to contract aggregate demand.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-83789212"
+  },
+  {
+    "question": "In Barbados, the Minister of Finance presents the annual budget featuring changes to income tax brackets, while the Governor of the Central Bank of Barbados announces adjustments to the reserve requirement ratio. Which statement correctly identifies these responsibilities?",
+    "options": [
+      "Both decisions represent fiscal policy tools controlled by the government",
+      "The budget represents fiscal policy while the reserve requirement represents monetary policy",
+      "Both decisions represent monetary policy tools controlled by the central bank",
+      "The budget represents monetary policy while the reserve requirement represents fiscal policy"
+    ],
+    "answer": 1,
+    "explanation": "Fiscal policy involves government decisions regarding taxation and spending (managed by the Minister of Finance), while monetary policy involves controlling the money supply and interest rates through tools like reserve requirements (managed by the Central Bank Governor). These are distinct authorities with separate mandates.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-68e8b41c"
+  },
+  {
+    "question": "Which of the following best describes a progressive income tax system used in Caribbean territories such as Trinidad and Tobago?",
+    "options": [
+      "All taxpayers pay a fixed percentage of their income in tax regardless of earnings",
+      "High-income earners pay a smaller percentage of tax than low-income earners",
+      "Low-income earners pay a higher percentage of tax than high-income earners",
+      "The tax rate increases as income increases, placing a higher burden on high-income earners"
+    ],
+    "answer": 3,
+    "explanation": "A progressive tax system is designed so that as an individual's income increases, they pay not just more in absolute terms, but a higher percentage of their income in tax. This is intended to reduce income inequality, as used in many Caribbean income tax structures.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-30fea8c6"
+  },
+  {
+    "question": "A Caribbean government faces high inflation and decides to reduce its budget deficit by cutting public expenditure. However, the Central Bank simultaneously lowers interest rates to stimulate growth. This policy mix is likely to result in:",
+    "options": [
+      "A guaranteed decrease in unemployment levels",
+      "Conflicting effects on aggregate demand with an uncertain overall impact",
+      "A definite reduction in inflationary pressures",
+      "An immediate balance of payments surplus"
+    ],
+    "answer": 1,
+    "explanation": "This represents a policy conflict: contractionary fiscal policy (cutting spending) reduces aggregate demand and helps fight inflation but may slow growth, while expansionary monetary policy (lowering rates) increases aggregate demand and stimulates growth but may worsen inflation. The net effect on the economy depends on which policy proves more powerful.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-cb9f179a"
+  },
+  {
+    "question": "The government of a Caribbean country facing high inflation and rising public debt decides to implement a contractionary fiscal policy. Which combination of measures would achieve this objective?",
+    "options": [
+      "Increase income tax rates and reduce government capital expenditure",
+      "Decrease interest rates and increase transfer payments to households",
+      "Increase subsidies to agricultural producers and reduce value-added tax (VAT)",
+      "Devalue the domestic currency and impose quotas on imported goods"
+    ],
+    "answer": 0,
+    "explanation": "Contractionary fiscal policy aims to reduce aggregate demand and inflationary pressures by decreasing government spending and/or increasing taxation. Option A correctly identifies these fiscal tools. Option B describes expansionary monetary and fiscal policy. Option C represents expansionary fiscal policy. Option D relates to exchange rate and trade policy, not fiscal policy.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-78fd6ac7"
+  },
+  {
+    "question": "In the Eastern Caribbean Currency Union (ECCU), which institution is responsible for implementing monetary policy decisions such as setting interest rates and managing the money supply?",
+    "options": [
+      "The Eastern Caribbean Central Bank (ECCB)",
+      "The Ministry of Finance of each independent member state",
+      "The Caribbean Development Bank (CDB)",
+      "The commercial banks operating within each territory"
+    ],
+    "answer": 0,
+    "explanation": "The Eastern Caribbean Central Bank (ECCB) manages monetary policy for the eight member territories of the ECCU, maintaining the Eastern Caribbean dollar peg to the US dollar. Individual finance ministers (Option B) manage fiscal policy (taxation and spending), not monetary policy. The CDB (Option C) provides development financing but does not set monetary policy. Commercial banks (Option D) are subject to the ECCB's monetary policy directives but do not set them.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-0b047a38"
+  },
+  {
+    "question": "Barbados experiences a severe decline in tourism revenue leading to high unemployment and negative economic growth. Which fiscal policy measure would be most appropriate for the government to stimulate economic recovery?",
+    "options": [
+      "Raise the central bank's reserve requirement ratio for commercial banks",
+      "Increase corporate tax rates on international business companies",
+      "Increase government spending on hotel renovation grants and public infrastructure works",
+      "Appreciate the Barbadian dollar against the US dollar to reduce import costs"
+    ],
+    "answer": 2,
+    "explanation": "Expansionary fiscal policy during a recession involves increasing government expenditure or reducing taxes to boost aggregate demand and employment. Option C represents increased government spending on infrastructure and tourism support. Option A is a monetary policy tool, not fiscal. Option B is contractionary fiscal policy, which would worsen the recession. Option D relates to exchange rate policy and is not a fiscal measure; additionally, appreciation would hurt tourism competitiveness.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-fe5c6d6b"
+  },
+  {
+    "question": "Which statement best describes a cyclical budget deficit in the context of a Caribbean economy?",
+    "options": [
+      "A deliberate policy to overspend on infrastructure projects regardless of economic conditions",
+      "A budget deficit caused by automatic decreases in tax revenues during an economic recession",
+      "The annual shortfall between export earnings and import payments on the current account",
+      "A budget surplus that automatically occurs during periods of high economic growth"
+    ],
+    "answer": 1,
+    "explanation": "A cyclical deficit occurs due to the automatic stabilizers in the economy\u2014during recessions, tax revenues fall and welfare spending rises automatically, creating a deficit even without policy changes. Option B correctly identifies this. Option A describes a structural deficit (deliberate/policy-driven). Option C confuses the budget deficit with the current account deficit on the balance of payments. Option D incorrectly describes a surplus rather than a deficit.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-364ca931"
+  },
+  {
+    "question": "If the Bank of Jamaica raises its policy interest rate (the rate at which it lends to commercial banks) to combat high inflation, what is the most likely immediate effect on the domestic economy?",
+    "options": [
+      "Commercial banks are legally required to increase their lending to small businesses",
+      "The government automatically reduces its budget deficit through increased revenue",
+      "The cost of borrowing for commercial banks rises, leading to higher loan rates for consumers and reduced credit",
+      "The Jamaican dollar immediately depreciates against the US dollar to boost exports"
+    ],
+    "answer": 2,
+    "explanation": "When the central bank raises its policy rate, commercial banks face higher costs to borrow reserves, which they typically pass on to consumers through higher lending rates, thereby reducing borrowing and spending to combat inflation. Option A is incorrect as monetary policy does not mandate specific lending quotas. Option B confuses monetary policy with fiscal outcomes. Option D is incorrect because higher interest rates typically attract foreign capital, causing appreciation (or reduced depreciation), not depreciation.",
+    "topic_id": "ECON-06-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-06-00002-485cfb01"
+  },
+  {
+    "question": "Categorize each statement as relating to either Absolute Advantage or Comparative Advantage.",
+    "type": "DND",
+    "categories": [
+      "Absolute Advantage",
+      "Comparative Advantage"
+    ],
+    "items": [
+      {
+        "text": "Ability to produce more of a good using the same quantity of resources",
+        "category": "Absolute Advantage"
+      },
+      {
+        "text": "Ability to produce a good at a lower opportunity cost than another country",
+        "category": "Comparative Advantage"
+      },
+      {
+        "text": "Theory developed by Adam Smith",
+        "category": "Absolute Advantage"
+      },
+      {
+        "text": "Theory developed by David Ricardo",
+        "category": "Comparative Advantage"
+      },
+      {
+        "text": "Basis for trade even when one country is less efficient in producing all goods",
+        "category": "Comparative Advantage"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-5007e6f6"
+  },
+  {
+    "question": "Classify each policy or outcome as characteristic of Free Trade or Protectionism.",
+    "type": "DND",
+    "categories": [
+      "Free Trade",
+      "Protectionism"
+    ],
+    "items": [
+      {
+        "text": "Removal of tariffs and quotas between trading nations",
+        "category": "Free Trade"
+      },
+      {
+        "text": "Imposition of tariffs on imported manufactured goods",
+        "category": "Protectionism"
+      },
+      {
+        "text": "Allows countries to specialize according to their comparative advantage",
+        "category": "Free Trade"
+      },
+      {
+        "text": "Protecting domestic infant industries from foreign competition",
+        "category": "Protectionism"
+      },
+      {
+        "text": "Generally leads to lower prices and greater consumer choice",
+        "category": "Free Trade"
+      },
+      {
+        "text": "Use of import quotas to limit the quantity of foreign goods entering a country",
+        "category": "Protectionism"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-e2de03d0"
+  },
+  {
+    "question": "Identify whether each statement represents an Argument for Protectionism or an Argument for Free Trade.",
+    "type": "DND",
+    "categories": [
+      "Argument for Protectionism",
+      "Argument for Free Trade"
+    ],
+    "items": [
+      {
+        "text": "Protects domestic employment from cheap foreign labor",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Promotes competition, efficiency, and innovation",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Prevents dumping of goods at prices below production cost",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Allows firms to achieve economies of scale by accessing larger markets",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Essential for protecting industries crucial to national security",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Increases the variety of goods and services available to consumers",
+        "category": "Argument for Free Trade"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-c55c6a5e"
+  },
+  {
+    "question": "Sort each economic effect as resulting from Trade Barriers or Free Trade.",
+    "type": "DND",
+    "categories": [
+      "Effect of Trade Barriers",
+      "Effect of Free Trade"
+    ],
+    "items": [
+      {
+        "text": "Higher prices for imported goods due to taxes on imports",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Generation of government revenue through customs duties",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Resource allocation based on a nation's comparative advantage",
+        "category": "Effect of Free Trade"
+      },
+      {
+        "text": "Potential for trade wars and retaliatory measures between countries",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Increased efficiency and lower average costs of production",
+        "category": "Effect of Free Trade"
+      },
+      {
+        "text": "Reduced consumer surplus due to restricted import competition",
+        "category": "Effect of Trade Barriers"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-6647708c"
+  },
+  {
+    "question": "Determine whether each factor acts as a Reason for International Trade or a Barrier to International Trade.",
+    "type": "DND",
+    "categories": [
+      "Reason for International Trade",
+      "Barrier to International Trade"
+    ],
+    "items": [
+      {
+        "text": "Differences in resource endowments and climate between countries",
+        "category": "Reason for International Trade"
+      },
+      {
+        "text": "Administrative red tape and complex customs procedures",
+        "category": "Barrier to International Trade"
+      },
+      {
+        "text": "Differences in technology and productivity levels",
+        "category": "Reason for International Trade"
+      },
+      {
+        "text": "Embargoes prohibiting trade with specific countries",
+        "category": "Barrier to International Trade"
+      },
+      {
+        "text": "Access to larger markets to achieve economies of scale",
+        "category": "Reason for International Trade"
+      },
+      {
+        "text": "Health and safety standards that discriminate against foreign producers",
+        "category": "Barrier to International Trade"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-3136a749"
+  },
+  {
+    "question": "Barbados can produce either 200 tons of sugar or 100 tons of rum with its available resources. Trinidad and Tobago can produce either 150 tons of sugar or 150 tons of rum with the same amount of resources. Based on the principle of comparative advantage, which specialization pattern should occur for mutual benefit?",
+    "options": [
+      "Barbados should specialize in sugar and Trinidad and Tobago in rum",
+      "Barbados should specialize in both goods since it has absolute advantage in sugar production",
+      "Trinidad and Tobago should specialize in sugar since it has lower absolute production costs",
+      "No trade should occur since Barbados is more efficient at producing both goods"
+    ],
+    "answer": 0,
+    "explanation": "Comparative advantage is determined by opportunity cost, not absolute efficiency. Barbados has a lower opportunity cost in sugar (0.5 rum per ton vs. Trinidad's 1 rum per ton), while Trinidad has a lower opportunity cost in rum (1 sugar per ton vs. Barbados' 2 sugar per ton). Therefore, Barbados should specialize in sugar and Trinidad in rum, allowing both to gain from trade.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-873d452f"
+  },
+  {
+    "question": "Which of the following statements best explains why small Caribbean nations like St. Lucia and Jamaica engage in international trade based on the principle of comparative advantage?",
+    "options": [
+      "Countries should only trade if they can produce goods more efficiently than trading partners in absolute terms",
+      "Trade allows countries to consume beyond their production possibilities frontier by specializing in goods with lower opportunity costs",
+      "Caribbean nations have absolute advantages in all tropical agricultural products compared to temperate nations",
+      "Specialization leads to dangerous over-dependence and unemployment, so diversification is always preferable"
+    ],
+    "answer": 1,
+    "explanation": "Comparative advantage allows nations to specialize in producing goods where they have lower opportunity costs, then trade to obtain other goods. This enables consumption combinations that would be impossible without trade, effectively allowing countries to operate beyond their domestic production possibilities frontier. This is particularly crucial for small Caribbean economies with limited resource diversity.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-9a674ffa"
+  },
+  {
+    "question": "The government of Jamaica imposes a 25% tariff on imported chicken to protect local poultry farmers from foreign competition. What is the most likely immediate impact on Jamaican consumers?",
+    "options": [
+      "Lower quality of locally produced chicken due to reduced competition",
+      "Increased availability and variety of foreign chicken products",
+      "Decreased government revenue collected at the ports of entry",
+      "Higher prices for chicken products in the domestic market"
+    ],
+    "answer": 3,
+    "explanation": "Tariffs are taxes on imported goods that increase their prices, making domestic products more competitive by comparison. While this protects local producers, the immediate effect on consumers is higher prices for the protected good (chicken), as the tariff cost is typically passed on to buyers and import volumes decrease.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-ddfcfb9e"
+  },
+  {
+    "question": "Guyana specializes in exporting raw sugar and bauxite while importing manufactured consumer goods from the United States and Europe. What is the primary economic benefit of this trade pattern for Guyana?",
+    "options": [
+      "It protects Guyana's domestic manufacturing industries from foreign competition",
+      "It eliminates Guyana's need to earn foreign exchange through exports",
+      "It allows Guyana to maximize the productivity of its limited resources through specialization",
+      "It ensures complete economic independence from developed nations"
+    ],
+    "answer": 2,
+    "explanation": "By specializing in goods where it has comparative advantage (sugar and bauxite) and trading for manufactured goods, Guyana achieves greater efficiency in resource allocation. This specialization allows the country to gain more value from its factors of production than if it attempted to produce everything domestically, which would be inefficient for a small economy.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-c7aece5d"
+  },
+  {
+    "question": "The European Union provides substantial subsidies to its domestic beet sugar farmers, enabling them to sell sugar at prices below the actual cost of production. How does this practice affect Caribbean sugar exporters like Belize and Guyana?",
+    "options": [
+      "It creates a free trade zone that benefits Caribbean producers through increased market access",
+      "It demonstrates that EU farmers have an absolute advantage in sugar production",
+      "It acts as a protectionist trade barrier that undermines the principle of comparative advantage",
+      "It proves that EU beet sugar producers have a natural comparative advantage over Caribbean cane sugar"
+    ],
+    "answer": 2,
+    "explanation": "Export subsidies are a form of protectionism that artificially lowers prices, distorting the natural comparative advantage that Caribbean cane sugar producers might have. This trade barrier makes it difficult for unsubsidized Caribbean producers to compete fairly in global markets, despite potentially having lower true production costs or natural comparative advantages in sugar cultivation.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-2f917374"
+  },
+  {
+    "question": "Trinidad and Tobago can produce petroleum more efficiently than St. Lucia, but it still imports bananas from St. Lucia despite having the land to grow them domestically. Which economic concept BEST explains this trading pattern?",
+    "options": [
+      "Absolute advantage, since Trinidad is more efficient in all production",
+      "Comparative advantage based on differences in opportunity costs",
+      "Economies of scale in petroleum refining only",
+      "Government subsidies for banana production in St. Lucia"
+    ],
+    "answer": 1,
+    "explanation": "Comparative advantage explains trade based on lower opportunity costs, not absolute productivity. Even if Trinidad could produce bananas, it specializes in petroleum (where its advantage is greater) and trades for bananas, allowing both nations to consume beyond their production possibilities frontiers.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-04e38c49"
+  },
+  {
+    "question": "The government of a CARICOM member state imposes a 25% tariff on imported poultry from the United States to protect domestic chicken farmers. Who bears the primary burden of this trade barrier in the short run?",
+    "options": [
+      "Domestic poultry farmers, who face reduced competition",
+      "Consumers, who pay higher prices for chicken",
+      "The government treasury, which loses tax revenue",
+      "Foreign exchange reserves, which automatically decrease"
+    ],
+    "answer": 1,
+    "explanation": "While tariffs protect domestic producers (who benefit from higher prices and market share), the cost is primarily passed to consumers through increased prices. This is a common misconception\u2014students often forget that protectionism benefits producers at the expense of consumer welfare.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-29a26090"
+  },
+  {
+    "question": "Which of the following is the MOST valid economic argument for a small Caribbean island nation maintaining trade barriers on manufactured goods from developed countries?",
+    "options": [
+      "To maximize consumer surplus by ensuring the lowest possible prices",
+      "To protect infant industries until they achieve competitive efficiency",
+      "To prevent all forms of international specialization",
+      "To eliminate the need for domestic taxation"
+    ],
+    "answer": 1,
+    "explanation": "The infant industry argument justifies temporary protection for new domestic industries that cannot yet compete with established foreign firms. This is particularly relevant for Caribbean manufacturing sectors that need time to develop economies of scale before facing global competition.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-5f3e7b93"
+  },
+  {
+    "question": "Based on the following annual production possibilities:\n\u2022 Barbados: 100 tonnes of sugar OR 50 tonnes of coffee\n\u2022 Jamaica: 60 tonnes of sugar OR 60 tonnes of coffee\nWhich statement correctly identifies the basis for mutually beneficial trade between the two nations?",
+    "options": [
+      "Barbados has absolute advantage in both goods, so trade offers no benefit",
+      "Jamaica has comparative advantage in sugar due to lower absolute production",
+      "Barbados has comparative advantage in sugar and Jamaica in coffee",
+      "Both countries should produce both goods to ensure food security"
+    ],
+    "answer": 2,
+    "explanation": "Opportunity cost of 1 tonne of sugar is 0.5 tonnes of coffee in Barbados (lower) versus 1 tonne of coffee in Jamaica. Therefore, Barbados specializes in sugar and Jamaica in coffee. This tests the distinction between absolute advantage (Barbados in sugar) and comparative advantage.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-e31da10c"
+  },
+  {
+    "question": "Following the implementation of the CARICOM Single Market and Economy (CSME), member states removed tariffs on goods traded among themselves. What was the MOST likely economic impact on participating Caribbean nations?",
+    "options": [
+      "Immediate collapse of all domestic manufacturing sectors",
+      "Increased specialization based on comparative advantage and lower consumer prices",
+      "Complete elimination of foreign currency exchange requirements",
+      "Guaranteed equal distribution of income across all member states"
+    ],
+    "answer": 1,
+    "explanation": "Trade liberalization allows countries to specialize according to comparative advantage, increasing efficiency and lowering prices for consumers. While some inefficient industries may contract, the overall effect is gains from trade\u2014not collapse (distractor A), elimination of currency needs (C), or income equality (D).",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-71a69d85"
+  },
+  {
+    "question": "Barbados can produce 100 tonnes of sugar or 200 computers with the same resources. Grenada can produce 80 tonnes of sugar or 40 computers with identical resources. According to the theory of comparative advantage, which statement is correct?",
+    "options": [
+      "Barbados has an absolute advantage in both goods and therefore should not engage in trade",
+      "Grenada has a comparative advantage in computer production",
+      "Barbados should specialize in computers and import sugar from Grenada",
+      "Neither country benefits from trade since Barbados is more efficient in producing both goods"
+    ],
+    "answer": 2,
+    "explanation": "Barbados has an absolute advantage in both goods, but comparative advantage determines trade patterns. Barbados' opportunity cost of 1 computer is 0.5 tonnes of sugar, while Grenada's is 2 tonnes. Since Barbados has the lower opportunity cost in computers, it has the comparative advantage there. Conversely, Grenada has a comparative advantage in sugar (0.5 computers vs. 2 computers). Specialization and trade allow both nations to consume beyond their production possibilities frontiers.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-a99ae1fb"
+  },
+  {
+    "question": "Trinidad and Tobago can extract 50,000 barrels of oil per day using the same resources that Barbados uses to extract 10,000 barrels. However, Barbados can produce 30,000 tonnes of rum using resources that Trinidad uses to produce only 15,000 tonnes. Which concept does this data best illustrate?",
+    "options": [
+      "Trinidad has an absolute advantage in oil and Barbados has an absolute advantage in rum",
+      "Trinidad has a comparative advantage in both goods",
+      "Barbados has an absolute advantage in both goods",
+      "Neither country should trade as they have identical production capabilities"
+    ],
+    "answer": 0,
+    "explanation": "Absolute advantage refers to the ability to produce more of a good with the same resources. Trinidad produces more oil (50,000 vs 10,000), giving it an absolute advantage in oil. Barbados produces more rum (30,000 vs 15,000), giving it an absolute advantage in rum. This demonstrates that even when one country is more efficient in one good, trade can still be beneficial based on comparative advantage (opportunity costs).",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-4d4ef305"
+  },
+  {
+    "question": "The Government of Jamaica imposes a 15% tariff on imported cement from Trinidad and Tobago to protect domestic cement manufacturers. What is the most likely immediate effect of this protectionist policy on Jamaican consumers?",
+    "options": [
+      "A decrease in the price of domestically produced cement due to increased competition",
+      "An increase in consumer surplus as local production expands",
+      "A reduction in government revenue from customs duties",
+      "An increase in the price of cement as imported cement becomes more expensive"
+    ],
+    "answer": 3,
+    "explanation": "A tariff is a tax on imports, which increases the price of imported cement in the Jamaican market. While this protects domestic producers from foreign competition, it raises prices for consumers who must pay more for both imported cement (due to the tariff) and potentially domestic cement (as domestic firms may raise prices when shielded from competition). Government revenue actually increases from the tariff collections.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-8fb05bf7"
+  },
+  {
+    "question": "Which of the following arguments would a CARICOM government most likely use to justify protecting its domestic agricultural sector from imports of subsidized European Union produce?",
+    "options": [
+      "To ensure consumers have access to the cheapest possible food prices regardless of origin",
+      "To protect infant industries and prevent dumping of foreign surplus goods",
+      "To encourage complete specialization in tourism services only",
+      "To eliminate the need for customs revenue collection"
+    ],
+    "answer": 1,
+    "explanation": "The infant industry argument suggests that new domestic industries need temporary protection from established foreign competitors until they achieve economies of scale and can compete internationally. Additionally, preventing dumping (selling goods below cost to destroy domestic competition) is a valid protectionist argument. Caribbean governments often cite these reasons to protect local farmers from heavily subsidized agricultural imports that would otherwise destroy domestic food security.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-b5fd2673"
+  },
+  {
+    "question": "St. Lucia specializes in exporting bananas and tourism services while importing manufactured machinery from Germany. According to international trade theory, what is the primary economic benefit St. Lucia gains from this arrangement?",
+    "options": [
+      "St. Lucia becomes self-sufficient and eliminates all need for foreign exchange",
+      "St. Lucia can consume combinations of goods beyond its domestic production possibilities frontier",
+      "St. Lucia automatically eliminates unemployment in all sectors",
+      "St. Lucia develops an absolute advantage in manufacturing through trade"
+    ],
+    "answer": 1,
+    "explanation": "The fundamental benefit of trade based on comparative advantage is that nations can specialize in goods where they have lower opportunity costs, export those goods, and import other goods. This allows a country to consume at a point beyond its production possibilities frontier (PPF), achieving higher living standards than would be possible under autarky (self-sufficiency). Trade does not create absolute advantages, guarantee full employment, or promote self-sufficiency.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-5cc71c20"
+  },
+  {
+    "question": "St. Lucia can produce either 100 tons of sugar or 400 tons of bananas using the same resources. St. Vincent can produce either 200 tons of sugar or 200 tons of bananas with identical resources. Based on this information, which statement is correct regarding comparative advantage?",
+    "options": [
+      "St. Vincent has a comparative advantage in banana production because it can produce more bananas than St. Lucia",
+      "St. Lucia should specialize in sugar production because it produces less of it than St. Vincent",
+      "St. Lucia has a comparative advantage in banana production due to lower opportunity cost",
+      "Neither country benefits from trade because St. Vincent has an absolute advantage in both goods"
+    ],
+    "answer": 2,
+    "explanation": "Comparative advantage is determined by opportunity cost, not total output. St. Lucia's opportunity cost of 1 ton of bananas is 0.25 tons of sugar (100/400), while St. Vincent's is 1 ton of sugar (200/200). Since 0.25 < 1, St. Lucia has the comparative advantage in bananas. St. Vincent has the comparative advantage in sugar (opportunity cost: 1 banana vs 4 bananas). Option A confuses absolute advantage (total output) with comparative advantage. Option B suggests incorrect specialization. Option D is incorrect because gains from trade arise from comparative advantage differences, not absolute advantage.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-abf46bf1"
+  },
+  {
+    "question": "Barbados can produce 1,000 barrels of oil with the same resources that Trinidad and Tobago use to produce 2,000 barrels of oil. Which concept best describes Trinidad and Tobago's position relative to Barbados in oil production?",
+    "options": [
+      "Comparative advantage, because Trinidad produces oil more efficiently",
+      "Absolute advantage, defined as the ability to produce more output with the same resources",
+      "Absolute advantage, defined as producing at a lower opportunity cost than Barbados",
+      "Comparative disadvantage, because Barbados should import all its oil needs"
+    ],
+    "answer": 1,
+    "explanation": "Absolute advantage refers to the ability to produce a greater quantity of a good using the same amount of resources. Trinidad produces more oil (2,000 vs 1,000), giving it absolute advantage. Option A incorrectly labels this as comparative advantage. Option C confuses absolute advantage with comparative advantage (which concerns opportunity cost). Option D is incorrect because the data given only establishes absolute advantage, not whether Barbados should import oil (which depends on comparative advantage/opportunity costs in both goods).",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-ebe5bfb0"
+  },
+  {
+    "question": "Jamaica imposes a 25% tariff on imported poultry from the United States to protect its domestic chicken farmers. Who benefits most directly from this trade barrier in the short run?",
+    "options": [
+      "Jamaican consumers, who will enjoy lower prices for chicken due to increased local supply",
+      "Jamaican poultry farmers, who face reduced competition from cheaper foreign imports",
+      "American poultry producers, who receive higher prices for their exported goods",
+      "The Jamaican government, through elimination of customs revenue collection"
+    ],
+    "answer": 1,
+    "explanation": "Tariffs protect domestic producers by making imported goods more expensive, reducing competitive pressure. Option A is incorrect because tariffs raise prices for consumers, not lower them. Option C is incorrect because foreign producers face reduced demand or must absorb the tariff, hurting their competitiveness. Option D is incorrect because tariffs generate (not eliminate) government revenue, though revenue generation is not the primary beneficiary group intended by protectionist policy.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-0df0370c"
+  },
+  {
+    "question": "Which economic argument best supports a Caribbean government's decision to impose trade barriers on imported manufactured goods to develop a local textiles industry?",
+    "options": [
+      "To ensure the country develops absolute advantage in all sectors of the economy",
+      "To protect infant industries until they achieve economies of scale and can compete internationally",
+      "To eliminate the principle of comparative advantage from applying to the domestic economy",
+      "To immediately increase consumer choice through restricted import competition"
+    ],
+    "answer": 1,
+    "explanation": "The infant industry argument is the classic economic justification for temporary protectionism\u2014allowing new domestic industries time to become efficient before facing foreign competition. Option A reflects a misconception that countries should seek absolute advantage in everything, which is impossible and unnecessary. Option C misunderstands that comparative advantage is a natural economic reality, not a policy that can be eliminated. Option D is incorrect because protectionism typically reduces consumer choice and raises prices in the short run.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-ba939fda"
+  },
+  {
+    "question": "What is a likely long-term impact of sustained high trade barriers, such as quotas and tariffs, on a small open economy like Barbados?",
+    "options": [
+      "Increased domestic efficiency through enhanced competition among local firms",
+      "Guaranteed development of absolute advantage in all protected industrial sectors",
+      "Higher consumer prices and potential retaliation from trading partners restricting Barbadian exports",
+      "Automatic diversification of the economy into new competitive export markets"
+    ],
+    "answer": 2,
+    "explanation": "Trade barriers typically raise domestic prices (protecting producers at consumers' expense) and risk retaliation from trading partners who may impose their own barriers on the country's exports. Option A is incorrect because protectionism shields domestic firms from foreign competition, often reducing efficiency incentives. Option B is a misconception\u2014protectionism does not create absolute advantage (productive efficiency), it merely protects existing producers. Option D is unlikely because protectionism focuses on import substitution rather than developing export competitiveness.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-c6a218f8"
+  },
+  {
+    "question": "Drag each concept to the correct category of trade advantage theory.",
+    "type": "DND",
+    "categories": [
+      "Absolute Advantage",
+      "Comparative Advantage"
+    ],
+    "items": [
+      {
+        "text": "Adam Smith's theory",
+        "category": "Absolute Advantage"
+      },
+      {
+        "text": "David Ricardo's theory",
+        "category": "Comparative Advantage"
+      },
+      {
+        "text": "Ability to produce more output with the same resources",
+        "category": "Absolute Advantage"
+      },
+      {
+        "text": "Ability to produce at a lower opportunity cost",
+        "category": "Comparative Advantage"
+      },
+      {
+        "text": "Basis for trade even when a country is less efficient in all goods",
+        "category": "Comparative Advantage"
+      },
+      {
+        "text": "Requires comparing actual productivity levels between countries",
+        "category": "Absolute Advantage"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-de9d1875"
+  },
+  {
+    "question": "Classify each statement as an argument supporting free trade or protectionism.",
+    "type": "DND",
+    "categories": [
+      "Argument for Free Trade",
+      "Argument for Protectionism"
+    ],
+    "items": [
+      {
+        "text": "Consumers benefit from lower prices and greater variety",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Protection of infant industries from foreign competition",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Specialization according to comparative advantage",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Preventing dumping of cheap foreign goods",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Increased competition leads to greater efficiency",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Safeguarding national security and strategic industries",
+        "category": "Argument for Protectionism"
+      },
+      {
+        "text": "Access to larger markets for exports",
+        "category": "Argument for Free Trade"
+      },
+      {
+        "text": "Preservation of domestic employment in the short run",
+        "category": "Argument for Protectionism"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-85280d4e"
+  },
+  {
+    "question": "Sort the following trade restrictions into the correct type of barrier.",
+    "type": "DND",
+    "categories": [
+      "Tariff Barriers",
+      "Non-Tariff Barriers"
+    ],
+    "items": [
+      {
+        "text": "Ad valorem duty charged as a percentage of value",
+        "category": "Tariff Barriers"
+      },
+      {
+        "text": "Import quota limiting physical quantity",
+        "category": "Non-Tariff Barriers"
+      },
+      {
+        "text": "Specific tax charged per unit imported",
+        "category": "Tariff Barriers"
+      },
+      {
+        "text": "Complete ban on trade (embargo)",
+        "category": "Non-Tariff Barriers"
+      },
+      {
+        "text": "Voluntary export restraint agreed with exporter",
+        "category": "Non-Tariff Barriers"
+      },
+      {
+        "text": "Complex administrative procedures and red tape",
+        "category": "Non-Tariff Barriers"
+      },
+      {
+        "text": "Strict health and safety standards for imports",
+        "category": "Non-Tariff Barriers"
+      },
+      {
+        "text": "Customs duties collected at the port of entry",
+        "category": "Tariff Barriers"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-7dc742a0"
+  },
+  {
+    "question": "Categorize each outcome as a cost or benefit of protectionist policies.",
+    "type": "DND",
+    "categories": [
+      "Cost of Protectionism",
+      "Benefit of Protectionism"
+    ],
+    "items": [
+      {
+        "text": "Higher prices for consumers",
+        "category": "Cost of Protectionism"
+      },
+      {
+        "text": "Time for infant industries to become competitive",
+        "category": "Benefit of Protectionism"
+      },
+      {
+        "text": "Inefficiency and lack of innovation in protected firms",
+        "category": "Cost of Protectionism"
+      },
+      {
+        "text": "Government revenue from tariff collection",
+        "category": "Benefit of Protectionism"
+      },
+      {
+        "text": "Risk of retaliation from trading partners",
+        "category": "Cost of Protectionism"
+      },
+      {
+        "text": "Diversification of the domestic industrial base",
+        "category": "Benefit of Protectionism"
+      },
+      {
+        "text": "Misallocation of resources away from efficient production",
+        "category": "Cost of Protectionism"
+      },
+      {
+        "text": "Protection of jobs in declining industries temporarily",
+        "category": "Benefit of Protectionism"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-4a0cf7db"
+  },
+  {
+    "question": "Match each economic effect to whether it results from trade barriers or free trade.",
+    "type": "DND",
+    "categories": [
+      "Effect of Trade Barriers",
+      "Effect of Free Trade"
+    ],
+    "items": [
+      {
+        "text": "Deadweight loss to society",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Economies of scale for exporting firms",
+        "category": "Effect of Free Trade"
+      },
+      {
+        "text": "Increased government revenue",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Greater choice and variety for consumers",
+        "category": "Effect of Free Trade"
+      },
+      {
+        "text": "Reduced competition in domestic markets",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Efficient global allocation of resources",
+        "category": "Effect of Free Trade"
+      },
+      {
+        "text": "Higher domestic prices for protected goods",
+        "category": "Effect of Trade Barriers"
+      },
+      {
+        "text": "Export-led economic growth",
+        "category": "Effect of Free Trade"
+      }
+    ],
+    "topic_id": "ECON-07-00001",
+    "id": "Q-ECON-07-00001-91aaf5d1"
+  },
+  {
+    "question": "Barbados can produce 100 tons of sugar or 50 tons of molasses with the same resources. Guyana can produce 80 tons of sugar or 20 tons of molasses with the same resources. Based on the principle of comparative advantage, which statement is correct?",
+    "options": [
+      "Barbados has a comparative advantage in both goods because it is more efficient in absolute terms",
+      "Guyana should specialize in producing molasses and export it to Barbados",
+      "Barbados has a comparative advantage in molasses while Guyana has a comparative advantage in sugar",
+      "No trade should occur since Barbados has an absolute advantage in both products"
+    ],
+    "answer": 2,
+    "explanation": "Comparative advantage is determined by lower opportunity cost, not absolute productivity. For Barbados, 1 ton of molasses costs 2 tons of sugar (100/50), while for Guyana it costs 4 tons (80/20). Thus Barbados has comparative advantage in molasses. For sugar, Barbados gives up 0.5 molasses per ton while Guyana gives up only 0.25, giving Guyana the comparative advantage in sugar.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-42b3f359"
+  },
+  {
+    "question": "Trinidad and Tobago can produce 1,000 barrels of oil or 500 tons of asphalt per day. Jamaica can produce 400 barrels of oil or 100 tons of asphalt per day. Which country has an absolute advantage in oil production and which has a comparative advantage in asphalt production?",
+    "options": [
+      "Trinidad and Tobago has absolute advantage in oil; Jamaica has comparative advantage in asphalt",
+      "Trinidad and Tobago has absolute advantage in oil; Trinidad and Tobago has comparative advantage in asphalt",
+      "Jamaica has absolute advantage in oil; Trinidad and Tobago has comparative advantage in asphalt",
+      "Jamaica has absolute advantage in both goods"
+    ],
+    "answer": 1,
+    "explanation": "Trinidad has absolute advantage in oil (1,000 > 400). For comparative advantage in asphalt: Trinidad's opportunity cost is 2 barrels of oil per ton (1,000/500), while Jamaica's is 4 barrels per ton (400/100). Since Trinidad has the lower opportunity cost, it holds the comparative advantage in asphalt despite Jamaica being less efficient in absolute terms.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-507843ee"
+  },
+  {
+    "question": "The Government of Antigua and Barbuda imposes a 25% tariff on imported furniture to protect domestic manufacturers. Which group is most likely to be negatively affected by this protectionist policy?",
+    "options": [
+      "Local furniture manufacturers who gain market share",
+      "The government treasury which collects the tariff revenue",
+      "Consumers of furniture who face higher prices",
+      "Workers in the domestic furniture industry who receive higher wages"
+    ],
+    "answer": 2,
+    "explanation": "While tariffs protect domestic producers and generate government revenue, they typically result in higher prices for consumers due to reduced competition and the pass-through of tariff costs. This creates a deadweight loss where consumer surplus decreases more than the gains to producers and government.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-513320e9"
+  },
+  {
+    "question": "Which of the following represents the most valid economic argument for a small Caribbean nation like St. Lucia to maintain temporary protectionist policies on its emerging solar panel manufacturing industry?",
+    "options": [
+      "To protect an infant industry until it achieves economies of scale and can compete internationally",
+      "To maximize government revenue through permanent tariff collection",
+      "To ensure the country develops absolute advantage over all trading partners",
+      "To prevent the country from specializing according to comparative advantage"
+    ],
+    "answer": 0,
+    "explanation": "The infant industry argument is the classic valid justification for temporary protectionism. It allows new domestic industries in developing Caribbean nations to achieve economies of scale and learning-curve efficiencies before facing established international competition. However, such protection should be temporary to avoid inefficiency and retaliation.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-ec2d8c17"
+  },
+  {
+    "question": "Under a free trade policy, a Caribbean nation specializes in producing goods where it has comparative advantage and trades for other goods. What is the primary benefit of this specialization for the nation?",
+    "options": [
+      "It increases the total quantity and variety of goods available for consumption beyond domestic production possibilities",
+      "It allows the nation to produce all goods more efficiently than its trading partners",
+      "It eliminates the need for the country to maintain foreign exchange reserves",
+      "It ensures the nation achieves absolute advantage in its export sectors"
+    ],
+    "answer": 0,
+    "explanation": "The fundamental gain from trade is that specialization according to comparative advantage allows nations to consume beyond their production possibility frontier. By trading, Caribbean nations can obtain imports at a lower opportunity cost than if they produced everything domestically, expanding consumption possibilities even without increasing absolute productivity.",
+    "topic_id": "ECON-07-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00001-848570b9"
+  },
+  {
+    "question": "Categorize the following international transactions into the appropriate section of the Balance of Payments.",
+    "type": "DND",
+    "categories": [
+      "Current Account",
+      "Financial Account"
+    ],
+    "items": [
+      {
+        "text": "Export of bananas to the United Kingdom",
+        "category": "Current Account"
+      },
+      {
+        "text": "Purchase of shares in a foreign company",
+        "category": "Financial Account"
+      },
+      {
+        "text": "Expenditure by tourists visiting the island",
+        "category": "Current Account"
+      },
+      {
+        "text": "Foreign Direct Investment by a multinational corporation",
+        "category": "Financial Account"
+      },
+      {
+        "text": "Interest payments on foreign debt",
+        "category": "Current Account"
+      },
+      {
+        "text": "Changes in the central bank's reserve assets",
+        "category": "Financial Account"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-d3c48fcb"
+  },
+  {
+    "question": "Match each characteristic to the correct exchange rate system.",
+    "type": "DND",
+    "categories": [
+      "Fixed Exchange Rate",
+      "Floating Exchange Rate"
+    ],
+    "items": [
+      {
+        "text": "Value determined by market forces of supply and demand",
+        "category": "Floating Exchange Rate"
+      },
+      {
+        "text": "Pegged to a major currency such as the US dollar",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Central bank must intervene to maintain the exchange rate",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Automatic adjustment to changes in trade flows",
+        "category": "Floating Exchange Rate"
+      },
+      {
+        "text": "Example: Eastern Caribbean Currency Union",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Example: Jamaica",
+        "category": "Floating Exchange Rate"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-75435a3d"
+  },
+  {
+    "question": "Classify the following effects as resulting from currency appreciation or depreciation.",
+    "type": "DND",
+    "categories": [
+      "Currency Appreciation",
+      "Currency Depreciation"
+    ],
+    "items": [
+      {
+        "text": "Domestic goods become more expensive for foreign buyers",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "Imports become cheaper for domestic consumers",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "Boosts the tourism sector as the country becomes cheaper to visit",
+        "category": "Currency Depreciation"
+      },
+      {
+        "text": "Reduces the international competitiveness of exports",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "Increases the cost of servicing foreign currency debt",
+        "category": "Currency Depreciation"
+      },
+      {
+        "text": "Makes imported raw materials more expensive for local producers",
+        "category": "Currency Depreciation"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-abdba742"
+  },
+  {
+    "question": "Drag each transaction to the correct component of the Current Account.",
+    "type": "DND",
+    "categories": [
+      "Trade in Goods (Visible)",
+      "Trade in Services (Invisible)",
+      "Primary Income",
+      "Secondary Income (Transfers)"
+    ],
+    "items": [
+      {
+        "text": "Export of bauxite and alumina",
+        "category": "Trade in Goods (Visible)"
+      },
+      {
+        "text": "Receipts from tourism and hospitality services",
+        "category": "Trade in Services (Invisible)"
+      },
+      {
+        "text": "Wages earned by domestic workers employed abroad",
+        "category": "Primary Income"
+      },
+      {
+        "text": "Remittances sent home by citizens living overseas",
+        "category": "Secondary Income (Transfers)"
+      },
+      {
+        "text": "Import of machinery and vehicles",
+        "category": "Trade in Goods (Visible)"
+      },
+      {
+        "text": "Shipping and insurance services purchased from foreign companies",
+        "category": "Trade in Services (Invisible)"
+      },
+      {
+        "text": "Interest earned on foreign investments",
+        "category": "Primary Income"
+      },
+      {
+        "text": "Foreign aid and grants received from international organizations",
+        "category": "Secondary Income (Transfers)"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-7074c2c1"
+  },
+  {
+    "question": "Identify whether each factor would cause a currency to appreciate or depreciate.",
+    "type": "DND",
+    "categories": [
+      "Causes Appreciation",
+      "Causes Depreciation"
+    ],
+    "items": [
+      {
+        "text": "Domestic interest rates rise above those of trading partners",
+        "category": "Causes Appreciation"
+      },
+      {
+        "text": "Higher inflation rate compared to major trading partners",
+        "category": "Causes Depreciation"
+      },
+      {
+        "text": "Increased foreign direct investment inflows",
+        "category": "Causes Appreciation"
+      },
+      {
+        "text": "Growing imports leading to higher demand for foreign currency",
+        "category": "Causes Depreciation"
+      },
+      {
+        "text": "Speculative buying of the domestic currency",
+        "category": "Causes Appreciation"
+      },
+      {
+        "text": "Capital flight due to political instability",
+        "category": "Causes Depreciation"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-1dcf39d2"
+  },
+  {
+    "question": "Which of the following transactions would be recorded as a CREDIT entry in the Current Account of Barbados' Balance of Payments?",
+    "options": [
+      "Earnings from tourists visiting Barbados from the United Kingdom",
+      "Import of petroleum products from Trinidad and Tobago",
+      "A Barbadian company purchasing machinery from Germany",
+      "Interest paid on loans from the Inter-American Development Bank"
+    ],
+    "answer": 0,
+    "explanation": "Tourism earnings represent service exports (invisible exports) and are recorded as credits in the Current Account. Options B and C represent imports of goods, which are debits in the Current Account. Option D is a debit entry representing income outflow (primary income) to non-residents.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-52f104d7"
+  },
+  {
+    "question": "If the Jamaican dollar depreciates against the United States dollar, which of the following is the MOST likely immediate effect on Jamaica's economy?",
+    "options": [
+      "American tourists find it cheaper to vacation in Jamaica",
+      "Jamaican exporters receive fewer Jamaican dollars for their US dollar earnings",
+      "The price of imported raw materials for Jamaican manufacturers decreases",
+      "Remittances sent from the US to Jamaica decrease in value when converted to Jamaican dollars"
+    ],
+    "answer": 0,
+    "explanation": "Currency depreciation means more Jamaican dollars are needed to buy one US dollar. This makes Jamaican goods and services cheaper for US residents (including tourists), stimulating demand for exports. Option B is incorrect because exporters receive MORE local currency for the same USD earnings. Option C is incorrect because imports become MORE expensive. Option D is incorrect because remittances increase in JMD value.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-25a76b1d"
+  },
+  {
+    "question": "The Eastern Caribbean Currency Union (ECCU) maintains a fixed exchange rate of EC$2.70 = US$1.00. If there is sudden excessive demand for US dollars in the foreign exchange market, which action would the Eastern Caribbean Central Bank (ECCB) take to defend the peg?",
+    "options": [
+      "Sell US dollars from its official foreign reserves",
+      "Immediately devalue the Eastern Caribbean dollar",
+      "Purchase US dollars from commercial banks to increase its reserves",
+      "Lower interest rates to encourage capital inflows"
+    ],
+    "answer": 0,
+    "explanation": "To maintain a fixed exchange rate when there is excess demand for foreign currency (putting downward pressure on the EC dollar), the central bank must intervene by selling foreign reserves (USD) to satisfy the excess demand at the fixed rate. Option B represents abandoning the peg. Option C would worsen the shortage. Option D would likely stimulate imports, increasing demand for USD further.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-90a176d9"
+  },
+  {
+    "question": "Trinidad and Tobago purchases military aircraft from the United Kingdom. In Trinidad and Tobago's Balance of Payments, this transaction is recorded as:",
+    "options": [
+      "A debit in the Current Account",
+      "A credit in the Capital Account",
+      "A debit in the Financial Account",
+      "A credit in the Official Settlements Account"
+    ],
+    "answer": 0,
+    "explanation": "The purchase of military equipment constitutes an import of goods (visible trade), which is recorded as a debit (negative entry) in the Current Account. Students often confuse 'capital goods' with the 'Capital Account' (which records capital transfers and non-produced assets) or the 'Financial Account' (which records investment flows), leading to the distractors.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-57404e62"
+  },
+  {
+    "question": "A Caribbean country records the following transactions in a given year: Export of bananas $40m, Import of oil $70m, Tourism receipts $50m, Profit repatriation by foreign companies $15m. What is the balance on the Current Account?",
+    "options": [
+      "Deficit of $5m",
+      "Surplus of $5m",
+      "Deficit of $25m",
+      "Surplus of $25m"
+    ],
+    "answer": 0,
+    "explanation": "The Current Account balance is calculated as: (Visible Exports - Visible Imports) + (Invisible Exports - Invisible Imports) + Net Income + Net Transfers. Here: ($40m - $70m) + ($50m - $0m) - $15m (income outflow) = -$30m + $50m - $15m = $5m surplus. Wait, correction: ($40m exports) + ($50m tourism) - ($70m oil imports) - ($15m profit repatriation) = $90m - $85m = $5m surplus. The correct answer should be surplus of $5m (index 1). Recalculating: 40 + 50 - 70 - 15 = 5. So answer is 1 (Surplus of $5m).",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-4f06add1"
+  },
+  {
+    "question": "Which of the following represents a debit entry in the Current Account of Jamaica's Balance of Payments?",
+    "options": [
+      "A Canadian tourist spending money at an all-inclusive resort in Montego Bay",
+      "A Jamaican bauxite mining company earning foreign exchange from sales to the USA",
+      "The Jamaican government purchasing petroleum products from Trinidad and Tobago",
+      "A Jamaican nurse working in the UK sending remittances to family in Kingston"
+    ],
+    "answer": 2,
+    "explanation": "Purchasing oil from abroad constitutes a visible import (debit) in the Current Account. Option A is a credit (tourism service export), Option B is a credit (visible export), and Option D is a credit (unrequited transfer inflow). Students often confuse tourism and remittances, but both represent foreign exchange entering the country.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-0082c2ef"
+  },
+  {
+    "question": "If the Barbados dollar depreciates against the US dollar, which of the following is the MOST likely immediate effect?",
+    "options": [
+      "Barbadian exports become more expensive for American consumers",
+      "Barbadian manufacturers find imported raw materials cheaper to purchase",
+      "The Central Bank of Barbados automatically increases its foreign exchange reserves",
+      "Barbadian exporters receive more Barbados dollars for each US dollar of revenue earned"
+    ],
+    "answer": 3,
+    "explanation": "Depreciation means more domestic currency (BBD) is needed to buy one unit of foreign currency (USD). Therefore, when exporters convert their US dollar earnings, they receive more Barbados dollars. Option A is incorrect because depreciation makes exports cheaper in foreign currency terms. Option B is incorrect because imports become more expensive, not cheaper.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-0f0f4dd4"
+  },
+  {
+    "question": "A British company building a new luxury hotel in Grenada represents which type of transaction in Grenada's Balance of Payments?",
+    "options": [
+      "A credit in the Current Account under invisible trade",
+      "A debit in the Current Account under unrequited transfers",
+      "A credit in the Capital Account representing foreign direct investment",
+      "A debit in the Official Financing Account"
+    ],
+    "answer": 2,
+    "explanation": "Foreign Direct Investment (FDI), such as the construction of physical assets by foreign entities, is recorded as a credit (inflow) in the Capital Account (or Financial Account). Students often mistakenly classify investment income or capital transactions as Current Account items, but FDI specifically belongs to the Capital Account.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-02ab8693"
+  },
+  {
+    "question": "An increase in interest rates by the Eastern Caribbean Central Bank (ECCB) is likely to cause the Eastern Caribbean dollar (EC$) to appreciate because:",
+    "options": [
+      "Domestic consumers will demand more imported goods",
+      "Foreign investors will seek higher returns, increasing demand for EC dollars",
+      "Local banks will reduce their holdings of foreign currency",
+      "The current account deficit will automatically decrease"
+    ],
+    "answer": 1,
+    "explanation": "Higher interest rates attract foreign portfolio investment (hot money) as investors seek better returns on deposits and bonds. This increases the demand for the domestic currency in the foreign exchange market, causing appreciation. Option A would typically cause depreciation (increased supply of EC$), and Option D describes a long-term adjustment rather than the immediate capital flow mechanism.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-57f6df56"
+  },
+  {
+    "question": "St. Lucia records a current account deficit of EC$400 million and a capital account surplus of EC$250 million. Which entry balances the overall Balance of Payments?",
+    "options": [
+      "A net inflow (credit) of EC$150 million in the Official Financing Account",
+      "A net outflow (debit) of EC$150 million in the Official Financing Account",
+      "An increase of EC$150 million in the visible trade surplus",
+      "A depreciation of the EC dollar by exactly 37.5%"
+    ],
+    "answer": 0,
+    "explanation": "The Balance of Payments must sum to zero. With a -400 current account and +250 capital account, there is a shortfall of 150. This is financed by a +150 (credit) in the Official Financing Account, representing either a drawdown of foreign exchange reserves or borrowing from international institutions. Option B would worsen the imbalance, and Option D confuses accounting balance with market adjustment mechanisms.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-35f80457"
+  },
+  {
+    "question": "Which of the following transactions would be recorded in the Current Account of the Balance of Payments of a Caribbean country?",
+    "options": [
+      "A Trinidadian energy company building a new natural gas plant in Jamaica",
+      "A Guyanese family receiving remittances from relatives living in the United States",
+      "The Government of Barbados issuing bonds purchased by Canadian institutional investors",
+      "A St. Lucian commercial bank depositing reserve funds in a Swiss bank account"
+    ],
+    "answer": 1,
+    "explanation": "Remittances are classified as secondary income (current transfers) in the Current Account. Options A, C, and D represent Financial Account transactions: A is Foreign Direct Investment (FDI), C is portfolio investment, and D is other investment.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-3cee0b21"
+  },
+  {
+    "question": "If global demand for Trinidad and Tobago's liquefied natural gas (LNG) increases significantly, what is the likely effect on the Trinidad and Tobago dollar (TTD) under a floating exchange rate system?",
+    "options": [
+      "The TTD will depreciate due to an increased supply of Trinidad and Tobago dollars on the foreign exchange market",
+      "The TTD will appreciate as foreign buyers demand more TTD to pay for the additional LNG exports",
+      "The TTD will remain stable at its pegged rate of TT$6.80 to US$1",
+      "The TTD will depreciate as Trinidad and Tobago imports more foreign machinery for gas production"
+    ],
+    "answer": 1,
+    "explanation": "Increased demand for a country's exports leads to increased demand for its currency to pay for those exports. Under a floating exchange rate, this causes the currency to appreciate. Option C is incorrect because Trinidad and Tobago operates a managed float, not a fixed peg. Option A confuses the direction of currency movement, while D confuses the effect of imports with exports.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-908e241d"
+  },
+  {
+    "question": "A depreciation of the Jamaican dollar against the US dollar is most likely to have which immediate effect on Jamaica's tourism sector?",
+    "options": [
+      "Increase the cost of accommodation for American tourists visiting Montego Bay",
+      "Reduce the number of stopover visitors due to higher visa costs",
+      "Increase the Jamaican dollar value of tourism receipts when US dollar earnings are converted",
+      "Decrease the international competitiveness of Jamaican resorts compared to Cuban alternatives"
+    ],
+    "answer": 2,
+    "explanation": "When the Jamaican dollar depreciates, each US dollar earned from tourism converts into more Jamaican dollars, increasing the local currency value of export earnings. Option A is incorrect because depreciation makes Jamaican goods and services cheaper, not more expensive, for foreigners. Option D is incorrect because depreciation improves, not reduces, price competitiveness.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-be509ed3"
+  },
+  {
+    "question": "The following data is extracted from the Balance of Payments of a Caribbean country: Exports of goods US$600 million; Imports of goods US$800 million; Tourism receipts US$500 million; Remittances US$300 million; Foreign Direct Investment US$400 million. What is the balance on the Current Account?",
+    "options": [
+      "US$600 million surplus",
+      "US$100 million deficit",
+      "US$400 million deficit",
+      "US$600 million deficit"
+    ],
+    "answer": 0,
+    "explanation": "Current Account = (Exports of goods - Imports of goods) + Services (Tourism) + Secondary Income (Remittants) = (600 - 800) + 500 + 300 = +US$600 million. Note that Foreign Direct Investment is recorded in the Financial Account, not the Current Account. A common error is to include FDI (leading to option A) or to omit remittances (leading to option B).",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-422b2efa"
+  },
+  {
+    "question": "Under a managed floating exchange rate system, if the Bank of Jamaica observes that the Jamaican dollar is depreciating rapidly against the US dollar, which action would it most likely take to stabilize the exchange rate?",
+    "options": [
+      "Increase the policy interest rate to reduce domestic inflation",
+      "Sell US dollars from its official reserves and buy Jamaican dollars on the foreign exchange market",
+      "Impose higher tariffs on imports from the United States to reduce demand for US dollars",
+      "Officially devalue the Jamaican dollar to match the market rate"
+    ],
+    "answer": 1,
+    "explanation": "In a managed float, the central bank intervenes by buying its own currency (increasing demand) using foreign reserves (increasing supply of foreign currency) to support the exchange rate. Option A is a monetary policy action that might influence exchange rates indirectly but is not direct intervention. Option C is a trade policy, not an exchange rate mechanism. Option D describes a fixed exchange rate regime adjustment, not a managed float intervention.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-0d0d12eb"
+  },
+  {
+    "question": "Categorize the following international transactions into the appropriate Balance of Payments account.",
+    "type": "DND",
+    "categories": [
+      "Current Account",
+      "Capital and Financial Account"
+    ],
+    "items": [
+      {
+        "text": "Export of agricultural products to European markets",
+        "category": "Current Account"
+      },
+      {
+        "text": "Foreign direct investment by a multinational corporation",
+        "category": "Capital and Financial Account"
+      },
+      {
+        "text": "Receipt of remittances from citizens working abroad",
+        "category": "Current Account"
+      },
+      {
+        "text": "Purchase of foreign government bonds by domestic investors",
+        "category": "Capital and Financial Account"
+      },
+      {
+        "text": "Tourism earnings from international visitors",
+        "category": "Current Account"
+      },
+      {
+        "text": "Foreign aid and grants received from international organizations",
+        "category": "Current Account"
+      },
+      {
+        "text": "Portfolio investment in the local stock exchange by foreign investors",
+        "category": "Capital and Financial Account"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-890a23b7"
+  },
+  {
+    "question": "Match the characteristics to the correct exchange rate system.",
+    "type": "DND",
+    "categories": [
+      "Fixed Exchange Rate",
+      "Floating Exchange Rate"
+    ],
+    "items": [
+      {
+        "text": "Value is determined by market forces of demand and supply",
+        "category": "Floating Exchange Rate"
+      },
+      {
+        "text": "Currency is pegged to a major currency like the US dollar",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Central bank intervenes to maintain the exchange rate",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Exchange rate adjusts automatically to balance of payments changes",
+        "category": "Floating Exchange Rate"
+      },
+      {
+        "text": "Requires substantial foreign exchange reserves to maintain",
+        "category": "Fixed Exchange Rate"
+      },
+      {
+        "text": "Subject to volatility due to speculation and market sentiment",
+        "category": "Floating Exchange Rate"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-a0ff9177"
+  },
+  {
+    "question": "Classify the following effects as resulting from either currency appreciation or depreciation.",
+    "type": "DND",
+    "categories": [
+      "Currency Appreciation",
+      "Currency Depreciation"
+    ],
+    "items": [
+      {
+        "text": "Exports become more expensive for foreign buyers",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "Imports become cheaper for domestic consumers",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "The country becomes a more expensive destination for tourists",
+        "category": "Currency Appreciation"
+      },
+      {
+        "text": "Exports become cheaper and more competitive on world markets",
+        "category": "Currency Depreciation"
+      },
+      {
+        "text": "Imports become more expensive for domestic producers",
+        "category": "Currency Depreciation"
+      },
+      {
+        "text": "Likely to increase the domestic price of imported raw materials",
+        "category": "Currency Depreciation"
+      },
+      {
+        "text": "Reduces the local currency price of imported capital goods",
+        "category": "Currency Appreciation"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-f768fb89"
+  },
+  {
+    "question": "Identify whether each transaction represents a Credit (inflow) or Debit (outflow) entry in the Balance of Payments.",
+    "type": "DND",
+    "categories": [
+      "Credit (Inflow)",
+      "Debit (Outflow)"
+    ],
+    "items": [
+      {
+        "text": "Sale of manufactured goods to foreign countries",
+        "category": "Credit (Inflow)"
+      },
+      {
+        "text": "Purchase of machinery from foreign suppliers",
+        "category": "Debit (Outflow)"
+      },
+      {
+        "text": "Foreign tourists spending money at local hotels",
+        "category": "Credit (Inflow)"
+      },
+      {
+        "text": "Local residents traveling abroad for vacations",
+        "category": "Debit (Outflow)"
+      },
+      {
+        "text": "Foreign companies investing in domestic businesses",
+        "category": "Credit (Inflow)"
+      },
+      {
+        "text": "Domestic investors buying shares in foreign companies",
+        "category": "Debit (Outflow)"
+      },
+      {
+        "text": "Interest received on investments held abroad",
+        "category": "Credit (Inflow)"
+      },
+      {
+        "text": "Dividends paid to foreign shareholders of local companies",
+        "category": "Debit (Outflow)"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-8d8904f9"
+  },
+  {
+    "question": "Sort the following Current Account transactions into their correct sub-categories.",
+    "type": "DND",
+    "categories": [
+      "Visible Trade (Goods)",
+      "Invisible Trade (Services)",
+      "Income",
+      "Current Transfers"
+    ],
+    "items": [
+      {
+        "text": "Export of crude oil and bananas",
+        "category": "Visible Trade (Goods)"
+      },
+      {
+        "text": "Banking and insurance services provided to non-residents",
+        "category": "Invisible Trade (Services)"
+      },
+      {
+        "text": "Wages and remittances sent home by overseas workers",
+        "category": "Current Transfers"
+      },
+      {
+        "text": "Interest earned on foreign bonds and deposits",
+        "category": "Income"
+      },
+      {
+        "text": "Import of motor vehicles and electronics",
+        "category": "Visible Trade (Goods)"
+      },
+      {
+        "text": "Shipping services paid to foreign transport companies",
+        "category": "Invisible Trade (Services)"
+      },
+      {
+        "text": "Foreign aid and grants received from donor countries",
+        "category": "Current Transfers"
+      },
+      {
+        "text": "Profits repatriated from subsidiary companies abroad",
+        "category": "Income"
+      }
+    ],
+    "topic_id": "ECON-07-00002",
+    "id": "Q-ECON-07-00002-e47fec3f"
+  },
+  {
+    "question": "Which of the following transactions would be recorded in the Current Account of Jamaica's Balance of Payments?",
+    "options": [
+      "A Japanese company purchasing shares in a Jamaican hotel chain",
+      "Remittances sent by Jamaicans living in the United Kingdom to their families in Kingston",
+      "The Jamaican government borrowing $500 million from the IMF to finance infrastructure",
+      "A Canadian bank establishing a new branch in Montego Bay"
+    ],
+    "answer": 1,
+    "explanation": "The Current Account records trade in goods and services, income flows, and current transfers. Remittances are unrequited transfers (current transfers) and belong in the Current Account. Options A, C, and D represent financial/capital account transactions (portfolio investment, reserve assets/loans, and direct investment respectively).",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-c2f477a3"
+  },
+  {
+    "question": "The Eastern Caribbean Currency Union (ECCU) maintains a fixed exchange rate system where the EC dollar is pegged to the US dollar at approximately EC$2.70 to US$1.00. What is the primary advantage of this fixed exchange rate arrangement for small open economies like Antigua and Barbuda?",
+    "options": [
+      "It allows the currency to automatically adjust to eliminate balance of payments deficits",
+      "It provides exchange rate certainty, reducing risk for international trade and investment",
+      "It enables the ECCB to pursue an independent monetary policy regardless of US interest rates",
+      "It guarantees that the current account will always remain in surplus"
+    ],
+    "answer": 1,
+    "explanation": "Fixed exchange rates provide stability and certainty for traders and investors, reducing exchange rate risk. This is particularly important for small open Caribbean economies dependent on tourism and imports. Option A describes a floating exchange rate advantage, C is incorrect because fixed rates require following the anchor country's monetary policy, and D is false as the current account depends on many factors.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-aad71d68"
+  },
+  {
+    "question": "Suppose the Trinidad and Tobago dollar depreciates against the US dollar. How would this likely affect Trinidad's economy assuming demand is elastic?",
+    "options": [
+      "Trinidad's exports to the USA would become more expensive in US dollar terms, reducing demand",
+      "Trinidad's imports from the USA would become cheaper in Trinidad and Tobago dollar terms",
+      "Trinidad's exports would become more competitive internationally, potentially improving the current account",
+      "There would be no impact on trade as the Trinidad and Tobago dollar is not a major reserve currency"
+    ],
+    "answer": 2,
+    "explanation": "Currency depreciation makes exports cheaper for foreign buyers (more competitive) and imports more expensive for domestic consumers. With elastic demand, this leads to increased export volumes and reduced import volumes, improving the current account balance. Option A is incorrect (exports become cheaper, not more expensive), B is incorrect (imports become more expensive), and D is incorrect as exchange rate changes affect all currencies.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-508aa7d4"
+  },
+  {
+    "question": "Barbados records a current account deficit of $200 million in a given year. According to Balance of Payments accounting, which of the following must necessarily occur to balance the accounts?",
+    "options": [
+      "The Barbados government must immediately devalue the Barbados dollar",
+      "There must be a corresponding surplus in the capital and financial accounts or a decrease in foreign reserves",
+      "The Central Bank of Barbados must print more domestic currency to finance the deficit",
+      "Imports must automatically decrease by exactly $200 million in the same period"
+    ],
+    "answer": 1,
+    "explanation": "The Balance of Payments must sum to zero by definition. A current account deficit must be financed by a capital/financial account surplus (inflows of foreign investment/loans) or by running down foreign exchange reserves. Option A is a policy choice, not an accounting necessity. C is incorrect as printing money doesn't finance external deficits directly. D confuses accounting identity with automatic market adjustment.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-472b3013"
+  },
+  {
+    "question": "In a freely floating exchange rate system, what is the primary determinant of the exchange rate between the Jamaican dollar and the US dollar?",
+    "options": [
+      "The fixed parity established by the Bank of Jamaica",
+      "The supply of and demand for Jamaican dollars relative to US dollars in the foreign exchange market",
+      "The ratio of gold reserves held by Jamaica to those held by the United States",
+      "The difference in government budget deficits between Jamaica and the United States"
+    ],
+    "answer": 1,
+    "explanation": "In a floating exchange rate system, rates are determined by market forces of supply and demand in the foreign exchange market. Demand for Jamaican dollars comes from exports, capital inflows, and remittances; supply comes from imports and capital outflows. Option A describes a fixed system. C describes the old gold standard. D is a distractor though fiscal policy can indirectly affect exchange rates through other channels.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-551d5944"
+  },
+  {
+    "question": "In the Balance of Payments accounts for Jamaica, which of the following would be recorded as a credit entry in the Current Account?",
+    "options": [
+      "A Jamaican manufacturing firm importing raw materials from Canada",
+      "A Canadian tourist spending money on accommodation in Montego Bay",
+      "A Trinidadian investor purchasing shares on the Jamaica Stock Exchange",
+      "The Jamaican government repaying a loan to the International Monetary Fund"
+    ],
+    "answer": 1,
+    "explanation": "Tourism services sold to foreigners constitute an export of services (invisible export) and are recorded as a credit in the Current Account. Option A represents an import (debit entry), while options C and D represent transactions in the Financial Account.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-7f2ceac8"
+  },
+  {
+    "question": "If the Central Bank of Trinidad and Tobago allows the TT dollar to depreciate against the US dollar without intervention, what is the most likely immediate impact on the country's trade balance?",
+    "options": [
+      "Imported oil and machinery will become less expensive for local firms",
+      "Trinidadian manufactured goods will become less competitive in US markets",
+      "American tourists will find Trinidad and Tobago vacations more expensive",
+      "Locally produced goods and services will become relatively cheaper for foreign buyers"
+    ],
+    "answer": 3,
+    "explanation": "Currency depreciation means more units of local currency are needed to buy one unit of foreign currency. This makes exports cheaper for foreigners (increasing competitiveness) and imports more expensive for domestic consumers. Options A, B, and C describe the opposite effects of appreciation.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-70829348"
+  },
+  {
+    "question": "Which of the following would be recorded as a debit entry in the Current Account of Guyana's Balance of Payments?",
+    "options": [
+      "Earnings from bauxite exports to Canada",
+      "Remittances received from Guyanese citizens living in the United States",
+      "Payments for fuel imports from Trinidad and Tobago",
+      "Foreign direct investment by an American company in Guyana's oil sector"
+    ],
+    "answer": 2,
+    "explanation": "Imports of goods (such as fuel) are recorded as debits in the Current Account because they represent an outflow of foreign exchange. Options A and B represent credit entries (exports and transfers received), while option D belongs in the Financial Account.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-9185fd81"
+  },
+  {
+    "question": "A Barbadian investor purchasing a hotel in Saint Lucia would be recorded in which section of Saint Lucia's Balance of Payments?",
+    "options": [
+      "The Current Account as an export of services",
+      "The Financial Account as foreign direct investment",
+      "The Current Account as a unilateral transfer",
+      "The Official Reserves Account as a liability"
+    ],
+    "answer": 1,
+    "explanation": "The purchase of physical assets such as real estate or business establishments by foreign investors constitutes Foreign Direct Investment (FDI), which is recorded in the Financial Account (Capital and Financial Account). Students often confuse this with the Current Account, which records trade in goods and services, income, and current transfers.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-0793be27"
+  },
+  {
+    "question": "The Eastern Caribbean dollar is pegged to the US dollar at a fixed rate of EC$2.70 to US$1.00. Which of the following represents a significant economic cost of maintaining this fixed exchange rate for countries like Antigua and Barbuda?",
+    "options": [
+      "It eliminates the need for the Eastern Caribbean Central Bank to hold foreign reserves",
+      "It allows member countries to pursue independent monetary policies regardless of US interest rates",
+      "It may require high domestic interest rates to defend the peg, potentially reducing local investment and growth",
+      "It automatically corrects balance of payments deficits through exchange rate adjustments"
+    ],
+    "answer": 2,
+    "explanation": "Under a fixed exchange rate system, defending the currency peg often requires maintaining high interest rates to attract foreign capital and preserve reserves, which can stifle domestic economic growth. Option A is incorrect because fixed rates require substantial reserves; Option B is incorrect because pegged rates limit monetary policy independence; Option D describes a floating exchange rate system.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-45df2e9a"
+  },
+  {
+    "question": "Which of the following transactions would be recorded as a CREDIT in the current account of Barbados's Balance of Payments?",
+    "options": [
+      "A Barbadian manufacturing firm importing new machinery from Germany",
+      "A German tourist spending two weeks at all-inclusive hotels in Bridgetown",
+      "A Barbadian investor purchasing shares in a multinational corporation based in New York",
+      "The Barbadian government receiving a development loan from the World Bank"
+    ],
+    "answer": 1,
+    "explanation": "Tourism services sold to non-residents are classified as exports of services, which are recorded as credits in the current account. Option A represents an import (debit), while options C and D represent financial account transactions (portfolio investment and official borrowing respectively), not current account items.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-8e2077da"
+  },
+  {
+    "question": "The Eastern Caribbean Currency Union (ECCU) maintains a fixed exchange rate of EC$2.70 to US$1.00. If there is sudden excess supply of Eastern Caribbean dollars in the foreign exchange market, what action MUST the Eastern Caribbean Central Bank (ECCB) take to defend the peg?",
+    "options": [
+      "Sell foreign reserves and purchase Eastern Caribbean dollars",
+      "Purchase foreign currency and sell Eastern Caribbean dollars",
+      "Allow the exchange rate to float freely to find market equilibrium",
+      "Immediately devalue the Eastern Caribbean dollar to EC$3.00 per US$1.00"
+    ],
+    "answer": 0,
+    "explanation": "To maintain a fixed exchange rate when there is excess supply (downward pressure) of the domestic currency, the central bank must increase demand for the currency by buying EC dollars using its foreign reserves. Selling EC dollars (option B) would worsen the excess supply, while allowing the rate to float (option C) or devaluing (option D) would abandon the fixed rate regime.",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-6a524315"
+  },
+  {
+    "question": "If the Jamaican dollar depreciates significantly against the US dollar, which of the following is the MOST likely short-term effect on Jamaica's economy?",
+    "options": [
+      "Jamaican manufactured goods become more expensive for American consumers",
+      "The cost of servicing Jamaica's US dollar-denominated foreign debt decreases in local currency terms",
+      "Jamaica's tourism sector becomes more price-competitive internationally",
+      "Imported inflation decreases, reducing the domestic cost of living"
+    ],
+    "answer": 2,
+    "explanation": "Currency depreciation makes domestic goods and services cheaper for foreign buyers. Since tourism is an export of services, a weaker Jamaican dollar makes holidays in Jamaica less expensive for foreign tourists, boosting competitiveness. Depreciation actually makes exports cheaper (not more expensive as in A), increases the local currency cost of foreign debt (B), and raises import prices causing inflation (D).",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-d74ec812"
+  },
+  {
+    "question": "A Caribbean nation records a current account deficit of $400 million and a capital and financial account surplus of $400 million. What is the MOST likely impact on the country's foreign reserves?",
+    "options": [
+      "Foreign reserves will decrease by $400 million, requiring immediate IMF intervention",
+      "Foreign reserves will remain unchanged as the Balance of Payments is in equilibrium",
+      "Foreign reserves will increase by $400 million due to the capital account surplus",
+      "The domestic currency will automatically depreciate to eliminate the current account deficit"
+    ],
+    "answer": 1,
+    "explanation": "The Balance of Payments must balance: Current Account + Capital and Financial Account + Change in Reserves = 0 (ignoring errors). When the current account deficit (-400) is exactly offset by the capital/financial account surplus (+400), the sum is zero, meaning there is no net pressure on foreign reserves. The deficit is already financed by capital inflows, so reserves remain stable without the need for IMF borrowing (A) or automatic depreciation (D).",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "id": "Q-ECON-07-00002-a660d5c2"
+  },
+  {
+    "question": "Drag and drop each item into the correct category: CARICOM Objectives or CSME Features.",
+    "type": "DND",
+    "categories": [
+      "CARICOM Objectives",
+      "CSME Features"
+    ],
+    "items": [
+      {
+        "text": "Common External Tariff (CET)",
+        "category": "CARICOM Objectives"
+      },
+      {
+        "text": "Free movement of skilled labor",
+        "category": "CSME Features"
+      },
+      {
+        "text": "Cooperation in foreign policy",
+        "category": "CARICOM Objectives"
+      },
+      {
+        "text": "Right of establishment in any member state",
+        "category": "CSME Features"
+      },
+      {
+        "text": "Economic integration through trade",
+        "category": "CARICOM Objectives"
+      },
+      {
+        "text": "Free movement of capital and services",
+        "category": "CSME Features"
+      }
+    ],
+    "topic_id": "ECON-08-00001",
+    "id": "Q-ECON-08-00001-df6422a8"
+  },
+  {
+    "question": "Classify the following as either Challenges or Opportunities facing Caribbean economies.",
+    "type": "DND",
+    "categories": [
+      "Challenges",
+      "Opportunities"
+    ],
+    "items": [
+      {
+        "text": "Limited economies of scale due to small population",
+        "category": "Challenges"
+      },
+      {
+        "text": "Access to global markets through e-commerce",
+        "category": "Opportunities"
+      },
+      {
+        "text": "Brain drain of skilled professionals",
+        "category": "Challenges"
+      },
+      {
+        "text": "Regional integration reducing trade barriers",
+        "category": "Opportunities"
+      },
+      {
+        "text": "Vulnerability to climate change and natural disasters",
+        "category": "Challenges"
+      },
+      {
+        "text": "Growth of service exports like tourism and BPO",
+        "category": "Opportunities"
+      }
+    ],
+    "topic_id": "ECON-08-00001",
+    "id": "Q-ECON-08-00001-06b0f0c9"
+  },
+  {
+    "question": "Categorize the following impacts as Positive or Negative effects of globalization on Caribbean economies.",
+    "type": "DND",
+    "categories": [
+      "Positive Effects",
+      "Negative Effects"
+    ],
+    "items": [
+      {
+        "text": "Increased foreign direct investment (FDI) inflows",
+        "category": "Positive Effects"
+      },
+      {
+        "text": "Domination of local markets by multinational corporations",
+        "category": "Negative Effects"
+      },
+      {
+        "text": "Technology transfer and modernization",
+        "category": "Positive Effects"
+      },
+      {
+        "text": "Erosion of traditional cultural values",
+        "category": "Negative Effects"
+      },
+      {
+        "text": "Access to larger export markets",
+        "category": "Positive Effects"
+      },
+      {
+        "text": "Exploitation of cheap labor in free trade zones",
+        "category": "Negative Effects"
+      }
+    ],
+    "topic_id": "ECON-08-00001",
+    "id": "Q-ECON-08-00001-ee6305c3"
+  },
+  {
+    "question": "Match each characteristic to the correct entity: Multinational Corporations (MNCs) or Regional Institutions (CARICOM/CSME).",
+    "type": "DND",
+    "categories": [
+      "Multinational Corporations",
+      "Regional Institutions"
+    ],
+    "items": [
+      {
+        "text": "Repatriation of profits to home country",
+        "category": "Multinational Corporations"
+      },
+      {
+        "text": "Implementation of Common External Tariff",
+        "category": "Regional Institutions"
+      },
+      {
+        "text": "Headquarters typically located outside the Caribbean",
+        "category": "Multinational Corporations"
+      },
+      {
+        "text": "Coordination through CARICOM Secretariat",
+        "category": "Regional Institutions"
+      },
+      {
+        "text": "Primary goal of maximizing shareholder profits",
+        "category": "Multinational Corporations"
+      },
+      {
+        "text": "Promotion of economic cooperation among member states",
+        "category": "Regional Institutions"
+      }
+    ],
+    "topic_id": "ECON-08-00001",
+    "id": "Q-ECON-08-00001-8b72d3cb"
+  },
+  {
+    "question": "Drag each item to indicate whether it represents a Benefit or Challenge of e-commerce for Caribbean businesses.",
+    "type": "DND",
+    "categories": [
+      "Benefits of E-commerce",
+      "Challenges of E-commerce"
+    ],
+    "items": [
+      {
+        "text": "Reduced costs for physical storefront infrastructure",
+        "category": "Benefits of E-commerce"
+      },
+      {
+        "text": "Digital divide limiting rural access",
+        "category": "Challenges of E-commerce"
+      },
+      {
+        "text": "24/7 access to global consumer markets",
+        "category": "Benefits of E-commerce"
+      },
+      {
+        "text": "High shipping costs for small island states",
+        "category": "Challenges of E-commerce"
+      },
+      {
+        "text": "Lower transaction costs for micro-enterprises",
+        "category": "Benefits of E-commerce"
+      },
+      {
+        "text": "Cybersecurity threats and online fraud risks",
+        "category": "Challenges of E-commerce"
+      }
+    ],
+    "topic_id": "ECON-08-00001",
+    "id": "Q-ECON-08-00001-623f791f"
+  },
+  {
+    "question": "One of the main objectives of the Caribbean Single Market and Economy (CSME) is to:",
+    "options": [
+      "Eliminate all trade barriers between CARICOM and non-CARICOM countries",
+      "Allow for the free movement of goods, services, capital, and skilled labor among member states",
+      "Establish a single Caribbean currency to replace all national currencies immediately",
+      "Create a unified military force to protect regional economic interests"
+    ],
+    "answer": 1,
+    "explanation": "The CSME aims to create a single economic space within CARICOM to facilitate the free movement of goods, services, capital, and skilled labor. It does not eliminate external trade barriers (option 0), establish an immediate common currency (option 2 - this is a longer-term aspiration but not the current CSME objective), nor does it focus on military unification (option 3).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-25dfba59"
+  },
+  {
+    "question": "Globalization presents a significant challenge to Caribbean manufacturing firms primarily because:",
+    "options": [
+      "It restricts their access to international shipping routes and ports",
+      "They face intense competition from cheaper imports produced by economies of scale in larger countries",
+      "It prevents the adoption of modern technology in local production",
+      "It guarantees higher wage costs for local workers"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean manufacturers often struggle to compete with cheaper imports from large-scale producers (e.g., China, USA) who benefit from economies of scale. Globalization actually improves access to shipping (option 0), facilitates technology transfer (option 2), and does not guarantee higher wages (option 3).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-a1e5c4c4"
+  },
+  {
+    "question": "Which of the following represents a major challenge associated with multinational corporations (MNCs) operating in Caribbean economies?",
+    "options": [
+      "The transfer of technology and managerial expertise to local firms",
+      "The repatriation of profits to their home countries, reducing local capital accumulation",
+      "The creation of employment opportunities for local citizens",
+      "Payment of corporate taxes to host governments"
+    ],
+    "answer": 1,
+    "explanation": "While MNCs bring benefits like technology transfer (option 0), employment (option 2), and tax revenue (option 3), a significant challenge is profit repatriation, where earnings are sent back to the parent company's country rather than being reinvested locally.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-54f0d550"
+  },
+  {
+    "question": "E-commerce presents an opportunity for small Caribbean businesses by enabling them to:",
+    "options": [
+      "Avoid compliance with international product quality standards",
+      "Eliminate shipping and logistics costs for exported goods",
+      "Access global markets with relatively low start-up costs compared to physical storefronts",
+      "Bypass foreign exchange regulations and banking fees"
+    ],
+    "answer": 2,
+    "explanation": "E-commerce allows Caribbean SMEs to reach international customers without heavy investment in physical infrastructure abroad. However, they must still comply with quality standards (option 0), pay shipping costs (option 1), and adhere to foreign exchange regulations (option 3).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-68192d59"
+  },
+  {
+    "question": "One economic benefit that CARICOM member states seek through regional integration is:",
+    "options": [
+      "Automatic immunity from global economic recessions and financial crises",
+      "The ability to exploit economies of scale by producing for a larger combined market",
+      "Guaranteed fixed exchange rates between all member country currencies",
+      "Complete elimination of foreign ownership in local industries"
+    ],
+    "answer": 1,
+    "explanation": "Regional integration allows small Caribbean states to overcome the limitation of small domestic markets by accessing a larger CSME market, enabling mass production and lower average costs. It does not provide immunity from recessions (option 0), fixed exchange rates (option 2), or elimination of foreign investment (option 3).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-79f1df50"
+  },
+  {
+    "question": "Which of the following represents a significant challenge to the full implementation of the CARICOM Single Market and Economy (CSME)?",
+    "options": [
+      "Excessive labor mobility causing brain drain in larger territories",
+      "The geographical separation of Caribbean islands by water",
+      "Difficulty in harmonizing professional standards and certification across member states",
+      "The adoption of a single currency by all fifteen member states"
+    ],
+    "answer": 2,
+    "explanation": "While the CSME aims to facilitate free movement of labor, a major implementation challenge is the lack of mutual recognition of professional qualifications and standards among member states. This creates non-tariff barriers to labor mobility despite treaty commitments. Contrary to option D, only the OECS sub-group shares a common currency (EC Dollar), and geographical separation (B) has not prevented trade agreements, while labor mobility remains limited rather than excessive (A).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-2c95f263"
+  },
+  {
+    "question": "How has globalization most negatively impacted traditional manufacturing sectors in Caribbean economies such as Jamaica and Trinidad and Tobago?",
+    "options": [
+      "By eliminating the need for imported capital goods",
+      "By increasing competition from cheaper manufactured imports in domestic markets",
+      "By guaranteeing duty-free access to North American markets for all products",
+      "By automatically transferring advanced technology to local firms"
+    ],
+    "answer": 1,
+    "explanation": "Globalization has exposed small Caribbean manufacturing sectors to intense competition from low-cost producers, particularly from Asia, leading to deindustrialization in some territories. This is exacerbated by the erosion of preferential trade agreements. Option C is incorrect because access to markets like the US (CBTPA) and Canada (CARIBCAN) comes with strict rules of origin and time limits, while technology transfer (D) is not automatic and import needs (A) remain significant.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-cef58ad2"
+  },
+  {
+    "question": "What is the primary economic opportunity that e-commerce presents to micro and small enterprises (MSEs) in the Eastern Caribbean?",
+    "options": [
+      "Complete elimination of customs duties on all digital transactions",
+      "Removal of the need for physical delivery infrastructure",
+      "Access to global niche markets without high costs of physical storefronts",
+      "Guaranteed protection from competition with large multinational retailers"
+    ],
+    "answer": 2,
+    "explanation": "E-commerce allows Caribbean MSEs to overcome the constraint of small domestic markets by reaching diaspora communities and global consumers online, reducing the capital required for expansion. However, duties still apply to physical goods (A), delivery infrastructure remains crucial (B), and online competition with giants like Amazon intensifies rather than diminishes (D).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-543f13ee"
+  },
+  {
+    "question": "Which of the following is a valid criticism regarding the operation of multinational corporations (MNCs) in extractive industries within Caribbean economies?",
+    "options": [
+      "They exclusively import all labor from their home countries",
+      "They repatriate profits to parent companies rather than reinvesting in local communities",
+      "They are legally prohibited from listing on regional stock exchanges",
+      "They focus investment solely on agricultural cash crops"
+    ],
+    "answer": 1,
+    "explanation": "A common challenge with MNCs in sectors like bauxite (Jamaica/Guyana) and petroleum (Trinidad and Tobago) is the high rate of profit repatriation, which limits the multiplier effect on local economies. This contrasts with option A (they primarily employ local labor), option C (many are listed locally), and option D (they focus on minerals/energy, not agriculture).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-f8856bfe"
+  },
+  {
+    "question": "What is the primary obstacle preventing Caribbean countries from achieving the full benefits of regional economic integration?",
+    "options": [
+      "Fundamental language barriers between English, French, and Dutch-speaking territories",
+      "The absence of a unified regional currency across all member states",
+      "Persistent protectionist policies and slow implementation of agreed protocols",
+      "The lack of a common geographical time zone"
+    ],
+    "answer": 2,
+    "explanation": "Despite signing treaties, member states often maintain non-tariff barriers, delay harmonizing customs procedures, and protect sensitive domestic industries from regional competition, undermining the CSME. While language differences (A) exist, they are not the primary economic barrier; currency differences (B) are mitigated by fixed exchange rates in the OECS; and time zones (D) are largely uniform (UTC-4 to UTC-5).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-a48904cc"
+  },
+  {
+    "question": "Which of the following represents a primary economic benefit of the CARICOM Single Market and Economy (CSME) for member states?",
+    "options": [
+      "Automatic compensation for trade deficits with non-CARICOM nations",
+      "Free movement of capital, goods, services, and skilled labor among member states",
+      "Immediate establishment of a single Caribbean currency to replace national currencies",
+      "Exemption from World Trade Organization (WTO) rules and regulations"
+    ],
+    "answer": 1,
+    "explanation": "The CSME facilitates deeper regional integration through the free movement of capital, goods, services, and skilled labor. This creates a larger market of approximately 18 million people, allowing Caribbean firms to achieve economies of scale and improve competitiveness. It does not automatically fix trade deficits with external partners, establish a single currency (though this has been proposed), or exempt members from international trade rules.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-d74aa42d"
+  },
+  {
+    "question": "One significant challenge that globalization poses to Caribbean manufacturing industries is:",
+    "options": [
+      "Guaranteed access to subsidized raw materials from developed countries",
+      "Elimination of the need to meet international quality standards",
+      "Increased competition from cheaper imported goods that may lead to deindustrialization",
+      "Automatic preferential treatment in all international trade agreements"
+    ],
+    "answer": 2,
+    "explanation": "Globalization exposes small Caribbean manufacturers to intense competition from large-scale foreign producers, particularly from Asia, who often benefit from economies of scale and lower production costs. This competition can lead to deindustrialization as local firms struggle to compete, resulting in factory closures and job losses in sectors such as textiles and light manufacturing.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-29e24c2b"
+  },
+  {
+    "question": "How does e-commerce specifically present an opportunity for Small and Medium Enterprises (SMEs) in Caribbean economies?",
+    "options": [
+      "By eliminating the need for physical infrastructure such as roads and ports",
+      "By providing access to global markets without the high overhead costs of establishing physical stores abroad",
+      "By guaranteeing exemption from all forms of taxation on international sales",
+      "By removing the requirement for product standardization and quality control"
+    ],
+    "answer": 1,
+    "explanation": "E-commerce allows Caribbean SMEs to overcome the constraint of small domestic markets by reaching international consumers directly through digital platforms. This significantly reduces the traditional barriers of high capital costs associated with establishing physical retail presence in foreign markets, enabling firms to market unique Caribbean products (such as crafts and specialty foods) globally with relatively low initial investment.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-1a04299e"
+  },
+  {
+    "question": "A potential negative impact of multinational corporations (MNCs) operating in Caribbean economies is:",
+    "options": [
+      "The mandatory transfer of all proprietary technology to local competitors",
+      "The repatriation of profits to their home countries, affecting the host country's balance of payments",
+      "Automatic increases in domestic savings rates among local populations",
+      "Guaranteed long-term employment for all local workers regardless of economic conditions"
+    ],
+    "answer": 1,
+    "explanation": "While MNCs bring foreign direct investment (FDI) and employment opportunities, a significant drawback is profit repatriation\u2014sending profits back to their home countries. This creates an outflow of foreign exchange that can negatively impact the current account of the host Caribbean nation's balance of payments, particularly if the value of repatriated profits exceeds the value of new capital inflows.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-4ffe8fc0"
+  },
+  {
+    "question": "Which factor poses the greatest challenge to the effective implementation of CARICOM's economic integration goals?",
+    "options": [
+      "The excessive similarity of currencies used by member states",
+      "The large physical size of Caribbean territories making transportation difficult",
+      "The persistence of non-tariff barriers and slow harmonization of regulations",
+      "The absence of any trade agreements with countries outside the region"
+    ],
+    "answer": 2,
+    "explanation": "Despite the establishment of CSME, practical implementation is hindered by non-tariff barriers such as differing customs procedures, product standards, and administrative regulations across member states. The slow pace of harmonizing legal frameworks and the persistence of 'border delays' contradict the goal of seamless movement of goods and services, undermining the potential benefits of regional integration for Caribbean economies.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-98202f7b"
+  },
+  {
+    "question": "Which of the following is a PRIMARY objective of the Caribbean Single Market and Economy (CSME)?",
+    "options": [
+      "To establish a single currency for all CARICOM member states immediately",
+      "To facilitate the free movement of goods, services, capital, and skilled labor among member states",
+      "To replace national governments with a centralized regional authority",
+      "To eliminate all agricultural production in favor of service-based economies"
+    ],
+    "answer": 1,
+    "explanation": "The CSME aims to create a single economic space to enhance competitiveness and economies of scale. While the OECS has a currency union, CSME does not mandate a single currency for all CARICOM. It specifically focuses on the free movement of factors of production to integrate the fragmented Caribbean market.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-d3954737"
+  },
+  {
+    "question": "One major CHALLENGE facing Caribbean manufacturing firms in the era of globalization is:",
+    "options": [
+      "Guaranteed access to preferential markets without any competition",
+      "The inability to achieve economies of scale to compete with cheaper imports from large-scale foreign producers",
+      "The complete elimination of shipping costs for regional exports",
+      "Mandatory technology transfer agreements imposed by WTO regulations"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean manufacturers often operate with small domestic markets and higher unit costs due to limited scale. When trade liberalization reduces tariffs, they struggle to compete with mass-produced imports from countries with larger industrial bases, leading to de-industrialization concerns in the region.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-f203ca82"
+  },
+  {
+    "question": "Regarding Multinational Corporations (MNCs) operating in Caribbean tourism and extractive industries, which statement is MOST accurate?",
+    "options": [
+      "They typically reinvest 100% of profits locally and use only local suppliers",
+      "They provide significant employment and foreign exchange but may repatriate profits and limit technology transfer",
+      "They are legally prohibited from repatriating dividends to parent companies under CARICOM rules",
+      "They exclusively hire expatriate workers for all positions including entry-level staff"
+    ],
+    "answer": 1,
+    "explanation": "While MNCs bring Foreign Direct Investment (FDI), employment, and global marketing networks to Caribbean economies, a common criticism is that they often repatriate profits, import inputs rather than use local suppliers, and retain high-level decision-making and technology control at headquarters abroad.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-7ef201e8"
+  },
+  {
+    "question": "How does e-commerce specifically present an OPPORTUNITY for Small and Medium Enterprises (SMEs) in Caribbean islands?",
+    "options": [
+      "By eliminating the need for internet connectivity and digital literacy",
+      "By allowing access to global niche markets (including the diaspora) without heavy investment in physical storefronts abroad",
+      "By guaranteeing exemption from all forms of taxation and customs duties",
+      "By removing competition from international retailers like Amazon"
+    ],
+    "answer": 1,
+    "explanation": "E-commerce reduces barriers to entry for Caribbean SMEs by lowering overhead costs associated with international expansion. Artisans, agro-processors, and service providers can reach the Caribbean diaspora and global consumers directly, though they still face challenges with logistics and digital infrastructure.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-dc350089"
+  },
+  {
+    "question": "The implementation of the 'free movement of skills' under CSME has created concerns about 'brain drain' because:",
+    "options": [
+      "Skilled professionals from larger territories like Jamaica and Trinidad migrate exclusively to North America",
+      "Smaller Eastern Caribbean islands may lose trained professionals to larger regional economies offering higher wages and opportunities",
+      "Unskilled workers are prohibited from moving between any CARICOM territories",
+      "All professional qualifications are automatically standardized without verification"
+    ],
+    "answer": 1,
+    "explanation": "While free movement allows optimal allocation of regional human resources, smaller islands with limited training capacity fear losing skilled nurses, teachers, and engineers to larger territories (e.g., Trinidad and Tobago, Jamaica, Barbados) that offer better compensation, exacerbating human resource shortages in the sending countries.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-cb54b7a9"
+  },
+  {
+    "question": "Which of the following represents a major challenge facing the implementation of the Caribbean Single Market and Economy (CSME) regarding the free movement of skilled labor?",
+    "options": [
+      "An oversupply of skilled workers in all member territories creating unemployment",
+      "The lack of harmonized professional standards and certification across member states",
+      "The prohibition of agricultural workers from crossing national borders",
+      "High tariff barriers imposed on labor services between territories"
+    ],
+    "answer": 1,
+    "explanation": "A significant challenge to the CSME is the absence of mutual recognition of professional qualifications and standards across CARICOM member states. This creates barriers for skilled workers (such as nurses and teachers) seeking employment in other territories, despite the agreement allowing free movement of certain categories of labor.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-9742546d"
+  },
+  {
+    "question": "How does globalization present both an opportunity and a challenge for manufacturing sectors in small Caribbean economies like Jamaica or Barbados?",
+    "options": [
+      "It provides access to cheaper imported raw materials while eliminating all domestic production",
+      "It creates opportunities for export expansion but exposes local industries to intense competition from cheaper foreign goods",
+      "It guarantees increased foreign direct investment while simultaneously causing high domestic unemployment",
+      "It eliminates all trade barriers between CARICOM member states only"
+    ],
+    "answer": 1,
+    "explanation": "Globalization offers Caribbean manufacturers access to larger international markets and global supply chains. However, it simultaneously challenges them to compete with mass-produced, lower-cost imports from larger economies, potentially threatening domestic infant industries that lack economies of scale.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-4c03aedd"
+  },
+  {
+    "question": "What is a significant economic challenge posed by the operations of multinational corporations (MNCs) in Caribbean territories?",
+    "options": [
+      "They exclusively employ foreign expatriates rather than local Caribbean workers",
+      "They contribute the majority of their tax revenues to local Caribbean governments",
+      "They frequently repatriate profits to their home countries rather than reinvesting in the local economy",
+      "They prevent local firms from accessing global e-commerce platforms"
+    ],
+    "answer": 2,
+    "explanation": "While MNCs provide employment and technology transfer, a major challenge is profit repatriation (sending profits back to headquarters). This creates a leakage from the circular flow of income, reducing the multiplier effect and limiting the long-term developmental impact of foreign direct investment in the Caribbean.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-00ee3b2e"
+  },
+  {
+    "question": "Which factor presents the greatest challenge to the expansion of e-commerce among micro and small enterprises in the Caribbean?",
+    "options": [
+      "Excessive government subsidies for digital infrastructure development",
+      "Limited access to reliable high-speed internet and high inter-island shipping costs",
+      "An overabundance of local online payment gateway options",
+      "Strict legal prohibitions on all imports by regional customs authorities"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean small businesses face significant infrastructure challenges including inconsistent broadband connectivity, high costs of cross-border shipping between islands, and limited access to secure online payment systems. These barriers hinder their ability to participate effectively in global digital trade.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-cc280c40"
+  },
+  {
+    "question": "Despite the establishment of CARICOM, intra-regional trade among member states remains limited primarily due to:",
+    "options": [
+      "The absence of a common currency across all fifteen member states",
+      "High transportation costs between islands and non-tariff barriers such as complex customs procedures",
+      "The complete elimination of all external trade with non-CARICOM countries",
+      "All member states producing identical goods with no comparative advantage"
+    ],
+    "answer": 1,
+    "explanation": "While CARICOM aims to facilitate free trade, intra-regional trade is hindered by high shipping costs due to geographic dispersion, inadequate maritime transport links, and non-tariff barriers including lengthy customs procedures and different product standards, making it sometimes cheaper to import from outside the region.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-3ea79094"
+  },
+  {
+    "question": "Which of the following represents a PRIMARY challenge hindering the full implementation of the CARICOM Single Market and Economy (CSME)?",
+    "options": [
+      "Non-tariff barriers and lack of harmonized professional standards across member states",
+      "Excessive population size requiring strict migration controls",
+      "Over-abundance of natural resources creating trade imbalances",
+      "Mandatory adoption of a single Caribbean currency by all territories"
+    ],
+    "answer": 0,
+    "explanation": "A major obstacle to CSME implementation is the persistence of non-tariff barriers, such as differing standards for professional qualifications and administrative hurdles, which restrict the free movement of skilled labor and goods despite tariff removal. Caribbean nations have small populations (not excessive), generally lack abundant natural resources, and only some use the Eastern Caribbean Dollar (not all).",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-45afbbc3"
+  },
+  {
+    "question": "How has globalization MOST significantly impacted employment in Caribbean manufacturing sectors?",
+    "options": [
+      "Guaranteed expansion of assembly-line jobs through offshore production",
+      "Increased competition from lower-cost Asian producers leading to deindustrialization",
+      "Mandatory reduction in service sector employment to favor manufacturing",
+      "Elimination of all trade barriers protecting domestic infant industries"
+    ],
+    "answer": 1,
+    "explanation": "Globalization has exposed small Caribbean economies to intense competition from large-scale, low-cost manufacturers in Asia, leading to factory closures and job losses in labor-intensive sectors like textiles and assembly. While trade barriers have reduced, they have not been fully eliminated, and the service sector has actually expanded, not contracted.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-0f09fff2"
+  },
+  {
+    "question": "What is a PRIMARY concern regarding the economic impact of multinational corporations (MNCs) operating in Caribbean territories?",
+    "options": [
+      "Mandatory joint venture requirements with local governments",
+      "Guaranteed transfer of advanced technology to all domestic competitors",
+      "Repatriation of profits to home countries reducing local capital accumulation",
+      "Excessive payment of corporate taxes beyond statutory rates"
+    ],
+    "answer": 2,
+    "explanation": "A significant concern is capital flight, where MNCs repatriate profits to their home countries rather than reinvesting in the local economy, limiting domestic capital formation. MNCs often receive tax holidays (not excessive taxes), are not required to form joint ventures, and frequently protect their proprietary technology rather than transferring it.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-07de915e"
+  },
+  {
+    "question": "Which factor presents the GREATEST challenge to Small Island Developing States (SIDS) seeking to expand through e-commerce?",
+    "options": [
+      "Strict regional laws prohibiting cross-border digital transactions",
+      "Surplus of domestic consumer demand exceeding supply capacity",
+      "High shipping costs and inadequate digital payment infrastructure",
+      "Over-saturation of local markets with international digital entrepreneurs"
+    ],
+    "answer": 2,
+    "explanation": "Caribbean SIDS face structural challenges including high international shipping costs due to geographic isolation and limited logistics networks, alongside underdeveloped digital payment systems. Domestic markets are small (not saturated with demand), regulations are often underdeveloped rather than prohibitive, and local digital entrepreneurship is growing but not oversaturated.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-fe0e4c81"
+  },
+  {
+    "question": "The establishment of the CSME creates economic opportunities for Caribbean firms primarily by:",
+    "options": [
+      "Isolating the region from global multinational competition",
+      "Providing economies of scale and enlarged market access",
+      "Eliminating the need for foreign direct investment",
+      "Mandating that all MNCs employ exclusively Caribbean nationals"
+    ],
+    "answer": 1,
+    "explanation": "The CSME allows businesses to operate across 15 member states as a single economic space, enabling firms to achieve economies of scale by accessing a larger market of approximately 18 million people. It does not isolate the region from global competition, eliminate the need for FDI (which remains vital), or impose strict national employment quotas on MNCs.",
+    "topic_id": "ECON-08-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-08-00001-ee051580"
   }
 ]

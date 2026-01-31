@@ -503,7 +503,7 @@ export default function SimulatePage() {
               <div className="owl-sprite owl-happy" style={{ transform: 'scale(1.5)', transformOrigin: 'center' }} />
             </div>
             <p className="text-xl font-bold text-[var(--text-secondary)]">
-              "Hoo-ray! You've mastered this objective with flying colors!"
+              &quot;Hoo-ray! You&apos;ve mastered this objective with flying colors!&quot;
             </p>
           </div>
 

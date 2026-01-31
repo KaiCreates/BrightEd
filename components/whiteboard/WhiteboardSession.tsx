@@ -394,7 +394,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       }
     }
     ctx.restore()
-  }, [elements, panX, panY, zoom, selection, tool, textEditId])
+  }, [elements, panX, panY, zoom, selection, tool, textEditId, theme])
 
   useEffect(() => {
     let anim = requestAnimationFrame(render)

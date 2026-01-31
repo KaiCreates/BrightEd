@@ -87,7 +87,7 @@ export default function LandingDuolingo() {
                             free. fun. effective.
                         </h2>
                         <p className="text-lg text-[#777] font-medium leading-relaxed">
-                            Learning with BrightEd is fun, and <span className="text-[var(--brand-primary)] font-bold cursor-pointer underline decoration-2 underline-offset-4">research shows that it works</span>! With quick, bite-sized simulations, you'll earn points and unlock new levels while gaining real-world skills.
+                            Learning with BrightEd is fun, and <span className="text-[var(--brand-primary)] font-bold cursor-pointer underline decoration-2 underline-offset-4">research shows that it works</span>! With quick, bite-sized simulations, you&apos;ll earn points and unlock new levels while gaining real-world skills.
                         </p>
                     </div>
                 </div>

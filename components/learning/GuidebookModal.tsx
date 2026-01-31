@@ -112,7 +112,7 @@ export function GuidebookModal({
                                         <div>
                                             <p className="text-[#1cb0f6] font-black mb-1">Study Tip</p>
                                             <p className="text-[#afafaf] text-sm font-medium">
-                                                Review these core concepts before starting the challenges. Use the "Got it" button to track your progress!
+                                                Review these core concepts before starting the challenges. Use the &quot;Got it&quot; button to track your progress!
                                             </p>
                                         </div>
                                     </div>

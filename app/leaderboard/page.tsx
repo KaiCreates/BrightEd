@@ -6,6 +6,8 @@ import { useAuth } from '@/lib/auth-context';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { ProfessorBrightMascot } from '@/components/learning';
+import { FeedbackResponse } from '@/lib/professor-bright';
 
 interface LeaderboardEntry {
     id: string;
@@ -24,6 +26,7 @@ export default function LeaderboardPage() {
     const [activeTab, setActiveTab] = useState<LeaderboardType>('xp');
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<LeaderboardEntry[]>([]);
+    const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null);
 
     useEffect(() => {
         if (!user) return;
@@ -63,7 +66,6 @@ export default function LeaderboardPage() {
 
                     const payload = await res.json();
                     const entries: LeaderboardEntry[] = (payload.entries || []).map((entry: any) => {
-                        const isMastery = activeTab === 'mastery';
                         const value = typeof entry.value === 'number' ? entry.value : 0;
                         return {
                             id: entry.id,
@@ -87,146 +89,228 @@ export default function LeaderboardPage() {
         fetchData();
     }, [activeTab, user]);
 
+    useEffect(() => {
+        // Mascot Greeting
+        const timeout = setTimeout(() => {
+            if (activeTab === 'xp') {
+                setMascotFeedback({
+                    tone: 'encouraging',
+                    message: "The XP leaderboard shows who's putting in the most work! Keep grinding! ⚡",
+                    emoji: '🔋',
+                    spriteClass: 'owl-magic'
+                });
+            } else if (activeTab === 'streak') {
+                setMascotFeedback({
+                    tone: 'supportive',
+                    message: "Consistency is key. Don't let your flame go out! 🔥",
+                    emoji: '🔥',
+                    spriteClass: 'owl-neutral'
+                });
+            } else if (activeTab === 'business') {
+                setMascotFeedback({
+                    tone: 'celebratory',
+                    message: "Look at those valuations! You're building an empire! 🏢",
+                    emoji: '💰',
+                    spriteClass: 'owl-happy'
+                });
+            }
+        }, 1000);
+        return () => clearTimeout(timeout);
+    }, [activeTab]);
+
+    const getRankColor = (rank: number) => {
+        if (rank === 1) return 'border-yellow-400 bg-yellow-400/5 shadow-yellow-400/20';
+        if (rank === 2) return 'border-slate-300 bg-slate-300/5 shadow-slate-300/20';
+        if (rank === 3) return 'border-orange-400 bg-orange-400/5 shadow-orange-400/20';
+        return 'border-[var(--border-subtle)] bg-[var(--bg-secondary)]/30';
+    };
+
+    const getRankIconBg = (rank: number) => {
+        if (rank === 1) return 'bg-yellow-400 text-[#543b00]';
+        if (rank === 2) return 'bg-slate-300 text-[#334155]';
+        if (rank === 3) return 'bg-orange-400 text-[#5c2a00]';
+        return 'bg-[var(--bg-elevated)] text-[var(--text-muted)]';
+    };
+
     return (
-        <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] py-8 pb-24 md:py-12 safe-padding">
-            <div className="container-responsive">
+        <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] py-8 pb-32 md:py-16 safe-padding overflow-x-hidden">
+            {/* Background Decorations */}
+            <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]">
+                <div className="absolute top-[10%] left-[5%] w-[40%] h-[40%] bg-[var(--brand-primary)] rounded-full blur-[120px]" />
+                <div className="absolute bottom-[20%] right-[10%] w-[30%] h-[30%] bg-[var(--brand-accent)] rounded-full blur-[100px]" />
+            </div>
+
+            <div className="container-responsive relative z-10 max-w-4xl mx-auto">
+                {/* Hero Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-8 md:mb-12"
+                    className="text-center mb-12"
                 >
-                    <BrightHeading level={1} className="mb-4 heading-responsive">
-                        Hall of Fame 🏆
+                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] text-xs font-black uppercase tracking-[0.2em] mb-6 border border-[var(--brand-primary)]/20 shadow-sm">
+                        <span className="text-xl">🏆</span> Arena of Excellence
+                    </div>
+                    <BrightHeading level={1} className="mb-4 text-5xl md:text-7xl">
+                        Hall of <span className="text-[var(--brand-primary)] text-shadow-glow">Fame</span>
                     </BrightHeading>
-                    <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-xl mx-auto">
-                        See where you stand among the top performers and businesses.
+                    <p className="text-[var(--text-secondary)] text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+                        The elite scholars and visionaries of BrightEd. Where will your name be remembered?
                     </p>
                 </motion.div>
 
-                {/* Tabs */}
-                <div className="flex bg-[var(--bg-elevated)] p-1 rounded-3xl mb-8 border border-[var(--border-subtle)] shadow-lg overflow-hidden">
-                    {(['xp', 'streak', 'mastery', 'schools', 'business'] as LeaderboardType[]).map((tab) => (
-                        <button
-                            key={tab}
-                            onClick={() => setActiveTab(tab)}
-                            className={`flex-1 py-4 px-2 rounded-2xl font-black uppercase tracking-wider transition-all relative z-10 ${activeTab === tab
-                                ? 'text-white'
-                                : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
-                                }`}
-                        >
-                            {activeTab === tab && (
-                                <motion.div
-                                    layoutId="tab-bg"
-                                    className="absolute inset-0 bg-[var(--brand-primary)] rounded-2xl -z-10"
-                                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                                />
-                            )}
-                            {tab === 'xp' ? 'XP' : tab === 'streak' ? 'Streak' : tab === 'mastery' ? 'Mastery' : tab === 'schools' ? 'Schools' : 'Business'}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Content */}
-                <BrightLayer variant="glass" padding="none" className="overflow-hidden border border-white/10">
-                    <div className="p-6 bg-gradient-to-r from-[var(--brand-primary)]/10 to-transparent border-b border-white/5 flex justify-between items-center">
-                        <span className="font-black text-[var(--text-primary)] uppercase tracking-wider">Ranking</span>
-                        <span className="font-black text-[var(--text-primary)] uppercase tracking-wider">
-                            {activeTab === 'xp' ? 'Total XP' : activeTab === 'streak' ? 'Current Streak' : activeTab === 'mastery' ? 'Global Mastery' : activeTab === 'business' ? 'Valuation' : 'School XP'}
-                        </span>
-                    </div>
-
-                    <div className="divide-y divide-white/5">
-                        {loading ? (
-                            <div className="py-20 text-center">
-                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)] mx-auto" />
-                            </div>
-                        ) : data.length > 0 ? (
-                            <AnimatePresence mode="popLayout">
-                                {data.map((entry) => (
+                {/* Tactile Tab System */}
+                <BrightLayer variant="glass" padding="none" className="p-2 mb-12 border-b-[8px] border-[var(--border-subtle)] ring-1 ring-white/5">
+                    <div className="flex flex-wrap md:flex-nowrap gap-2">
+                        {(['xp', 'streak', 'mastery', 'schools', 'business'] as LeaderboardType[]).map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`
+                                    flex-1 min-w-[120px] py-4 px-4 rounded-2xl font-black uppercase tracking-wider transition-all relative overflow-hidden
+                                    ${activeTab === tab
+                                        ? 'text-white shadow-lg'
+                                        : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/5'
+                                    }
+                                `}
+                            >
+                                {activeTab === tab && (
                                     <motion.div
-                                        key={entry.id}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: 20 }}
-                                        className={`flex items-center p-6 transition-colors hover:bg-white/[0.02] ${entry.isCurrentUser ? 'bg-[var(--brand-primary)]/10 ring-1 ring-inset ring-[var(--brand-primary)]/20' : ''
-                                            }`}
+                                        layoutId="leaderboard-tab-bg"
+                                        className="absolute inset-0 bg-[var(--brand-primary)] border-b-[4px] border-[#1F7A85]"
+                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                                <span className="relative z-10">
+                                    {tab === 'xp' ? '⚡ XP' :
+                                        tab === 'streak' ? '🔥 Streak' :
+                                            tab === 'mastery' ? '🧠 Mastery' :
+                                                tab === 'schools' ? '🏫 Schools' : '🏢 Business'}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+                </BrightLayer>
+
+                {/* Main Leaderboard List */}
+                <div className="space-y-4">
+                    {loading ? (
+                        <div className="py-32 flex flex-col items-center justify-center space-y-4">
+                            <div className="w-16 h-16 border-4 border-[var(--brand-primary)] border-t-transparent rounded-full animate-spin shadow-[0_0_15px_rgba(45,155,168,0.3)]" />
+                            <p className="text-[var(--text-muted)] font-black uppercase tracking-widest text-sm animate-pulse">Consulting the Sages...</p>
+                        </div>
+                    ) : data.length > 0 ? (
+                        <AnimatePresence mode="popLayout">
+                            {data.map((entry, index) => (
+                                <motion.div
+                                    key={entry.id}
+                                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="group"
+                                >
+                                    <BrightLayer
+                                        variant="elevated"
+                                        padding="none"
+                                        className={`
+                                            relative flex items-center p-4 md:p-6 transition-all hover:-translate-y-1 active:translate-y-0
+                                            border-b-[8px] ${getRankColor(entry.rank)}
+                                            ${entry.isCurrentUser ? 'ring-2 ring-[var(--brand-primary)] shadow-[0_0_20px_rgba(45,155,168,0.2)]' : ''}
+                                        `}
                                     >
-                                        <div className="w-12 text-2xl font-black text-[var(--brand-primary)]">
-                                            {entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : `#${entry.rank}`}
+                                        {/* Rank Badge */}
+                                        <div className={`
+                                            w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-xl md:text-2xl font-black mr-4 md:mr-6 shrink-0
+                                            shadow-lg border-b-[4px] border-black/10 transition-transform group-hover:scale-110
+                                            ${getRankIconBg(entry.rank)}
+                                        `}>
+                                            {entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : entry.rank}
                                         </div>
-                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mr-4 shadow-inner ${entry.rank <= 3 ? 'bg-gradient-to-br from-yellow-400/20 to-yellow-600/20' : 'bg-white/5'
-                                            }`}>
-                                            {entry.icon}
+
+                                        {/* Entry Avatar/Icon */}
+                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-2xl mr-4 md:mr-6 shadow-inner">
+                                            {entry.icon || '👤'}
                                         </div>
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2">
-                                                <h3 className="text-xl font-bold text-[var(--text-primary)]">
+
+                                        {/* Name and Subtext */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <h3 className="text-lg md:text-2xl font-black text-[var(--text-primary)] truncate group-hover:text-[var(--brand-primary)] transition-colors">
                                                     {entry.name}
                                                 </h3>
                                                 {entry.isCurrentUser && (
-                                                    <span className="bg-[var(--brand-primary)] text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase">You</span>
+                                                    <span className="bg-[var(--brand-primary)] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-sm">YOU</span>
                                                 )}
                                             </div>
-                                            <p className="text-[var(--text-muted)] text-sm font-medium">
+                                            <p className="text-[var(--text-muted)] text-xs md:text-sm font-bold uppercase tracking-widest truncate">
                                                 {entry.subtext}
                                             </p>
                                         </div>
-                                        <div className="text-right">
-                                            <div className="text-2xl font-black text-[var(--brand-primary)] tracking-tighter">
+
+                                        {/* Value Display */}
+                                        <div className="text-right ml-4">
+                                            <div className={`text-2xl md:text-4xl font-black tracking-tighter ${entry.rank <= 3 ? 'text-[var(--text-primary)]' : 'text-[var(--brand-primary)]'}`}>
                                                 {activeTab === 'business'
                                                     ? `$${entry.value.toLocaleString()}`
                                                     : activeTab === 'mastery'
                                                         ? `${Math.round(entry.value * 100)}%`
                                                         : entry.value.toLocaleString()}
                                             </div>
-                                            <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">
-                                                {activeTab === 'business' ? 'Net Worth' : activeTab === 'streak' ? 'Days' : activeTab === 'mastery' ? 'Skill' : activeTab === 'schools' ? 'Total XP' : 'Total XP'}
+                                            <p className="text-[var(--text-muted)] text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em]">
+                                                {activeTab === 'business' ? 'Net Worth' : activeTab === 'streak' ? 'Days' : activeTab === 'mastery' ? 'Skill' : 'Total XP'}
                                             </p>
                                         </div>
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
-                        ) : (
-                            <div className="py-20 text-center text-[var(--text-muted)]">
-                                No entries found yet. Start learning to be the first!
-                            </div>
-                        )}
-                    </div>
-                </BrightLayer>
+                                    </BrightLayer>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    ) : (
+                        <BrightLayer variant="glass" className="py-20 text-center text-[var(--text-muted)] border-b-[8px] border-[var(--border-subtle)]">
+                            <span className="text-5xl block mb-4">🏜️</span>
+                            <p className="font-black uppercase tracking-widest">No legends have claimed this path yet.</p>
+                            <p className="text-xs font-medium mt-2">Start learning to be the first name etched in history!</p>
+                        </BrightLayer>
+                    )}
+                </div>
 
-                {/* Current User Stats Footer */}
+                {/* Personal Standing Card (Bottom Sticky) */}
                 {!loading && userData && (activeTab === 'xp' || activeTab === 'streak' || activeTab === 'mastery') && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mt-8"
+                        className="mt-12"
                     >
-                        <BrightLayer variant="elevated" className="border-b-[6px] border-[var(--brand-primary)]">
-                            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                                <div>
-                                    <h4 className="text-[var(--text-muted)] text-xs font-black uppercase tracking-widest mb-1">Your Standing</h4>
-                                    <div className="text-2xl font-black text-[var(--text-primary)]">
-                                        Keep pushing, {userData.firstName}! 🚀
+                        <BrightLayer variant="elevated" className="border-b-[8px] border-[var(--brand-primary)] bg-[var(--bg-elevated)]/90 backdrop-blur-xl ring-1 ring-[var(--brand-primary)]/50 shadow-2xl">
+                            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 rounded-2xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-2xl font-black shadow-lg">
+                                        👋
+                                    </div>
+                                    <div>
+                                        <p className="text-[var(--text-muted)] text-xs font-black uppercase tracking-widest mb-1">Your Standing</p>
+                                        <h4 className="text-2xl font-black text-[var(--text-primary)]">Keep rising, {userData.firstName}!</h4>
                                     </div>
                                 </div>
-                                <div className="flex gap-8">
-                                    <div className="text-center">
-                                        <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">XP</p>
-                                        <p className="text-2xl font-black text-[var(--brand-primary)]">{userData.xp?.toLocaleString()}</p>
+                                <div className="flex gap-10">
+                                    <div className="text-left">
+                                        <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest mb-1">Total XP</p>
+                                        <p className="text-2xl font-black text-[var(--brand-primary)] tracking-tighter">{userData.xp?.toLocaleString()}</p>
                                     </div>
-                                    <div className="text-center">
-                                        <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Streak</p>
-                                        <p className="text-2xl font-black text-[var(--brand-accent)]">{userData.streak || 0}d</p>
+                                    <div className="text-left">
+                                        <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest mb-1">Streak</p>
+                                        <p className="text-2xl font-black text-[var(--brand-accent)] tracking-tighter">{userData.streak || 0}d 🔥</p>
                                     </div>
+                                    <BrightButton onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} size="sm">
+                                        Top ⬆️
+                                    </BrightButton>
                                 </div>
-                                <BrightButton onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                                    Back to top
-                                </BrightButton>
                             </div>
                         </BrightLayer>
                     </motion.div>
                 )}
             </div>
+
+            {/* Professor Bright Mascot Feedback */}
+            <ProfessorBrightMascot feedback={mascotFeedback} />
         </div>
     );
 }

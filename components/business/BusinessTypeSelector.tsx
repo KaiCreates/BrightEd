@@ -124,20 +124,27 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
     };
 
     return (
-        <div className="w-full">
-            <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div className="w-full pb-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-                {/* Header */}
+                {/* Header & Branding */}
                 <motion.div
-                    className="text-center mb-10"
+                    className="text-center mb-8 bg-[var(--bg-elevated)]/30 p-6 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-sm"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
-                    <BrightHeading level={1} className="mb-4">
-                        Choose Your Path
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-[var(--brand-primary)] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[var(--brand-primary)]/20">
+                            <span className="text-xl font-black">B</span>
+                        </div>
+                        <span className="text-xl font-black tracking-tight text-[var(--text-primary)]">BrightEd <span className="text-[var(--brand-primary)]">Enterprise</span></span>
+                    </div>
+
+                    <BrightHeading level={1} className="text-4xl md:text-5xl mb-3 tracking-tight">
+                        Choose Your <span className="text-[var(--brand-primary)] underline decoration-wavy decoration-4 underline-offset-8">Path</span>
                     </BrightHeading>
-                    <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-                        Your business type determines how you earn money, what challenges you face, and how success is measured.
+                    <p className="text-sm md:text-base text-[var(--text-secondary)] font-medium max-w-xl mx-auto opacity-80">
+                        Select a business model. Your choice defines your starting capital, daily costs, and success metrics.
                     </p>
                 </motion.div>
 
@@ -150,22 +157,22 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                         >
-                            {/* Luka's guidance */}
-                            <div className="mb-10">
+                            {/* Luka's guidance - Compacted */}
+                            <div className="mb-8 scale-90 origin-top">
                                 <CharacterDialogue
                                     node={introDialogue}
-                                    typewriterSpeed={20}
+                                    typewriterSpeed={15}
                                 />
                             </div>
 
-                            {/* Business Type Grid */}
-                            <div className="grid md:grid-cols-2 gap-6">
+                            {/* Business Type Grid - 4 Columns for No Scroll */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {ALL_BUSINESS_TYPES.map((type, idx) => (
                                     <motion.div
                                         key={type.id}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: idx * 0.03 }}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: idx * 0.05 }}
                                     >
                                         <button
                                             onClick={() => handleTypeSelect(type)}
@@ -173,62 +180,66 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                         >
                                             <BrightLayer
                                                 variant="glass"
-                                                padding="lg"
-                                                className={`relative overflow-hidden transition-all duration-300 
-                          group-hover:border-[var(--brand-primary)]/50 
-                          group-hover:shadow-xl ${categoryStyles[type.category].glow}`}
+                                                padding="md"
+                                                className={`relative overflow-hidden transition-all h-[340px] flex flex-col justify-between
+                          border-b-[6px] border-[var(--border-subtle)] 
+                          active:border-b-0 active:translate-y-[6px]
+                          hover:bg-white/[0.05] hover:border-b-[var(--brand-primary)]/50
+                          ${categoryStyles[type.category].glow}`}
                                             >
-                                                {/* Background gradient */}
-                                                <div className={`absolute inset-0 bg-gradient-to-br ${categoryStyles[type.category].gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                                                {/* Category Label */}
+                                                <div className={`
+                                                   absolute top-0 right-0 px-3 py-1 rounded-bl-xl text-[9px] font-black uppercase tracking-widest text-white shadow-sm
+                                                   ${type.category === 'service' ? 'bg-purple-500' :
+                                                        type.category === 'retail' ? 'bg-blue-500' :
+                                                            type.category === 'food' ? 'bg-orange-500' : 'bg-emerald-500'}
+                                                `}>
+                                                    {type.category}
+                                                </div>
 
-                                                <div className="relative z-10">
-                                                    {/* Header */}
-                                                    <div className="flex items-start justify-between mb-4">
-                                                        <div className="flex items-center gap-3">
-                                                            <span className="text-4xl">{type.emoji}</span>
-                                                            <div>
-                                                                <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                                                                    {type.name}
-                                                                </h3>
-                                                                <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">
-                                                                    {type.category}
-                                                                </span>
-                                                            </div>
+                                                <div className="relative z-10 flex flex-col h-full">
+                                                    {/* Visual Section */}
+                                                    <div className="flex flex-col items-center text-center mb-4">
+                                                        <div className="w-16 h-16 rounded-2xl bg-white/[0.03] flex items-center justify-center text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                                            {type.emoji}
                                                         </div>
-                                                        <div className="text-right">
-                                                            <p className="text-sm text-[var(--text-muted)]">Starting Capital</p>
-                                                            <p className="text-lg font-bold text-[var(--brand-accent)]">
-                                                                ฿{type.startingCapital.toLocaleString()}
-                                                            </p>
-                                                        </div>
+                                                        <h3 className="text-lg font-black text-[var(--text-primary)] leading-tight">
+                                                            {type.name}
+                                                        </h3>
                                                     </div>
 
-                                                    {/* Description */}
-                                                    <p className="text-[var(--text-secondary)] mb-4 leading-relaxed">
+                                                    {/* Body */}
+                                                    <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-medium line-clamp-3 mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
                                                         {type.description}
                                                     </p>
 
-                                                    {/* Quick stats */}
-                                                    <div className="flex gap-4 text-sm">
-                                                        <div className="flex items-center gap-1">
-                                                            <span className="text-[var(--text-muted)]">Products:</span>
-                                                            <span className="font-bold text-[var(--text-primary)]">{type.products.length}</span>
+                                                    {/* Footer Info */}
+                                                    <div className="mt-auto space-y-3">
+                                                        <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
+                                                            <span>Starting Capital</span>
+                                                            <span className="text-[var(--brand-accent)] text-xs">฿{type.startingCapital.toLocaleString()}</span>
                                                         </div>
-                                                        <div className="flex items-center gap-1">
-                                                            <span className="text-[var(--text-muted)]">Peak demand:</span>
-                                                            <span className="font-bold text-[var(--text-primary)]">
-                                                                {type.category === 'food' ? 'Lunch' :
-                                                                    type.category === 'retail' ? 'Evening' :
-                                                                        type.category === 'service' ? 'Afternoon' : 'Weekdays'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
 
-                                                    {/* CTA */}
-                                                    <div className="mt-4 pt-4 border-t border-[var(--border-subtle)] flex justify-end">
-                                                        <span className="text-sm font-bold text-[var(--brand-primary)] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                                                            Choose this path <span>→</span>
-                                                        </span>
+                                                        <div className="flex justify-between items-center">
+                                                            <div className="flex items-center gap-1.5">
+                                                                <span className="text-xs">📦</span>
+                                                                <span className="text-[10px] font-bold text-[var(--text-secondary)]">{type.products.length} Items</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-1.5">
+                                                                <span className="text-xs">🕒</span>
+                                                                <span className="text-[10px] font-bold text-[var(--text-secondary)]">
+                                                                    {type.category === 'food' ? 'Lunch' :
+                                                                        type.category === 'retail' ? 'Evening' :
+                                                                            type.category === 'service' ? 'Afternoon' : 'Day'}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="pt-3 border-t border-white/5">
+                                                            <div className="text-center py-1.5 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] text-[10px] font-black uppercase tracking-widest group-hover:bg-[var(--brand-primary)] group-hover:text-white transition-all">
+                                                                Choose Path
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </BrightLayer>
@@ -257,42 +268,53 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="max-w-xl mx-auto"
+                            className="max-w-xl mx-auto px-4"
                         >
-                            <BrightLayer variant="glass" padding="lg" className="text-center">
-                                <span className="text-6xl mb-4 inline-block">{selectedType.emoji}</span>
-                                <BrightHeading level={2} className="mb-2">
-                                    Name Your {selectedType.name}
+                            <BrightLayer variant="elevated" padding="lg" className="text-center border-b-[8px] border-[var(--brand-primary)]">
+                                <div className="w-24 h-24 rounded-3xl bg-white/[0.03] flex items-center justify-center text-7xl mx-auto mb-6 shadow-inner animate-bounce-slow">
+                                    {selectedType.emoji}
+                                </div>
+                                <BrightHeading level={2} className="text-3xl mb-3 tracking-tight">
+                                    Name Your <span className="text-[var(--brand-primary)]">{selectedType.name}</span>
                                 </BrightHeading>
-                                <p className="text-[var(--text-secondary)] mb-8">
-                                    Give your business a name that customers will remember.
+                                <p className="text-[var(--text-secondary)] mb-10 font-medium">
+                                    This name will appear on your official charter and credit card.
                                 </p>
 
-                                <input
-                                    type="text"
-                                    value={businessName}
-                                    onChange={(e) => setBusinessName(e.target.value)}
-                                    placeholder={`e.g., "${selectedType.category === 'food' ? "Mama's Kitchen" :
-                                        selectedType.category === 'service' ? "Style Studio" :
-                                            selectedType.category === 'retail' ? "Corner Mart" :
-                                                "Creative Design Co."}`}
-                                    className="w-full px-6 py-4 text-xl bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-2xl 
-                    text-[var(--text-primary)] placeholder:text-[var(--text-muted)] 
-                    focus:border-[var(--brand-primary)] focus:outline-none transition-colors text-center"
-                                    autoFocus
-                                    maxLength={40}
-                                />
+                                <div className="relative group">
+                                    <input
+                                        type="text"
+                                        value={businessName}
+                                        onChange={(e) => setBusinessName(e.target.value)}
+                                        placeholder={`e.g., "${selectedType.category === 'food' ? "Mama's Kitchen" :
+                                            selectedType.category === 'service' ? "Style Studio" :
+                                                selectedType.category === 'retail' ? "Corner Mart" :
+                                                    "Creative Design Co."}`}
+                                        className="w-full px-8 py-5 text-2xl bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-[2rem] 
+                        text-[var(--text-primary)] placeholder:text-[var(--text-muted)] 
+                        focus:border-[var(--brand-primary)] focus:outline-none transition-all text-center font-black shadow-inner"
+                                        autoFocus
+                                        maxLength={40}
+                                    />
+                                    <div className="absolute inset-0 rounded-[2rem] border-4 border-[var(--brand-primary)]/0 group-focus-within:border-[var(--brand-primary)]/10 pointer-events-none transition-all" />
+                                </div>
 
-                                <div className="mt-8 flex justify-center gap-4">
-                                    <BrightButton variant="ghost" onClick={handleBack}>
+                                <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
+                                    <BrightButton
+                                        variant="ghost"
+                                        onClick={handleBack}
+                                        className="order-2 sm:order-1"
+                                    >
                                         ← Back
                                     </BrightButton>
                                     <BrightButton
                                         variant="primary"
+                                        size="lg"
                                         onClick={handleNameSubmit}
                                         disabled={businessName.trim().length < 3}
+                                        className="order-1 sm:order-2 px-12 py-6 text-lg font-black"
                                     >
-                                        Continue →
+                                        Next Step →
                                     </BrightButton>
                                 </div>
                             </BrightLayer>
@@ -306,114 +328,131 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="max-w-5xl mx-auto"
+                            className="max-w-6xl mx-auto px-4"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                                <div className="lg:col-span-5">
-                                    <BusinessCreditCard
-                                        businessName={businessName}
-                                        ownerName="Director"
-                                        themeColor={themeColor}
-                                        logoUrl={logoUrl || undefined}
-                                        icon={icon}
-                                        cardLabel="BUSINESS CREDIT"
-                                    />
+                            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+                                {/* Left: Card Preview */}
+                                <div className="xl:col-span-5 flex flex-col gap-6">
+                                    <div className="relative group">
+                                        <div className="absolute inset-x-0 -bottom-8 bg-[var(--brand-primary)]/10 h-10 rounded-[3rem] blur-2xl group-hover:bg-[var(--brand-primary)]/20 transition-all opacity-0 group-hover:opacity-100" />
+                                        <BusinessCreditCard
+                                            businessName={businessName}
+                                            ownerName="Director"
+                                            themeColor={themeColor}
+                                            logoUrl={logoUrl || undefined}
+                                            icon={icon}
+                                            cardLabel="BUSINESS CREDIT"
+                                            className="transform rotate-0 group-hover:-rotate-1 group-hover:scale-[1.02] transition-all duration-500 shadow-2xl"
+                                        />
+                                    </div>
+                                    <BrightLayer variant="glass" padding="sm" className="bg-white/[0.02] border border-white/5 rounded-2xl text-center">
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Live Preview • Legal Identity</p>
+                                    </BrightLayer>
                                 </div>
 
-                                <div className="lg:col-span-7">
-                                    <BrightLayer variant="glass" padding="lg" className="border-2 border-[var(--border-subtle)]">
-                                        <div className="flex items-start justify-between gap-4 mb-8">
-                                            <div>
-                                                <BrightHeading level={2} className="mb-2">Branding</BrightHeading>
-                                                <p className="text-[var(--text-secondary)]">Choose a logo, icon, and theme color. This will style your business card.</p>
-                                            </div>
-                                            <div className="text-3xl">🎨</div>
-                                        </div>
+                                {/* Right: Controls */}
+                                <div className="xl:col-span-7">
+                                    <BrightLayer variant="elevated" padding="lg" className="border-b-[8px] border-[var(--border-subtle)] relative overflow-hidden bg-white/[0.02]">
+                                        <div className="absolute top-0 right-0 p-8 text-5xl opacity-10 pointer-events-none">🎨</div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="space-y-3">
-                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Theme Color</div>
-                                                <div className="flex items-center gap-3">
-                                                    <input
-                                                        type="color"
-                                                        value={themeColor}
-                                                        onChange={(e) => setThemeColor(e.target.value)}
-                                                        className="h-10 w-14 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]"
-                                                    />
-                                                    <input
-                                                        type="text"
-                                                        value={themeColor}
-                                                        onChange={(e) => setThemeColor(e.target.value)}
-                                                        className="flex-1 px-4 py-3 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--brand-primary)] focus:outline-none"
-                                                        placeholder="#7c3aed"
-                                                    />
-                                                </div>
+                                        <div className="relative z-10">
+                                            <div className="mb-8">
+                                                <BrightHeading level={2} className="text-3xl tracking-tight mb-2">Corporate Identity</BrightHeading>
+                                                <p className="text-[var(--text-secondary)] font-medium">Define your brand visual assets to differentiate in the market.</p>
                                             </div>
 
-                                            <div className="space-y-3">
-                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Logo Upload</div>
-                                                <div className="flex items-center gap-3">
-                                                    <label className="flex-1">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                {/* Theme Color */}
+                                                <div className="space-y-4">
+                                                    <div className="text-[11px] font-black uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-primary)]" /> Theme Color
+                                                    </div>
+                                                    <div className="flex items-center gap-4 p-2 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-subtle)] group focus-within:border-[var(--brand-primary)]/50 transition-colors">
                                                         <input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            onChange={(e) => {
-                                                                const file = e.target.files?.[0];
-                                                                if (file) handleLogoUpload(file);
-                                                            }}
-                                                            className="hidden"
+                                                            type="color"
+                                                            value={themeColor}
+                                                            onChange={(e) => setThemeColor(e.target.value)}
+                                                            className="h-12 w-12 rounded-xl border-0 bg-transparent cursor-pointer overflow-hidden p-0"
                                                         />
-                                                        <div className="px-4 py-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/40 hover:border-[var(--brand-primary)]/40 transition-colors cursor-pointer text-sm font-bold text-[var(--text-primary)]">
-                                                            {logoUploading ? 'Uploading...' : (logoUrl ? 'Replace Logo' : 'Upload Logo')}
-                                                        </div>
-                                                    </label>
-                                                    {logoUrl && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => setLogoUrl('')}
-                                                            className="px-4 py-3 rounded-xl border border-[var(--border-subtle)] bg-transparent hover:bg-[var(--bg-elevated)]/40 transition-colors text-sm font-bold text-[var(--text-muted)]"
-                                                        >
-                                                            Clear
-                                                        </button>
-                                                    )}
+                                                        <input
+                                                            type="text"
+                                                            value={themeColor}
+                                                            onChange={(e) => setThemeColor(e.target.value)}
+                                                            className="flex-1 bg-transparent border-0 text-lg font-black text-[var(--text-primary)] focus:outline-none uppercase"
+                                                            placeholder="#7c3aed"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                {logoError && (
-                                                    <div className="text-sm font-bold text-[var(--state-error)]">{logoError}</div>
-                                                )}
+
+                                                {/* Logo Upload */}
+                                                <div className="space-y-4">
+                                                    <div className="text-[11px] font-black uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Logo Upload
+                                                    </div>
+                                                    <div className="flex items-center gap-3">
+                                                        <label className="flex-1 group">
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                onChange={(e) => {
+                                                                    const file = e.target.files?.[0];
+                                                                    if (file) handleLogoUpload(file);
+                                                                }}
+                                                                className="hidden"
+                                                            />
+                                                            <div className="px-6 py-4 rounded-2xl border-2 border-dashed border-[var(--border-subtle)] bg-[var(--bg-secondary)] hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)]/5 transition-all cursor-pointer text-sm font-black text-[var(--text-primary)] text-center shadow-inner">
+                                                                {logoUploading ? '⏳ Uploading...' : (logoUrl ? '✅ Replace' : '📁 Upload File')}
+                                                            </div>
+                                                        </label>
+                                                        {logoUrl && (
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setLogoUrl('')}
+                                                                className="p-4 rounded-2xl border border-[var(--border-subtle)] bg-transparent hover:bg-red-500/10 hover:border-red-500/30 transition-all text-sm font-black text-red-500"
+                                                            >
+                                                                🗑️
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {/* Preset Icon */}
+                                                <div className="md:col-span-2 space-y-4">
+                                                    <div className="text-[11px] font-black uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Symbol Pack
+                                                    </div>
+                                                    <div className="grid grid-cols-4 sm:grid-cols-7 lg:grid-cols-10 gap-2 sm:gap-3">
+                                                        {presetIcons.map((i) => (
+                                                            <button
+                                                                key={i}
+                                                                type="button"
+                                                                onClick={() => setIcon(i)}
+                                                                className={`h-11 w-11 sm:h-12 sm:w-12 rounded-2xl border-2 transition-all text-xl active:scale-90 flex items-center justify-center ${icon === i
+                                                                    ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] shadow-[0_0_20px_rgba(var(--brand-primary-rgb),0.3)] text-white scale-110 z-10'
+                                                                    : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 hover:border-white/20'
+                                                                    }`}
+                                                            >
+                                                                {i}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div className="md:col-span-2 space-y-3">
-                                                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Preset Icon</div>
-                                                <div className="grid grid-cols-7 sm:grid-cols-10 gap-2">
-                                                    {presetIcons.map((i) => (
-                                                        <button
-                                                            key={i}
-                                                            type="button"
-                                                            onClick={() => setIcon(i)}
-                                                            className={`h-11 w-11 rounded-xl border transition-all text-lg active:scale-95 ${icon === i
-                                                                    ? 'border-white/10 bg-[var(--brand-primary)]/20 shadow-lg'
-                                                                    : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 hover:border-[var(--brand-primary)]/40'
-                                                                }`}
-                                                        >
-                                                            {i}
-                                                        </button>
-                                                    ))}
-                                                </div>
+                                            <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4">
+                                                <BrightButton variant="ghost" onClick={handleBack} className="w-full sm:w-auto">
+                                                    ← Back
+                                                </BrightButton>
+                                                <BrightButton
+                                                    variant="primary"
+                                                    size="lg"
+                                                    onClick={() => setStep('confirm')}
+                                                    disabled={logoUploading}
+                                                    className="w-full sm:w-auto px-12 py-5 text-lg font-black border-b-4 border-black/20"
+                                                >
+                                                    Finalize Identity →
+                                                </BrightButton>
                                             </div>
-                                        </div>
-
-                                        <div className="mt-10 flex justify-between items-center gap-4">
-                                            <BrightButton variant="ghost" onClick={handleBack}>
-                                                ← Back
-                                            </BrightButton>
-                                            <BrightButton
-                                                variant="primary"
-                                                size="lg"
-                                                onClick={() => setStep('confirm')}
-                                                disabled={logoUploading}
-                                            >
-                                                Continue →
-                                            </BrightButton>
                                         </div>
                                     </BrightLayer>
                                 </div>
@@ -421,61 +460,86 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                         </motion.div>
                     )}
 
-                    {/* Step 4: Confirm */}
+                    {/* Step 4: Confirm Launch */}
                     {step === 'confirm' && selectedType && (
                         <motion.div
                             key="confirm"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.95 }}
-                            className="max-w-xl mx-auto"
+                            className="max-w-2xl mx-auto px-4"
                         >
                             <BrightLayer
-                                variant="glass"
+                                variant="elevated"
                                 padding="lg"
-                                className="text-center border-2 border-[var(--brand-primary)]/30"
+                                className="text-center border-b-[8px] border-[var(--brand-primary)] overflow-hidden relative"
                             >
-                                <span className="text-6xl mb-4 inline-block">{logoUrl ? '✅' : icon}</span>
-                                <BrightHeading level={2} className="mb-2">
-                                    {businessName}
-                                </BrightHeading>
-                                <p className="text-[var(--text-secondary)] mb-6">
-                                    {selectedType.name} • Starting with ฿{selectedType.startingCapital.toLocaleString()}
-                                </p>
+                                {/* Background flare */}
+                                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[var(--brand-primary)] to-transparent opacity-50" />
+                                <div className="absolute -top-24 -left-24 w-64 h-64 bg-[var(--brand-primary)] opacity-10 blur-[100px] rounded-full" />
 
-                                <div className="bg-[var(--bg-elevated)]/50 rounded-xl p-4 mb-8 text-left">
-                                    <h4 className="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)] mb-3">
-                                        What you&apos;ll face:
-                                    </h4>
-                                    <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-[var(--state-warning)]">⚡</span>
-                                            Daily operating costs (rent, utilities, staff)
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-[var(--state-info)]">📦</span>
-                                            {selectedType.category === 'food'
-                                                ? 'Ingredient spoilage and waste management'
-                                                : selectedType.category === 'retail'
-                                                    ? 'Inventory management and stock levels'
-                                                    : selectedType.category === 'service'
-                                                        ? 'Appointment scheduling and quality'
-                                                        : 'Deadlines and client expectations'}
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <span className="text-[var(--state-success)]">⭐</span>
-                                            Reputation affects your order volume
-                                        </li>
-                                    </ul>
-                                </div>
+                                <div className="relative z-10">
+                                    <div className="w-24 h-24 rounded-full bg-[var(--brand-primary)] text-white text-5xl mx-auto mb-6 flex items-center justify-center shadow-[0_0_30px_rgba(var(--brand-primary-rgb),0.3)] animate-pulse">
+                                        🚀
+                                    </div>
+                                    <BrightHeading level={1} className="text-4xl md:text-5xl mb-2 tracking-tighter">
+                                        Ready for <span className="text-[var(--brand-primary)]">Launch?</span>
+                                    </BrightHeading>
+                                    <p className="text-[var(--text-secondary)] mb-10 font-medium">Final review of your business charter.</p>
 
-                                <div className="flex justify-center gap-4">
-                                    <BrightButton variant="ghost" onClick={handleBack}>
-                                        ← Change
-                                    </BrightButton>
-                                    <BrightButton variant="primary" size="lg" onClick={handleConfirm}>
-                                        Launch My Business 🚀
-                                    </BrightButton>
+                                    <div className="space-y-4 mb-10">
+                                        <div className="bg-white/[0.03] rounded-3xl p-6 border border-white/5 flex flex-col sm:flex-row items-center gap-6 text-left">
+                                            <div className="w-20 h-20 rounded-2xl bg-white/[0.03] flex items-center justify-center text-5xl shrink-0">
+                                                {icon || selectedType.emoji}
+                                            </div>
+                                            <div>
+                                                <h4 className="text-2xl font-black text-[var(--text-primary)] leading-tight mb-1">{businessName}</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    <span className="px-3 py-0.5 rounded-full bg-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-[10px] font-black uppercase tracking-widest">{selectedType.name}</span>
+                                                    <span className="px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px] font-black uppercase tracking-widest">฿{selectedType.startingCapital.toLocaleString()} Capital</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="bg-white/[0.02] rounded-3xl p-5 border border-white/5 text-left h-full">
+                                                <div className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> Operational Risks
+                                                </div>
+                                                <ul className="space-y-2 text-xs text-[var(--text-secondary)] font-medium">
+                                                    <li>• Daily operating costs apply</li>
+                                                    <li>• System spoilage risk: {selectedType.category === 'food' ? 'High' : 'Medium'}</li>
+                                                </ul>
+                                            </div>
+                                            <div className="bg-white/[0.02] rounded-3xl p-5 border border-white/5 text-left h-full">
+                                                <div className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Success Metrics
+                                                </div>
+                                                <ul className="space-y-2 text-xs text-[var(--text-secondary)] font-medium">
+                                                    <li>• Reputation-based demand</li>
+                                                    <li>• Profit margin tracking</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                        <BrightButton
+                                            variant="ghost"
+                                            onClick={handleBack}
+                                            className="order-2 sm:order-1"
+                                        >
+                                            ← Adjust Brand
+                                        </BrightButton>
+                                        <BrightButton
+                                            variant="primary"
+                                            size="lg"
+                                            onClick={handleConfirm}
+                                            className="order-1 sm:order-2 px-16 py-6 text-xl font-black border-b-[6px] border-black/20"
+                                        >
+                                            Launch My Empire 🥂
+                                        </BrightButton>
+                                    </div>
                                 </div>
                             </BrightLayer>
                         </motion.div>

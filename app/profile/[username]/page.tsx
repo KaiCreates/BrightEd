@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/lib/auth-context';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
@@ -205,10 +206,12 @@ export default function UserProfilePage() {
                                                 dangerouslySetInnerHTML={{ __html: avatarSvg }}
                                             />
                                         ) : (
-                                            <img
+                                            <Image
                                                 src={profileData.avatarUrl || fallbackAvatarUrl}
                                                 alt={username}
-                                                className="w-full h-full object-cover"
+                                                fill
+                                                sizes="(max-width: 768px) 160px, 208px"
+                                                className="object-cover"
                                             />
                                         )}
                                     </div>
@@ -412,11 +415,15 @@ function FriendRow({ name, username, sub, xp }: { name: string, username: string
             <div className="p-4 flex items-center justify-between group hover:bg-white/[0.02] transition-colors">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full border border-white/10 shadow-lg overflow-hidden flex items-center justify-center bg-white/5 group-hover:scale-105 transition-transform">
-                        <img
-                            src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(username)}&backgroundType=solid&backgroundColor=FF8A8A`}
-                            alt={username}
-                            className="w-full h-full"
-                        />
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(username)}&backgroundType=solid&backgroundColor=FF8A8A`}
+                                alt={username}
+                                fill
+                                sizes="40px"
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
                     <div>
                         <div className="font-black text-sm group-hover:text-[var(--brand-primary)] transition-colors">{name}</div>
@@ -513,11 +520,15 @@ function UserSearchModal({ isOpen, onClose, currentUser, onFollow }: { isOpen: b
                                     <div className="flex items-center justify-between p-4 rounded-3xl bg-white/5 hover:bg-white/10 transition-all border border-transparent hover:border-white/10 group">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full border-2 border-[var(--brand-primary)] p-0.5 overflow-hidden">
-                                                <img
-                                                    src={u.avatarUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(u.username)}&backgroundType=solid&backgroundColor=FF8A8A`}
-                                                    className="w-full h-full rounded-full bg-white/10"
-                                                    alt={u.username}
-                                                />
+                                                <div className="relative w-full h-full rounded-full bg-white/10 overflow-hidden">
+                                                    <Image
+                                                        src={u.avatarUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(u.username)}&backgroundType=solid&backgroundColor=FF8A8A`}
+                                                        alt={u.username}
+                                                        fill
+                                                        sizes="48px"
+                                                        className="object-cover"
+                                                    />
+                                                </div>
                                             </div>
                                             <div>
                                                 <div className="font-black text-sm group-hover:text-[var(--brand-primary)] transition-colors">{u.firstName || u.username}</div>

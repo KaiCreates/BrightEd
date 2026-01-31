@@ -131,7 +131,7 @@ export default function AvatarCustomizationPage() {
 
     const username = params?.username as string;
 
-    const constructLocalSvg = (c: any) => {
+    const constructLocalSvg = React.useCallback((c: any) => {
         const avatar = createAvatar(avataaars, {
             seed: username,
             backgroundColor: [c.backgroundColor],
@@ -147,7 +147,7 @@ export default function AvatarCustomizationPage() {
             backgroundType: ['solid']
         });
         return avatar.toString();
-    };
+    }, [username]);
 
     const getCloudUrl = (c: any) => {
         const seedValue = encodeURIComponent(username);
@@ -178,7 +178,7 @@ export default function AvatarCustomizationPage() {
         setConfig((prev: any) => ({ ...prev, [field]: value }));
     };
 
-    const previewSvg = React.useMemo(() => constructLocalSvg(config), [config, username]);
+    const previewSvg = React.useMemo(() => constructLocalSvg(config), [config, constructLocalSvg]);
 
     if (authLoading) return (
         <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">

@@ -215,7 +215,7 @@ function DiagnosticContent() {
                         <h1 className="text-3xl font-extrabold text-slate-700 mb-4">Quick Evaluation</h1>
                         <p className="text-slate-400 font-bold mb-8">
                             This short evaluation helps us find the perfect starting point for you.
-                            If it seems easy at first, don't worry—it's just calibrating!
+                            If it seems easy at first, don&apos;t worry—it&apos;s just calibrating!
                         </p>
                     </div>
                     <button
@@ -265,7 +265,7 @@ function DiagnosticContent() {
                             />
                         </div>
                         <p className="mt-6 text-slate-500 font-bold">
-                            We've unlocked the <strong>{stats.generalLevel > 6 ? 'Advanced' : 'Foundational'}</strong> learning path based on your performance.
+                            We&apos;ve unlocked the <strong>{stats.generalLevel > 6 ? 'Advanced' : 'Foundational'}</strong> learning path based on your performance.
                         </p>
                     </div>
 
