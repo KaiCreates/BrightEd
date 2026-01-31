@@ -116,7 +116,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [blockedUsers, setBlockedUsers] = useState<string[]>([]);
     const [mutedUsers, setMutedUsers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
-    const [lastMessageTime, setLastMessageTime] = useState<number>(0);
+    const lastMessageTimeRef = useRef<number>(0);
     const typingWriteRef = useRef<{ lastAt: number; lastState: boolean }>({ lastAt: 0, lastState: false });
 
     // Initialize subject lounges
@@ -479,10 +479,10 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
         // Rate limiting: 1 message per 2 seconds
         const now = Date.now();
-        if (now - lastMessageTime < 2000) {
+        if (now - lastMessageTimeRef.current < 2000) {
             throw new Error('Please wait before sending another message');
         }
-        setLastMessageTime(now);
+        lastMessageTimeRef.current = now;
 
         // Get business valuation for prestige
         let businessPrestige = 0;
@@ -509,7 +509,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             whiteboardThumbnailUrl: options?.whiteboardThumbnailUrl || null,
             reactions: {}
         });
-    }, [user, activeRoom, userData, lastMessageTime]);
+    }, [user, activeRoom, userData]);
 
     const sendDM = useCallback(async (userId: string, text: string) => {
         if (!user) return;

@@ -26,6 +26,12 @@ export default function UserProfilePage() {
     const username = params?.username as string;
 
     useEffect(() => {
+        if (isOwner) {
+            router.push('/profile');
+        }
+    }, [isOwner, router]);
+
+    useEffect(() => {
         if (authLoading) return;
 
         const fetchProfile = async () => {

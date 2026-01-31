@@ -321,7 +321,7 @@ function CommandCenterContent() {
                   businessType,
                   customerProfile
                 );
-                
+
                 const { order: completed, payment, tip, inventoryDeductions, loyaltyUpdate } = completionResult;
 
                 const stars = qualityScore >= 95 ? 6 : Math.ceil((qualityScore / 100) * 5);
@@ -371,11 +371,11 @@ function CommandCenterContent() {
                 if (!emp.skills || Object.keys(emp.skills).length === 0) {
                   emp.skills = initializeEmployeeSkills(emp.role);
                 }
-                
+
                 const taskDifficulty = 'easy'; // Auto-work is easier
                 const primarySkill = emp.role === 'speedster' ? 'speed' : emp.role === 'specialist' ? 'quality' : 'customer_service';
                 const result = updateEmployeeAfterTask(emp, taskDifficulty, primarySkill);
-                
+
                 return result.updatedEmployee;
               });
 
@@ -439,7 +439,7 @@ function CommandCenterContent() {
         }
 
         const activeCount = orders.filter((o) => o.status === 'accepted' || o.status === 'in_progress').length;
-        
+
         // Convert customer profiles to Map
         const customerProfilesMap = new Map<string, CustomerProfile>();
         if (business.customerProfiles) {
@@ -447,7 +447,7 @@ function CommandCenterContent() {
             customerProfilesMap.set(id, profile as CustomerProfile);
           });
         }
-        
+
         const newOrders = generateOrdersForTick(businessType, business, simHour, activeCount, 15, customerProfilesMap);
 
         if (newOrders.length > 0) {
@@ -495,21 +495,21 @@ function CommandCenterContent() {
     if (!order) return;
 
     const qualityScore = customQuality ?? Math.floor(60 + Math.random() * 40);
-    
+
     // Get or create customer profile
     const customerProfiles = business.customerProfiles || {};
     let customerProfile = customerProfiles[order.customerId] as CustomerProfile | undefined;
     if (!customerProfile) {
       customerProfile = createCustomerProfile(order.customerId, order.customerName);
     }
-    
+
     const completionResult = completeOrder(
       order,
       qualityScore,
       businessType ?? undefined,
       customerProfile
     );
-    
+
     const { order: completed, payment, tip, inventoryDeductions, loyaltyUpdate } = completionResult;
 
     const currentInv = business.inventory || {};
@@ -572,7 +572,7 @@ function CommandCenterContent() {
         totalOrders: customerProfile.totalOrders + 1,
         lifetimeValue: customerProfile.lifetimeValue + order.totalAmount,
       };
-      
+
       updates.customerProfileUpdate = {
         customerId: order.customerId,
         profile: updatedProfile
@@ -587,11 +587,11 @@ function CommandCenterContent() {
         if (!emp.skills || Object.keys(emp.skills).length === 0) {
           emp.skills = initializeEmployeeSkills(emp.role);
         }
-        
+
         // Award XP based on role
         const primarySkill = emp.role === 'speedster' ? 'speed' : emp.role === 'specialist' ? 'quality' : 'customer_service';
         const result = updateEmployeeAfterTask(emp, taskDifficulty, primarySkill, ['speed', 'quality']);
-        
+
         return result.updatedEmployee;
       });
 
@@ -627,6 +627,49 @@ function CommandCenterContent() {
   }
 
   if (!business && !isRegistering) {
+    // Check for Orphaned State: User has flag but no business data found
+    if (userData?.hasBusiness && !loading) {
+      return (
+        <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden flex items-center justify-center">
+          <DashboardAmbience cashBalance={0} />
+          <BrightLayer variant="glass" padding="xl" className="max-w-md w-full text-center border-red-500/30">
+            <div className="text-4xl mb-4">⚠️</div>
+            <BrightHeading level={3} className="mb-2">Data Sync Error</BrightHeading>
+            <p className="text-[var(--text-secondary)] mb-6 text-sm">
+              Your account is flagged as having a business, but the operation center cannot find your files. This usually happens if a previous shutdown was interrupted.
+            </p>
+            <BrightButton
+              variant="danger"
+              className="w-full"
+              onClick={async () => {
+                if (!window.confirm('Reset registration synchronization?')) return;
+                const token = await user?.getIdToken();
+                if (!token) return;
+
+                try {
+                  const res = await fetch('/api/business/shutdown', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                  });
+
+                  if (res.ok) {
+                    window.location.reload();
+                  } else {
+                    alert('Failed to reset. Please try again.');
+                  }
+                } catch (e) {
+                  console.error(e);
+                  alert('Connection error.');
+                }
+              }}
+            >
+              Reset Registration
+            </BrightButton>
+          </BrightLayer>
+        </div>
+      )
+    }
+
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
         <DashboardAmbience cashBalance={0} />
@@ -784,7 +827,7 @@ function CommandCenterContent() {
                 <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
                   Customer Relationships
                 </BrightHeading>
-                <LoyaltyDashboard 
+                <LoyaltyDashboard
                   customers={Object.values(business.customerProfiles).map(p => ({
                     id: p.id,
                     name: p.name,
