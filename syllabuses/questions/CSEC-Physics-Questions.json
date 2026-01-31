@@ -1,0 +1,56 @@
+[
+    {
+        "id": "Q-PHYS-01-001",
+        "topic_id": "PHYS-01-00001",
+        "type": "MCQ",
+        "difficulty": 1,
+        "question": "Which of the following is a vector quantity?",
+        "options": [
+            {
+                "id": "a",
+                "text": "Mass"
+            },
+            {
+                "id": "b",
+                "text": "Speed"
+            },
+            {
+                "id": "c",
+                "text": "Velocity"
+            },
+            {
+                "id": "d",
+                "text": "Time"
+            }
+        ],
+        "answer": "c",
+        "explanation": "A vector quantity has both magnitude and direction. Velocity includes direction, whereas speed does not."
+    },
+    {
+        "id": "Q-PHYS-02-001",
+        "topic_id": "PHYS-02-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "A sound wave travels through air. Which of the following properties of the wave describes its loudness?",
+        "options": [
+            {
+                "id": "a",
+                "text": "Frequency"
+            },
+            {
+                "id": "b",
+                "text": "Wavelength"
+            },
+            {
+                "id": "c",
+                "text": "Amplitude"
+            },
+            {
+                "id": "d",
+                "text": "Velocity"
+            }
+        ],
+        "answer": "c",
+        "explanation": "The amplitude of a sound wave determines its loudness, while frequency determines its pitch."
+    }
+]

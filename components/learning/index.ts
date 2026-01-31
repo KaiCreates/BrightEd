@@ -5,7 +5,9 @@ export { default as PathConnector } from './PathConnector'
 export { default as TopicMasteryDashboard } from './TopicMasteryDashboard'
 export { default as StreakCelebration } from './StreakCelebration'
 export { ProfessorBrightMascot } from './ProfessorBrightMascot'
+export { GuidebookModal } from './GuidebookModal'
 
 // Types
 export type { NodeType, NodeStatus, LearningPathNodeProps } from './LearningPathNode'
 export type { TopicMastery, SubSkillMastery } from './TopicMasteryDashboard'
+export type { GuidebookObjective } from './GuidebookModal'

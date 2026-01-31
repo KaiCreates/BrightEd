@@ -1,0 +1,20 @@
+{
+  "subjects": [
+    "Mathematics",
+    "English A",
+    "Principles of Business",
+    "Social Studies",
+    "Biology",
+    "Spanish"
+  ],
+  "source": "tiktok",
+  "proficiencies": {
+    "Mathematics": "2",
+    "English A": "3",
+    "Principles of Business": "2",
+    "Social Studies": "3",
+    "Biology": "2",
+    "Spanish": "3"
+  },
+  "timestamp": "2026-01-31T01:44:59.407Z"
+}

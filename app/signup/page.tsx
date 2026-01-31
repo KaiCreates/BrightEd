@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { z } from 'zod'
-import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { useEffect } from 'react'
 
+// --- Types & Constants ---
 
 const SignUpSchema = z.object({
   email: z.string().email('Invalid email address').min(1, 'Email is required'),
@@ -16,37 +15,85 @@ const SignUpSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters').max(30, 'Username too long').regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
 })
 
+const MascotOwl = ({ pose = 'owl-happy', size = 'sm' }: { pose?: string, size?: 'sm' | 'md' | 'lg' }) => {
+  const sizes = { sm: 48, md: 96, lg: 192 }
+  const pixels = sizes[size]
+
+  const poses: Record<string, number> = {
+    'owl-happy': 0, 'owl-relieved': 1, 'owl-shocked': 2, 'owl-sad-rain': 3,
+    'owl-thinking': 4, 'owl-sad-cloud': 5, 'owl-idea': 6, 'owl-smart': 7,
+    'owl-wink': 8, 'owl-confused': 9, 'owl-reading': 10, 'owl-studying': 11,
+    'owl-sleeping': 12, 'owl-magic': 13, 'owl-zzz': 14, 'owl-bored': 15
+  }
+  const index = poses[pose] || 0
+  const row = Math.floor(index / 4)
+  const col = index % 4
+
+  const posX = (col * 100) / 3
+  const posY = (row * 100) / 3
+
+  return (
+    <div
+      style={{
+        width: `${pixels}px`,
+        height: `${pixels}px`,
+        backgroundImage: "url('/professor-bright-sprite.png')",
+        backgroundSize: '400% 400%',
+        backgroundPosition: `${posX}% ${posY}%`,
+        imageRendering: 'pixelated',
+        flexShrink: 0
+      }}
+      className="flex-shrink-0"
+    />
+  )
+}
+
+// --- Main Component ---
+
 export default function SignUpPage() {
   const router = useRouter()
-  const { user, userData, loading: authLoading } = useAuth()
-  const [loading, setLoading] = useState(false)
+  const searchParams = useSearchParams()
+  const { user, loading: authLoading } = useAuth()
 
-  useEffect(() => {
-    if (!authLoading && user) {
-      router.push(userData?.onboardingCompleted ? '/home' : '/onboarding')
-    }
-  }, [user, userData?.onboardingCompleted, authLoading, router])
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const subjectsParam = searchParams?.get('subjects')
+  const hasSubjects = !!subjectsParam
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     username: '',
+    subjects: subjectsParam?.split(',') || []
   })
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.push('/home')
+    }
+  }, [user, authLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
 
+    if (!hasSubjects) {
+      router.push('/welcome')
+      return
+    }
+
     const { isFirebaseReady } = await import('@/lib/firebase')
     if (!isFirebaseReady) {
-      setError("System temporary unavailable: Firebase configuration is missing. Please check your environment variables.")
+      setError("System temporary unavailable: Firebase configuration is missing.")
       return
     }
 
     setLoading(true)
 
     try {
-      // Validate form with Zod
+      // Validate form
       const validationResult = SignUpSchema.safeParse({
         email: formData.email.trim(),
         password: formData.password,
@@ -54,41 +101,103 @@ export default function SignUpPage() {
       })
 
       if (!validationResult.success) {
-        const firstError = validationResult.error.errors[0]
-        throw new Error(firstError.message)
+        throw new Error(validationResult.error.errors[0].message)
       }
 
       const validatedData = validationResult.data
 
-      // 1. Create User with Firebase Auth
-      const { createUserWithEmailAndPassword } = await import('firebase/auth')
+      // 1. Create User
+      const { createUserWithEmailAndPassword, updateProfile } = await import('firebase/auth')
       const { auth, db } = await import('@/lib/firebase')
-      const { doc, setDoc } = await import('firebase/firestore')
+      const { doc, setDoc, collection, writeBatch } = await import('firebase/firestore')
 
       const userCredential = await createUserWithEmailAndPassword(auth, validatedData.email, validatedData.password)
-      const user = userCredential.user
+      const newUser = userCredential.user
 
-      // 2. Create User Document in Firestore
-      const userDocRef = doc(db, 'users', user.uid)
+      // Update display name immediately
+      await updateProfile(newUser, { displayName: validatedData.username })
+
+      // 2. Prepare User Data (Bypassing Onboarding)
+      const userDocRef = doc(db, 'users', newUser.uid)
+
+      const lvlsParam = searchParams?.get('lvls')
+      const diagnosticMastery = searchParams?.get('mastery')
+      const diagStatsParam = searchParams?.get('diag_stats')
+
+      let proficiencyMap: Record<string, string> = {}
+      try {
+        if (lvlsParam) proficiencyMap = JSON.parse(lvlsParam)
+      } catch (e) {
+        console.error('Failed to parse lvls:', e)
+      }
+
+      const subjectProgress: Record<string, number> = {}
+      formData.subjects.forEach(s => {
+        // If we have a specific diagnostic mastery, we could apply it globally or to specific subjects
+        // For now, if diagnosticMastery exists, we use it as the base.
+        const baseMastery = diagnosticMastery ? parseFloat(diagnosticMastery) : (parseInt(proficiencyMap[s] || '1') * 0.1)
+        subjectProgress[s] = baseMastery
+      })
+
       await setDoc(userDocRef, {
+        uid: newUser.uid,
         username: validatedData.username,
         email: validatedData.email,
-        mastery: 0.1,
-        streak: 0,
-        xp: 0,
+        mastery: diagnosticMastery ? parseFloat(diagnosticMastery) : 0.1,
+        streak: 1,
+        xp: 50,
         bCoins: 100,
         hasBusiness: false,
         businessID: null,
-        consistency: 0,
-        subjectProgress: {},
-        subjects: [],
-        onboardingCompleted: false,
+        consistency: 10,
+        subjectProgress,
+        subjects: formData.subjects,
+        proficiencies: proficiencyMap,
+        diagnosticStats: diagStatsParam ? JSON.parse(diagStatsParam) : null,
+        diagnosticCompleted: !!diagnosticMastery,
+        onboardingCompleted: true,
+        onboardingCompletedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
+        examTrack: 'CSEC',
+        formLevel: 3,
+        country: 'Trinidad and Tobago'
       })
 
-      // Redirect to onboarding
-      router.push('/onboarding')
+      // 3. Initialize Learning Path
+      try {
+        const { paths } = await fetch(
+          '/api/learning-path?' + new URLSearchParams({ subjects: formData.subjects.join(',') })
+        ).then((res) => res.json())
+
+        if (paths) {
+          const batch = writeBatch(db)
+          const progressRef = collection(userDocRef, 'progress')
+          let isFirstModule = true
+
+          for (const [subj, objectives] of Object.entries(paths)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const objectivesList = objectives as any[]
+            for (const obj of objectivesList) {
+              const moduleRef = doc(progressRef, obj.id)
+              batch.set(moduleRef, {
+                moduleId: obj.id,
+                subject: subj,
+                isUnlocked: isFirstModule,
+                status: isFirstModule ? 'active' : 'locked',
+                mastery: 0,
+                attempts: 0,
+              })
+              if (isFirstModule) isFirstModule = false
+            }
+          }
+          await batch.commit()
+        }
+      } catch (pathError) {
+        console.error("Failed to init learning path:", pathError)
+      }
+
+      router.push('/home')
     } catch (err: any) {
       console.error('Signup Error:', err)
       setError(err.message || 'An error occurred during signup')
@@ -98,95 +207,96 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center py-20 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-2xl"
-      >
-        <BrightLayer variant="glass" padding="lg" className="border-[var(--brand-primary)]/30">
-          <div className="text-center mb-8">
-            <BrightHeading level={1} className="mb-2">
-              Create Your Account
-            </BrightHeading>
-            <p className="text-[var(--text-secondary)]">
-              Start your journey to mastering Business, Finance, and IT
-            </p>
-          </div>
+    <div className="min-h-screen bg-white text-[#4b4b4b] font-sans flex items-center justify-center p-4">
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
+      {/* Header / Logo */}
+      <div className="absolute top-6 left-6 flex items-center gap-2">
+        <MascotOwl pose="owl-happy" size="sm" />
+        <span className="font-heading font-extrabold text-2xl text-[var(--state-success)] tracking-tighter">BrightEd</span>
+      </div>
+
+      <AnimatePresence mode="wait">
+        {!hasSubjects ? (
+          <motion.div
+            key="redirect"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center gap-8 text-center"
+          >
+            <MascotOwl pose="owl-smart" size="lg" />
             <div>
-              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2 uppercase tracking-wider">
-                Email *
-              </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                required
-                className="w-full bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:border-[var(--brand-primary)] focus:outline-none focus:neon-glow-primary transition-all"
-                placeholder="your.email@example.com"
-              />
+              <h2 className="text-3xl font-extrabold text-slate-700">Ready to learn?</h2>
+              <p className="text-slate-400 font-bold mt-2">First, let's pick your subjects!</p>
+            </div>
+            <Link
+              href="/welcome"
+              className="bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold px-12 py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all tracking-widest uppercase shadow-lg shadow-green-100"
+            >
+              GET STARTED
+            </Link>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="form"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-md"
+          >
+            <div className="text-center mb-8">
+              <div className="flex justify-center mb-4">
+                <MascotOwl pose="owl-happy" size="md" />
+              </div>
+              <h2 className="text-3xl font-extrabold text-slate-700">Create your profile</h2>
+              <p className="text-slate-400 font-bold mt-2">To save your progress!</p>
             </div>
 
-            {/* Password */}
-            <div>
-              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2 uppercase tracking-wider">
-                Password *
-              </label>
-              <input
-                type="password"
-                value={formData.password}
-                onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                required
-                minLength={6}
-                className="w-full bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:border-[var(--brand-primary)] focus:outline-none focus:neon-glow-primary transition-all"
-                placeholder="At least 6 characters"
-              />
-            </div>
-
-            {/* Username */}
-            <div>
-              <label className="block text-sm font-bold text-[var(--text-primary)] mb-2 uppercase tracking-wider">
-                Username *
-              </label>
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
+                placeholder="Username"
+                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
                 value={formData.username}
-                onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 required
-                className="w-full bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:border-[var(--brand-primary)] focus:outline-none focus:neon-glow-primary transition-all"
-                placeholder="Choose a unique username"
               />
-            </div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full p-4 rounded-2xl border-2 border-slate-200 focus:border-[var(--brand-primary)] bg-slate-50 font-bold outline-none transition-all"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                required
+              />
 
-            {/* Error Message */}
-            {error && (
-              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium">
-                {error}
-              </div>
-            )}
+              {error && (
+                <div className="p-4 bg-red-50 text-red-500 font-bold rounded-2xl border-2 border-red-100 text-sm">
+                  {error}
+                </div>
+              )}
 
-            <BrightButton
-              type="submit"
-              variant="primary"
-              size="lg"
-              className="w-full"
-              disabled={loading}
-            >
-              {loading ? 'Creating Account...' : 'Sign Up'}
-            </BrightButton>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-[var(--state-success)] hover:bg-green-600 text-white font-extrabold py-4 rounded-2xl border-b-4 border-green-700 active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 tracking-widest uppercase mt-4 shadow-lg shadow-green-100"
+              >
+                {loading ? 'CREATING...' : 'CREATE ACCOUNT'}
+              </button>
+            </form>
 
-            <p className="text-center text-sm text-[var(--text-secondary)]">
-              Already have an account?{' '}
-              <Link href="/login" className="text-[var(--brand-primary)] font-bold hover:underline">
-                Log in
-              </Link>
+            <p className="text-center mt-8 text-slate-400 font-bold">
+              Already have an account? <Link href="/login" className="text-[var(--brand-primary)]">Log in</Link>
             </p>
-          </form>
-        </BrightLayer>
-      </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

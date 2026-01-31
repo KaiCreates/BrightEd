@@ -34,6 +34,7 @@ export interface SubSkillScore {
     errorHistory: ErrorType[];
     streakCount: number;
     memoryDecay: number;      // 0.0 - 1.0 (higher = more forgotten)
+    halfLife: number;         // days (Half-Life Regression)
     theoreticalOnly: boolean; // Failed in practical application
 }
 
@@ -91,6 +92,18 @@ export interface ContentItem {
     contentType: ContentType;
     distractorSimilarity: number; // 0.0 - 1.0 (higher = harder to distinguish wrong answers)
     expectedTime: number;     // seconds
+
+    // Quality Control (Layer 1 Behavioral Signals)
+    flagCount?: number;
+    flagReasons?: string[];
+    isArchived?: boolean;
+    successRate?: number;
+    avgTimeSpent?: number;
+
+    // V4: Human-in-the-Loop & Dependencies
+    verificationStatus?: 'pending' | 'verified' | 'rejected';
+    verifiedBy?: string;
+    prerequisites?: string[]; // Sub-skill IDs that must be mastered first
 }
 
 /**
@@ -141,6 +154,11 @@ export interface NABLEResponse {
     errorClassification: ErrorType | null;
     shouldSwitchToVisualAided: boolean;
     currentStreak: number;
+
+    // V4: Engagement & State Sync
+    heartsRemaining: number;
+    requiresRefill: boolean;
+    stateDelta?: KnowledgeGraph; // Only changed skills
 }
 
 /**
@@ -261,6 +279,24 @@ export interface PostStoryQuestion {
 }
 
 /**
+ * NABLE's internal state for a user session
+ */
+export interface NABLEState {
+    userId: string;
+    knowledgeGraph: KnowledgeGraph;
+    currentStreak: number;
+    consecutiveErrors: number;
+    sessionQuestions: string[];
+    lastDifficulty: number;
+    lastDistractorSimilarity: number;
+    recentTopicIds: string[];
+    personalStabilityFactor: number;
+    hearts: number;
+    completedQuestionIds: string[]; // Tracks history for filtering without subcollection reads
+    sessionStarted: string;
+}
+
+/**
  * Story analysis result
  */
 export interface StoryAnalysis {
@@ -352,5 +388,15 @@ export const NABLE_CONSTANTS = {
     // Distractor scaling
     MIN_DISTRACTOR_SIMILARITY: 0.3,
     MAX_DISTRACTOR_SIMILARITY: 0.9,
-    DISTRACTOR_STEP: 0.1
+    DISTRACTOR_STEP: 0.1,
+
+    // Half-Life Regression (HLR)
+    HALFLIFE_BASE: 1,           // Start with 1 day half-life
+    HALFLIFE_MAX: 365,          // Cap at 1 year
+
+    // Quality Control thresholds
+    QC_FAIL_RATE_THRESHOLD: 0.1,    // Flag if success rate < 10%
+    QC_TIME_FACTOR_THRESHOLD: 4.0,  // Flag if time > 4x expected
+    QC_MIN_SAMPLES_FOR_FLAG: 5,     // Need at least 5 people to flag
+    QC_AUTO_ARCHIVE_FLAGS: 5        // Auto-archive after 5 flags
 } as const;

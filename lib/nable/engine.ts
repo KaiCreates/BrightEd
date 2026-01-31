@@ -15,6 +15,7 @@ import {
     NABLEResponse,
     NABLEEvaluateRequest,
     NABLERecommendRequest,
+    NABLEState,
     KnowledgeGraph,
     SubSkillScore,
     ContentItem,
@@ -31,20 +32,7 @@ import { calculateDifficultyScaling, rankQuestionsByFit, getRecommendedDifficult
 import { checkSessionRefresh, applyDecayToGraph, calculateMemoryDecay } from './spaced-repetition';
 import { markSkillAsTheoreticalOnly } from './story-analyzer';
 import { normalizeQuestion, NormalizedQuestion, padOptions } from './question-normalizer';
-
-/**
- * NABLE Engine state
- */
-export interface NABLEState {
-    userId: string;
-    knowledgeGraph: KnowledgeGraph;
-    currentStreak: number;
-    consecutiveErrors: number;
-    sessionQuestions: string[];
-    lastDifficulty: number;
-    lastDistractorSimilarity: number;
-    sessionStarted: string;
-}
+import { detectWeirdQuestion, filterContentPool, QCResult } from './quality-control';
 
 /**
  * Create initial NABLE state for new user
@@ -58,6 +46,10 @@ export function createInitialState(userId: string): NABLEState {
         sessionQuestions: [],
         lastDifficulty: 5,
         lastDistractorSimilarity: 0.5,
+        recentTopicIds: [],
+        personalStabilityFactor: 1.0,
+        hearts: 5, // Start with 5 hearts
+        completedQuestionIds: [], // Initialize completedQuestionIds
         sessionStarted: new Date().toISOString()
     };
 }
@@ -76,9 +68,17 @@ export function loadState(
     }
 
     // Apply decay to knowledge graph if it exists
-    const knowledgeGraph = existingData.knowledgeGraph
+    let knowledgeGraph = existingData.knowledgeGraph
         ? applyDecayToGraph(existingData.knowledgeGraph)
         : {};
+
+    // V4: Merge Delta if provided
+    if (existingData.knowledgeGraph && (existingData as any).stateDelta) {
+        knowledgeGraph = {
+            ...knowledgeGraph,
+            ...(existingData as any).stateDelta
+        };
+    }
 
     return {
         ...baseState,
@@ -140,8 +140,27 @@ export function evaluate(
         correctAnswer
     };
 
+    // PRODUCTION: Automated Quality Control (Detect "Weird" Questions)
+    // We pass a partial ContentItem constructed from the request
+    const mockContentItem: ContentItem = {
+        questionId,
+        objectiveId,
+        difficultyWeight: questionDifficulty,
+        subSkills,
+        contentType: 'standard', // Fallback
+        distractorSimilarity: state.lastDistractorSimilarity,
+        expectedTime: 30 // Default expected time
+    };
+
+    const qcResult = detectWeirdQuestion(mockContentItem, metrics);
+    if (qcResult.isFlagged) {
+        console.warn(`[NABLE QC] Flagged Question ${questionId}: ${qcResult.reason}`);
+        // In a real system, we'd fire an event to a global database here to increment population flags
+    }
+
     // Update mastery for each sub-skill
     const masteryDelta: Record<string, number> = {};
+    const stateDelta: KnowledgeGraph = {};
     const newKnowledgeGraph = { ...state.knowledgeGraph };
 
     for (const subSkillId of subSkills) {
@@ -149,18 +168,29 @@ export function evaluate(
         const currentScore = newKnowledgeGraph[subSkillId] || createInitialSubSkillScore();
 
         // Update score
-        const updatedScore = updateSubSkillScore(currentScore, metrics);
+        const updatedScore = updateSubSkillScore(
+            currentScore,
+            metrics,
+            30,
+            state.personalStabilityFactor
+        );
 
         // Calculate delta
         masteryDelta[subSkillId] = updatedScore.mastery - currentScore.mastery;
 
         // Store updated score
         newKnowledgeGraph[subSkillId] = updatedScore;
+
+        // Track for V4 Delta Sync
+        stateDelta[subSkillId] = updatedScore;
     }
 
     // Update state counters
     const newStreak = correct ? state.currentStreak + 1 : 0;
     const newConsecutiveErrors = correct ? 0 : state.consecutiveErrors + 1;
+
+    // V4 Heart Economy: Deduct on error
+    const newHearts = correct ? state.hearts : Math.max(0, state.hearts - 1);
 
     // Calculate difficulty scaling
     const primarySubSkill = subSkills[0];
@@ -198,7 +228,12 @@ export function evaluate(
         consecutiveErrors: newConsecutiveErrors,
         sessionQuestions: [...state.sessionQuestions, questionId],
         lastDifficulty: questionDifficulty + scaling.difficultyAdjustment,
-        lastDistractorSimilarity: scaling.distractorSimilarity
+        lastDistractorSimilarity: scaling.distractorSimilarity,
+        recentTopicIds: [objectiveId, ...state.recentTopicIds].slice(0, 5),
+        hearts: newHearts,
+        completedQuestionIds: correct
+            ? Array.from(new Set([...state.completedQuestionIds, questionId]))
+            : state.completedQuestionIds
     };
 
     // Build response
@@ -214,7 +249,10 @@ export function evaluate(
         refreshQuestion: null,
         errorClassification,
         shouldSwitchToVisualAided: scaling.recommendedContentType === 'visual-aided',
-        currentStreak: newStreak
+        currentStreak: newStreak,
+        heartsRemaining: newHearts,
+        requiresRefill: newHearts === 0,
+        stateDelta
     };
 
     // Build Learning Event for Global Intelligence
@@ -257,11 +295,30 @@ export function recommend(
         };
     }
 
-    // Filter out already-asked questions
+    // Filter out already-asked questions AND archived/flagged ones
     const allExcluded = [...excludeQuestionIds, ...state.sessionQuestions];
-    const filteredQuestions = availableQuestions.filter(
+    let filteredQuestions = availableQuestions.filter(
         q => !allExcluded.includes(q.questionId)
     );
+
+    // V4: Human-in-the-Loop & Prerequisite Enforcement
+    filteredQuestions = filteredQuestions.filter(q => {
+        // 1. Only allow verified (or pending for now to avoid empty pool)
+        if (q.verificationStatus === 'rejected') return false;
+
+        // 2. Prerequisite Check
+        if (q.prerequisites && q.prerequisites.length > 0) {
+            const unmet = q.prerequisites.some(preId => {
+                const preScore = state.knowledgeGraph[preId];
+                return !preScore || preScore.mastery < 0.5; // Threshold for "unlocking"
+            });
+            if (unmet) return false;
+        }
+        return true;
+    });
+
+    // Apply Quality Control filtering (remove archived)
+    filteredQuestions = filterContentPool(filteredQuestions);
 
     if (filteredQuestions.length === 0) {
         return { question: null, refreshFirst: false, refreshQueue: [] };
@@ -300,7 +357,8 @@ export function recommend(
         targetDifficulty,
         state.lastDistractorSimilarity,
         requiredContentType,
-        weakSkills
+        weakSkills,
+        state.recentTopicIds // Pass recent topics to penalize fit
     );
 
     return {

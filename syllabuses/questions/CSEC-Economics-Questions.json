@@ -1,0 +1,698 @@
+[
+  {
+    "id": "Q-ECON-01-001",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "What is the basic economic problem that all societies face?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unemployment"
+      },
+      {
+        "id": "b",
+        "text": "Inflation"
+      },
+      {
+        "id": "c",
+        "text": "Scarcity"
+      },
+      {
+        "id": "d",
+        "text": "Poverty"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Scarcity is the fundamental economic problem of having seemingly unlimited human wants in a world of limited resources."
+  },
+  {
+    "id": "Q-ECON-01-002",
+    "topic_id": "ECON-01-00001",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Match the economic concept to its definition.",
+    "items": [
+      {
+        "text": "Choice",
+        "category": "Selecting an alternative from a set of options"
+      },
+      {
+        "text": "Opportunity Cost",
+        "category": "The value of the next best alternative forgone"
+      },
+      {
+        "text": "Scarcity",
+        "category": "Limited resources versus unlimited wants"
+      }
+    ]
+  },
+  {
+    "id": "Q-ECON-03-001",
+    "topic_id": "ECON-03-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "According to the Law of Demand, as the price of a good increases:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Quantity demanded increases"
+      },
+      {
+        "id": "b",
+        "text": "The demand curve shifts to the right"
+      },
+      {
+        "id": "c",
+        "text": "Quantity demanded decreases"
+      },
+      {
+        "id": "d",
+        "text": "The demand curve shifts to the left"
+      }
+    ],
+    "answer": "c",
+    "explanation": "The Law of Demand states that there is an inverse relationship between price and quantity demanded, ceteris paribus."
+  },
+  {
+    "id": "Q-ECON-03-002",
+    "topic_id": "ECON-03-00004",
+    "type": "MCQ",
+    "difficulty": 3,
+    "question": "If a 10% increase in price leads to a 20% decrease in quantity demanded, the Price Elasticity of Demand (PED) is:",
+    "options": [
+      {
+        "id": "a",
+        "text": "0.5 (Inelastic)"
+      },
+      {
+        "id": "b",
+        "text": "2.0 (Elastic)"
+      },
+      {
+        "id": "c",
+        "text": "1.0 (Unitary)"
+      },
+      {
+        "id": "d",
+        "text": "0.2 (Inelastic)"
+      }
+    ],
+    "answer": "b",
+    "explanation": "PED = % Change in Q / % Change in P = 20% / 10% = 2.0. Since 2.0 > 1, the demand is elastic."
+  },
+  {
+    "id": "Q-ECON-05-001",
+    "topic_id": "ECON-05-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which of the following is NOT a function of money?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Medium of Exchange"
+      },
+      {
+        "id": "b",
+        "text": "Store of Value"
+      },
+      {
+        "id": "c",
+        "text": "Unit of Account"
+      },
+      {
+        "id": "d",
+        "text": "Source of Interest"
+      }
+    ],
+    "answer": "d",
+    "explanation": "Money itself is not a source of interest; interest is a reward for lending money. The standard functions are medium of exchange, store of value, unit of account, and standard for deferred payment."
+  },
+  {
+    "id": "Q-ECON-06-001",
+    "topic_id": "ECON-06-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "What type of inflation is caused by a persistent rise in the cost of production (e.g., higher wages or raw material prices)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Demand-pull inflation"
+      },
+      {
+        "id": "b",
+        "text": "Cost-push inflation"
+      },
+      {
+        "id": "c",
+        "text": "Hyperinflation"
+      },
+      {
+        "id": "d",
+        "text": "Incentive inflation"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Cost-push inflation occurs when production costs increase, leading firms to raise prices to maintain profit margins."
+  },
+  {
+    "id": "Q-ECON-07-001",
+    "topic_id": "ECON-07-00002",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "A deficit in the Balance of Payments means that:",
+    "options": [
+      {
+        "id": "a",
+        "text": "Exports exceed imports"
+      },
+      {
+        "id": "b",
+        "text": "Total outflows of money exceed total inflows"
+      },
+      {
+        "id": "c",
+        "text": "The government is spending more than it earns in taxes"
+      },
+      {
+        "id": "d",
+        "text": "The country has too much foreign reserve"
+      }
+    ],
+    "answer": "b",
+    "explanation": "A Balance of Payments deficit occurs when a country's total payments to the rest of the world are greater than its total receipts."
+  },
+  {
+    "question": "Which statement best describes the central economic problem facing Caribbean nations?",
+    "options": [
+      "The inability to produce enough goods to export to developed countries",
+      "Limited resources available to satisfy unlimited human wants",
+      "High levels of unemployment in the tourism and agricultural sectors",
+      "The dependence on foreign aid for economic development"
+    ],
+    "answer": 1,
+    "explanation": "Scarcity is the fundamental economic problem where limited resources (land, labour, capital, enterprise) are insufficient to satisfy unlimited human wants. This condition forces societies to make choices about resource allocation, regardless of whether they are developed or developing nations.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-7555f252"
+  },
+  {
+    "question": "The government of Jamaica decides to allocate $500 million to build a new highway instead of upgrading hospital facilities. In economic terms, the opportunity cost is:",
+    "options": [
+      "The $500 million spent on the highway",
+      "The improved hospital facilities that were foregone",
+      "The taxes collected from citizens to fund the project",
+      "The construction jobs created by the highway project"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost is defined as the next best alternative foregone when a choice is made. Since the hospital upgrades were the alternative use of the $500 million, they represent the real cost of the decision, not the monetary expenditure itself.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-8963b0a9"
+  },
+  {
+    "question": "A farmer in Barbados must decide whether to use his 10 acres of land to grow sugar cane or vegetables. This decision best illustrates:",
+    "options": [
+      "The problem of surplus production in agricultural markets",
+      "The need for government subsidies to support farming",
+      "The economic problem of choice due to scarcity of resources",
+      "The principle of diminishing marginal returns"
+    ],
+    "answer": 2,
+    "explanation": "Because land is a scarce resource (limited in supply) and cannot be used for both crops simultaneously, the farmer must make a choice. This demonstrates how scarcity forces economic decision-making at the individual and firm level.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-2027212b"
+  },
+  {
+    "question": "In Trinidad and Tobago, cocoa beans become difficult to obtain after a prolonged drought destroys half the national crop. This situation represents:",
+    "options": [
+      "Scarcity, because cocoa will always be limited relative to wants",
+      "A shortage, because the quantity supplied is temporarily less than quantity demanded at current prices",
+      "An opportunity cost, because farmers lost their investment in the crop",
+      "Economic growth, because market prices will rise to increase profits"
+    ],
+    "answer": 1,
+    "explanation": "A shortage is a temporary market condition where quantity demanded exceeds quantity supplied at a given price, often caused by temporary factors like natural disasters. Scarcity, by contrast, is the permanent, universal condition of limited resources that exists regardless of temporary supply disruptions.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-b2a0a7cf"
+  },
+  {
+    "question": "A secondary school student in Grenada chooses to spend three hours studying for a CSEC Economics exam rather than working at her part-time job earning $15 per hour. Her opportunity cost of studying is:",
+    "options": [
+      "The grade she will receive on the examination",
+      "The $45 she could have earned from working ($15 \u00d7 3 hours)",
+      "The cost of textbooks and stationery purchased for studying",
+      "Zero, because education is an investment in human capital"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost is the value of the next best alternative foregone. By choosing to study, the student gives up the $45 she could have earned. This illustrates that opportunity cost applies to all economic decisions, including those involving time allocation.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-71ffc1f5"
+  },
+  {
+    "question": "In the Caribbean, a farmer has limited land to grow either bananas or sugarcane. This situation illustrates the economic concept of:",
+    "options": [
+      "Inflation",
+      "Scarcity",
+      "Surplus",
+      "Specialization"
+    ],
+    "answer": 1,
+    "explanation": "Scarcity refers to the fundamental economic problem where unlimited wants exceed limited resources. The farmer faces scarcity of land and must choose between alternative uses.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-9c8773c3"
+  },
+  {
+    "question": "A government in the Eastern Caribbean must choose between building a new hospital or improving road infrastructure due to budget constraints. If it chooses the hospital, the opportunity cost is:",
+    "options": [
+      "The money spent on the hospital",
+      "The improved road infrastructure that must be foregone",
+      "The taxes collected from citizens",
+      "The wages paid to hospital workers"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost is the next best alternative foregone. By choosing the hospital, the government gives up the opportunity to improve road infrastructure.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-77221c3f"
+  },
+  {
+    "question": "A fishing cooperative in St. Lucia has limited ice-making capacity. They must choose between preserving today's catch or storing ice for tomorrow's expected larger catch. This illustrates that:",
+    "options": [
+      "Scarcity requires choices to be made",
+      "Specialization increases efficiency",
+      "Division of labor reduces costs",
+      "Trade improves economic welfare"
+    ],
+    "answer": 0,
+    "explanation": "The limited ice-making capacity represents scarce resources. The need to choose between preserving today's catch or tomorrow's demonstrates how scarcity forces decision-making and trade-offs.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-2e9a5fce"
+  },
+  {
+    "question": "A student in Jamaica spends $500 on textbooks for the semester. The opportunity cost of this decision is:",
+    "options": [
+      "$500 in cash",
+      "The textbooks themselves",
+      "The alternative goods or services the $500 could have purchased",
+      "The time spent studying"
+    ],
+    "answer": 2,
+    "explanation": "Opportunity cost represents the value of the next best alternative foregone. The $500 could have been used for other purposes such as transportation, food, or entertainment.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-82df2094"
+  },
+  {
+    "question": "Which of the following would shift a Caribbean nation's Production Possibility Frontier (PPF) outward?",
+    "options": [
+      "Discovering new oil reserves off the coast of Guyana",
+      "Moving from a point inside the PPF to a point on the curve",
+      "Increasing unemployment in the agricultural sector",
+      "Producing more consumer goods and fewer capital goods"
+    ],
+    "answer": 0,
+    "explanation": "An outward shift of the PPF represents economic growth, caused by an increase in resources or technology. Discovering oil reserves increases the resource base. Moving from inside to on the curve is efficiency, not growth.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-3d93d5b5"
+  },
+  {
+    "question": "Which of the following best describes the economic concept of scarcity in the context of Caribbean economies?",
+    "options": [
+      "The inability of governments to provide free tertiary education to all citizens",
+      "A temporary shortage of bananas in Jamaican supermarkets following a hurricane",
+      "The fundamental tension between limited resources and unlimited human wants",
+      "The high price of imported fuel in Trinidad and Tobago due to exchange rate fluctuations"
+    ],
+    "answer": 2,
+    "explanation": "Scarcity refers to the basic economic problem where resources are finite while human wants are infinite. It is a permanent, universal condition that forces choices, unlike a shortage (Option B) which is temporary. Option A describes a policy constraint, while Option D refers to price mechanisms, not scarcity itself.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-4fa31eb3"
+  },
+  {
+    "question": "A Barbadian farmer decides to use his 10-acre plot to grow sugar cane rather than vegetables. Which of the following represents the opportunity cost of this decision?",
+    "options": [
+      "The profit he would have earned from growing vegetables instead",
+      "The wages paid to workers who harvest the sugar cane",
+      "The revenue obtained from selling the sugar cane at market",
+      "The cost of fertilizer and equipment used for sugar cane production"
+    ],
+    "answer": 0,
+    "explanation": "Opportunity cost is defined as the value of the next best alternative foregone. By choosing sugar cane, the farmer sacrifices the vegetable production (Option A). Options B and D represent explicit accounting costs, while Option C represents benefit, not cost.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-aa4bbcc6"
+  },
+  {
+    "question": "The Production Possibility Frontier (PPF) for a small Caribbean nation producing tourism services and agricultural goods slopes downward from left to right. This downward slope primarily illustrates that:",
+    "options": [
+      "Increasing production of tourism services necessarily reduces the quantity of agricultural goods produced",
+      "The economy is experiencing high levels of unemployment and inefficiency",
+      "Resources are perfectly adaptable between tourism and agricultural production",
+      "Economic growth has occurred due to technological improvements"
+    ],
+    "answer": 0,
+    "explanation": "The negative slope of the PPF demonstrates the concept of trade-offs due to scarcity. To produce more of one good, society must sacrifice some of the other because resources are limited. Option B describes points inside the curve, Option C would result in a straight line PPF, and Option D would shift the entire curve outward.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-56938580"
+  },
+  {
+    "question": "A Trinidadian entrepreneur invests $100,000 of his savings to open a restaurant and resigns from his job paying $80,000 annually. After one year, his restaurant earns $150,000 in revenue with $90,000 in operating expenses. What is the entrepreneur's opportunity cost for that year?",
+    "options": [
+      "$90,000",
+      "$80,000",
+      "$100,000",
+      "$170,000"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost includes the value of the next best alternative foregone. Here, the $80,000 foregone salary represents the implicit opportunity cost. While the $100,000 investment has an opportunity cost (interest foregone), the clearest opportunity cost in this context is the sacrificed salary. Option A is explicit cost, Option C is the capital invested, and Option D incorrectly adds figures.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-0ba0b3f2"
+  },
+  {
+    "question": "The Government of Saint Lucia must decide whether to allocate limited budgetary funds toward improving coastal road infrastructure or expanding public healthcare facilities. This decision best illustrates that:",
+    "options": [
+      "Scarcity forces choices and opportunity costs at the national level",
+      "Road infrastructure generates more economic growth than healthcare",
+      "Government resources are unlimited but require prioritization",
+      "Opportunity cost concepts apply only to individual consumers, not governments"
+    ],
+    "answer": 0,
+    "explanation": "This scenario demonstrates scarcity at the macroeconomic level\u2014governments face limited budgets (scarcity) and must choose between competing uses, incurring opportunity costs (the benefits foregone from the rejected option). Option B is a normative value judgment, Option C contradicts the concept of scarcity, and Option D incorrectly limits the scope of opportunity cost.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-d5e675c6"
+  },
+  {
+    "question": "Which statement best describes the economic concept of scarcity in the context of a Caribbean nation like Jamaica?",
+    "options": [
+      "The temporary shortage of coffee beans due to a drought this season",
+      "The situation where limited resources cannot satisfy all unlimited human wants",
+      "The lack of money experienced by low-income households only",
+      "The inability of the government to collect enough taxes to fund its budget"
+    ],
+    "answer": 1,
+    "explanation": "Scarcity is the fundamental economic problem where resources are limited relative to unlimited wants, affecting all individuals, firms, and governments regardless of income level. Option A describes a temporary shortage (a market condition), not the permanent condition of scarcity. Option C incorrectly limits scarcity to the poor, while wealthy individuals and nations also face scarcity. Option D describes a budget deficit, which is a fiscal issue rather than the economic concept of resource scarcity.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-e883709f"
+  },
+  {
+    "question": "The Government of Trinidad and Tobago decides to allocate $50 million to construct a new highway instead of using the funds to build a new hospital. What is the opportunity cost of this decision?",
+    "options": [
+      "The $50 million monetary outlay spent on constructing the highway",
+      "The new hospital that the government must now forego building",
+      "The future toll revenue that will be collected from the highway users",
+      "The combined value of both the highway and the hospital projects"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost is defined as the next best alternative foregone when a choice is made. In this case, by choosing the highway, the government sacrifices the opportunity to build the hospital, making the hospital the opportunity cost. Option A represents the accounting cost or explicit cost, not the economic cost of the decision. Option C represents a potential future benefit, not a foregone alternative. Option D incorrectly suggests that opportunity cost includes the chosen option.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-7d9344da"
+  },
+  {
+    "question": "Which of the following statements about scarcity is TRUE for Caribbean countries like Barbados and St. Lucia?",
+    "options": [
+      "Scarcity can be eliminated through technological advancement and economic growth",
+      "Scarcity exists only in developing nations and does not affect developed countries",
+      "Scarcity forces individuals, firms, and governments to make choices about resource allocation",
+      "Scarcity refers specifically to the shortage of money and financial capital in the economy"
+    ],
+    "answer": 2,
+    "explanation": "Scarcity is a universal and permanent condition that compels all economic agents to make choices about how to allocate limited resources. It affects all nations regardless of development status. Option A is incorrect because while technology can help us use resources more efficiently, it cannot eliminate scarcity since human wants remain unlimited. Option B is incorrect as even wealthy developed nations face scarcity of time, natural resources, and productive capacity. Option D confuses scarcity with a temporary lack of liquidity or cash.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-e5cb82bd"
+  },
+  {
+    "question": "A farmer in Guyana has 20 acres of fertile land suitable for agriculture. He must choose between planting sugarcane or rice. If he decides to plant sugarcane, what is his opportunity cost?",
+    "options": [
+      "The total revenue he expects to earn from selling the sugarcane",
+      "The rice production he must give up by not using the land for rice cultivation",
+      "The cost of fertilizers, seeds, and labor required for the sugarcane crop",
+      "The sum of profits from both the sugarcane and rice crops combined"
+    ],
+    "answer": 1,
+    "explanation": "Opportunity cost is the value of the next best alternative that is sacrificed when a choice is made. By allocating his land to sugarcane, the farmer gives up the opportunity to produce rice, making the foregone rice production the opportunity cost. Option A represents the expected benefit of the chosen option, not the cost of the foregone alternative. Option C represents explicit or accounting costs, not opportunity cost. Option D is economically meaningless as the farmer cannot produce both crops simultaneously on the same land.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-9bb1deda"
+  },
+  {
+    "question": "In the Eastern Caribbean, which of the following situations best illustrates scarcity of the factor of production 'land'?",
+    "options": [
+      "A manufacturing plant in Dominica closing temporarily due to hurricane damage",
+      "The limited availability of beachfront property for hotel development in Antigua",
+      "Commercial banks refusing to approve loans for new small businesses in Grenada",
+      "Qualified nurses migrating from St. Vincent to the United Kingdom for better wages"
+    ],
+    "answer": 1,
+    "explanation": "Land as a factor of production refers to natural resources and geographical space. The limited beachfront property represents a fixed supply of natural land facing competing uses (tourism vs. other purposes), illustrating scarcity of this specific factor. Option A relates to capital stock (physical infrastructure) being damaged. Option C relates to financial capital or credit availability. Option D illustrates scarcity or mobility of labor (human capital), often referred to as 'brain drain,' rather than land scarcity.",
+    "topic_id": "ECON-01-00001",
+    "type": "MCQ",
+    "id": "Q-ECON-01-00001-9f71609a"
+  },
+  {
+    "question": "Drag each item to the correct category: Identify whether each item represents a Limited Resource or an Unlimited Want.",
+    "type": "DND",
+    "categories": [
+      "Limited Resources",
+      "Unlimited Wants"
+    ],
+    "items": [
+      {
+        "text": "Land available for farming",
+        "category": "Limited Resources"
+      },
+      {
+        "text": "Factory machinery",
+        "category": "Limited Resources"
+      },
+      {
+        "text": "Skilled labor force",
+        "category": "Limited Resources"
+      },
+      {
+        "text": "Petroleum reserves",
+        "category": "Limited Resources"
+      },
+      {
+        "text": "Desire for luxury cars",
+        "category": "Unlimited Wants"
+      },
+      {
+        "text": "Wanting the latest smartphone",
+        "category": "Unlimited Wants"
+      },
+      {
+        "text": "Hunger for more education",
+        "category": "Unlimited Wants"
+      },
+      {
+        "text": "Aspiration to travel worldwide",
+        "category": "Unlimited Wants"
+      }
+    ],
+    "topic_id": "ECON-01-00001",
+    "id": "Q-ECON-01-00001-b0d4a7e2"
+  },
+  {
+    "question": "Categorize the following items as either Factors of Production (resources used to produce goods/services) or Economic Wants (desires that need to be satisfied).",
+    "type": "DND",
+    "categories": [
+      "Factors of Production",
+      "Economic Wants"
+    ],
+    "items": [
+      {
+        "text": "Capital equipment",
+        "category": "Factors of Production"
+      },
+      {
+        "text": "Entrepreneurial skills",
+        "category": "Factors of Production"
+      },
+      {
+        "text": "Natural raw materials",
+        "category": "Factors of Production"
+      },
+      {
+        "text": "Human labor",
+        "category": "Factors of Production"
+      },
+      {
+        "text": "New clothing",
+        "category": "Economic Wants"
+      },
+      {
+        "text": "Entertainment services",
+        "category": "Economic Wants"
+      },
+      {
+        "text": "Gourmet food",
+        "category": "Economic Wants"
+      },
+      {
+        "text": "Healthcare services",
+        "category": "Economic Wants"
+      }
+    ],
+    "topic_id": "ECON-01-00001",
+    "id": "Q-ECON-01-00001-3e89d05f"
+  },
+  {
+    "question": "Classify each scenario as either an Individual Choice (made by single persons/households) or a Societal Choice (made by governments or communities).",
+    "type": "DND",
+    "categories": [
+      "Individual Choice",
+      "Societal Choice"
+    ],
+    "items": [
+      {
+        "text": "A student choosing between studying and working part-time",
+        "category": "Individual Choice"
+      },
+      {
+        "text": "A consumer deciding between buying a car or taking a vacation",
+        "category": "Individual Choice"
+      },
+      {
+        "text": "A worker choosing leisure time over overtime pay",
+        "category": "Individual Choice"
+      },
+      {
+        "text": "A family deciding on private school versus public school",
+        "category": "Individual Choice"
+      },
+      {
+        "text": "Government building a hospital versus a new highway",
+        "category": "Societal Choice"
+      },
+      {
+        "text": "Country allocating land to agriculture versus industry",
+        "category": "Societal Choice"
+      },
+      {
+        "text": "Nation choosing military spending over healthcare funding",
+        "category": "Societal Choice"
+      },
+      {
+        "text": "Society deciding on environmental protection versus economic growth",
+        "category": "Societal Choice"
+      }
+    ],
+    "topic_id": "ECON-01-00001",
+    "id": "Q-ECON-01-00001-bf8cfd65"
+  },
+  {
+    "question": "Sort the following concepts and examples into the correct economic categories: Scarcity, Choice, or Opportunity Cost.",
+    "type": "DND",
+    "categories": [
+      "Scarcity",
+      "Choice",
+      "Opportunity Cost"
+    ],
+    "items": [
+      {
+        "text": "Insufficient oil to meet global demand",
+        "category": "Scarcity"
+      },
+      {
+        "text": "Limited number of seats at a concert",
+        "category": "Scarcity"
+      },
+      {
+        "text": "Shortage of qualified teachers",
+        "category": "Scarcity"
+      },
+      {
+        "text": "Finite amount of clean water",
+        "category": "Scarcity"
+      },
+      {
+        "text": "Selecting the best alternative among available options",
+        "category": "Choice"
+      },
+      {
+        "text": "Decision-making process when resources are limited",
+        "category": "Choice"
+      },
+      {
+        "text": "Picking between different goods to purchase",
+        "category": "Choice"
+      },
+      {
+        "text": "Value of the next best alternative foregone",
+        "category": "Opportunity Cost"
+      },
+      {
+        "text": "Income lost by attending university full-time",
+        "category": "Opportunity Cost"
+      },
+      {
+        "text": "Leisure time sacrificed to work overtime",
+        "category": "Opportunity Cost"
+      },
+      {
+        "text": "Benefits given up when choosing option A over option B",
+        "category": "Opportunity Cost"
+      }
+    ],
+    "topic_id": "ECON-01-00001",
+    "id": "Q-ECON-01-00001-c2609b61"
+  },
+  {
+    "question": "Drag each item to show whether it is an Example of Scarcity (limited availability) or an Example of Abundance (plentiful supply).",
+    "type": "DND",
+    "categories": [
+      "Examples of Scarcity",
+      "Examples of Abundance"
+    ],
+    "items": [
+      {
+        "text": "Diamonds",
+        "category": "Examples of Scarcity"
+      },
+      {
+        "text": "Beachfront property",
+        "category": "Examples of Scarcity"
+      },
+      {
+        "text": "Seats in a popular concert",
+        "category": "Examples of Scarcity"
+      },
+      {
+        "text": "Skilled surgeons",
+        "category": "Examples of Scarcity"
+      },
+      {
+        "text": "Sand in the desert",
+        "category": "Examples of Abundance"
+      },
+      {
+        "text": "Salt in the ocean",
+        "category": "Examples of Abundance"
+      },
+      {
+        "text": "Air in the atmosphere",
+        "category": "Examples of Abundance"
+      },
+      {
+        "text": "Leaves on trees in a forest",
+        "category": "Examples of Abundance"
+      }
+    ],
+    "topic_id": "ECON-01-00001",
+    "id": "Q-ECON-01-00001-e9ba2c44"
+  }
+]

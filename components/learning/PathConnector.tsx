@@ -36,68 +36,46 @@ export default function PathConnector({
                 xmlns="http://www.w3.org/2000/svg"
                 className="overflow-visible"
             >
-                {/* Background Shadow Path */}
+                {/* 3D Shadow Layer */}
                 <path
                     d={pathData}
-                    stroke="var(--border-subtle)"
+                    stroke="#e5e5e5"
+                    strokeWidth="16"
+                    strokeLinecap="round"
+                />
+
+                {/* Base Path Layer (Top Road) */}
+                <path
+                    d={pathData}
+                    stroke={isCompleted ? "#58cc02" : "#e5e5e5"}
                     strokeWidth="12"
                     strokeLinecap="round"
-                    className="opacity-20"
+                    className="transition-colors duration-500"
                 />
 
-                {/* Base Path */}
-                <path
-                    d={pathData}
-                    stroke="var(--border-subtle)"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                />
-
-                {/* Completed / Active Path */}
-                {(isCompleted || isNext) && (
-                    <motion.path
-                        d={pathData}
-                        stroke={isCompleted ? "var(--state-success)" : "var(--brand-primary)"}
-                        strokeWidth="8"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.8, delay: fromIndex * 0.05 }}
-                    />
-                )}
-
-                {/* Animated Particles for Active Path */}
+                {/* Animated Highlights for Active Path */}
                 {isNext && !isCompleted && (
                     <motion.path
                         d={pathData}
-                        stroke="white"
-                        strokeWidth="2"
+                        stroke="#afafaf"
+                        strokeWidth="12"
                         strokeLinecap="round"
-                        strokeDasharray="1, 20"
-                        animate={{ strokeDashoffset: [0, -40] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        className="opacity-60"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: fromIndex * 0.05 }}
                     />
                 )}
-            </svg>
 
-            {/* Dots decoration at the middle of the path */}
-            <div
-                className="absolute top-1/2 flex gap-1 pointer-events-none"
-                style={{
-                    transform: `translate(${(fromOffset + toOffset) / 2}px, -50%)`
-                }}
-            >
-                {[...Array(2)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: fromIndex * 0.1 + i * 0.1 }}
-                        className={`w-1.5 h-1.5 rounded-full ${isCompleted ? 'bg-[var(--state-success)]' : 'bg-[var(--border-subtle)]'}`}
-                    />
-                ))}
-            </div>
+                {/* Road Dashed Line (Pavement Markings) */}
+                <path
+                    d={pathData}
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeDasharray="1, 15"
+                    className="opacity-40"
+                />
+            </svg>
         </div>
     )
 }

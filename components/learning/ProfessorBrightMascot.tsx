@@ -1,17 +1,48 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FeedbackResponse } from '@/lib/professor-bright'
 
 interface ProfessorBrightMascotProps {
     feedback: FeedbackResponse | null
     webMode?: boolean
+    mini?: boolean // NEW: show only the mascot without bubble
 }
 
-export function ProfessorBrightMascot({ feedback, webMode = false }: ProfessorBrightMascotProps) {
+export function ProfessorBrightMascot({ feedback, webMode = false, mini = false }: ProfessorBrightMascotProps) {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        if (feedback) {
+            setIsVisible(true)
+            if (!mini) {
+                const timer = setTimeout(() => {
+                    setIsVisible(false)
+                }, 3000)
+                return () => clearTimeout(timer)
+            }
+        }
+    }, [feedback, mini])
+
+    if (!feedback) return null;
+
+    if (mini) {
+        return (
+            <div className="relative filter drop-shadow-xl">
+                <div
+                    className={`owl-sprite ${feedback.spriteClass} scale-75 md:scale-100`}
+                    style={{
+                        transformOrigin: 'bottom center'
+                    }}
+                />
+            </div>
+        )
+    }
+
     return (
         <AnimatePresence>
-            {feedback && (
+            {isVisible && (
                 <motion.div
                     initial={{ x: 300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}

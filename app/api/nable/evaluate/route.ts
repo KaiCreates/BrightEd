@@ -34,14 +34,10 @@ const EvaluateSchema = z.object({
     questionId: z.string(),
     objectiveId: z.string(),
     selectedAnswer: z.number(),
-    correctAnswer: z.number(),
     options: z.array(z.string()).optional().default([]),
     timeToAnswer: z.number().optional().default(5),
     subSkills: z.array(z.string()).optional().default([]),
-    questionDifficulty: z.number().optional().default(5),
-    // Optional: Send current NABLE state to avoid extra read if client has it
-    currentState: z.any().optional(),
-    knowledgeGraph: z.record(z.any()).optional().default({})
+    questionDifficulty: z.number().optional().default(5)
 });
 
 export async function POST(request: NextRequest) {
@@ -65,46 +61,42 @@ export async function POST(request: NextRequest) {
             questionId,
             objectiveId,
             selectedAnswer,
-            correctAnswer,
             options,
             timeToAnswer,
             subSkills,
-            questionDifficulty,
-            currentState,
-            knowledgeGraph
+            questionDifficulty
         } = result.data;
 
-        // 4. Load NABLE State
-        // Strategy: Use passed state/graph if valid to save a read, otherwise DB, otherwise cold start.
+        // 4. Load NABLE State PROTECTED (Ignore client-sent state)
         const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
+        const nableDoc = await nableRef.get();
         let nableState: NABLEState;
 
-        // Try Loading
-        if (currentState) {
-            nableState = loadState(userId, currentState);
-        } else if (Object.keys(knowledgeGraph).length > 0) {
-            nableState = loadState(userId, { knowledgeGraph });
+        if (nableDoc.exists) {
+            nableState = loadState(userId, nableDoc.data() as Partial<NABLEState>);
         } else {
-            const nableDoc = await nableRef.get();
-            if (nableDoc.exists) {
-                nableState = loadState(userId, nableDoc.data() as Partial<NABLEState>);
-            } else {
-                nableState = createInitialState(userId);
-            }
+            nableState = createInitialState(userId);
         }
 
-        // 5. Evaluate with NABLE Engine
-        const isCorrect = selectedAnswer === correctAnswer;
+        // 5. Fetch Question Truth from DB (Prevent CorrectAnswer Injection)
+        const questionDoc = await adminDb.collection('questions').doc(questionId).get();
+        if (!questionDoc.exists) {
+            return NextResponse.json({ error: 'Question not found in database' }, { status: 404 });
+        }
+        const questionData = questionDoc.data()!;
+        const realCorrectAnswer = questionData.correctAnswer;
+        const realSubSkills = questionData.subSkills || subSkills || [];
+
+        // 6. Evaluate with NABLE Engine (Using REAL correctness)
+        const isCorrect = selectedAnswer === realCorrectAnswer;
 
         // Ensure subSkills has at least the objectiveId
-        const activeSubSkills = subSkills.length > 0 ? subSkills : [objectiveId];
+        const activeSubSkills = realSubSkills.length > 0 ? realSubSkills : [objectiveId];
 
         // Pre-fill missing Sub-Skills with Global Intelligence Priors
-        // This ensures cold-start users get "Human Average" not "Zero"
-        const missingSkills = activeSubSkills.filter(id => !nableState.knowledgeGraph[id]);
+        const missingSkills = activeSubSkills.filter((id: string) => !nableState.knowledgeGraph[id]);
         if (missingSkills.length > 0) {
             for (const skillId of missingSkills) {
-                // Fetch prior (async but fast due to cache)
                 const prior = await GlobalIntelligence.getPriorMastery(skillId);
                 nableState.knowledgeGraph[skillId] = createInitialSubSkillScore(prior);
             }
@@ -115,11 +107,11 @@ export async function POST(request: NextRequest) {
             questionId,
             objectiveId,
             selectedAnswer,
-            correctAnswer,
+            correctAnswer: realCorrectAnswer,
             options,
             timeToAnswer,
             subSkills: activeSubSkills,
-            questionDifficulty
+            questionDifficulty: questionData.difficultyWeight || questionDifficulty
         };
 
         const { response: nableResponse, newState: newNableState, learningEvent } = evaluate(
@@ -251,7 +243,7 @@ export async function POST(request: NextRequest) {
                 questionId,
                 isCorrect,
                 selectedAnswer,
-                correctAnswer,
+                correctAnswer: realCorrectAnswer,
                 timeToAnswer,
                 mastery: objMastery,
                 confidence: objConfidence,
@@ -267,7 +259,7 @@ export async function POST(request: NextRequest) {
                 objectiveId,
                 isCorrect,
                 selectedAnswer,
-                correctAnswer,
+                correctAnswer: realCorrectAnswer,
                 timestamp: admin.firestore.FieldValue.serverTimestamp()
             });
 

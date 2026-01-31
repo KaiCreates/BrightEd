@@ -1,9 +1,19 @@
-'use client'
+'use client';
+
+import { useEffect } from 'react';
+import { useAuth } from '@/lib/auth-context';
+import { useRouter } from 'next/navigation';
+import LandingDuolingo from '@/components/landing/LandingDuolingo';
 
 export default function RootPage() {
-  return (
-    <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)]"></div>
-    </div>
-  )
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user) {
+      router.push('/home');
+    }
+  }, [user, loading, router]);
+
+  return <LandingDuolingo />;
 }

@@ -1,0 +1,3550 @@
+[
+  {
+    "id": "Q-AGRI-01-001",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "Which of the following is considered a primary branch of agriculture concerned with the cultivation of fruits, vegetables, and ornamental plants?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Agronomy"
+      },
+      {
+        "id": "b",
+        "text": "Horticulture"
+      },
+      {
+        "id": "c",
+        "text": "Agricultural Economics"
+      },
+      {
+        "id": "d",
+        "text": "Animal Science"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Horticulture is the branch of agriculture that deals with the art, science, technology, and business of plant cultivation, including fruits, vegetables, and ornamental plants."
+  },
+  {
+    "id": "Q-AGRI-01-002",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which regional organization is primarily responsible for agricultural research and development in the Caribbean?",
+    "options": [
+      {
+        "id": "a",
+        "text": "CARICOM"
+      },
+      {
+        "id": "b",
+        "text": "IICA"
+      },
+      {
+        "id": "c",
+        "text": "CARDI"
+      },
+      {
+        "id": "d",
+        "text": "OECS"
+      }
+    ],
+    "answer": "c",
+    "explanation": "CARDI (Caribbean Agricultural Research and Development Institute) provides for the research and development needs of the agriculture of the region."
+  },
+  {
+    "id": "Q-AGRI-01-003",
+    "topic_id": "AGRI-01-00001",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Match the agricultural branch to its primary focus.",
+    "categories": [
+      "Focus Area"
+    ],
+    "items": [
+      {
+        "text": "Soil Management and Field Crops",
+        "category": "Agronomy"
+      },
+      {
+        "text": "Livestock Breeding and Care",
+        "category": "Animal Science"
+      },
+      {
+        "text": "Fruit and Vegetable Production",
+        "category": "Horticulture"
+      },
+      {
+        "text": "Farm Business and Finance",
+        "category": "Agri-Business"
+      }
+    ]
+  },
+  {
+    "id": "Q-AGRI-02-001",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "A farmer wants to estimate the expected income and expenditure for the next production cycle. Which farm record should they prepare?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Production Record"
+      },
+      {
+        "id": "b",
+        "text": "Inventory Record"
+      },
+      {
+        "id": "c",
+        "text": "Farm Budget"
+      },
+      {
+        "id": "d",
+        "text": "Cash Book"
+      }
+    ],
+    "answer": "c",
+    "explanation": "A farm budget is a forward-looking financial statement that estimates future income and expenses."
+  },
+  {
+    "id": "Q-AGRI-02-002",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "In an agricultural cooperative, how is the 'surplus' (profit) usually distributed among members?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Equally to all members regardless of use"
+      },
+      {
+        "id": "b",
+        "text": "Based on the volume of business done with the cooperative"
+      },
+      {
+        "id": "c",
+        "text": "Only to the board of directors"
+      },
+      {
+        "id": "d",
+        "text": "It is kept entirely by the government"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Cooperatives typically distribute dividends or surpluses based on patronage, meaning the more a member uses the service, the larger their share of the profit."
+  },
+  {
+    "id": "Q-AGRI-03-001",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which of the following soil types has the highest water-holding capacity but the poorest drainage?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sandy Soil"
+      },
+      {
+        "id": "b",
+        "text": "Silty Soil"
+      },
+      {
+        "id": "c",
+        "text": "Clayey Soil"
+      },
+      {
+        "id": "d",
+        "text": "Loamy Soil"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Clay soil has very small particles that pack closely together, allowing it to hold a lot of water but making it difficult for water to drain through."
+  },
+  {
+    "id": "Q-AGRI-03-002",
+    "topic_id": "AGRI-03-00001",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Drag the land preparation steps into the correct chronological order.",
+    "items": [
+      {
+        "text": "Land Clearing",
+        "rank": 1
+      },
+      {
+        "text": "Ploughing",
+        "rank": 2
+      },
+      {
+        "text": "Harrowing",
+        "rank": 3
+      },
+      {
+        "text": "Leveling",
+        "rank": 4
+      }
+    ]
+  },
+  {
+    "id": "Q-AGRI-03-003",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "difficulty": 3,
+    "question": "A soil test reveals a pH of 4.5. Which material should the farmer apply to neutralize the acidity?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Ammonium Sulfate"
+      },
+      {
+        "id": "b",
+        "text": "Ground Limestone"
+      },
+      {
+        "id": "c",
+        "text": "Organic Compost"
+      },
+      {
+        "id": "d",
+        "text": "Sulfur Powder"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Liming materials like ground limestone are alkaline and used to raise the pH of acidic soils (making them more neutral)."
+  },
+  {
+    "id": "Q-AGRI-04-001",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which of the following animals possesses a complex stomach with four compartments (Rumen, Reticulum, Omasum, Abomasum)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pig"
+      },
+      {
+        "id": "b",
+        "text": "Chicken"
+      },
+      {
+        "id": "c",
+        "text": "Goat"
+      },
+      {
+        "id": "d",
+        "text": "Rabbit"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Goats are ruminants. Others like pigs and chickens are non-ruminants (monogastric), and rabbits are pseudo-ruminants."
+  },
+  {
+    "id": "Q-AGRI-04-002",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "In poultry production, what is the primary purpose of 'broilers'?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Egg production"
+      },
+      {
+        "id": "b",
+        "text": "Meat production"
+      },
+      {
+        "id": "c",
+        "text": "Feather production"
+      },
+      {
+        "id": "d",
+        "text": "Breeding stock only"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Broilers are chickens bred and raised specifically for meat production."
+  },
+  {
+    "question": "Categorize the following contributions of agriculture to the economy:",
+    "type": "DND",
+    "categories": [
+      "Food Security",
+      "Employment Creation",
+      "Foreign Exchange Earnings"
+    ],
+    "items": [
+      {
+        "text": "Production of vegetables for local consumption",
+        "category": "Food Security"
+      },
+      {
+        "text": "Jobs for farm laborers and technicians",
+        "category": "Employment Creation"
+      },
+      {
+        "text": "Export earnings from cocoa and coffee sales",
+        "category": "Foreign Exchange Earnings"
+      },
+      {
+        "text": "Reducing the national food import bill",
+        "category": "Food Security"
+      },
+      {
+        "text": "Income generation for rural households",
+        "category": "Employment Creation"
+      },
+      {
+        "text": "Revenue from banana exports to European markets",
+        "category": "Foreign Exchange Earnings"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-52836706"
+  },
+  {
+    "question": "Classify the following challenges facing regional agriculture:",
+    "type": "DND",
+    "categories": [
+      "Climatic Challenges",
+      "Economic Challenges",
+      "Social/Structural Challenges"
+    ],
+    "items": [
+      {
+        "text": "Hurricanes and tropical storms damaging crops",
+        "category": "Climatic Challenges"
+      },
+      {
+        "text": "High cost of imported fertilizers and inputs",
+        "category": "Economic Challenges"
+      },
+      {
+        "text": "Youth migration from rural to urban areas",
+        "category": "Social/Structural Challenges"
+      },
+      {
+        "text": "Drought conditions affecting crop yields",
+        "category": "Climatic Challenges"
+      },
+      {
+        "text": "Limited access to credit for small farmers",
+        "category": "Economic Challenges"
+      },
+      {
+        "text": "Fragmented and uneconomical land holdings",
+        "category": "Social/Structural Challenges"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-7c88a978"
+  },
+  {
+    "question": "Match the agricultural activities to the type of employment they represent:",
+    "type": "DND",
+    "categories": [
+      "Direct Farm Employment",
+      "Agro-processing Employment",
+      "Agricultural Services Employment"
+    ],
+    "items": [
+      {
+        "text": "Planting and harvesting sugarcane in the field",
+        "category": "Direct Farm Employment"
+      },
+      {
+        "text": "Operating machinery in a rum distillery",
+        "category": "Agro-processing Employment"
+      },
+      {
+        "text": "Selling fertilizers and seeds to farmers",
+        "category": "Agricultural Services Employment"
+      },
+      {
+        "text": "Rearing cattle on pasture land",
+        "category": "Direct Farm Employment"
+      },
+      {
+        "text": "Packaging fresh produce for export",
+        "category": "Agro-processing Employment"
+      },
+      {
+        "text": "Providing veterinary care to livestock",
+        "category": "Agricultural Services Employment"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-804ba4c4"
+  },
+  {
+    "question": "Categorize these agricultural strategies based on their economic orientation:",
+    "type": "DND",
+    "categories": [
+      "Import Substitution",
+      "Export Promotion"
+    ],
+    "items": [
+      {
+        "text": "Growing rice to replace imported grains",
+        "category": "Import Substitution"
+      },
+      {
+        "text": "Cultivating flowers for overseas markets",
+        "category": "Export Promotion"
+      },
+      {
+        "text": "Producing local milk to reduce dairy imports",
+        "category": "Import Substitution"
+      },
+      {
+        "text": "Shipping cocoa beans to international buyers",
+        "category": "Export Promotion"
+      },
+      {
+        "text": "Developing root crop industries to replace wheat flour",
+        "category": "Import Substitution"
+      },
+      {
+        "text": "Exporting organic spices to North America",
+        "category": "Export Promotion"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-800841da"
+  },
+  {
+    "question": "Classify the following economic activities into the correct agricultural sector:",
+    "type": "DND",
+    "categories": [
+      "Crop Production",
+      "Livestock Production",
+      "Agro-industry"
+    ],
+    "items": [
+      {
+        "text": "Cultivation of bananas for export",
+        "category": "Crop Production"
+      },
+      {
+        "text": "Raising pigs and poultry for meat supply",
+        "category": "Livestock Production"
+      },
+      {
+        "text": "Processing sugarcane into raw sugar",
+        "category": "Agro-industry"
+      },
+      {
+        "text": "Growing vegetables for domestic markets",
+        "category": "Crop Production"
+      },
+      {
+        "text": "Dairy farming for milk and cheese production",
+        "category": "Livestock Production"
+      },
+      {
+        "text": "Canning of fruits and vegetables for local sale",
+        "category": "Agro-industry"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-ea0bf28d"
+  },
+  {
+    "question": "Which of the following groups of crops has traditionally served as the primary source of foreign exchange earnings for Caribbean countries?",
+    "options": [
+      "Root crops and vegetables",
+      "Sugar, bananas, and coffee",
+      "Rice and corn",
+      "Herbs and spices"
+    ],
+    "answer": 1,
+    "explanation": "Traditional export crops such as sugar, bananas, coffee, and cocoa have historically dominated foreign exchange earnings for Caribbean nations, though diversification into non-traditional crops is increasing.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-ffaf64c0"
+  },
+  {
+    "question": "Despite declining contributions to GDP in many territories, agriculture remains economically significant in the Caribbean primarily because it:",
+    "options": [
+      "Employs the majority of workers in urban centers",
+      "Provides employment in rural areas and supports livelihoods",
+      "Generates more revenue than the tourism sector",
+      "Requires minimal capital investment to operate"
+    ],
+    "answer": 1,
+    "explanation": "Agriculture continues to be a major employer in rural communities and supports livelihoods through direct farming, agro-processing, and ancillary services, even as its relative GDP contribution decreases.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-d30cb529"
+  },
+  {
+    "question": "A major economic challenge facing regional agriculture is the Caribbean's increasing:",
+    "options": [
+      "Food export surplus",
+      "Food import bill",
+      "Self-sufficiency in cereal production",
+      "Agricultural labor force participation"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean countries import billions of dollars in food annually, creating a heavy burden on foreign exchange reserves and highlighting food security vulnerabilities that agriculture seeks to address.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-f51fed98"
+  },
+  {
+    "question": "Which challenge is particularly significant in Caribbean agriculture due to its direct impact on farmer profitability and willingness to invest in production?",
+    "options": [
+      "Praedial larceny",
+      "Excess rainfall",
+      "Soil salinity",
+      "High export tariffs on regional goods"
+    ],
+    "answer": 0,
+    "explanation": "Praedial larceny (theft of agricultural produce and livestock) is a pervasive regional problem that discourages investment, increases production costs, and threatens the sustainability of farming operations.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-162263cc"
+  },
+  {
+    "question": "The diversification of Caribbean agriculture to include non-traditional crops and agro-processing aims primarily to:",
+    "options": [
+      "Eliminate the need for food imports entirely",
+      "Replace tourism as the main economic sector",
+      "Reduce dependence on single-export commodities and increase value-added",
+      "Increase subsistence farming among rural households"
+    ],
+    "answer": 2,
+    "explanation": "Diversification strategies focus on reducing vulnerability to global price fluctuations of traditional crops while capturing greater economic value through processing, packaging, and accessing new export markets.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-4cd4c451"
+  },
+  {
+    "question": "Which of the following BEST describes how agriculture contributes to foreign exchange earnings in Caribbean countries?",
+    "options": [
+      "By reducing the need for imported agricultural machinery",
+      "Through the export of primary commodities such as bananas, sugar, and cocoa",
+      "By eliminating tariffs on imported food products",
+      "Through government subsidies paid to local farmers using foreign currency"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean countries earn foreign exchange by exporting agricultural products like bananas, sugar, cocoa, and coffee to international markets. These exports bring in foreign currency needed to pay for imports of fuel, machinery, and manufactured goods.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-48c1e487"
+  },
+  {
+    "question": "In Caribbean economies, agriculture remains significant as a source of employment primarily because it:",
+    "options": [
+      "Provides high-wage jobs mainly for university graduates in urban centers",
+      "Absorbs labor in rural areas where industrial employment opportunities are limited",
+      "Requires minimal labor input due to widespread mechanization on small farms",
+      "Offers salaries consistently higher than those in the tourism sector"
+    ],
+    "answer": 1,
+    "explanation": "Agriculture is labor-intensive and provides crucial employment opportunities in rural communities where alternative jobs are scarce. This helps reduce rural-urban migration and underemployment in Caribbean territories.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-d55c1e1c"
+  },
+  {
+    "question": "Increased local agricultural production in the Caribbean contributes to food security mainly by:",
+    "options": [
+      "Eliminating the need for all food imports within one growing season",
+      "Reducing foreign exchange expenditure on food imports and stabilizing local food supply",
+      "Ensuring complete self-sufficiency in wheat and temperate vegetable production",
+      "Preventing the export of any locally grown produce to regional markets"
+    ],
+    "answer": 1,
+    "explanation": "Local production reduces the food import bill, conserving foreign exchange for other essential imports, and provides a buffer against international price fluctuations and supply disruptions.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-4f567905"
+  },
+  {
+    "question": "Which of the following is a MAJOR challenge specifically affecting agricultural productivity and farmer retention in the Caribbean region?",
+    "options": [
+      "Excessive government subsidies leading to overproduction and price collapse",
+      "Praedial larceny (theft of crops and livestock) and high cost of agricultural inputs",
+      "Unsuitable tropical climate conditions for growing export crops",
+      "Surplus labor availability causing overcrowding on small farm holdings"
+    ],
+    "answer": 1,
+    "explanation": "Praedial larceny is a pervasive problem in Caribbean agriculture that discourages investment and reduces yields. Combined with high costs for fertilizers, pesticides, and equipment (which must often be imported), these factors significantly challenge regional food production.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-50fa479f"
+  },
+  {
+    "question": "The agricultural sector in Caribbean economies demonstrates strong forward linkages to economic growth when:",
+    "options": [
+      "Farmers purchase imported seeds, fertilizers, and machinery from foreign suppliers",
+      "Raw agricultural produce is processed into manufactured goods for local consumption and export",
+      "Agricultural workers migrate to urban areas seeking employment in manufacturing",
+      "Governments provide tax incentives to reduce the price of imported food items"
+    ],
+    "answer": 1,
+    "explanation": "Forward linkages occur when agricultural output serves as inputs for other industries (agro-processing, food manufacturing, tourism). This adds value to raw products, creates additional employment, and generates higher export earnings than raw commodity sales alone.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-ecb403ae"
+  },
+  {
+    "question": "In many Caribbean territories, agriculture remains significant as a source of employment primarily because:",
+    "options": [
+      "It provides year-round permanent jobs for the majority of the urban population",
+      "It absorbs labor in rural areas and provides seasonal employment during planting and harvesting",
+      "It requires highly specialized technical skills unavailable in other economic sectors",
+      "It offers higher wages and better benefits than tourism and manufacturing combined"
+    ],
+    "answer": 1,
+    "explanation": "Agriculture in the Caribbean provides crucial employment opportunities, particularly in rural communities, and offers seasonal work during crop cycles. This helps reduce rural-urban migration, underemployment, and provides livelihoods for small-scale farmers and agricultural laborers.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-70a6ffbb"
+  },
+  {
+    "question": "One major economic benefit of increasing local agricultural production in the Caribbean region is:",
+    "options": [
+      "The immediate elimination of all food imports within one growing season",
+      "Reducing the high regional food import bill and enhancing food security",
+      "Increasing dependence on international food aid and donation programs",
+      "Raising domestic food prices to match international market rates"
+    ],
+    "answer": 1,
+    "explanation": "The Caribbean has a food import bill exceeding US$4-5 billion annually. Increasing local agricultural production reduces expenditure on imports, conserves foreign exchange, improves food security, and decreases vulnerability to global supply chain disruptions and price volatility.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-d276c691"
+  },
+  {
+    "question": "Which of the following is a major challenge currently facing agricultural development in the Caribbean region?",
+    "options": [
+      "Excessive government subsidies that make agricultural production artificially cheap",
+      "Praedial larceny (crop theft), high input costs, and the impacts of climate change",
+      "Overproduction of staple crops leading to persistent market gluts and price collapses",
+      "A complete lack of suitable climate and soil for growing tropical crops"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean agriculture faces significant challenges including praedial larceny (theft of crops and livestock), high costs of inputs (fertilizers, pesticides), limited access to credit, praedial larceny, and increasing frequency of hurricanes, droughts, and flooding due to climate change.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-9f470d44"
+  },
+  {
+    "question": "The contribution of agriculture to Gross Domestic Product (GDP) in most Caribbean countries has declined in percentage terms over recent decades because:",
+    "options": [
+      "The agricultural sector has become completely obsolete and non-productive",
+      "Other sectors such as tourism and services have grown at relatively faster rates",
+      "Agricultural exports no longer earn any foreign exchange for these countries",
+      "Farmers have ceased production of crops for domestic consumption"
+    ],
+    "answer": 1,
+    "explanation": "While agriculture continues to grow in absolute terms, its share of GDP has declined because sectors like tourism, financial services, and construction have expanded more rapidly. However, agriculture remains vital for food security, employment generation, rural development, and foreign exchange earnings.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-32243d2a"
+  },
+  {
+    "question": "Which statement best describes the current contribution of agriculture to foreign exchange earnings in Caribbean countries?",
+    "options": [
+      "Agriculture no longer contributes significantly due to the decline in sugar and banana exports",
+      "Foreign exchange from agriculture is exclusively derived from petroleum products",
+      "Agriculture remains a major source through diversified exports like spices, coffee, cocoa, and fresh produce",
+      "Remittances from agricultural workers abroad constitute the primary agricultural foreign exchange"
+    ],
+    "answer": 2,
+    "explanation": "While traditional exports like sugar and bananas have declined, Caribbean agriculture continues to earn substantial foreign exchange through non-traditional exports including spices (nutmeg, pimento), coffee, cocoa, tropical fruits, and vegetables. This diversification helps stabilize export earnings.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-3a154931"
+  },
+  {
+    "question": "What is the primary challenge facing food security and the agricultural trade balance in most Caribbean territories?",
+    "options": [
+      "Excessive domestic production leading to gluts and waste",
+      "Complete self-sufficiency in staple crops like wheat and rice",
+      "Absence of suitable climate for crop diversification",
+      "High dependence on food imports resulting in significant foreign exchange expenditure"
+    ],
+    "answer": 3,
+    "explanation": "Caribbean countries import between 60-80% of their food requirements, creating a heavy burden on foreign exchange reserves. This import dependence makes the region vulnerable to global price fluctuations and supply chain disruptions.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-bc4e317d"
+  },
+  {
+    "question": "How does the agricultural sector primarily interact with the tourism industry in Caribbean economies?",
+    "options": [
+      "Through direct competition for available labor in rural areas",
+      "By supplying local food products to hotels and restaurants and providing agro-tourism experiences",
+      "Tourism development inevitably leads to the displacement of agricultural lands without mutual benefit",
+      "There is minimal interaction as tourists exclusively demand imported food products"
+    ],
+    "answer": 1,
+    "explanation": "Agriculture and tourism maintain strong linkages where farmers supply fresh produce to the hospitality sector, reducing food import bills. Additionally, agro-tourism initiatives allow visitors to experience farm activities, creating diversified income streams for rural communities.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-f7f4d53c"
+  },
+  {
+    "question": "Which combination represents significant internal challenges currently hindering agricultural productivity in the Caribbean region?",
+    "options": [
+      "Universal mechanization across all farm sizes and excessive government subsidies",
+      "Praedial larceny (theft of agricultural produce) and high production costs",
+      "Overabundance of processing facilities and surplus labor in rural areas",
+      "Excessive rainfall throughout the year and lack of fertile volcanic soil"
+    ],
+    "answer": 1,
+    "explanation": "Praedial larceny remains a persistent socio-economic problem that discourages farmer investment and expansion. Combined with high input costs (fertilizers, fuel, labor), these factors reduce the competitiveness of local produce against subsidized imports.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-7d2f1891"
+  },
+  {
+    "question": "What trend has characterized employment patterns in Caribbean agriculture over recent decades?",
+    "options": [
+      "Decline in percentage of total employment but continued importance in rural livelihoods alongside diversification into non-farm activities",
+      "Complete mechanization eliminating all agricultural jobs",
+      "Uniform increase in agricultural employment across all age groups, especially youth",
+      "Shift from small-scale farming to exclusively large-scale industrial employment"
+    ],
+    "answer": 0,
+    "explanation": "While agriculture's share of total employment has decreased due to structural adjustment, urbanization, and service sector growth, it remains vital for rural employment. Many farming households now diversify into agro-processing, direct marketing, and service activities to supplement income.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-75e330da"
+  },
+  {
+    "question": "Categorize the following roles of agriculture in the Caribbean economy:",
+    "type": "DND",
+    "categories": [
+      "Source of Food",
+      "Source of Employment",
+      "Source of Foreign Exchange"
+    ],
+    "items": [
+      {
+        "text": "Provision of staple crops like cassava and yams",
+        "category": "Source of Food"
+      },
+      {
+        "text": "Jobs for farm laborers and plantation workers",
+        "category": "Source of Employment"
+      },
+      {
+        "text": "Export earnings from cocoa and coffee",
+        "category": "Source of Foreign Exchange"
+      },
+      {
+        "text": "Supply of fresh fruits and vegetables to local markets",
+        "category": "Source of Food"
+      },
+      {
+        "text": "Income generation through banana exports to Europe",
+        "category": "Source of Foreign Exchange"
+      },
+      {
+        "text": "Livelihood for fishermen and aquaculture workers",
+        "category": "Source of Employment"
+      },
+      {
+        "text": "Reduction of food import bill through local production",
+        "category": "Source of Food"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-c8893540"
+  },
+  {
+    "question": "Classify the following as either Economic Contributions or Challenges facing regional agriculture:",
+    "type": "DND",
+    "categories": [
+      "Economic Contribution",
+      "Challenge Facing Agriculture"
+    ],
+    "items": [
+      {
+        "text": "Contribution to Gross Domestic Product (GDP)",
+        "category": "Economic Contribution"
+      },
+      {
+        "text": "Praedial larceny and crop theft",
+        "category": "Challenge Facing Agriculture"
+      },
+      {
+        "text": "Drought and irregular rainfall patterns",
+        "category": "Challenge Facing Agriculture"
+      },
+      {
+        "text": "Provision of raw materials for agro-processing industries",
+        "category": "Economic Contribution"
+      },
+      {
+        "text": "Limited access to credit and financing",
+        "category": "Challenge Facing Agriculture"
+      },
+      {
+        "text": "Youth migration from rural farming areas",
+        "category": "Challenge Facing Agriculture"
+      },
+      {
+        "text": "Multiplier effects on rural economies",
+        "category": "Economic Contribution"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-09073226"
+  },
+  {
+    "question": "Sort the following agricultural activities into Direct or Indirect employment:",
+    "type": "DND",
+    "categories": [
+      "Direct Employment",
+      "Indirect Employment"
+    ],
+    "items": [
+      {
+        "text": "Harvesting sugarcane on a plantation",
+        "category": "Direct Employment"
+      },
+      {
+        "text": "Selling agricultural supplies and equipment",
+        "category": "Indirect Employment"
+      },
+      {
+        "text": "Processing milk into cheese at a dairy factory",
+        "category": "Indirect Employment"
+      },
+      {
+        "text": "Planting and tending to vegetable crops",
+        "category": "Direct Employment"
+      },
+      {
+        "text": "Transporting produce from farm to market",
+        "category": "Indirect Employment"
+      },
+      {
+        "text": "Managing pest control on a farm",
+        "category": "Direct Employment"
+      },
+      {
+        "text": "Working in agricultural extension services",
+        "category": "Indirect Employment"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-74db0cd9"
+  },
+  {
+    "question": "Categorize the following based on whether they relate to Domestic Food Security or Foreign Exchange Earnings:",
+    "type": "DND",
+    "categories": [
+      "Domestic Food Supply",
+      "Export Earnings"
+    ],
+    "items": [
+      {
+        "text": "Ensuring national food security and self-sufficiency",
+        "category": "Domestic Food Supply"
+      },
+      {
+        "text": "Revenue generated from spice exports to international markets",
+        "category": "Export Earnings"
+      },
+      {
+        "text": "Providing local consumers with fresh, affordable produce",
+        "category": "Domestic Food Supply"
+      },
+      {
+        "text": "Earning foreign currency from citrus fruit exports",
+        "category": "Export Earnings"
+      },
+      {
+        "text": "Reducing dependence on imported food products",
+        "category": "Domestic Food Supply"
+      },
+      {
+        "text": "Sales of ornamental plants to overseas buyers",
+        "category": "Export Earnings"
+      },
+      {
+        "text": "Stabilizing local food prices through domestic production",
+        "category": "Domestic Food Supply"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-c2d65cbe"
+  },
+  {
+    "question": "Classify the following challenges facing Caribbean agriculture into their appropriate categories:",
+    "type": "DND",
+    "categories": [
+      "Natural/Environmental Challenges",
+      "Economic/Market Challenges",
+      "Social/Institutional Challenges"
+    ],
+    "items": [
+      {
+        "text": "Hurricanes and flooding affecting crop yields",
+        "category": "Natural/Environmental Challenges"
+      },
+      {
+        "text": "Volatile world market prices for commodities",
+        "category": "Economic/Market Challenges"
+      },
+      {
+        "text": "Aging farming population and lack of young entrants",
+        "category": "Social/Institutional Challenges"
+      },
+      {
+        "text": "Soil degradation and erosion",
+        "category": "Natural/Environmental Challenges"
+      },
+      {
+        "text": "High costs of imported fertilizers and pesticides",
+        "category": "Economic/Market Challenges"
+      },
+      {
+        "text": "Inadequate agricultural research and development",
+        "category": "Social/Institutional Challenges"
+      },
+      {
+        "text": "Trade barriers and protective tariffs in export markets",
+        "category": "Economic/Market Challenges"
+      },
+      {
+        "text": "Climate change and rising temperatures",
+        "category": "Natural/Environmental Challenges"
+      }
+    ],
+    "topic_id": "AGRI-01-00001",
+    "id": "Q-AGRI-01-00001-65a2d889"
+  },
+  {
+    "question": "Which of the following represents the PRIMARY way agriculture contributes to foreign exchange earnings in Caribbean countries?",
+    "options": [
+      "Importing modern agricultural machinery and equipment",
+      "Exporting traditional crops such as sugar, bananas, and coffee",
+      "Providing subsidies to local farmers for domestic consumption",
+      "Purchasing chemical fertilizers from international suppliers"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean agriculture earns foreign exchange primarily through the export of traditional crops (sugar, bananas, coffee, cocoa) and non-traditional crops to international markets. Importing machinery and fertilizers actually depletes foreign exchange reserves, while subsidies are domestic expenditures that do not generate foreign currency.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-6c82db4e"
+  },
+  {
+    "question": "What is the MAIN economic challenge regarding food security faced by most Caribbean nations?",
+    "options": [
+      "Overproduction of staple foods leading to waste",
+      "High food import bills draining foreign exchange reserves",
+      "Excessive export of locally grown vegetables to North America",
+      "Lack of consumer demand for local agricultural products"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean countries import between 60-80% of their food requirements, resulting in a high food import bill that consumes valuable foreign exchange reserves. This dependence makes the region vulnerable to global price fluctuations and supply chain disruptions, threatening both food security and economic stability.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-8671006f"
+  },
+  {
+    "question": "Approximately what percentage of the workforce in Caribbean countries is typically employed directly or indirectly by the agricultural sector?",
+    "options": [
+      "Less than 2% of the total workforce",
+      "Between 10% and 25% depending on the country",
+      "Between 50% and 60% of the total workforce",
+      "Over 80% of the total workforce"
+    ],
+    "answer": 1,
+    "explanation": "Agriculture employs approximately 10-25% of the Caribbean workforce directly, with additional indirect employment in agro-processing, distribution, and support services. While this figure has declined from historical highs due to tourism expansion, it remains significant in countries like Belize, Guyana, and Haiti, and is crucial for rural employment across the region.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-6cc636e4"
+  },
+  {
+    "question": "Which factor poses the GREATEST challenge to agricultural productivity and investor confidence in the Caribbean region?",
+    "options": [
+      "Praedial larceny (theft of agricultural produce)",
+      "Excessive year-round rainfall causing constant flooding",
+      "Abundant availability of cheap skilled labor",
+      "Government prohibition of agricultural exports"
+    ],
+    "answer": 0,
+    "explanation": "Praedial larceny is a pervasive challenge in Caribbean agriculture, causing significant financial losses to farmers and deterring youth and investors from entering the sector. Unlike seasonal weather issues, theft represents a constant socio-economic threat that increases production costs (security measures) and reduces profitability, undermining the sector's contribution to employment and GDP.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-c4db854c"
+  },
+  {
+    "question": "Why do many Caribbean agricultural products struggle to compete effectively in international export markets?",
+    "options": [
+      "They are of lower quality than global standards",
+      "High production costs due to small-scale operations and imported inputs",
+      "There is no international demand for tropical crops",
+      "Caribbean governments refuse to certify products for export"
+    ],
+    "answer": 1,
+    "explanation": "Caribbean farmers typically operate small-scale holdings with high production costs due to expensive imported inputs (fuel, fertilizers, equipment) and limited mechanization. This makes their products less price-competitive against heavily subsidized agricultural produce from large-scale producers in the USA, EU, and Latin America, challenging the sector's ability to earn foreign exchange.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-cc0f53d3"
+  },
+  {
+    "question": "One major disadvantage of Caribbean economies relying heavily on traditional agricultural exports such as sugar and bananas is that:",
+    "options": [
+      "These commodities face uncertain prices and high competition on the world market",
+      "These crops are resistant to damage from hurricanes and tropical storms",
+      "These products have guaranteed purchase agreements at stable prices with importing countries",
+      "These commodities require minimal labor input during production"
+    ],
+    "answer": 0,
+    "explanation": "Traditional Caribbean exports like sugar and bananas are subject to price volatility on the international market and face competition from subsidized producers in other regions, making foreign exchange earnings unpredictable. Contrary to option B, these crops are actually vulnerable to hurricanes, and contrary to option D, they are labor-intensive.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-6addec25"
+  },
+  {
+    "question": "Which of the following best explains how increased domestic agricultural production improves a Caribbean country's balance of payments position?",
+    "options": [
+      "It increases the need for imported agricultural machinery and chemicals",
+      "It reduces expenditure on food imports and may generate foreign exchange through exports",
+      "It eliminates the need for domestic food processing industries",
+      "It guarantees consistently high international prices for all local produce"
+    ],
+    "answer": 1,
+    "explanation": "Boosting local agricultural production reduces the foreign exchange spent on food imports (import substitution) while potentially increasing earnings from agricultural exports, thereby improving the balance of payments. Option A would worsen the balance, while options C and D represent misconceptions about agricultural economics.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-a8105447"
+  },
+  {
+    "question": "The agricultural sector contributes significantly to Caribbean economies primarily because it:",
+    "options": [
+      "Provides employment opportunities for a substantial portion of the workforce, especially in rural areas",
+      "Offers exclusively permanent, year-round employment with no seasonal fluctuations",
+      "Requires highly specialized technical qualifications that exclude unskilled laborers",
+      "Operates independently without linkages to tourism, manufacturing, or service sectors"
+    ],
+    "answer": 0,
+    "explanation": "Agriculture remains a major employer in the Caribbean, particularly in rural communities, absorbing labor across various skill levels. However, option B is incorrect as agricultural work is often seasonal, option C is wrong as it employs both skilled and unskilled workers, and option D is incorrect due to strong linkages with agro-processing and tourism (agro-tourism).",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-e9945e71"
+  },
+  {
+    "question": "A significant challenge facing sustainable agricultural development in the Caribbean region is:",
+    "options": [
+      "The abundance of flat, arable land suitable for large-scale mechanized farming",
+      "The consistent availability of cheap irrigation water throughout the year",
+      "The susceptibility of farming systems to damage from natural disasters such as hurricanes and droughts",
+      "The surplus of post-harvest storage and processing facilities"
+    ],
+    "answer": 2,
+    "explanation": "Caribbean agriculture is highly vulnerable to climate change impacts, particularly hurricanes, floods, and droughts, which destroy crops and infrastructure. Options A, B, and D are incorrect distractors as the region actually faces limited flat arable land, water scarcity issues, and inadequate post-harvest facilities.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-48965f45"
+  },
+  {
+    "question": "Government policies promoting 'import substitution' in Caribbean agriculture are primarily designed to:",
+    "options": [
+      "Increase dependence on foreign food aid and charitable donations",
+      "Replace locally grown foods with imported varieties to ensure quality",
+      "Reduce foreign exchange expenditure on food imports by boosting domestic production",
+      "Eliminate agricultural exports to focus solely on local consumption"
+    ],
+    "answer": 2,
+    "explanation": "Import substitution policies aim to decrease reliance on expensive food imports (which deplete foreign exchange reserves) by encouraging local production of crops that would otherwise be imported. This enhances food security and conserves foreign exchange for other developmental needs, contrary to options A, B, and D which describe opposite or incorrect outcomes.",
+    "topic_id": "AGRI-01-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-01-00001-fa9de1cc"
+  },
+  {
+    "question": "Categorize the following farm records into Production Records or Financial Records.",
+    "type": "DND",
+    "categories": [
+      "Production Records",
+      "Financial Records"
+    ],
+    "items": [
+      {
+        "text": "Daily milk yield log",
+        "category": "Production Records"
+      },
+      {
+        "text": "Cash book",
+        "category": "Financial Records"
+      },
+      {
+        "text": "Breeding and calving register",
+        "category": "Production Records"
+      },
+      {
+        "text": "Invoice and receipt file",
+        "category": "Financial Records"
+      },
+      {
+        "text": "Feed consumption chart",
+        "category": "Production Records"
+      },
+      {
+        "text": "Bank statement records",
+        "category": "Financial Records"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-965af619"
+  },
+  {
+    "question": "Classify the following budget items as either Capital Expenditure or Operating Expenditure.",
+    "type": "DND",
+    "categories": [
+      "Capital Expenditure",
+      "Operating Expenditure"
+    ],
+    "items": [
+      {
+        "text": "Purchase of tractor",
+        "category": "Capital Expenditure"
+      },
+      {
+        "text": "Seeds and fertilizers",
+        "category": "Operating Expenditure"
+      },
+      {
+        "text": "Construction of storage silo",
+        "category": "Capital Expenditure"
+      },
+      {
+        "text": "Fuel for farm machinery",
+        "category": "Operating Expenditure"
+      },
+      {
+        "text": "Buying farmland",
+        "category": "Capital Expenditure"
+      },
+      {
+        "text": "Veterinary services and medicines",
+        "category": "Operating Expenditure"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-a7af55a6"
+  },
+  {
+    "question": "Sort the following into Marketing Functions or Types of Markets.",
+    "type": "DND",
+    "categories": [
+      "Marketing Functions",
+      "Types of Markets"
+    ],
+    "items": [
+      {
+        "text": "Transportation of produce to buyers",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Grading and standardization of crops",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Wholesale market",
+        "category": "Types of Markets"
+      },
+      {
+        "text": "Retail market",
+        "category": "Types of Markets"
+      },
+      {
+        "text": "Storage and warehousing",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Farmers' market",
+        "category": "Types of Markets"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-0dffdf2d"
+  },
+  {
+    "question": "Match the cooperative characteristics to the correct Type of Cooperative.",
+    "type": "DND",
+    "categories": [
+      "Marketing Cooperative",
+      "Credit Cooperative",
+      "Production Cooperative"
+    ],
+    "items": [
+      {
+        "text": "Pools members' produce for bulk sale",
+        "category": "Marketing Cooperative"
+      },
+      {
+        "text": "Provides loans to farmer members",
+        "category": "Credit Cooperative"
+      },
+      {
+        "text": "Jointly owns processing equipment",
+        "category": "Production Cooperative"
+      },
+      {
+        "text": "Negotiates better prices for members' goods",
+        "category": "Marketing Cooperative"
+      },
+      {
+        "text": "Collects savings and deposits from members",
+        "category": "Credit Cooperative"
+      },
+      {
+        "text": "Shared use of heavy machinery",
+        "category": "Production Cooperative"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-a645403a"
+  },
+  {
+    "question": "Categorize the following costs as Fixed Costs or Variable Costs in agricultural budgeting.",
+    "type": "DND",
+    "categories": [
+      "Fixed Costs",
+      "Variable Costs"
+    ],
+    "items": [
+      {
+        "text": "Land rent or lease payment",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Seeds and planting materials",
+        "category": "Variable Costs"
+      },
+      {
+        "text": "Insurance premiums",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Casual labor wages",
+        "category": "Variable Costs"
+      },
+      {
+        "text": "Depreciation on farm buildings",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Pesticides and herbicides",
+        "category": "Variable Costs"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-8c2df689"
+  },
+  {
+    "question": "A Barbadian farmer notices a decline in milk production from his dairy herd over the past six months. Which type of farm record would be most useful in identifying whether the cause is related to breeding efficiency or increased calf mortality?",
+    "options": [
+      "Production records",
+      "Inventory records",
+      "Cash flow statements",
+      "Net worth statements"
+    ],
+    "answer": 0,
+    "explanation": "Production records track inputs, outputs, and biological parameters specific to farm enterprises (such as breeding dates, calving rates, and mortality). Inventory records only track assets at a point in time, while financial statements track monetary flows rather than biological performance.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-0aa53501"
+  },
+  {
+    "question": "A Trinidad farmer currently cultivating 3 hectares of cassava wants to evaluate whether converting 1 hectare to vegetable production would increase overall farm profit. Which budgeting technique is most appropriate for this analysis?",
+    "options": [
+      "Partial budgeting",
+      "Enterprise budgeting",
+      "Complete farm budgeting",
+      "Break-even analysis only"
+    ],
+    "answer": 0,
+    "explanation": "Partial budgeting is specifically designed to analyze the financial impact of minor changes or alternatives in farm operations (such as substituting one crop for part of the land). Enterprise budgeting analyzes a single enterprise in isolation, while complete budgeting is used for planning entirely new farm setups.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-66ef2222"
+  },
+  {
+    "question": "In the Eastern Caribbean marketing system, which statement BEST describes the primary function of higglers?",
+    "options": [
+      "They purchase produce directly from farmers for resale in urban markets, often providing transport and immediate cash payment",
+      "They regulate wholesale prices to ensure farmers receive fixed minimum prices",
+      "They provide long-term credit facilities and storage infrastructure for perishable crops",
+      "They certify produce quality for international export compliance"
+    ],
+    "answer": 0,
+    "explanation": "Higglers are informal middlemen in the Caribbean who buy produce directly from rural farmers, transport it to urban markets, and sell to consumers. While they provide immediate liquidity and transport, they do not regulate prices, provide long-term credit, or handle export certification.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-5a7f8313"
+  },
+  {
+    "question": "A group of small-scale cocoa farmers in Grenada forms a cooperative society to ferment, dry, and export their beans collectively. Which characteristic distinguishes this cooperative structure from a private limited liability company?",
+    "options": [
+      "Profits are distributed to members based on patronage (quantity of cocoa delivered) rather than share capital held",
+      "Ownership is restricted to external investors who do not produce cocoa",
+      "Decision-making is controlled solely by a board of directors with no member input",
+      "Members receive fixed dividends regardless of the cooperative's annual performance"
+    ],
+    "answer": 0,
+    "explanation": "Agricultural cooperatives operate on the principle of patronage returns, where profits are distributed based on members' use of the cooperative's services (e.g., amount of produce sold through it), not based on capital investment. This contrasts with companies where dividends depend on shares held.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-81900b40"
+  },
+  {
+    "question": "At the end of the financial year, a Jamaican farmer needs to determine the value of his stored produce (yam and sweet potato), the depreciated value of his tractor, and his outstanding loan balance. Which single record consolidates all this information?",
+    "options": [
+      "The inventory/balance sheet record",
+      "The daily labour register",
+      "The enterprise production record",
+      "The cash flow budget"
+    ],
+    "answer": 0,
+    "explanation": "The inventory record (part of the balance sheet) tracks assets such as stored produce, equipment value (accounting for depreciation), and liabilities like loans. Labour registers track workforce data, production records track biological inputs/outputs, and cash flow budgets track projected monetary movements.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-8a261e66"
+  },
+  {
+    "question": "A small-scale dasheen farmer in St. Vincent maintains detailed production records showing yield per hectare, input costs, and labour hours for each variety planted. What is the PRIMARY purpose of keeping these farm records?",
+    "options": [
+      "To satisfy government inspection requirements and avoid penalties",
+      "To determine the profitability of different varieties and guide future planting decisions",
+      "To calculate the exact amount of taxes owed to the Inland Revenue Department",
+      "To qualify for bank loans only when expanding the farm size"
+    ],
+    "answer": 1,
+    "explanation": "While farm records can be used for tax purposes and loan applications, their primary function is to provide data for management decisions. By analyzing which dasheen varieties yield the highest returns relative to costs, the farmer can make informed decisions about future resource allocation and crop selection to maximize profitability.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-b6270764"
+  },
+  {
+    "question": "A poultry farmer in Jamaica is preparing a cash flow budget for the upcoming 12 months. Which of the following BEST describes the main purpose of this budgeting exercise?",
+    "options": [
+      "To predict the total net profit for the year regardless of when money is received or paid",
+      "To identify specific periods when cash shortages might occur and plan for necessary borrowing or adjustments",
+      "To calculate the depreciation value of farm equipment and buildings",
+      "To determine the fixed market price for eggs during the Christmas season"
+    ],
+    "answer": 1,
+    "explanation": "A cash flow budget tracks the timing of cash inflows (sales) and outflows (expenses), which is crucial because even profitable farms can face liquidity crises if major expenses (like feed purchases) occur before income is received. This allows the farmer to arrange credit or adjust payment schedules to avoid cash shortages.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-29a17445"
+  },
+  {
+    "question": "A group of cocoa farmers in Grenada forms a cooperative to ferment, dry, and export their beans directly to European chocolate manufacturers rather than selling wet beans to local middlemen. What is the main economic advantage of this marketing strategy?",
+    "options": [
+      "Elimination of all production and labour costs for individual farmers",
+      "Capturing a larger share of the final consumer price through value-added processing and bypassing intermediaries",
+      "Guaranteed protection from hurricanes and other natural disasters",
+      "Automatic exemption from all agricultural export taxes and duties"
+    ],
+    "answer": 1,
+    "explanation": "By processing the cocoa (adding value) and exporting directly, the cooperative retains the profit margins that would otherwise go to middlemen and processors. This vertical integration allows farmers to receive higher prices for their product, though they must invest in processing facilities and marketing.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-394a6b2a"
+  },
+  {
+    "question": "Which of the following financial records is ESSENTIAL for a farmers' cooperative in Trinidad to maintain in order to determine whether the group is operating at a profit or loss at the end of the financial year?",
+    "options": [
+      "A breeding calendar showing mating dates for livestock-owning members",
+      "An inventory log recording only the depreciation of shared machinery",
+      "A statement of income and expenditure (profit and loss statement)",
+      "A meteorological record of rainfall patterns over the past five years"
+    ],
+    "answer": 2,
+    "explanation": "The statement of income and expenditure (profit and loss statement) systematically records all revenues (sales, subsidies) and expenses (inputs, labour, depreciation) to calculate net income. While breeding calendars and weather records are useful production tools, and machinery logs track asset values, only the income statement reveals the financial viability of the cooperative.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-722c6b31"
+  },
+  {
+    "question": "In Barbados, the demand for fresh lamb and goat meat increases significantly during the Easter season, resulting in higher market prices. How should a livestock farmer BEST incorporate this market information into the annual farm budget?",
+    "options": [
+      "Plan the production cycle so that animals reach market weight during high-demand periods to maximize revenue",
+      "Reduce the herd size by half to create artificial scarcity and drive prices higher",
+      "Ignore seasonal price trends as they do not significantly affect total annual farm income",
+      "Sell all animals during the Christmas season when prices are traditionally at their lowest"
+    ],
+    "answer": 0,
+    "explanation": "Effective farm budgeting requires aligning production with market demand cycles. By planning breeding and feeding schedules so that animals are ready for market during peak demand (Easter), the farmer can take advantage of higher prices. This requires backward planning from the target market date to determine breeding times and feed budgets.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-20ea5237"
+  },
+  {
+    "question": "A small-scale vegetable farmer in St. Lucia notices that despite high sales of tomatoes at the market, the farm profits remain consistently low. Which type of farm record would BEST help the farmer identify the specific cause of this financial problem?",
+    "options": [
+      "Cash flow statement",
+      "Weather diary",
+      "Production inventory record",
+      "Soil analysis report"
+    ],
+    "answer": 0,
+    "explanation": "A cash flow statement tracks all money entering and leaving the business, revealing high production costs or hidden expenses that erode profits despite good sales. While weather diaries and soil reports affect yield, and inventory tracks stock levels, only the cash flow statement identifies financial inefficiencies.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-9f6d3880"
+  },
+  {
+    "question": "A farmer in Barbados is considering switching 2 hectares from sugarcane to hot pepper production to meet increasing hotel demand. Which budgeting tool is MOST appropriate for determining whether this specific change would be economically viable?",
+    "options": [
+      "Whole farm budget",
+      "Partial budget",
+      "Capital budget",
+      "Cash flow budget"
+    ],
+    "answer": 1,
+    "explanation": "A partial budget is specifically designed to analyze the financial impact of minor changes to an existing farm operation (like switching one crop for another) by comparing additional costs and returns. A whole farm budget examines the entire operation, a capital budget is for long-term investments in fixed assets, and a cash flow budget tracks the timing of money movement rather than enterprise profitability.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-2da38b2d"
+  },
+  {
+    "question": "Which marketing channel would typically provide the highest price per kilogram for fresh dasheen (taro) produced by a farmer in St. Vincent, though it carries the greatest risk of unsold produce?",
+    "options": [
+      "Wholesale supply to a higgler in the local market",
+      "Contract sales to a supermarket chain",
+      "Direct sales to tourists at a heritage site",
+      "Bulk sale to an agro-processor for flour production"
+    ],
+    "answer": 2,
+    "explanation": "Direct sales to tourists eliminate intermediaries (middlemen) and allow farmers to charge premium retail prices, but volumes are unpredictable and dependent on tourist traffic. Selling to higglers (informal traders) or supermarkets provides guaranteed volume but at lower wholesale prices, while processors typically pay the lowest rates as they purchase bulk, often lower-grade produce.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-ac69ceda"
+  },
+  {
+    "question": "A group of cocoa farmers in Grenada formed a cooperative to collectively process their beans into chocolate bars for export. What is the PRIMARY economic advantage of this form of vertical integration?",
+    "options": [
+      "Increased profit margins by capturing value-added processing returns",
+      "Elimination of all production and labor costs",
+      "Exclusive access to government subsidies unavailable to individual farmers",
+      "Guaranteed immunity from international cocoa price fluctuations"
+    ],
+    "answer": 0,
+    "explanation": "By processing raw cocoa into chocolate, the cooperative moves up the value chain to capture the profits that would otherwise go to external processors. This vertical integration increases margins but does not eliminate costs (A), guarantee exclusive subsidies (B), or provide complete immunity from market fluctuations (D), though it may reduce risk through collective bargaining power.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-3d397cc4"
+  },
+  {
+    "question": "At the end of the financial year, a Jamaican goat farmer calculates total assets of $400,000 (breeding stock and equipment) and total liabilities of $150,000 (outstanding bank loan and unpaid feed bills). What is the farmer's net worth (owner's equity)?",
+    "options": [
+      "$550,000",
+      "$400,000",
+      "$250,000",
+      "$150,000"
+    ],
+    "answer": 2,
+    "explanation": "Net worth (Owner's Equity) is calculated as Total Assets minus Total Liabilities ($400,000 - $150,000 = $250,000). The distractor $550,000 represents the sum of assets and liabilities (a common calculation error), $400,000 represents total assets only (ignoring debts), and $150,000 represents total liabilities only.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-aa626a44"
+  },
+  {
+    "question": "A vegetable farmer in St. Elizabeth, Jamaica, wants to determine which tomato variety generates the highest profit per hectare. Which type of farm record would be MOST useful for this specific analysis?",
+    "options": [
+      "Production records detailing input costs and yields for each variety",
+      "Inventory records of farm machinery and equipment",
+      "Daily labour attendance and wage records",
+      "Weather observation and rainfall data"
+    ],
+    "answer": 0,
+    "explanation": "Production records track both the inputs (costs) and outputs (yields) for specific enterprises or varieties, allowing the farmer to calculate net returns per hectare. Machinery inventory tracks assets, labour records track workforce data, and weather records track environmental conditions\u2014none of which directly compare profitability between crop varieties.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-c948b8a8"
+  },
+  {
+    "question": "A root crop farmer in St. Vincent is preparing an enterprise budget for dasheen production. Which of the following should be classified as a FIXED cost?",
+    "options": [
+      "Casual labour costs for harvesting based on yield volume",
+      "Annual land taxes and insurance premiums for the farm",
+      "Fertilizer expenses proportional to the area planted",
+      "Transportation costs to the packaging house"
+    ],
+    "answer": 1,
+    "explanation": "Fixed costs remain constant regardless of the level of production in the short run, such as land taxes, insurance, and depreciation. Variable costs like labour, fertilizer, and transportation change with the scale of production or yield levels.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-e6c1194c"
+  },
+  {
+    "question": "Which marketing arrangement BEST enables small-scale cocoa farmers in Grenada to meet international export quality standards and negotiate premium prices collectively?",
+    "options": [
+      "Forward contracting with individual buyers before harvest",
+      "Participating in a cooperative marketing association",
+      "Direct roadside vending to local consumers",
+      "Engaging in commodity futures trading"
+    ],
+    "answer": 1,
+    "explanation": "Cooperative marketing allows small farmers to pool their produce to achieve the volume and consistent quality required for export markets, while gaining collective bargaining power. Forward contracting locks in prices but doesn't address pooling, roadside vending is for local retail, and futures trading involves complex financial instruments unsuitable for direct smallholder marketing.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-04a7ebfc"
+  },
+  {
+    "question": "What is the PRIMARY advantage of joining a registered farmers' cooperative in the Caribbean?",
+    "options": [
+      "Automatic exemption from all agricultural taxes",
+      "Access to bulk purchasing of inputs at reduced prices",
+      "Guaranteed government subsidies regardless of production",
+      "Automatic export licenses for all produce types"
+    ],
+    "answer": 1,
+    "explanation": "Cooperatives achieve economies of scale by purchasing inputs (fertilizer, seeds, chemicals) in bulk for members, reducing individual costs. They do not provide automatic tax exemptions, guaranteed subsidies, or automatic export licenses\u2014these depend on specific government policies and compliance with regulations.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-5fe9ca9e"
+  },
+  {
+    "question": "At the end of the financial year, a poultry farmer in Trinidad reviews his records and finds: Total Assets = $450,000 and Total Liabilities = $175,000. What is the farmer's net worth (owner's equity)?",
+    "options": [
+      "$625,000",
+      "$275,000",
+      "$175,000",
+      "$450,000"
+    ],
+    "answer": 1,
+    "explanation": "Net worth or owner's equity is calculated as Total Assets minus Total Liabilities ($450,000 - $175,000 = $275,000). This represents the farmer's actual ownership stake in the business. The other options represent common errors: adding instead of subtracting, using liability value alone, or using asset value alone.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-f7ce5249"
+  },
+  {
+    "question": "Drag each item to the correct category: Farm Records or Budgeting Documents.",
+    "type": "DND",
+    "categories": [
+      "Farm Records",
+      "Budgeting Documents"
+    ],
+    "items": [
+      {
+        "text": "Breeding and calving records",
+        "category": "Farm Records"
+      },
+      {
+        "text": "Cash flow statement",
+        "category": "Budgeting Documents"
+      },
+      {
+        "text": "Inventory of machinery and equipment",
+        "category": "Farm Records"
+      },
+      {
+        "text": "Enterprise budget",
+        "category": "Budgeting Documents"
+      },
+      {
+        "text": "Pesticide and fertilizer application log",
+        "category": "Farm Records"
+      },
+      {
+        "text": "Partial budget for proposed changes",
+        "category": "Budgeting Documents"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-8307df87"
+  },
+  {
+    "question": "Classify the following as either Marketing Methods or Cooperative Principles.",
+    "type": "DND",
+    "categories": [
+      "Marketing Methods",
+      "Cooperative Principles"
+    ],
+    "items": [
+      {
+        "text": "Selling produce directly to consumers at farm gate",
+        "category": "Marketing Methods"
+      },
+      {
+        "text": "One member, one vote",
+        "category": "Cooperative Principles"
+      },
+      {
+        "text": "Contract farming with processing companies",
+        "category": "Marketing Methods"
+      },
+      {
+        "text": "Patronage refunds based on member transactions",
+        "category": "Cooperative Principles"
+      },
+      {
+        "text": "Auction sales at local market",
+        "category": "Marketing Methods"
+      },
+      {
+        "text": "Open and voluntary membership",
+        "category": "Cooperative Principles"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-1b019108"
+  },
+  {
+    "question": "Sort these costs into Fixed Costs or Variable Costs in agricultural budgeting.",
+    "type": "DND",
+    "categories": [
+      "Fixed Costs",
+      "Variable Costs"
+    ],
+    "items": [
+      {
+        "text": "Annual land rent or lease payments",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Seeds and planting materials",
+        "category": "Variable Costs"
+      },
+      {
+        "text": "Depreciation on farm buildings",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Casual labor wages for harvesting",
+        "category": "Variable Costs"
+      },
+      {
+        "text": "Insurance premiums",
+        "category": "Fixed Costs"
+      },
+      {
+        "text": "Fertilizers and agrochemicals",
+        "category": "Variable Costs"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-8f76fb1f"
+  },
+  {
+    "question": "Categorize the following items as either Production Records or Financial Records.",
+    "type": "DND",
+    "categories": [
+      "Production Records",
+      "Financial Records"
+    ],
+    "items": [
+      {
+        "text": "Daily milk yield per cow",
+        "category": "Production Records"
+      },
+      {
+        "text": "Sales receipts and invoices",
+        "category": "Financial Records"
+      },
+      {
+        "text": "Feed consumption charts for poultry",
+        "category": "Production Records"
+      },
+      {
+        "text": "Bank deposit slips and statements",
+        "category": "Financial Records"
+      },
+      {
+        "text": "Crop yield per hectare data",
+        "category": "Production Records"
+      },
+      {
+        "text": "Loan repayment schedules",
+        "category": "Financial Records"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-1bb3a933"
+  },
+  {
+    "question": "Match each activity with the correct business concept: Marketing Functions or Cooperative Benefits.",
+    "type": "DND",
+    "categories": [
+      "Marketing Functions",
+      "Cooperative Benefits"
+    ],
+    "items": [
+      {
+        "text": "Grading and standardization of produce",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Bulk purchasing of inputs at lower prices",
+        "category": "Cooperative Benefits"
+      },
+      {
+        "text": "Packaging and branding for export",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Shared use of expensive machinery",
+        "category": "Cooperative Benefits"
+      },
+      {
+        "text": "Transportation to market centers",
+        "category": "Marketing Functions"
+      },
+      {
+        "text": "Collective bargaining power for better prices",
+        "category": "Cooperative Benefits"
+      }
+    ],
+    "topic_id": "AGRI-02-00001",
+    "id": "Q-AGRI-02-00001-287c40bf"
+  },
+  {
+    "question": "A farmer in St. Vincent maintains detailed records of all input costs, including fertilizers, labor, and planting materials, for his banana crop. Which type of farm record is this, and what is its primary use in business planning?",
+    "options": [
+      "Production records; to determine optimal harvesting times",
+      "Inventory records; to track stock levels of unsold produce",
+      "Financial/cost records; to calculate break-even prices and profitability",
+      "Breeding records; to improve genetic stock of planting material"
+    ],
+    "answer": 2,
+    "explanation": "Financial or cost records track all expenditures associated with crop or livestock production. These are essential for calculating the cost of production per unit, determining break-even prices, and assessing whether the enterprise is profitable, which is crucial for business planning and securing credit.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-a783fb28"
+  },
+  {
+    "question": "A group of small-scale cocoa farmers in Trinidad form a cooperative to ferment, dry, and export their beans collectively. Which cooperative principle ensures that each member has equal voting power in decision-making, regardless of how many shares they purchased?",
+    "options": [
+      "Open and voluntary membership",
+      "Democratic member control",
+      "Limited interest on share capital",
+      "Patronage-based distribution of surplus"
+    ],
+    "answer": 1,
+    "explanation": "Democratic control is a fundamental cooperative principle where each member typically has one vote, preventing control by wealthy members who buy more shares. This ensures equitable participation in governance, distinguishing cooperatives from conventional companies where voting power is proportional to shareholding.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-1616e8b3"
+  },
+  {
+    "question": "A vegetable producer in Jamaica traditionally sells to higglers at the farm gate but decides to supply directly to hotels in Montego Bay. What is the most significant business advantage of this direct marketing channel?",
+    "options": [
+      "Complete elimination of price fluctuations and market risk",
+      "Guaranteed purchase of all produce regardless of quality standards",
+      "Better price realization and immediate feedback on quality requirements",
+      "Elimination of all transportation and packaging costs"
+    ],
+    "answer": 2,
+    "explanation": "Direct marketing to hotels allows farmers to capture a larger share of the consumer price by bypassing intermediaries (higglers). It also provides direct feedback on quality standards and consistency requirements, though the farmer assumes responsibility for transport and still faces market risks.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-4c4c46fb"
+  },
+  {
+    "question": "When preparing an annual enterprise budget for a mixed crop farm in Barbados, why is it important to include depreciation charges for fixed assets like tractors and irrigation equipment?",
+    "options": [
+      "To reduce the farm's taxable income to zero",
+      "To account for the wear and tear cost of using assets in production",
+      "To generate immediate cash reserves for equipment replacement",
+      "To inflate production costs when applying for government subsidies"
+    ],
+    "answer": 1,
+    "explanation": "Depreciation allocates the cost of durable assets over their useful life, reflecting the true cost of using equipment in production. This ensures accurate calculation of net profit and helps the farmer plan for future capital replacement, though it is a non-cash expense in the current period.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-443d8715"
+  },
+  {
+    "question": "A farmer's cash flow budget for the first quarter shows a negative net cash flow. Which business principle should be applied to manage this short-term liquidity problem without compromising the long-term viability of the farm?",
+    "options": [
+      "Immediately sell all fixed assets to generate cash",
+      "Postpone all planting activities until cash reserves are positive",
+      "Arrange short-term credit or renegotiate payment schedules with suppliers",
+      "Switch to a completely different enterprise that requires no inputs"
+    ],
+    "answer": 2,
+    "explanation": "Negative cash flow indicates a timing mismatch between income and expenses, common in seasonal agriculture. Prudent financial management involves using short-term credit facilities, renegotiating payment terms, or drawing on savings to cover the gap, rather than drastic measures like selling essential assets or abandoning the production cycle.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-c74fc9fc"
+  },
+  {
+    "question": "A small-scale pepper farmer in St. Lucia wishes to secure a loan from a commercial bank to expand production. Which type of farm record would be MOST critical for the bank to assess the farmer's creditworthiness?",
+    "options": [
+      "Soil analysis records from the past 5 years",
+      "Daily weather observation logs",
+      "Financial records showing profit/loss statements and cash flow",
+      "Breeding records of livestock (if applicable)"
+    ],
+    "answer": 2,
+    "explanation": "Banks assess creditworthiness based on financial viability and ability to repay. Financial records demonstrate the farm's profitability and cash management, whereas soil or weather records, while important for production, don't directly indicate financial capacity to service debt.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-85711533"
+  },
+  {
+    "question": "A vegetable farmer in Jamaica is preparing an enterprise budget for tomato production on 1 hectare. Which calculation represents the GROSS MARGIN for this enterprise?",
+    "options": [
+      "Total revenue minus fixed costs only",
+      "Total revenue minus total variable costs",
+      "Total revenue minus (fixed costs + variable costs)",
+      "Fixed costs divided by total revenue"
+    ],
+    "answer": 1,
+    "explanation": "Gross margin (or gross profit) is calculated as total revenue minus variable costs (costs that vary with production level like seeds, fertilizer, labor). It shows the contribution toward covering fixed costs and generating profit, distinct from net profit which subtracts all costs.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-d8e8f814"
+  },
+  {
+    "question": "A group of cocoa farmers in Grenada wants to maximize returns by selling fermented beans directly to a chocolate manufacturer in the USA rather than through traditional intermediaries. This strategy represents:",
+    "options": [
+      "Horizontal integration",
+      "Contract farming",
+      "Shortening the marketing chain",
+      "Forward integration by the manufacturer only"
+    ],
+    "answer": 2,
+    "explanation": "By eliminating intermediaries (middlemen/higglers) and selling directly to the end-user/manufacturer, farmers shorten the marketing chain (channel). This typically increases the producer's share of the consumer price, though it requires meeting quality standards and managing logistics.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-d1c7a254"
+  },
+  {
+    "question": "The Windward Islands Farmers' Association (WINFA) assists banana growers in collective marketing and negotiating better prices. Which characteristic distinguishes this cooperative structure from a private limited company?",
+    "options": [
+      "Profit distribution based on share capital invested",
+      "One member, one vote regardless of farm size",
+      "Focus on maximizing dividends for external shareholders",
+      "Government ownership of the enterprise"
+    ],
+    "answer": 1,
+    "explanation": "Cooperatives operate on democratic principles where each member has one vote, regardless of their level of investment or production volume. This contrasts with companies where voting power is proportional to shareholding. Cooperatives exist to serve members rather than maximize profits for investors.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-e9d10053"
+  },
+  {
+    "question": "A poultry farmer in Barbados calculates that the break-even point for egg production is reached when 2,000 dozen eggs are sold monthly. If the farmer currently produces 2,500 dozen eggs per month, which statement is CORRECT?",
+    "options": [
+      "The farmer is operating at a loss",
+      "The farmer is making an economic profit above variable costs",
+      "The farmer has covered all fixed and variable costs and is making a profit on the additional 500 dozen",
+      "The farmer needs to reduce fixed costs immediately to avoid bankruptcy"
+    ],
+    "answer": 2,
+    "explanation": "The break-even point is where total revenue equals total costs (fixed + variable). Production beyond this point (2,500 vs 2,000) means all costs are covered, and additional units contribute directly to profit since fixed costs are already covered and only variable costs apply to the extra production.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-366aad2e"
+  },
+  {
+    "question": "A farmer in St. Lucia maintains detailed logs of livestock births, milk yields, and mortality rates. This type of farm record is best classified as:",
+    "options": [
+      "Production record",
+      "Financial record",
+      "Inventory record",
+      "Marketing record"
+    ],
+    "answer": 0,
+    "explanation": "Production records document biological and operational activities including yields, breeding data, and livestock performance. Financial records track monetary transactions, inventory records list assets on hand, and marketing records track sales and distribution.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-028a085a"
+  },
+  {
+    "question": "A Barbadian farmer currently growing sugar cane is considering diversifying into vegetable production. To determine the financial impact of this proposed change, which budgeting technique is most appropriate?",
+    "options": [
+      "Partial budget",
+      "Enterprise budget",
+      "Cash flow budget",
+      "Balance sheet"
+    ],
+    "answer": 0,
+    "explanation": "A partial budget is specifically designed to analyze proposed changes to farm operations by comparing additional revenues and costs against reduced revenues and costs from displaced activities. An enterprise budget analyzes only one enterprise in isolation, while a cash flow budget tracks the timing of monetary inflows and outflows.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-ec54f978"
+  },
+  {
+    "question": "Which marketing strategy would be most beneficial for a group of cocoa farmers in Grenada seeking to secure premium prices for their high-quality beans while reducing dependency on middlemen?",
+    "options": [
+      "Forming a cooperative to negotiate bulk sales directly to exporters",
+      "Selling individually to multiple higglers at the farm gate",
+      "Waiting for buyers to visit the farm during harvest season",
+      "Restricting sales to the local domestic market only"
+    ],
+    "answer": 0,
+    "explanation": "Agricultural cooperatives enable farmers to achieve economies of scale, eliminate middlemen, access bulk purchasing and processing facilities, and negotiate better prices through collective bargaining power. This is particularly valuable for small-scale Caribbean producers of export crops like cocoa.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-91345544"
+  },
+  {
+    "question": "A citrus cooperative in Belize distributes surplus profits to members based on the quantity of fruit each member delivered to the processing plant rather than their initial capital investment. This practice demonstrates which cooperative principle?",
+    "options": [
+      "Member economic participation",
+      "Democratic member control",
+      "Voluntary and open membership",
+      "Cooperation among cooperatives"
+    ],
+    "answer": 0,
+    "explanation": "The principle of Member Economic Participation states that members contribute equitably to the capital of their cooperative and are allocated surpluses proportional to their transactions with the cooperative (patronage), rather than based on capital invested. Democratic member control refers to the 'one member, one vote' governance structure.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-0ec02bca"
+  },
+  {
+    "question": "A vegetable farmer in Trinidad shows a net profit at the end of the financial year, yet struggles to pay monthly expenses for seeds and fertilizers when they are due. This situation indicates a problem with:",
+    "options": [
+      "Cash flow timing",
+      "Gross margin calculation",
+      "Inventory valuation",
+      "Enterprise diversification"
+    ],
+    "answer": 0,
+    "explanation": "Profitability (accrual accounting) does not guarantee liquidity. Cash flow problems occur when the timing of cash inflows (sales) and outflows (expenses) is not synchronized, even if the farm is profitable overall. This is common in agriculture where production costs occur before harvest and sales revenue.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-c09daf51"
+  },
+  {
+    "question": "A small-scale vegetable farmer in Jamaica is preparing an enterprise budget for the upcoming crop season. Which of the following expenses would be correctly classified as a VARIABLE cost?",
+    "options": [
+      "Annual lease payment for the farmland",
+      "Cost of seeds and fertilizers",
+      "Depreciation on the farm tractor",
+      "Property insurance premium"
+    ],
+    "answer": 1,
+    "explanation": "Variable costs fluctuate directly with the level of production. Seeds and fertilizers vary depending on the acreage planted and intensity of cultivation. The other options are fixed costs that remain constant regardless of production volume.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-07358284"
+  },
+  {
+    "question": "Small-scale banana farmers in St. Lucia wish to improve their bargaining power with large supermarkets and reduce post-harvest losses through shared packing facilities. Which strategy represents the MOST appropriate application of business principles to achieve these goals?",
+    "options": [
+      "Forming a producer cooperative to bulk and grade produce for export",
+      "Selling exclusively to municipal markets to avoid supermarket intermediaries",
+      "Each farmer investing in individual cold storage units",
+      "Establishing a consumer cooperative to secure input discounts"
+    ],
+    "answer": 0,
+    "explanation": "A producer cooperative enables farmers to collectively market their produce, significantly increasing their bargaining power with large buyers, while shared infrastructure like packing houses reduces individual capital costs and post-harvest losses. This differs from consumer cooperatives which focus on purchasing inputs, not marketing outputs.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-7c25b2af"
+  },
+  {
+    "question": "A poultry farmer in Barbados maintains detailed records of daily feed consumption, mortality rates, egg production per layer, and revenue from sales. Which financial metric can be MOST accurately calculated directly from these specific records?",
+    "options": [
+      "Net worth of the farm business",
+      "Gross margin for the poultry enterprise",
+      "Return on investment for farm buildings",
+      "Break-even point for the total farm operation"
+    ],
+    "answer": 1,
+    "explanation": "Gross margin is calculated as revenue minus variable costs (primarily feed in poultry production). The records provide the necessary data for feed costs (variable cost) and sales revenue. Net worth requires balance sheet data, ROI requires asset valuation, and total farm break-even analysis requires fixed cost data from all farm enterprises.",
+    "topic_id": "AGRI-02-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-02-00001-287084c4"
+  },
+  {
+    "question": "Classify the following soil properties into Physical or Chemical properties.",
+    "type": "DND",
+    "categories": [
+      "Physical Properties",
+      "Chemical Properties"
+    ],
+    "items": [
+      {
+        "text": "Soil texture",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Soil pH level",
+        "category": "Chemical Properties"
+      },
+      {
+        "text": "Soil structure",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Cation exchange capacity",
+        "category": "Chemical Properties"
+      },
+      {
+        "text": "Porosity and permeability",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Nutrient content (NPK)",
+        "category": "Chemical Properties"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-e1d562f3"
+  },
+  {
+    "question": "Categorize these land preparation operations into Primary or Secondary tillage.",
+    "type": "DND",
+    "categories": [
+      "Primary Tillage",
+      "Secondary Tillage"
+    ],
+    "items": [
+      {
+        "text": "Ploughing",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Harrowing",
+        "category": "Secondary Tillage"
+      },
+      {
+        "text": "Subsoiling",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Levelling",
+        "category": "Secondary Tillage"
+      },
+      {
+        "text": "Ripping",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Seedbed preparation",
+        "category": "Secondary Tillage"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-21d2c134"
+  },
+  {
+    "question": "Sort these soil amendments into Organic or Inorganic fertilizers.",
+    "type": "DND",
+    "categories": [
+      "Organic Fertilizers",
+      "Inorganic Fertilizers"
+    ],
+    "items": [
+      {
+        "text": "Compost",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "Urea",
+        "category": "Inorganic Fertilizers"
+      },
+      {
+        "text": "Green manure",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "Triple superphosphate",
+        "category": "Inorganic Fertilizers"
+      },
+      {
+        "text": "Animal manure",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "Ammonium nitrate",
+        "category": "Inorganic Fertilizers"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-644b180e"
+  },
+  {
+    "question": "Match the crop management practice to the appropriate crop type: Vegetables or Fruits.",
+    "type": "DND",
+    "categories": [
+      "Vegetable Crops",
+      "Fruit Crops"
+    ],
+    "items": [
+      {
+        "text": "Staking tomato plants",
+        "category": "Vegetable Crops"
+      },
+      {
+        "text": "Pruning mango trees",
+        "category": "Fruit Crops"
+      },
+      {
+        "text": "Trellising cucumbers",
+        "category": "Vegetable Crops"
+      },
+      {
+        "text": "Grafting citrus seedlings",
+        "category": "Fruit Crops"
+      },
+      {
+        "text": "Earthing up potato tubers",
+        "category": "Vegetable Crops"
+      },
+      {
+        "text": "Thinning peach fruits",
+        "category": "Fruit Crops"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-3e561b0b"
+  },
+  {
+    "question": "Classify the following plant nutrients as Macronutrients or Micronutrients.",
+    "type": "DND",
+    "categories": [
+      "Macronutrients",
+      "Micronutrients"
+    ],
+    "items": [
+      {
+        "text": "Nitrogen (N)",
+        "category": "Macronutrients"
+      },
+      {
+        "text": "Iron (Fe)",
+        "category": "Micronutrients"
+      },
+      {
+        "text": "Phosphorus (P)",
+        "category": "Macronutrients"
+      },
+      {
+        "text": "Zinc (Zn)",
+        "category": "Micronutrients"
+      },
+      {
+        "text": "Potassium (K)",
+        "category": "Macronutrients"
+      },
+      {
+        "text": "Manganese (Mn)",
+        "category": "Micronutrients"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-d71451ed"
+  },
+  {
+    "question": "Which practice is most effective for correcting soil acidity when preparing land for tomato production in high-rainfall areas of the Caribbean?",
+    "options": [
+      "Applying agricultural lime (calcium carbonate) two weeks before planting",
+      "Incorporating ammonium sulfate to increase nitrogen levels",
+      "Adding fresh poultry manure immediately before transplanting",
+      "Increasing irrigation frequency to leach excess acids"
+    ],
+    "answer": 0,
+    "explanation": "Caribbean soils in high-rainfall regions tend to be acidic due to leaching of bases. Agricultural lime raises soil pH toward neutral (6.0-6.5), optimizing nutrient availability for tomatoes. Ammonium sulfate (option B) is acidic and would worsen the condition, while fresh manure (option C) can burn seedlings and acidify soil temporarily.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-41cc5f26"
+  },
+  {
+    "question": "A vegetable farmer in Barbados observes water pooling on the soil surface after irrigation, causing root rot in dasheen (taro). Which soil property is primarily responsible for this drainage problem?",
+    "options": [
+      "High clay content creating small pore spaces and poor percolation",
+      "Excessive organic matter content reducing water infiltration",
+      "High sand content causing rapid water movement through the profile",
+      "Alkaline pH levels creating hydrophobic soil conditions"
+    ],
+    "answer": 0,
+    "explanation": "Heavy clay soils, common in certain Caribbean valleys, have poor drainage due to small particle size and pore spaces. This leads to waterlogging and anaerobic conditions causing root rot. The solution involves creating raised beds or installing drainage channels. High sand content (option C) would cause excessive drainage rather than water pooling.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-ea8535bf"
+  },
+  {
+    "question": "The older leaves of callaloo (Amaranthus) plants display distinct yellowing between the veins while the veins remain green. Which nutrient deficiency is indicated, common in sandy soils of the Eastern Caribbean?",
+    "options": [
+      "Magnesium deficiency",
+      "Nitrogen deficiency",
+      "Calcium deficiency",
+      "Iron deficiency"
+    ],
+    "answer": 0,
+    "explanation": "Interveinal chlorosis (yellowing between veins) on older leaves is characteristic of magnesium deficiency, prevalent in leached, sandy Caribbean soils. Magnesium is mobile in plants, so deficiency symptoms appear first on older foliage. Nitrogen deficiency (option B) causes uniform yellowing, while calcium (option C) affects new growth, causing tip burn.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-67cd8d84"
+  },
+  {
+    "question": "When preparing seedbeds for cabbage production in the Caribbean highlands, which land preparation sequence ensures optimal soil tilth for root penetration while conserving moisture?",
+    "options": [
+      "Deep ploughing (15-20 cm) followed by harrowing to break clods and level the field",
+      "Shallow cultivation (5 cm) only to avoid disturbing soil structure",
+      "Heavy compaction using rollers to create a firm seedbed",
+      "Removing all vegetation without soil disturbance to prevent erosion"
+    ],
+    "answer": 0,
+    "explanation": "Deep ploughing breaks up hardpans in virgin or fallow Caribbean soils, while harrowing creates a fine tilth (seedbed texture) necessary for cabbage root penetration and water retention. Shallow cultivation (option B) is insufficient for deep-rooted brassicas, while compaction (option C) restricts root growth and water infiltration.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-f39a0902"
+  },
+  {
+    "question": "A farmer in Jamaica seeks to improve the water-holding capacity of sandy loam soil for bell pepper cultivation during the dry season. Which soil amendment would provide the most sustainable long-term solution?",
+    "options": [
+      "Incorporating well-decomposed compost or leaf mold into the topsoil",
+      "Adding additional coarse builders' sand to the planting area",
+      "Applying high rates of quick-release NPK fertilizer before planting",
+      "Mixing agricultural lime to increase soil pH to 7.5"
+    ],
+    "answer": 0,
+    "explanation": "Well-decomposed organic matter acts like a sponge in sandy Caribbean soils, increasing water-holding capacity and cation exchange capacity while providing slow-release nutrients. Adding more sand (option B) would exacerbate drainage issues, and synthetic fertilizers (option C) do not improve soil physical properties or moisture retention.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-99e0c311"
+  },
+  {
+    "question": "A vegetable farmer in St. Lucia observes stunted growth and leaf yellowing in tomato plants. A soil test reveals a pH of 5.0. Which amendment should be applied to optimize nutrient availability?",
+    "options": [
+      "Ammonium sulfate to increase nitrogen levels",
+      "Agricultural lime to raise the soil pH",
+      "Urea fertilizer to correct the micronutrient deficiency",
+      "Gypsum to improve soil structure and drainage"
+    ],
+    "answer": 1,
+    "explanation": "A pH of 5.0 is too acidic for tomatoes, which prefer a pH of 6.0-6.8. Caribbean soils are often acidic due to high rainfall leaching. Agricultural lime (calcium carbonate) raises pH, making nutrients like phosphorus and calcium more available, whereas ammononium sulfate would further acidify the soil.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-7f204a57"
+  },
+  {
+    "question": "During the flowering and fruiting stage of sweet peppers (Capsicum annuum), which NPK fertilizer ratio would be most appropriate to maximize yield?",
+    "options": [
+      "20-10-10 to promote vigorous vegetative growth",
+      "10-20-20 to support flower and fruit development",
+      "0-0-60 to supply potassium only for fruit swelling",
+      "46-0-0 to boost nitrogen during the reproductive phase"
+    ],
+    "answer": 1,
+    "explanation": "During flowering and fruiting, crops require less nitrogen (which promotes leafy growth) and more phosphorus and potassium. The 10-20-20 ratio supports energy transfer, root development, and fruit quality. High nitrogen at this stage causes flower drop and delays fruiting.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-63d52f47"
+  },
+  {
+    "question": "A farmer in Barbados notices that lettuce plants wilt rapidly by midday despite daily irrigation. The soil drains very quickly after rainfall. Which soil characteristic is most likely responsible?",
+    "options": [
+      "High clay content causing waterlogging",
+      "High organic matter content retaining too much moisture",
+      "High sand content resulting in poor water retention",
+      "High silt content creating a crust on the soil surface"
+    ],
+    "answer": 2,
+    "explanation": "Sandy soils, common in Caribbean coastal plains, have large pore spaces that drain quickly and retain little water. This causes rapid wilting in shallow-rooted crops like lettuce. The solution involves adding organic matter (compost) to improve water-holding capacity, rather than addressing drainage which is already excessive.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-6b90f41f"
+  },
+  {
+    "question": "Which implement is primarily used for the initial breaking and inversion of soil during primary tillage, specifically to bury crop residues and control weeds?",
+    "options": [
+      "Disc harrow for pulverizing soil clods",
+      "Ridger for forming planting beds",
+      "Mouldboard plough for cutting and inverting furrows",
+      "Rotavator for secondary seedbed preparation"
+    ],
+    "answer": 2,
+    "explanation": "The mouldboard plough is the primary tillage implement designed to cut, lift, and invert the soil, burying surface vegetation and weeds. Harrows and rotavators are secondary tillage tools for seedbed preparation, while ridgers form beds after primary tillage is complete.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-cafe2dfc"
+  },
+  {
+    "question": "A farmer in Jamaica plants lablab (Lablab purpureus) as a cover crop during the fallow period and incorporates the vegetation into the soil three weeks before planting cabbage. This practice is primarily intended to:",
+    "options": [
+      "Increase soil acidity to combat bacterial diseases",
+      "Fix atmospheric nitrogen and add organic matter",
+      "Sterilize the soil through allelopathic compounds",
+      "Increase soil salinity to suppress weed germination"
+    ],
+    "answer": 1,
+    "explanation": "Lablab is a leguminous green manure crop that fixes atmospheric nitrogen through Rhizobium bacteria in root nodules. Incorporating it into the soil adds both nitrogen and organic matter, improving soil structure and fertility for the subsequent cabbage crop. This is a sustainable practice common in Caribbean small-scale farming.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-c3853798"
+  },
+  {
+    "question": "In the Caribbean, many agricultural soils are acidic due to heavy rainfall leaching basic nutrients. Which practice is most effective for raising soil pH to optimal levels (6.0-6.5) for vegetable production?",
+    "options": [
+      "Applying ammonium sulfate fertilizer to supply nitrogen",
+      "Incorporating agricultural lime (calcium carbonate)",
+      "Adding fresh pine sawdust to increase organic content",
+      "Increasing irrigation frequency to wash away acidity"
+    ],
+    "answer": 1,
+    "explanation": "Agricultural lime neutralizes soil acidity through chemical reactions that raise pH. Caribbean latosols and oxisols often require periodic liming. Ammonium sulfate is acidic and would lower pH further, while pine sawdust is acidic and initially immobilizes nitrogen during decomposition.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-dbec713f"
+  },
+  {
+    "question": "A farmer in St. Vincent observes that his tomato plants display uniform yellowing beginning with the older leaves, while new growth remains green. Which nutrient deficiency is most likely affecting crop yield?",
+    "options": [
+      "Iron deficiency causing interveinal chlorosis on young leaves",
+      "Nitrogen deficiency causing general chlorosis on older leaves",
+      "Calcium deficiency causing blossom end rot on fruits",
+      "Magnesium deficiency causing interveinal chlorosis on older leaves"
+    ],
+    "answer": 1,
+    "explanation": "Nitrogen is mobile within plants; deficiencies manifest first on older leaves as nitrogen translocates to new growth. The uniform yellowing (not interveinal) distinguishes this from magnesium deficiency. Caribbean sandy soils are particularly prone to nitrogen leaching during heavy rains.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-99974d7a"
+  },
+  {
+    "question": "When preparing land for root crops (dasheen/cassava) on a 15\u00b0 slope in the Windward Islands, which practice is essential to prevent soil erosion while maintaining optimal yield potential?",
+    "options": [
+      "Ploughing up and down the slope to facilitate drainage",
+      "Establishing contour hedgerows and ploughing along the contour",
+      "Deep ripping vertically across the slope to break hardpan",
+      "Removing all native vegetation before tillage to reduce competition"
+    ],
+    "answer": 1,
+    "explanation": "Contour ploughing follows the land's natural contours, creating barriers to water flow that reduce runoff velocity and soil erosion. Vetiver grass hedgerows are commonly used in the Caribbean for this purpose. Ploughing up-and-down or complete vegetation removal accelerates erosion on steep slopes.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-4ac28e65"
+  },
+  {
+    "question": "Which soil component is primarily responsible for cation exchange capacity (nutrient retention) and water-holding capacity in the heavy clay alluvial soils found in the lowlands of Trinidad?",
+    "options": [
+      "Sand particles due to their large surface area",
+      "Gravel and stones which create water reservoirs",
+      "Clay particles and humus with their negative electrical charges",
+      "Silt particles which dominate tropical soil textures"
+    ],
+    "answer": 2,
+    "explanation": "Clay particles and organic matter (humus) possess negative charges that attract and hold positively charged nutrient ions (cations). While sand improves drainage and silt provides structure, only clay and humus provide high CEC. Alluvial clays require organic matter management to prevent compaction.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-139ccd1b"
+  },
+  {
+    "question": "During the dry season (January-March), a farmer in Barbados applies grass mulch around pumpkin (Cucurbita) plants. What is the primary agronomic benefit of this practice for achieving optimal yield?",
+    "options": [
+      "To increase soil temperature for faster germination",
+      "To immediately supply high levels of nitrogen to the crop",
+      "To conserve soil moisture and suppress weed growth",
+      "To prevent insect pollinators from accessing flowers"
+    ],
+    "answer": 2,
+    "explanation": "Organic mulches reduce evaporative water loss (critical in Caribbean dry seasons), moderate soil temperature fluctuations, and suppress weeds that compete for limited water. Fresh grass mulch has a high carbon-to-nitrogen ratio that initially immobilizes nitrogen rather than supplying it, and mulch actually keeps soil cooler, not warmer.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-fb0f17d3"
+  },
+  {
+    "question": "Many Caribbean soils are naturally acidic due to high rainfall leaching. Which pH range is considered optimal for the production of most vegetables such as tomatoes and sweet peppers?",
+    "options": [
+      "4.0 - 5.0",
+      "5.5 - 6.5",
+      "7.5 - 8.5",
+      "8.5 - 9.0"
+    ],
+    "answer": 1,
+    "explanation": "Most vegetables thrive in slightly acidic to neutral soils (pH 5.5-6.5). While Caribbean soils are often acidic due to heavy leaching, extremely acidic conditions (pH <5.5) lock up essential nutrients like phosphorus and can cause aluminum toxicity. Liming is frequently required to raise pH to this optimal range for vegetable production.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-8c5adcc4"
+  },
+  {
+    "question": "When preparing land for root crops such as yam (Dioscorea spp.) and dasheen (Colocasia esculenta) in the Caribbean, which tillage practice is most appropriate to facilitate tuber and corm development?",
+    "options": [
+      "Deep ploughing to 40-50 cm to break up hard pans",
+      "Shallow cultivation to 10 cm to preserve soil structure",
+      "Construction of ridges and mounds with loose, friable soil to 25-30 cm depth",
+      "Zero tillage with direct planting into undisturbed sod"
+    ],
+    "answer": 2,
+    "explanation": "Root crops like yam and dasheen require loose, friable soil to allow for expansion of tubers and corms. Ridges and mounds provide the necessary depth (25-30 cm) of loosened topsoil without bringing up infertile subsoil. Deep ploughing can destroy soil structure and bring up acidic subsoil, while shallow cultivation restricts root development.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-cbf8bc4e"
+  },
+  {
+    "question": "A farmer in St. Vincent observes that his cabbage plants display uniformly pale green to yellow older leaves, accompanied by stunted growth and reduced head formation. Which nutrient deficiency is most likely responsible for these symptoms?",
+    "options": [
+      "Nitrogen",
+      "Calcium",
+      "Iron",
+      "Phosphorus"
+    ],
+    "answer": 0,
+    "explanation": "Nitrogen is a mobile nutrient, meaning the plant translocates it from older leaves to new growth when deficient. This causes general chlorosis (yellowing) starting with older leaves. Calcium deficiency affects new growth first (causing tip burn), iron deficiency causes interveinal chlorosis on young leaves, and phosphorus deficiency typically results in dark green or purple discoloration rather than yellowing.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-6bcab685"
+  },
+  {
+    "question": "In the production of indeterminate tomato varieties commonly grown in the Eastern Caribbean, which cultural practice is essential to improve air circulation, reduce fungal disease incidence, and ensure optimal fruit quality?",
+    "options": [
+      "Allowing plants to trail on the ground to maximize leaf area for photosynthesis",
+      "Staking and pruning to single or double stems while removing suckers",
+      "Removing all lower leaves to expose developing fruits to direct sunlight",
+      "Planting at maximum density to increase total yield per hectare"
+    ],
+    "answer": 1,
+    "explanation": "Staking and pruning indeterminate tomatoes improves air circulation (reducing humidity and fungal diseases like early blight and Septoria leaf spot), keeps fruits off the soil surface (preventing rot and nematode damage), and directs plant energy toward fruit production rather than excessive vegetative growth. Trailing plants on the ground increases disease pressure significantly.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-4f2c7795"
+  },
+  {
+    "question": "A sustainable farming system in Jamaica utilizes Crotalaria juncea (sunn hemp) as a cover crop between sweet potato plantings. What is the primary agricultural benefit of incorporating this legume into the soil before planting the next crop?",
+    "options": [
+      "To significantly increase soil acidity for acid-loving crops",
+      "To add organic matter and fix atmospheric nitrogen through root nodules",
+      "To sterilize the soil against all nematode species through natural toxins",
+      "To increase soil bulk density for better root anchorage of heavy crops"
+    ],
+    "answer": 1,
+    "explanation": "Sunn hemp is a fast-growing legume used extensively in Caribbean agriculture as a green manure. It fixes atmospheric nitrogen (adding 100-150 kg N/ha through Rhizobium bacteria) and contributes significant biomass/organic matter when incorporated, improving soil structure, water retention, and nutrient availability. While it has some biofumigation properties, nitrogen fixation and organic matter addition are its primary benefits.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-eb3fe8ba"
+  },
+  {
+    "question": "Classify the following soil properties into their respective categories.",
+    "type": "DND",
+    "categories": [
+      "Physical Properties",
+      "Chemical Properties"
+    ],
+    "items": [
+      {
+        "text": "Soil texture",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Soil pH level",
+        "category": "Chemical Properties"
+      },
+      {
+        "text": "Porosity",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Cation exchange capacity",
+        "category": "Chemical Properties"
+      },
+      {
+        "text": "Soil structure",
+        "category": "Physical Properties"
+      },
+      {
+        "text": "Nutrient availability",
+        "category": "Chemical Properties"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-a6704e4a"
+  },
+  {
+    "question": "Categorize these land preparation operations as Primary or Secondary tillage.",
+    "type": "DND",
+    "categories": [
+      "Primary Tillage",
+      "Secondary Tillage"
+    ],
+    "items": [
+      {
+        "text": "Ploughing",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Harrowing",
+        "category": "Secondary Tillage"
+      },
+      {
+        "text": "Subsoiling",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Ridging",
+        "category": "Secondary Tillage"
+      },
+      {
+        "text": "Breaking hard pans",
+        "category": "Primary Tillage"
+      },
+      {
+        "text": "Levelling",
+        "category": "Secondary Tillage"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-d50f7fd4"
+  },
+  {
+    "question": "Drag each fertilizer type to the correct category: Organic or Inorganic.",
+    "type": "DND",
+    "categories": [
+      "Organic Fertilizers",
+      "Inorganic Fertilizers"
+    ],
+    "items": [
+      {
+        "text": "Compost",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "Urea",
+        "category": "Inorganic Fertilizers"
+      },
+      {
+        "text": "Animal manure",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "NPK 12-24-12",
+        "category": "Inorganic Fertilizers"
+      },
+      {
+        "text": "Green manure",
+        "category": "Organic Fertilizers"
+      },
+      {
+        "text": "Ammonium nitrate",
+        "category": "Inorganic Fertilizers"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-beec53f8"
+  },
+  {
+    "question": "Match the planting techniques to the appropriate establishment method: Direct Seeding or Transplanting.",
+    "type": "DND",
+    "categories": [
+      "Direct Seeding",
+      "Transplanting"
+    ],
+    "items": [
+      {
+        "text": "Broadcasting seeds",
+        "category": "Direct Seeding"
+      },
+      {
+        "text": "Using nursery-raised seedlings",
+        "category": "Transplanting"
+      },
+      {
+        "text": "Dibbling seeds into soil",
+        "category": "Direct Seeding"
+      },
+      {
+        "text": "Hardening off plants",
+        "category": "Transplanting"
+      },
+      {
+        "text": "Furrow planting of seeds",
+        "category": "Direct Seeding"
+      },
+      {
+        "text": "Setting out tomato seedlings",
+        "category": "Transplanting"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-40bc6d83"
+  },
+  {
+    "question": "Sort these crop management activities into Pre-planting or Post-planting operations.",
+    "type": "DND",
+    "categories": [
+      "Pre-planting Operations",
+      "Post-planting Operations"
+    ],
+    "items": [
+      {
+        "text": "Seedbed preparation",
+        "category": "Pre-planting Operations"
+      },
+      {
+        "text": "Thinning seedlings",
+        "category": "Post-planting Operations"
+      },
+      {
+        "text": "Soil pH testing",
+        "category": "Pre-planting Operations"
+      },
+      {
+        "text": "Staking tomato plants",
+        "category": "Post-planting Operations"
+      },
+      {
+        "text": "Basal fertilizer application",
+        "category": "Pre-planting Operations"
+      },
+      {
+        "text": "Pruning fruit trees",
+        "category": "Post-planting Operations"
+      }
+    ],
+    "topic_id": "AGRI-03-00001",
+    "id": "Q-AGRI-03-00001-7e86009d"
+  },
+  {
+    "question": "A farmer in Barbados wants to grow sweet peppers in an area with heavy clay soil that waterlogs after the frequent tropical rainfall. Which soil management practice should be prioritized to ensure optimal root development and prevent disease?",
+    "options": [
+      "Incorporating organic matter and constructing raised beds to improve drainage",
+      "Adding coarse sand to the entire field to alter soil texture",
+      "Increasing irrigation frequency to leach excess clay particles",
+      "Applying high doses of ammonium nitrate fertilizer to strengthen root systems"
+    ],
+    "answer": 0,
+    "explanation": "Heavy clay soils in the Caribbean often have poor drainage leading to root rot in vegetables like peppers. Adding organic matter improves soil structure and water infiltration, while raised beds provide the essential drainage needed for optimal root health. Adding sand would require impractical volumes to change clay texture, and fertilizer does not address physical drainage issues.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-66100923"
+  },
+  {
+    "question": "When preparing land for yam production on a steep hillside in St. Vincent, which technique best prevents soil erosion while simultaneously providing the loose soil structure necessary for optimal tuber expansion?",
+    "options": [
+      "Establishing contour ridges across the slope following the land's natural contours",
+      "Plowing up and down the slope to facilitate water runoff and tractor access",
+      "Deep plowing to the subsoil level to break up the hardpan regardless of slope",
+      "Leaving the soil in large compact clods to prevent surface soil from washing away"
+    ],
+    "answer": 0,
+    "explanation": "Contour ridges follow the natural topography, slowing water runoff and preventing soil erosion on Caribbean hillsides prone to heavy rainfall. This method also creates the friable tilth necessary for yam tubers to expand without deformation. Plowing up and down slopes creates channels for water erosion, while large clods restrict tuber growth.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-555cad4e"
+  },
+  {
+    "question": "A vegetable farmer in Trinidad observes that the older leaves of his pak choi crop are turning uniformly yellow while the veins remain green, with symptoms progressing upward. Which nutrient deficiency is most likely affecting the plants, and what is the primary cause in tropical soils?",
+    "options": [
+      "Nitrogen deficiency caused by leaching from heavy rainfall",
+      "Iron deficiency caused by high soil pH alkalinity",
+      "Calcium deficiency caused by irregular watering patterns",
+      "Phosphorus deficiency caused by fixation in volcanic soils"
+    ],
+    "answer": 0,
+    "explanation": "The yellowing of older leaves (chlorosis) while veins remain green indicates nitrogen deficiency, as nitrogen is a mobile nutrient that moves from older to newer growth. In Caribbean tropical soils with high rainfall, nitrogen is readily leached below the root zone. Iron deficiency affects young leaves first, calcium causes tip burn, and phosphorus deficiency typically causes purple discoloration.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-0610eccb"
+  },
+  {
+    "question": "In the hot tropical climate of Jamaica, which is the primary benefit of applying a 10cm layer of grass mulch around the base of tomato plants during the dry season?",
+    "options": [
+      "Conservation of soil moisture and moderation of soil temperature",
+      "Immediate supply of primary macronutrients N, P, and K to replace chemical fertilizers",
+      "Complete prevention of fungal diseases like early blight and leaf spot",
+      "Elimination of the need for irrigation during short drought periods"
+    ],
+    "answer": 0,
+    "explanation": "In tropical climates with intense heat, mulching reduces evaporation losses and keeps root zones cool, which is critical for tomato fruit set. While mulch eventually adds organic matter, it does not supply sufficient NPK to replace fertilizers, nor does it eliminate all diseases or irrigation needs. These are common misconceptions about mulch functionality.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-844ff0cf"
+  },
+  {
+    "question": "Most agricultural soils in the Eastern Caribbean are naturally acidic due to high rainfall leaching calcium and magnesium. Which practice is essential when preparing such soil for vegetable production to optimize nutrient availability?",
+    "options": [
+      "Applying agricultural lime (calcium carbonate) to raise soil pH to 6.0-6.5",
+      "Adding elemental sulfur to further acidify the soil for better nutrient solubility",
+      "Increasing the application of urea fertilizer to neutralize soil acidity",
+      "Deep ripping to bring alkaline subsoil to the surface to mix with topsoil"
+    ],
+    "answer": 0,
+    "explanation": "Caribbean soils are typically acidic (pH 4.5-5.5) due to heavy rainfall leaching basic cations. Most vegetables require pH 6.0-6.5 for optimal nutrient availability, particularly phosphorus and micronutrients. Liming corrects acidity and supplies calcium. Adding sulfur increases acidity, urea actually acidifies soil further, and subsoil in the Caribbean is rarely alkaline enough to neutralize surface acidity.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-69454239"
+  },
+  {
+    "question": "Most agricultural soils in the Caribbean are acidic latosols. Which pH range is considered optimal for the production of leafy vegetables such as pak choi and lettuce?",
+    "options": [
+      "pH 4.5 - 5.5",
+      "pH 5.5 - 6.5",
+      "pH 7.5 - 8.5",
+      "pH 8.5 - 9.5"
+    ],
+    "answer": 1,
+    "explanation": "While Caribbean latosols are naturally acidic (pH 4.5-5.5), most leafy vegetables require a slightly acidic to neutral pH of 5.5-6.5 for optimal nutrient availability. pH 4.5-5.5 is too acidic and would require liming, while pH above 7.5 is too alkaline for most vegetables and would limit micronutrient uptake.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-a05aa2e9"
+  },
+  {
+    "question": "A farmer in St. Lucia is preparing land for tomato production. Which operation represents secondary tillage?",
+    "options": [
+      "Clearing and removal of tree stumps",
+      "Plowing with a disc plow to 20cm depth",
+      "Harrowing to pulverize soil clods and level the field",
+      "Constructing drainage channels across the field"
+    ],
+    "answer": 2,
+    "explanation": "Secondary tillage follows primary tillage (plowing) and includes operations like harrowing, rotavating, or cultivating to break clods, incorporate amendments, and prepare the seedbed. Clearing is preliminary site preparation, plowing is primary tillage that inverts the soil, and drainage construction is land forming.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-08ddbf54"
+  },
+  {
+    "question": "A vegetable farmer in St. Vincent observes that the older leaves of his dasheen (Colocasia esculenta) plants show yellowing between the veins while the veins remain green. This symptom indicates a deficiency of:",
+    "options": [
+      "Nitrogen",
+      "Magnesium",
+      "Calcium",
+      "Iron"
+    ],
+    "answer": 1,
+    "explanation": "Interveinal chlorosis (yellowing between veins) on older leaves is characteristic of magnesium deficiency, which is common in leached, acidic Caribbean soils. Nitrogen deficiency causes uniform yellowing of older leaves, calcium affects new growth and terminal buds, and iron deficiency causes interveinal chlorosis on young leaves.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-7974caff"
+  },
+  {
+    "question": "Which practice is most effective for improving the water-holding capacity of sandy soils commonly found in coastal vegetable production areas of Barbados?",
+    "options": [
+      "Frequent deep plowing to increase rooting depth",
+      "Heavy application of ammonium sulfate fertilizer",
+      "Incorporation of composted organic matter",
+      "Application of agricultural lime to raise pH"
+    ],
+    "answer": 2,
+    "explanation": "Sandy soils have low water-holding capacity due to large pore spaces. Incorporating organic matter (compost) improves soil structure by creating aggregates that hold water and nutrients. Deep plowing destroys soil structure, ammonium sulfate is an acidifying fertilizer that does not affect soil texture, and lime corrects pH but does not significantly improve water retention in sands.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-e21b0ec4"
+  },
+  {
+    "question": "When establishing a pineapple plantation on the slopes of St. Catherine, Jamaica, which cultural practice is essential for soil conservation and optimal yield?",
+    "options": [
+      "Planting in rows running up and down the slope for easy access",
+      "Contour planting along the hillside at right angles to the slope",
+      "Removing all ground cover vegetation to reduce competition",
+      "Annual deep tillage between plants to control weeds"
+    ],
+    "answer": 1,
+    "explanation": "Contour planting (following the contour lines across the slope) reduces soil erosion by slowing water runoff and allowing infiltration. Planting up and down slopes creates channels for water erosion, removing cover vegetation exposes soil to erosion and desiccation, and deep tillage destroys the shallow, fibrous root systems that pineapples require for nutrient uptake.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-1b5ef2cf"
+  },
+  {
+    "question": "A soil test reveals a pH of 4.5 in a vegetable plot in St. Lucia. Which amendment should be applied and at what stage of land preparation to correct this for optimal crop yield?",
+    "options": [
+      "Agricultural lime incorporated during final seedbed preparation one day before planting",
+      "Agricultural lime applied and incorporated at least 2-4 weeks before planting",
+      "Ammonium sulfate broadcast immediately after transplanting seedlings",
+      "Fresh poultry manure incorporated into the planting holes at transplanting"
+    ],
+    "answer": 1,
+    "explanation": "Agricultural lime (calcium carbonate) is used to raise soil pH in acidic Caribbean soils, but it requires 2-4 weeks to react with the soil. Applying it at final preparation (Option 0) is too late for the current crop. Ammonium sulfate (Option 2) is acidic and would worsen the pH. Fresh manure (Option 3) can 'burn' seedlings and does not effectively neutralize soil acidity in the short term.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-3b544e49"
+  },
+  {
+    "question": "A farmer in Guyana observes that his sweet pepper plants are stunted with purple discoloration on the older leaves. Which fertilizer element is most likely deficient, and which NPK ratio would best address this?",
+    "options": [
+      "Nitrogen deficiency; apply a high nitrogen fertilizer (20-0-0)",
+      "Phosphorus deficiency; apply a high phosphorus fertilizer (0-20-0)",
+      "Potassium deficiency; apply a high potassium fertilizer (0-0-20)",
+      "Calcium deficiency; apply agricultural lime immediately"
+    ],
+    "answer": 1,
+    "explanation": "Phosphorus deficiency typically manifests as stunted growth and purple/reddish discoloration (anthocyanin accumulation) on older leaves. While nitrogen deficiency (Option 0) causes yellowing, and potassium (Option 3) causes marginal chlorosis, the purple coloration is characteristic of phosphorus. Calcium deficiency (Option 3) affects new growth (tip burn), not older leaves.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-144f6d27"
+  },
+  {
+    "question": "Which practice during land preparation in Grenada would most effectively improve soil tilth for root vegetable production (such as carrots or beets)?",
+    "options": [
+      "Deep ploughing with a mouldboard plough when the soil is wet and sticky",
+      "Incorporation of composted organic matter followed by secondary tillage to achieve a fine, friable seedbed",
+      "Heavy rolling with a Cambridge roller to firm the soil and remove air pockets",
+      "Removing the topsoil layer to expose the firmer subsoil for planting"
+    ],
+    "answer": 1,
+    "explanation": "Good tilth requires a friable, crumbly structure ideal for root penetration. Incorporating organic matter improves structure and drainage. Ploughing wet soil (Option 0) destroys structure and creates hard pans. Heavy rolling (Option 2) causes compaction, restricting root growth. Removing topsoil (Option 3) exposes infertile subsoil, reducing yield potential.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-d4958f52"
+  },
+  {
+    "question": "During the dry season in Antigua, which mulching practice would best conserve soil moisture for vegetable crops while simultaneously improving soil fertility?",
+    "options": [
+      "Black plastic polythene sheeting spread over the soil surface",
+      "Fresh grass clippings applied in 15cm thick layers around plant stems",
+      "Dried grass straw or shredded banana leaves applied 5-10cm deep",
+      "White gravel stones spread 3cm deep over the bed surface"
+    ],
+    "answer": 2,
+    "explanation": "Dried organic mulch (Option 2) reduces evaporation, moderates soil temperature, and decomposes to add nutrients. Black plastic (Option 0) conserves moisture but can overheat tropical soils and adds no nutrients. Fresh grass clippings (Option 1) can ferment, generating heat that damages stems and temporarily immobilizes nitrogen. Gravel (Option 3) provides minimal moisture conservation and no nutritional benefit.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-aad64d25"
+  },
+  {
+    "question": "A farmer in Dominica has cultivated tomatoes (Solanaceae family) in the same field for three consecutive years and observes declining yields despite increasing fertilizer application. Which management strategy would most likely restore optimal yield?",
+    "options": [
+      "Increase the planting density to maximize use of the available nutrients",
+      "Implement crop rotation using a non-solanaceous crop such as corn (Zea mays) or cowpeas (Vigna unguiculata)",
+      "Apply a broad-spectrum fungicide before every irrigation to eliminate soil pathogens",
+      "Switch to a different tomato variety but continue planting in the same field location"
+    ],
+    "answer": 1,
+    "explanation": "Continuous monocropping of Solanaceae builds up soil-borne pathogens (wilts, nematodes) and depletes specific nutrients. Rotation with non-host crops (grass family like corn or legumes like cowpeas) breaks disease cycles and can fix nitrogen. Increasing density (Option 0) increases competition. Fungicides (Option 2) don't address nematodes or nutrient imbalance. Different varieties (Option 3) remain susceptible to the same pests and diseases.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-4d972e98"
+  },
+  {
+    "question": "A farmer in St. Lucia preparing land for tomato cultivation observes that the volcanic soil sticks to tools when wet and shrinks with wide cracks when dry. Laboratory analysis shows pH 4.2. Which amendment strategy would MOST effectively improve this soil for optimal vegetable production?",
+    "options": [
+      "Apply gypsum (calcium sulfate) and incorporate sharp sand to improve drainage",
+      "Add agricultural lime and well-decomposed organic matter to raise pH and improve structure",
+      "Apply muriate of potash and construct deep drainage channels to remove excess water",
+      "Mix in fresh green manure and ammonium sulfate to increase nitrogen content"
+    ],
+    "answer": 1,
+    "explanation": "The symptoms indicate heavy 2:1 clay soil with high acidity, common in volcanic Caribbean islands. Agricultural lime (calcium carbonate) raises pH and helps flocculate clay particles, while organic matter improves soil structure, water retention, and nutrient availability. Gypsum is used for sodic (saline) soils, not acidic clays. Potash does not address pH or soil structure. Fresh manure can cause nitrogen immobilization, and ammonium sulfate would further acidify the soil.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-efd8f954"
+  },
+  {
+    "question": "When preparing a steep hillside for yam cultivation in the Cockpit Country, Jamaica, which combination of practices BEST optimizes yield while adhering to sustainable soil conservation principles?",
+    "options": [
+      "Vertical ploughing up and down the slope to facilitate drainage and ease of harvest",
+      "Contour ridging at 1.5m intervals with live barriers of vetiver grass",
+      "Complete clearing of all vegetation and deep ripping to 60cm depth",
+      "Flat bed preparation with plastic mulching to prevent soil erosion"
+    ],
+    "answer": 1,
+    "explanation": "Contour ridging follows the land's natural contours, reducing runoff velocity and soil erosion on steep slopes while providing adequate space for yam tuber development. Vetiver grass (Chrysopogon zizanioides) is widely used in Caribbean conservation agriculture to stabilize slopes. Vertical ploughing creates erosion channels and gullies. Complete clearing removes protective vegetation and increases erosion risk. Flat beds are impractical on steep terrain and do not effectively manage water flow.",
+    "topic_id": "AGRI-03-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-03-00001-12519b1e"
+  },
+  {
+    "question": "Drag and drop each digestive organ to the correct animal type.",
+    "type": "DND",
+    "categories": [
+      "Ruminant",
+      "Poultry"
+    ],
+    "items": [
+      {
+        "text": "Rumen",
+        "category": "Ruminant"
+      },
+      {
+        "text": "Gizzard",
+        "category": "Poultry"
+      },
+      {
+        "text": "Reticulum",
+        "category": "Ruminant"
+      },
+      {
+        "text": "Proventriculus",
+        "category": "Poultry"
+      },
+      {
+        "text": "Omasum",
+        "category": "Ruminant"
+      },
+      {
+        "text": "Cloaca",
+        "category": "Poultry"
+      }
+    ],
+    "topic_id": "AGRI-04-00001",
+    "id": "Q-AGRI-04-00001-fafc29b5"
+  },
+  {
+    "question": "Classify the following poultry breeds according to their primary production purpose.",
+    "type": "DND",
+    "categories": [
+      "Meat Production",
+      "Egg Production"
+    ],
+    "items": [
+      {
+        "text": "Cornish",
+        "category": "Meat Production"
+      },
+      {
+        "text": "White Leghorn",
+        "category": "Egg Production"
+      },
+      {
+        "text": "Sussex",
+        "category": "Meat Production"
+      },
+      {
+        "text": "Rhode Island Red",
+        "category": "Egg Production"
+      },
+      {
+        "text": "Plymouth Rock",
+        "category": "Meat Production"
+      },
+      {
+        "text": "Australorp",
+        "category": "Egg Production"
+      }
+    ],
+    "topic_id": "AGRI-04-00001",
+    "id": "Q-AGRI-04-00001-18f9ae05"
+  },
+  {
+    "question": "Match the management terms with the correct livestock type.",
+    "type": "DND",
+    "categories": [
+      "Pigs",
+      "Rabbits"
+    ],
+    "items": [
+      {
+        "text": "Farrowing",
+        "category": "Pigs"
+      },
+      {
+        "text": "Kindling",
+        "category": "Rabbits"
+      },
+      {
+        "text": "Ear notching",
+        "category": "Pigs"
+      },
+      {
+        "text": "Ear tattooing",
+        "category": "Rabbits"
+      },
+      {
+        "text": "Sty",
+        "category": "Pigs"
+      },
+      {
+        "text": "Hutch",
+        "category": "Rabbits"
+      }
+    ],
+    "topic_id": "AGRI-04-00001",
+    "id": "Q-AGRI-04-00001-974b39ca"
+  },
+  {
+    "question": "Categorize the animals based on their digestive system fermentation type.",
+    "type": "DND",
+    "categories": [
+      "Fore-stomach Fermenter",
+      "Hind-gut Fermenter"
+    ],
+    "items": [
+      {
+        "text": "Cattle",
+        "category": "Fore-stomach Fermenter"
+      },
+      {
+        "text": "Rabbit",
+        "category": "Hind-gut Fermenter"
+      },
+      {
+        "text": "Sheep",
+        "category": "Fore-stomach Fermenter"
+      },
+      {
+        "text": "Horse",
+        "category": "Hind-gut Fermenter"
+      },
+      {
+        "text": "Goat",
+        "category": "Fore-stomach Fermenter"
+      },
+      {
+        "text": "Donkey",
+        "category": "Hind-gut Fermenter"
+      }
+    ],
+    "topic_id": "AGRI-04-00001",
+    "id": "Q-AGRI-04-00001-666ca171"
+  },
+  {
+    "question": "Drag each management practice to the appropriate production system.",
+    "type": "DND",
+    "categories": [
+      "Intensive System",
+      "Extensive System"
+    ],
+    "items": [
+      {
+        "text": "Battery cages",
+        "category": "Intensive System"
+      },
+      {
+        "text": "Free range grazing",
+        "category": "Extensive System"
+      },
+      {
+        "text": "Deep litter housing",
+        "category": "Intensive System"
+      },
+      {
+        "text": "Pasture rotation",
+        "category": "Extensive System"
+      },
+      {
+        "text": "Confinement rearing",
+        "category": "Intensive System"
+      },
+      {
+        "text": "Hutch and run system",
+        "category": "Extensive System"
+      }
+    ],
+    "topic_id": "AGRI-04-00001",
+    "id": "Q-AGRI-04-00001-cba6edba"
+  },
+  {
+    "question": "A farmer in St. Lucia observes that his goats maintain body condition while grazing mature Guinea grass, whereas his pigs lose weight on the same forage. What biological feature explains this difference in digestive efficiency?",
+    "options": [
+      "Goats possess a simple stomach with higher acid concentration specifically adapted to break down cellulose",
+      "Goats harbor microorganisms in the rumen that ferment cellulose into absorbable volatile fatty acids",
+      "Goats chew their cud more frequently than pigs, mechanically shredding fiber into digestible particles",
+      "Goats have significantly longer small intestines that extract more nutrients from roughage"
+    ],
+    "answer": 1,
+    "explanation": "Goats are ruminants with a four-chambered stomach, including the rumen which contains bacteria and protozoa capable of fermenting cellulose. Pigs are monogastrics (non-ruminants) lacking this microbial fermentation chamber, making them unable to efficiently extract energy from high-fiber tropical grasses like Guinea grass.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-ad4e3f63"
+  },
+  {
+    "question": "In backyard poultry operations common in rural Jamaica, farmers provide grit to free-range chickens. What is the physiological basis for this management practice?",
+    "options": [
+      "Grit dissolves in the proventriculus to create hydrochloric acid for protein digestion",
+      "Grit serves as a calcium supplement necessary for eggshell formation in laying hens",
+      "Grit aids mechanical grinding in the gizzard since chickens lack teeth for mastication",
+      "Grit stimulates microbial fermentation in the crop to improve grain digestion"
+    ],
+    "answer": 2,
+    "explanation": "Chickens are non-ruminants (monogastrics) with no teeth. The gizzard is a muscular organ that uses ingested grit/stones to mechanically grind feed, compensating for the lack of chewing. This is essential for breaking down hard grains and fibous materials common in scavenging and backyard systems.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-b37b5826"
+  },
+  {
+    "question": "A pig farmer in Trinidad is preparing for farrowing during the hot season. Which management practice is critical to prevent neonatal mortality in piglets?",
+    "options": [
+      "Providing sows with unlimited fresh forage to increase the fat content of colostrum",
+      "Maintaining farrowing house temperatures above 32\u00b0C to prevent chilling of newborns",
+      "Administering iron injections or iron-rich supplements to piglets within 1-3 days after birth",
+      "Removing piglets from the sow immediately after birth to prevent crushing accidents"
+    ],
+    "answer": 2,
+    "explanation": "Piglets are born with minimal iron stores (approximately 50mg) and require 8-10mg daily. In indoor or confined farrowing systems common in the Caribbean, piglets lack access to soil iron and rapidly develop anemia ('thinner' or pale pig syndrome). Iron dextran injections are essential, whereas excessive heat (option B) actually increases sow stress and piglet mortality.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-847d6f26"
+  },
+  {
+    "question": "Small-scale rabbit farmers in Barbados observe their animals consuming soft night feces directly from the anus (cecotrophy). What does this behavior indicate about rabbit digestive physiology?",
+    "options": [
+      "Rabbits are ruminants that practice rumination by regurgitating and re-chewing food",
+      "Rabbits have inefficient digestive systems requiring twice the feed intake of pigs per kilogram of gain",
+      "Rabbits utilize hindgut fermentation to synthesize B-vitamins and microbial protein for re-ingestion",
+      "Rabbits cannot digest fresh greens and must ferment them in the cecum before consumption"
+    ],
+    "answer": 2,
+    "explanation": "Rabbits are hindgut fermenters (non-ruminant herbivores). They ferment fiber in the cecum, producing soft night feces (cecotropes) rich in vitamins B and K, plus microbial protein. By consuming these directly, they obtain essential nutrients not absorbed during the first digestive passage, a process vital for survival on fibrous diets like guinea grass and cane tops.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-af95a197"
+  },
+  {
+    "question": "The Barbados Black Belly sheep is increasingly popular with small ruminant producers across the Eastern Caribbean. What characteristic makes this breed particularly suited to tropical production systems?",
+    "options": [
+      "It produces high-quality wool suitable for export to temperate markets",
+      "It exhibits strong resistance to internal parasites and thrives on low-quality forage",
+      "It requires concentrated grain feeding to achieve marketable weights within six months",
+      "It possesses five stomach compartments allowing more efficient digestion than cattle"
+    ],
+    "answer": 1,
+    "explanation": "The Barbados Black Belly is a hair sheep (non-wool) genetically adapted to tropical conditions. Unlike temperate wool breeds that suffer from heat stress and parasite burdens in humid Caribbean climates, this breed demonstrates natural resistance to endoparasites (particularly Haemonchus contortus) and efficiently converts poor-quality pasture to meat without expensive grain supplementation.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-9ddff272"
+  },
+  {
+    "question": "In small ruminant production common throughout the Caribbean, goats consume fibrous forages such as guinea grass. Which compartment of the ruminant stomach houses microorganisms that ferment cellulose to produce volatile fatty acids?",
+    "options": [
+      "Abomasum",
+      "Rumen",
+      "Omasum",
+      "Reticulum"
+    ],
+    "answer": 1,
+    "explanation": "The rumen is the largest compartment of the ruminant stomach and functions as a fermentation vat where bacteria, protozoa, and fungi break down cellulose into volatile fatty acids (VFAs) for energy. The abomasum is the true stomach (glandular), the omasum absorbs water, and the reticulum traps foreign objects.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-f2a37984"
+  },
+  {
+    "question": "Backyard poultry production is widespread in rural Caribbean communities. Birds frequently consume grit to aid digestion because they lack teeth. Which organ utilizes this grit to mechanically grind food?",
+    "options": [
+      "Crop",
+      "Proventriculus",
+      "Gizzard",
+      "Cloaca"
+    ],
+    "answer": 2,
+    "explanation": "The gizzard (ventriculus) is a muscular organ that mechanically grinds food using grit or small stones since poultry lack teeth. The crop stores and moistens food, the proventriculus secretes gastric juices for chemical digestion, and the cloaca is the common exit for waste and reproductive products.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-baf7e6d4"
+  },
+  {
+    "question": "Which cattle breed, developed at the Hope Estate in Jamaica by crossing Indian zebu with British dairy breeds, is specifically adapted to tropical conditions and known for heat tolerance and milk production in the Caribbean?",
+    "options": [
+      "Holstein-Friesian",
+      "Jamaica Hope",
+      "Brahman",
+      "Jersey"
+    ],
+    "answer": 1,
+    "explanation": "The Jamaica Hope was developed specifically for tropical conditions, combining the heat tolerance of zebu cattle with the dairy characteristics of British breeds. Holstein-Friesians and Jerseys are temperate breeds prone to heat stress, while Brahman cattle are heat-tolerant but primarily used for beef production.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-3ea24691"
+  },
+  {
+    "question": "A pig farmer in Trinidad observes poor growth in weaners despite adequate feed intake. In monogastric animals, which enzyme secreted by the pancreas into the small intestine is essential for breaking down proteins into absorbable amino acids?",
+    "options": [
+      "Amylase",
+      "Lipase",
+      "Trypsin",
+      "Pepsin"
+    ],
+    "answer": 2,
+    "explanation": "Trypsin is a protease produced by the pancreas that breaks down proteins in the small intestine (duodenum). Amylase digests starch and lipase digests fats. Pepsin is a common distractor as it also digests proteins, but it is produced in the stomach, not the pancreas/small intestine.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-044678a3"
+  },
+  {
+    "question": "Rabbit farmers in Barbados observe their animals practicing cecotrophy (eating soft night feces directly from the anus). This behavior is necessary to obtain sufficient quantities of which nutrient synthesized by bacteria in the cecum?",
+    "options": [
+      "Vitamin C",
+      "B-complex vitamins",
+      "Crude fiber",
+      "Vitamin D"
+    ],
+    "answer": 1,
+    "explanation": "Cecotrophy allows rabbits to obtain B-complex vitamins (such as B12 and riboflavin) and microbial protein synthesized by bacteria in the cecum. Rabbits synthesize their own Vitamin C (unlike guinea pigs), crude fiber is indigestible roughage, and Vitamin D is obtained through diet or sunlight exposure.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-4f0c84d3"
+  },
+  {
+    "question": "In Caribbean beef production, which compartment of the ruminant stomach serves as the primary site for microbial fermentation of cellulose, converting fibrous plant material into volatile fatty acids (VFAs) that provide energy to the animal?",
+    "options": [
+      "Abomasum",
+      "Rumen",
+      "Reticulum",
+      "Omasum"
+    ],
+    "answer": 1,
+    "explanation": "The rumen is the largest compartment and functions as a fermentation vat where symbiotic microbes break down cellulose. The abomasum is the 'true stomach' (gastric digestion), the reticulum traps foreign objects (hardware), and the omasum absorbs water and VFAs.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-1d1f355e"
+  },
+  {
+    "question": "Which organ in the digestive system of poultry, commonly raised in backyard operations throughout the Caribbean, is responsible for the mechanical grinding of feed using strong muscular action and requires grit to function effectively?",
+    "options": [
+      "Crop",
+      "Proventriculus",
+      "Gizzard",
+      "Cloaca"
+    ],
+    "answer": 2,
+    "explanation": "The gizzard (muscular stomach) mechanically grinds feed since poultry lack teeth. The crop stores and softens food, the proventriculus (glandular stomach) secretes digestive enzymes, and the cloaca is the common chamber for waste excretion and egg laying.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-d60f6f7f"
+  },
+  {
+    "question": "A farmer in Jamaica is selecting breeding stock for a pig production unit. Which breed is characterized by a distinctive black body with a white belt encircling the shoulders and forelegs, and is known for excellent meat quality and adaptability to tropical foraging conditions?",
+    "options": [
+      "Large White",
+      "Landrace",
+      "Hampshire",
+      "Duroc"
+    ],
+    "answer": 2,
+    "explanation": "The Hampshire breed is easily identified by the white 'belt' across the shoulders. Large White and Landrace are entirely white (with Large White having erect ears and Landrace having drooping ears), while Duroc is typically reddish-brown in color.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-7c31432e"
+  },
+  {
+    "question": "In small-scale rabbit production systems common in the Eastern Caribbean, which feeding practice is MOST likely to cause enteritis and high mortality due to the rabbit's sensitivity to excessive fermentable carbohydrates in its monogastric digestive system?",
+    "options": [
+      "Providing grass hay and fresh forage ad libitum",
+      "Feeding high levels of starchy root crops like cassava and sweet potato",
+      "Supplying commercial pelleted concentrates formulated for rabbits",
+      "Ensuring access to clean, fresh water at all times"
+    ],
+    "answer": 1,
+    "explanation": "Rabbits are hindgut fermenters but have simple stomachs; high starch/sugar from root crops causes dysbiosis and enterotoxemia. They require high-fiber diets (hay/grass) for proper gut motility and health.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-1ae65e5c"
+  },
+  {
+    "question": "Which statement accurately distinguishes the protein metabolism of ruminants from that of non-ruminant livestock (such as pigs and poultry) in tropical farming systems?",
+    "options": [
+      "Ruminants can utilize non-protein nitrogen sources like urea to synthesize microbial protein, while non-ruminants require pre-formed amino acids from dietary protein",
+      "Non-ruminants possess cecal fermentation that supplies adequate protein equivalent to the rumen",
+      "Ruminants must obtain all essential amino acids directly from the diet, similar to poultry",
+      "Non-ruminants can digest cellulose efficiently to meet their protein requirements through microbial action"
+    ],
+    "answer": 0,
+    "explanation": "Ruminant microbes convert NPN (like urea) into microbial protein. Non-ruminants (monogastrics) lack this ability and require dietary amino acids. While non-ruminants have some cecal fermentation, it does not significantly meet protein needs like the rumen, and they cannot efficiently digest cellulose.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-0e1ba8c7"
+  },
+  {
+    "question": "In the context of small ruminant production in the Caribbean, which compartment of the stomach is primarily responsible for the microbial fermentation of cellulose into volatile fatty acids?",
+    "options": [
+      "Abomasum",
+      "Rumen",
+      "Omasum",
+      "Reticulum"
+    ],
+    "answer": 1,
+    "explanation": "The rumen (or paunch) is the largest compartment containing symbiotic bacteria and protozoa that produce cellulase enzymes to break down fiber. While the reticulum also aids fermentation, the rumen is the primary site. The abomasum is the 'true stomach' for acid digestion, and the omasum absorbs water and nutrients.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-67e31aa4"
+  },
+  {
+    "question": "Which structure in the poultry digestive system serves as a temporary storage pouch for ingested feed before it enters the proventriculus?",
+    "options": [
+      "Gizzard",
+      "Proventriculus",
+      "Crop",
+      "Cecum"
+    ],
+    "answer": 2,
+    "explanation": "The crop is a diverticulum of the esophagus that stores food temporarily, allowing birds to eat quickly and digest later. The gizzard mechanically grinds food, the proventriculus secretes gastric juices, and the ceca are involved in fermentation of coarse materials.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-2b34d98a"
+  },
+  {
+    "question": "Which pig breed, commonly found in Caribbean farming systems, is characterized by a black body with a distinctive white belt encircling the forequarters and shoulders?",
+    "options": [
+      "Large White",
+      "Duroc",
+      "Landrace",
+      "Hampshire"
+    ],
+    "answer": 3,
+    "explanation": "The Hampshire breed is easily identified by its black color with a white belt across the shoulders. It is valued in the Caribbean for its excellent meat quality and is often used in crossbreeding programs with local Creole pigs to improve growth rates while maintaining hardiness.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-39a92200"
+  },
+  {
+    "question": "In small-scale rabbit production systems typical in the Caribbean, which housing method is most effective for preventing coccidiosis outbreaks while maintaining good sanitation?",
+    "options": [
+      "Battery cages with wire mesh floors elevated above ground",
+      "Deep litter bedding systems with straw",
+      "Free-range grazing in fenced paddocks",
+      "Colony housing on solid concrete floors"
+    ],
+    "answer": 0,
+    "explanation": "Wire mesh cages allow droppings to fall through, breaking the direct life cycle of coccidia protozoa which are transmitted via fecal-oral route. Deep litter and solid floors allow accumulation of infective oocysts, while free-range exposes rabbits to soil-borne parasites common in tropical Caribbean environments.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-9dcef8c1"
+  },
+  {
+    "question": "Unlike monogastric animals such as pigs, ruminants like the Black Belly sheep (common in the Caribbean) can efficiently digest fibrous forages because they possess:",
+    "options": [
+      "A significantly longer small intestine",
+      "Symbiotic microorganisms that produce cellulase enzymes",
+      "Highly acidic gastric secretions in all stomach compartments",
+      "Four stomach chambers that mechanically grind cellulose"
+    ],
+    "answer": 1,
+    "explanation": "Ruminants harbor bacteria, protozoa, and fungi in the rumen and reticulum that produce cellulase to break down cellulose into absorbable fatty acids. The four compartments facilitate microbial fermentation, not mechanical grinding (which occurs in the gizzard of poultry). Acidic digestion only occurs in the abomasum.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-8d36fb86"
+  },
+  {
+    "question": "Which of the following best describes the primary function of the rumen in ruminant animals such as goats and cattle commonly reared in Caribbean mixed farming systems?",
+    "options": [
+      "Secretion of hydrochloric acid and enzymes for protein digestion",
+      "Microbial fermentation of cellulose to produce volatile fatty acids",
+      "Absorption of water and electrolytes from digesta before excretion",
+      "Mechanical breakdown of feed through muscular grinding action"
+    ],
+    "answer": 1,
+    "explanation": "The rumen is the largest compartment of the ruminant stomach and functions as a fermentation chamber where microbes break down cellulose into volatile fatty acids (VFAs) for energy. Option A describes the abomasum (true stomach), option C describes the large intestine/omasum, and option D describes the gizzard in poultry or the reticulum's limited role.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-12d9e5ef"
+  },
+  {
+    "question": "In the digestive tract of layer hens kept in deep litter systems in Trinidad and Tobago, which organ serves as the site for temporary feed storage and moistening before passage to the proventriculus?",
+    "options": [
+      "Gizzard",
+      "Caecum",
+      "Crop",
+      "Proventriculus"
+    ],
+    "answer": 2,
+    "explanation": "The crop is a diverticulum of the esophagus that stores and softens feed with saliva before it moves to the proventriculus (glandular stomach). Students often confuse the crop with the gizzard (option A), which is the muscular stomach responsible for mechanical grinding, or the caecum (option B), which is involved in microbial fermentation.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-87918eb8"
+  },
+  {
+    "question": "Which characteristic makes the Barbados Black Belly sheep particularly suitable for extensive grazing systems in the Caribbean compared to temperate wool sheep breeds?",
+    "options": [
+      "High wool production requiring regular shearing and cooling",
+      "Hair coat adaptation to tropical heat and natural parasite resistance",
+      "Requirement for high-concentrate grain diets to maintain body condition",
+      "Sensitivity to high humidity levels and heat stress"
+    ],
+    "answer": 1,
+    "explanation": "The Barbados Black Belly is a hair sheep breed that lacks wool, making it heat-tolerant and resistant to external parasites common in tropical climates. Option A is incorrect as they are hair sheep (no wool), option C is incorrect as they are efficient foragers, and option D is opposite to their actual adaptation.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-90a8a6fb"
+  },
+  {
+    "question": "In smallholder pig production systems common in rural Jamaica, which feeding practice is most appropriate for non-ruminant pigs to ensure adequate amino acid supply for growth?",
+    "options": [
+      "Providing only fresh cut grass and forages as the sole ration",
+      "Feeding high-quality protein supplements or commercially balanced rations",
+      "Allowing exclusive grazing on pasture without concentrate supplementation",
+      "Feeding solely on fibrous agricultural by-products like bagasse"
+    ],
+    "answer": 1,
+    "explanation": "As non-ruminants (monogastrics), pigs have a simple stomach and cannot synthesize essential amino acids through microbial fermentation like ruminants. They require dietary protein sources. Options A, C, and D represent common misconceptions where farmers treat pigs like ruminants that can thrive on high-fiber forages alone.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-fda439b5"
+  },
+  {
+    "question": "Rabbit farmers in the Eastern Caribbean observe their animals eating soft fecal pellets (cecotropes) directly from the anus. This coprophagic behavior is essential because:",
+    "options": [
+      "It provides emergency water supplementation during drought periods",
+      "It allows absorption of B-vitamins and proteins synthesized by microbes in the caecum",
+      "It compensates for the anatomical absence of a large intestine in rabbits",
+      "It serves primarily to maintain hygiene in the hutch environment"
+    ],
+    "answer": 1,
+    "explanation": "Rabbits are non-ruminant herbivores with hindgut fermentation. They produce cecotropes (soft feces) rich in microbial protein and B-vitamins from caecal fermentation, which they re-ingest to absorb these nutrients. Option C is incorrect as rabbits do have a large intestine, and option D is incorrect as the behavior is nutritional, not hygienic.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-a4bc5fe0"
+  },
+  {
+    "question": "In the ruminant digestive system, which compartment serves as the primary site for microbial fermentation of roughages such as guinea grass and sugar cane tops commonly fed to cattle in the Caribbean?",
+    "options": [
+      "Rumen",
+      "Abomasum",
+      "Omasum",
+      "Reticulum"
+    ],
+    "answer": 0,
+    "explanation": "The rumen is the largest compartment and functions as a fermentation vat where microbes break down cellulose into volatile fatty acids. While the reticulum aids fermentation, the rumen is the primary site. The abomasum is the 'true stomach' using enzymes (not microbes), and the omasum absorbs water and acids.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-47a5983f"
+  },
+  {
+    "question": "Which statement accurately describes a key limitation of the monogastric digestive system in pigs compared to ruminants when utilizing local feed resources in the Caribbean?",
+    "options": [
+      "Pigs cannot digest proteins effectively without microbial assistance",
+      "Pigs lack the ability to synthesize B-vitamins in their digestive tract",
+      "Pigs cannot efficiently utilize high-fibre roughages like pasture grasses due to the absence of microbial fermentation",
+      "Pigs possess four stomach chambers but lack a functional cecum"
+    ],
+    "answer": 2,
+    "explanation": "As non-ruminants (monogastrics), pigs have a simple stomach and lack the rumen fermentation vat. They cannot digest cellulose in fibrous roughages efficiently, unlike ruminants. Pigs do digest proteins enzymatically (option A is wrong), can synthesize some vitamins (option B is partially incorrect), and have only one true stomach (option D is wrong).",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-659afe1c"
+  },
+  {
+    "question": "Which breed characteristic should a Jamaican farmer prioritize when selecting pigs for extensive backyard production systems where animals forage for kitchen scraps and local vegetation with minimal commercial inputs?",
+    "options": [
+      "Large White (Yorkshire) purebred stock with high growth rates",
+      "Landrace genetics optimized for intensive confinement operations",
+      "Local Creole or indigenous crossbreeds with hardy foraging abilities",
+      "Duroc breeds selected for maximum lean muscle development"
+    ],
+    "answer": 2,
+    "explanation": "Local Creole or indigenous crossbreeds are adapted to tropical conditions, parasites, and low-input foraging systems common in Caribbean backyards. Exotic breeds like Large White, Landrace, and Duroc require high-quality commercial feeds, confinement, and veterinary care to perform well.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-9f36d0d6"
+  },
+  {
+    "question": "When managing rabbits in the Eastern Caribbean where ambient temperatures frequently exceed 30\u00b0C, which housing practice is most critical to prevent heat prostration and maintain productivity?",
+    "options": [
+      "Constructing hutches with solid metal roofing positioned in direct sunlight",
+      "Ensuring cages are well-ventilated, raised off the ground, and located in shaded areas",
+      "Feeding high-energy grain rations exclusively to boost metabolic heat production",
+      "Housing rabbits in large communal pens to promote huddling behavior"
+    ],
+    "answer": 1,
+    "explanation": "Rabbits are highly susceptible to heat stress in tropical climates. Elevated, well-ventilated cages in shade allow air circulation and prevent heat buildup. Metal roofs in sun (option A) create ovens; high-energy feeds (option C) increase metabolic heat; and communal huddling (option D) reduces heat dissipation.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-74dc3f30"
+  },
+  {
+    "question": "A Barbadian farmer observes that dairy cows grazing lush legume pastures develop severe bloating. This condition is most directly caused by which characteristic of ruminant digestive physiology?",
+    "options": [
+      "Rapid microbial fermentation in the rumen producing excessive gas that cannot be eructated",
+      "The absence of hydrochloric acid secretion in the abomasum",
+      "The inability of the animal to regurgitate cud for rechewing",
+      "Enzymatic breakdown of cellulose by the cow's own digestive enzymes"
+    ],
+    "answer": 0,
+    "explanation": "Bloat occurs when microbial fermentation in the rumen produces gas faster than it can be belched (eructated), especially with frothy legume pastures. The abomasum does secrete acid (option B is wrong), cows do ruminate (option C is wrong), and cellulose is digested by microbes not the cow's own enzymes (option D is a common misconception).",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-02926e39"
+  },
+  {
+    "question": "Which compartment of the ruminant stomach is primarily responsible for the microbial fermentation of cellulose in forages consumed by goats and cattle reared on Caribbean pastures?",
+    "options": [
+      "Rumen",
+      "Reticulum",
+      "Omasum",
+      "Abomasum"
+    ],
+    "answer": 0,
+    "explanation": "The rumen is the largest compartment containing billions of microbes that break down cellulose into volatile fatty acids. The reticulum traps foreign objects, the omasum absorbs water, and the abomasum functions as the 'true stomach' with enzymatic digestion.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-868ae764"
+  },
+  {
+    "question": "In commercial broiler production systems across the Caribbean, which organ serves as the muscular 'grinding chamber' that mechanically breaks down feed particles, compensating for the absence of teeth in poultry?",
+    "options": [
+      "Crop",
+      "Proventriculus",
+      "Gizzard",
+      "Caeca"
+    ],
+    "answer": 2,
+    "explanation": "The gizzard (ventriculus) uses strong muscular contractions to grind food, often aided by insoluble grit. The crop stores and softens food, the proventriculus secretes digestive enzymes, and the caeca are involved in limited fermentation and water absorption.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-17e10961"
+  },
+  {
+    "question": "Which pig breed is most suitable for extensive outdoor production systems in the tropical Caribbean climate due to its dark coloration, hardiness, and ability to thrive on locally available feedstuffs with minimal supplemental inputs?",
+    "options": [
+      "Large White",
+      "Landrace",
+      "Hampshire",
+      "Creole pig"
+    ],
+    "answer": 3,
+    "explanation": "The Creole pig (or local hairless/black hog) is genetically adapted to tropical heat, resistant to local parasites and diseases, and efficient at foraging. Light-colored exotic breeds like Large White and Landrace are prone to sunburn and heat stress, requiring intensive housing and climate control.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-3e0d243d"
+  },
+  {
+    "question": "A farmer in Barbados practicing cuniculture observes severe diarrhea (scours) in weanling rabbits caused by coccidiosis. Which management practice is most effective for preventing this parasitic infection?",
+    "options": [
+      "Increasing crude protein levels in the concentrate feed",
+      "Housing rabbits in wire-mesh cages to separate animals from feces",
+      "Feeding freshly cut grass immediately after rainfall",
+      "Reducing hutch ventilation to maintain high temperatures"
+    ],
+    "answer": 1,
+    "explanation": "Coccidiosis spreads via ingestion of oocysts from contaminated feces. Wire-mesh cages (all-wire hutches) break the parasite's life cycle by allowing droppings to fall through, unlike solid-floor systems. High protein can cause digestive upset, wet grass may harbor parasites, and poor ventilation increases ammonia levels that stress the respiratory system.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-56b06225"
+  },
+  {
+    "question": "Which statement correctly differentiates the digestive physiology of ruminants (such as sheep) from non-ruminants (such as pigs) commonly raised in Caribbean integrated livestock systems?",
+    "options": [
+      "Ruminants digest cellulose using enzymes secreted in the abomasum, while non-ruminants rely entirely on salivary amylase for carbohydrate digestion.",
+      "Both ruminants and non-ruminants can efficiently digest large quantities of fibrous roughage due to extensive hindgut fermentation.",
+      "Ruminants utilize microbial fermentation in the rumen to synthesize B-vitamins and digest cellulose, while pigs require dietary sources of B-vitamins and cannot digest cellulose efficiently.",
+      "Non-ruminants possess four distinct stomach compartments, whereas ruminants have a single simple stomach followed by a large caecum."
+    ],
+    "answer": 2,
+    "explanation": "Ruminants rely on rumen microbes to synthesize B-complex vitamins and break down cellulose into usable energy. Pigs are monogastric (single stomach) and lack the enzyme cellulase; they require pre-formed vitamins in their diet and utilize starch and proteins more efficiently than fibrous materials.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-979780ea"
+  },
+  {
+    "question": "A farmer in St. Elizabeth, Jamaica observes that his cattle can thrive on fibrous pasture grasses (such as Guinea grass) that his pigs cannot digest efficiently. This ability of ruminants is primarily due to which physiological characteristic?",
+    "options": [
+      "The presence of four separate stomachs that mechanically grind cellulose",
+      "Microbial fermentation occurring in the rumen that breaks down fiber",
+      "The production of cellulase enzymes by the cow's pancreas",
+      "Rapid passage of food allowing for continuous grazing without digestion"
+    ],
+    "answer": 1,
+    "explanation": "Ruminants possess a rumen populated by symbiotic microbes (bacteria, protozoa, and fungi) that ferment cellulose in plant cell walls, converting it to volatile fatty acids for energy. While ruminants have four compartments (not separate stomachs), they do not produce cellulase enzymes themselves\u2014the microbes do. Food actually remains in the rumen for extended periods (24-48 hours) to allow thorough fermentation.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-800a57f0"
+  },
+  {
+    "question": "In a commercial broiler operation in Trinidad, a farmer notices that birds appear to eat continuously but the feed seems to accumulate in a pouch-like structure at the base of the neck before moving deeper into the digestive tract. Which anatomical structure is responsible for this temporary storage and softening of ingested feed?",
+    "options": [
+      "Gizzard",
+      "Proventriculus",
+      "Crop",
+      "Ceca"
+    ],
+    "answer": 2,
+    "explanation": "The crop is a diverticulum of the esophagus that serves as a temporary storage chamber where feed is moistened and softened before passing to the proventriculus (glandular stomach). The gizzard mechanically grinds feed using muscular action and grit, while the proventriculus secretes digestive enzymes. The ceca are blind pouches at the junction of the small and large intestines involved in microbial fermentation of fiber, not storage.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-c60ef63c"
+  },
+  {
+    "question": "A 4-H student in Barbados is establishing a rabbitry for meat production. To prevent enteritis (bloat/scours) in weanling rabbits (4-8 weeks old), which dietary management practice is most critical?",
+    "options": [
+      "Ensuring a gradual transition from milk to high-fiber pellets with limited fresh greens",
+      "Providing unlimited fresh forages like banana leaves and grass as the sole diet",
+      "Feeding root crops like cassava and sweet potato as the primary energy source",
+      "Withholding water for 12 hours daily to prevent intestinal bloating"
+    ],
+    "answer": 0,
+    "explanation": "Young rabbits have sensitive digestive systems and require a gradual dietary transition. Abrupt changes or excessive fresh greens high in moisture can disrupt gut flora, causing fatal enteritis. Unlimited fresh forages alone lack balanced nutrition and may cause diarrhea, while high-starch root crops can ferment and cause acidosis. Rabbits must have constant access to clean water; deprivation causes severe stress and health issues.",
+    "topic_id": "AGRI-04-00001",
+    "type": "MCQ",
+    "id": "Q-AGRI-04-00001-bda3e914"
+  }
+]

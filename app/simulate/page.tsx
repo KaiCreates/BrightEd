@@ -256,12 +256,10 @@ export default function SimulatePage() {
           questionId: resolvedQuestionId,
           objectiveId: objectiveId,
           selectedAnswer: answerIndex,
-          correctAnswer: step.correctAnswer || 0,
           options: step.options || [],
           timeToAnswer,
           subSkills: Array.isArray(step.subSkills) && step.subSkills.length > 0 ? step.subSkills : [objectiveId].filter(Boolean),
-          questionDifficulty: step.questionDifficulty || objectiveInfo?.difficulty || 5,
-          knowledgeGraph: nableState?.knowledgeGraph || {} // CRITICAL: Pass current knowledge state
+          questionDifficulty: step.questionDifficulty || objectiveInfo?.difficulty || 5
         })
       })
 

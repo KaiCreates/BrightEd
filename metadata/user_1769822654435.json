@@ -1,0 +1,20 @@
+{
+  "subjects": [
+    "Mathematics",
+    "English A",
+    "Spanish",
+    "Social Studies",
+    "Biology",
+    "Principles of Business"
+  ],
+  "source": "social",
+  "proficiencies": {
+    "Mathematics": "1",
+    "English A": "3",
+    "Spanish": "3",
+    "Social Studies": "2",
+    "Biology": "3",
+    "Principles of Business": "3"
+  },
+  "timestamp": "2026-01-31T01:24:13.838Z"
+}

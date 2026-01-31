@@ -6,7 +6,7 @@ import { Navigation } from './Navigation'
 export function ConditionalNavigation() {
   const pathname = usePathname()
   const isOnboardingPage = pathname?.startsWith('/onboarding')
-  const isLandingPage = pathname === '/landing' || pathname === '/signup' || pathname === '/login'
+  const isLandingPage = pathname === '/' || pathname === '/landing' || pathname === '/signup' || pathname === '/login' || pathname?.startsWith('/welcome')
   const isImmersivePractical = pathname?.startsWith('/practicals/technology-practicality')
 
   // Hide navigation on onboarding pages
@@ -14,10 +14,11 @@ export function ConditionalNavigation() {
     return <Navigation variant="minimal" />
   }
 
-  if (isImmersivePractical) {
+  // Hide navigation on immersive practicals AND landing page (which has its own header)
+  if (isImmersivePractical || isLandingPage) {
     return null
   }
 
-  // Show navigation on all other pages (including landing)
+  // Show navigation on all other pages
   return <Navigation />
 }

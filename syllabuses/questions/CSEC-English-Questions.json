@@ -1,0 +1,183 @@
+[
+    {
+        "id": "Q-ENGL-01-001",
+        "topic_id": "ENG-UA-00001",
+        "type": "MCQ",
+        "difficulty": 1,
+        "question": "Which of the following best describes the 'main idea' of a passage?",
+        "options": [
+            {
+                "id": "a",
+                "text": "A minor detail in the first paragraph"
+            },
+            {
+                "id": "b",
+                "text": "The primary point or concept that the author wants to communicate"
+            },
+            {
+                "id": "c",
+                "text": "The author's biography"
+            },
+            {
+                "id": "d",
+                "text": "A list of all the characters in a story"
+            }
+        ],
+        "answer": "b",
+        "explanation": "The main idea represents the central focus around which all other details in the text are organized."
+    },
+    {
+        "id": "Q-ENGL-01-002",
+        "topic_id": "ENG-UA-00001",
+        "type": "DND",
+        "difficulty": 2,
+        "question": "Match the reading strategy to its purpose.",
+        "items": [
+            {
+                "text": "Skimming",
+                "category": "Quickly reading for a general overview"
+            },
+            {
+                "text": "Scanning",
+                "category": "Looking for specific keywords or pieces of information"
+            },
+            {
+                "text": "Critical Reading",
+                "category": "Analyzing the author's tone and bias"
+            }
+        ]
+    },
+    {
+        "id": "Q-ENGL-02-001",
+        "topic_id": "ENG-UB-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "In narrative writing, what is 'foreshadowing'?",
+        "options": [
+            {
+                "id": "a",
+                "text": "The conclusion of the story"
+            },
+            {
+                "id": "b",
+                "text": "A flashback to a character's childhood"
+            },
+            {
+                "id": "c",
+                "text": "Hints or clues about events that will happen later in the story"
+            },
+            {
+                "id": "d",
+                "text": "The use of extremely long descriptions"
+            }
+        ],
+        "answer": "c",
+        "explanation": "Foreshadowing is a literary device used to create suspense or prepare the reader for future developments."
+    },
+    {
+        "id": "Q-ENGL-03-001",
+        "topic_id": "ENG-UC-00001",
+        "type": "MCQ",
+        "difficulty": 3,
+        "question": "Identify the figure of speech used in the sentence: 'The wind whispered through the trees.'",
+        "options": [
+            {
+                "id": "a",
+                "text": "Metaphor"
+            },
+            {
+                "id": "b",
+                "text": "Simile"
+            },
+            {
+                "id": "c",
+                "text": "Personification"
+            },
+            {
+                "id": "d",
+                "text": "Hyperbole"
+            }
+        ],
+        "answer": "c",
+        "explanation": "Personification gives human qualities (whispering) to non-human things (the wind)."
+    },
+    {
+        "id": "Q-ENGL-04-001",
+        "topic_id": "ENG-UD-00004",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "What is the purpose of an 'Expository' essay?",
+        "options": [
+            {
+                "id": "a",
+                "text": "To tell a fictional story"
+            },
+            {
+                "id": "b",
+                "text": "To express strong personal emotions"
+            },
+            {
+                "id": "c",
+                "text": "To inform or explain a topic in a logical and neutral manner"
+            },
+            {
+                "id": "d",
+                "text": "To persuade someone to change their political view"
+            }
+        ],
+        "answer": "c",
+        "explanation": "Expository writing focuses on clarifying or explaining a topic without the use of personal bias or persuasion."
+    },
+    {
+        "id": "Q-ENGL-05-001",
+        "topic_id": "ENG-UE-00002",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "Which sentence shows the correct subject-verb agreement?",
+        "options": [
+            {
+                "id": "a",
+                "text": "The team of players are arriving early."
+            },
+            {
+                "id": "b",
+                "text": "The team of players is arriving early."
+            },
+            {
+                "id": "c",
+                "text": "The players is arriving early."
+            },
+            {
+                "id": "d",
+                "text": "The team are arrive early."
+            }
+        ],
+        "answer": "b",
+        "explanation": "The subject is 'team' (singular), not 'players' (which is the object of the preposition). Therefore, the verb must be 'is'."
+    },
+    {
+        "id": "Q-ENGL-05-002",
+        "topic_id": "ENG-UE-00002",
+        "type": "DND",
+        "difficulty": 2,
+        "question": "Match the transition word to its function.",
+        "items": [
+            {
+                "text": "However",
+                "category": "Contrast"
+            },
+            {
+                "text": "Therefore",
+                "category": "Consequence/Result"
+            },
+            {
+                "text": "In addition",
+                "category": "Adding information"
+            },
+            {
+                "text": "For example",
+                "category": "Illustration"
+            }
+        ]
+    }
+]

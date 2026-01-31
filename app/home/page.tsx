@@ -11,6 +11,7 @@ import { db } from '@/lib/firebase'
 import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
 import { ProfessorBrightMascot } from '@/components/learning'
 import { FeedbackResponse } from '@/lib/professor-bright'
+import { ALL_ACHIEVEMENTS, checkAchievement } from '@/lib/achievements'
 
 export default function HomePage() {
     const router = useRouter()
@@ -25,6 +26,32 @@ export default function HomePage() {
         topBusiness: { name: string; value: number } | null
         loading: boolean
     }>({ xpTop: null, streakTop: null, topBusiness: null, loading: true })
+
+    // Calculate Mastery
+    const getMasteryValue = (val: any): number => {
+        if (typeof val === 'number') return val;
+        if (typeof val === 'object' && val !== null) {
+            const values = Object.values(val).filter(v => typeof v === 'number') as number[];
+            if (values.length === 0) return 0.1;
+            const sum = values.reduce((a, b) => a + b, 0);
+            return sum / (values.length * 10.0); // 0.1-10 scale
+        }
+        return 0.1;
+    };
+    const mastery = getMasteryValue(userData?.mastery || userData?.subjectProgress);
+
+    const HOME_STATS = [
+        { label: 'Mastery', value: Math.round(mastery * 100).toString(), unit: '%', icon: '🧠', color: 'text-purple-500' },
+        { label: 'Consistency', value: Math.round(userData?.consistency || 0).toString(), unit: '%', icon: '📈', color: 'text-blue-500' },
+        { label: 'Streak', value: (userData?.streak || 0).toString(), unit: 'Days', icon: '🔥', color: 'text-orange-500' },
+        { label: 'Wealth', value: (userData?.xp || 0).toLocaleString(), unit: 'Total', icon: '⚡', color: 'text-yellow-500' },
+    ]
+
+    const ACHIEVEMENT_PREVIEWS = ALL_ACHIEVEMENTS.slice(0, 4).map(ach => ({
+        ...ach,
+        unlocked: checkAchievement(ach, userData, leaderPreview.topBusiness?.value || 0),
+        progress: 0 // We can add progress calculation logic later if needed
+    }))
 
     useEffect(() => {
         if (authLoading) return
@@ -54,42 +81,51 @@ export default function HomePage() {
         const subjects = userData?.subjectProgress ? Object.keys(userData.subjectProgress) : []
 
         if (subjects.length > 0) {
-            fetch('/api/learning-path?' + new URLSearchParams({
-                subjects: subjects.join(',')
-            }), {
-                signal: abortController.signal,
-                cache: 'force-cache' // Use browser cache
-            })
-                .then(res => res.json())
-                .then(pathData => {
-                    const allPaths = pathData.paths || {}
-                    const preview: any[] = []
+            // Get auth token for the API call
+            user.getIdToken().then(token => {
+                fetch('/api/learning-path?' + new URLSearchParams({
+                    subjects: subjects.join(',')
+                }), {
+                    signal: abortController.signal,
+                    cache: 'force-cache', // Use browser cache
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .then(res => res.json())
+                    .then(pathData => {
+                        const allPaths = pathData.paths || {}
+                        const preview: any[] = []
 
-                    for (const [subject, objectives] of Object.entries(allPaths)) {
-                        const subjectObjectives = objectives as any[]
-                        if (subjectObjectives.length > 0) {
-                            preview.push({
-                                title: subjectObjectives[0].objective?.substring(0, 40) || `${subject} - Objective 1`,
-                                subject: subject,
-                                level: subjectObjectives[0].difficulty || 1,
-                                objectiveId: subjectObjectives[0].id,
-                                icon: getSubjectIcon(subject),
-                                color: getSubjectColor(subject),
-                                // Calculate actual progress from mastery data (0.1-10.0 scale -> 0-100%)
-                                progress: userData?.subjectProgress?.[subject]
-                                    ? Math.min(100, Math.round(((userData.subjectProgress[subject] || 0.1) / 10.0) * 100))
-                                    : 0
-                            })
+                        for (const [subject, objectives] of Object.entries(allPaths)) {
+                            const subjectObjectives = objectives as any[]
+                            if (subjectObjectives.length > 0) {
+                                preview.push({
+                                    title: subjectObjectives[0].objective?.substring(0, 40) || `${subject} - Objective 1`,
+                                    subject: subject,
+                                    level: subjectObjectives[0].difficulty || 1,
+                                    objectiveId: subjectObjectives[0].id,
+                                    icon: getSubjectIcon(subject),
+                                    color: getSubjectColor(subject),
+                                    // Calculate actual progress from mastery data (0.1-10.0 scale -> 0-100%)
+                                    progress: userData?.subjectProgress?.[subject]
+                                        ? Math.min(100, Math.round(((userData.subjectProgress[subject] || 0.1) / 10.0) * 100))
+                                        : 0
+                                })
+                            }
                         }
-                    }
-                    setLearningPath(preview.slice(0, 3))
-                })
-                .catch((err) => {
-                    // Ignore abort errors
-                    if (err.name !== 'AbortError') {
-                        // Silent fail - learning path is not critical
-                    }
-                })
+                        setLearningPath(preview.slice(0, 3))
+                    })
+                    .catch((err) => {
+                        // Ignore abort errors
+                        if (err.name !== 'AbortError') {
+                            console.error('Learning path error:', err);
+                            // Silent fail - learning path is not critical
+                        }
+                    })
+            }).catch(err => {
+                console.error('Token error:', err);
+            });
         }
 
         return () => {
@@ -252,17 +288,71 @@ export default function HomePage() {
                                         className="relative w-full h-full"
                                     >
                                         <div className="absolute inset-0 bg-[var(--brand-primary)] opacity-20 blur-2xl rounded-full scale-75 animate-pulse" />
-                                        <Image
-                                            src="/BrightEdLogo.png"
-                                            alt="BrightEd Owl"
-                                            fill
-                                            className="object-contain drop-shadow-2xl relative z-10"
-                                            priority
+                                        {/* Professor Bright Sprite */}
+                                        <div
+                                            className="owl-sprite owl-happy relative z-10 filter drop-shadow-2xl"
+                                            style={{
+                                                transform: 'scale(1.35) translateY(10%)',
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
                                         />
                                     </motion.div>
+
+                                    {/* Professor Bright Badge */}
+                                    <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 px-4 py-2 rounded-xl shadow-xl border border-black/5 flex items-center gap-2 transform rotate-[-6deg] z-20">
+                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-accent)] flex items-center justify-center text-white text-xs font-black">
+                                            PB
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Mascot</span>
+                                            <span className="text-sm font-black text-[var(--brand-primary)]">Professor Bright</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </BrightLayer>
+
+                        {/* Duolingo-Style Statistics Grid */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            {HOME_STATS.map((stat, i) => (
+                                <BrightLayer key={i} variant="elevated" padding="md" className="flex flex-col items-center hover:scale-105 transition-transform cursor-pointer border-b-[6px] border-black/10 active:border-b-0 active:translate-y-[6px]">
+                                    <span className={`text-3xl mb-2 ${stat.color}`}>{stat.icon}</span>
+                                    <span className="text-2xl font-black text-[var(--text-primary)]">{stat.value}{stat.unit === '%' ? '%' : ''}</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">{stat.label}</span>
+                                </BrightLayer>
+                            ))}
+                        </div>
+
+                        {/* Achievements Row */}
+                        <div className="space-y-6">
+                            <div className="flex justify-between items-end pl-2">
+                                <div>
+                                    <BrightHeading level={2} className="text-xl">Achievements</BrightHeading>
+                                    <p className="text-[var(--text-muted)] text-sm font-bold">Your latest milestones</p>
+                                </div>
+                                <Link href="/achievements" className="text-[var(--brand-primary)] font-black uppercase text-xs tracking-widest hover:underline">View All</Link>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {ACHIEVEMENT_PREVIEWS.map((ach) => (
+                                    <BrightLayer key={ach.id} variant="glass" padding="md" className={`group ${ach.unlocked ? 'border-[var(--brand-primary)]' : ''}`}>
+                                        <div className="flex items-center gap-4">
+                                            <div className={`text-4xl group-hover:scale-110 transition-transform ${!ach.unlocked && 'grayscale opacity-50'}`}>{ach.icon}</div>
+                                            <div className="flex-1">
+                                                <div className="flex justify-between mb-1">
+                                                    <span className="font-black text-sm">{ach.name}</span>
+                                                    <span className="text-[var(--brand-primary)] text-xs font-black">{ach.unlocked ? '100%' : 'Locked'}</span>
+                                                </div>
+                                                <div className="w-full bg-white/5 rounded-full h-2.5 border border-white/5">
+                                                    <div className={`${ach.unlocked ? 'bg-[var(--brand-primary)]' : 'bg-white/10'} h-full rounded-full transition-all duration-1000`} style={{ width: ach.unlocked ? '100%' : '5%' }} />
+                                                </div>
+                                                <p className="text-[10px] font-bold text-[var(--text-muted)] mt-1 uppercase tracking-wider">{ach.description}</p>
+                                            </div>
+                                        </div>
+                                    </BrightLayer>
+                                ))}
+                            </div>
+                        </div>
 
                         {/* Hall of Fame Preview Section */}
                         <div className="relative overflow-hidden group">

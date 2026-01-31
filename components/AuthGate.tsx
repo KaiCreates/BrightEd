@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 
-const PUBLIC_PATHS = new Set<string>(['/landing', '/login', '/signup'])
+const PUBLIC_PATHS = new Set<string>(['/', '/landing', '/login', '/signup', '/welcome'])
 const ONBOARDING_PATHS = ['/onboarding']
 const PROTECTED_PATHS = ['/home', '/community', '/learn', '/simulate', '/leaderboard', '/profile', '/achievements', '/practicals', '/progress']
 
@@ -17,7 +17,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (loading) return
 
-    const isPublic = PUBLIC_PATHS.has(pathname)
+    const isPublic = PUBLIC_PATHS.has(pathname) || pathname.startsWith('/welcome')
     const isOnboarding = pathname.startsWith('/onboarding')
     const isDiagnostic = pathname === '/onboarding/diagnostic' || pathname.startsWith('/onboarding/diagnostic')
     const isProtected = PROTECTED_PATHS.some(p => pathname.startsWith(p))
@@ -25,7 +25,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     // Not logged in
     if (!user) {
       if (!isPublic) {
-        router.replace('/landing')
+        router.replace('/')
       }
       setIsChecking(false)
       return

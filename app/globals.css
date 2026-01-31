@@ -134,9 +134,9 @@
   --neon-cyan: #00f5ff;
   --neon-magenta: #ff00ff;
 
-  /* Glass blur - Optimized for performance */
-  --glass-blur: 12px;
-  --glass-border: rgba(255, 255, 255, 0.08);
+  /* Glass blur - Optimized for performance (Reduced from 12px) */
+  --glass-blur: 8px;
+  --glass-border: rgba(255, 255, 255, 0.06);
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -186,10 +186,10 @@ body {
   overflow-x: hidden;
   font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--bg-primary);
-  background-image:
-    radial-gradient(1200px 800px at 15% 10%, rgba(99, 102, 241, 0.10), transparent 60%),
-    radial-gradient(1200px 800px at 85% 90%, rgba(45, 212, 191, 0.10), transparent 60%);
-  background-attachment: fixed;
+  background-image: 
+    radial-gradient(800px 600px at 15% 10%, rgba(99, 102, 241, 0.06), transparent 70%),
+    radial-gradient(800px 600px at 85% 90%, rgba(45, 212, 191, 0.06), transparent 70%);
+  background-attachment: scroll; /* Changed from fixed for mobile performance */
   color: var(--text-primary);
   min-height: 100vh;
   /* Smooth theme transition */
@@ -276,19 +276,20 @@ html {
   }
 
   .aura-glow {
-    animation: aura 2.4s ease-in-out infinite;
+    /* Simplified animation */
+    animation: aura 3s ease-in-out infinite;
   }
 
   .aura-gold {
-    box-shadow: 0 0 0 1px rgba(255, 191, 0, 0.10), 0 0 22px rgba(255, 191, 0, 0.14);
+    box-shadow: 0 0 15px rgba(255, 191, 0, 0.1);
   }
 
   .aura-silver {
-    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.10), 0 0 22px rgba(99, 102, 241, 0.14);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
   }
 
   .aura-bronze {
-    box-shadow: 0 0 0 1px rgba(var(--hero-rgb), 0.12), 0 0 22px rgba(var(--hero-rgb), 0.12);
+    box-shadow: 0 0 15px rgba(var(--hero-rgb), 0.1);
   }
 
   /* Glass Card with hover glow */

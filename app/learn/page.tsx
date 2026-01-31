@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { LearningPathNode, SectionHeader, PathConnector, type NodeType, ProfessorBrightMascot } from '@/components/learning'
+import { LearningPathNode, SectionHeader, PathConnector, type NodeType, ProfessorBrightMascot, GuidebookModal, type GuidebookObjective } from '@/components/learning'
 import { FeedbackResponse } from '@/lib/professor-bright'
 
 interface SyllabusObjective {
@@ -72,6 +72,19 @@ function LearnContent() {
   const [error, setError] = useState<string | null>(null)
   const [subjects, setSubjects] = useState<string[]>([])
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
+  const [guidebookState, setGuidebookState] = useState<{
+    isOpen: boolean;
+    moduleNumber: number;
+    title: string;
+    objectives: GuidebookObjective[];
+    theme: 'startup' | 'growth' | 'mastery' | 'default';
+  }>({
+    isOpen: false,
+    moduleNumber: 1,
+    title: '',
+    objectives: [],
+    theme: 'default'
+  })
 
   useEffect(() => {
     if (authLoading) return
@@ -278,8 +291,8 @@ function LearnContent() {
   return (
     <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] pb-24 md:pb-24 relative overflow-hidden safe-padding">
       {/* Background Decor */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[var(--brand-primary)]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[var(--brand-secondary)]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-[var(--brand-primary)]/5 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-[var(--brand-secondary)]/5 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-2xl mx-auto px-4 py-6 md:py-8 relative z-10">
 
@@ -291,31 +304,47 @@ function LearnContent() {
           <p className="text-[var(--text-secondary)] font-medium">Your personalized journey to CXC success</p>
         </div>
 
-        {/* Subject Filter */}
+        {/* Subject Filter - Improved Horizontal Scroll */}
         {subjects.length > 1 && (
-          <div className="mb-8 w-full overflow-x-auto pb-4 -mx-4 px-4 flex justify-start sm:justify-center no-scrollbar">
-            <div className="flex gap-2 flex-nowrap">
-              <button
-                onClick={() => setSelectedSubject(null)}
-                className={`whitespace-nowrap px-4 py-2 rounded-xl font-bold transition-all border-2 flex-shrink-0 ${selectedSubject === null
-                  ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
-                  : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
-                  }`}
-              >
-                All Subjects
-              </button>
-              {subjects.map((subject) => (
+          <div className="mb-8 -mx-4 overflow-hidden">
+            <div className="overflow-x-auto no-scrollbar touch-pan-x px-4 pb-6">
+              <div className="flex gap-4 items-center min-w-max pr-12">
                 <button
-                  key={subject}
-                  onClick={() => setSelectedSubject(subject)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-xl font-bold transition-all border-2 flex-shrink-0 ${selectedSubject === subject
-                    ? 'bg-[var(--brand-primary)] border-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
-                    : 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'
-                    }`}
+                  onClick={(e) => {
+                    setSelectedSubject(null);
+                    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  }}
+                  className={`
+                    whitespace-nowrap px-6 py-4 rounded-2xl font-black tracking-wide transition-all border-b-4 
+                    active:border-b-0 active:translate-y-[4px] flex-shrink-0
+                    ${selectedSubject === null
+                      ? 'bg-[#1cb0f6] border-[#1899d6] text-white shadow-lg'
+                      : 'bg-[#1a1c1e] border-[#2f3336] text-[#afafaf] hover:bg-[#25282b]'
+                    }
+                  `}
                 >
-                  {subject}
+                  All Subjects
                 </button>
-              ))}
+                {subjects.map((subject) => (
+                  <button
+                    key={subject}
+                    onClick={(e) => {
+                      setSelectedSubject(subject);
+                      e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }}
+                    className={`
+                      whitespace-nowrap px-6 py-4 rounded-2xl font-black tracking-wide transition-all border-b-4 
+                      active:border-b-0 active:translate-y-[4px] flex-shrink-0
+                      ${selectedSubject === subject
+                        ? 'bg-[#1cb0f6] border-[#1899d6] text-white shadow-lg'
+                        : 'bg-[#1a1c1e] border-[#2f3336] text-[#afafaf] hover:bg-[#25282b]'
+                      }
+                    `}
+                  >
+                    {subject}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -393,16 +422,62 @@ function LearnContent() {
                     moduleNumber={moduleNum}
                     title={moduleNum === 1 ? "The Startup Phase" : moduleNum === 2 ? "Growth & Scaling" : "Market Dominance"}
                     theme={headerTheme}
+                    onOpenGuidebook={() => {
+                      // Get all objectives for this section (current index to next 5)
+                      const sectionModules = learningModules.slice(index, index + 5);
+                      const sectionObjectives: GuidebookObjective[] = sectionModules.map(m => ({
+                        id: String(m.id),
+                        objective: m.title,
+                        content: m.subject // Using subject or some other field as content for now
+                      }));
+
+                      setGuidebookState({
+                        isOpen: true,
+                        moduleNumber: moduleNum,
+                        title: moduleNum === 1 ? "The Startup Phase" : moduleNum === 2 ? "Growth & Scaling" : "Market Dominance",
+                        objectives: sectionObjectives,
+                        theme: headerTheme
+                      });
+                    }}
                   />
                 )}
 
-                {/* Node Component */}
-                <LearningPathNode
-                  {...module}
-                  id={String(module.id)}
-                  index={index}
-                  isUnlocking={isUnlocking}
-                />
+                {/* Node Component with Floating Mascot for Current Node */}
+                <div className="relative">
+                  <LearningPathNode
+                    {...module}
+                    id={String(module.id)}
+                    index={index}
+                    isUnlocking={isUnlocking}
+                  />
+
+                  {/* Floating Mascot (Professor Bright) on current node */}
+                  {module.status === 'current' && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 0 }}
+                      animate={{ opacity: 1, x: 120 }}
+                      className="absolute top-[-20%] right-[-40%] z-20 pointer-events-none hidden md:block"
+                    >
+                      <motion.div
+                        animate={{ y: [0, -10, 0], rotate: [0, -2, 2, 0] }}
+                        transition={{
+                          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                          rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                        }}
+                      >
+                        <ProfessorBrightMascot
+                          feedback={{
+                            tone: 'encouraging',
+                            message: "Keep going!",
+                            emoji: '🦉',
+                            spriteClass: 'owl-happy'
+                          }}
+                          mini
+                        />
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </div>
 
                 {/* Connector Path (if not last) */}
                 {index < learningModules.length - 1 && (
@@ -450,6 +525,17 @@ function LearnContent() {
 
       {/* Professor Bright Mascot */}
       <ProfessorBrightMascot feedback={mascotFeedback} webMode={true} />
+
+      {/* Guidebook Modal */}
+      <GuidebookModal
+        isOpen={guidebookState.isOpen}
+        onClose={() => setGuidebookState(prev => ({ ...prev, isOpen: false }))}
+        moduleNumber={guidebookState.moduleNumber}
+        title={guidebookState.title}
+        subject={selectedSubject || 'General'}
+        objectives={guidebookState.objectives}
+        theme={guidebookState.theme}
+      />
     </div>
   )
 }

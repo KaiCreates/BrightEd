@@ -1,0 +1,214 @@
+[
+    {
+        "id": "Q-IT-01-001",
+        "topic_id": "IT-01-00001",
+        "type": "MCQ",
+        "difficulty": 1,
+        "question": "Which of the following is the brain of the computer that performs calculations and logical operations?",
+        "options": [
+            {
+                "id": "a",
+                "text": "RAM"
+            },
+            {
+                "id": "b",
+                "text": "GPU"
+            },
+            {
+                "id": "c",
+                "text": "CPU"
+            },
+            {
+                "id": "d",
+                "text": "SSD"
+            }
+        ],
+        "answer": "c",
+        "explanation": "The CPU (Central Processing Unit) is responsible for interpreting and executing most of the commands from the computer's other hardware and software."
+    },
+    {
+        "id": "Q-IT-01-002",
+        "topic_id": "IT-01-00001",
+        "type": "DND",
+        "difficulty": 2,
+        "question": "Categorize these components as Input or Output devices.",
+        "items": [
+            {
+                "text": "Keyboard",
+                "category": "Input"
+            },
+            {
+                "text": "Monitor",
+                "category": "Output"
+            },
+            {
+                "text": "Microphone",
+                "category": "Input"
+            },
+            {
+                "text": "Printer",
+                "category": "Output"
+            }
+        ]
+    },
+    {
+        "id": "Q-IT-03-001",
+        "topic_id": "IT-03-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "Which type of network spans a city-wide area, such as a network connecting multiple campuses of a university across town?",
+        "options": [
+            {
+                "id": "a",
+                "text": "LAN"
+            },
+            {
+                "id": "b",
+                "text": "PAN"
+            },
+            {
+                "id": "c",
+                "text": "MAN"
+            },
+            {
+                "id": "d",
+                "text": "WAN"
+            }
+        ],
+        "answer": "c",
+        "explanation": "A MAN (Metropolitan Area Network) interconnects users with computer resources in a geographic area or region larger than that covered by a large LAN but smaller than the area covered by a WAN."
+    },
+    {
+        "id": "Q-IT-04-001",
+        "topic_id": "IT-04-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "A user receives an email that appears to be from their bank, asking them to click a link and log in to 'verify' their account. This is an example of:",
+        "options": [
+            {
+                "id": "a",
+                "text": "A Virus"
+            },
+            {
+                "id": "b",
+                "text": "Phishing"
+            },
+            {
+                "id": "c",
+                "text": "Ransomware"
+            },
+            {
+                "id": "d",
+                "text": "Baiting"
+            }
+        ],
+        "answer": "b",
+        "explanation": "Phishing is a social engineering attack often used to steal user data, including login credentials and credit card numbers."
+    },
+    {
+        "id": "Q-IT-05-001",
+        "topic_id": "IT-05-00001",
+        "type": "MCQ",
+        "difficulty": 3,
+        "question": "In a spreadsheet, which formula would you use to find the average of values in cells A1 through A10?",
+        "options": [
+            {
+                "id": "a",
+                "text": "=SUM(A1:A10)/2"
+            },
+            {
+                "id": "b",
+                "text": "=AVERAGE(A1:A10)"
+            },
+            {
+                "id": "c",
+                "text": "=MEAN(A1:A10)"
+            },
+            {
+                "id": "d",
+                "text": "=TOTAL(A1:A10)/10"
+            }
+        ],
+        "answer": "b",
+        "explanation": "=AVERAGE is the standard spreadsheet function for calculating the arithmetic mean of a range."
+    },
+    {
+        "id": "Q-IT-05-002",
+        "topic_id": "IT-05-00002",
+        "type": "DND",
+        "difficulty": 3,
+        "question": "Match the database term to its definition.",
+        "items": [
+            {
+                "text": "Primary Key",
+                "category": "Unique identifier for a record"
+            },
+            {
+                "text": "Foreign Key",
+                "category": "Reference to a primary key in another table"
+            },
+            {
+                "text": "Query",
+                "category": "Search or request for specific data"
+            },
+            {
+                "text": "Table",
+                "category": "Collection of related data records"
+            }
+        ]
+    },
+    {
+        "id": "Q-IT-06-001",
+        "topic_id": "IT-06-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "Which flowchart symbol is used to represent a decision-making step?",
+        "options": [
+            {
+                "id": "a",
+                "text": "Rectangle"
+            },
+            {
+                "id": "b",
+                "text": "Oval"
+            },
+            {
+                "id": "c",
+                "text": "Diamond"
+            },
+            {
+                "id": "d",
+                "text": "Parallelogram"
+            }
+        ],
+        "answer": "c",
+        "explanation": "The Diamond represents a decision or branching point in a flowchart."
+    },
+    {
+        "id": "Q-IT-07-001",
+        "topic_id": "IT-07-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "What is the primary difference between a Compiler and an Interpreter?",
+        "options": [
+            {
+                "id": "a",
+                "text": "A compiler translates code line-by-line during execution."
+            },
+            {
+                "id": "b",
+                "text": "An interpreter translates the entire program before execution."
+            },
+            {
+                "id": "c",
+                "text": "A compiler translates the entire program into machine code before execution."
+            },
+            {
+                "id": "d",
+                "text": "An interpreter only works for low-level languages."
+            }
+        ],
+        "answer": "c",
+        "explanation": "Compilers translate the whole program at once, while interpreters translate and execute it one line at a time."
+    }
+]

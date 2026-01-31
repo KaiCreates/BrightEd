@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
-import LandingV2 from '@/components/landing/LandingV2';
+import LandingDuolingo from '@/components/landing/LandingDuolingo';
 
 export default function LandingPage() {
   const { user, loading } = useAuth();
@@ -15,5 +15,5 @@ export default function LandingPage() {
     }
   }, [user, loading, router]);
 
-  return <LandingV2 />;
+  return <LandingDuolingo />;
 }

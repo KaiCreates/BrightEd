@@ -6,62 +6,64 @@ interface SectionHeaderProps {
     moduleNumber: number
     title: string
     theme?: 'startup' | 'growth' | 'mastery' | 'default'
+    onOpenGuidebook?: () => void
 }
 
 const THEME_STYLES = {
     startup: {
         icon: '🚀',
-        gradient: 'from-blue-500 to-cyan-400',
-        borderColor: 'border-blue-500/30',
+        bannerColor: 'bg-[#ff4b4b]', // Duolingo Red/Coral
+        accentColor: 'text-[#ff4b4b]',
     },
     growth: {
         icon: '📈',
-        gradient: 'from-green-500 to-emerald-400',
-        borderColor: 'border-green-500/30',
+        bannerColor: 'bg-[#58cc02]', // Duolingo Green
+        accentColor: 'text-[#58cc02]',
     },
     mastery: {
         icon: '👑',
-        gradient: 'from-amber-500 to-yellow-400',
-        borderColor: 'border-amber-500/30',
+        bannerColor: 'bg-[#ffc800]', // Duolingo Gold
+        accentColor: 'text-[#ffc800]',
     },
     default: {
         icon: '📚',
-        gradient: 'from-[var(--brand-primary)] to-[var(--brand-secondary)]',
-        borderColor: 'border-[var(--brand-primary)]/30',
+        bannerColor: 'bg-[#1cb0f6]', // Duolingo Blue
+        accentColor: 'text-[#1cb0f6]',
     },
 }
 
 export default function SectionHeader({
     moduleNumber,
     title,
-    theme = 'default'
+    theme = 'default',
+    onOpenGuidebook
 }: SectionHeaderProps) {
     const styles = THEME_STYLES[theme]
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-lg mx-auto my-8"
+            className="w-full max-w-2xl mx-auto my-12 px-4"
         >
-            <div className={`relative p-4 rounded-2xl bg-[var(--bg-secondary)] border-2 ${styles.borderColor}`}>
-                {/* Decorative Lines */}
-                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-[var(--border-subtle)] to-transparent" />
-
-                {/* Content */}
-                <div className="relative z-10 flex items-center justify-center gap-4 bg-[var(--bg-secondary)] px-4">
-                    <span className="text-3xl">{styles.icon}</span>
-                    <div className="text-center">
-                        <span className={`block text-[10px] font-black uppercase tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r ${styles.gradient}`}>
-                            MODULE {moduleNumber}
-                        </span>
-                        <h3 className="text-lg font-black text-[var(--text-primary)]">
-                            {title}
-                        </h3>
-                    </div>
-                    <span className="text-3xl">{styles.icon}</span>
+            <div className={`relative px-6 py-6 rounded-[24px] ${styles.bannerColor} text-white shadow-[0_8px_0_rgba(0,0,0,0.1)] flex items-center justify-between`}>
+                <div className="flex flex-col gap-1">
+                    <span className="text-xs font-black uppercase tracking-[0.2em] opacity-80">
+                        Section {moduleNumber}, Unit {moduleNumber}
+                    </span>
+                    <h3 className="text-2xl font-black tracking-tight leading-tight">
+                        {title}
+                    </h3>
                 </div>
+
+                <button
+                    onClick={onOpenGuidebook}
+                    className="flex items-center gap-3 bg-black/10 hover:bg-black/20 transition-colors px-6 py-4 rounded-[16px] border-b-4 border-black/20 active:border-b-0 active:translate-y-[4px]"
+                >
+                    <span className="text-2xl font-bold">📖</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Guidebook</span>
+                </button>
             </div>
         </motion.div>
     )

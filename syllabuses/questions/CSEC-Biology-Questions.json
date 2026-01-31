@@ -1,0 +1,3052 @@
+[
+  {
+    "id": "Q-BIOL-01-001",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "Which organelle is known as the 'powerhouse' of the cell because it is the site of aerobic respiration?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nucleus"
+      },
+      {
+        "id": "b",
+        "text": "Ribosome"
+      },
+      {
+        "id": "c",
+        "text": "Mitochondrion"
+      },
+      {
+        "id": "d",
+        "text": "Chloroplast"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Mitochondria are the sites of aerobic respiration, where energy (ATP) is produced for the cell."
+  },
+  {
+    "id": "Q-BIOL-01-002",
+    "topic_id": "BIOL-01-00001",
+    "type": "DND",
+    "difficulty": 2,
+    "question": "Match the specialized cell to its primary function.",
+    "categories": [
+      "Function"
+    ],
+    "items": [
+      {
+        "text": "Absorption of water and minerals",
+        "category": "Root Hair Cell"
+      },
+      {
+        "text": "Transport of oxygen in the blood",
+        "category": "Red Blood Cell"
+      },
+      {
+        "text": "Transport of water in plants",
+        "category": "Xylem Vessel"
+      },
+      {
+        "text": "Transmission of electrical impulses",
+        "category": "Nerve Cell"
+      }
+    ]
+  },
+  {
+    "id": "Q-BIOL-02-001",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which of the following is the correct word equation for photosynthesis?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Glucose + Oxygen -> Carbon Dioxide + Water"
+      },
+      {
+        "id": "b",
+        "text": "Carbon Dioxide + Water -> Glucose + Oxygen"
+      },
+      {
+        "id": "c",
+        "text": "Glucose + Water -> Carbon Dioxide + Oxygen"
+      },
+      {
+        "id": "d",
+        "text": "Carbon Dioxide + Oxygen -> Glucose + Water"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Photosynthesis uses light energy to convert carbon dioxide and water into glucose and oxygen."
+  },
+  {
+    "id": "Q-BIOL-02-002",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which enzyme is responsible for the breakdown of starch into maltose in the human mouth?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pepsin"
+      },
+      {
+        "id": "b",
+        "text": "Lipase"
+      },
+      {
+        "id": "c",
+        "text": "Amylase"
+      },
+      {
+        "id": "d",
+        "text": "Trypsin"
+      }
+    ],
+    "answer": "c",
+    "explanation": "Salivary amylase begins the chemical digestion of carbohydrates (starch) into simpler sugars like maltose."
+  },
+  {
+    "id": "Q-BIOL-02-003",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "Which blood vessel carries oxygenated blood away from the heart to the rest of the body?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pulmonary Artery"
+      },
+      {
+        "id": "b",
+        "text": "Pulmonary Vein"
+      },
+      {
+        "id": "c",
+        "text": "Aorta"
+      },
+      {
+        "id": "d",
+        "text": "Vena Cava"
+      }
+    ],
+    "answer": "c",
+    "explanation": "The aorta is the largest artery in the body and carries oxygen-rich blood from the left ventricle to all body tissues."
+  },
+  {
+    "id": "Q-BIOL-02-004",
+    "topic_id": "BIOL-02-00002",
+    "type": "DND",
+    "difficulty": 3,
+    "question": "Categorize the following blood components into their primary roles.",
+    "items": [
+      {
+        "text": "Oxygen Transport",
+        "category": "Red Blood Cells"
+      },
+      {
+        "text": "Immune Defense",
+        "category": "White Blood Cells"
+      },
+      {
+        "text": "Blood Clotting",
+        "category": "Platelets"
+      },
+      {
+        "text": "Transport of Nutrients/Waste",
+        "category": "Plasma"
+      }
+    ]
+  },
+  {
+    "id": "Q-BIOL-03-001",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "difficulty": 2,
+    "question": "In a monohybrid cross between two heterozygous (Tt) tall pea plants, what is the expected ratio of phenotypes in the offspring?",
+    "options": [
+      {
+        "id": "a",
+        "text": "1 Tall : 1 Dwarf"
+      },
+      {
+        "id": "b",
+        "text": "3 Tall : 1 Dwarf"
+      },
+      {
+        "id": "c",
+        "text": "All Tall"
+      },
+      {
+        "id": "d",
+        "text": "1 Tall : 2 Medium : 1 Dwarf"
+      }
+    ],
+    "answer": "b",
+    "explanation": "A Tt x Tt cross results in TT, Tt, Tt, and tt genotypes. Both TT and Tt appear tall, while tt is dwarf, giving a 3:1 ratio."
+  },
+  {
+    "id": "Q-BIOL-03-002",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "difficulty": 1,
+    "question": "Which process results in four daughter cells, each with half the number of chromosomes of the parent cell?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mitosis"
+      },
+      {
+        "id": "b",
+        "text": "Meiosis"
+      },
+      {
+        "id": "c",
+        "text": "Binary Fission"
+      },
+      {
+        "id": "d",
+        "text": "Fertilization"
+      }
+    ],
+    "answer": "b",
+    "explanation": "Meiosis is a reduction division that produces haploid gametes (sperm and egg) for sexual reproduction."
+  },
+  {
+    "question": "A biologist examines a sample of pond water from a mangrove swamp in Trinidad and observes unicellular organisms lacking membrane-bound organelles and a true nucleus. These organisms are most likely:",
+    "options": [
+      "Protozoans like Paramecium",
+      "Bacteria",
+      "Yeast cells",
+      "Unicellular algae like Chlorella"
+    ],
+    "answer": 1,
+    "explanation": "Bacteria are prokaryotic organisms that lack membrane-bound organelles and a true nucleus, characteristics that distinguish them from eukaryotic organisms like protozoans, yeast, and algae. Mangrove swamps are rich in bacterial decomposers that break down organic matter.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-941d9166"
+  },
+  {
+    "question": "In a cross-section of a sugarcane leaf (Saccharum officinarum), a major crop in Barbados, which organelle would be most abundant in the photosynthetic mesophyll cells?",
+    "options": [
+      "Mitochondria",
+      "Ribosomes",
+      "Chloroplasts",
+      "Lysosomes"
+    ],
+    "answer": 2,
+    "explanation": "Chloroplasts contain chlorophyll and are the site of photosynthesis. Sugarcane leaves are specialized for photosynthesis and therefore contain abundant chloroplasts. While mitochondria are present for cellular respiration, they are not as numerous as chloroplasts in photosynthetic cells.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-29afa233"
+  },
+  {
+    "question": "Which of the following correctly represents the hierarchy of biological organization in a queen conch (Lobatus gigas), a marine mollusk important to Caribbean fisheries?",
+    "options": [
+      "Cell \u2192 Organ \u2192 Tissue \u2192 Organ system \u2192 Organism",
+      "Cell \u2192 Tissue \u2192 Organ \u2192 Organ system \u2192 Organism",
+      "Tissue \u2192 Cell \u2192 Organ \u2192 Organ system \u2192 Organism",
+      "Cell \u2192 Tissue \u2192 Organ system \u2192 Organ \u2192 Organism"
+    ],
+    "answer": 1,
+    "explanation": "The correct sequence is: cells (basic structural units) form tissues (groups of similar cells), tissues form organs (structures with specific functions), organs work together in organ systems, and organ systems form the complete organism. This hierarchy applies to all multicellular animals including the queen conch.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-7655214d"
+  },
+  {
+    "question": "When comparing epithelial cells from the mantle tissue of a land crab (Gecarcinus ruricola) found in Barbados with parenchyma cells from a cassava tuber (Manihot esculenta), which structural difference would be clearly visible under a light microscope?",
+    "options": [
+      "Only the crab cells possess a cell membrane",
+      "Only the cassava cells possess a cell wall",
+      "Both cell types possess cell walls",
+      "Neither cell type possesses membrane-bound organelles"
+    ],
+    "answer": 1,
+    "explanation": "Cassava, being a plant, has cells surrounded by both a cell membrane and a rigid cell wall composed of cellulose. Crab cells, being animal cells, possess only a cell membrane. Both are eukaryotic cells with membrane-bound organelles, distinguishing them from prokaryotic cells.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-92182d75"
+  },
+  {
+    "question": "A student examining a transverse section of a hibiscus stem (Hibiscus rosa-sinensis), a common ornamental plant in Jamaica, observes a group of xylem vessels functioning together to transport water and minerals. This group represents which level of organization?",
+    "options": [
+      "An organ",
+      "A tissue",
+      "An organ system",
+      "A cell"
+    ],
+    "answer": 1,
+    "explanation": "A tissue is defined as a group of similar cells working together to perform a specific function. Xylem vessels are specialized cells that collectively form xylem tissue. An organ (like the stem) consists of multiple tissue types working together, while an organ system involves multiple organs.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-0e1f6e31"
+  },
+  {
+    "question": "A marine biologist compares cells from cyanobacteria (blue-green algae) found in Caribbean coral reef waters with cells from the coral animal itself. Which cellular feature is present in the coral cells but absent in the cyanobacteria?",
+    "options": [
+      "A membrane-bound nucleus",
+      "Cytoplasm",
+      "Ribosomes",
+      "A cell membrane"
+    ],
+    "answer": 0,
+    "explanation": "Cyanobacteria are prokaryotic organisms and lack membrane-bound organelles, including a true nucleus. Coral animals are eukaryotes with a defined nucleus containing their genetic material. Both cell types possess cytoplasm, ribosomes (though different sizes), and a cell membrane.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-36bafe60"
+  },
+  {
+    "question": "During photosynthesis, cells in the leaves of a sugarcane plant (Saccharum officinarum) convert light energy into chemical energy stored in glucose. In which organelle does this process primarily occur?",
+    "options": [
+      "Mitochondrion",
+      "Chloroplast",
+      "Permanent vacuole",
+      "Nucleus"
+    ],
+    "answer": 1,
+    "explanation": "Chloroplasts contain chlorophyll and are the site of photosynthesis in plant cells. The mitochondrion is responsible for cellular respiration (energy release), the vacuole stores water and nutrients, and the nucleus controls cell activities.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-e54fc852"
+  },
+  {
+    "question": "In a Queen Conch (Lobatus gigas), several different tissues\u2014including muscle, nerve, and connective tissues\u2014work together to form the muscular foot used for locomotion and anchoring. What level of biological organization does the foot represent?",
+    "options": [
+      "A tissue",
+      "An organ system",
+      "An organ",
+      "An organism"
+    ],
+    "answer": 2,
+    "explanation": "An organ is a structure composed of two or more different types of tissues working together to perform a specific function. The foot is not just one tissue (it contains several), nor is it a complete organ system (like the nervous system) or the whole organism.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-2778ce67"
+  },
+  {
+    "question": "A student examines epidermal cells from the root of a white yam (Dioscorea spp.) and compares them with epithelial cells from a tilapia fish. Which structure would be present in the yam cells but absent in the tilapia cells?",
+    "options": [
+      "A nucleus",
+      "A cellulose cell wall",
+      "Mitochondria",
+      "A cell membrane"
+    ],
+    "answer": 1,
+    "explanation": "Plant cells, including those of the yam, possess a rigid cell wall made of cellulose outside the cell membrane, which provides structural support. Animal cells, such as those from tilapia, lack cell walls but have only a cell membrane. Both cell types contain nuclei, mitochondria, and cell membranes.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-eee3f95a"
+  },
+  {
+    "question": "The diagram below illustrates the hierarchy of organization in a multicellular organism such as the green monkey (Chlorocebus sabaeus). Which level correctly completes the sequence: Cell \u2192 _____ \u2192 Organ \u2192 Organ System \u2192 Organism?",
+    "options": [
+      "Organelle",
+      "Tissue",
+      "Population",
+      "Molecule"
+    ],
+    "answer": 1,
+    "explanation": "The correct sequence of biological organization is: cells form tissues, tissues form organs, organs form organ systems, and organ systems form the organism. Organelles and molecules are sub-cellular components, while population refers to a group of organisms of the same species living in the same area (ecological level).",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-95a81c84"
+  },
+  {
+    "question": "Which organelle is responsible for converting light energy into chemical energy during photosynthesis in the leaf cells of a sugar cane plant (Saccharum officinarum)?",
+    "options": [
+      "Mitochondrion",
+      "Chloroplast",
+      "Ribosome",
+      "Nucleus"
+    ],
+    "answer": 1,
+    "explanation": "Chloroplasts contain chlorophyll and are the specific site where photosynthesis occurs, converting light energy into glucose. Mitochondria are involved in cellular respiration (energy release), ribosomes synthesize proteins, and the nucleus controls cell activities.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-c4b76fde"
+  },
+  {
+    "question": "A biology student examining a soil sample from a Trinidad cocoa estate observes microorganisms that lack a membrane-bound nucleus and other membrane-bound organelles. These cells are classified as:",
+    "options": [
+      "Eukaryotic",
+      "Prokaryotic",
+      "Fungal cells",
+      "Plant cells"
+    ],
+    "answer": 1,
+    "explanation": "Prokaryotic cells, such as bacteria, do not have a true nucleus or membrane-bound organelles. Eukaryotic cells (including fungal, plant, and animal cells) possess a membrane-bound nucleus and organelles like mitochondria and endoplasmic reticulum.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-d4c1460b"
+  },
+  {
+    "question": "In a green iguana (Iguana iguana) found throughout the Caribbean islands, which of the following correctly represents the hierarchy of biological organization from the simplest to the most complex level?",
+    "options": [
+      "Cell \u2192 Tissue \u2192 Organ \u2192 Organ System \u2192 Organism",
+      "Cell \u2192 Organ \u2192 Tissue \u2192 Organ System \u2192 Organism",
+      "Tissue \u2192 Cell \u2192 Organ \u2192 Organ System \u2192 Organism",
+      "Organ \u2192 Tissue \u2192 Cell \u2192 Organism"
+    ],
+    "answer": 0,
+    "explanation": "The correct sequence is: Cells are the basic units; similar cells form tissues (e.g., muscle tissue); tissues form organs (e.g., heart); organs work together in organ systems (e.g., circulatory system); and all systems constitute the organism.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-dcd9eab2"
+  },
+  {
+    "question": "Which structure is present in the cells of a seagrape (Coccoloba uvifera) leaf but absent in human cheek cells?",
+    "options": [
+      "Cell membrane",
+      "Cytoplasm",
+      "Cell wall",
+      "Nucleus"
+    ],
+    "answer": 2,
+    "explanation": "Plant cells possess a rigid cell wall made of cellulose outside the cell membrane, providing structural support. Animal cells, including human cheek cells, lack a cell wall but have a cell membrane, cytoplasm, and nucleus.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-06318bbe"
+  },
+  {
+    "question": "The gill cells of a tilapia living in Jamaican freshwater ponds regulate the selective entry and exit of substances such as oxygen and ions through which structure?",
+    "options": [
+      "Cell wall",
+      "Cell membrane",
+      "Vacuole",
+      "Nuclear membrane"
+    ],
+    "answer": 1,
+    "explanation": "The cell membrane (plasma membrane) is selectively permeable and controls the movement of substances into and out of the cell. Cell walls are found in plants, fungi, and bacteria but not in animal cells like fish gill cells. Vacuoles store substances, and the nuclear membrane surrounds the nucleus.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-4249799b"
+  },
+  {
+    "question": "A biologist examines cells from a sugarcane leaf and a human cheek. Which structure would be present in the sugarcane cell but absent from the human cell?",
+    "options": [
+      "Cell membrane",
+      "Nucleus",
+      "Cell wall",
+      "Mitochondria"
+    ],
+    "answer": 2,
+    "explanation": "Plant cells, such as those in sugarcane (a major Caribbean crop), possess a rigid cell wall made of cellulose that provides structural support. Animal cells, like human cheek cells, lack cell walls. Both cell types contain cell membranes, nuclei, and mitochondria.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-1a08fbef"
+  },
+  {
+    "question": "During a 100m sprint, a Caribbean athlete's muscle cells require large amounts of ATP. Which organelle is primarily responsible for generating this energy through cellular respiration?",
+    "options": [
+      "Chloroplast",
+      "Ribosome",
+      "Mitochondrion",
+      "Nucleus"
+    ],
+    "answer": 2,
+    "explanation": "Mitochondria are the sites of aerobic respiration and ATP production in both plant and animal cells. A common misconception is confusing mitochondria with chloroplasts; however, chloroplasts are found only in plant cells and perform photosynthesis, not cellular respiration for muscle contraction.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-d2b922ad"
+  },
+  {
+    "question": "A student observes bacteria from Caribbean soil and yeast cells used in traditional bread-making. Which feature distinguishes the yeast cell as eukaryotic compared to the bacterium?",
+    "options": [
+      "Presence of a cell wall",
+      "Presence of a membrane-bound nucleus",
+      "Ability to reproduce asexually",
+      "Small size and simple structure"
+    ],
+    "answer": 1,
+    "explanation": "Yeast (a fungus) is eukaryotic and possesses a true nucleus enclosed within a nuclear membrane. Bacteria are prokaryotic and lack membrane-bound organelles, with their genetic material free in the cytoplasm. Both organisms have cell walls and can reproduce, though prokaryotes are typically smaller.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-342ca039"
+  },
+  {
+    "question": "In the Doctor Bird (Jamaica's national bird), which level of biological organization is represented by the heart?",
+    "options": [
+      "Tissue",
+      "Organ",
+      "Organ system",
+      "Cell"
+    ],
+    "answer": 1,
+    "explanation": "The heart is an organ composed of different tissues (cardiac muscle, connective, and nervous tissue) working together to pump blood. A common error is confusing this with the circulatory organ system (which includes the heart, blood vessels, and blood) or with the cardiac muscle tissue that makes up the heart wall.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-5276a6d6"
+  },
+  {
+    "question": "Which organelle is abundant in the palisade mesophyll cells of Caribbean cocoa leaves, enabling them to produce glucose for the plant's growth?",
+    "options": [
+      "Mitochondria",
+      "Ribosomes",
+      "Chloroplasts",
+      "Vacuoles"
+    ],
+    "answer": 2,
+    "explanation": "Chloroplasts contain chlorophyll and are the site of photosynthesis, converting light energy into chemical energy stored in glucose. Cocoa, an important Caribbean crop, relies on abundant chloroplasts in leaf cells for food production. Mitochondria break down glucose for energy (respiration), while vacuoles store substances.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-a098bdce"
+  },
+  {
+    "question": "A student examining a water sample from a Jamaican mangrove swamp observes microscopic cells that lack a membrane-bound nucleus. These cells are most likely:",
+    "options": [
+      "Protozoans like Paramecium",
+      "Bacteria",
+      "Diatoms",
+      "Yeast cells"
+    ],
+    "answer": 1,
+    "explanation": "Bacteria are prokaryotic organisms that lack a membrane-bound nucleus and other membrane-bound organelles. Protozoans, diatoms, and yeast are all eukaryotes with true nuclei and would be visible with distinct nuclear structures under a microscope.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-6d28daf0"
+  },
+  {
+    "question": "During a field trip to a sugarcane plantation in Barbados, students observed that the leaves appeared green. The green coloration is primarily due to the presence of:",
+    "options": [
+      "Mitochondria involved in cellular respiration",
+      "Chloroplasts containing chlorophyll",
+      "Ribosomes synthesizing proteins",
+      "Vacuoles storing sucrose"
+    ],
+    "answer": 1,
+    "explanation": "Chloroplasts contain chlorophyll, the green pigment essential for photosynthesis. Sugarcane (Saccharum officinarum) is a major Caribbean crop where photosynthesis occurs in leaf mesophyll cells containing numerous chloroplasts. Mitochondria are involved in respiration, not photosynthesis, and do not contain green pigments.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-5b7c6257"
+  },
+  {
+    "question": "Which of the following represents the correct hierarchy of organization in a coral polyp from the Caribbean reef, arranged from the simplest to the most complex level?",
+    "options": [
+      "Cell \u2192 Organ \u2192 Tissue \u2192 Organ system \u2192 Organism",
+      "Tissue \u2192 Cell \u2192 Organ \u2192 Organism",
+      "Cell \u2192 Tissue \u2192 Organ \u2192 Organ system \u2192 Organism",
+      "Organism \u2192 Organ system \u2192 Organ \u2192 Tissue \u2192 Cell"
+    ],
+    "answer": 2,
+    "explanation": "The correct hierarchy is: cells form tissues (groups of similar cells performing a function), tissues form organs, organs form organ systems, and organ systems form the complete organism. Coral polyps, despite their relatively simple structure compared to vertebrates, follow this organizational pattern.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-dd6bccd6"
+  },
+  {
+    "question": "A biologist examines a cross-section of a white yam (Dioscorea alata) tuber, a staple crop in the Eastern Caribbean, under the microscope. Which structure would be present in the yam cells but absent in human cheek cells?",
+    "options": [
+      "Cell membrane",
+      "Cytoplasm",
+      "Cell wall",
+      "Mitochondria"
+    ],
+    "answer": 2,
+    "explanation": "White yam is a plant, and plant cells possess a rigid cell wall made of cellulose that provides structural support and protection. Human cheek cells are animal cells and lack cell walls. Both cell types possess cell membranes, cytoplasm, and mitochondria.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-6857ea17"
+  },
+  {
+    "question": "In the epidermis of a hibiscus leaf from a garden in St. Lucia, specialized cells control the opening and closing of stomata to regulate water loss in the tropical heat. These specialized cells are called:",
+    "options": [
+      "Guard cells",
+      "Meristematic cells",
+      "Parenchyma cells",
+      "Xylem vessels"
+    ],
+    "answer": 0,
+    "explanation": "Guard cells are specialized kidney-shaped cells found in the epidermis of leaves that surround and regulate the stomatal opening. They control gas exchange and transpiration, which is crucial for tropical plants to prevent excessive water loss in hot Caribbean climates. Meristematic cells are involved in growth, parenchyma cells are general purpose, and xylem vessels transport water.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-e3424278"
+  },
+  {
+    "question": "Which structural feature distinguishes prokaryotic cells, such as those found in bacteria decomposing organic matter in Caribbean mangrove ecosystems, from eukaryotic cells?",
+    "options": [
+      "Presence of a circular DNA molecule",
+      "Absence of membrane-bound organelles",
+      "Presence of ribosomes for protein synthesis",
+      "Absence of a cell membrane"
+    ],
+    "answer": 1,
+    "explanation": "Prokaryotic cells lack membrane-bound organelles such as nuclei, mitochondria, and endoplasmic reticulum. While they possess ribosomes (which are not membrane-bound) and genetic material, the defining distinction is the absence of membrane-enclosed organelles characteristic of eukaryotic cells found in organisms like mangrove trees and marine life.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-7e1dde5c"
+  },
+  {
+    "question": "In the photosynthetic parenchyma cells of sugar cane (Saccharum officinarum), a major Caribbean agricultural crop, which organelle contains chlorophyll and converts light energy into chemical energy?",
+    "options": [
+      "Mitochondria",
+      "Chloroplasts",
+      "Ribosomes",
+      "Golgi apparatus"
+    ],
+    "answer": 1,
+    "explanation": "Chloroplasts are the sites of photosynthesis in plant cells, containing chlorophyll pigments that capture light energy to produce glucose. This process is essential for sugar cane growth and sucrose accumulation, distinguishing chloroplasts from mitochondria (which carry out cellular respiration) and other organelles.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-239ce346"
+  },
+  {
+    "question": "Which of the following represents the correct sequence of biological organization in a Caribbean athlete, from the simplest level to the most complex?",
+    "options": [
+      "Cell \u2192 Organ \u2192 Tissue \u2192 Organ system \u2192 Organism",
+      "Cell \u2192 Tissue \u2192 Organ \u2192 Organ system \u2192 Organism",
+      "Tissue \u2192 Cell \u2192 Organ \u2192 Organ system \u2192 Organism",
+      "Cell \u2192 Tissue \u2192 Organ system \u2192 Organ \u2192 Organism"
+    ],
+    "answer": 1,
+    "explanation": "The hierarchy of biological organization progresses from cells (the basic units of life) to tissues (groups of similar cells performing specific functions), to organs (structures composed of different tissues working together), to organ systems (groups of organs cooperating for major bodily functions), and finally to the complete organism.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-482b64eb"
+  },
+  {
+    "question": "A biology student examined epithelial cells from the gills of a Caribbean snapper (Lutjanus campechanus) and compared them to cells from the leaf of a hibiscus plant (Hibiscus rosa-sinensis). Which structure would be present in the plant cells but absent in the fish cells?",
+    "options": [
+      "Cytoplasm",
+      "Cell membrane",
+      "Cell wall",
+      "Mitochondria"
+    ],
+    "answer": 2,
+    "explanation": "Plant cells possess a rigid cell wall composed primarily of cellulose surrounding the cell membrane, providing structural support and protection. Animal cells, including those of fish, lack cell walls but contain cell membranes, cytoplasm, and mitochondria. This structural difference explains why plant cells maintain fixed shapes while animal cells are more flexible.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-42a696c7"
+  },
+  {
+    "question": "In the cells of a Caribbean cactus (Cactaceae) adapted to store water during drought conditions, which organelle is primarily responsible for maintaining turgor pressure and storing large quantities of water and dissolved ions?",
+    "options": [
+      "Large central vacuole",
+      "Lysosome",
+      "Nucleus",
+      "Endoplasmic reticulum"
+    ],
+    "answer": 0,
+    "explanation": "The large central vacuole is a prominent feature of mature plant cells, occupying up to 90% of the cell volume. It stores water, maintains turgor pressure against the cell wall (keeping the plant rigid), and stores nutrients and waste products. This adaptation is crucial for xerophytes like cacti native to arid Caribbean environments, unlike lysosomes which are primarily found in animal cells for digestion.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-e4b9d9d7"
+  },
+  {
+    "question": "Which organelle is present in leaf cells of the Caribbean breadfruit tree (Artocarpus altilis) but absent from muscle cells of the agouti (Dasyprocta)?",
+    "options": [
+      "Mitochondrion",
+      "Chloroplast",
+      "Nucleus",
+      "Ribosome"
+    ],
+    "answer": 1,
+    "explanation": "Chloroplasts contain chlorophyll and are responsible for photosynthesis in plant cells. While both plant and animal cells contain mitochondria, nuclei, and ribosomes, chloroplasts are unique to plant cells and some algae. The agouti, being an animal, cannot photosynthesize and therefore lacks chloroplasts.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-cf220064"
+  },
+  {
+    "question": "While examining a freshly caught red snapper (Lutjanus campechanus) from Jamaican waters, a student identifies the following structures: epithelial cell, stomach tissue, stomach, and digestive system. Which sequence correctly represents the hierarchy of biological organization from simplest to most complex?",
+    "options": [
+      "Stomach \u2192 Stomach tissue \u2192 Epithelial cell \u2192 Digestive system",
+      "Epithelial cell \u2192 Stomach tissue \u2192 Digestive system \u2192 Stomach",
+      "Epithelial cell \u2192 Stomach tissue \u2192 Stomach \u2192 Digestive system",
+      "Digestive system \u2192 Stomach \u2192 Stomach tissue \u2192 Epithelial cell"
+    ],
+    "answer": 2,
+    "explanation": "The correct hierarchy of organization is: cells (epithelial cell) form tissues (stomach tissue), tissues form organs (stomach), and organs work together in organ systems (digestive system). This levels of organization apply to all multicellular organisms, including Caribbean marine fish.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-3524c32a"
+  },
+  {
+    "question": "A marine biologist collects samples from the coral reefs of Barbados and observes two types of cells under the microscope: bacterial cells from the water and cells from a sea fan (Gorgonia ventalina). Which feature distinguishes the bacterial cells as prokaryotic?",
+    "options": [
+      "Presence of ribosomes",
+      "Presence of a cell membrane",
+      "Absence of a membrane-bound nucleus",
+      "Absence of cytoplasm"
+    ],
+    "answer": 2,
+    "explanation": "Prokaryotic cells, such as bacteria, lack a membrane-bound nucleus and other membrane-bound organelles. Eukaryotic cells, like those of the sea fan (a type of coral), possess a true nucleus enclosed within a nuclear membrane. Both cell types contain ribosomes, cytoplasm, and a cell membrane.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-c9f4fa26"
+  },
+  {
+    "question": "During the dry season in Trinidad, the Ruby-topaz Hummingbird (Chrysolampis mosquitus) requires large amounts of ATP to power its rapid wing beats of up to 50 times per second. In which organelle is the majority of this ATP produced?",
+    "options": [
+      "Nucleus",
+      "Chloroplast",
+      "Ribosome",
+      "Mitochondrion"
+    ],
+    "answer": 3,
+    "explanation": "Mitochondria are the 'powerhouses' of the cell, responsible for aerobic respiration and ATP production through oxidative phosphorylation. While chloroplasts produce ATP during photosynthesis in plants, they are not present in animal cells like those of the hummingbird. The nucleus controls cell activities, and ribosomes synthesize proteins.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-d11f8056"
+  },
+  {
+    "question": "In the trunk of a mature Caribbean mahogany tree (Swietenia macrophylla), which tissue is primarily responsible for transporting water and dissolved minerals absorbed from the soil to the leaves?",
+    "options": [
+      "Phloem",
+      "Xylem",
+      "Epidermis",
+      "Cambium"
+    ],
+    "answer": 1,
+    "explanation": "Xylem tissue consists of tubular vessels that transport water and mineral ions upward from the roots to the leaves via transpiration pull. Phloem transports organic nutrients like sucrose (food) from leaves to other parts of the plant. The epidermis provides protection, and the cambium is a lateral meristem responsible for secondary growth (increasing girth).",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-9006872d"
+  },
+  {
+    "question": "A student prepares microscope slides of cells from a sugarcane (Saccharum officinarum) leaf and from the lining of their own cheek. Which structure would be present in the sugarcane cells but absent from the cheek cells?",
+    "options": [
+      "Cell wall",
+      "Nucleus",
+      "Mitochondria",
+      "Ribosomes"
+    ],
+    "answer": 0,
+    "explanation": "Plant cells, such as those from sugarcane, possess a rigid cell wall made of cellulose outside the cell membrane, which provides structural support. Animal cells, like cheek cells, lack a cell wall. Both cell types contain a nucleus, mitochondria, and ribosomes, as they are both eukaryotic cells.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-c74e5183"
+  },
+  {
+    "question": "In the Caribbean Sea, a Queen Conch (Lobatus gigas) uses its muscular foot to move across the ocean floor. In terms of the hierarchy of biological organization, the foot represents which level?",
+    "options": [
+      "A tissue",
+      "An organ",
+      "An organ system",
+      "An organism"
+    ],
+    "answer": 1,
+    "explanation": "The foot is an organ because it is composed of several types of tissues (including muscle, epithelial, and connective tissues) working together to perform a specific function (locomotion). A tissue would be just the muscle fibers alone, while an organ system would include the foot, nerves, and other components working together for movement.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-b5bc1643"
+  },
+  {
+    "question": "During a field trip to the hot springs in Dominica, students collect samples of bacteria from the warm water. When compared to cells from a conch (a marine mollusk), which feature correctly distinguishes the bacterial cells?",
+    "options": [
+      "The presence of a cell membrane",
+      "The absence of a membrane-bound nucleus",
+      "The absence of genetic material",
+      "The presence of mitochondria"
+    ],
+    "answer": 1,
+    "explanation": "Bacterial cells are prokaryotic, meaning they lack a membrane-bound nucleus and their genetic material is found in a nucleoid region. Conch cells are eukaryotic and possess a true nucleus enclosed by a nuclear membrane. Both cell types have a cell membrane and genetic material (DNA), but only the eukaryotic conch cells have membrane-bound organelles like mitochondria.",
+    "topic_id": "BIOL-01-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-01-00001-91fe00e3"
+  },
+  {
+    "question": "A farmer in Barbados observes that sugar cane plants growing beneath coconut palms produce lower sucrose yields than those in open fields. Which environmental factor directly limits the rate of sucrose synthesis in the shaded plants?",
+    "options": [
+      "Carbon dioxide concentration",
+      "Light intensity",
+      "Temperature",
+      "Water availability"
+    ],
+    "answer": 1,
+    "explanation": "Light intensity is the limiting factor in shaded conditions. Light energy drives the light-dependent reactions of photosynthesis to produce ATP and NADPH, which are required for the Calvin cycle to fix carbon dioxide into glucose (subsequently converted to sucrose in sugar cane storage tissues).",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-cbc60146"
+  },
+  {
+    "question": "During the light-independent reactions (Calvin cycle) of photosynthesis, what is produced when carbon dioxide combines with ribulose bisphosphate (RuBP)?",
+    "options": [
+      "Glucose immediately",
+      "An unstable 6-carbon compound that splits into two 3-carbon molecules (GP/PGA)",
+      "Oxygen gas",
+      "ATP and NADPH"
+    ],
+    "answer": 1,
+    "explanation": "The enzyme RuBisCO catalyzes the fixation of CO2 to RuBP (a 5-carbon compound), forming a transient unstable 6-carbon intermediate that immediately splits into two molecules of glycerate 3-phosphate (GP, also called PGA). These 3-carbon molecules are subsequently reduced to triose phosphate using ATP and NADPH from the light-dependent reactions.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-274aac39"
+  },
+  {
+    "question": "A student in Trinidad investigates enzyme activity along the human digestive tract. Which combination correctly matches the enzyme, its site of action, and its optimal pH?",
+    "options": [
+      "Amylase - stomach - pH 2",
+      "Pepsin - small intestine - pH 8",
+      "Trypsin - small intestine - pH 8",
+      "Lipase - mouth - pH 7"
+    ],
+    "answer": 2,
+    "explanation": "Trypsin is a protease secreted by the pancreas into the duodenum (small intestine), where it functions optimally at an alkaline pH of approximately 8 due to bicarbonate ions in pancreatic juice. Pepsin functions in the stomach at pH 2, salivary amylase functions in the mouth at pH 7, and lipase primarily functions in the small intestine.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-24213848"
+  },
+  {
+    "question": "In the human stomach, the enzyme pepsin catalyzes the hydrolysis of proteins into smaller polypeptides. What prevents pepsin from digesting the proteins that make up the stomach wall itself?",
+    "options": [
+      "Pepsin is secreted in an inactive form (pepsinogen) and only activates in the lumen",
+      "The stomach wall is composed of carbohydrates, not proteins",
+      "Pepsin denatures immediately upon contact with mucus",
+      "The acidic pH of the stomach inhibits all protease activity"
+    ],
+    "answer": 0,
+    "explanation": "Chief cells secrete pepsinogen, the inactive zymogen form of pepsin. Pepsinogen is only converted to active pepsin upon contact with hydrochloric acid in the stomach lumen. Additionally, the stomach lining is protected by a mucus layer secreted by goblet cells, preventing auto-digestion. The stomach wall contains proteins (not carbohydrates), and the acidic pH actually activates pepsin rather than inhibiting it.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-e69f964a"
+  },
+  {
+    "question": "Which statement accurately describes a fundamental similarity between energy transfer in photosynthesis and cellular respiration?",
+    "options": [
+      "Both processes occur only in the presence of sunlight",
+      "Both processes produce glucose as a final product",
+      "Both processes involve the synthesis of ATP from ADP and inorganic phosphate",
+      "Both processes release carbon dioxide as a metabolic waste product"
+    ],
+    "answer": 2,
+    "explanation": "Both photosynthesis (during photophosphorylation in the light-dependent reactions) and cellular respiration (during substrate-level and oxidative phosphorylation) involve the phosphorylation of ADP to synthesize ATP. This ATP serves as the universal energy currency in cells. Photosynthesis consumes CO2 and produces glucose, while respiration consumes glucose and produces CO2; respiration occurs continuously (not just in light).",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-564b99c1"
+  },
+  {
+    "question": "A farmer in Barbados notices that sugarcane plants grow taller during the cloudy rainy season but accumulate less sucrose compared to the dry sunny season. Which explanation best accounts for this observation?",
+    "options": [
+      "Cloud cover reduces light intensity, limiting photosynthesis and sugar production despite adequate water for growth",
+      "Excess water during the rainy season dilutes the sugar concentration already stored in the stalks",
+      "Sugarcane leaves cannot absorb carbon dioxide efficiently in humid, rainy conditions",
+      "The rainy season increases cellular respiration rates, consuming all glucose before it converts to sucrose"
+    ],
+    "answer": 0,
+    "explanation": "While water is essential for growth (tall plants), photosynthesis rate is limited by light intensity. During cloudy rainy seasons, reduced light limits the light-dependent reactions of photosynthesis, resulting in less glucose (and subsequently sucrose) production, even though stem elongation may continue due to water availability.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-41d23559"
+  },
+  {
+    "question": "In the human digestive system, the enzyme amylase functions optimally at a neutral pH of approximately 7. Where does this enzyme first act on starch, and why does it become inactive when food passes into the stomach?",
+    "options": [
+      "Mouth; the acidic pH of the stomach denatures the enzyme and changes its active site shape",
+      "Small intestine; the stomach temperature is too high for enzyme activity",
+      "Stomach; the alkaline conditions prevent the enzyme from binding to starch substrates",
+      "Mouth; peristalsis mechanically destroys the enzyme structure during swallowing"
+    ],
+    "answer": 0,
+    "explanation": "Salivary amylase begins starch digestion in the mouth, breaking it into maltose. However, the stomach's hydrochloric acid creates an acidic environment (pH 1.5-3.5) that denatures amylase by altering its active site, stopping starch digestion until pancreatic amylase resumes it in the small intestine.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-1d98d98f"
+  },
+  {
+    "question": "A student in Jamaica eats a breakfast of ackee and saltfish. The digestion of the proteins present in the saltfish begins in which part of the alimentary canal, and which substance facilitates this initial breakdown?",
+    "options": [
+      "Stomach; pepsin and hydrochloric acid",
+      "Mouth; salivary amylase",
+      "Small intestine; bile salts",
+      "Stomach; sodium hydroxide"
+    ],
+    "answer": 0,
+    "explanation": "Protein digestion begins in the stomach where chief cells secrete pepsinogen (converted to active pepsin by HCl). The acidic environment (pH 2) denatures proteins and allows pepsin to break peptide bonds, converting proteins into polypeptides. Amylase is for carbohydrates, bile emulsifies fats (not proteins), and the stomach is acidic not alkaline.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-d9e02542"
+  },
+  {
+    "question": "Which of the following correctly identifies the immediate products of the light-dependent reactions of photosynthesis and their subsequent use in the light-independent reactions?",
+    "options": [
+      "ATP and NADPH; used to convert carbon dioxide into glucose in the stroma",
+      "Glucose and oxygen; used to produce ATP through cellular respiration",
+      "Carbon dioxide and water; used to regenerate chlorophyll pigments",
+      "Oxygen and starch; stored in the vacuole for nighttime energy requirements"
+    ],
+    "answer": 0,
+    "explanation": "During the light-dependent reactions in the thylakoid membranes, light energy is captured to produce ATP and NADPH (energy carriers). These are used in the Calvin cycle (light-independent reactions) in the stroma to fix carbon dioxide and produce glucose. Oxygen is a byproduct released, not used in the Calvin cycle.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-24068531"
+  },
+  {
+    "question": "During a vigorous game of football in the hot Trinidadian sun, a player's muscle cells begin to accumulate lactic acid. This occurs because:",
+    "options": [
+      "The demand for ATP exceeds the oxygen supply, causing muscle cells to respire anaerobically",
+      "Photosynthesis occurring in skin cells produces lactic acid as a waste product",
+      "High temperatures cause the denaturation of enzymes involved in aerobic respiration",
+      "Sweat glands release lactic acid into the bloodstream to cool the body"
+    ],
+    "answer": 0,
+    "explanation": "During intense exercise, oxygen supply cannot meet the high demand for ATP. Muscle cells switch to anaerobic respiration (glycolysis without the Krebs cycle/ETC), which rapidly regenerates NAD+ to keep glycolysis running but results in lactic acid accumulation as a byproduct. This is not related to photosynthesis (which doesn't occur in animals), enzyme denaturation, or sweat gland function.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-f1f7ed33"
+  },
+  {
+    "question": "A farmer in Barbados observes that sugarcane plants grown in full sunlight produce sweeter stalks than those grown in partial shade. Which substance produced during photosynthesis accounts for this increased sweetness?",
+    "options": [
+      "Glucose (converted to sucrose for storage)",
+      "Oxygen gas released through stomata",
+      "Carbon dioxide absorbed from the air",
+      "Water transported from the roots"
+    ],
+    "answer": 0,
+    "explanation": "During photosynthesis, plants convert light energy into chemical energy stored in glucose. In sugarcane, glucose is converted into sucrose (table sugar) and stored in the stalk parenchyma cells, creating the sweet taste. Oxygen is a byproduct released into the atmosphere, not stored. Carbon dioxide and water are reactants, not energy-rich products.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-c135f460"
+  },
+  {
+    "question": "A student eats a breakfast of boiled green bananas and fried plantains. Where does the chemical digestion of the starch in these foods begin, and which enzyme catalyzes this reaction?",
+    "options": [
+      "Mouth; salivary amylase",
+      "Stomach; pepsin",
+      "Small intestine; bile",
+      "Large intestine; cellulase"
+    ],
+    "answer": 0,
+    "explanation": "Chemical digestion of starch begins in the mouth (oral cavity) where salivary amylase breaks down starch into maltose. Pepsin digests proteins, not carbohydrates, in the stomach. Bile emulsifies fats but does not digest starch. Humans do not produce cellulase to digest cellulose; this occurs in the large intestine through bacterial action, not human enzymes.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-cdd8e02c"
+  },
+  {
+    "question": "Which statement correctly compares how a coconut palm tree and a human obtain usable energy for metabolic processes?",
+    "options": [
+      "The tree produces organic compounds using light energy; the human obtains energy by breaking down organic compounds from food",
+      "Both organisms obtain energy directly from sunlight through chlorophyll in their cells",
+      "The tree absorbs energy from soil minerals; the human synthesizes energy from vitamin supplements",
+      "Both organisms produce glucose through cellular respiration occurring in chloroplasts"
+    ],
+    "answer": 0,
+    "explanation": "The coconut palm is an autotroph that performs photosynthesis in chloroplasts to convert light energy into chemical energy (glucose). Humans are heterotrophs who must ingest and digest organic compounds to release energy through cellular respiration in mitochondria. Only plants contain chlorophyll and chloroplasts; humans cannot photosynthesize.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-72ff084b"
+  },
+  {
+    "question": "In an experiment with potted hibiscus plants in Jamaica, leaves from plants kept in bright sunlight were compared with those from shaded plants. Which structural adaptation would be observed in the sun-grown leaves?",
+    "options": [
+      "Thicker cuticle and more compact palisade mesophyll with additional chloroplasts",
+      "Larger surface area but significantly fewer chloroplasts per cell",
+      "Thinner epidermis and complete absence of stomata to conserve water",
+      "More spongy mesophyll and reduced xylem tissue to increase light absorption"
+    ],
+    "answer": 0,
+    "explanation": "Plants grown in high light intensity develop xeromorphic features including a thicker waxy cuticle to reduce water loss and more compact palisade mesophyll layers containing more chloroplasts to maximize photosynthesis. Shade plants typically have larger, thinner leaves with more spongy mesophyll to capture limited light, not sun plants.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-f7a857f7"
+  },
+  {
+    "question": "When digesting a traditional meal of ackee and saltfish (containing high levels of fats and proteins), which combination correctly matches the enzyme with its site of action and substrate?",
+    "options": [
+      "Pepsin - stomach - proteins; Lipase - small intestine - fats",
+      "Amylase - stomach - fats; Trypsin - mouth - proteins",
+      "Lipase - stomach - proteins; Pepsin - small intestine - fats",
+      "Maltase - large intestine - fats; Pepsin - esophagus - proteins"
+    ],
+    "answer": 0,
+    "explanation": "Protein digestion begins in the stomach with pepsin breaking down proteins into peptides. Fat digestion occurs primarily in the small intestine where pancreatic lipase breaks down lipids into fatty acids and glycerol. Amylase digests starch, not fats. Trypsin acts in the small intestine, not the mouth. The esophagus and large intestine do not perform significant enzymatic digestion of these macronutrients.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-156d02a0"
+  },
+  {
+    "question": "A Biology student conducted an experiment using a variegated leaf from a croton plant (Codiaeum variegatum), commonly found in Caribbean gardens. After destarching the plant for 48 hours and exposing it to sunlight for 6 hours, the leaf was tested with iodine solution. Which result and conclusion would be valid?",
+    "options": [
+      "The entire leaf turned blue-black; proving that chlorophyll is not needed for photosynthesis",
+      "Only the green parts turned blue-black; proving that chlorophyll is necessary for photosynthesis",
+      "Only the white/yellow parts turned blue-black; proving that starch is stored in non-photosynthetic tissue",
+      "The entire leaf remained brown; proving that croton leaves cannot photosynthesize"
+    ],
+    "answer": 1,
+    "explanation": "The green parts of the leaf contain chlorophyll and photosynthesize to produce starch, which turns blue-black with iodine. The white/yellow parts lack chlorophyll, cannot photosynthesize, and therefore contain no starch. This demonstrates that chlorophyll is essential for photosynthesis.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-afbf2544"
+  },
+  {
+    "question": "A meal consisting of boiled green bananas (starch), fried plantains (carbohydrates and fats), and ackee (fats and proteins) requires specific enzymes for digestion. Which pair of enzymes acts upon the starch and fats respectively in the human digestive tract?",
+    "options": [
+      "Amylase and lipase",
+      "Protease and amylase",
+      "Lipase and protease",
+      "Pepsin and maltase"
+    ],
+    "answer": 0,
+    "explanation": "Salivary and pancreatic amylase digest starch (found in green bananas and plantains) into maltose, while lipase (from the pancreas) digests fats (found in fried plantains and ackee) into fatty acids and glycerol. Protease and pepsin digest proteins, not starch.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-390042dc"
+  },
+  {
+    "question": "In the chloroplasts of sugarcane leaves, which substances are produced during the light-dependent stage and subsequently utilized during the light-independent stage (Calvin cycle) to convert carbon dioxide into glucose?",
+    "options": [
+      "Oxygen and water",
+      "ATP and NADPH",
+      "Carbon dioxide and water",
+      "Starch and cellulose"
+    ],
+    "answer": 1,
+    "explanation": "During the light-dependent reactions on the thylakoid membranes, light energy is used to produce ATP and NADPH (energy carriers). These are then used in the stroma during the Calvin cycle (light-independent stage) to reduce carbon dioxide into glucose. Oxygen is a byproduct released, not used in the Calvin cycle.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-c3ef79c8"
+  },
+  {
+    "question": "The enzyme pepsin plays a crucial role in digesting proteins from a meal of jerk chicken. At which location and pH does pepsin function optimally?",
+    "options": [
+      "Mouth; pH 7",
+      "Stomach; pH 2",
+      "Small intestine; pH 8",
+      "Large intestine; pH 7"
+    ],
+    "answer": 1,
+    "explanation": "Pepsin is a protein-digesting enzyme secreted by gastric glands in the stomach. It functions optimally at a highly acidic pH of approximately 2. In the small intestine (pH 8), pepsin is denatured and pancreatic proteases like trypsin take over protein digestion.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-8ab5d600"
+  },
+  {
+    "question": "During a 100m sprint, a Trinidadian athlete's muscle cells require immediate energy for contraction. Which molecule directly supplies usable chemical energy for this process?",
+    "options": [
+      "Glucose",
+      "ATP",
+      "Oxygen",
+      "Lactic acid"
+    ],
+    "answer": 1,
+    "explanation": "ATP (adenosine triphosphate) is the direct energy currency of the cell. While glucose contains stored chemical energy, it must first undergo cellular respiration (glycolysis, Krebs cycle, electron transport chain) to generate ATP, which then powers muscle contraction. Oxygen is required for aerobic respiration but is not itself an energy supply molecule.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-3d5cc99c"
+  },
+  {
+    "question": "Classify the following substances as either raw materials or products of photosynthesis.",
+    "type": "DND",
+    "categories": [
+      "Raw Materials",
+      "Products"
+    ],
+    "items": [
+      {
+        "text": "Carbon dioxide",
+        "category": "Raw Materials"
+      },
+      {
+        "text": "Water",
+        "category": "Raw Materials"
+      },
+      {
+        "text": "Glucose",
+        "category": "Products"
+      },
+      {
+        "text": "Oxygen",
+        "category": "Products"
+      }
+    ],
+    "topic_id": "BIOL-02-00001",
+    "id": "Q-BIOL-02-00001-a344970c"
+  },
+  {
+    "question": "Sort these examples based on their mode of nutrition.",
+    "type": "DND",
+    "categories": [
+      "Autotrophic Nutrition",
+      "Heterotrophic Nutrition"
+    ],
+    "items": [
+      {
+        "text": "Green plant making glucose",
+        "category": "Autotrophic Nutrition"
+      },
+      {
+        "text": "Human eating vegetables",
+        "category": "Heterotrophic Nutrition"
+      },
+      {
+        "text": "Photosynthesis in algae",
+        "category": "Autotrophic Nutrition"
+      },
+      {
+        "text": "Fungus absorbing nutrients",
+        "category": "Heterotrophic Nutrition"
+      }
+    ],
+    "topic_id": "BIOL-02-00001",
+    "id": "Q-BIOL-02-00001-da6ce18f"
+  },
+  {
+    "question": "Match each digestive enzyme to the class of nutrient it acts upon.",
+    "type": "DND",
+    "categories": [
+      "Carbohydrate Digestion",
+      "Protein Digestion",
+      "Fat Digestion"
+    ],
+    "items": [
+      {
+        "text": "Amylase",
+        "category": "Carbohydrate Digestion"
+      },
+      {
+        "text": "Pepsin",
+        "category": "Protein Digestion"
+      },
+      {
+        "text": "Lipase",
+        "category": "Fat Digestion"
+      },
+      {
+        "text": "Trypsin",
+        "category": "Protein Digestion"
+      },
+      {
+        "text": "Maltase",
+        "category": "Carbohydrate Digestion"
+      }
+    ],
+    "topic_id": "BIOL-02-00001",
+    "id": "Q-BIOL-02-00001-cf4f0ac1"
+  },
+  {
+    "question": "Distinguish between photosynthesis and aerobic respiration by sorting the characteristics below.",
+    "type": "DND",
+    "categories": [
+      "Photosynthesis",
+      "Aerobic Respiration"
+    ],
+    "items": [
+      {
+        "text": "Requires sunlight",
+        "category": "Photosynthesis"
+      },
+      {
+        "text": "Occurs in mitochondria",
+        "category": "Aerobic Respiration"
+      },
+      {
+        "text": "Uses carbon dioxide and water",
+        "category": "Photosynthesis"
+      },
+      {
+        "text": "Releases energy from glucose",
+        "category": "Aerobic Respiration"
+      },
+      {
+        "text": "Produces glucose and oxygen",
+        "category": "Photosynthesis"
+      },
+      {
+        "text": "Requires oxygen",
+        "category": "Aerobic Respiration"
+      }
+    ],
+    "topic_id": "BIOL-02-00001",
+    "id": "Q-BIOL-02-00001-bcbe9d7f"
+  },
+  {
+    "question": "Classify the following digestive processes as either mechanical or chemical digestion.",
+    "type": "DND",
+    "categories": [
+      "Mechanical Digestion",
+      "Chemical Digestion"
+    ],
+    "items": [
+      {
+        "text": "Chewing food with teeth",
+        "category": "Mechanical Digestion"
+      },
+      {
+        "text": "Amylase breaking down starch",
+        "category": "Chemical Digestion"
+      },
+      {
+        "text": "Stomach churning",
+        "category": "Mechanical Digestion"
+      },
+      {
+        "text": "Pepsin digesting proteins",
+        "category": "Chemical Digestion"
+      },
+      {
+        "text": "Bile emulsifying fats",
+        "category": "Mechanical Digestion"
+      },
+      {
+        "text": "Lipase hydrolyzing lipids",
+        "category": "Chemical Digestion"
+      }
+    ],
+    "topic_id": "BIOL-02-00001",
+    "id": "Q-BIOL-02-00001-bb1162ae"
+  },
+  {
+    "question": "Which chemical equation correctly represents photosynthesis occurring in the leaves of a sugarcane plant?",
+    "options": [
+      "C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + energy",
+      "6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082",
+      "6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082 + energy",
+      "C\u2086H\u2081\u2082O\u2086 \u2192 2C\u2082H\u2085OH + 2CO\u2082"
+    ],
+    "answer": 1,
+    "explanation": "Option B correctly shows carbon dioxide and water combining to form glucose and oxygen. Option A represents cellular respiration (a common misconception where students confuse the two processes). Option C incorrectly shows energy as a product rather than light energy being required as an input. Option D represents alcoholic fermentation.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-51bf5c77"
+  },
+  {
+    "question": "A student eats a meal of boiled breadfruit and fried plantain. In which part of the digestive system does the chemical digestion of the starch initially begin?",
+    "options": [
+      "Mouth",
+      "Stomach",
+      "Small intestine",
+      "Esophagus"
+    ],
+    "answer": 0,
+    "explanation": "Chemical digestion of starch begins in the mouth (Option A) where salivary amylase breaks down starch into maltose. Option B is a common misconception\u2014students often think the acidic stomach digests everything, but stomach acid actually denatures amylase. While digestion continues in the small intestine (Option C), it does not begin there. The esophagus (Option D) only transports food.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-c7b17cdf"
+  },
+  {
+    "question": "During a dry spell in St. Vincent, a farmer observes that his yam vines are growing slowly despite receiving full sunlight. Which factor is most likely limiting the rate of photosynthesis?",
+    "options": [
+      "Oxygen concentration",
+      "Water availability",
+      "Chlorophyll concentration",
+      "Carbon dioxide levels"
+    ],
+    "answer": 1,
+    "explanation": "Water (Option B) is a raw material for photosynthesis, and during a dry spell, reduced water uptake limits the light-dependent reactions. Option A represents a common misconception\u2014oxygen is a product, not a requirement for photosynthesis. While chlorophyll (Option C) is necessary, there is no indication the plants are chlorotic. Carbon dioxide (Option D) is rarely limiting in open field conditions.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-ca7b8764"
+  },
+  {
+    "question": "Which statement correctly describes enzyme activity during the digestion of a meal containing ackee (high in fats) and saltfish (high in proteins)?",
+    "options": [
+      "Digestive enzymes are completely used up as they break down the nutrients",
+      "Pepsin digests proteins in the acidic environment of the stomach",
+      "Lipase works most effectively in the acidic conditions of the stomach",
+      "Salivary amylase continues to digest starch when it reaches the stomach"
+    ],
+    "answer": 1,
+    "explanation": "Pepsin (Option B) is a protease that functions optimally at the low pH (acidic) of the stomach to digest proteins like those in saltfish. Option A reflects the misconception that enzymes are consumed in reactions\u2014they are catalysts and are reusable. Option C is incorrect because lipase requires alkaline conditions found in the small intestine. Option D is incorrect because salivary amylase is denatured by stomach acid.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-393e9b5e"
+  },
+  {
+    "question": "How do root cells of a cassava plant obtain the energy required for active transport of mineral ions from the soil into the xylem?",
+    "options": [
+      "By performing photosynthesis using underground chloroplasts",
+      "Through cellular respiration using glucose transported from the leaves",
+      "By absorbing ATP directly from the surrounding soil water",
+      "Through anaerobic fermentation of soil organic matter"
+    ],
+    "answer": 1,
+    "explanation": "Root cells (Option B) respire glucose that is transported down from the leaves via phloem to produce ATP for active transport. Option A represents a common misconception\u2014root cells lack chlorophyll and cannot photosynthesize. Option C is incorrect because cells cannot absorb pre-made ATP from the environment; they must generate it. Option D is incorrect because fermentation is only an emergency backup pathway, not the primary energy source.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-ddb084da"
+  },
+  {
+    "question": "A farmer in Barbados observes that sugar cane plants growing in full sunlight produce significantly more sucrose than those in shaded areas. This occurs because light energy is directly required to:",
+    "options": [
+      "Convert glucose molecules into starch for storage",
+      "Split water molecules during photolysis to provide hydrogen ions",
+      "Fix carbon dioxide into glucose in the Calvin cycle",
+      "Transport sucrose from the leaves to the storage tissues"
+    ],
+    "answer": 1,
+    "explanation": "In the light-dependent stage of photosynthesis, light energy splits water molecules (photolysis) to release oxygen, electrons, and hydrogen ions. These hydrogen ions are used in the light-independent stage (Calvin cycle) to reduce carbon dioxide into glucose, which is later converted to sucrose. While the Calvin cycle produces glucose, it does not directly use light energy\u2014it uses ATP and NADPH produced during the light-dependent reactions.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-0ea631bd"
+  },
+  {
+    "question": "When consuming breadfruit (Artocarpus altilis), a carbohydrate-rich staple food in St. Vincent and the Grenadines, the chemical digestion of starch begins in the:",
+    "options": [
+      "Stomach, where pepsin breaks down complex carbohydrates",
+      "Small intestine, where bile emulsifies the starch molecules",
+      "Mouth, where salivary amylase acts at approximately pH 7",
+      "Pancreas, where trypsin hydrolyzes the glycosidic bonds"
+    ],
+    "answer": 2,
+    "explanation": "Salivary amylase (ptyalin) in the mouth begins the hydrolysis of starch into maltose at neutral pH (around 7). This enzyme continues to act until it is denatured by the acidic conditions (pH 1.5-2) of the stomach. Pepsin digests proteins, not carbohydrates; bile emulsifies fats; and trypsin is a protease that digests proteins in the small intestine.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-d0ef97f5"
+  },
+  {
+    "question": "In Jamaica, coffee plants grown at higher elevations (e.g., Blue Mountain Peak) often exhibit higher rates of photosynthesis during the day compared to lowland areas, primarily because the cooler temperatures:",
+    "options": [
+      "Increase the wavelength of light absorbed by chlorophyll",
+      "Allow enzymes in the Calvin cycle to function closer to their optimum without denaturing",
+      "Cause stomata to remain closed, trapping carbon dioxide inside the leaves",
+      "Prevent the photolysis of water in the thylakoid membranes"
+    ],
+    "answer": 1,
+    "explanation": "Photosynthesis involves enzyme-controlled reactions in the Calvin cycle (light-independent stage). While higher temperatures increase kinetic energy and reaction rates initially, excessive heat denatures enzymes. Cooler temperatures at high elevations allow these enzymes to function efficiently without denaturation, while still providing sufficient kinetic energy for reactions. Stomata typically open in light to allow CO2 entry, and photolysis depends on light intensity, not temperature.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-8c42a3ba"
+  },
+  {
+    "question": "Ackee and saltfish is Jamaica's national dish. The digestion of proteins from the salted codfish begins in the stomach, where the enzyme pepsin functions optimally at:",
+    "options": [
+      "pH 7, similar to salivary amylase in the mouth",
+      "pH 2, maintained by hydrochloric acid secretion",
+      "pH 8, created by sodium bicarbonate from the pancreas",
+      "pH 5, due to the acidic nature of the food bolus"
+    ],
+    "answer": 1,
+    "explanation": "The stomach lining secretes hydrochloric acid (HCl), creating an acidic environment (pH 1.5-2) that denatures salivary amylase (stopping carbohydrate digestion) and provides the optimal pH for pepsin to break down proteins into smaller peptides. The acidic pH also activates pepsinogen into its active form, pepsin. The small intestine has a higher pH (around 7-8) where pancreatic enzymes function.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-1f4956a7"
+  },
+  {
+    "question": "A biology student in Trinidad investigates the enzyme papain found in green papaya (Carica papaya). She observes that papain can tenderize meat (protein) but cannot break down the starch in cassava. This specificity occurs because:",
+    "options": [
+      "Enzymes are denatured by the different pH levels in various foods",
+      "The active site of papain has a specific shape complementary to proteins but not starch",
+      "Enzymes are used up during chemical reactions and cannot act on multiple substrates",
+      "Starch molecules are too large to enter the cells containing papain"
+    ],
+    "answer": 1,
+    "explanation": "This demonstrates the 'lock and key' hypothesis of enzyme action. The active site of papain has a specific three-dimensional shape that is complementary to protein substrates (meat), allowing it to form an enzyme-substrate complex. Starch molecules have a different shape and cannot fit into papain's active site. Enzymes are not used up in reactions (they are catalysts), and enzyme action is determined by molecular fit, not just size or cellular location.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-6c6a16d4"
+  },
+  {
+    "question": "A biologist examines a cross-section of a sugar cane leaf, an important commercial crop in the Caribbean. In which cellular structure does the light-dependent stage of photosynthesis occur?",
+    "options": [
+      "Stroma of the chloroplast",
+      "Mitochondrial matrix",
+      "Thylakoid membranes of the chloroplast",
+      "Cytoplasm of the cell"
+    ],
+    "answer": 2,
+    "explanation": "The light-dependent stage occurs in the thylakoid membranes (within chloroplasts) where chlorophyll and other pigments capture light energy to produce ATP and NADPH. The stroma is where the light-independent stage (Calvin cycle) occurs, while mitochondria are involved in respiration, not photosynthesis.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-6117788a"
+  },
+  {
+    "question": "After eating a meal of boiled green bananas, salivary amylase begins digesting the starch in the mouth. Which statement correctly describes the action of this enzyme?",
+    "options": [
+      "It breaks down starch into individual glucose molecules",
+      "It remains active when it reaches the acidic environment of the stomach",
+      "It acts as a biological catalyst converting starch into maltose",
+      "It is consumed and destroyed during the chemical reaction"
+    ],
+    "answer": 2,
+    "explanation": "Salivary amylase catalyzes the hydrolysis of starch into maltose (a disaccharide), not glucose. It is denatured by the hydrochloric acid in the stomach and, like all enzymes, is not used up in the reaction but can be reused multiple times.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-62b4c515"
+  },
+  {
+    "question": "Farmers in Trinidad cultivate cocoa trees under shade cloth to regulate light intensity. During a sunny afternoon, which statement correctly describes the relationship between photosynthesis and respiration in the cocoa leaves?",
+    "options": [
+      "Photosynthesis occurs during the day, while respiration only occurs at night",
+      "The rate of photosynthesis exceeds the rate of respiration",
+      "Oxygen is absorbed and carbon dioxide is released during photosynthesis",
+      "Respiration stops in the leaves when photosynthesis is active"
+    ],
+    "answer": 1,
+    "explanation": "Both photosynthesis and respiration occur in plant leaves during daylight hours. However, in sunlight, the rate of photosynthesis exceeds respiration, resulting in net consumption of carbon dioxide and net production of oxygen. Respiration occurs continuously in all living cells to provide ATP for cellular activities.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-aa763dc7"
+  },
+  {
+    "question": "A student consumes a traditional meal of stewed peas and rice. Where does the final chemical digestion of the proteins present in the peas occur, and what are the end products?",
+    "options": [
+      "Stomach; amino acids",
+      "Small intestine; amino acids",
+      "Large intestine; peptides",
+      "Stomach; fatty acids and glycerol"
+    ],
+    "answer": 1,
+    "explanation": "Protein digestion begins in the stomach where pepsin breaks proteins into polypeptides, but it is completed in the small intestine by enzymes such as trypsin and peptidases. These enzymes hydrolyze proteins and polypeptides into amino acids, which are then absorbed through the intestinal villi into the bloodstream.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-6ed56f6e"
+  },
+  {
+    "question": "When preparing cassava bread, a traditional food in some Caribbean territories, grated cassava is heated on a flat pan. This high temperature would denature any enzymes present in the tissue. Which statement best explains this denaturation?",
+    "options": [
+      "The heat permanently alters the shape of the enzyme's active site",
+      "The enzyme molecules are completely destroyed atom by atom",
+      "The enzyme combines irreversibly with the starch substrate",
+      "The temperature increases the kinetic energy of only the products"
+    ],
+    "answer": 0,
+    "explanation": "High temperatures disrupt the hydrogen bonds and other weak interactions that maintain the enzyme's specific tertiary structure. This causes the active site to lose its precise shape permanently, preventing the substrate from binding. The enzyme is denatured, not destroyed at the atomic level, and does not chemically combine with the substrate.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-51dbbcc2"
+  },
+  {
+    "question": "A farmer in Trinidad observes that cassava plants grow rapidly during the sunny dry season. Which chemical equation correctly represents the process by which these plants convert light energy into chemical energy stored in glucose?",
+    "options": [
+      "C\u2086H\u2081\u2082O\u2086 + 6O\u2082 \u2192 6CO\u2082 + 6H\u2082O + energy",
+      "6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082",
+      "6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082 + energy",
+      "C\u2086H\u2081\u2082O\u2086 \u2192 2C\u2082H\u2085OH + 2CO\u2082"
+    ],
+    "answer": 1,
+    "explanation": "Option B correctly represents photosynthesis, where carbon dioxide and water are converted to glucose and oxygen, storing light energy as chemical energy. Option A represents cellular respiration (a common misconception where students confuse the two processes). Option C incorrectly suggests energy is released during photosynthesis (it is actually stored/endothermic). Option D represents alcoholic fermentation, which is irrelevant to plant energy capture.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-188e12ff"
+  },
+  {
+    "question": "A student in Jamaica chews a piece of breadfruit (a starchy staple) for 5 minutes without swallowing, then tests the mixture with iodine solution. What result would indicate that digestion of starch has occurred?",
+    "options": [
+      "The mixture remains blue-black because salivary amylase only digests proteins",
+      "The mixture remains blue-black because starch digestion requires an alkaline pH",
+      "The color changes from blue-black to brown/yellow indicating starch breakdown",
+      "The mixture turns brick-red indicating glucose formation"
+    ],
+    "answer": 2,
+    "explanation": "Option C is correct: salivary amylase in the mouth breaks starch into maltose, causing the blue-black iodine-starch complex to disappear, revealing the original brown/yellow color of the iodine solution. Option A confuses amylase with protease. Option B confuses the pH requirements of amylase (neutral) with those of pepsin (acidic). Option D confuses the iodine test (for starch) with the Benedict's test (brick-red precipitate for reducing sugars like glucose).",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-aafdd421"
+  },
+  {
+    "question": "A Biology student investigates protein digestion using pepsin and pieces of saltfish (protein) at 37\u00b0C. Which test tube condition would result in the most rapid digestion after 15 minutes?",
+    "options": [
+      "pH 2 with pepsin",
+      "pH 7 with pepsin",
+      "pH 9 with pepsin",
+      "pH 2 without pepsin"
+    ],
+    "answer": 0,
+    "explanation": "Option A is correct because pepsin is a protease enzyme that functions optimally in the acidic conditions (pH 1.5-2) found in the stomach. Option B represents neutral pH where pepsin is denatured (students often confuse this with the optimal pH for trypsin in the small intestine). Option C represents alkaline conditions that would denature pepsin. Option D demonstrates that enzymes are necessary for digestion (a control), though this is a less common misconception than pH confusion.",
+    "topic_id": "BIOL-02-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00001-b6a3dc12"
+  },
+  {
+    "question": "Drag each structure to the correct transport system.",
+    "type": "DND",
+    "categories": [
+      "Plant Transport System",
+      "Human Transport System"
+    ],
+    "items": [
+      {
+        "text": "Xylem vessels",
+        "category": "Plant Transport System"
+      },
+      {
+        "text": "Phloem sieve tubes",
+        "category": "Plant Transport System"
+      },
+      {
+        "text": "Heart",
+        "category": "Human Transport System"
+      },
+      {
+        "text": "Blood capillaries",
+        "category": "Human Transport System"
+      },
+      {
+        "text": "Root hair cells",
+        "category": "Plant Transport System"
+      },
+      {
+        "text": "Pulmonary artery",
+        "category": "Human Transport System"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-7149aa81"
+  },
+  {
+    "question": "Classify the following processes and characteristics as either Transpiration or Translocation.",
+    "type": "DND",
+    "categories": [
+      "Transpiration",
+      "Translocation"
+    ],
+    "items": [
+      {
+        "text": "Movement of water and mineral ions",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Transport of sucrose and amino acids",
+        "category": "Translocation"
+      },
+      {
+        "text": "Occurs in xylem tissue",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Occurs in phloem tissue",
+        "category": "Translocation"
+      },
+      {
+        "text": "Upward movement only",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Bidirectional movement (up and down)",
+        "category": "Translocation"
+      },
+      {
+        "text": "Driven by evaporation from leaf surfaces",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Requires active loading at source",
+        "category": "Translocation"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-7354276a"
+  },
+  {
+    "question": "Identify whether each blood vessel characteristic describes Arteries or Veins.",
+    "type": "DND",
+    "categories": [
+      "Arteries",
+      "Veins"
+    ],
+    "items": [
+      {
+        "text": "Carry blood away from the heart",
+        "category": "Arteries"
+      },
+      {
+        "text": "Carry blood toward the heart",
+        "category": "Veins"
+      },
+      {
+        "text": "Thick muscular and elastic walls",
+        "category": "Arteries"
+      },
+      {
+        "text": "Thin walls with less smooth muscle",
+        "category": "Veins"
+      },
+      {
+        "text": "Contain valves to prevent backflow",
+        "category": "Veins"
+      },
+      {
+        "text": "High blood pressure",
+        "category": "Arteries"
+      },
+      {
+        "text": "Low blood pressure",
+        "category": "Veins"
+      },
+      {
+        "text": "Pulse can be detected",
+        "category": "Arteries"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-cf6be015"
+  },
+  {
+    "question": "Match each component with its primary function in the circulatory system.",
+    "type": "DND",
+    "categories": [
+      "Gas Transport",
+      "Immune Defense",
+      "Clotting"
+    ],
+    "items": [
+      {
+        "text": "Red blood cells",
+        "category": "Gas Transport"
+      },
+      {
+        "text": "Hemoglobin",
+        "category": "Gas Transport"
+      },
+      {
+        "text": "White blood cells (phagocytes)",
+        "category": "Immune Defense"
+      },
+      {
+        "text": "Lymphocytes",
+        "category": "Immune Defense"
+      },
+      {
+        "text": "Antibodies",
+        "category": "Immune Defense"
+      },
+      {
+        "text": "Platelets",
+        "category": "Clotting"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-a4cddf6a"
+  },
+  {
+    "question": "Categorize the following substances based on where they are primarily transported in plants.",
+    "type": "DND",
+    "categories": [
+      "Xylem Transport",
+      "Phloem Transport"
+    ],
+    "items": [
+      {
+        "text": "Water",
+        "category": "Xylem Transport"
+      },
+      {
+        "text": "Dissolved mineral salts (nitrates)",
+        "category": "Xylem Transport"
+      },
+      {
+        "text": "Magnesium ions",
+        "category": "Xylem Transport"
+      },
+      {
+        "text": "Sucrose (sugar)",
+        "category": "Phloem Transport"
+      },
+      {
+        "text": "Amino acids",
+        "category": "Phloem Transport"
+      },
+      {
+        "text": "Plant hormones (auxins)",
+        "category": "Phloem Transport"
+      },
+      {
+        "text": "Calcium ions",
+        "category": "Xylem Transport"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-ec69b3ff"
+  },
+  {
+    "question": "A farmer in Jamaica notices that sugarcane plants wilt during the hottest part of the day. Which process is primarily responsible for moving water from the roots to the leaves of the sugarcane?",
+    "options": [
+      "Translocation through phloem vessels",
+      "Transpiration pull through xylem vessels",
+      "Active transport through stomata",
+      "Osmosis in the phloem sieve tubes"
+    ],
+    "answer": 1,
+    "explanation": "Transpiration pull is the primary mechanism for water movement in xylem. As water evaporates from leaf mesophyll cells (transpiration), it creates a negative pressure that pulls water up from the roots. Students often confuse xylem (water/minerals) with phloem (food transport), or mistakenly believe stomata actively transport water rather than facilitating gas exchange.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-006632be"
+  },
+  {
+    "question": "In the Caribbean population, sickle cell anemia affects blood composition. Which component of blood is primarily responsible for transporting oxygen from the lungs to body tissues?",
+    "options": [
+      "White blood cells",
+      "Platelets",
+      "Red blood cells",
+      "Plasma"
+    ],
+    "answer": 2,
+    "explanation": "Red blood cells contain hemoglobin which binds to oxygen. This is particularly relevant in Caribbean populations where sickle cell trait affects red blood cell shape and oxygen-carrying capacity. White blood cells fight infection, platelets clot blood, and plasma transports dissolved substances like nutrients and hormones but not oxygen.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-b3de5f11"
+  },
+  {
+    "question": "A farmer in Barbados harvests sugarcane where sucrose is stored in the roots. How is sucrose transported from the leaves (source) to the roots (sink) for storage?",
+    "options": [
+      "Translocation through phloem from source to sink",
+      "Transpiration through xylem vessels",
+      "Active transport through stomata",
+      "Diffusion through root hairs"
+    ],
+    "answer": 0,
+    "explanation": "Translocation is the movement of sugars (like sucrose) through phloem sieve tubes from source regions (where food is made/stored) to sink regions (where food is used/stored). The sugarcane industry is vital to Caribbean economies. Xylem transports water, not sugars; stomata exchange gases; root hairs absorb water/minerals but do not transport sugars from leaves.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-d7b51ccd"
+  },
+  {
+    "question": "Which sequence correctly shows the flow of blood from the body through the heart to the lungs in the human circulatory system?",
+    "options": [
+      "Left ventricle \u2192 left atrium \u2192 lungs",
+      "Left atrium \u2192 left ventricle \u2192 lungs",
+      "Right ventricle \u2192 right atrium \u2192 lungs",
+      "Right atrium \u2192 right ventricle \u2192 lungs"
+    ],
+    "answer": 3,
+    "explanation": "Deoxygenated blood returns to the right atrium, passes to the right ventricle, and is pumped to the lungs via the pulmonary artery for oxygenation. A common misconception is confusing the left and right sides of the heart, or reversing the atrium-ventricle flow. The left side pumps oxygenated blood to the body (systemic circulation), while the right side pumps deoxygenated blood to the lungs (pulmonary circulation).",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-b7884e9d"
+  },
+  {
+    "question": "A student in Trinidad investigates transpiration in two identical hibiscus plants. Plant X is placed in a humid, shaded, still environment, while Plant Y is placed in a dry, sunny, windy environment. Which statement correctly compares their transpiration rates?",
+    "options": [
+      "Plant X loses more water because high humidity increases evaporation",
+      "Both plants lose water at the same rate because they are the same species",
+      "Plant Y loses more water due to wind and low humidity",
+      "Plant X loses more water because shade increases leaf temperature"
+    ],
+    "answer": 2,
+    "explanation": "Transpiration rate increases with wind (removes water vapor from leaf surface, maintaining the diffusion gradient) and decreases with high humidity (reduces the water potential gradient between leaf and air). Shade reduces temperature and thus transpiration. Hibiscus is a common ornamental plant throughout the Caribbean. Students often incorrectly assume humidity increases transpiration or that genetic identity overrides environmental factors.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-92ae893a"
+  },
+  {
+    "question": "On a hot, sunny day with strong trade winds in Barbados, a farmer notices increased wilting in tomato plants. Which factor combination is primarily responsible for increasing the rate of transpiration?",
+    "options": [
+      "High temperature and high humidity",
+      "High temperature and wind movement",
+      "Low light intensity and high humidity",
+      "Low temperature and still air"
+    ],
+    "answer": 1,
+    "explanation": "High temperature increases the kinetic energy of water molecules, causing faster evaporation from mesophyll cells, while wind (trade winds) removes water vapor from the leaf surface, maintaining a steep water potential gradient between the leaf and atmosphere. High humidity would reduce transpiration by decreasing the water potential gradient.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-6a383197"
+  },
+  {
+    "question": "In sugar cane (Saccharum officinarum) plants grown in Jamaica, sucrose produced in the leaves during photosynthesis is transported to the stalk for storage. Which tissue is responsible for this transport and in which direction does it occur?",
+    "options": [
+      "Xylem; upwards only",
+      "Phloem; from source to sink",
+      "Xylem; from source to sink",
+      "Phloem; upwards only"
+    ],
+    "answer": 1,
+    "explanation": "Phloem tissue transports organic solutes like sucrose from source regions (leaves where photosynthesis occurs) to sink regions (storage areas like stalks, roots, or growing fruits). Unlike xylem which transports water upwards only, phloem transport is multidirectional depending on metabolic needs.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-f7d36e5b"
+  },
+  {
+    "question": "A student in Trinidad examines a blood sample and observes cells that contain hemoglobin but lack a nucleus. Which statement correctly describes the primary function of these cells in the circulatory system?",
+    "options": [
+      "To engulf and destroy pathogens using enzymes",
+      "To transport carbon dioxide as bicarbonate ions in plasma",
+      "To carry oxygen from the lungs to body tissues",
+      "To clot blood at wound sites by forming fibrin networks"
+    ],
+    "answer": 2,
+    "explanation": "These are mature red blood cells (erythrocytes), specialized for oxygen transport via hemoglobin. The lack of a nucleus provides more space for hemoglobin. Option A describes phagocytes (white blood cells), option B describes a function of blood plasma, and option D describes platelets.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-087c9f2e"
+  },
+  {
+    "question": "During a biology practical at a school in Guyana, students trace the path of blood flow through the human heart. Which sequence correctly represents the flow of deoxygenated blood from the body back to the lungs?",
+    "options": [
+      "Vena cava \u2192 Right atrium \u2192 Right ventricle \u2192 Pulmonary artery",
+      "Pulmonary vein \u2192 Left atrium \u2192 Left ventricle \u2192 Aorta",
+      "Vena cava \u2192 Left atrium \u2192 Left ventricle \u2192 Pulmonary artery",
+      "Pulmonary artery \u2192 Right ventricle \u2192 Right atrium \u2192 Vena cava"
+    ],
+    "answer": 0,
+    "explanation": "Deoxygenated blood returns to the heart via the vena cava, enters the right atrium, passes through to the right ventricle, and is then pumped via the pulmonary artery to the lungs for oxygenation. The pulmonary vein carries oxygenated blood (option B), and the left side of the heart handles oxygenated blood (option C is incorrect).",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-817a6e24"
+  },
+  {
+    "question": "In coconut palms (Cocos nucifera) common throughout the Caribbean, water must reach heights of over 20 meters. Which mechanism is primarily responsible for moving water up the xylem to the top of these tall trees?",
+    "options": [
+      "Root pressure generated by active transport in root cells",
+      "Transpiration pull created by evaporation from leaf mesophyll",
+      "Capillary action alone in the narrow xylem vessels",
+      "Phloem transport pulling water up by suction"
+    ],
+    "answer": 1,
+    "explanation": "The cohesion-tension theory explains that transpiration pull (tension created by evaporation from leaf mesophyll) is the primary mechanism for water ascent in tall trees. Root pressure is limited to small heights (typically <2m) and is insufficient for tall palms. Capillary action alone can only raise water a few meters. Phloem transports sugars, not water.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-dc07544b"
+  },
+  {
+    "question": "A cocoa farmer in Grenada notices that the leaves of his plants wilt more quickly on a sunny, windy afternoon compared to a cool, humid morning. Which combination of environmental factors is responsible for this increased rate of water movement through the plant?",
+    "options": [
+      "High humidity and low atmospheric pressure",
+      "High light intensity, high temperature, wind, and low humidity",
+      "High carbon dioxide concentration and still air",
+      "Low temperature and high soil water potential"
+    ],
+    "answer": 1,
+    "explanation": "High light intensity opens stomata, high temperature increases the kinetic energy of water molecules for evaporation, wind removes the water vapor from around the leaf maintaining a steep diffusion gradient, and low humidity increases the water potential gradient between the leaf and the atmosphere. These factors collectively increase the rate of transpiration, which is the loss of water vapor from leaves.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-2ea115b0"
+  },
+  {
+    "question": "A farmer in St. Vincent observes that cassava roots (tubers) become shriveled and decrease in mass after the plant has been flowering for several weeks. Which process explains the movement of substances that caused this change?",
+    "options": [
+      "Transpiration moving water from the roots to the flowers",
+      "Translocation moving sugars from the storage roots to the developing flowers and fruits",
+      "Guttation releasing excess water from the root xylem into the soil",
+      "Osmosis moving starch grains from the phloem into the flowers"
+    ],
+    "answer": 1,
+    "explanation": "During flowering, the developing flowers and fruits become strong 'sinks' requiring sugars for energy and growth. The cassava tubers, which were previously storage organs (sinks), become 'sources'. Translocation is the movement of organic nutrients (like sucrose) through the phloem from sources to sinks, causing the stored starch in the roots to be converted to sugars and transported away, leading to shriveling.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-36444592"
+  },
+  {
+    "question": "During a school biology trip in Belize, students learn that humans have a double circulatory system where blood passes through the heart twice during one complete circuit of the body. What is the primary physiological advantage of this arrangement?",
+    "options": [
+      "It allows blood to flow slowly through the lungs to maximize carbon dioxide absorption",
+      "It maintains a high pressure in the systemic circulation for efficient delivery of oxygen to tissues",
+      "It prevents the mixing of oxygenated blood with tissue fluid in the muscles",
+      "It reduces the heart rate necessary to maintain blood flow in tropical climates"
+    ],
+    "answer": 1,
+    "explanation": "In a double circulatory system, the pulmonary circuit (heart to lungs) operates at low pressure to protect the delicate capillaries in the lungs, while the systemic circuit (heart to body) operates at high pressure to ensure rapid delivery of oxygen and nutrients to tissues and overcome the resistance of the peripheral vessels. This separation ensures efficient transport despite the different pressure requirements.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-de02630c"
+  },
+  {
+    "question": "During an intense football match in Port of Spain, a player's muscle cells require increased supplies of glucose and oxygen. How do these substances primarily move from the blood plasma in the capillaries into the muscle cells?",
+    "options": [
+      "By active transport using ATP to pump them against their concentration gradients",
+      "By diffusion down a concentration gradient from the blood to the cells",
+      "By osmosis through the selectively permeable membranes of the capillary walls",
+      "By translocation through plasmodesmata connecting the cells"
+    ],
+    "answer": 1,
+    "explanation": "As muscle cells respire during exercise, they consume glucose and oxygen, creating a low concentration inside the cells relative to the blood. These substances move by diffusion (facilitated or simple) down their concentration gradients from the capillary blood (high concentration) into the tissue fluid and then into the cells (low concentration). Osmosis refers specifically to water movement, and translocation is a plant process.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-8103f647"
+  },
+  {
+    "question": "A biologist examining a cross-section of a banana plant (Musa sp.) stem observes two distinct vascular tissues: vessels with thick, lignified walls and no cross-walls, and tubes with sieve plates and companion cells. Which statement correctly identifies the function of each tissue?",
+    "options": [
+      "The lignified vessels transport water by translocation; the sieve tubes transport minerals by transpiration",
+      "The lignified vessels transport water and minerals by transpiration; the sieve tubes transport sugars by translocation",
+      "The lignified vessels provide structural support only; the sieve tubes transport both water and dissolved nutrients",
+      "Both vessel types transport water and sugars simultaneously in opposite directions"
+    ],
+    "answer": 1,
+    "explanation": "The lignified vessels are xylem, adapted to withstand the negative pressure of the transpiration pull while transporting water and minerals from roots to leaves. The sieve tubes are phloem, which lack lignin but have sieve plates and companion cells to facilitate the transport of sugars (products of photosynthesis) via translocation from sources (leaves) to sinks (roots, fruits, growing points).",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-4e5714d7"
+  },
+  {
+    "question": "Classify the following structures according to whether they are found in plant transport systems or human circulatory systems.",
+    "type": "DND",
+    "categories": [
+      "Plant Transport Structures",
+      "Human Transport Structures"
+    ],
+    "items": [
+      {
+        "text": "Xylem vessels",
+        "category": "Plant Transport Structures"
+      },
+      {
+        "text": "Phloem sieve tubes",
+        "category": "Plant Transport Structures"
+      },
+      {
+        "text": "Arteries",
+        "category": "Human Transport Structures"
+      },
+      {
+        "text": "Veins",
+        "category": "Human Transport Structures"
+      },
+      {
+        "text": "Capillaries",
+        "category": "Human Transport Structures"
+      },
+      {
+        "text": "Lignified tracheids",
+        "category": "Plant Transport Structures"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-08ea64ee"
+  },
+  {
+    "question": "Categorize the following descriptions as either referring to transpiration or translocation in plants.",
+    "type": "DND",
+    "categories": [
+      "Transpiration",
+      "Translocation"
+    ],
+    "items": [
+      {
+        "text": "Loss of water vapour through stomata",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Transport of assimilates from source to sink",
+        "category": "Translocation"
+      },
+      {
+        "text": "Movement driven by transpiration pull",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Movement driven by pressure-flow mechanism",
+        "category": "Translocation"
+      },
+      {
+        "text": "Occurs in dead, hollow xylem vessels",
+        "category": "Transpiration"
+      },
+      {
+        "text": "Requires living sieve tube elements",
+        "category": "Translocation"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-91beea8c"
+  },
+  {
+    "question": "Match the following components and features to the correct transport tissue or medium.",
+    "type": "DND",
+    "categories": [
+      "Xylem",
+      "Phloem",
+      "Blood"
+    ],
+    "items": [
+      {
+        "text": "Tracheids and vessel elements",
+        "category": "Xylem"
+      },
+      {
+        "text": "Companion cells and sieve plates",
+        "category": "Phloem"
+      },
+      {
+        "text": "Red blood cells and plasma",
+        "category": "Blood"
+      },
+      {
+        "text": "Lignified walls for strength",
+        "category": "Xylem"
+      },
+      {
+        "text": "Cytoplasmic strands through pores",
+        "category": "Phloem"
+      },
+      {
+        "text": "Hemoglobin for gas transport",
+        "category": "Blood"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-95bd62e2"
+  },
+  {
+    "question": "Identify whether the following mechanisms and processes occur in the transpiration stream, translocation, or the human circulatory system.",
+    "type": "DND",
+    "categories": [
+      "Transpiration Stream",
+      "Translocation",
+      "Circulatory System"
+    ],
+    "items": [
+      {
+        "text": "Cohesion-tension theory",
+        "category": "Transpiration Stream"
+      },
+      {
+        "text": "Evaporation from leaf mesophyll cells",
+        "category": "Transpiration Stream"
+      },
+      {
+        "text": "Source-to-sink transport of sugars",
+        "category": "Translocation"
+      },
+      {
+        "text": "Loading at photosynthetic tissues",
+        "category": "Translocation"
+      },
+      {
+        "text": "Double circulation through heart",
+        "category": "Circulatory System"
+      },
+      {
+        "text": "Pulmonary and systemic circuits",
+        "category": "Circulatory System"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-a4c25112"
+  },
+  {
+    "question": "Classify the following substances according to where they are primarily transported in organisms.",
+    "type": "DND",
+    "categories": [
+      "Transported in Xylem",
+      "Transported in Phloem",
+      "Transported in Blood"
+    ],
+    "items": [
+      {
+        "text": "Water and mineral ions from roots",
+        "category": "Transported in Xylem"
+      },
+      {
+        "text": "Nitrates dissolved in sap",
+        "category": "Transported in Xylem"
+      },
+      {
+        "text": "Sucrose from leaves to storage organs",
+        "category": "Transported in Phloem"
+      },
+      {
+        "text": "Amino acids to growing regions",
+        "category": "Transported in Phloem"
+      },
+      {
+        "text": "Oxygen to respiring tissues",
+        "category": "Transported in Blood"
+      },
+      {
+        "text": "Carbon dioxide and urea as waste",
+        "category": "Transported in Blood"
+      }
+    ],
+    "topic_id": "BIOL-02-00002",
+    "id": "Q-BIOL-02-00002-1b0fcc00"
+  },
+  {
+    "question": "Which of the following best explains how water moves up the xylem vessels of a tall coconut palm tree against gravity?",
+    "options": [
+      "Active transport using ATP to pump water upward",
+      "Transpiration pull created by evaporation of water from the leaves",
+      "Osmosis from areas of high sugar concentration to low sugar concentration",
+      "Capillary action alone in the narrow xylem vessels"
+    ],
+    "answer": 1,
+    "explanation": "Transpiration pull (cohesion-tension theory) is the primary mechanism where evaporation from leaf surfaces creates a negative pressure that pulls water up the xylem. Distractor A represents the misconception that energy is required for all upward movement, C confuses water potential with sugar concentration, and D identifies a contributing factor but not the main driving force.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-dd0963fb"
+  },
+  {
+    "question": "In sugarcane plantations across the Caribbean, sucrose produced in the leaves is transported to storage tissues in the stem. Through which tissue does this transport occur?",
+    "options": [
+      "Xylem vessels by the process of transpiration",
+      "Phloem sieve tubes by the process of translocation",
+      "Root hairs by osmosis and active transport",
+      "Stomata by diffusion and mass flow"
+    ],
+    "answer": 1,
+    "explanation": "Phloem sieve tubes transport organic solutes like sucrose from sources (leaves) to sinks (storage tissues) via translocation. Distractor A confuses xylem (water transport) with phloem, C confuses absorption in roots with transport in stems, and D confuses gas exchange structures with transport tissues.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-7e19475c"
+  },
+  {
+    "question": "Sickle cell anemia is a genetic condition prevalent in Caribbean populations that affects red blood cells. What is the primary function of healthy red blood cells in the human circulatory system?",
+    "options": [
+      "To engulf bacteria and viruses through phagocytosis",
+      "To transport oxygen from the lungs to body tissues",
+      "To produce antibodies against specific pathogens",
+      "To prevent blood loss by forming clots at injury sites"
+    ],
+    "answer": 1,
+    "explanation": "Red blood cells contain hemoglobin which binds oxygen in the lungs and releases it to tissues. Distractor A describes white blood cells (phagocytes), C describes lymphocytes (immune function), and D describes platelets (clotting function) - common misconceptions about blood components.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-132eebd6"
+  },
+  {
+    "question": "During a health education session at a school in Jamaica, students learn about blood flow through the heart. Which vessel carries deoxygenated blood from the right ventricle to the lungs?",
+    "options": [
+      "Pulmonary vein",
+      "Pulmonary artery",
+      "Aorta",
+      "Vena cava"
+    ],
+    "answer": 1,
+    "explanation": "The pulmonary artery carries deoxygenated blood to the lungs (an exception to the general rule that arteries carry oxygenated blood). Distractor A is the common misconception where students assume 'vein' means deoxygenated and 'artery' means oxygenated, C carries oxygenated blood to the body, and D brings deoxygenated blood to the heart.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-ca3fd4ba"
+  },
+  {
+    "question": "A farmer in Guyana notices that his cassava plants lose water most rapidly during the dry season when conditions are hot, windy, and dry. Which combination of factors directly increases the rate of transpiration?",
+    "options": [
+      "High humidity and decreased air movement",
+      "Increased temperature and increased air movement",
+      "Decreased light intensity and closed stomata",
+      "High carbon dioxide concentration and low humidity"
+    ],
+    "answer": 1,
+    "explanation": "Increased temperature raises the kinetic energy of water molecules for faster evaporation, while wind (air movement) removes the humid layer of air at the leaf surface, maintaining a steep diffusion gradient. Distractor A describes conditions that reduce transpiration, C describes factors that would decrease water loss, and D introduces an irrelevant factor (CO2) mixed with a correct one.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-bb745cf9"
+  },
+  {
+    "question": "A farmer in Barbados observes that his sugar cane plants lose more water on a bright, windy day compared to a calm, humid day. This difference occurs because wind:",
+    "options": [
+      "Increases the humidity around the leaf surfaces, forcing water out",
+      "Removes water vapour from around the stomata, increasing the transpiration gradient",
+      "Increases the concentration of water inside the leaf cells",
+      "Causes the stomata to open wider to absorb carbon dioxide"
+    ],
+    "answer": 1,
+    "explanation": "Wind increases the rate of transpiration by removing the moist air (water vapour) that accumulates around the stomata. This maintains a steep concentration gradient between the humid air inside the leaf and the drier external air, allowing water vapour to diffuse out more rapidly. Humidity actually decreases transpiration by reducing this gradient.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-8ade7b4b"
+  },
+  {
+    "question": "In a coconut palm growing in Trinidad, sucrose produced in the leaves during photosynthesis is transported to the developing coconut fruit for storage. This movement of organic solutes occurs primarily through:",
+    "options": [
+      "Xylem vessels by transpiration pull",
+      "Phloem sieve tubes by translocation",
+      "Diffusion through the cortex cells of the stem",
+      "Active transport across the epidermis"
+    ],
+    "answer": 1,
+    "explanation": "Translocation is the process by which organic substances like sucrose are transported from sources (leaves) to sinks (fruits, roots, growing regions) through the phloem. Xylem transports water and minerals, not sugars. The process requires energy (ATP) and occurs in living sieve tube elements.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-6599fe11"
+  },
+  {
+    "question": "A student from St. Lucia living at sea level inhales air during a sprint race. Which sequence correctly describes how oxygen is transported from the alveoli to the muscle cells?",
+    "options": [
+      "Oxygen diffuses into red blood cells and binds to hemoglobin for transport",
+      "Oxygen is actively transported into white blood cells and carried as oxyhemoglobin",
+      "Oxygen dissolves in the blood plasma and reacts with carbon dioxide to form glucose",
+      "Oxygen moves by osmosis through the capillary walls into tissue fluid"
+    ],
+    "answer": 0,
+    "explanation": "Oxygen diffuses from the alveoli (high concentration) across the capillary walls into red blood cells, where it binds to hemoglobin to form oxyhemoglobin. It is then transported to tissues where it dissociates and diffuses into cells. White blood cells are for defense, not oxygen transport, and osmosis refers to water movement, not gases.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-359535ad"
+  },
+  {
+    "question": "Which factor directly provides the driving force for the upward movement of water from the roots to the leaves of a breadfruit tree (Artocarpus altilis) on a hot tropical afternoon?",
+    "options": [
+      "Transpiration pull created by evaporation of water from the leaf mesophyll",
+      "Photosynthesis occurring in the root hair cells",
+      "Active transport by living xylem vessel elements",
+      "Gravitational force pulling water upward against its natural flow"
+    ],
+    "answer": 0,
+    "explanation": "The transpiration stream is driven by the transpiration pull (tension) created when water evaporates from the surfaces of mesophyll cells in the leaves. This creates negative pressure that pulls water up the xylem (cohesion-tension theory). Xylem vessels are dead, hollow tubes, so they cannot perform active transport. Photosynthesis does not occur in roots.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-1a9dc789"
+  },
+  {
+    "question": "Blood leaving the right ventricle of a human heart during a dengue fever screening in Jamaica is transported via the pulmonary artery to the lungs primarily to:",
+    "options": [
+      "Collect oxygen and return immediately to the left ventricle to be pumped to the body",
+      "Release carbon dioxide and pick up oxygen through the alveolar capillaries",
+      "Deliver glucose and amino acids to nourish the lung tissues",
+      "Filter urea and nitrogenous wastes through the alveoli walls"
+    ],
+    "answer": 1,
+    "explanation": "The right side of the heart (right ventricle) pumps deoxygenated blood to the lungs via the pulmonary artery for gas exchange: carbon dioxide diffuses out of the blood into alveoli to be exhaled, while oxygen diffuses into the blood. The oxygenated blood then returns to the left atrium (not ventricle directly). The pulmonary circulation is for gas exchange, not nutrient delivery or waste filtration.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-7f190c5b"
+  },
+  {
+    "question": "A farmer in Barbados observes that during the harvesting season, sugarcane stalks accumulate high concentrations of sucrose in their lower internodes. Which process is primarily responsible for moving the sucrose from the leaves to the storage tissues in the stalk?",
+    "options": [
+      "Transpiration through the xylem vessels",
+      "Osmosis through the stomata",
+      "Translocation through the phloem sieve tubes",
+      "Active transport through the xylem tracheids"
+    ],
+    "answer": 2,
+    "explanation": "Translocation is the process by which organic solutes such as sucrose are transported from a source (leaves where photosynthesis occurs) to a sink (storage tissues in the stalk) through the phloem sieve tubes. Xylem vessels transport water and minerals, not sugars.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-b10aa9fd"
+  },
+  {
+    "question": "In the Caribbean, hypertension is a major health concern affecting blood vessel function. Which structural feature correctly distinguishes arteries from veins and allows them to withstand high pressure?",
+    "options": [
+      "Thin walls with valves to prevent backflow of blood",
+      "Thick muscular walls and a narrow lumen",
+      "Single cell-thick walls to facilitate rapid exchange of nutrients",
+      "Wide lumen and minimal elastic tissue to store blood when the heart relaxes"
+    ],
+    "answer": 1,
+    "explanation": "Arteries have thick muscular walls with abundant elastic tissue and a relatively narrow lumen to withstand the high pressure generated by ventricular contraction and to maintain blood flow away from the heart. Valves are characteristic of veins, and single cell-thick walls describe capillaries.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-f24898aa"
+  },
+  {
+    "question": "A biology student in Jamaica investigates water loss from hibiscus leaves. Which combination of environmental conditions common in the Caribbean would result in the highest rate of transpiration?",
+    "options": [
+      "High humidity, low temperature, and still air",
+      "High humidity, high temperature, and still air",
+      "Low humidity, low temperature, and windy conditions",
+      "Low humidity, high temperature, and windy conditions"
+    ],
+    "answer": 3,
+    "explanation": "Transpiration rates increase when the temperature is high (increasing the kinetic energy of water molecules), humidity is low (increasing the water potential gradient between the leaf and air), and wind is present (removing the water vapor layer at the leaf surface). This combination creates the greatest driving force for water loss.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-e80769fd"
+  },
+  {
+    "question": "During an inter-school sports meet in Trinidad, an athlete's pulse rate increases significantly. Which sequence correctly traces the path of an oxygenated red blood cell traveling from the lungs to the quadriceps muscle in the leg?",
+    "options": [
+      "Pulmonary vein \u2192 Left atrium \u2192 Left ventricle \u2192 Aorta \u2192 Leg arteries \u2192 Muscle capillaries",
+      "Pulmonary artery \u2192 Left atrium \u2192 Left ventricle \u2192 Vena cava \u2192 Leg arteries",
+      "Pulmonary vein \u2192 Right atrium \u2192 Right ventricle \u2192 Pulmonary artery \u2192 Leg capillaries",
+      "Vena cava \u2192 Right atrium \u2192 Right ventricle \u2192 Aorta \u2192 Leg arteries"
+    ],
+    "answer": 0,
+    "explanation": "Oxygenated blood returns from the lungs via the pulmonary vein to the left atrium, passes to the left ventricle, and is pumped into the aorta for systemic circulation to the body tissues. The pulmonary artery carries deoxygenated blood to the lungs, and the right side of the heart handles deoxygenated blood.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-4277bf08"
+  },
+  {
+    "question": "A cook in St. Lucia preparing dasheen (taro) stems notices that watery sap continues to ooze from the cut surfaces of the vascular bundles. Which tissue is responsible for transporting this water from the roots to the leaves of the plant?",
+    "options": [
+      "Phloem, which transports dissolved sugars from leaves to roots",
+      "Cambium, which produces new xylem and phloem cells",
+      "Xylem, which transports water and minerals from roots to shoots",
+      "Epidermis, which protects the stem and prevents water loss"
+    ],
+    "answer": 2,
+    "explanation": "Xylem vessels and tracheids form the tissue responsible for the upward movement of water and dissolved minerals from the roots to the aerial parts of the plant through transpiration pull. Phloem transports organic nutrients like sucrose, not water, while the cambium is a lateral meristem and the epidermis is a protective layer.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-e384b4cd"
+  },
+  {
+    "question": "During a hot afternoon in Barbados, water evaporates rapidly from the leaves of a bougainvillea plant. Which process best explains how water is continuously drawn up from the soil to replace this loss?",
+    "options": [
+      "Active transport of water molecules from the soil into the root xylem",
+      "Translocation of water through phloem vessels from roots to leaves",
+      "Osmosis into root hairs followed by the cohesion-tension mechanism in xylem",
+      "Capillary action drawing water from the atmosphere into the leaf stomata"
+    ],
+    "answer": 2,
+    "explanation": "Water enters root hairs by osmosis (passive movement down a water potential gradient) and is transported upward through xylem vessels via the cohesion-tension mechanism, where water molecules stick together (cohesion) and are pulled up by transpiration (tension). It is not active transport (A), does not occur in phloem (B), and does not enter from the atmosphere (D).",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-8a936d39"
+  },
+  {
+    "question": "A biology student in Trinidad examines a diagram of the human heart. Which statement correctly describes the destination of blood immediately after it leaves the right ventricle?",
+    "options": [
+      "It enters the aorta to be distributed to the entire body",
+      "It travels through the pulmonary artery to the lungs",
+      "It returns to the left atrium through the bicuspid valve",
+      "It moves to the kidneys for filtration before reaching other organs"
+    ],
+    "answer": 1,
+    "explanation": "The right ventricle pumps deoxygenated blood through the pulmonary artery to the lungs (pulmonary circulation) for oxygenation. The aorta (A) receives blood from the left ventricle. Blood does not go directly to the left atrium (C) from the right ventricle, nor does it go to kidneys first (D) - it goes to lungs first.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-dc9a43eb"
+  },
+  {
+    "question": "In sugar cane fields in Guyana, farmers observe that sugars produced in the leaves are transported to the stem for storage. Which statement correctly identifies the tissue and direction of transport?",
+    "options": [
+      "Xylem vessels transport sugars from the leaves to the stem by transpiration pull",
+      "Phloem sieve tubes translocate sugars from source to sink",
+      "Phloem sieve tubes translocate sugars from sink to source",
+      "Cambium layer transports sugars using root pressure"
+    ],
+    "answer": 1,
+    "explanation": "Organic nutrients like sucrose are transported through phloem sieve tubes by translocation, moving from a source (where food is made/stored, e.g., leaves) to a sink (where food is used/stored, e.g., stem). Xylem (A) transports water and minerals, not sugars. Direction is source to sink, not reversed (C). The cambium (D) is a meristematic tissue for secondary growth, not transport.",
+    "topic_id": "BIOL-02-00002",
+    "type": "MCQ",
+    "id": "Q-BIOL-02-00002-65f11976"
+  },
+  {
+    "question": "A farmer in Jamaica wants to propagate sweet potato plants vegetatively to ensure all offspring have the same desirable traits as the parent plant. Which process occurs in the cells of the new plantlets during this asexual reproduction?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Binary fission",
+      "Crossing over"
+    ],
+    "answer": 0,
+    "explanation": "Mitosis produces genetically identical diploid cells, ensuring the offspring are clones of the parent plant. Meiosis (option 1) reduces chromosome number and creates genetic variation for sexual reproduction. Binary fission (option 2) occurs in prokaryotes like bacteria, not plants. Crossing over (option 3) occurs during meiosis I and increases genetic variation, which is undesirable when maintaining specific crop traits.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-8bbedb80"
+  },
+  {
+    "question": "In Barbados, a population of cane toads shows variation in resistance to a commonly used pesticide. After years of pesticide application, the frequency of the resistance allele has increased significantly in the population. This scenario best demonstrates:",
+    "options": [
+      "Natural selection",
+      "Artificial selection",
+      "Lamarckian inheritance",
+      "Genetic drift"
+    ],
+    "answer": 0,
+    "explanation": "Natural selection occurs when environmental pressure (pesticide) favors individuals with advantageous alleles (resistance), allowing them to survive and reproduce. Artificial selection (option 1) involves human breeding of desirable traits. Lamarckian inheritance (option 2) incorrectly suggests acquired characteristics during an organism's lifetime are inherited. Genetic drift (option 3) refers to random changes in allele frequencies, not adaptive responses to specific environmental pressures.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-a0f4beb1"
+  },
+  {
+    "question": "A somatic cell of the Caribbean fruit fly (Drosophila) contains 8 chromosomes. Following meiosis II, how many chromosomes will be present in each resulting gamete?",
+    "options": [
+      "4",
+      "8",
+      "2",
+      "16"
+    ],
+    "answer": 0,
+    "explanation": "Meiosis reduces the chromosome number by half. Starting with 8 chromosomes (diploid), meiosis I produces cells with 4 chromosomes (haploid), and meiosis II separates sister chromatids but maintains the haploid number (4). Option 1 (8) would result from mitosis. Option 2 (2) incorrectly divides by 4. Option 3 (16) results from confusing DNA replication with chromosome doubling.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9bad82d0"
+  },
+  {
+    "question": "In Trinidad, a horticulturist crosses two heterozygous purple-flowered bougainvillea plants (Pp \u00d7 Pp), where purple (P) is dominant over white (p). What is the expected phenotypic ratio of the offspring?",
+    "options": [
+      "3 purple : 1 white",
+      "1 purple : 1 white",
+      "1 purple : 2 mixed : 1 white",
+      "9 purple : 3 white : 3 red : 1 pink"
+    ],
+    "answer": 0,
+    "explanation": "A monohybrid cross between two heterozygotes (Pp \u00d7 Pp) produces a 3:1 phenotypic ratio (3 purple to 1 white) according to Mendelian inheritance. Option 1 (1:1) results from a test cross (Pp \u00d7 pp). Option 2 describes incomplete dominance, which is not indicated here. Option 3 (9:3:3:1) is the phenotypic ratio for a dihybrid cross involving two different genes.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-60fd6cb6"
+  },
+  {
+    "question": "During the formation of pollen grains in hibiscus flowers native to the Caribbean, which two mechanisms contribute most to genetic variation among the resulting gametes?",
+    "options": [
+      "Crossing over and independent assortment",
+      "Mitosis and cytokinesis",
+      "DNA replication and binary fission",
+      "Artificial selection and cloning"
+    ],
+    "answer": 0,
+    "explanation": "Crossing over (exchange of genetic material between homologous chromosomes) and independent assortment (random orientation of chromosome pairs at metaphase I) are the primary sources of genetic variation during meiosis. Mitosis (option 1) produces identical cells. DNA replication (option 2) is conservative and produces identical copies. Binary fission (option 2) is asexual. Artificial selection and cloning (option 3) reduce genetic variation rather than increase it.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-d69969b0"
+  },
+  {
+    "question": "A beachgoer in Trinidad develops sunburn after exposure to intense tropical sunlight. Which cell division process is responsible for the regeneration of damaged skin cells during healing?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Binary fission",
+      "Budding"
+    ],
+    "answer": 0,
+    "explanation": "Mitosis is the process of somatic cell division that produces genetically identical daughter cells for growth and repair. Meiosis produces gametes (sex cells) and would not be involved in tissue repair. Binary fission occurs in prokaryotes, and budding is a form of asexual reproduction in organisms like yeast.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-8a5ca346"
+  },
+  {
+    "question": "In Jamaica, sickle cell anemia is a concern in the population. If both parents are carriers of the sickle cell trait (heterozygous genotype HbA HbS), what is the probability that their child will inherit the disease (homozygous recessive HbS HbS)?",
+    "options": [
+      "0%",
+      "25%",
+      "50%",
+      "75%"
+    ],
+    "answer": 1,
+    "explanation": "Using a Punnett square for a cross between two heterozygous parents (HbA HbS \u00d7 HbA HbS), the genotypic ratio is 25% HbA HbA (normal), 50% HbA HbS (carrier), and 25% HbS HbS (affected). Students often incorrectly select 50% by confusing carrier status with the disease phenotype.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-05c3bbc6"
+  },
+  {
+    "question": "Anolis lizards, found throughout the Caribbean islands, display remarkable variation in toe pad structure. Which mechanisms during meiosis contribute most significantly to this genetic diversity among offspring?",
+    "options": [
+      "DNA replication during interphase",
+      "Crossing over and independent assortment",
+      "Mitotic cell division",
+      "Binary fission of gametes"
+    ],
+    "answer": 1,
+    "explanation": "Crossing over (exchange of genetic material between homologous chromosomes) and independent assortment (random orientation of homologous pairs at the metaphase plate) occur during meiosis I and are the primary sources of genetic variation. DNA replication produces identical copies, mitosis produces identical somatic cells, and binary fission is a prokaryotic process.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-eadde5bd"
+  },
+  {
+    "question": "In Barbados, prolonged drought has affected maize crops. After several generations, the population shows increased drought resistance. Which statement correctly describes this example of natural selection?",
+    "options": [
+      "Individual maize plants adapted by growing deeper roots and passed these acquired traits to offspring",
+      "Plants with genetic variations for deeper roots survived and reproduced more frequently, increasing the trait's frequency",
+      "All plants simultaneously developed beneficial mutations in response to the drought conditions",
+      "Farmers intentionally selected and bred only the tallest plants for propagation"
+    ],
+    "answer": 1,
+    "explanation": "Natural selection acts on existing genetic variation; individuals with advantageous traits (deeper roots) have higher survival and reproductive rates, passing these genes to the next generation. The first option reflects the Lamarckian misconception of inheritance of acquired characteristics, while the third suggests directed mutation, which does not occur.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-e4335d15"
+  },
+  {
+    "question": "Farmers in St. Lucia propagate plantains asexually by taking cuttings from parent plants to ensure the new plants maintain the exact sweetness and yield characteristics of the parent. Which biological process ensures this genetic uniformity?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Fertilization",
+      "Crossing over"
+    ],
+    "answer": 0,
+    "explanation": "Asexual propagation through cuttings involves mitosis, which produces genetically identical daughter cells (clones) to the parent plant. Meiosis and fertilization introduce genetic variation through recombination and mixing of parental genomes, which would not preserve the exact desirable traits of the parent plant.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-1ea5ddb6"
+  },
+  {
+    "question": "A farmer in Jamaica propagates banana plants vegetatively using underground stems (suckers). The offspring produced are genetically identical to the parent plant. Which cell division process ensures this genetic uniformity?",
+    "options": [
+      "Meiosis, producing haploid gametes that fuse during fertilization",
+      "Mitosis, producing diploid daughter cells identical to the parent cell",
+      "Binary fission, common in bacterial contamination of soil",
+      "Meiosis II, separating sister chromatids without crossing over"
+    ],
+    "answer": 1,
+    "explanation": "Vegetative propagation involves mitosis, where a parent cell divides to produce genetically identical diploid daughter cells. This maintains the exact genetic makeup of the parent banana plant, unlike meiosis which produces genetically variable haploid gametes for sexual reproduction.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-8b2190cd"
+  },
+  {
+    "question": "During gamete formation in the Trinidad motmot (Momotus bahamensis), which specific event during meiosis contributes most significantly to genetic variation among the offspring?",
+    "options": [
+      "DNA replication during interphase, doubling the genetic material",
+      "Crossing over between homologous chromosomes in prophase I",
+      "Separation of sister chromatids during anaphase II",
+      "Cytokinesis dividing the cytoplasm equally between cells"
+    ],
+    "answer": 1,
+    "explanation": "Crossing over during prophase I of meiosis involves the exchange of genetic material between non-sister chromatids of homologous chromosomes. This recombination creates new allele combinations, increasing genetic diversity. DNA replication produces identical copies, while sister chromatid separation merely distributes identical copies to different cells.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9273cf01"
+  },
+  {
+    "question": "In Barbados, a horticulturist crosses a pure-breeding red scotch bonnet pepper plant (RR) with a pure-breeding yellow one (rr). If red is dominant to yellow, what is the expected phenotypic ratio of red to yellow peppers in the F2 generation?",
+    "options": [
+      "100% red peppers",
+      "50% red and 50% yellow peppers",
+      "75% red and 25% yellow peppers",
+      "25% red and 75% yellow peppers"
+    ],
+    "answer": 2,
+    "explanation": "The F1 generation from RR \u00d7 rr is all Rr (red). When F1 plants self-pollinate (Rr \u00d7 Rr), the genotypic ratio is 1 RR : 2 Rr : 1 rr. Since both RR and Rr show the dominant red phenotype, the phenotypic ratio is 3 red : 1 yellow, or 75% red and 25% yellow.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9787785a"
+  },
+  {
+    "question": "Caribbean anole lizards have evolved distinct morphological adaptations on different islands, such as longer limbs for open habitats versus shorter limbs for dense vegetation. Which mechanism best explains this adaptive radiation?",
+    "options": [
+      "Inheritance of acquired characteristics during the lizard's lifetime",
+      "Natural selection acting on pre-existing genetic variations in populations",
+      "Spontaneous mutation creating new traits exactly when the environment changes",
+      "Genetic drift occurring primarily in large, stable island populations"
+    ],
+    "answer": 1,
+    "explanation": "Natural selection acts on existing genetic variation within populations. Lizards with advantageous traits (e.g., appropriate limb length for specific habitats) survive and reproduce more successfully, passing these traits to offspring. This is not Lamarckian inheritance of acquired characteristics, nor does it require mutations to occur exactly when needed.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-3402841f"
+  },
+  {
+    "question": "In malaria-endemic regions of the Caribbean, individuals heterozygous for the sickle cell allele (HbAS) have a survival advantage over both normal homozygotes (HbAA) and sickle cell homozygotes (HbSS). How does this demonstrate the mechanism of natural selection?",
+    "options": [
+      "Malaria parasites cause mutations that produce the sickle cell allele",
+      "Balanced polymorphism maintains both alleles through heterozygote advantage",
+      "The HbSS genotype gradually eliminates the HbA allele from the population",
+      "Acquired immunity to malaria is inherited by all offspring"
+    ],
+    "answer": 1,
+    "explanation": "This is an example of balanced polymorphism, where natural selection maintains two or more alleles in a population because the heterozygote has higher fitness (survival advantage) than either homozygote. HbAS individuals resist malaria better than HbAA, while avoiding the severe anemia of HbSS, thus preserving both alleles in the gene pool.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-2ba6df51"
+  },
+  {
+    "question": "A Caribbean farmer observes that a banana sucker (offshoot) grows into a genetically identical plant to the parent. Which cellular process is responsible for producing these identical cells during vegetative propagation?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Fertilization",
+      "Binary fission"
+    ],
+    "answer": 0,
+    "explanation": "Mitosis produces genetically identical daughter cells (clones), which is essential for asexual reproduction like the growth of banana suckers. Meiosis reduces chromosome number and creates genetic variation for sexual reproduction. Binary fission occurs in prokaryotes like bacteria, not in banana plants.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-d604d1bd"
+  },
+  {
+    "question": "In a Caribbean population, the allele for normal hemoglobin (H) is dominant to the sickle cell allele (h). If two carrier parents (Hh) have a child, what is the probability that the child will actually have sickle cell anemia (genotype hh)?",
+    "options": [
+      "0%",
+      "25%",
+      "50%",
+      "75%"
+    ],
+    "answer": 1,
+    "explanation": "Using a Punnett square for a heterozygous cross (Hh \u00d7 Hh), the genotypic ratio is 25% HH (normal), 50% Hh (carriers), and 25% hh (affected). A common misconception is selecting 50%, confusing carriers with affected individuals, or 0%, assuming carriers cannot produce affected offspring.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-5675bd61"
+  },
+  {
+    "question": "In the 1950s, industrial pollution darkened tree trunks in parts of Jamaica. Scientists observed that the population of light-colored peppered moths decreased while dark-colored moths increased over several generations. This change in population characteristics best illustrates:",
+    "options": [
+      "Inheritance of acquired characteristics",
+      "Natural selection",
+      "Artificial selection",
+      "Genetic drift"
+    ],
+    "answer": 1,
+    "explanation": "This is an example of industrial melanism via natural selection: predators easily spotted light moths on dark bark, so dark moths survived and reproduced more. 'Inheritance of acquired characteristics' (Lamarckism) is a common misconception where students think the moths turned dark due to pollution exposure.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-6effcb91"
+  },
+  {
+    "question": "During meiosis in a Caribbean fruit fly with 8 chromosomes (diploid number 2n=8), at which stage does the chromosome number reduce from 8 to 4 in each cell?",
+    "options": [
+      "Anaphase I",
+      "Metaphase II",
+      "Anaphase II",
+      "Telophase II"
+    ],
+    "answer": 0,
+    "explanation": "During Anaphase I, homologous chromosomes separate and move to opposite poles, reducing the chromosome number from diploid (2n) to haploid (n). A common error is selecting Anaphase II, which separates sister chromatids in cells that are already haploid.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-eb423be0"
+  },
+  {
+    "question": "Two processes during meiosis contribute to genetic variation among offspring of Trinidad guppies. These are crossing over and:",
+    "options": [
+      "Cloning",
+      "Independent assortment",
+      "Cytokinesis",
+      "DNA replication"
+    ],
+    "answer": 1,
+    "explanation": "Crossing over (exchange between homologous chromosomes) and independent assortment (random orientation of homologous pairs at metaphase I) are the two main sources of genetic variation in meiosis. Students often mistakenly select cloning (which produces identical copies) or DNA replication (which occurs before division but does not create variation).",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-e666243c"
+  },
+  {
+    "question": "Drag each characteristic to the correct type of cell division.",
+    "type": "DND",
+    "categories": [
+      "Mitosis",
+      "Meiosis"
+    ],
+    "items": [
+      {
+        "text": "Produces two daughter cells",
+        "category": "Mitosis"
+      },
+      {
+        "text": "Produces four daughter cells",
+        "category": "Meiosis"
+      },
+      {
+        "text": "Occurs in somatic (body) cells",
+        "category": "Mitosis"
+      },
+      {
+        "text": "Occurs during gamete formation",
+        "category": "Meiosis"
+      },
+      {
+        "text": "Maintains the diploid chromosome number",
+        "category": "Mitosis"
+      },
+      {
+        "text": "Reduces chromosome number by half (haploid)",
+        "category": "Meiosis"
+      },
+      {
+        "text": "Crossing over occurs between homologous chromosomes",
+        "category": "Meiosis"
+      },
+      {
+        "text": "Results in genetically identical daughter cells",
+        "category": "Mitosis"
+      },
+      {
+        "text": "Introduces genetic variation in daughter cells",
+        "category": "Meiosis"
+      },
+      {
+        "text": "One division cycle",
+        "category": "Mitosis"
+      },
+      {
+        "text": "Two division cycles (Meiosis I and II)",
+        "category": "Meiosis"
+      }
+    ],
+    "topic_id": "BIOL-03-00001",
+    "id": "Q-BIOL-03-00001-f1211ab7"
+  },
+  {
+    "question": "Classify the following terms as either genotype or phenotype.",
+    "type": "DND",
+    "categories": [
+      "Genotype",
+      "Phenotype"
+    ],
+    "items": [
+      {
+        "text": "TT",
+        "category": "Genotype"
+      },
+      {
+        "text": "Tall plant",
+        "category": "Phenotype"
+      },
+      {
+        "text": "Bb",
+        "category": "Genotype"
+      },
+      {
+        "text": "Blue eye color",
+        "category": "Phenotype"
+      },
+      {
+        "text": "The genetic makeup of an organism",
+        "category": "Genotype"
+      },
+      {
+        "text": "The observable physical appearance",
+        "category": "Phenotype"
+      },
+      {
+        "text": "Heterozygous tall (Tt)",
+        "category": "Genotype"
+      },
+      {
+        "text": "Short stature",
+        "category": "Phenotype"
+      }
+    ],
+    "topic_id": "BIOL-03-00001",
+    "id": "Q-BIOL-03-00001-a5149d86"
+  },
+  {
+    "question": "Distinguish between natural selection and artificial selection by dragging each example to the correct category.",
+    "type": "DND",
+    "categories": [
+      "Natural Selection",
+      "Artificial Selection"
+    ],
+    "items": [
+      {
+        "text": "Survival of the fittest in a wild population",
+        "category": "Natural Selection"
+      },
+      {
+        "text": "Selective breeding of dairy cattle for high milk yield",
+        "category": "Artificial Selection"
+      },
+      {
+        "text": "Development of antibiotic resistance in bacteria",
+        "category": "Natural Selection"
+      },
+      {
+        "text": "Breeding dogs to enhance specific physical traits",
+        "category": "Artificial Selection"
+      },
+      {
+        "text": "Adaptation to environmental pressures without human intervention",
+        "category": "Natural Selection"
+      },
+      {
+        "text": "Human-directed breeding programs",
+        "category": "Artificial Selection"
+      },
+      {
+        "text": "Darwin's theory of evolution mechanism",
+        "category": "Natural Selection"
+      },
+      {
+        "text": "Domestication of wild plants into crops",
+        "category": "Artificial Selection"
+      }
+    ],
+    "topic_id": "BIOL-03-00001",
+    "id": "Q-BIOL-03-00001-c079126e"
+  },
+  {
+    "question": "Identify whether each event occurs during Meiosis I or Meiosis II.",
+    "type": "DND",
+    "categories": [
+      "Meiosis I",
+      "Meiosis II"
+    ],
+    "items": [
+      {
+        "text": "Synapsis (pairing of homologous chromosomes)",
+        "category": "Meiosis I"
+      },
+      {
+        "text": "Crossing over between non-sister chromatids",
+        "category": "Meiosis I"
+      },
+      {
+        "text": "Separation of homologous chromosomes",
+        "category": "Meiosis I"
+      },
+      {
+        "text": "Reduction division (diploid to haploid)",
+        "category": "Meiosis I"
+      },
+      {
+        "text": "Two cells produced at the end of the division",
+        "category": "Meiosis I"
+      },
+      {
+        "text": "Separation of sister chromatids",
+        "category": "Meiosis II"
+      },
+      {
+        "text": "Equational division (maintains haploid number)",
+        "category": "Meiosis II"
+      },
+      {
+        "text": "Four cells produced at the end of the division",
+        "category": "Meiosis II"
+      }
+    ],
+    "topic_id": "BIOL-03-00001",
+    "id": "Q-BIOL-03-00001-e94db3c7"
+  },
+  {
+    "question": "Categorize the following genetic conditions based on allele composition.",
+    "type": "DND",
+    "categories": [
+      "Homozygous",
+      "Heterozygous"
+    ],
+    "items": [
+      {
+        "text": "BB",
+        "category": "Homozygous"
+      },
+      {
+        "text": "Bb",
+        "category": "Heterozygous"
+      },
+      {
+        "text": "tt",
+        "category": "Homozygous"
+      },
+      {
+        "text": "Tt",
+        "category": "Heterozygous"
+      },
+      {
+        "text": "Contains two identical alleles for a trait",
+        "category": "Homozygous"
+      },
+      {
+        "text": "Contains two different alleles for a trait",
+        "category": "Heterozygous"
+      },
+      {
+        "text": "True breeding (pure line) for a characteristic",
+        "category": "Homozygous"
+      },
+      {
+        "text": "Hybrid condition",
+        "category": "Heterozygous"
+      }
+    ],
+    "topic_id": "BIOL-03-00001",
+    "id": "Q-BIOL-03-00001-9b47a76f"
+  },
+  {
+    "question": "Marine biologists in Jamaica are restoring damaged coral reefs by fragmenting healthy corals and attaching them to new substrates. Which cellular process allows these fragments to grow into colonies that are genetically identical to the parent coral?",
+    "options": [
+      "Meiosis involving crossing over",
+      "Mitosis involving DNA replication and equal chromosome separation",
+      "Binary fission following conjugation",
+      "Fertilization producing diploid zygotes"
+    ],
+    "answer": 1,
+    "explanation": "Mitosis is the process of nuclear division that produces two genetically identical daughter cells, maintaining the diploid chromosome number. This enables asexual growth and repair in organisms like corals. Meiosis would reduce genetic material and introduce variation, while binary fission occurs in prokaryotes and fertilization involves sexual reproduction.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-204adccc"
+  },
+  {
+    "question": "In Trinidad, populations of the Blue Morpho butterfly show significant color variation. Which event during meiosis I contributes most to this genetic diversity among offspring?",
+    "options": [
+      "Replication of chromatids during interphase",
+      "Random alignment of homologous pairs at the metaphase plate",
+      "Crossing over between non-sister chromatids of homologous chromosomes",
+      "Separation of sister chromatids at anaphase II"
+    ],
+    "answer": 2,
+    "explanation": "Crossing over (genetic recombination) occurs during prophase I when homologous chromosomes exchange segments, creating new allele combinations on chromatids. While independent assortment (option B) also increases variation, crossing over is specifically the mechanism that recombines linked genes. DNA replication (option A) produces identical copies, and anaphase II (option D) separates chromatids already created by meiosis I.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-98607efc"
+  },
+  {
+    "question": "A farmer in St. Lucia crosses a heterozygous scotch bonnet pepper plant (Hh) producing high heat with a homozygous recessive plant (hh) producing mild heat. According to Mendelian genetics, what percentage of the F1 offspring will be phenotypically mild?",
+    "options": [
+      "0%",
+      "25%",
+      "50%",
+      "75%"
+    ],
+    "answer": 2,
+    "explanation": "This is a test cross. The heterozygous parent (Hh) produces gametes H and h, while the homozygous recessive (hh) produces only h gametes. The Punnett square yields 50% Hh (high heat) and 50% hh (mild heat). Students often incorrectly apply the 3:1 ratio from monohybrid crosses of two heterozygotes (Hh \u00d7 Hh) or the 1:2:1 genotypic ratio.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-b077e25b"
+  },
+  {
+    "question": "On Caribbean islands, Anolis lizards have evolved distinct toe pad sizes; those on broad tree trunks possess larger adhesive pads than those on narrow twigs. Which principle of Darwin's theory of natural selection best explains this adaptive radiation?",
+    "options": [
+      "Inheritance of acquired characteristics from parental stretching exercises",
+      "Differential survival and reproduction of individuals with advantageous variations",
+      "Direct mutation of genes in response to tree trunk diameter",
+      "Random genetic drift fixing traits in isolated island populations"
+    ],
+    "answer": 1,
+    "explanation": "Natural selection operates through variation in heritable traits; individuals with toe pads better suited to their specific habitat survive and reproduce more successfully, passing these advantageous alleles to offspring. Option A represents Lamarckism (discredited), option C suggests directed mutation (incorrect), and option D describes genetic drift (a different evolutionary mechanism) rather than selection based on environmental adaptation.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-2c08c523"
+  },
+  {
+    "question": "A hawksbill sea turtle female produces haploid eggs through gamete formation while her somatic cells divide for tissue repair. Regarding chromosome number, how does meiosis differ from mitosis in this organism?",
+    "options": [
+      "Mitosis halves the chromosome number; meiosis maintains the diploid number",
+      "Mitosis maintains the diploid number; meiosis reduces to the haploid number",
+      "Both processes produce diploid cells for growth and reproduction",
+      "Both processes produce haploid cells to maintain genetic consistency"
+    ],
+    "answer": 1,
+    "explanation": "Mitosis produces two diploid (2n) daughter cells identical to the parent cell for growth and repair, conserving the chromosome number. Meiosis consists of two divisions that reduce the chromosome number by half, producing four haploid (n) gametes necessary for sexual reproduction. Students commonly reverse these outcomes or assume both processes have the same ploidy result.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-c16f190d"
+  },
+  {
+    "question": "A fisherman in Jamaica heals a deep cut on his hand. The new skin cells formed are genetically identical to the original cells. Which cell division process is responsible for this repair?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Binary fission",
+      "Fertilization"
+    ],
+    "answer": 0,
+    "explanation": "Mitosis produces two genetically identical diploid daughter cells from a parent cell, enabling growth and tissue repair in multicellular organisms. Meiosis produces gametes with half the chromosome number, binary fission occurs in prokaryotes, and fertilization is the fusion of gametes.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-3cbf1d8c"
+  },
+  {
+    "question": "An agricultural scientist in St. Vincent is studying breadfruit (Artocarpus altilis) reproduction. If the somatic cells contain 56 chromosomes, how many chromosomes would be present in the pollen grains (male gametes) produced by meiosis?",
+    "options": [
+      "28",
+      "56",
+      "112",
+      "14"
+    ],
+    "answer": 0,
+    "explanation": "Meiosis is a reduction division that halves the chromosome number to produce haploid gametes. If somatic (diploid) cells have 56 chromosomes (2n), gametes will have 28 chromosomes (n). This ensures the chromosome number is restored when fertilization occurs.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9643b477"
+  },
+  {
+    "question": "In Trinidad, a plant breeder crosses two heterozygous red hibiscus plants (Rr \u00d7 Rr), where the allele for red flowers (R) is dominant over white flowers (r). What is the expected phenotypic ratio of the offspring?",
+    "options": [
+      "3 red : 1 white",
+      "1 red : 1 white",
+      "1 red : 2 pink : 1 white",
+      "All red"
+    ],
+    "answer": 0,
+    "explanation": "A monohybrid cross between two heterozygotes (Rr \u00d7 Rr) produces offspring with genotypes in the ratio 1 RR : 2 Rr : 1 rr. Since R is dominant, both RR and Rr show the red phenotype, giving a phenotypic ratio of 3 red : 1 white. The 1:2:1 ratio in option C represents incomplete dominance, not complete dominance.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-dffbcb92"
+  },
+  {
+    "question": "In Barbados, populations of Anolis lizards in forested areas have longer legs for running, while those in shrubby areas have shorter legs for climbing. Following a prolonged drought that killed tall trees and created scrubbier vegetation, what would the theory of natural selection predict about the lizard population after several generations?",
+    "options": [
+      "The proportion of lizards with shorter legs would increase because they survive and reproduce more successfully",
+      "Individual adult lizards would grow shorter legs to adapt to the new environment",
+      "All lizards would develop shorter legs within their lifetime and pass this trait to offspring",
+      "The population would remain unchanged because mutations occur randomly"
+    ],
+    "answer": 0,
+    "explanation": "Natural selection acts on existing genetic variation within a population. Lizards with shorter legs (already present in the gene pool) have higher fitness in scrubby habitats, survive longer, and leave more offspring. Options B and C reflect Lamarckian inheritance (acquired characteristics), which is incorrect. Natural selection is not random; it is the differential survival of variants.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-69cd6723"
+  },
+  {
+    "question": "Banana farmers in St. Lucia face crop losses from Panama disease. Scientists observe that sexually reproducing wild banana relatives show greater resistance variation than cloned commercial varieties. Which events during meiosis generate the genetic variation that natural selection acts upon?",
+    "options": [
+      "Crossing over between homologous chromosomes and independent assortment of chromosomes",
+      "Chromosome duplication during interphase",
+      "Cytokinesis at the end of telophase",
+      "Mitotic division of gametes before fertilization"
+    ],
+    "answer": 0,
+    "explanation": "Crossing over (exchange of genetic material between homologous chromosomes in prophase I) and independent assortment (random orientation of chromosome pairs at metaphase I) shuffle alleles to create new genetic combinations in gametes. This variation is the raw material for natural selection. Duplication and cytokinesis do not create variation, and gametes are produced by meiosis, not mitosis.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-19f38a4d"
+  },
+  {
+    "question": "A Caribbean agricultural researcher is studying wild sweet potato (Ipomoea batatas) plants which have a diploid chromosome number of 2n = 22. If a pollen mother cell undergoes meiosis to produce gametes, what is the correct outcome?",
+    "options": [
+      "22 daughter cells each containing 22 chromosomes",
+      "4 daughter cells each containing 11 chromosomes",
+      "2 daughter cells each containing 11 chromosomes",
+      "4 daughter cells each containing 22 chromosomes"
+    ],
+    "answer": 1,
+    "explanation": "Meiosis involves two divisions resulting in 4 haploid daughter cells (n). Since 2n = 22, the haploid number n = 11. Option A confuses meiosis with multiple rounds of mitosis. Option C describes the result after Meiosis I only (2 cells). Option D incorrectly assumes meiosis maintains the diploid number like mitosis.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-7169e3b0"
+  },
+  {
+    "question": "In Jamaica, a farmer crosses two heterozygous black-coated goats (Bb \u00d7 Bb), where the allele for black coat (B) is dominant over white coat (b). What percentage of the F1 offspring are expected to be homozygous dominant (BB)?",
+    "options": [
+      "25%",
+      "50%",
+      "75%",
+      "100%"
+    ],
+    "answer": 0,
+    "explanation": "Using a Punnett square, the genotypic ratio is 1 BB : 2 Bb : 1 bb. Therefore, 25% are homozygous dominant (BB). Option B (50%) is a common error representing the heterozygous proportion. Option C (75%) represents the proportion showing the dominant phenotype (BB + Bb), not the specific genotype requested.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9417030b"
+  },
+  {
+    "question": "On the islands of the Lesser Antilles, different species of anole lizards have adapted to specific habitats\u2014tree-dwelling species possess expanded adhesive toe pads while ground-dwelling species have smaller pads. According to the theory of natural selection, how did these distinct adaptations arise?",
+    "options": [
+      "The lizards stretched and exercised their toes to climb better, passing these acquired characteristics to their offspring",
+      "Random genetic mutations created variation in toe pad size, and individuals with advantageous pads survived and reproduced more successfully",
+      "The lizards intentionally developed larger toe pads in response to their arboreal lifestyle to ensure survival",
+      "All lizards originally had identical toe pads, but the tropical environment altered their genetic structure over time"
+    ],
+    "answer": 1,
+    "explanation": "Natural selection acts on pre-existing random variation (mutations). Advantageous traits increase survival and reproductive success. Option A reflects Lamarckism (inheritance of acquired characteristics)\u2014a common misconception. Option C implies purposeful evolution. Option D suggests the environment directly changes genes (acquired characteristics), which is incorrect.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-9aad95c0"
+  },
+  {
+    "question": "Caribbean brain corals (Diploria) can reproduce asexually through budding and sexually by releasing gametes into the water during mass spawning events. Which statement correctly identifies the type of cell division and genetic outcome for each process?",
+    "options": [
+      "Budding involves meiosis producing genetically identical cells; gamete formation involves mitosis producing variable cells",
+      "Both processes involve mitosis to maintain genetic stability and the diploid chromosome number",
+      "Budding involves mitosis producing genetically identical diploid cells; gamete formation involves meiosis producing haploid cells with genetic variation",
+      "Both processes involve meiosis to ensure genetic diversity within the coral population"
+    ],
+    "answer": 2,
+    "explanation": "Asexual reproduction (budding) uses mitosis, producing clones (genetically identical to parent). Sexual reproduction requires meiosis to produce haploid gametes (with half the chromosome number) and introduces genetic variation through crossing over and independent assortment. Option A reverses the processes. Options B and D incorrectly apply one division type to both processes.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-34dfe863"
+  },
+  {
+    "question": "In Barbados, the widespread use of antibiotics in poultry farming has led to an increase in antibiotic-resistant Salmonella bacteria. Which sequence correctly describes the mechanism of natural selection driving this evolution?",
+    "options": [
+      "The bacteria developed resistance to survive the antibiotics, then passed this resistance to their offspring",
+      "Random mutations created some resistant bacteria; antibiotics killed non-resistant strains; surviving resistant bacteria reproduced and spread resistance genes",
+      "The antibiotics caused mutations in the bacterial DNA, creating resistance that was inherited by subsequent generations",
+      "All bacteria were naturally resistant, and the antibiotics simply selected for the strongest individuals"
+    ],
+    "answer": 1,
+    "explanation": "This describes the correct sequence: variation exists (random mutation) \u2192 selection pressure (antibiotics) \u2192 differential survival \u2192 inheritance. Option A implies purposeful adaptation (Lamarckism). Option C is a common misconception\u2014antibiotics select for existing resistance but do not cause the mutations. Option D is incorrect because populations typically contain genetic variation rather than universal resistance.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-ccf0a3d2"
+  },
+  {
+    "question": "During gamete formation in soursop (Annona muricata) plants native to the Caribbean, meiosis occurs. Which statement correctly compares the outcome of meiosis to mitosis in these plants?",
+    "options": [
+      "Meiosis produces four genetically identical diploid cells, while mitosis produces two genetically identical diploid cells.",
+      "Meiosis produces four genetically different haploid cells, while mitosis produces two genetically identical diploid cells.",
+      "Meiosis produces two genetically identical haploid cells, while mitosis produces four genetically different diploid cells.",
+      "Meiosis produces two genetically different diploid cells, while mitosis produces four genetically identical haploid cells."
+    ],
+    "answer": 1,
+    "explanation": "Meiosis involves two nuclear divisions resulting in four haploid (n) daughter cells with genetic variation due to crossing over and independent assortment. This reduces the chromosome number by half for sexual reproduction. Mitosis produces two diploid (2n) cells genetically identical to the parent cell, used for growth and repair. Options A, C, and D confuse chromosome number (haploid vs diploid), cell count, and genetic variation.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-7aec2ffd"
+  },
+  {
+    "question": "In Jamaica, sickle cell anaemia follows Mendelian inheritance patterns prevalent in Afro-Caribbean populations. If a heterozygous woman (genotype HbA HbS) has children with a man who has sickle cell anaemia (genotype HbS HbS), what is the probability that their child will have the sickle cell trait (carrier) but not the disease?",
+    "options": [
+      "0%",
+      "25%",
+      "50%",
+      "100%"
+    ],
+    "answer": 2,
+    "explanation": "Using a Punnett square: the mother can pass either HbA or HbS (50% each), while the father can only pass HbS. The possible offspring are 50% HbA HbS (carrier/trait, no disease) and 50% HbS HbS (disease). Therefore, there is a 50% probability of having a child with the trait but not the disease. The 25% distractor confuses this with a standard monohybrid cross between two heterozygotes (Aa \u00d7 Aa), while 100% and 0% represent misconceptions about dominance and inheritance patterns.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-96f3858c"
+  },
+  {
+    "question": "Studies of Anolis lizard populations across Caribbean islands show that those living on broad tree trunks have longer legs for running, while those on narrow twigs have shorter legs. According to the theory of natural selection, which statement best explains this variation?",
+    "options": [
+      "Individual lizards grew shorter or longer legs depending on the tree they climbed, and passed these acquired characteristics to their offspring.",
+      "Random mutations occurred that were directed by the environment to produce exactly the leg length needed for each habitat.",
+      "Genetic variations in leg length existed in the population; lizards with leg lengths best suited to their habitat survived and reproduced more successfully.",
+      "The lizards consciously chose to develop specific leg lengths to better survive in their particular habitat."
+    ],
+    "answer": 2,
+    "explanation": "Natural selection acts on pre-existing genetic variation within a population. Individuals with advantageous traits (appropriate leg length for their specific habitat) have higher survival and reproductive rates, passing these genes to subsequent generations. Option A reflects Lamarckism (inheritance of acquired characteristics), Option B suggests directed or adaptive mutation (mutations are random, not directed by need), and Option D implies conscious evolution\u2014both are common misconceptions about how natural selection operates.",
+    "topic_id": "BIOL-03-00001",
+    "type": "MCQ",
+    "id": "Q-BIOL-03-00001-eb273d91"
+  }
+]

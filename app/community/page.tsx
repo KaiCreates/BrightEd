@@ -585,7 +585,7 @@ function CommunityHubInner() {
 
                 const auraClass = rank === 1 ? 'aura-glow aura-gold' : rank === 2 ? 'aura-glow aura-silver' : rank === 3 ? 'aura-glow aura-bronze' : ''
 
-                const bubbleBase = `nebula-stroke bg-white/[0.03] backdrop-blur-md border border-white/10 ${auraClass}`
+                const bubbleBase = `nebula-stroke bg-white/[0.04] border border-white/10 ${auraClass}`
                 const bubbleCornersMine = 'rounded-[var(--radius-bubble)] rounded-tr-md'
                 const bubbleCornersOther = 'rounded-[var(--radius-bubble)] rounded-tl-md'
 

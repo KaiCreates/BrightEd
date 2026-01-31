@@ -9,6 +9,7 @@
  */
 
 import { NABLE_CONSTANTS, SubSkillScore, InteractionMetrics, FluencyScore } from './types';
+import { updateHalfLife } from './spaced-repetition';
 
 /**
  * Calculate speed factor based on response time
@@ -185,7 +186,8 @@ export function updateStreak(
 export function updateSubSkillScore(
     current: SubSkillScore,
     metrics: InteractionMetrics,
-    expectedTime: number = 30
+    expectedTime: number = 30,
+    stabilityFactor: number = 1.0
 ): SubSkillScore {
     const correct = metrics.selectedAnswer === metrics.correctAnswer;
 
@@ -213,6 +215,14 @@ export function updateSubSkillScore(
     // Reset memory decay on test
     const newMemoryDecay = 0;
 
+    // Update half-life using HLR model
+    const newHalfLife = updateHalfLife(
+        current.halfLife,
+        correct,
+        metrics.questionDifficulty,
+        stabilityFactor
+    );
+
     return {
         mastery: masteryResult.newMastery,
         confidence: newConfidence,
@@ -220,6 +230,7 @@ export function updateSubSkillScore(
         errorHistory: newErrorHistory,
         streakCount: newStreak,
         memoryDecay: newMemoryDecay,
+        halfLife: newHalfLife,
         theoreticalOnly: current.theoreticalOnly
     };
 }
@@ -238,6 +249,7 @@ export function createInitialSubSkillScore(
         errorHistory: [],
         streakCount: 0,
         memoryDecay: 0,
+        halfLife: NABLE_CONSTANTS.HALFLIFE_BASE,
         theoreticalOnly: false
     };
 }

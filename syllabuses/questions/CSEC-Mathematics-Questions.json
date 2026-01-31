@@ -1,0 +1,210 @@
+[
+    {
+        "id": "Q-MATH-01-001",
+        "topic_id": "MATH-01-00001",
+        "type": "MCQ",
+        "difficulty": 1,
+        "question": "What is the value of 5 + 3 * 2?",
+        "options": [
+            {
+                "id": "a",
+                "text": "16"
+            },
+            {
+                "id": "b",
+                "text": "11"
+            },
+            {
+                "id": "c",
+                "text": "10"
+            },
+            {
+                "id": "d",
+                "text": "13"
+            }
+        ],
+        "answer": "b",
+        "explanation": "According to the order of operations (BODMAS), multiplication is performed before addition. 3 * 2 = 6, and 5 + 6 = 11."
+    },
+    {
+        "id": "Q-MATH-01-002",
+        "topic_id": "MATH-01-00001",
+        "type": "DND",
+        "difficulty": 2,
+        "question": "Sort these numbers into their correct sets.",
+        "items": [
+            {
+                "text": "5",
+                "category": "Natural Numbers"
+            },
+            {
+                "text": "-3",
+                "category": "Integers"
+            },
+            {
+                "text": "0.75",
+                "category": "Rational Numbers"
+            },
+            {
+                "text": "π",
+                "category": "Irrational Numbers"
+            }
+        ]
+    },
+    {
+        "id": "Q-MATH-02-001",
+        "topic_id": "MATH-02-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "An item priced at $120 is sold at a 15% discount. What is the sale price?",
+        "options": [
+            {
+                "id": "a",
+                "text": "$102"
+            },
+            {
+                "id": "b",
+                "text": "$105"
+            },
+            {
+                "id": "c",
+                "text": "$108"
+            },
+            {
+                "id": "d",
+                "text": "$115"
+            }
+        ],
+        "answer": "a",
+        "explanation": "Discount = 15% of $120 = 0.15 * 120 = $18. Sale Price = $120 - $18 = $102."
+    },
+    {
+        "id": "Q-MATH-02-002",
+        "topic_id": "MATH-02-00001",
+        "type": "MCQ",
+        "difficulty": 3,
+        "question": "Calculate the simple interest on $5000 invested at 4% per annum for 3 years.",
+        "options": [
+            {
+                "id": "a",
+                "text": "$200"
+            },
+            {
+                "id": "b",
+                "text": "$600"
+            },
+            {
+                "id": "c",
+                "text": "$5600"
+            },
+            {
+                "id": "d",
+                "text": "$120"
+            }
+        ],
+        "answer": "b",
+        "explanation": "Simple Interest = (Principal * Rate * Time) / 100 = (5000 * 4 * 3) / 100 = $600."
+    },
+    {
+        "id": "Q-MATH-04-001",
+        "topic_id": "MATH-04-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "What is the area of a circle with a radius of 7 cm? (Use π = 22/7)",
+        "options": [
+            {
+                "id": "a",
+                "text": "44 cm²"
+            },
+            {
+                "id": "b",
+                "text": "154 cm²"
+            },
+            {
+                "id": "c",
+                "text": "49 cm²"
+            },
+            {
+                "id": "d",
+                "text": "22 cm²"
+            }
+        ],
+        "answer": "b",
+        "explanation": "Area = πr² = (22/7) * 7 * 7 = 22 * 7 = 154 cm²."
+    },
+    {
+        "id": "Q-MATH-06-001",
+        "topic_id": "MATH-06-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "Solve for x: 3x - 5 = 16",
+        "options": [
+            {
+                "id": "a",
+                "text": "x = 3"
+            },
+            {
+                "id": "b",
+                "text": "x = 7"
+            },
+            {
+                "id": "c",
+                "text": "x = 11"
+            },
+            {
+                "id": "d",
+                "text": "x = 21"
+            }
+        ],
+        "answer": "b",
+        "explanation": "3x = 16 + 5 => 3x = 21 => x = 21 / 3 => x = 7."
+    },
+    {
+        "id": "Q-MATH-06-002",
+        "topic_id": "MATH-06-00001",
+        "type": "DND",
+        "difficulty": 3,
+        "question": "Match the algebraic expression to its factorized form.",
+        "items": [
+            {
+                "text": "x² - 9",
+                "category": "(x-3)(x+3)"
+            },
+            {
+                "text": "x² + 5x + 6",
+                "category": "(x+2)(x+3)"
+            },
+            {
+                "text": "2x + 6",
+                "category": "2(x+3)"
+            }
+        ]
+    },
+    {
+        "id": "Q-MATH-07-001",
+        "topic_id": "MATH-07-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "In a right-angled triangle, if the opposite side is 3 and the adjacent side is 4, what is the length of the hypotenuse?",
+        "options": [
+            {
+                "id": "a",
+                "text": "5"
+            },
+            {
+                "id": "b",
+                "text": "7"
+            },
+            {
+                "id": "c",
+                "text": "12"
+            },
+            {
+                "id": "d",
+                "text": "25"
+            }
+        ],
+        "answer": "a",
+        "explanation": "Using Pythagoras' Theorem: a² + b² = c² => 3² + 4² = c² => 9 + 16 = 25 => c = √25 = 5."
+    }
+]

@@ -198,75 +198,30 @@ export async function GET(request: NextRequest) {
 
     candidates = sanitizedCandidates;
 
-    // Exclude already-correct questions (and very recently attempted ones) so users don't see repeats.
-    // However, if we run out of new questions, we MUST repeat them rather than showing an error.
+    // Exclude already-correct questions using state-based tracking (no DB reads needed!)
+    // This replaces the 500+ subcollection reads with a simple array check
     let isReviewMode = false;
 
-    if (userId && candidates && candidates.length > 0) {
-      const correctIds = new Set<string>();
-      const attemptIds = new Set<string>();
-
-      try {
-        const correctSnap = await adminDb
-          .collection('users')
-          .doc(userId)
-          .collection('correct_questions')
-          .limit(500)
-          .get();
-
-        correctSnap.docs.forEach((d) => correctIds.add(d.id));
-      } catch (e) {
-        // ignore (no index / no permissions)
-      }
-
-      let attemptsSnap: FirebaseFirestore.QuerySnapshot | null = null;
-      try {
-        attemptsSnap = await adminDb
-          .collection('users')
-          .doc(userId)
-          .collection('question_attempts')
-          .orderBy('timestamp', 'desc')
-          .limit(20)
-          .get();
-
-        attemptsSnap.docs.forEach((d) => {
-          const qid = d.get('questionId');
-          if (typeof qid === 'string' && qid) attemptIds.add(qid);
-        });
-      } catch (e) {
-        // ignore
-      }
+    if (userId && candidates && candidates.length > 0 && nableState.completedQuestionIds) {
+      const completedSet = new Set(nableState.completedQuestionIds);
 
       // Priority 1: Questions never answered correctly
       const withoutCorrect = candidates.filter((q: any) => {
         const qid = q?.questionId || q?.id;
-        return !(typeof qid === 'string' && correctIds.has(qid));
+        return !(typeof qid === 'string' && completedSet.has(qid));
       });
 
-      // Priority 2: Questions never attempted at all (fresh)
-      const withoutAttempts = withoutCorrect.filter((q: any) => {
-        const qid = q?.questionId || q?.id;
-        return !(typeof qid === 'string' && attemptIds.has(qid));
-      });
-
-      if (withoutAttempts.length > 0) {
-        candidates = withoutAttempts;
-      } else if (withoutCorrect.length > 0) {
-        candidates = withoutCorrect; // Retry wrong answers
+      if (withoutCorrect.length > 0) {
+        candidates = withoutCorrect;
       } else {
-        // Priority 3: Review Mode (Repeat correct questions if that's all we have)
-        // We do strictly nothing here to candidates, effectively resetting the pool to full
-        // but we flag it for the UI/Evaluation logic if needed.
+        // All questions completed - enter review mode
         isReviewMode = true;
 
-        // Filter out the *immediately* previous question to avoid back-to-back repeats if possible
-        if (attemptsSnap && !attemptsSnap.empty) {
-          const lastAttemptDoc = attemptsSnap.docs[0];
-          const lastQid = lastAttemptDoc.get('questionId');
-          if (lastQid) {
-            const notLast = candidates.filter((q: any) => (q.questionId || q.id) !== lastQid);
-            if (notLast.length > 0) candidates = notLast;
-          }
+        // Filter out the most recently completed question to avoid immediate repeats
+        if (nableState.completedQuestionIds.length > 0) {
+          const lastQid = nableState.completedQuestionIds[nableState.completedQuestionIds.length - 1];
+          const notLast = candidates.filter((q: any) => (q.questionId || q.id) !== lastQid);
+          if (notLast.length > 0) candidates = notLast;
         }
       }
     }
@@ -332,7 +287,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     // 1. Try querying by 'objectiveId' field
     let snapshot = await questionsRef
       .where('objectiveId', '==', objectiveId)
-      .limit(50)
+      .limit(10)
       .get();
 
     // 2. Fallback: Query by Document ID prefix
@@ -343,7 +298,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
       snapshot = await questionsRef
         .where(FieldPath.documentId(), '>=', startId)
         .where(FieldPath.documentId(), '<', endId)
-        .limit(50)
+        .limit(10)
         .get();
     }
 
@@ -353,7 +308,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
       if (subjectKey) {
         snapshot = await questionsRef
           .where('subjectId', '==', subjectKey)
-          .limit(50)
+          .limit(10)
           .get();
       }
 
@@ -361,7 +316,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
       if (snapshot.empty && subjectId) {
         snapshot = await questionsRef
           .where('subjectName', '==', subjectId)
-          .limit(50)
+          .limit(10)
           .get();
       }
     }

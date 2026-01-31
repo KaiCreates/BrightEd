@@ -16,39 +16,39 @@ import {
 } from './types';
 
 /**
- * Calculate memory decay for a sub-skill
- * Based on Ebbinghaus forgetting curve principles
+ * Calculate recall probability and decay level
+ * Based on Half-Life Regression (HLR) principles: P = 2^(-Δt / h)
  * 
  * @param lastTested - ISO date of last test
- * @param currentMastery - Current mastery level (affects decay rate)
+ * @param halfLife - Current half-life in days
  * @returns Decay level and refresh necessity
  */
 export function calculateMemoryDecay(
     lastTested: string,
-    currentMastery: number
+    halfLife: number = NABLE_CONSTANTS.HALFLIFE_BASE
 ): MemoryDecayResult & { subSkillId: string } {
     const now = new Date();
     const lastDate = new Date(lastTested);
-    const daysSinceTest = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+    const daysSinceTest = Math.max(0, (now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
 
-    // Higher mastery = slower decay (skill is more "cemented")
-    const masteryFactor = 1 - (currentMastery * 0.5); // Range: 0.5 to 1.0
-    const decayRate = NABLE_CONSTANTS.MEMORY_DECAY_RATE * masteryFactor;
+    // HLR Formula: p = 2^(-Δt / h)
+    // Recall probability (p) is 1.0 immediately after testing
+    const recallProbability = Math.pow(2, -daysSinceTest / halfLife);
 
-    // Calculate decay using exponential formula
-    // decay = 1 - e^(-rate * days)
-    const decayLevel = Math.min(1, 1 - Math.exp(-decayRate * daysSinceTest));
+    // Decay level is the inverse of recall probability (higher = more forgotten)
+    const decayLevel = Math.min(1, 1 - recallProbability);
 
-    // Determine if refresh is needed
-    const needsRefresh = daysSinceTest >= NABLE_CONSTANTS.MEMORY_DECAY_DAYS_THRESHOLD;
+    // Determine if refresh is needed (threshold: e.g. 7 days or probability < 0.5)
+    // Using NABLE_CONSTANTS.MEMORY_DECAY_DAYS_THRESHOLD (7) as a secondary check
+    const needsRefresh = daysSinceTest >= NABLE_CONSTANTS.MEMORY_DECAY_DAYS_THRESHOLD || recallProbability < 0.8;
 
     // Determine urgency
     let urgency: 'low' | 'medium' | 'high' | 'critical';
-    if (daysSinceTest >= 30) {
+    if (recallProbability < 0.3 || daysSinceTest >= 30) {
         urgency = 'critical';
-    } else if (daysSinceTest >= 14) {
+    } else if (recallProbability < 0.5 || daysSinceTest >= 14) {
         urgency = 'high';
-    } else if (daysSinceTest >= 7) {
+    } else if (recallProbability < 0.7 || daysSinceTest >= 7) {
         urgency = 'medium';
     } else {
         urgency = 'low';
@@ -56,11 +56,45 @@ export function calculateMemoryDecay(
 
     return {
         subSkillId: '', // Will be set by caller
-        daysSinceTest,
+        daysSinceTest: Math.floor(daysSinceTest),
         decayLevel,
         needsRefresh,
         urgency
     };
+}
+
+/**
+ * Update half-life based on performance
+ * @param currentHalfLife - Current half-life in days
+ * @param correct - Whether the answer was correct
+ * @param difficulty - Question difficulty (0-10)
+ */
+export function updateHalfLife(
+    currentHalfLife: number,
+    correct: boolean,
+    difficulty: number,
+    stabilityFactor: number = 1.0
+): number {
+    const h = currentHalfLife || NABLE_CONSTANTS.HALFLIFE_BASE;
+    let newHalfLife: number;
+
+    if (correct) {
+        // Growth factor: slower growth for harder questions
+        // Apply stabilityFactor (personal multiplier)
+        const growthFactor = (2.5 - (difficulty / 10)) * stabilityFactor;
+        newHalfLife = h * growthFactor;
+    } else {
+        // Decay factor: sharp drop on failure, but tempered by stability factor
+        // High stability = less dramatic drop
+        const decayFactor = 0.5 / stabilityFactor;
+        newHalfLife = h * Math.min(0.8, decayFactor);
+    }
+
+    // Clamp between base and max
+    return Math.max(
+        NABLE_CONSTANTS.HALFLIFE_BASE,
+        Math.min(NABLE_CONSTANTS.HALFLIFE_MAX, newHalfLife)
+    );
 }
 
 /**
@@ -69,7 +103,7 @@ export function calculateMemoryDecay(
 export function updateMemoryDecay(
     subSkillScore: SubSkillScore
 ): SubSkillScore {
-    const decay = calculateMemoryDecay(subSkillScore.lastTested, subSkillScore.mastery);
+    const decay = calculateMemoryDecay(subSkillScore.lastTested, subSkillScore.halfLife);
 
     return {
         ...subSkillScore,
@@ -88,7 +122,7 @@ export function checkSessionRefresh(
 
     // Calculate decay for all sub-skills
     for (const [subSkillId, score] of Object.entries(knowledgeGraph)) {
-        const decay = calculateMemoryDecay(score.lastTested, score.mastery);
+        const decay = calculateMemoryDecay(score.lastTested, score.halfLife);
         decayResults.push({
             ...decay,
             subSkillId
@@ -172,18 +206,18 @@ export function getReviewPriority(
     subSkillId: string,
     score: SubSkillScore
 ): number {
-    const decay = calculateMemoryDecay(score.lastTested, score.mastery);
+    const decay = calculateMemoryDecay(score.lastTested, score.halfLife);
 
     // Priority factors:
-    // 1. High decay = high priority
-    // 2. Low mastery = high priority
-    // 3. Low confidence = high priority
-    // 4. Theoretical-only = high priority (needs practical reinforcement)
+    // 1. High decay = high priority (Max 50)
+    // 2. Low mastery = high priority (Max 20)
+    // 3. Low confidence = high priority (Max 20)
+    // 4. Theoretical-only = high priority (Max 10)
 
-    let priority = decay.decayLevel * 40; // Max 40 points from decay
-    priority += (1 - score.mastery) * 30;  // Max 30 points from low mastery
-    priority += (1 - score.confidence) * 20; // Max 20 points from low confidence
-    priority += score.theoreticalOnly ? 10 : 0; // Bonus 10 for theoretical-only
+    let priority = decay.decayLevel * 50;
+    priority += (1 - score.mastery) * 20;
+    priority += (1 - score.confidence) * 20;
+    priority += score.theoreticalOnly ? 10 : 0;
 
     return priority;
 }

@@ -1,0 +1,56 @@
+[
+    {
+        "id": "Q-SOC-01-001",
+        "topic_id": "SOC-01-00001",
+        "type": "MCQ",
+        "difficulty": 1,
+        "question": "What is a 'Nuclear Family'?",
+        "options": [
+            {
+                "id": "a",
+                "text": "A family with grandparents and cousins living together"
+            },
+            {
+                "id": "b",
+                "text": "A mother and children only"
+            },
+            {
+                "id": "c",
+                "text": "A mother, father, and their children"
+            },
+            {
+                "id": "d",
+                "text": "A family formed by remarriage"
+            }
+        ],
+        "answer": "c",
+        "explanation": "A nuclear family consists of two parents and their children living in one household."
+    },
+    {
+        "id": "Q-POB-01-001",
+        "topic_id": "POB-01-00001",
+        "type": "MCQ",
+        "difficulty": 2,
+        "question": "Which type of business organization is owned and controlled by its members for their mutual benefit?",
+        "options": [
+            {
+                "id": "a",
+                "text": "Sole Trader"
+            },
+            {
+                "id": "b",
+                "text": "Public Limited Company"
+            },
+            {
+                "id": "c",
+                "text": "Partnership"
+            },
+            {
+                "id": "d",
+                "text": "Cooperative"
+            }
+        ],
+        "answer": "d",
+        "explanation": "A cooperative is a business owned and operated by a group of individuals for their shared benefit."
+    }
+]

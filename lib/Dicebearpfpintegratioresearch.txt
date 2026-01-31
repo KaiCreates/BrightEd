@@ -1,0 +1,704 @@
+DiceBear Character full integration 
+
+
+
+Introduction
+What is DiceBear?
+With DiceBear you can create awesome avatars for your project in no time. Whether you are looking for abstract shapes or lovingly designed characters, you will find something suitable among our avatar styles. And no matter how and for what you want to use the avatars, DiceBear offers the right solution!
+
+In addition to purely random avatars, you can also create deterministic avatars for user identities. With the built-in PRNG you create the same avatar over and over again based on a seed. But also individual avatars are possible! Just use the countless options that each avatar style provides.
+
+And thanks to the JavaScript library, HTTP API, CLI, Figma plugin, Editor and Playground, your next avatar is always just a stone's throw away!
+
+How to use?
+You are a designer and need avatars for your design? Then check out our Figma Plugin and Editor. As a developer, you could take a look at the HTTP API, the CLI, the JS library or the Playground. Which is more appropriate for you, depends on the programming language and environment you are using.
+
+In a JavaScript environment, you could use the JS library or the HTTP API if the JS library is too large for you. In other environments you might be interested in the HTTP API or the CLI if you are concerned about the stability or latency of the HTTP API.
+
+The CLI is always a good choice for automations or if you want to create a large number of avatars in different image formats.
+
+How does it work?
+The avatars are created in SVG format. This allows to generate avatars dynamically without much computing power. In most cases, various SVG elements such as hair, eyes, ears etc. are selected from a set and combined to create a character / avatar.
+
+XorShift32 is used as the algorithm for the PRNG. It is important to note that the PNGR does not attempt to be cryptographically secure.
+
+JS-Library
+The library is written in TypeScript / JavaScript and can be used in the browser and also in Node.js. In other environments you may be interested in the HTTP API or the CLI.
+
+The library is a pure ESM package. Sindre Sorhus has written a great help page if you are new to ESM packages.
+
+Installation
+At least two packages are needed. The first package is the core library @dicebear/core and the second package is an avatar style. In our examples we use the package @dicebear/collection which contains all official avatar styles.
+
+
+npm install @dicebear/core @dicebear/collection
+TIP
+
+We highly recommend the use of a bundler with tree shaking functionality. If you don't have one, take a look at our guide "Using the library without tree shaking".
+
+Usage
+We use the avatar style lorelei in our example. You can find more avatar styles here.
+
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, {
+  seed: 'John Doe',
+  // ... other options
+});
+
+const svg = avatar.toString();
+Each avatar style comes with several options. You can find them on the details page of each avatar style.
+
+TIP
+
+If you’d like to integrate the library into a framework, check out our guides for Angular, React, React Native, Vue or Svelte.
+
+INFO
+
+We provide a large number of avatar styles from different artists. The avatar styles are licensed under different licenses that the artists can choose themselves. For a quick overview we have created an license overview for you.
+
+Methods
+createAvatar(style, options)
+Return type: Object with .toString(), .toJson() and .toDataUri() methods.
+
+Every cool avatar starts here! An avatar style is expected as the first argument. The second argument is an optional object with options. Which options are possible here depends on the avatar style.
+
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, { 
+  // ... options
+});
+.toString()
+Return type: string
+
+Returns the avatar as SVG in XML format.
+
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, {
+  // ... options
+});
+
+const svg = avatar.toString(); 
+.toJson()
+Return type: { svg: string, extra: Record<string, unknown> }
+
+Returns a JSON with the SVG and additional information, such as the actual options used.
+
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, {
+  // ... options
+});
+
+const json = avatar.toJson(); 
+.toDataUri()
+Return type: Promise<string>
+
+Returns the avatar as data uri.
+
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, {
+  // ... options
+});
+
+const dataUri = avatar.toDataUri(); 
+Converter
+Sometimes you need the avatar in a different format than SVG. For this we have created a package called @dicebear/converter which can convert the avatar to PNG and JPEG.
+
+Installation
+
+npm install @dicebear/converter
+TIP
+
+You don't need to install the core library @dicebear/core to use the converter package. While it is optimized for DiceBear, it can also be used with SVGs from other sources.
+
+Usage
+Although the converter can be used without the core library, we use it in our example to create the avatar.
+
+
+import { toPng } from '@dicebear/converter';
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
+
+const avatar = createAvatar(lorelei, {
+  seed: 'John Doe',
+  // ... other options
+});
+
+const png = toPng(avatar, {
+  // ... options
+});
+Methods
+toPng(svg, options)
+Return type: Object with .toDataUri() and .toArrayBuffer() methods.
+
+Converts the avatar from SVG to PNG. Expects an SVG string or an object with toString method as first argument. Expects an optional options argument of type object. See options for more information.
+
+
+import { toJpeg } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const png = toJpeg(svg, {
+  // ... options
+});
+toJpeg(svg, options)
+Return type: Object with .toDataUri() and .toArrayBuffer() methods.
+
+Converts the avatar from SVG to JPEG. Expects an SVG string or an object with toString method as first argument. Expects an optional options argument of type object. See options for more information.
+
+
+import { toJpeg } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const jpeg = toJpeg(svg, {
+  // ... options
+});
+toWebp(svg, options)
+Return type: Object with .toDataUri() and .toArrayBuffer() methods.
+
+Converts the avatar from SVG to WEBP. Expects an SVG string or an object with toString method as first argument. Expects an optional options argument of type object. See options for more information.
+
+
+import { toWebp } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const png = toWebp(svg, {
+  // ... options
+});
+Limited browser support
+
+This function uses an HTML canvas element in the browser and is dependent on the browser being able to export the canvas as a WebP. If the browser does not support WebP, PNG is usually used as a fallback. See mdn web docs for more information.
+
+toAvif(svg, options)
+Return type: Object with .toDataUri() and .toArrayBuffer() methods.
+
+Converts the avatar from SVG to AVIF. Expects an SVG string or an object with toString method as first argument. Expects an optional options argument of type object. See options for more information.
+
+
+import { toWebp } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const png = toWebp(svg, {
+  // ... options
+});
+Limited browser support
+
+This function uses an HTML canvas element in the browser and is dependent on the browser being able to export the canvas as a AVIF. If the browser does not support AVIF, PNG is usually used as a fallback. See mdn web docs for more information.
+
+.toDataUri()
+Return type: Promise<string>
+
+Returns the avatar as data uri.
+
+
+import { toPng } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const png = toPng(svg, {
+  // ... options
+});
+
+const dataUri = await png.toDataUri(); 
+.toArrayBuffer()
+Return type: Promise<ArrayBuffer>
+
+Converts the avatar to an ArrayBuffer.
+
+
+import { toPng } from '@dicebear/converter';
+
+const svg = '<svg>...</svg>';
+
+const png = toPng(svg, {
+  // ... options
+});
+
+const dataUri = await png.toArrayBuffer(); 
+Options
+fonts Node.js only
+Type: string[]
+
+Default: []
+
+An array of paths to font files which should be used to render the avatar. If not set, the system fonts will be used.
+
+includeExif Node.js only
+Type: boolean
+
+Default: false
+
+If set to true, the converter will try to read the metadata from the SVG and add it to the PNG or JPEG. This is useful if you want to add license information to the image.
+
+WARNING
+
+This uses an exiftool singleton which needs to be exited manually. See the documentation for more information.
+
+HTTP-API
+Our HTTP API is probably the easiest way to use DiceBear. Thanks to our sponsor bunny.net it is lightning fast worldwide. You can use our official instance or run your own. Yes, the API is also OpenSource!
+
+Usage
+Use the following address and replace <styleName> with your preferred avatar style (camelCase). Every official avatar style is supported.
+
+
+https://api.dicebear.com/9.x/<styleName>/svg
+A few examples
+https://api.dicebear.com/9.x/pixel-art/svg
+preview
+https://api.dicebear.com/9.x/lorelei/svg
+preview
+INFO
+
+We provide a large number of avatar styles from different artists. The avatar styles are licensed under different licenses that the artists can choose themselves. For a quick overview we have created an license overview for you.
+
+Options
+Options can be passed via the query string. For example, you can set a seed like this:
+
+https://api.dicebear.com/9.x/pixel-art/svg?seed=John
+preview
+https://api.dicebear.com/9.x/pixel-art/svg?seed=Jane
+preview
+TIP
+
+If you want to pass more options, you connect them with a & as usual with query strings.
+
+Array options
+Array values are separated by a comma. For example, the URL could look like this if you want to provide the PRNG with several hair styles in addition to the seed. Note that the avatar styles provide different options. In this example, we use the Pixel Art avatar style.
+
+https://api.dicebear.com/9.x/pixel-art/svg?seed=John&hair=short01,short02,short03,short04,short05
+preview
+https://api.dicebear.com/9.x/pixel-art/svg?seed=Jane&hair=long01,long02,long03,long04,long05
+preview
+Boolean options
+Boolean values can be set as strings (true and false).
+
+https://api.dicebear.com/9.x/lorelei/svg?flip=true
+preview
+https://api.dicebear.com/9.x/lorelei/svg?flip=false
+preview
+File format
+The API supports SVG, PNG, JPG, WebP, AVIF and JSON. We recommend using SVG if possible! SVG is the more modern format, scales indefinitely, and requires less traffic. Because the PNG, JPG, WebP and AVIF formats put more load on the API, the size is limited to 256x256. PNG, JPG, WebP and AVIF also have a lower rate limit.
+
+PNG, JPG, WebP and AVIF use the Noto Sans font and currently supports the following subsets: cyrillic, cyrillic-ext, devanagari, greek, greek-ext, japanese, korean, latin, latin-ext, simplified-chinese, thai and vietnamese.
+
+https://api.dicebear.com/9.x/bottts/svg
+preview
+https://api.dicebear.com/9.x/bottts/png
+preview
+https://api.dicebear.com/9.x/bottts/jpg
+preview
+https://api.dicebear.com/9.x/bottts/webp
+preview
+https://api.dicebear.com/9.x/bottts/avif
+preview
+Versioning
+You can set the version in the URL. Just replace the 9.x from the previous examples with the one you want.
+
+Supported versions: 5.x, 6.x, 7.x, 8.x, 9.x
+
+WARNING
+
+We reserve the right to discontinue any version at any time without notice. You can create your own instance of the API to be able to access discontinued versions even afterwards.
+
+Fair use
+Our API is free to use, but we ask that you use it responsibly. We reserve the right to block abusive users. Currently, we limit the number of requests. See Rate limits for more information. We also ask you to use the API only for non-commercial purposes. If you want to use the API for commercial purposes or need more requests per second, please set up your own instance.
+
+We are happy to answer any questions you may have. Just open an discussion on GitHub.
+
+Rate limits
+We currently limit the number of requests per second to 50 for SVG and to 10 for PNG, JPG, WebP and AVIF. We reserve the right to change these limits at any time without notice.
+
+Changes and Availability
+Please be aware that we reserve the right to update the API at any time. While we will do our best to maintain backwards compatibility, we cannot guarantee this. Even though we try to always return the same avatar, the design and especially the source code may change. Additionally, we cannot guarantee that the API will always be available. If you need consistent access to the API, we recommend setting up your own instance.
+
+CLI
+With the CLI you can create thousands of avatars in no time!
+
+Installation
+Make sure you have Node.js and NPM installed.
+
+
+npm install dicebear --global
+Upgrade
+For the latest features and avatar styles, make sure you update the CLI regularly.
+
+
+npm install dicebear --global
+Usage
+Create an avatar
+Replace <style> with an avatar style name (camelCase) and [outputPath] with a target directory. If [outputPath] is omitted, the current directory is used as target directory.
+
+
+dicebear <style> [outputPath]
+For example, to create an avatar with the lorelei avatar style, use the following command:
+
+
+dicebear lorelei .
+INFO
+
+We provide a large number of avatar styles from different artists. The avatar styles are licensed under different licenses that the artists can choose themselves. For a quick overview we have created an license overview for you.
+
+Create multiple avatars
+You can also create multiple avatars at once! Just use the --count option. Replace <count> with the number of avatars to create.
+
+
+dicebear <style> [outputPath] --count <count>
+WARNING
+
+The seed option has no effect in combination with the count option. If count is greater than 1, random values are generated and used as seed to make the avatars differ from each other.
+
+Passing options
+You can find out what options are available with --help. Besides the options provided by the avatar styles, there are the following additional options:
+
+
+--count      Defines how many avatars to create.          [number]
+--format                                                  [string] [choices: "svg", "png", "jpg", "jpeg", "webp", "avif", "json"]
+--exif       Include Exif Metadata                        [boolean]
+--json       Save JSON file in addition to image file     [boolean]
+As you can see, you can also create the avatars in a format other than SVG. For example, to create a PNG avatar of the avatar style lorelei, use the following command:
+
+
+dicebear lorelei . --format png
+Show help
+For each command you can ask for help.
+
+
+dicebear --help
+
+dicebear <command>
+
+Commands:
+  dicebear adventurer [outputPath]         Generate "adventurer" avatar(s)
+  dicebear adventurerNeutral [outputPath]  Generate "adventurerNeutral" avatar(s)
+  dicebear avataaars [outputPath]          Generate "avataaars" avatar(s)
+  dicebear avataaarsNeutral [outputPath]   Generate "avataaarsNeutral" avatar(s)
+  dicebear bigEars [outputPath]            Generate "bigEars" avatar(s)
+  dicebear bigEarsNeutral [outputPath]     Generate "bigEarsNeutral" avatar(s)
+  dicebear bigSmile [outputPath]           Generate "bigSmile" avatar(s)
+  dicebear bottts [outputPath]             Generate "bottts" avatar(s)
+  dicebear botttsNeutral [outputPath]      Generate "botttsNeutral" avatar(s)
+  dicebear croodles [outputPath]           Generate "croodles" avatar(s)
+  dicebear croodlesNeutral [outputPath]    Generate "croodlesNeutral" avatar(s)
+  dicebear dylan [outputPath]              Generate "dylan" avatar(s)
+  dicebear funEmoji [outputPath]           Generate "funEmoji" avatar(s)
+  dicebear glass [outputPath]              Generate "glass" avatar(s)
+  dicebear icons [outputPath]              Generate "icons" avatar(s)
+  dicebear identicon [outputPath]          Generate "identicon" avatar(s)
+  dicebear initials [outputPath]           Generate "initials" avatar(s)
+  dicebear lorelei [outputPath]            Generate "lorelei" avatar(s)
+  dicebear loreleiNeutral [outputPath]     Generate "loreleiNeutral" avatar(s)
+  dicebear micah [outputPath]              Generate "micah" avatar(s)
+  dicebear miniavs [outputPath]            Generate "miniavs" avatar(s)
+  dicebear notionists [outputPath]         Generate "notionists" avatar(s)
+  dicebear notionistsNeutral [outputPath]  Generate "notionistsNeutral" avatar(s)
+  dicebear openPeeps [outputPath]          Generate "openPeeps" avatar(s)
+  dicebear personas [outputPath]           Generate "personas" avatar(s)
+  dicebear pixelArt [outputPath]           Generate "pixelArt" avatar(s)
+  dicebear pixelArtNeutral [outputPath]    Generate "pixelArtNeutral" avatar(s)
+  dicebear rings [outputPath]              Generate "rings" avatar(s)
+  dicebear shapes [outputPath]             Generate "shapes" avatar(s)
+  dicebear thumbs [outputPath]             Generate "thumbs" avatar(s)
+
+Options:
+  --version  Show version number                                       [boolean]
+  --help     Show help                                                 [boolean]
+How to programmatically access all available options of an avatar style?
+Each official avatar style provides a JSON schema that you can use to validate your options. But you can also use this JSON to find out what options are available to you.
+
+Here is a small example of how to access all the options of an avatar style.
+
+
+import { schema } from '@dicebear/core';
+import { micah } from '@dicebear/collection';
+
+const options = {
+  ...schema.properties,
+  ...micah.schema.properties,
+};
+
+console.log(options);
+Also for this documentation and the CLI, we are parsing this JSON schema to show all the available options.
+
+Example: https://github.com/dicebear/dicebear/blob/main/packages/dicebear/src/utils/getOptionsBySchema.ts
+
+Edit this pageHost the HTTP API yourself
+In this guide, we will show you how to host the HTTP API yourself. This is not necessary for most users, but it can be useful in some cases.
+
+You can find the source code for the HTTP API on GitHub. The code is written in TypeScript and uses the Fastify framework.
+
+With docker
+The easiest way to host the HTTP API yourself is to use the docker image. You can find the image on Docker Hub.
+
+
+docker run --tmpfs /run --tmpfs /tmp -p 3000:3000 -i -t dicebear/api:3
+Or you can use docker-compose.yml to configure the HTTP API and start it with "docker compose up".
+
+
+services:
+  dicebear:
+    image: dicebear/api:3
+    restart: always
+    ports:
+      - '3000:3000'
+    tmpfs:
+      - '/run'
+      - '/tmp'
+Without docker
+If you don't want to use docker, you can also run the HTTP API directly on your machine. You need to have Node.js installed.
+
+
+git clone git@github.com:dicebear/api.git
+cd api
+
+npm install
+npm run build
+npm start
+Environment variables
+The HTTP API supports the following environment variables:
+
+PORT
+The port on which the HTTP API should listen. Defaults to 3000.
+
+HOST
+The host on which the HTTP API should listen. Defaults to 0.0.0.0 (all IPv4 addresses). See https://fastify.dev/docs/latest/Reference/Server#listentextresolver
+
+LOGGER
+Enable the logger. Defaults to 0 (false).
+
+PNG
+Enable the PNG endpoint. Defaults to 1 (true).
+
+PNG_SIZE_MIN
+The minimum size for the PNG endpoint. Defaults to 1.
+
+PNG_SIZE_MAX
+The maximum size for the PNG endpoint. Defaults to 128.
+
+PNG_SIZE_DEFAULT
+The default size for the PNG endpoint. Defaults to 128.
+
+PNG_EXIF
+Enable EXIF data for the PNG endpoint. Defaults to 1 (true).
+
+Requirements
+Perl (https://www.npmjs.com/package/exiftool-vendored#installation)
+procps (https://www.npmjs.com/package/exiftool-vendored#this-package-requires-procps)
+JPEG
+Enable the JPEG endpoint. Defaults to 1 (true).
+
+JPEG_SIZE_MIN
+The minimum size for the JPEG endpoint. Defaults to 1.
+
+JPEG_SIZE_MAX
+The maximum size for the JPEG endpoint. Defaults to 128.
+
+JPEG_SIZE_DEFAULT
+The default size for the JPEG endpoint. Defaults to 128.
+
+JPEG_EXIF
+Enable EXIF data for the JPEG endpoint. Defaults to 1 (true).
+
+WEBP
+Enable the WebP endpoint. Defaults to 1 (true).
+
+WEBP_SIZE_MIN
+The minimum size for the WebP endpoint. Defaults to 1.
+
+WEBP_SIZE_MAX
+The maximum size for the WebP endpoint. Defaults to 128.
+
+WEBP_SIZE_DEFAULT
+The default size for the WebP endpoint. Defaults to 128.
+
+WEBP_EXIF
+Enable EXIF data for the WebP endpoint. Defaults to 1 (true).
+
+AVIF
+Enable the AVIF endpoint. Defaults to 1 (true).
+
+AVIF_SIZE_MIN
+The minimum size for the AVIF endpoint. Defaults to 1.
+
+AVIF_SIZE_MAX
+The maximum size for the AVIF endpoint. Defaults to 128.
+
+AVIF_SIZE_DEFAULT
+The default size for the AVIF endpoint. Defaults to 128.
+
+AVIF_EXIF
+Enable EXIF data for the AVIF endpoint. Defaults to 1 (true).
+
+Requirements
+Perl (https://www.npmjs.com/package/exiftool-vendored#installation)
+procps (https://www.npmjs.com/package/exiftool-vendored#this-package-requires-procps)
+VERSIONS
+Comma separated specification of desired DiceBear Major versions. Default to 5,6,7,8,9.
+
+CACHE_CONTROL_AVATARS
+Cache duration for the avatars endpoint in seconds. Defaults to 31536000 (1 year).
+
+WORKERS
+The number of node worker threads to use. Defaults to 1.
+
+Contribute to the documentation
+For the documentation we use VitePress. A static website generator powered by Vue. You can find the source files in the dicebear/dicebear repository in the apps/docs folder. You will also find a link to the source file of the respective page in the documentation below each page.
+
+Requirements
+A GitHub account
+Git installed (Learn how to install Git here)
+Node.js and Npm installed
+Set up locally
+Create a fork from the dicebear/dicebear repository.
+
+Clone the project:
+
+
+git clone https://github.com/<YOUR_GITHUB_USERNAME>/dicebear.git
+If you've set up SSH, you can do this instead:
+
+
+git clone git@github.com:<YOUR_GITHUB_USERNAME>/dicebear.git
+Install dependencies:
+
+
+cd dicebear
+npm install
+Create a build:
+
+
+npm run build
+Verifying your changes
+You can start the documentation locally on your computer with the following command to check your changes:
+
+
+npm run dev --workspace @dicebear/docs
+Open http://localhost:5173/ in your browser to see your changes.
+
+Branching and committing
+Once you are happy with the changes, create a branch so you can commit the changes.
+
+
+git checkout -b <YOUR_BRANCH>
+Afterwards you have to add your changes to the stage and commit them.
+
+
+git add .
+git commit -m "Change: <YOUR_CHANGES>"
+git push origin <YOUR_BRANCH>
+Creating a Pull Request
+Follow these instructions to create a Pull Request.
+
+Create an avatar style from Scratch
+We highly recommend our Figma plugin to create an avatar style. Most of DiceBear official avatar styles were created with the plugin. But with appropriate programming skills you can also create an avatar style without Figma.
+
+Interfaces
+
+interface AvatarStyle {
+  meta?: {
+    title?: string;
+    source?: string;
+    creator?: string;
+    homepage?: string;
+    license?: {
+      name: string;
+      url: string;
+    };
+  };
+  schema?: JSONSchema7;
+  create(props: { prng: Prng; options: object }): {
+    attributes: {
+      viewBox: string;
+      [key: string]: string;
+    };
+    body: string;
+  };
+}
+
+interface Prng {
+  seed: string;
+  bool(likelihood?: number): boolean;
+  integer(min: number, max: number): number;
+  pick<T>(arr: T[]): T | undefined;
+  string(length: number, characters?: string): string;
+}
+Minimal Example
+A minimal example of an avatar style with a circle colored red or blue by the PRNG based on a seed.
+
+
+const style = {
+  create: ({ prng, options }) => {
+    const attributes = {
+      viewBox: '0 0 100 100',
+    };
+
+    const fill = prng.bool() ? 'red' : 'blue';
+    const body = `<circle cx="50" cy="50" r="50" fill="${fill}" />`;
+
+    return { attributes, body };
+  },
+};
+As you can see, it doesn't take much to create an avatar style. Both the metadata and the JSON schema are optional. The create method takes the PRNG and options and creates the avatar. What you do exactly in this function is up to you.
+
+If you specify metadata, it will be placed in the metadata of the created avatars. If none are specified, the avatar's metadata is empty accordingly.
+
+The JSON Schema object describes the allowed options that can be passed to the createAvatar option. It is mainly used by the CLI, the API and the documentation. So you can leave the object empty without any real disadvantages. But it can help to document your avatar style.
+
+Use the library without tree shaking
+The examples in this documentation assume that you are using a bundler with a tree shaking function (Officially supported are webpack and rollup). If you don't use such a bundler, you should not use the package @dicebear/collection, because it contains all official avatar styles, which would bloat your frontend.
+
+Instead, you should use the packages for the individual avatar styles. For example, if you want to use the avatar style lorelei, you should install the package @dicebear/lorelei. You can find the package name for each avatar style in the documentation of each avatar style. Look for the section "Details".
+
+
+import { createAvatar } from '@dicebear/core';
+import * as lorelei from '@dicebear/lorelei';
+
+const avatar = createAvatar(lorelei, {
+  seed: 'John Doe',
+  // ... other options
+});
+
+const svg = avatar.toString();How many unique avatars are possible per avatar style?
+The number of unique avatars possible depends heavily on the configuration. Depending on the configuration, there can be significantly more or significantly fewer unique avatars. Therefore, we will concentrate on the default configuration for the calculation.
+
+Package	Unique Avatars
+@dicebear/adventurer	4.419.792.000
+@dicebear/adventurer-neutral	280.800
+@dicebear/avataaars	7.191.699.540.480
+@dicebear/avataaars-neutral	13.104
+@dicebear/big-ears	1.207.664.640.000
+@dicebear/big-ears-neutral	3.594.240
+@dicebear/big-smile	4.792.320
+@dicebear/bottts	9.049.320
+@dicebear/bottts-neutral	2.394
+@dicebear/croodles	105.753.600
+@dicebear/croodles-neutral	2.592
+@dicebear/fun-emoji	1.350
+@dicebear/icons	2.774
+@dicebear/identicon	319.333
+@dicebear/lorelei	1.630.347.264
+@dicebear/lorelei-neutral	606.528
+@dicebear/micah	1.119.744.000.000
+@dicebear/miniavs	145.800
+@dicebear/open-peeps	76.576.500
+@dicebear/personas	27.546.624
+@dicebear/pixel-art	119.279.143.855.872.000
+@dicebear/pixel-art-neutral	28.985.299.200
+@dicebear/shapes	1.212.439.363.614.480.000.000
+@dicebear/thumbs	3.518.430.498.000
+Calculation errors cannot be excluded. The calculations can therefore be viewed in this document: DiceBear / Number of unique avatars. If you find an error or have questions, please feel free to open a discussion on GitHub.

@@ -150,7 +150,8 @@ export function rankQuestionsByFit(
     targetDifficulty: number,
     targetDistractorSimilarity: number,
     requiredContentType: ContentType | null = null,
-    weakSubSkills: string[] = []
+    weakSubSkills: string[] = [],
+    recentTopicIds: string[] = []
 ): ContentItem[] {
     return questions
         .filter(q => {
@@ -168,7 +169,11 @@ export function rankQuestionsByFit(
             // Bonus for targeting weak skills
             const weakSkillBonus = q.subSkills.some(s => weakSubSkills.includes(s)) ? -2 : 0;
 
-            const fitScore = difficultyGap + (distractorGap * 3) + weakSkillBonus;
+            // Penalty for topic over-exposure (Diversity Buffer)
+            // If the objective has appeared in the last 5 questions, penalize it heavily
+            const topicPenalty = recentTopicIds.includes(q.objectiveId) ? 5 : 0;
+
+            const fitScore = difficultyGap + (distractorGap * 3) + weakSkillBonus + topicPenalty;
 
             return { ...q, _fitScore: fitScore };
         })

@@ -11,8 +11,10 @@ import { BCoinIcon } from '@/components/BCoinIcon'
 
 const navItems = [
   { href: '/home', label: 'Home', icon: '🏠' },
+  { href: '/community', label: 'Community', icon: '💬' },
   { href: '/learn', label: 'Learn', icon: '📚' },
   { href: '/simulate', label: 'Simulate', icon: '🎮' },
+  { href: '/practicals', label: 'Practicals', icon: '🧪' },
   { href: '/leaderboard', label: 'Rankings', icon: '🏆' },
   { href: '/progress', label: 'Progress', icon: '📈' },
   { href: '/achievements', label: 'Locker', icon: '🎖️' },
@@ -61,17 +63,17 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
 
   return (
     <nav className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out 
-        ${scrolled ? 'top-4 w-[95%] max-w-6xl' : 'top-6 w-[95%] max-w-7xl'}`}
+        ${scrolled ? 'top-2 w-[99%] max-w-full' : 'top-4 w-[96%] max-w-[1920px]'}`}
     >
-      <div className={`relative bg-[var(--bg-elevated)]/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] px-4 md:px-6 transition-all duration-300 ${scrolled ? 'py-3' : 'py-4'}`}>
+      <div className={`relative bg-[var(--bg-elevated)]/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] px-3 md:px-6 transition-all duration-300 ${scrolled ? 'py-2' : 'py-3'}`}>
 
         <div className="flex items-center justify-between">
           {/* Logo Section */}
           <Link
-            href={isAuthenticated ? "/home" : "/landing"}
+            href={isAuthenticated ? "/home" : "/"}
             className="flex items-center space-x-3 group relative z-10"
           >
-            <div className={`relative transition-all duration-500 ${scrolled ? 'w-10 h-10' : 'w-12 h-12'} group-hover:scale-110 drop-shadow-xl`}>
+            <div className={`relative transition-all duration-500 ${scrolled ? 'w-8 h-8' : 'w-10 h-10'} group-hover:scale-110 drop-shadow-xl`}>
               <div className="absolute inset-0 bg-[var(--brand-primary)] opacity-20 blur-lg rounded-full group-hover:opacity-40 transition-opacity animate-pulse-slow" />
               <Image
                 src="/BrightEdLogo.png"
@@ -81,21 +83,25 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                 priority
               />
             </div>
-            <span className={`font-heading font-black text-[var(--text-primary)] tracking-tighter hidden xl:block bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-400 group-hover:via-[var(--brand-primary)] transition-all duration-700 ${scrolled ? 'text-xl' : 'text-2xl'}`}>
+            <span className={`font-heading font-black text-[var(--text-primary)] tracking-tighter hidden xl:block bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-400 group-hover:via-[var(--brand-primary)] transition-all duration-700 ${scrolled ? 'text-lg' : 'text-xl'}`}>
               BrightEd
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="hidden xl:flex items-center gap-0.5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {isAuthenticated ? (
               navItems.map((item) => {
                 const isActive = pathname?.startsWith(item.href)
+                const href = item.label === 'Profile' && userData?.username
+                  ? `/profile/${userData.username}`
+                  : item.href
+
                 return (
                   <Link
                     key={item.href}
-                    href={item.href}
-                    className={`relative px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-[0.1em] transition-all duration-300 flex items-center gap-2 group/item ${isActive
+                    href={href}
+                    className={`relative px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 group/item ${isActive
                       ? 'text-white'
                       : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                       }`}
@@ -103,11 +109,11 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-[var(--brand-primary)] rounded-xl -z-10 shadow-lg shadow-[var(--brand-primary)]/20"
+                        className="absolute inset-0 bg-[var(--brand-primary)] rounded-lg -z-10 shadow-lg shadow-[var(--brand-primary)]/20"
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
-                    <span className={`text-lg transition-transform duration-300 group-hover/item:scale-110`}>
+                    <span className={`text-base transition-transform duration-300 group-hover/item:scale-110`}>
                       {item.icon}
                     </span>
                     <span className="relative z-10">{item.label}</span>
@@ -136,20 +142,39 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-3 relative z-10">
+          <div className="flex items-center gap-2 md:gap-4 relative z-10">
             {isAuthenticated && (
-              <>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-yellow-500/10 rounded-full border border-yellow-500/20 shadow-inner"
-                >
-                  <BCoinIcon size={20} />
-                  <span className="text-sm font-black text-yellow-500 tracking-tighter">
-                    {userData?.bCoins?.toLocaleString() || '0'}
-                  </span>
-                </motion.div>
-                <div className="h-6 w-[1px] bg-white/10 mx-1 hidden sm:block" />
-              </>
+              <div className="flex items-center gap-1 md:gap-3 bg-white/5 px-2 md:px-4 py-1.5 rounded-2xl border border-white/10">
+                {/* Flag / Subject */}
+                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                  <span className="text-lg md:text-xl">🇹🇹</span>
+                  <span className="text-xs md:text-sm font-black text-white/40 group-hover/stat:text-white transition-colors">11</span>
+                </div>
+
+                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+
+                {/* Streak */}
+                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                  <span className="text-lg md:text-xl filter drop-shadow-[0_0_8px_rgba(255,165,0,0.5)]">🔥</span>
+                  <span className="text-xs md:text-sm font-black text-[var(--brand-accent)]">{userData?.streak || 0}</span>
+                </div>
+
+                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+
+                {/* Gems / B-Coins */}
+                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                  <BCoinIcon size={20} className="filter drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                  <span className="text-xs md:text-sm font-black text-blue-400">{userData?.bCoins?.toLocaleString() || '0'}</span>
+                </div>
+
+                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+
+                {/* Hearts / Consistency */}
+                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                  <span className="text-lg md:text-xl filter drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">❤️</span>
+                  <span className="text-xs md:text-sm font-black text-red-500">5</span>
+                </div>
+              </div>
             )}
 
             <div className="bg-white/5 rounded-full p-1 border border-white/5 hover:bg-white/10 transition-colors">
@@ -159,7 +184,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
             {/* Mobile Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden ml-2 p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-95 transition-all text-[var(--text-primary)]"
+              className="xl:hidden ml-2 p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-95 transition-all text-[var(--text-primary)]"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (

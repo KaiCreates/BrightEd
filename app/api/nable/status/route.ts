@@ -10,9 +10,11 @@ import {
     loadState,
     getStatus,
     checkSessionRefresh,
+    createInitialState,
     type NABLEState
 } from '@/lib/nable';
 import { verifyAuth } from '@/lib/auth-server';
+import { adminDb } from '@/lib/firebase-admin';
 
 export async function GET(request: NextRequest) {
     try {
@@ -24,7 +26,16 @@ export async function GET(request: NextRequest) {
         // const { searchParams } = new URL(request.url);
         // const requestedUser = searchParams.get('userId');
 
-        const state = loadState(userId);
+        // Load from Database
+        const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
+        const nableDoc = await nableRef.get();
+
+        let state: NABLEState;
+        if (nableDoc.exists) {
+            state = loadState(userId, nableDoc.data() as Partial<NABLEState>);
+        } else {
+            state = createInitialState(userId);
+        }
 
         // Get overall status
         const status = getStatus(state);

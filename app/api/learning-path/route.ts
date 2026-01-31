@@ -131,6 +131,35 @@ function validateInput(body: any): { subjects: string[], userProgress: UserProgr
  * @param objectives - All syllabus objectives
  * @returns Objectives grouped by subject with duplicates removed
  */
+/**
+ * Derives subject from objective ID prefix
+ */
+function getSubjectFromId(id: string): string {
+  if (!id) return 'General';
+  const prefix = id.split('-')[0].toUpperCase();
+
+  if (prefix === 'MATH') return 'Mathematics';
+  if (prefix === 'BIO' || prefix === 'BIOL') return 'Biology';
+  if (prefix === 'CHEM') return 'Chemistry';
+  if (prefix === 'PHYS') return 'Physics';
+  if (prefix === 'ENG' || prefix === 'ENGL') return 'English';
+  if (prefix === 'IT' || prefix === 'INFO') return 'Information Technology';
+  if (prefix === 'POB' || prefix === 'BUS') return 'Principles of Business';
+  if (prefix === 'ECON') return 'Economics';
+  if (prefix === 'SOC' || prefix === 'SS') return 'Social Studies';
+  if (prefix === 'GEO' || prefix === 'GEOG') return 'Geography';
+  if (prefix === 'HIST') return 'History';
+  if (prefix === 'AGRI') return 'Agricultural Science';
+  if (prefix === 'POA' || prefix === 'ACCT') return 'Principles of Accounts';
+
+  return 'General';
+}
+
+/**
+ * Groups objectives by subject and removes duplicates
+ * @param objectives - All syllabus objectives
+ * @returns Objectives grouped by subject with duplicates removed
+ */
 function groupObjectivesBySubject(
   objectives: SyllabusObjective[]
 ): { [subject: string]: SyllabusObjective[] } {
@@ -138,7 +167,17 @@ function groupObjectivesBySubject(
   const globalSeenIds = new Set<string>(); // Prevent cross-subject duplicates
 
   for (const obj of objectives) {
-    const subject = getSubjectFromSourceFile(obj.source_file);
+    let subject: string = getSubjectFromSourceFile(obj.source_file);
+
+    // Fallback to ID-based detection if source_file is missing or returns General
+    if ((!subject || subject === 'General') && obj.id) {
+      subject = getSubjectFromId(obj.id);
+    }
+
+    if (subject === 'General') {
+      // Try one last check on content keywords if both fail? 
+      // For now, let's stick to ID as it's reliable for our syllabus data
+    }
 
     if (!bySubject[subject]) {
       bySubject[subject] = [];
@@ -149,7 +188,6 @@ function groupObjectivesBySubject(
       bySubject[subject].push(obj);
       globalSeenIds.add(obj.id);
     }
-    // Silently skip duplicates - no need to log in production
   }
 
   return bySubject;
@@ -236,7 +274,7 @@ function sortObjectivesForLearning(
     }
 
     // Third: Difficulty level (easier first)
-    return a.difficulty - b.difficulty;
+    return (a.difficulty ?? 5) - (b.difficulty ?? 5);
   });
 }
 
@@ -270,7 +308,9 @@ function generateLearningPath(
     // Group by difficulty
     const byDifficulty: { [difficulty: string]: SyllabusObjective[] } = {};
     for (const obj of subjectObjectives) {
-      const key = obj.difficulty.toString();
+      // Default difficulty to 5 if not specified
+      const difficulty = obj.difficulty ?? 5;
+      const key = difficulty.toString();
       if (!byDifficulty[key]) {
         byDifficulty[key] = [];
       }
@@ -305,12 +345,36 @@ function generateLearningPath(
  * Loads syllabus data from file
  */
 function loadSyllabusData(): SyllabusObjective[] {
-  if (!fs.existsSync(SYLLABUS_FILE_PATH)) {
-    throw new Error('Syllabus data not found');
-  }
+  try {
+    if (!fs.existsSync(SYLLABUS_FILE_PATH)) {
+      console.error('Syllabus file not found at:', SYLLABUS_FILE_PATH);
+      throw new Error('Syllabus data not found');
+    }
 
-  const fileContents = fs.readFileSync(SYLLABUS_FILE_PATH, 'utf8');
-  return JSON.parse(fileContents);
+    const fileContents = fs.readFileSync(SYLLABUS_FILE_PATH, 'utf8');
+
+    if (!fileContents || fileContents.trim().length === 0) {
+      console.error('Syllabus file is empty');
+      throw new Error('Syllabus data is empty');
+    }
+
+    const parsed = JSON.parse(fileContents);
+
+    if (!Array.isArray(parsed)) {
+      console.error('Syllabus data is not an array, got:', typeof parsed);
+      throw new Error('Invalid syllabus format');
+    }
+
+    console.log(`Loaded ${parsed.length} syllabus objectives`);
+    return parsed;
+  } catch (error: any) {
+    console.error('Error loading syllabus data:', {
+      message: error.message,
+      path: SYLLABUS_FILE_PATH,
+      stack: error.stack
+    });
+    throw error;
+  }
 }
 
 /**
@@ -353,17 +417,35 @@ import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    await verifyAuth(request);
+    console.log('[Learning Path POST] Starting request');
 
+    // Auth is optional - learning paths use public syllabus data
+    try {
+      await verifyAuth(request);
+      console.log('[Learning Path POST] Auth successful');
+    } catch (authError) {
+      // Allow unauthenticated access for signup flow
+      console.log('[Learning Path POST] Auth skipped (allowed)');
+    }
+
+    console.log('[Learning Path POST] Parsing body');
     const body = await request.json();
-    const { subjects, userProgress } = validateInput(body);
+    console.log('[Learning Path POST] Body parsed:', { subjects: body?.subjects?.length || 0 });
 
+    const { subjects, userProgress } = validateInput(body);
+    console.log('[Learning Path POST] Input validated:', { subjectsCount: subjects.length });
+
+    console.log('[Learning Path POST] Loading syllabus data');
     const allObjectives = loadSyllabusData();
+    console.log('[Learning Path POST] Syllabus loaded:', allObjectives.length);
 
     // Generate paths separated by subject
+    console.log('[Learning Path POST] Generating learning paths');
     const { paths, warnings } = generateLearningPath(allObjectives, userProgress, subjects);
+    console.log('[Learning Path POST] Paths generated:', Object.keys(paths).length);
 
     const objectiveIdsWithQuestions = getObjectiveIdsWithQuestions();
+    console.log('[Learning Path POST] Objective IDs loaded:', objectiveIdsWithQuestions.size);
 
     // Limit each subject to max objectives
     const limitedPaths: { [subject: string]: SyllabusObjective[] } = {};
@@ -385,19 +467,36 @@ export async function POST(request: NextRequest) {
       response.warnings = warnings;
     }
 
+    console.log('[Learning Path POST] Success:', { subjects: response.subjects.length, total: response.total });
     return NextResponse.json(response);
   } catch (error: any) {
+    // Detailed error logging for debugging
+    console.error('[Learning Path POST] Error:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     const isNotFound = error instanceof Error && error.message === 'Syllabus data not found';
-    return NextResponse.json({ error: isNotFound ? 'Syllabus data not found' : 'Failed to generate learning path' }, { status: isNotFound ? 404 : 500 });
+    return NextResponse.json({
+      error: isNotFound ? 'Syllabus data not found' : 'Failed to generate learning path',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    }, { status: isNotFound ? 404 : 500 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
-    await verifyAuth(request);
+    // Auth is optional - learning paths use public syllabus data
+    try {
+      await verifyAuth(request);
+    } catch (authError) {
+      // Allow unauthenticated access
+      console.log('Learning path GET accessed without auth (allowed)');
+    }
 
     const { searchParams } = new URL(request.url);
 
@@ -449,6 +548,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(response);
   } catch (error: any) {
+    console.error('Learning Path GET Error:', error);
     if (error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }

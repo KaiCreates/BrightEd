@@ -64,6 +64,21 @@ export interface UserData {
         contentType?: string;
     };
     avatarUpdatedAt?: string;
+    following?: string[];
+    followers?: string[];
+    avatarCustomization?: {
+        presetId?: string;
+        backgroundColor?: string;
+        top?: string;
+        hairColor?: string;
+        eyes?: string;
+        mouth?: string;
+        clothing?: string;
+        clothesColor?: string;
+        accessories?: string;
+        facialHair?: string;
+        skinColor?: string;
+    };
 }
 
 interface AuthContextType {
@@ -177,7 +192,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                             learningGoal: 'Improve understanding',
                             intent: 'learner',
                             skills: { finance: 1, logic: 1, math: 1 },
-                            form: 1
+                            form: 1,
+                            following: [],
+                            followers: [],
+                            avatarCustomization: {
+                                top: 'shortFlat',
+                                hairColor: '2c1b18',
+                                eyes: 'default',
+                                mouth: 'smile',
+                                clothing: 'blazerAndShirt',
+                                clothesColor: '262e33',
+                                accessories: 'blank',
+                                facialHair: 'blank',
+                                skinColor: 'ffdbb4',
+                                backgroundColor: 'FF8A8A'
+                            }
                         };
                         setDoc(userRef, defaultData).catch(console.error);
                         setUserData(defaultData);

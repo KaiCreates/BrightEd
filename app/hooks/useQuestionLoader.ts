@@ -68,27 +68,41 @@ export function useQuestionLoader({
                 setError(null)
                 setStarJustEarned(false)
 
-                // 2. Load NABLE State (Parallel with other requests)
-                // We use direct Firestore import here as it's cleaner for state loading
-                const { doc, getDoc } = await import('firebase/firestore');
-                const { db } = await import('@/lib/firebase');
-
-                const nableRef = doc(db, 'users', user.uid, 'nable', 'state');
-
-                // Parallel Fetch: Progress + NABLE State
-                const [progressRes, nableDoc] = await Promise.all([
+                // 2. Load NABLE State via Secure API (Production Fortress)
+                const [progressRes, nableStatusRes] = await Promise.all([
                     authenticatedFetch(`/api/progress?userId=${user.uid}`),
-                    getDoc(nableRef)
+                    authenticatedFetch(`/api/nable/status`)
                 ]);
 
                 if (cancelled) return;
 
-                // Process NABLE State
-                const loadedNableState = nableDoc.exists()
-                    ? loadState(user.uid, nableDoc.data() as Partial<NABLEState>)
-                    : createInitialState(user.uid);
+                // Process NABLE Status
+                if (!nableStatusRes.ok) throw new Error('Failed to load NABLE status');
+                const nableData = await nableStatusRes.json();
 
-                setNableState(loadedNableState);
+                // We recreate the state structure from the API response for the frontend
+                // This keeps the UI working without exposing the full engine logic
+                setNableState({
+                    userId: user.uid,
+                    knowledgeGraph: nableData.skills.details.reduce((acc: any, skill: any) => {
+                        acc[skill.id] = {
+                            mastery: skill.mastery / 100,
+                            confidence: skill.confidence / 100,
+                            streakCount: skill.streak,
+                            lastTested: skill.lastTested
+                        };
+                        return acc;
+                    }, {}),
+                    sessionQuestions: [],
+                    currentStreak: nableData.session.currentStreak,
+                    consecutiveErrors: nableData.session.consecutiveErrors,
+                    lastDifficulty: 5,
+                    lastDistractorSimilarity: 0.5,
+                    recentTopicIds: [],
+                    personalStabilityFactor: 1.0,
+                    hearts: 5,
+                    sessionStarted: nableData.session.sessionStarted
+                } as any);
 
                 // Process Progress
                 const progressData = await progressRes.json();
