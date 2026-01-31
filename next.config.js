@@ -52,6 +52,11 @@ const nextConfig = {
         destination: '/lesson',
         permanent: true,
       },
+      {
+        source: '/onboarding',
+        destination: '/welcome',
+        permanent: true,
+      },
     ]
   },
 }
