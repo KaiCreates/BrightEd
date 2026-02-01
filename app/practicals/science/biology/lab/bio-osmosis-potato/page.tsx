@@ -150,11 +150,11 @@ export default function OsmosisLabPage() {
                     </p>
 
                     <div className="grid grid-cols-2 gap-6 mb-10 max-w-md mx-auto">
-                        <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
+                        <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Final Score</div>
                             <div className="text-3xl font-black text-emerald-400">{score}/100</div>
                         </div>
-                        <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
+                        <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
                             <div className="text-3xl font-black text-amber-400">+250</div>
                         </div>
@@ -271,7 +271,7 @@ export default function OsmosisLabPage() {
                                 <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-6">Potato Strips</div>
                                 <div className="space-y-4">
                                     {strips.map((strip, i) => (
-                                        <div key={strip.id} className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                                        <div key={strip.id} className="p-4 rounded-2xl bg-white/5 border border-[#3D3D5C] flex items-center justify-between">
                                             <div className="flex items-center gap-4">
                                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl ${strip.texture === 'turgid' ? 'bg-blue-500' : strip.texture === 'flaccid' ? 'bg-amber-800' : 'bg-amber-600'
                                                     }`}>
@@ -362,7 +362,7 @@ export default function OsmosisLabPage() {
                                                 key={sol.id}
                                                 className={`p-6 rounded-3xl border-2 transition-all ${stripInSolution
                                                         ? 'border-emerald-500/50 bg-emerald-500/5'
-                                                        : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                                                        : 'border-[#3D3D5C] bg-[#131325] hover:border-white/20'
                                                     }`}
                                             >
                                                 <div className="flex items-center justify-between mb-4">
@@ -387,7 +387,7 @@ export default function OsmosisLabPage() {
                                                             <button
                                                                 key={strip.id}
                                                                 onClick={() => handlePlaceInSolution(strip.id, sol.id as any)}
-                                                                className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-black text-zinc-300 hover:bg-white/10 transition-all"
+                                                                className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-[#3D3D5C] text-xs font-black text-zinc-300 hover:bg-white/10 transition-all"
                                                             >
                                                                 Add Strip #{i + 1}
                                                             </button>
@@ -417,7 +417,7 @@ export default function OsmosisLabPage() {
                                             addLog('Incorrect answer selected: Sugar entered the potato.');
                                             setScore(prev => prev - 10);
                                         }}
-                                        className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-left hover:bg-red-500/10 hover:border-red-500/20 transition-all"
+                                        className="w-full p-4 rounded-2xl bg-white/5 border border-[#3D3D5C] text-left hover:bg-red-500/10 hover:border-red-500/20 transition-all"
                                     >
                                         <span className="text-sm font-bold text-zinc-300">A) Sugar entered the potato cells.</span>
                                     </button>
@@ -426,7 +426,7 @@ export default function OsmosisLabPage() {
                                             addLog('Correct answer: Water left the potato by osmosis.');
                                             handleComplete();
                                         }}
-                                        className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-left hover:bg-emerald-500/10 hover:border-emerald-500/20 transition-all"
+                                        className="w-full p-4 rounded-2xl bg-white/5 border border-[#3D3D5C] text-left hover:bg-emerald-500/10 hover:border-emerald-500/20 transition-all"
                                     >
                                         <span className="text-sm font-bold text-zinc-300">B) Water left the potato cells by osmosis, moving to the region of lower water potential.</span>
                                     </button>
@@ -435,7 +435,7 @@ export default function OsmosisLabPage() {
                                             addLog('Incorrect answer selected.');
                                             setScore(prev => prev - 10);
                                         }}
-                                        className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-left hover:bg-red-500/10 hover:border-red-500/20 transition-all"
+                                        className="w-full p-4 rounded-2xl bg-white/5 border border-[#3D3D5C] text-left hover:bg-red-500/10 hover:border-red-500/20 transition-all"
                                     >
                                         <span className="text-sm font-bold text-zinc-300">C) The potato cells absorbed salt.</span>
                                     </button>

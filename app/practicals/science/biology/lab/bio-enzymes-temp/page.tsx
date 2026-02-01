@@ -1,10 +1,25 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ScienceLabLayout from '@/components/science/ScienceLabLayout';
-import { BrightLayer } from '@/components/system';
-import { simulateReaction } from '@/lib/science/chemical-logic';
+import {
+    DndContext,
+    DragEndEvent,
+    DragStartEvent,
+    DragOverlay,
+    useSensor,
+    useSensors,
+    PointerSensor,
+    TouchSensor,
+    useDraggable,
+    useDroppable
+} from '@dnd-kit/core';
+import ProfessorBright, { useProfessor } from '@/components/science/ProfessorBright';
+import { createParticles, Particle, itemVariants } from '@/lib/science/virtual-lab.types';
+
+// ==========================================
+// TYPES
+// ==========================================
 
 interface WaterBath {
     id: string;
@@ -12,150 +27,286 @@ interface WaterBath {
     temperature: number;
     icon: string;
     color: string;
+    enzymeStatus: 'inactive' | 'optimal' | 'denatured';
 }
 
-interface SpottingTileSlot {
-    time: number; // seconds elapsed
-    color: string;
+interface TestTube {
+    id: string;
+    bathId: string;
+    hasAmylase: boolean;
+    hasStarch: boolean;
+    timeElapsed: number;
+    starchBroken: boolean;
+}
+
+const WATER_BATHS: WaterBath[] = [
+    { id: 'ice', name: 'Ice Bath', temperature: 0, icon: '🧊', color: 'from-blue-500/30 to-cyan-500/30', enzymeStatus: 'inactive' },
+    { id: 'room', name: 'Room Temperature', temperature: 37, icon: '🌡️', color: 'from-emerald-500/30 to-green-500/30', enzymeStatus: 'optimal' },
+    { id: 'boiling', name: 'Boiling Water', temperature: 100, icon: '♨️', color: 'from-red-500/30 to-orange-500/30', enzymeStatus: 'denatured' }
+];
+
+// ==========================================
+// DRAGGABLE REAGENT
+// ==========================================
+
+interface Reagent {
+    id: string;
+    name: string;
+    icon: string;
+}
+
+const REAGENTS: Reagent[] = [
+    { id: 'amylase', name: 'Amylase Enzyme', icon: '🧬' },
+    { id: 'starch', name: 'Starch Solution', icon: '🫧' },
+    { id: 'iodine', name: 'Iodine', icon: '🟤' }
+];
+
+function DraggableReagent({ reagent, isOverlay }: { reagent: Reagent; isOverlay?: boolean }) {
+    const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+        id: reagent.id
+    });
+
+    return (
+        <motion.div
+            ref={setNodeRef}
+            {...listeners}
+            {...attributes}
+            variants={itemVariants}
+            initial="hidden"
+            animate={isDragging ? "dragging" : "visible"}
+            whileHover="hover"
+            className={`
+        p-4 rounded-2xl cursor-grab active:cursor-grabbing
+        bg-[#1B1B2F]  border border-[#3D3D5C]
+        transition-all select-none
+        hover:bg-white/[0.08] hover:border-emerald-500/30
+        ${isOverlay ? 'shadow-2xl shadow-emerald-500/20 scale-110' : ''}
+      `}
+        >
+            <div className="flex items-center gap-3">
+                <span className="text-2xl">{reagent.icon}</span>
+                <span className="text-sm font-black text-white">{reagent.name}</span>
+            </div>
+        </motion.div>
+    );
+}
+
+// ==========================================
+// WATER BATH DROP ZONE
+// ==========================================
+
+function WaterBathZone({
+    bath,
+    testTube,
+    isHovering,
+    onTest
+}: {
+    bath: WaterBath;
+    testTube: TestTube | null;
+    isHovering: boolean;
+    onTest: () => void;
+}) {
+    const { setNodeRef } = useDroppable({ id: bath.id });
+
+    const statusLabel: Record<string, { text: string; color: string }> = {
+        inactive: { text: 'Too Cold - Slow Reaction', color: 'text-blue-400' },
+        optimal: { text: 'Optimal - Fast Reaction', color: 'text-emerald-400' },
+        denatured: { text: 'Denatured - No Reaction', color: 'text-red-400' }
+    };
+
+    return (
+        <motion.div
+            ref={setNodeRef}
+            animate={isHovering ? { scale: 1.02, borderColor: 'rgba(16, 185, 129, 0.6)' } : { scale: 1 }}
+            className={`
+        relative p-6 rounded-[2rem] border-2 transition-all
+        bg-gradient-to-br ${bath.color} 
+        border-[#3D3D5C] min-h-[280px]
+        ${isHovering ? 'shadow-2xl shadow-emerald-500/20' : ''}
+      `}
+        >
+            {/* Temperature Display */}
+            <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                    <span className="text-4xl">{bath.icon}</span>
+                    <div>
+                        <div className="text-lg font-black text-white">{bath.name}</div>
+                        <div className="text-[10px] font-bold text-white/50 uppercase tracking-widest">
+                            {bath.temperature}°C
+                        </div>
+                    </div>
+                </div>
+                <div className={`text-[9px] font-black uppercase tracking-widest ${statusLabel[bath.enzymeStatus].color}`}>
+                    {statusLabel[bath.enzymeStatus].text}
+                </div>
+            </div>
+
+            {/* Test Tube Slot */}
+            <div className="mt-6 p-6 rounded-2xl bg-white/5 border border-[#3D3D5C] min-h-[140px] flex flex-col items-center justify-center">
+                {testTube ? (
+                    <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="text-center"
+                    >
+                        <div className="text-4xl mb-3">🧪</div>
+                        <div className="text-xs text-zinc-400 mb-2">
+                            {testTube.hasAmylase && testTube.hasStarch ? 'Amylase + Starch' : 'Empty'}
+                        </div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                            {testTube.timeElapsed}s elapsed
+                        </div>
+                        <button
+                            onClick={onTest}
+                            className="mt-4 px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-500/30 text-[10px] font-black uppercase tracking-widest text-amber-400 hover:bg-amber-500/30"
+                        >
+                            🟤 Test with Iodine
+                        </button>
+                    </motion.div>
+                ) : (
+                    <div className="text-center">
+                        <div className="text-3xl opacity-30 mb-2">🧪</div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600">
+                            Drop reagents here
+                        </div>
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+}
+
+// ==========================================
+// SPOTTING TILE RESULT
+// ==========================================
+
+interface SpottingResult {
+    bathId: string;
+    color: 'blue_black' | 'yellow_brown';
     starchPresent: boolean;
 }
 
-interface EnzymeTest {
-    bathId: string;
-    slots: SpottingTileSlot[];
-    enzymeActive: boolean;
-    completed: boolean;
-}
+// ==========================================
+// MAIN ENZYME TEMPERATURE LAB V2
+// ==========================================
 
-export default function EnzymeLabPage() {
-    const [currentStep, setCurrentStep] = useState(0);
-    const [score, setScore] = useState(100);
-    const [activeTestBath, setActiveTestBath] = useState<string | null>(null);
-    const [tests, setTests] = useState<Record<string, EnzymeTest>>({});
-    const [timer, setTimer] = useState(0);
-    const [timerRunning, setTimerRunning] = useState(false);
+export default function EnzymeLabV2Page() {
+    const [testTubes, setTestTubes] = useState<Record<string, TestTube>>({});
+    const [activeReagent, setActiveReagent] = useState<Reagent | null>(null);
+    const [hoveringBath, setHoveringBath] = useState<string | null>(null);
+    const [results, setResults] = useState<SpottingResult[]>([]);
+    const [particles, setParticles] = useState<Particle[]>([]);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [labLog, setLabLog] = useState<string[]>([]);
+    const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
-    const waterBaths: WaterBath[] = [
-        { id: 'cold', name: 'Ice Bath', temperature: 0, icon: '🧊', color: 'bg-blue-400' },
-        { id: 'room', name: 'Room Temp', temperature: 30, icon: '🌡️', color: 'bg-emerald-500' },
-        { id: 'boiling', name: 'Boiling', temperature: 100, icon: '♨️', color: 'bg-red-500' }
-    ];
+    const { professor, showSuccess: showProfessorSuccess, showWarning, showHint, resetToIdle } = useProfessor({
+        initialMessage: "Let's test how temperature affects enzyme activity. Add amylase and starch to each water bath!"
+    });
 
-    const addLog = useCallback((entry: string) => {
-        setLabLog(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${entry}`]);
+    const sensors = useSensors(
+        useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+        useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
+    );
+
+    // Timer for elapsed time
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTestTubes(prev => {
+                const updated = { ...prev };
+                Object.keys(updated).forEach(key => {
+                    if (updated[key].hasAmylase && updated[key].hasStarch) {
+                        const bath = WATER_BATHS.find(b => b.id === updated[key].bathId);
+                        updated[key] = {
+                            ...updated[key],
+                            timeElapsed: updated[key].timeElapsed + 10,
+                            // Starch breaks down at optimal temp after ~60s
+                            starchBroken: bath?.enzymeStatus === 'optimal' && updated[key].timeElapsed >= 50
+                        };
+                    }
+                });
+                return updated;
+            });
+        }, 1000); // Speed up for simulation
+
+        return () => clearInterval(interval);
     }, []);
 
-    // Timer effect
-    useEffect(() => {
-        if (timerRunning && activeTestBath) {
-            const interval = setInterval(() => {
-                setTimer(prev => prev + 1);
-            }, 100); // Speed up for simulation (1 real second = 10 game seconds)
-            return () => clearInterval(interval);
-        }
-    }, [timerRunning, activeTestBath]);
-
-    const handleStartTest = (bathId: string) => {
-        setActiveTestBath(bathId);
-        setTests(prev => ({
-            ...prev,
-            [bathId]: {
-                bathId,
-                slots: [],
-                enzymeActive: bathId !== 'boiling', // Enzyme is denatured at 100°C
-                completed: false
-            }
-        }));
-        setTimer(0);
-        setTimerRunning(true);
-        setCurrentStep(2);
-
-        const bath = waterBaths.find(b => b.id === bathId);
-        addLog(`Started enzyme test in ${bath?.name} (${bath?.temperature}°C). Amylase + Starch mixed.`);
+    const handleDragStart = (event: DragStartEvent) => {
+        const reagent = REAGENTS.find(r => r.id === event.active.id);
+        setActiveReagent(reagent || null);
     };
 
-    const handleTakeDroplet = () => {
-        if (!activeTestBath) return;
-
-        const test = tests[activeTestBath];
-        const bath = waterBaths.find(b => b.id === activeTestBath);
-
-        // Simulate reaction based on temperature
-        let starchPresent = true;
-        let color = 'Blue-Black';
-
-        if (bath) {
-            if (bath.temperature >= 90) {
-                // Enzyme denatured - starch never breaks down
-                starchPresent = true;
-                color = 'Blue-Black';
-            } else if (bath.temperature >= 30 && bath.temperature <= 40) {
-                // Optimum - fast reaction
-                starchPresent = timer < 60; // Starch gone after ~60 seconds
-                color = starchPresent ? 'Blue-Black' : 'Yellow-Brown';
-            } else if (bath.temperature < 10) {
-                // Too cold - very slow
-                starchPresent = timer < 300; // Takes much longer
-                color = starchPresent ? 'Blue-Black' : 'Yellow-Brown';
-            } else {
-                // Moderate
-                starchPresent = timer < 120;
-                color = starchPresent ? 'Blue-Black' : 'Yellow-Brown';
-            }
-        }
-
-        const newSlot: SpottingTileSlot = {
-            time: timer,
-            color,
-            starchPresent
-        };
-
-        setTests(prev => ({
-            ...prev,
-            [activeTestBath]: {
-                ...prev[activeTestBath],
-                slots: [...prev[activeTestBath].slots, newSlot]
-            }
-        }));
-
-        addLog(`Droplet taken at ${timer}s: ${color} (Starch ${starchPresent ? 'Present' : 'Absent'})`);
-    };
-
-    const handleCompleteTest = () => {
-        if (!activeTestBath) return;
-
-        const bath = waterBaths.find(b => b.id === activeTestBath);
-        setTests(prev => ({
-            ...prev,
-            [activeTestBath]: {
-                ...prev[activeTestBath],
-                completed: true
-            }
-        }));
-
-        setTimerRunning(false);
-        setActiveTestBath(null);
-        addLog(`Test in ${bath?.name} completed. ${tests[activeTestBath]?.slots.length} samples recorded.`);
-
-        // Check if all 3 tests are done
-        const completedCount = Object.values({ ...tests, [activeTestBath]: { completed: true } }).filter(t => t.completed).length;
-        if (completedCount >= 3) {
-            setCurrentStep(3);
+    const handleDragOver = (event: any) => {
+        if (event.over && WATER_BATHS.some(b => b.id === event.over.id)) {
+            setHoveringBath(event.over.id);
         } else {
-            setCurrentStep(1);
+            setHoveringBath(null);
         }
     };
 
-    const handleFinish = () => {
-        setShowSuccess(true);
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+        setActiveReagent(null);
+        setHoveringBath(null);
+
+        if (!over) return;
+
+        const reagentId = active.id as string;
+        const bathId = over.id as string;
+        const bath = WATER_BATHS.find(b => b.id === bathId);
+
+        if (!bath) return;
+
+        setTestTubes(prev => {
+            const existing = prev[bathId] || {
+                id: `tube-${bathId}`,
+                bathId,
+                hasAmylase: false,
+                hasStarch: false,
+                timeElapsed: 0,
+                starchBroken: false
+            };
+
+            if (reagentId === 'amylase') {
+                return { ...prev, [bathId]: { ...existing, hasAmylase: true } };
+            }
+            if (reagentId === 'starch') {
+                return { ...prev, [bathId]: { ...existing, hasStarch: true } };
+            }
+            return prev;
+        });
+
+        if (reagentId === 'amylase' || reagentId === 'starch') {
+            showProfessorSuccess(`Added ${reagentId} to the ${bath.name}!`);
+        }
     };
 
-    const getSlotColor = (color: string) => {
-        if (color === 'Blue-Black') return 'bg-indigo-900';
-        if (color === 'Yellow-Brown') return 'bg-amber-600';
-        return 'bg-zinc-600';
+    const handleTest = (bathId: string) => {
+        const tube = testTubes[bathId];
+        const bath = WATER_BATHS.find(b => b.id === bathId);
+
+        if (!tube || !bath) return;
+
+        const starchPresent = bath.enzymeStatus !== 'optimal' || !tube.starchBroken;
+        const color = starchPresent ? 'blue_black' : 'yellow_brown';
+
+        setResults(prev => [...prev, { bathId, color, starchPresent }]);
+
+        // Particle effect
+        const particleColor = starchPresent ? '#3730A3' : '#D97706';
+        setParticles(createParticles(400, 200, 25, particleColor));
+        setTimeout(() => setParticles([]), 1000);
+
+        if (starchPresent) {
+            showProfessorSuccess(`Blue-black! Starch is still present at ${bath.temperature}°C.`);
+        } else {
+            showProfessorSuccess(`Yellow-brown! Starch was digested at ${bath.temperature}°C. This is the optimal temperature!`);
+        }
+
+        // Check if all 3 tested
+        if (results.length + 1 >= 3) {
+            setTimeout(() => setShowSuccess(true), 2000);
+        }
     };
 
     if (showSuccess) {
@@ -174,41 +325,26 @@ export default function EnzymeLabPage() {
                         🧬✅
                     </motion.div>
                     <h1 className="text-4xl md:text-6xl font-black text-emerald-400 mb-4 uppercase tracking-tight">
-                        Practical Complete
+                        Lab Complete!
                     </h1>
-                    <p className="text-xl text-zinc-300 mb-8 leading-relaxed">
-                        You demonstrated how <span className="text-emerald-400 font-bold">temperature affects enzyme activity</span>.
-                        Enzymes have an <span className="text-white font-bold">optimum temperature</span> and
-                        <span className="text-red-400 font-bold"> denature at high heat</span>.
+                    <p className="text-xl text-zinc-300 mb-8">
+                        You demonstrated that enzymes have an <span className="text-emerald-400 font-bold">optimal temperature</span> and
+                        <span className="text-red-400 font-bold"> denature at high temperatures</span>.
                     </p>
 
-                    <div className="grid grid-cols-3 gap-4 mb-10 max-w-lg mx-auto">
-                        <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20">
-                            <div className="text-2xl mb-2">🧊</div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-blue-400">0°C</div>
-                            <div className="text-xs text-zinc-400">Very Slow</div>
-                        </div>
-                        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
-                            <div className="text-2xl mb-2">✅</div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-emerald-400">30-40°C</div>
-                            <div className="text-xs text-zinc-400">Optimum</div>
-                        </div>
-                        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20">
-                            <div className="text-2xl mb-2">❌</div>
-                            <div className="text-[10px] font-black uppercase tracking-widest text-red-400">100°C</div>
-                            <div className="text-xs text-zinc-400">Denatured</div>
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-6 mb-10 max-w-md mx-auto">
-                        <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
-                            <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Final Score</div>
-                            <div className="text-3xl font-black text-emerald-400">{score}/100</div>
-                        </div>
-                        <div className="p-6 rounded-3xl bg-white/5 border border-white/10">
-                            <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
-                            <div className="text-3xl font-black text-amber-400">+300</div>
-                        </div>
+                    <div className="grid grid-cols-3 gap-4 mb-10 max-w-xl mx-auto">
+                        {WATER_BATHS.map(bath => {
+                            const result = results.find(r => r.bathId === bath.id);
+                            return (
+                                <div key={bath.id} className={`p-4 rounded-2xl bg-gradient-to-br ${bath.color} border border-[#3D3D5C]`}>
+                                    <div className="text-3xl mb-2">{bath.icon}</div>
+                                    <div className="text-sm font-black text-white">{bath.temperature}°C</div>
+                                    <div className={`text-[10px] font-bold mt-1 ${result?.starchPresent ? 'text-indigo-400' : 'text-amber-400'}`}>
+                                        {result?.starchPresent ? 'Starch Present' : 'Starch Digested'}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <a
@@ -223,201 +359,110 @@ export default function EnzymeLabPage() {
     }
 
     return (
-        <ScienceLabLayout
-            labTitle="Effect of Temperature on Enzymes"
-            syllabusSection="Section B: Life Processes"
-            objectives={[
-                'Set up water baths at different temperatures',
-                'Mix amylase and starch in each bath',
-                'Test for starch breakdown using iodine',
-                'Explain enzyme denaturation'
-            ]}
-            equipment={[
-                { name: 'Water Bath (3)', icon: '♨️' },
-                { name: 'Thermometer', icon: '🌡️' },
-                { name: 'Test Tubes', icon: '🧫' },
-                { name: 'Spotting Tile', icon: '⬜' },
-                { name: 'Dropper', icon: '💧' },
-                { name: 'Stopwatch', icon: '⏱️' },
-                { name: 'Iodine Solution', icon: '🟤' }
-            ]}
-            currentStep={currentStep}
-            totalSteps={4}
+        <DndContext
+            sensors={sensors}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
         >
-            <div className="h-full flex flex-col p-8 overflow-y-auto">
-                {/* Active Step Instruction */}
-                <div className="mb-8">
-                    <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-4">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
-                            Step {currentStep + 1} of 4
+            <div className="fixed inset-0 bg-gradient-to-b from-[#0A1628] to-[#050A12] overflow-hidden">
+                {/* Background */}
+                <div className="absolute inset-0">
+                    <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-emerald-500/5 blur-[200px] rounded-full" />
+                    <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-blue-500/5 blur-[150px] rounded-full" />
+                </div>
+
+                {/* Header */}
+                <header className="relative z-50 h-16 bg-[#131325]  border-b-4 border-[#3D3D5C] flex items-center justify-between px-6">
+                    <div className="flex items-center gap-4">
+                        <a href="/practicals/science/biology" className="text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
+                            ← Exit Lab
+                        </a>
+                        <div className="h-6 w-px bg-white/10" />
+                        <div className="text-sm font-black tracking-tight text-white">Effect of Temperature on Enzymes</div>
+                    </div>
+                    <div className="flex items-center gap-2 bg-black/30 px-4 py-1.5 rounded-full border border-[#3D3D5C]">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">
+                            {results.length}/3 tests done
                         </span>
                     </div>
-                    <h2 className="text-2xl font-black tracking-tight text-white mb-2">
-                        {currentStep === 0 && 'Prepare Water Baths'}
-                        {currentStep === 1 && 'Select a Temperature Test'}
-                        {currentStep === 2 && 'Run Iodine Test'}
-                        {currentStep === 3 && 'Analyze Results'}
-                    </h2>
-                    <p className="text-zinc-400 font-medium">
-                        {currentStep === 0 && 'Review the three water baths at 0°C, 30°C, and 100°C.'}
-                        {currentStep === 1 && 'Click a water bath to start testing enzyme activity.'}
-                        {currentStep === 2 && 'Take droplets every 30 seconds and test with iodine.'}
-                        {currentStep === 3 && 'Compare results across all temperatures.'}
-                    </p>
-                </div>
+                </header>
 
-                {/* Main Workbench */}
-                <div className="flex-1 grid grid-cols-3 gap-6">
-                    {waterBaths.map((bath) => {
-                        const test = tests[bath.id];
-                        const isActive = activeTestBath === bath.id;
-                        const isCompleted = test?.completed;
+                <div className="relative z-10 h-[calc(100vh-4rem)] flex">
+                    {/* Left: Reagent Shelf */}
+                    <aside className="w-64 bg-[#131325]  border-r border-[#3D3D5C] p-6">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-6">
+                            Reagents
+                        </div>
+                        <div className="space-y-3">
+                            {REAGENTS.map((reagent) => (
+                                <DraggableReagent key={reagent.id} reagent={reagent} />
+                            ))}
+                        </div>
+                    </aside>
 
-                        return (
-                            <BrightLayer
-                                key={bath.id}
-                                variant={isActive ? "elevated" : "glass"}
-                                padding="lg"
-                                className={`flex flex-col transition-all ${isActive ? 'ring-2 ring-emerald-500' : ''
-                                    } ${isCompleted ? 'opacity-60' : ''}`}
-                            >
-                                <div className="flex items-center justify-between mb-6">
-                                    <div className={`w-14 h-14 rounded-2xl ${bath.color} flex items-center justify-center text-3xl`}>
-                                        {bath.icon}
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-2xl font-black text-white">{bath.temperature}°C</div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{bath.name}</div>
-                                    </div>
+                    {/* Center: Water Baths */}
+                    <main className="flex-1 p-8 overflow-y-auto">
+                        <div className="grid grid-cols-3 gap-6">
+                            {WATER_BATHS.map((bath) => (
+                                <WaterBathZone
+                                    key={bath.id}
+                                    bath={bath}
+                                    testTube={testTubes[bath.id] || null}
+                                    isHovering={hoveringBath === bath.id}
+                                    onTest={() => handleTest(bath.id)}
+                                />
+                            ))}
+                        </div>
+
+                        {/* Spotting Tile Results */}
+                        {results.length > 0 && (
+                            <div className="mt-8 p-6 rounded-2xl bg-[#131325] border border-[#3D3D5C]">
+                                <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-4">
+                                    Spotting Tile Results
                                 </div>
-
-                                {/* Spotting Tile Visualization */}
-                                <div className="flex-1 mb-6">
-                                    <div className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-3">Spotting Tile</div>
-                                    <div className="grid grid-cols-4 gap-2">
-                                        {[...Array(8)].map((_, i) => {
-                                            const slot = test?.slots[i];
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={`aspect-square rounded-xl border-2 flex items-center justify-center text-[8px] font-black ${slot
-                                                            ? `${getSlotColor(slot.color)} border-transparent`
-                                                            : 'border-zinc-700 border-dashed'
-                                                        }`}
-                                                >
-                                                    {slot && `${slot.time}s`}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                                <div className="flex gap-4">
+                                    {results.map((r, i) => {
+                                        const bath = WATER_BATHS.find(b => b.id === r.bathId);
+                                        return (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ scale: 0 }}
+                                                animate={{ scale: 1 }}
+                                                className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center ${r.color === 'blue_black' ? 'bg-indigo-900' : 'bg-amber-600'
+                                                    }`}
+                                            >
+                                                <span className="text-xs font-black text-white">{bath?.temperature}°C</span>
+                                            </motion.div>
+                                        );
+                                    })}
                                 </div>
+                            </div>
+                        )}
 
-                                {/* Actions */}
-                                {currentStep === 0 && (
-                                    <button
-                                        onClick={() => setCurrentStep(1)}
-                                        className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-zinc-400"
-                                    >
-                                        Baths Ready
-                                    </button>
-                                )}
-
-                                {currentStep === 1 && !isCompleted && !activeTestBath && (
-                                    <button
-                                        onClick={() => handleStartTest(bath.id)}
-                                        className="w-full py-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-xs font-black uppercase tracking-widest text-emerald-400 hover:bg-emerald-500/30 transition-all"
-                                    >
-                                        Start Test
-                                    </button>
-                                )}
-
-                                {isActive && (
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between text-sm">
-                                            <span className="font-bold text-zinc-400">Timer:</span>
-                                            <span className="font-black text-white">{timer}s</span>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <button
-                                                onClick={handleTakeDroplet}
-                                                disabled={test?.slots.length >= 8}
-                                                className="flex-1 py-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-xs font-black uppercase tracking-widest text-amber-400 hover:bg-amber-500/30 transition-all disabled:opacity-50"
-                                            >
-                                                Take Sample
-                                            </button>
-                                            <button
-                                                onClick={handleCompleteTest}
-                                                className="px-4 py-3 rounded-xl bg-emerald-500 text-xs font-black uppercase tracking-widest text-white hover:bg-emerald-400 transition-all"
-                                            >
-                                                Done
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {isCompleted && (
-                                    <div className="text-center py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                                        <span className="text-xs font-black uppercase tracking-widest text-emerald-400">
-                                            ✅ Test Complete
-                                        </span>
-                                    </div>
-                                )}
-                            </BrightLayer>
-                        );
-                    })}
+                        {/* Particles */}
+                        {particles.map((p) => (
+                            <motion.div
+                                key={p.id}
+                                initial={{ x: p.x, y: p.y, scale: 1, opacity: 1 }}
+                                animate={{ x: p.x + p.velocity.x, y: p.y + p.velocity.y, scale: 0, opacity: 0 }}
+                                transition={{ duration: 0.8 }}
+                                className="absolute pointer-events-none rounded-full"
+                                style={{ width: p.size, height: p.size, backgroundColor: p.color }}
+                            />
+                        ))}
+                    </main>
                 </div>
 
-                {/* Results Panel */}
-                {currentStep === 3 && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mt-8"
-                    >
-                        <BrightLayer variant="elevated" padding="lg">
-                            <div className="text-[10px] font-black uppercase tracking-widest text-emerald-500 mb-4">Results Summary</div>
-                            <div className="grid grid-cols-3 gap-6 mb-6">
-                                {waterBaths.map(bath => {
-                                    const test = tests[bath.id];
-                                    const lastSlot = test?.slots[test.slots.length - 1];
-                                    return (
-                                        <div key={bath.id} className="text-center">
-                                            <div className="text-lg font-black text-white mb-2">{bath.temperature}°C</div>
-                                            <div className={`text-sm font-bold ${lastSlot?.starchPresent === false ? 'text-emerald-400' : 'text-red-400'
-                                                }`}>
-                                                {lastSlot?.starchPresent === false ? 'Starch Digested' : 'Starch Remained'}
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                {/* Drag Overlay */}
+                <DragOverlay>
+                    {activeReagent && <DraggableReagent reagent={activeReagent} isOverlay />}
+                </DragOverlay>
 
-                            <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6">
-                                <p className="text-sm text-zinc-300 font-medium">
-                                    At <span className="text-red-400 font-bold">100°C</span>, the enzyme was <span className="text-red-400 font-bold">denatured</span> -
-                                    its active site lost its shape and could no longer catalyze the breakdown of starch.
-                                </p>
-                            </div>
-
-                            <button
-                                onClick={handleFinish}
-                                className="w-full py-4 rounded-2xl bg-emerald-500 text-white font-black uppercase tracking-widest hover:bg-emerald-400 transition-all"
-                            >
-                                Complete Lab
-                            </button>
-                        </BrightLayer>
-                    </motion.div>
-                )}
-
-                {/* Lab Log */}
-                <div className="mt-8 p-4 rounded-2xl bg-black/40 border border-white/5 max-h-32 overflow-y-auto font-mono text-xs text-zinc-400">
-                    {labLog.length === 0 ? (
-                        <div className="text-zinc-600">Lab session started. Awaiting actions...</div>
-                    ) : (
-                        labLog.map((entry, i) => <div key={i}>{entry}</div>)
-                    )}
-                </div>
+                {/* Professor Bright */}
+                <ProfessorBright state={professor} />
             </div>
-        </ScienceLabLayout>
+        </DndContext>
     );
 }

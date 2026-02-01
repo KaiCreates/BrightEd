@@ -38,7 +38,7 @@ export default function ScienceLabLayout({
             </div>
 
             {/* Laboratory Header */}
-            <header className="relative z-20 h-16 bg-white/[0.03] backdrop-blur-md border-b border-white/10 flex items-center justify-between px-6">
+            <header className="relative z-20 h-16 bg-white/[0.03]  border-b border-[#3D3D5C] flex items-center justify-between px-6">
                 <div className="flex items-center gap-6">
                     <button
                         onClick={() => onExit ? onExit() : window.history.back()}
@@ -54,7 +54,7 @@ export default function ScienceLabLayout({
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 bg-black/40 px-4 py-1.5 rounded-full border border-white/10">
+                    <div className="flex items-center gap-2 bg-black/40 px-4 py-1.5 rounded-full border border-[#3D3D5C]">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-300">
                             System Stable • {currentStep}/{totalSteps}
@@ -62,7 +62,7 @@ export default function ScienceLabLayout({
                     </div>
                     <button
                         onClick={() => setShowReport(!showReport)}
-                        className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${showReport ? 'bg-emerald-500 text-white' : 'bg-white/5 text-zinc-400 hover:bg-white/10 border border-white/10'
+                        className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${showReport ? 'bg-emerald-500 text-white' : 'bg-white/5 text-zinc-400 hover:bg-white/10 border border-[#3D3D5C]'
                             }`}
                     >
                         Notebook
@@ -72,7 +72,7 @@ export default function ScienceLabLayout({
 
             <div className="flex-1 flex overflow-hidden relative z-10">
                 {/* Left Toolbar: Equipment & Inventory */}
-                <aside className="w-64 border-r border-white/10 bg-black/20 backdrop-blur-sm flex flex-col p-6">
+                <aside className="w-64 border-r border-[#3D3D5C] bg-black/20 -sm flex flex-col p-6">
                     <div className="mb-10">
                         <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-6">Equipment Room</h3>
                         <div className="space-y-3">
@@ -104,7 +104,7 @@ export default function ScienceLabLayout({
                 </main>
 
                 {/* Right Sidebar: Objectives & Checklist */}
-                <aside className="w-80 border-l border-white/10 bg-black/20 backdrop-blur-sm p-6 flex flex-col gap-6 overflow-y-auto">
+                <aside className="w-80 border-l border-[#3D3D5C] bg-black/20 -sm p-6 flex flex-col gap-6 overflow-y-auto">
                     <div>
                         <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-4">Scientific Aim</h3>
                         <div className="space-y-4">
@@ -123,7 +123,7 @@ export default function ScienceLabLayout({
 
                     {/* Quick Stats / Environment Monitor */}
                     <div className="mt-auto space-y-4">
-                        <div className="p-5 rounded-[2rem] bg-white/[0.02] border border-white/10 space-y-4">
+                        <div className="p-5 rounded-[2rem] bg-[#131325] border border-[#3D3D5C] space-y-4">
                             <div className="flex justify-between items-center">
                                 <span className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Stability</span>
                                 <span className="text-[10px] font-black text-emerald-400">100%</span>
@@ -147,7 +147,7 @@ export default function ScienceLabLayout({
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="absolute inset-x-0 bottom-0 top-16 z-50 p-8 flex items-center justify-center bg-black/60 backdrop-blur-xl"
+                        className="absolute inset-x-0 bottom-0 top-16 z-50 p-8 flex items-center justify-center bg-black/60 "
                     >
                         <div className="w-full max-w-4xl h-full max-h-[800px] bg-[#fdfdfd] text-zinc-900 rounded-[2.5rem] shadow-2xl p-12 overflow-y-auto relative border-[12px] border-white/20">
                             <button
