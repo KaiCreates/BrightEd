@@ -3,18 +3,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
+import { BrightHeading, useDialog } from '@/components/system';
 import { MarketItem, BusinessState } from '@/lib/economy/economy-types';
-import { updateBusinessFinancials } from '@/lib/economy/firebase-db';
 import { ensureMarketRestock } from '@/lib/economy';
-import { 
-  SupplyDemandCurve, 
-  calculatePrice, 
-  getPricingResult, 
-  simulateMarketDemand 
+import {
+    SupplyDemandCurve,
+    calculatePrice,
+    getPricingResult,
+    simulateMarketDemand
 } from '@/lib/economy/pricing-engine';
-import { BCoinIcon } from '@/components/BCoinIcon';
-import { doc, updateDoc, Timestamp, increment } from 'firebase/firestore'; // Import directly for now or use db helper
+import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
 interface MarketplaceProps {
@@ -24,18 +22,18 @@ interface MarketplaceProps {
 // Initialize supply/demand curves for market items
 const initializePricingCurves = (items: MarketItem[]): Map<string, SupplyDemandCurve> => {
     const curves = new Map<string, SupplyDemandCurve>();
-    
+
     items.forEach(item => {
         curves.set(item.id, {
             productId: item.id,
             basePrice: item.price,
             currentSupply: item.stock,
-            currentDemand: Math.floor(item.maxStock * 0.3), // Base demand at 30% of max stock
-            elasticity: 0.3, // Moderate price sensitivity
+            currentDemand: Math.floor(item.maxStock * 0.3),
+            elasticity: 0.3,
             priceHistory: [{ timestamp: new Date().toISOString(), price: item.price }]
         });
     });
-    
+
     return curves;
 };
 
@@ -43,30 +41,26 @@ export default function Marketplace({ business }: MarketplaceProps) {
     const [timeLeft, setTimeLeft] = useState<string>('00:00');
     const [isRestocking, setIsRestocking] = useState(false);
     const [pricingCurves, setPricingCurves] = useState<Map<string, SupplyDemandCurve>>(new Map());
+    const { showAlert } = useDialog();
     const anySrcLoader = ({ src }: { src: string }) => src;
 
-    // Initialize pricing curves when market items change
     useEffect(() => {
         if (business.marketState?.items && business.marketState.items.length > 0) {
             const curves = initializePricingCurves(business.marketState.items);
-            
-            // Update demand based on time and reputation
             const hour = new Date().getHours();
             const demandMultiplier = simulateMarketDemand(hour, business.reputation);
-            
+
             curves.forEach((curve, itemId) => {
                 const adjustedDemand = Math.floor(curve.currentDemand * demandMultiplier);
                 curves.set(itemId, { ...curve, currentDemand: adjustedDemand });
             });
-            
+
             setPricingCurves(curves);
         }
     }, [business.marketState?.items, business.reputation]);
 
-    // Initial Restock Check
     useEffect(() => {
         let mounted = true;
-
         const tryRestockIfDue = async () => {
             const now = Date.now();
             const nextRestock = business.marketState?.nextRestock ? new Date(business.marketState.nextRestock).getTime() : 0;
@@ -100,7 +94,6 @@ export default function Marketplace({ business }: MarketplaceProps) {
         }, 1000);
 
         tryRestockIfDue();
-
         return () => {
             mounted = false;
             clearInterval(timer);
@@ -113,27 +106,24 @@ export default function Marketplace({ business }: MarketplaceProps) {
         const cost = dynamicPrice * quantity;
 
         if (business.cashBalance < cost) {
-            alert("Insufficient Bcoins!");
+            showAlert("Insufficient Bcoins! Complete more orders to earn cash for supplies.", { title: 'INSUFFICIENT FUNDS' });
             return;
         }
         if (item.stock < quantity) {
-            alert("Not enough stock available!");
+            showAlert("Not enough stock available in the market right now. Wait for the next restock!", { title: 'OUT OF STOCK' });
             return;
         }
 
         const bizRef = doc(db, 'businesses', business.id);
-
-        // Update Marketplace Stock and pricing curve
         const newMarketItems = marketItems.map(i =>
             i.id === item.id ? { ...i, stock: i.stock - quantity, price: Math.round(dynamicPrice) } : i
         );
 
-        // Update supply in pricing curve (supply decreased)
         if (curve) {
             const updatedCurve = {
                 ...curve,
                 currentSupply: Math.max(0, curve.currentSupply - quantity),
-                currentDemand: curve.currentDemand + Math.floor(quantity * 0.5), // Demand increases slightly
+                currentDemand: curve.currentDemand + Math.floor(quantity * 0.5),
                 priceHistory: [
                     ...curve.priceHistory.slice(-20),
                     { timestamp: new Date().toISOString(), price: dynamicPrice }
@@ -142,7 +132,6 @@ export default function Marketplace({ business }: MarketplaceProps) {
             setPricingCurves(new Map(pricingCurves.set(item.id, updatedCurve)));
         }
 
-        // Deduct money and update inventory + marketplace state
         await updateDoc(bizRef, {
             [`inventory.${item.id}`]: increment(quantity),
             cashBalance: increment(-cost),
@@ -170,117 +159,113 @@ export default function Marketplace({ business }: MarketplaceProps) {
         : getDefaultMarketItems()
     ).map(item => ({
         ...item,
-        // Ensure icon exists if missing from DB state
         icon: (item as any).icon || '📦',
-        // Fallback for image if older DB state doesn't have it (client-side patch)
         image: (item as any).image || getDefaultMarketItems().find(d => d.id === item.id)?.image
     }));
 
     return (
-        <div className="space-y-4">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-2">
+        <div className="duo-card p-8 space-y-8 flex flex-col h-full">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <BrightHeading level={3}>Global Logistics Market</BrightHeading>
-                    <p className="text-[var(--text-secondary)] text-sm">Purchase supplies to fulfill customer orders.</p>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Logistics</div>
+                    <BrightHeading level={2} className="text-3xl m-0">Supply Marketplace</BrightHeading>
+                    <p className="text-xs text-[var(--text-secondary)] font-bold mt-1 opacity-70">Purchase raw materials at dynamic market rates.</p>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-elevated)] rounded-full border border-[var(--brand-primary)]/30 shadow-[0_0_15px_var(--brand-primary)]/10">
-                    <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Market Refresh</span>
-                    <span className="font-mono font-bold text-[var(--brand-primary)] tabular-nums">{timeLeft}</span>
+                <div className="flex items-center gap-2 px-6 py-3 bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-subtle)] border-b-4">
+                    <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Next Restock</span>
+                    <span className="font-mono font-black text-[var(--brand-primary)] text-lg tabular-nums">{timeLeft}</span>
                 </div>
             </div>
 
-            <BrightLayer variant="glass" padding="lg" className="border-none bg-transparent">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                    {marketItems.map((item) => {
-                        const stockPercent = (item.stock / item.maxStock) * 100;
-                        const isLowStock = stockPercent < 30;
-                        const isSoldOut = item.stock === 0;
-                        
-                        // Get dynamic pricing
-                        const curve = pricingCurves.get(item.id);
-                        const dynamicPrice = curve ? Math.round(calculatePrice(curve)) : item.price;
-                        const pricingResult = curve ? getPricingResult(curve) : null;
-                        const priceChanged = dynamicPrice !== item.price;
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+                {marketItems.map((item) => {
+                    const stockPercent = (item.stock / item.maxStock) * 100;
+                    const isLowStock = stockPercent < 30;
+                    const isSoldOut = item.stock === 0;
 
-                        return (
-                            <div key={item.id} className="group relative bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden hover:border-[var(--brand-primary)] hover:shadow-lg transition-all duration-300">
-                                {/* Stock Bar Overlay */}
-                                <div className="absolute top-0 left-0 right-0 h-1 z-10 bg-[var(--bg-elevated)]">
-                                    <div
-                                        className={`h-full transition-all duration-500 ${isLowStock ? 'bg-[var(--state-error)]' : 'bg-[var(--state-success)]'}`}
-                                        style={{ width: `${stockPercent}%` }}
+                    const curve = pricingCurves.get(item.id);
+                    const dynamicPrice = curve ? Math.round(calculatePrice(curve)) : item.price;
+                    const pricingResult = curve ? getPricingResult(curve) : null;
+                    const priceChanged = dynamicPrice !== item.price;
+
+                    return (
+                        <div key={item.id} className="duo-card p-0 overflow-hidden flex flex-col group h-full">
+                            {/* Stock Bar */}
+                            <div className="absolute top-0 left-0 right-0 h-1.5 z-10 bg-[var(--bg-secondary)]">
+                                <div
+                                    className={`h-full transition-all duration-700 ${isSoldOut ? 'bg-[var(--state-error)]' : isLowStock ? 'bg-orange-500' : 'bg-emerald-500'}`}
+                                    style={{ width: `${stockPercent}%` }}
+                                />
+                            </div>
+
+                            {/* Image Area */}
+                            <div className="aspect-square relative bg-[var(--bg-secondary)]/50 p-6 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                                {item.image ? (
+                                    <Image
+                                        loader={anySrcLoader}
+                                        unoptimized
+                                        src={item.image}
+                                        alt={item.name}
+                                        fill
+                                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                                        className="object-contain filter drop-shadow-xl group-hover:scale-110 transition-transform duration-700"
                                     />
+                                ) : (
+                                    <div className="text-5xl group-hover:scale-110 transition-transform duration-700">{item.icon}</div>
+                                )}
+
+                                <div className={`absolute top-4 right-4 px-3 py-1 rounded-xl text-[10px] font-black uppercase tracking-widest border-2 shadow-lg backdrop-blur-md ${isSoldOut ? 'bg-red-500/90 text-white border-red-500/20' : 'bg-black/50 text-white border-white/20'}`}>
+                                    {isSoldOut ? 'Sold Out' : `${item.stock} left`}
                                 </div>
 
-                                {/* Image Area */}
-                                <div className="aspect-square relative bg-white/5 p-4 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                                    {item.image ? (
-                                        <Image
-                                            loader={anySrcLoader}
-                                            unoptimized
-                                            src={item.image}
-                                            alt={item.name}
-                                            fill
-                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                                            className="object-contain filter drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
-                                        />
-                                    ) : (
-                                        <div className="text-4xl">{item.icon}</div>
-                                    )}
-
-                                    <div className={`absolute top-2 right-2 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border backdrop-blur-md ${isSoldOut ? 'bg-[var(--state-error)]/90 text-white border-[var(--state-error)]' : 'bg-black/50 text-white border-white/20'}`}>
-                                        {isSoldOut ? 'Sold Out' : `${item.stock} left`}
+                                {pricingResult && pricingResult.trend !== 'stable' && (
+                                    <div className={`absolute top-4 left-4 px-3 py-1 rounded-xl text-[10px] font-black backdrop-blur-md border-2 shadow-lg ${pricingResult.trend === 'rising' ? 'bg-orange-500/80 text-white border-orange-500/20' : 'bg-emerald-500/80 text-white border-emerald-500/20'}`}>
+                                        {pricingResult.trend === 'rising' ? '▲ PRICE' : '▼ PRICE'}
                                     </div>
-                                    
-                                    {/* Price Trend Indicator */}
-                                    {pricingResult && pricingResult.trend !== 'stable' && (
-                                        <div className={`absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-black backdrop-blur-md ${pricingResult.trend === 'rising' ? 'bg-red-500/80 text-white' : 'bg-green-500/80 text-white'}`}>
-                                            {pricingResult.trend === 'rising' ? '📈' : '📉'}
-                                        </div>
-                                    )}
-                                </div>
+                                )}
+                            </div>
 
-                                {/* Details */}
-                                <div className="p-4">
-                                    <h4 className="font-bold text-[var(--text-primary)] text-sm mb-1 truncate" title={item.name}>{item.name}</h4>
-                                    <div className="flex items-baseline gap-1 mb-1">
-                                        <span className={`font-black text-base ${priceChanged ? 'text-[var(--state-warning)]' : 'text-[var(--brand-accent)]'}`}>
-                                            ฿{dynamicPrice}
+                            {/* Details */}
+                            <div className="p-5 flex-1 flex flex-col">
+                                <h4 className="font-black text-[var(--text-primary)] text-sm mb-2 truncate" title={item.name}>{item.name}</h4>
+                                <div className="flex items-baseline gap-2 mb-4">
+                                    <span className={`font-black text-2xl ${priceChanged ? 'text-orange-500' : 'text-[var(--brand-primary)]'}`}>
+                                        ฿{dynamicPrice}
+                                    </span>
+                                    {priceChanged && (
+                                        <span className="text-xs text-[var(--text-muted)] line-through font-bold opacity-50">
+                                            ฿{item.price}
                                         </span>
-                                        {priceChanged && (
-                                            <span className="text-[10px] text-[var(--text-muted)] line-through">
-                                                ฿{item.price}
-                                            </span>
-                                        )}
-                                    </div>
-                                    {pricingResult && (
-                                        <p className="text-[9px] text-[var(--text-muted)] mb-3 italic">
-                                            {pricingResult.reason}
-                                        </p>
                                     )}
+                                </div>
 
-                                    <div className="grid grid-cols-1 gap-2">
-                                        <button
-                                            disabled={item.stock < 1 || business.cashBalance < dynamicPrice}
-                                            onClick={() => handleBuy(item, 1)}
-                                            className="bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            Purchase 1 Unit
-                                        </button>
-                                        <button
-                                            disabled={item.stock < 5 || business.cashBalance < dynamicPrice * 5}
-                                            onClick={() => handleBuy(item, 5)}
-                                            className="bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] hover:text-white text-[var(--brand-primary)] border border-[var(--brand-primary)]/20 rounded-lg py-1.5 text-xs font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            Bulk Buy (5)
-                                        </button>
-                                    </div>
+                                {pricingResult && (
+                                    <p className="text-[10px] font-bold text-[var(--text-muted)] mb-6 leading-relaxed opacity-70">
+                                        {pricingResult.reason}
+                                    </p>
+                                )}
+
+                                <div className="mt-auto space-y-3">
+                                    <button
+                                        disabled={item.stock < 1 || business.cashBalance < dynamicPrice}
+                                        onClick={() => handleBuy(item, 1)}
+                                        className="duo-btn w-full text-[10px] py-2 border-b-4 border-black/10"
+                                    >
+                                        Buy 1 Units
+                                    </button>
+                                    <button
+                                        disabled={item.stock < 5 || business.cashBalance < dynamicPrice * 5}
+                                        onClick={() => handleBuy(item, 5)}
+                                        className="duo-btn duo-btn-primary w-full text-[10px] py-2"
+                                    >
+                                        Bulk Buy (5)
+                                    </button>
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
-            </BrightLayer>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

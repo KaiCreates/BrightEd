@@ -163,10 +163,6 @@ function LearnContent() {
         let objectives: SyllabusObjective[] = []
         if (currentSubject && pathsBySubject[currentSubject]) {
           objectives = pathsBySubject[currentSubject]
-          objectives = objectives.filter(obj => {
-            const objSubject = getSubjectFromSourceFile(obj.source_file)
-            return objSubject === currentSubject
-          })
         } else {
           objectives = Object.values(pathsBySubject).flat()
         }
@@ -178,13 +174,6 @@ function LearnContent() {
 
         // Transform to UI format
         const mappedModules: LearningModule[] = objectives
-          .filter(obj => {
-            if (currentSubject) {
-              const objSubject = getSubjectFromSourceFile(obj.source_file)
-              return objSubject === currentSubject
-            }
-            return true
-          })
           .map((obj, index) => {
             const style = getSubjectStyle(getSubjectFromSourceFile(obj.source_file))
             const progress = userProgress[obj.id]
@@ -384,17 +373,21 @@ function LearnContent() {
           {!loading && !error && learningModules.length === 0 && (
             <div className="text-center py-10">
               <p className="text-[var(--text-secondary)] mb-4">No learning objectives available.</p>
-              {!onboardingCompleted ? (
+              {subjects.length === 0 && !onboardingCompleted ? (
                 <Link href="/welcome" className="text-[var(--brand-primary)] hover:underline font-black">
                   Complete onboarding to get started
                 </Link>
               ) : (
-                <button
-                  onClick={() => window.location.reload()}
-                  className="text-[var(--brand-primary)] hover:underline font-black"
-                >
-                  Retry
-                </button>
+                <div className="flex flex-col gap-4 items-center">
+                  <p className="text-sm text-[var(--text-muted)]">Check another subject above or try resetting.</p>
+                  <BrightButton
+                    size="sm"
+                    variant="outline"
+                    onClick={() => window.location.reload()}
+                  >
+                    Refresh
+                  </BrightButton>
+                </div>
               )}
             </div>
           )}

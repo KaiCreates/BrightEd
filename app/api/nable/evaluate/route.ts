@@ -13,6 +13,7 @@ import {
 } from '@/lib/nable';
 import { GlobalIntelligence } from '@/lib/nable/global-intelligence';
 import { createInitialSubSkillScore } from '@/lib/nable/mastery-tracker';
+import { calculateXPUpdate, getDayKey } from '@/lib/xp-utils';
 
 function dayKeyUTC(d: Date) {
     const y = d.getUTCFullYear();
@@ -189,10 +190,14 @@ export async function POST(request: NextRequest) {
                 completed: newStars >= 3
             };
 
-            // Rewards - Base XP for correct, Bonus for Star Increase
+            // Rewards - Base XP for correct (50), Incorrect (10), Star Bonus (100)
+            // Updated to meet user request of 50-100 XP per question
             const starIncrease = Math.max(0, newStars - (objProgress.stars || 0));
-            const xpGain = (isCorrect ? 10 : 2) + (starIncrease * 50);
-            const bCoinGain = isCorrect ? 5 : 0;
+            const rawXpGain = (isCorrect ? 50 : 10) + (starIncrease * 50);
+
+            const xpUpdate = calculateXPUpdate(userData, rawXpGain, todayKey);
+            const xpGain = xpUpdate.xpGain;
+            const bCoinGain = isCorrect ? 10 : 0;
 
             const prevStreak = typeof userData.streak === 'number' ? userData.streak : 0;
             const lastStreakDay = typeof userData.lastStreakDay === 'string' ? userData.lastStreakDay : '';
@@ -221,8 +226,7 @@ export async function POST(request: NextRequest) {
                 },
                 [`mastery.${objectiveId}`]: objMastery, // Direct access map
                 // ATOMIC UPDATES: Use FieldValue.increment to prevent race conditions
-                xp: admin.firestore.FieldValue.increment(xpGain),
-                xp_today: admin.firestore.FieldValue.increment(xpGain),
+                ...xpUpdate.updates,
                 bCoins: admin.firestore.FieldValue.increment(bCoinGain),
                 streak: nextStreak,
                 lastStreakDay: shouldIncrementStreak ? todayKey : lastStreakDay,

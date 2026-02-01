@@ -75,7 +75,7 @@ export interface UserData {
         eyes?: string;
         mouth?: string;
         clothing?: string;
-        clothesColor?: string;
+        clothingColor?: string;
         accessories?: string;
         facialHair?: string;
         skinColor?: string;
@@ -208,7 +208,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                                 eyes: 'default',
                                 mouth: 'smile',
                                 clothing: 'blazerAndShirt',
-                                clothesColor: '262e33',
+                                clothingColor: '262e33',
                                 accessories: 'blank',
                                 facialHair: 'blank',
                                 skinColor: 'ffdbb4',

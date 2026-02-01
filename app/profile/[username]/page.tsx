@@ -147,7 +147,7 @@ export default function UserProfilePage() {
                 top: [c.top || 'shortFlat'],
                 hairColor: [c.hairColor || '2c1b18'],
                 clothing: [c.clothing || 'blazerAndShirt'],
-                clothesColor: [c.clothesColor || '262e33'],
+                clothesColor: [c.clothingColor || c.clothesColor || '262e33'],
                 accessories: [c.accessories || 'blank'],
                 eyes: [c.eyes || 'default'],
                 mouth: [c.mouth || 'smile'],
@@ -315,7 +315,7 @@ export default function UserProfilePage() {
                                 <StatCard icon="⚡" label="Total XP" value={profileData.xp?.toLocaleString() || 0} color="text-yellow-500" />
                                 {isOwner && (
                                     <>
-                                        <StatCard icon="💰" label="B-Coins" value={profileData.bCoins?.toLocaleString() || 0} color="text-green-500" />
+                                        <StatCard icon="💰" label="B-Coins" value={profileData.bCoins?.toLocaleString() || 0} color="text-[var(--brand-primary)]" />
                                         <StatCard icon="🧠" label="Mastery" value={`${Math.round((profileData.globalMastery || 0) * 100)}%`} color="text-purple-500" />
                                     </>
                                 )}
@@ -447,12 +447,12 @@ export default function UserProfilePage() {
 
 function StatCard({ icon, label, value, subtext, color }: { icon: string, label: string, value: string | number, subtext?: string, color: string }) {
     return (
-        <BrightLayer variant="elevated" padding="md" className="flex items-center gap-4 border-b-[6px] border-black/10 hover:border-white/10 transition-colors">
-            <div className={`text-4xl ${color} bg-white/5 p-3 rounded-2xl shadow-inner`}>{icon}</div>
-            <div>
-                <div className="text-2xl font-black">{value}</div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">{label}</div>
-                {subtext && <div className="text-[10px] font-bold text-green-500 uppercase mt-0.5">{subtext}</div>}
+        <BrightLayer variant="elevated" padding="md" className="flex flex-col items-center justify-center text-center gap-3 border-b-[6px] border-black/10 hover:border-white/10 transition-colors min-h-[140px]">
+            <div className={`text-4xl ${color} bg-white/5 p-3 rounded-2xl shadow-inner mb-1`}>{icon}</div>
+            <div className="w-full overflow-hidden">
+                <div className="text-2xl font-black leading-none mb-1">{value}</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] whitespace-nowrap">{label}</div>
+                {subtext && <div className="text-[10px] font-bold text-[var(--brand-primary)] uppercase mt-1">{subtext}</div>}
             </div>
         </BrightLayer>
     );

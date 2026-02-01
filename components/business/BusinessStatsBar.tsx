@@ -1,6 +1,5 @@
 'use client';
 
-import { BrightLayer } from '@/components/system';
 import { BusinessState } from '@/lib/economy/economy-types';
 
 interface BusinessStatsBarProps {
@@ -11,42 +10,42 @@ interface BusinessStatsBarProps {
 
 export function BusinessStatsBar({ businessState, pendingRevenue, earnedToday }: BusinessStatsBarProps) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            <BrightLayer variant="glass" padding="sm" className="flex flex-col justify-between">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Cash Balance</p>
-                <p className="text-2xl font-black text-[var(--text-primary)]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full">
+            <div className="duo-card p-4 flex flex-col justify-between hover:translate-y-[-2px] transition-transform">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Cash Balance</p>
+                <p className="text-3xl font-black text-[var(--text-primary)]">
                     ฿{businessState.cashBalance.toLocaleString()}
                 </p>
-            </BrightLayer>
+            </div>
 
-            <BrightLayer variant="glass" padding="sm" className="flex flex-col justify-between">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Pending Revenue</p>
-                <p className="text-2xl font-black text-[var(--state-info)]">
+            <div className="duo-card p-4 flex flex-col justify-between hover:translate-y-[-2px] transition-transform">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Pending Revenue</p>
+                <p className="text-3xl font-black text-cyan-500">
                     ฿{pendingRevenue.toLocaleString()}
                 </p>
-            </BrightLayer>
+            </div>
 
-            <BrightLayer variant="glass" padding="sm" className="flex flex-col justify-between">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Earned Today</p>
-                <p className="text-2xl font-black text-[var(--state-success)]">
+            <div className="duo-card p-4 flex flex-col justify-between hover:translate-y-[-2px] transition-transform">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Earned Today</p>
+                <p className="text-3xl font-black text-emerald-500">
                     ฿{earnedToday.toLocaleString()}
                 </p>
-            </BrightLayer>
+            </div>
 
-            <BrightLayer variant="glass" padding="sm" className="flex flex-col justify-between">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Reputation</p>
-                <div className="flex items-end gap-2">
-                    <p className="text-2xl font-black text-[var(--brand-accent)]">
-                        {businessState.reputation}/100
+            <div className="duo-card p-4 flex flex-col justify-between hover:translate-y-[-2px] transition-transform">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Reputation</p>
+                <div className="flex items-end gap-3">
+                    <p className="text-3xl font-black text-[var(--brand-primary)]">
+                        {businessState.reputation}
                     </p>
-                    <div className="h-1.5 flex-1 bg-[var(--bg-elevated)] rounded-full mb-1.5 overflow-hidden">
+                    <div className="h-2 flex-1 bg-[var(--bg-secondary)] rounded-full mb-2 border border-black/5 overflow-hidden">
                         <div
-                            className="h-full bg-[var(--brand-accent)] transition-all duration-500"
+                            className="h-full bg-[var(--brand-primary)] transition-all duration-700"
                             style={{ width: `${Math.min(100, Math.max(0, businessState.reputation))}%` }}
                         />
                     </div>
                 </div>
-            </BrightLayer>
+            </div>
         </div>
     );
 }

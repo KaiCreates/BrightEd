@@ -10,12 +10,16 @@ import { getLiveSessions, type BrightOSLiveSession } from '@/lib/brightos/live-s
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { ProfessorBrightMascot } from '@/components/learning';
 import { FeedbackResponse } from '@/lib/professor-bright';
+import { useAuth } from '@/lib/auth-context';
 
 export default function PracticalsPage() {
+  const { userData } = useAuth();
   const [malwareCompletion, setMalwareCompletion] = useState<ReturnType<typeof getMissionCompletion> | null>(null);
   const [sessions, setSessions] = useState<BrightOSLiveSession[]>([]);
   const [csecProgress, setCsecProgress] = useState<{ completed: number; xp: number }>({ completed: 0, xp: 0 });
   const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null);
+
+  const hasBusiness = userData?.hasBusiness || false;
 
   useEffect(() => {
     setMalwareCompletion(getMissionCompletion('brightos:malware-incident'));
@@ -209,49 +213,109 @@ export default function PracticalsPage() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2">
-            <Link href="/practicals/business/register" className="block group">
-              <BrightLayer
-                variant="elevated"
-                padding="md"
-                className="h-full border-b-[8px] border-amber-700 hover:border-amber-500 active:border-b-0 active:translate-y-[8px] transition-all cursor-pointer overflow-hidden relative bg-gradient-to-br from-amber-500/5 to-transparent"
+            <div className="relative group">
+              <Link
+                href={hasBusiness ? "#" : "/practicals/business/register"}
+                className={`block h-full ${hasBusiness ? 'cursor-default pointer-events-none' : ''}`}
               >
-                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500 opacity-[0.05] group-hover:opacity-[0.1] rounded-full blur-3xl transition-opacity" />
+                <BrightLayer
+                  variant="elevated"
+                  padding="md"
+                  className={`h-full border-b-[8px] border-amber-700 transition-all overflow-hidden relative bg-gradient-to-br from-amber-500/5 to-transparent ${hasBusiness
+                    ? 'opacity-40 grayscale-[0.5] border-amber-900/50'
+                    : 'hover:border-amber-500 active:border-b-0 active:translate-y-[8px] cursor-pointer'
+                    }`}
+                >
+                  {hasBusiness && (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/10 backdrop-blur-[1px]">
+                      <motion.div
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="flex flex-col items-center gap-2"
+                      >
+                        <span className="text-7xl filter drop-shadow-[0_0_20px_rgba(16,185,129,0.6)] animate-pulse">✅</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400 bg-black/60 px-4 py-1.5 rounded-full border border-emerald-500/30">Entity Established</span>
+                      </motion.div>
+                    </div>
+                  )}
+
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500 opacity-[0.05] group-hover:opacity-[0.1] rounded-full blur-3xl transition-opacity" />
+                  <div className="flex flex-col h-full relative z-10">
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="space-y-3">
+                        <div className="inline-block px-3 py-1 rounded-lg bg-amber-500 text-white text-[9px] font-black uppercase tracking-widest shadow-lg shadow-amber-500/20">Legal • Onboarding</div>
+                        <BrightHeading level={3} className="text-3xl group-hover:text-amber-400 transition-colors tracking-tight">Register Business</BrightHeading>
+                        <p className="text-[var(--text-secondary)] font-medium max-w-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                          Start the legal entity process and unlock the operations dashboard.
+                        </p>
+                      </div>
+                      <div className="w-24 h-24 rounded-3xl bg-amber-500 flex items-center justify-center text-5xl shadow-2xl shadow-amber-500/30 text-white transform group-hover:scale-110 transition-all duration-500">
+                        💼
+                      </div>
+                    </div>
+
+                    <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/5">
+                      <div className={`${hasBusiness ? 'bg-zinc-800 text-zinc-500 border-zinc-700' : 'bg-amber-500 text-white shadow-amber-500/20'} px-6 py-2 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 active:scale-95 transition-all`}>
+                        {hasBusiness ? 'COMPLETED' : 'ESTABLISH ENTITY'}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${hasBusiness ? 'bg-zinc-600' : 'bg-amber-500 animate-pulse'}`} />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Operations</span>
+                      </div>
+                    </div>
+                  </div>
+                </BrightLayer>
+              </Link>
+            </div>
+
+            <Link
+              href={hasBusiness ? "/practicals/business/operations" : "#"}
+              className={`block group ${!hasBusiness ? 'cursor-not-allowed' : ''}`}
+            >
+              <BrightLayer
+                variant={hasBusiness ? "elevated" : "glass"}
+                padding="md"
+                className={`h-full border-b-[8px] transition-all overflow-hidden relative bg-gradient-to-br from-indigo-500/5 to-transparent ${hasBusiness
+                  ? 'border-indigo-700 hover:border-indigo-500 active:border-b-0 active:translate-y-[8px] cursor-pointer'
+                  : 'border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50 opacity-60'
+                  }`}
+              >
+                {!hasBusiness && (
+                  <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px]">
+                    <span className="text-4xl mb-2 opacity-50 grayscale">🔒</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400">Registration Required</span>
+                  </div>
+                )}
+
+                <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500 opacity-[0.05] group-hover:opacity-[0.1] rounded-full blur-3xl transition-opacity" />
                 <div className="flex flex-col h-full relative z-10">
                   <div className="flex items-start justify-between mb-8">
-                    <div className="space-y-3">
-                      <div className="inline-block px-3 py-1 rounded-lg bg-amber-500 text-white text-[9px] font-black uppercase tracking-widest shadow-lg shadow-amber-500/20">Legal • Onboarding</div>
-                      <BrightHeading level={3} className="text-3xl group-hover:text-amber-400 transition-colors tracking-tight">Register Business</BrightHeading>
+                    <div className="space-y-3 text-left">
+                      <div className={`inline-block px-3 py-1 rounded-lg ${hasBusiness ? 'bg-indigo-500 shadow-indigo-500/20' : 'bg-zinc-700'} text-white text-[9px] font-black uppercase tracking-widest shadow-lg`}>
+                        Operations • Active
+                      </div>
+                      <BrightHeading level={3} className={`text-3xl tracking-tight transition-colors ${hasBusiness ? 'group-hover:text-indigo-400' : ''}`}>Business Operations</BrightHeading>
                       <p className="text-[var(--text-secondary)] font-medium max-w-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
-                        Start the legal entity process and unlock the operations dashboard.
+                        Customer Requests, Ethics Challenges, and Market Simulations.
                       </p>
                     </div>
-                    <div className="w-24 h-24 rounded-3xl bg-amber-500 flex items-center justify-center text-5xl shadow-2xl shadow-amber-500/30 text-white transform group-hover:scale-110 transition-all duration-500">
-                      💼
+                    <div className={`w-24 h-24 rounded-3xl ${hasBusiness ? 'bg-indigo-500 shadow-indigo-500/30' : 'bg-zinc-800'} flex items-center justify-center text-5xl shadow-2xl text-white transform group-hover:scale-110 transition-all duration-500`}>
+                      ⚙️
                     </div>
                   </div>
 
                   <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/5">
-                    <div className="bg-amber-500 text-white px-6 py-2 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all">
-                      ESTABLISH ENTITY
+                    <div className={`${hasBusiness ? 'bg-indigo-500 text-white shadow-indigo-500/20' : 'bg-zinc-800 text-zinc-500 border-zinc-700'} px-6 py-2 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-105 active:scale-95 transition-all`}>
+                      {hasBusiness ? 'OPEN COMMAND CENTER' : 'LOCKED'}
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Operations</span>
+                      <div className={`w-2 h-2 rounded-full ${hasBusiness ? 'bg-indigo-500 animate-pulse' : 'bg-zinc-600'}`} />
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Live Simulation</span>
                     </div>
                   </div>
                 </div>
               </BrightLayer>
             </Link>
-
-            <BrightLayer variant="glass" padding="md" className="border-b-[8px] border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50">
-              <div className="flex flex-col items-center justify-center h-full text-center py-10 opacity-60">
-                <span className="text-5xl mb-4">🚀</span>
-                <BrightHeading level={3} className="text-xl mb-2">Coming Soon</BrightHeading>
-                <p className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest max-w-xs">
-                  Customer Requests, Ethics Challenges, and Market Simulations.
-                </p>
-              </div>
-            </BrightLayer>
           </div>
         </section>
 
@@ -304,21 +368,31 @@ export default function PracticalsPage() {
           </BrightLayer>
         </section>
 
-        {/* Explorer Section */}
+        {/* Hub Selection Section */}
         <section>
           <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { title: 'Financial Literacy', desc: 'Reports, market shifts, and delayed consequences.', icon: '📊' },
-              { title: 'Science Labs', desc: 'Variable-state experiments with earned outcomes.', icon: '🧪' },
-              { title: 'Career Paths', desc: 'Real professional simulations with higher stakes.', icon: '🎯' }
-            ].map((item, i) => (
-              <BrightLayer key={i} variant="elevated" padding="sm" className="bg-[var(--bg-secondary)]/30 border-b-[6px] border-[var(--border-subtle)] opacity-70">
-                <div className="text-2xl mb-2">{item.icon}</div>
-                <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Coming Soon</div>
-                <div className="font-black text-[var(--text-primary)] mb-1">{item.title}</div>
-                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">{item.desc}</p>
+            <BrightLayer variant="elevated" padding="sm" className="bg-[var(--bg-secondary)]/30 border-b-[6px] border-[var(--border-subtle)] opacity-70">
+              <div className="text-2xl mb-2">📊</div>
+              <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Coming Soon</div>
+              <div className="font-black text-[var(--text-primary)] mb-1">Financial Literacy</div>
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Reports, market shifts, and delayed consequences.</p>
+            </BrightLayer>
+
+            <Link href="/practicals/science/biology" className="group">
+              <BrightLayer variant="elevated" padding="sm" className="h-full bg-emerald-500/5 border-b-[6px] border-emerald-700 hover:border-emerald-500 hover:-translate-y-1 transition-all cursor-pointer">
+                <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">🧪</div>
+                <div className="text-xs font-black uppercase tracking-widest text-emerald-500 mb-1">Active Hub</div>
+                <div className="font-black text-[var(--text-primary)] mb-1">Science Labs</div>
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Variable-state experiments with earned outcomes.</p>
               </BrightLayer>
-            ))}
+            </Link>
+
+            <BrightLayer variant="elevated" padding="sm" className="bg-[var(--bg-secondary)]/30 border-b-[6px] border-[var(--border-subtle)] opacity-70">
+              <div className="text-2xl mb-2">🎯</div>
+              <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Coming Soon</div>
+              <div className="font-black text-[var(--text-primary)] mb-1">Career Paths</div>
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Real professional simulations with higher stakes.</p>
+            </BrightLayer>
           </div>
         </section>
       </div>

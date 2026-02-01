@@ -46,7 +46,7 @@ export function DuoSessionLayout({
             </div>
 
             {/* Main Content */}
-            <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto px-4 pb-32">
+            <main className="flex-1 flex flex-col items-center justify-start w-full max-w-5xl mx-auto px-4 pb-32 pt-8 md:pt-12">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentStep}

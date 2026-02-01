@@ -363,16 +363,18 @@ export default function SimulatePage() {
     // Reset answer timer for next question
     setAnswerStartTime(Date.now())
 
-    setTimeout(() => {
-      if (currentStep < simulationSteps.length - 1) {
-        setCurrentStep(currentStep + 1)
-        setSelectedAnswer(null)
-        setShowFeedback(false)
-        setIsTransitioning(false)
-        setShowHint(false)
-        setShowMicroLesson(false)
-      }
-    }, 2500)
+    // Auto-advance removed to allow user to read feedback
+    // setTimeout(() => {
+    //   if (currentStep < simulationSteps.length - 1) {
+    //     setCurrentStep(currentStep + 1)
+    //     setSelectedAnswer(null)
+    //     setShowFeedback(false)
+    //     setIsTransitioning(false)
+    //     setShowHint(false)
+    //     setShowMicroLesson(false)
+    //   }
+    // }, 2500)
+
   }
 
   const nextStep = () => {
@@ -508,7 +510,7 @@ export default function SimulatePage() {
           </div>
 
           <Link href="/learn?animation=unlock" className="block w-full">
-            <button className="w-full py-4 rounded-2xl bg-[#58cc02] border-b-4 border-[#46a302] text-white font-black text-xl uppercase tracking-widest hover:bg-[#61e002] transition-colors">
+            <button className="w-full py-4 rounded-2xl bg-[#6366f1] border-b-4 border-[#4f46e5] text-white font-black text-xl uppercase tracking-widest hover:bg-[#4f46e5] transition-colors">
               Continue
             </button>
           </Link>
@@ -539,7 +541,7 @@ export default function SimulatePage() {
       onClose={() => router.push('/learn')}
       footer={
         <DuoActionBar
-          status={showFeedback ? (isAnswerCorrect ? 'correct' : 'wrong') : (selectedAnswer !== null ? 'selected' : 'idle')}
+          status={showFeedback ? (isAnswerCorrect ? 'correct' : 'wrong') : (step.type !== 'decision' ? 'continue' : (selectedAnswer !== null ? 'selected' : 'idle'))}
           onCheck={() => handleAnswer(selectedAnswer!)}
           onContinue={currentStep < simulationSteps.length - 1 ? nextStep : (isFallbackState ? () => router.push('/learn') : handleComplete)}
           feedbackTitle={isAnswerCorrect ? 'Excellent!' : 'Correct solution:'}
@@ -582,7 +584,7 @@ export default function SimulatePage() {
                 animate={{ y: 0, opacity: 1 }}
                 whileTap={{ y: 2 }}
                 onClick={() => router.push('/learn')}
-                className="w-full py-5 rounded-2xl bg-[#58cc02] border-b-[6px] border-[#46a302] text-white font-black text-xl uppercase tracking-widest hover:bg-[#61e002] active:border-b-0 active:translate-y-[4px] shadow-lg shadow-green-500/20 transition-all font-black"
+                className="w-full py-5 rounded-2xl bg-[#6366f1] border-b-[6px] border-[#4f46e5] text-white font-black text-xl uppercase tracking-widest hover:bg-[#4f46e5] active:border-b-0 active:translate-y-[4px] shadow-lg shadow-indigo-500/20 transition-all font-black"
               >
                 Back to Map
               </motion.button>

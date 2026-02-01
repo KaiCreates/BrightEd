@@ -1,6 +1,6 @@
 'use client';
 
-import { BrightLayer, BrightHeading } from '@/components/system';
+import { BrightHeading } from '@/components/system';
 
 interface InventoryPanelProps {
     inventory: Record<string, number>;
@@ -10,37 +10,46 @@ export default function InventoryPanel({ inventory }: InventoryPanelProps) {
     const items = Object.entries(inventory).filter(([_, qty]) => qty > 0);
 
     return (
-        <div className="space-y-4">
-            <BrightLayer variant="glass" padding="md">
-                <div className="flex justify-between items-center mb-4">
-                    <BrightHeading level={4} className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)]">Warehouse Stock</BrightHeading>
-                    <span className="text-[10px] px-2 py-0.5 bg-[var(--bg-elevated)] rounded border border-[var(--border-subtle)] font-mono text-[var(--text-secondary)]">
+        <div className="duo-card p-6 space-y-6">
+            <div className="flex justify-between items-center bg-[var(--bg-secondary)] p-4 rounded-2xl border-2 border-[var(--border-subtle)] border-b-4">
+                <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-0.5">Physical Inventory</div>
+                    <BrightHeading level={2} className="text-3xl m-0">Warehouse Stock</BrightHeading>
+                </div>
+                <div className="bg-[var(--brand-primary)]/10 px-4 py-2 rounded-xl border-2 border-[var(--brand-primary)]/20">
+                    <span className="text-xs font-black text-[var(--brand-primary)] tabular-nums">
                         {items.length} SKUs
                     </span>
                 </div>
+            </div>
 
-                {items.length === 0 ? (
-                    <div className="py-8 text-center border-2 border-dashed border-[var(--border-subtle)] rounded-xl">
-                        <p className="text-xs text-[var(--text-muted)]">No stock in warehouse.<br />Restock from the Supply Chain.</p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {items.map(([itemId, quantity]) => (
-                            <div key={itemId} className="bg-[var(--bg-elevated)]/50 rounded-lg p-3 border border-[var(--border-subtle)] flex items-center justify-between group hover:border-[var(--brand-primary)]/50 transition-colors">
+            {items.length === 0 ? (
+                <div className="py-12 text-center bg-[var(--bg-secondary)]/30 rounded-[2rem] border-2 border-dashed border-[var(--border-subtle)]">
+                    <div className="text-4xl mb-4 grayscale opacity-30">📦</div>
+                    <p className="text-sm font-black uppercase tracking-widest text-[var(--text-muted)] opacity-50">Warehouse Empty</p>
+                    <p className="text-[10px] font-bold text-[var(--text-secondary)] mt-1">Restock supplies from the marketplace.</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                    {items.map(([itemId, quantity]) => (
+                        <div key={itemId} className="duo-card p-4 transition-transform hover:translate-y-[-2px] active:translate-y-[0px]">
+                            <div className="flex items-center justify-between">
                                 <div className="flex flex-col">
-                                    <span className="text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-tight truncate max-w-[80px]">
+                                    <span className="text-[10px] text-[var(--brand-primary)] font-black uppercase tracking-widest mb-1 truncate max-w-[120px]">
                                         {itemId.replace(/_/g, ' ')}
                                     </span>
-                                    <span className="text-sm font-black text-[var(--text-primary)]">
+                                    <span className="text-2xl font-black text-[var(--text-primary)]">
                                         {quantity.toLocaleString()}
                                     </span>
                                 </div>
-                                <div className="w-1.5 h-8 bg-gradient-to-t from-[var(--brand-primary)] to-[var(--brand-accent)] rounded-full opacity-30 group-hover:opacity-100 transition-opacity" />
+                                <div className="w-12 h-12 rounded-2xl bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] border-b-4 flex items-center justify-center text-2xl">
+                                    {quantity > 100 ? '📦' : quantity > 0 ? '🥡' : '⭕'}
+                                </div>
                             </div>
-                        ))}
-                    </div>
-                )}
-            </BrightLayer>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

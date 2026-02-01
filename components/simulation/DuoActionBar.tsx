@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 
 interface DuoActionBarProps {
-    status: 'idle' | 'selected' | 'correct' | 'wrong'
+    status: 'idle' | 'selected' | 'correct' | 'wrong' | 'continue'
     onCheck: () => void
     onContinue: () => void
     feedbackMessage?: string
@@ -18,9 +18,9 @@ export function DuoActionBar({
     feedbackTitle
 }: DuoActionBarProps) {
     const isFeedback = status === 'correct' || status === 'wrong'
-    const bgColor = status === 'correct' ? 'bg-[#d7ffb8]' : status === 'wrong' ? 'bg-[#ffdfe0]' : 'bg-[var(--bg-primary)]'
-    const textColor = status === 'correct' ? 'text-[#46a302]' : status === 'wrong' ? 'text-[#ea2b2b]' : 'text-[var(--text-primary)]'
-    const buttonColor = status === 'correct' ? 'bg-[#58cc02] border-[#46a302]' : status === 'wrong' ? 'bg-[#ff4b4b] border-[#ea2b2b]' : 'bg-[#58cc02] border-[#46a302]'
+    const bgColor = status === 'correct' ? 'bg-[#e0e7ff]' : status === 'wrong' ? 'bg-[#ffdfe0]' : 'bg-[var(--bg-primary)]'
+    const textColor = status === 'correct' ? 'text-[#4338ca]' : status === 'wrong' ? 'text-[#ea2b2b]' : 'text-[var(--text-primary)]'
+    const buttonColor = (status === 'correct' || status === 'continue') ? 'bg-[#6366f1] border-[#4f46e5]' : status === 'wrong' ? 'bg-[#ff4b4b] border-[#ea2b2b]' : 'bg-[#6366f1] border-[#4f46e5]'
     const buttonDisabled = status === 'idle'
 
     return (
@@ -56,7 +56,7 @@ export function DuoActionBar({
 
                 {/* Action Button */}
                 <div className="w-full md:w-auto">
-                    {isFeedback ? (
+                    {(isFeedback || status === 'continue') ? (
                         <motion.button
                             whileTap={{ y: 2 }}
                             onClick={onContinue}
@@ -72,7 +72,7 @@ export function DuoActionBar({
                             className={`w-full md:min-w-[200px] py-4 md:py-5 rounded-2xl font-black text-white text-lg md:text-xl uppercase tracking-widest border-b-[6px] transition-all
                 ${buttonDisabled
                                     ? 'bg-[#e5e5e5] border-[#afafaf] border-b-0 cursor-not-allowed opacity-70 text-[#afafaf]'
-                                    : 'bg-[#58cc02] border-[#46a302] hover:bg-[#61e002] active:border-b-0 active:translate-y-[4px] shadow-lg shadow-green-500/20'}
+                                    : 'bg-[#6366f1] border-[#4f46e5] hover:bg-[#4f46e5] active:border-b-0 active:translate-y-[4px] shadow-lg shadow-indigo-500/20'}
               `}
                         >
                             Check

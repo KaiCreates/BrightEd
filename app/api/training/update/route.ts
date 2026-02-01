@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, updateDoc, setDoc, increment, serverTimestamp } from 'firebase/firestore';
+import { calculateXPGain, getDayKey } from '@/lib/xp-utils';
 
 interface TrainingUpdate {
   objectiveId: string;
@@ -10,18 +11,18 @@ interface TrainingUpdate {
   attempts: number;
 }
 
-// XP Calculation Logic
+// XP Calculation Logic - Reduced values to encourage grinding
 function calculateXP(correct: boolean, timeSpent: number, attemptCount: number): number {
-  if (!correct) return 2; // Participation award (effort)
+  if (!correct) return 1; // Participation award (effort) (Reduced from 2)
 
-  let baseXP = 15;
+  let baseXP = 8; // Reduced from 15
 
   // Speed bonus (if under 30s)
-  if (timeSpent < 30) baseXP += 5;
-  if (timeSpent < 10) baseXP += 5; // Super fast
+  if (timeSpent < 30) baseXP += 2; // Reduced from 5
+  if (timeSpent < 10) baseXP += 2; // Reduced from 5
 
   // First try bonus
-  if (attemptCount === 1) baseXP += 10;
+  if (attemptCount === 1) baseXP += 5; // Reduced from 10
 
   return baseXP;
 }
@@ -76,20 +77,27 @@ export async function POST(request: NextRequest) {
 
     // 5. Update User Global Stats (XP, Daily Goal, User Streak)
     const userSnap = await getDoc(userRef);
-    const userData = userSnap.data();
+    const userData = userSnap.data() || {};
+    const todayKey = getDayKey();
 
     // Check for global streak update (if daily goal crossed)
-    const currentDailyXP = (userData?.xp_today || 0) + xpGained;
+    const rawXpGained = calculateXP(correct, timeSpent, attempts);
+    const { xpGain, isNewDay } = calculateXPGain(userData, rawXpGained, todayKey);
+    const currentDailyXP = (isNewDay ? 0 : (userData?.xp_today || 0)) + xpGain;
     const dailyGoal = userData?.dailyGoal || 500;
 
     // Streak logic handled in daily reset, but we update XP here
-    await updateDoc(userRef, {
-      xp: increment(xpGained),
-      xp_today: increment(xpGained),
+    const updates: any = {
+      xp: increment(xpGain),
+      xp_today: isNewDay ? xpGain : increment(xpGain),
+      lastLearningDay: todayKey,
+      lastLearningAt: serverTimestamp(),
       lastActive: new Date().toISOString(),
       // Update local subject progress (denormalized for UI speed)
       [`subjectProgress.${objectiveId}`]: newMastery
-    });
+    };
+
+    await updateDoc(userRef, updates);
 
     return NextResponse.json({
       success: true,

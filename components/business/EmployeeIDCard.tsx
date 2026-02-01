@@ -2,13 +2,14 @@
 
 import { Employee } from '@/lib/economy/economy-types';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { DuoContextMenu } from '@/components/system';
 
 interface EmployeeIDCardProps {
     employee: Employee;
     mode: 'hiring' | 'managing';
     onAction: (e: Employee) => void;
     onSecondaryAction?: (e: Employee) => void;
+    onFire?: (e: Employee) => void;
     actionLabel: string;
     secondaryLabel?: string;
     disabled?: boolean;
@@ -21,6 +22,7 @@ export default function EmployeeIDCard({
     mode,
     onAction,
     onSecondaryAction,
+    onFire,
     actionLabel,
     secondaryLabel,
     disabled,
@@ -45,130 +47,131 @@ export default function EmployeeIDCard({
         return '😫';
     };
 
+    const avatarUrl = `https://api.dicebear.com/9.x/avataaars/svg?seed=${employee.id}&backgroundColor=b6e3f4,c0aede,d1d4f9&backgroundType=solid`;
+
+    const contextMenuItems = [
+        {
+            label: actionLabel,
+            icon: mode === 'hiring' ? '🤝' : '💰',
+            onClick: () => onAction(employee),
+            variant: 'primary' as const
+        },
+        ...(onSecondaryAction ? [{
+            label: secondaryLabel || 'Action',
+            icon: '⚡',
+            onClick: () => onSecondaryAction(employee)
+        }] : []),
+        ...(onFire ? [{
+            label: 'Terminate',
+            icon: '✕',
+            onClick: () => onFire(employee),
+            variant: 'danger' as const
+        }] : [])
+    ];
+
     return (
         <motion.div
             layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[var(--brand-primary)]/50 transition-all duration-300 flex flex-col h-full relative group"
+            className="duo-card p-0 overflow-hidden flex flex-col h-full relative group min-w-0 w-full"
         >
-            {/* Lanyard / Top Section */}
-            <div className={`h-24 bg-gradient-to-r ${bgGradient} relative p-4 flex justify-between items-start`}>
-                <div className="absolute inset-0 opacity-20 bg-[url('/patterns/circuit.svg')] bg-repeat opacity-10"></div>
+            {/* Top Header Section */}
+            <div className={`h-24 bg-gradient-to-r ${bgGradient} relative p-4 flex justify-between items-start border-b-2 border-black/10`}>
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat"></div>
 
-                {/* Badge/Hole */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-white/20 rounded-full blur-[1px]"></div>
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-8 bg-black/20 rounded-full"></div>
-
-                <div className="relative z-10 px-2 py-1 bg-black/40 backdrop-blur-sm rounded text-[9px] font-black uppercase text-white tracking-widest border border-white/10">
-                    {employee.role}
-                </div>
-
-                {mode === 'managing' && (
-                    <div className="relative z-10 px-2 py-1 bg-black/40 backdrop-blur-sm rounded text-[9px] font-black uppercase text-white tracking-widest border border-white/10 flex items-center gap-1">
-                        <span>Morale</span>
-                        <span>{getMoraleEmoji(employee.stats.morale)}</span>
-                    </div>
-                )}
-            </div>
-
-            {/* Avatar - Overlapping */}
-            <div className="px-5 -mt-10 mb-2 relative z-10 flex justify-between items-end">
-                <div className="w-20 h-20 rounded-2xl bg-[var(--bg-elevated)] border-4 border-[var(--bg-primary)] shadow-lg flex items-center justify-center text-3xl overflow-hidden relative">
-                    <span className="z-10">👤</span>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${bgGradient} opacity-10`}></div>
-                </div>
-
-                {mode === 'hiring' && cost !== undefined && (
-                    <div className="text-right mb-1">
-                        <p className="text-[9px] text-[var(--text-muted)] font-black uppercase tracking-wider">Starting Rate</p>
-                        <p className={`text-lg font-black ${currencyContext >= cost ? 'text-[var(--text-primary)]' : 'text-[var(--state-error)]'}`}>
-                            ฿{cost.toLocaleString()}
-                        </p>
-                    </div>
-                )}
-
-                {mode === 'managing' && (
-                    <div className="text-right mb-1">
-                        <p className="text-[9px] text-[var(--text-muted)] font-black uppercase tracking-wider">Unpaid Wages</p>
-                        <p className={`text-lg font-black ${employee.unpaidWages > 0 ? 'text-[var(--state-warning)]' : 'text-[var(--text-primary)]'}`}>
-                            ฿{(employee.unpaidWages || 0).toLocaleString()}
-                        </p>
-                    </div>
-                )}
-            </div>
-
-            {/* Info Section */}
-            <div className="px-5 pt-1 pb-4 flex-1 flex flex-col">
-                <h3 className="text-lg font-black text-[var(--text-primary)] leading-tight mb-1">{employee.name}</h3>
-                <p className="text-xs text-[var(--text-muted)] font-bold mb-4 flex items-center gap-2">
-                    ID: {employee.id.substring(0, 8).toUpperCase()}
-                    {mode === 'managing' && employee.hiredAt && (
-                        <span>• Hired: {new Date(employee.hiredAt).toLocaleDateString()}</span>
-                    )}
-                </p>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-3 mb-6 bg-[var(--bg-elevated)]/50 p-3 rounded-lg border border-[var(--border-subtle)]">
-                    <div>
-                        <div className="flex justify-between text-[9px] font-black uppercase text-[var(--text-muted)] tracking-wider mb-1">
-                            <span>Efficiency</span>
-                            <span>{employee.stats.speed}%</span>
-                        </div>
-                        <div className="w-full h-1.5 bg-[var(--bg-primary)] rounded-full overflow-hidden">
-                            <div className="h-full bg-blue-500 rounded-full" style={{ width: `${employee.stats.speed}%` }} />
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex justify-between text-[9px] font-black uppercase text-[var(--text-muted)] tracking-wider mb-1">
-                            <span>Quality</span>
-                            <span>{employee.stats.quality}%</span>
-                        </div>
-                        <div className="w-full h-1.5 bg-[var(--bg-primary)] rounded-full overflow-hidden">
-                            <div className="h-full bg-purple-500 rounded-full" style={{ width: `${employee.stats.quality}%` }} />
-                        </div>
+                <div className="relative z-10 flex flex-col gap-1">
+                    <div className="px-3 py-1 bg-black/40 backdrop-blur-sm rounded-xl text-[10px] font-black uppercase text-white tracking-widest border border-white/10 w-fit">
+                        {employee.role}
                     </div>
                     {mode === 'managing' && (
-                        <div className="col-span-2">
-                            <div className="flex justify-between text-[9px] font-black uppercase text-[var(--text-muted)] tracking-wider mb-1">
-                                <span>Morale</span>
-                                <span>{employee.stats.morale}%</span>
-                            </div>
-                            <div className="w-full h-1.5 bg-[var(--bg-primary)] rounded-full overflow-hidden">
-                                <div className={`h-full rounded-full ${employee.stats.morale < 30 ? 'bg-red-500' : employee.stats.morale < 60 ? 'bg-amber-500' : 'bg-green-500'}`} style={{ width: `${employee.stats.morale}%` }} />
-                            </div>
+                        <div className="px-3 py-1 bg-black/40 backdrop-blur-sm rounded-xl text-[10px] font-black uppercase text-white tracking-widest border border-white/10 flex items-center gap-2 w-fit">
+                            <span>{getMoraleEmoji(employee.stats.morale)}</span>
+                            <span>{employee.stats.morale}%</span>
                         </div>
                     )}
+                </div>
+
+                <div className="relative z-20">
+                    <DuoContextMenu
+                        trigger={
+                            <button className="w-8 h-8 rounded-full bg-black/20 hover:bg-black/40 flex items-center justify-center text-white transition-colors">
+                                <span className="text-xl leading-none">⋮</span>
+                            </button>
+                        }
+                        items={contextMenuItems}
+                    />
+                </div>
+            </div>
+
+            {/* Avatar & Key Metric */}
+            <div className="px-6 -mt-10 mb-4 relative z-10 flex justify-between items-end">
+                <div className="w-24 h-24 rounded-[2rem] bg-[var(--bg-primary)] border-4 border-[var(--bg-elevated)] shadow-xl overflow-hidden relative">
+                    <img
+                        src={avatarUrl}
+                        alt={employee.name}
+                        className="w-full h-full object-cover z-10 relative"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${bgGradient} opacity-5`}></div>
+                </div>
+
+                <div className="text-right">
+                    <p className="text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.15em] mb-1">
+                        {mode === 'hiring' ? 'Starting Rate' : 'Unpaid Wages'}
+                    </p>
+                    <p className={`text-2xl font-black ${(mode === 'hiring' ? (currencyContext >= (cost || 0)) : (employee.unpaidWages === 0)) ? 'text-[var(--text-primary)]' : 'text-orange-500'}`}>
+                        ฿{((mode === 'hiring' ? cost : employee.unpaidWages) || 0).toLocaleString()}
+                    </p>
+                </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="px-6 pb-6 flex-1 flex flex-col">
+                <div className="mb-4">
+                    <h3 className="text-xl font-black text-[var(--text-primary)] leading-tight">{employee.name}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">ID: {employee.id.substring(0, 8).toUpperCase()}</span>
+                    </div>
+                </div>
+
+                {/* Stats Grid */}
+                <div className="space-y-4 mb-4 bg-[var(--bg-secondary)]/50 p-4 rounded-2xl border-2 border-[var(--border-subtle)]">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center text-[10px] font-black uppercase text-[var(--text-muted)] tracking-widest">
+                                <span>Speed</span>
+                                <span className="text-[var(--text-primary)]">{employee.stats.speed}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-[var(--bg-primary)] rounded-full border-b-2 border-black/5 overflow-hidden">
+                                <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${employee.stats.speed}%` }} />
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center text-[10px] font-black uppercase text-[var(--text-muted)] tracking-widest">
+                                <span>Quality</span>
+                                <span className="text-[var(--text-primary)]">{employee.stats.quality}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-[var(--bg-primary)] rounded-full border-b-2 border-black/5 overflow-hidden">
+                                <div className="h-full bg-purple-500 rounded-full transition-all duration-500" style={{ width: `${employee.stats.quality}%` }} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Actions */}
-                <div className="mt-auto flex gap-2">
-                    {onSecondaryAction && secondaryLabel && (
-                        <button
-                            onClick={() => onSecondaryAction(employee)}
-                            className="flex-1 py-3 rounded-lg text-[10px] font-black uppercase tracking-wider border border-[var(--border-subtle)] hover:bg-[var(--bg-elevated)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
-                        >
-                            {secondaryLabel}
-                        </button>
-                    )}
+                <div className="mt-auto">
                     <button
                         onClick={() => onAction(employee)}
                         disabled={disabled}
-                        className={`
-                            flex-1 py-3 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all shadow-lg
-                            ${disabled
-                                ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)] cursor-not-allowed opacity-50'
-                                : 'bg-[var(--brand-primary)] text-white hover:bg-[var(--brand-primary)]/90 hover:scale-[1.02] active:scale-[0.98]'
-                            }
-                        `}
+                        className={`duo-btn duo-btn-primary w-full py-3 truncate text-[10px] ${disabled ? 'opacity-50 grayscale' : ''}`}
                     >
                         {actionLabel}
                     </button>
                 </div>
             </div>
 
-            {/* Gloss Overlay */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+            {/* Decorative Lanyard Thread */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-12 bg-black/20 rounded-b-full -mt-2 group-hover:bg-black/30 transition-colors pointer-events-none"></div>
         </motion.div>
     );
 }

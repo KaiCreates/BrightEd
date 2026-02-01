@@ -97,12 +97,14 @@ export async function GET(request: NextRequest) {
             name: user.displayName || 'Explorer',
             value: type === 'xp' ? user.xp : type === 'streak' ? user.streak : user.mastery,
             subtext: type === 'xp'
-              ? `${user.streak || 0} Day Streak`
+              ? `${user.xp || 0} XP`
               : type === 'streak'
-                ? `${user.xp || 0} XP`
+                ? `${user.streak || 0} Day Streak`
                 : `${Math.round((user.mastery || 0) * 100)}% Mastery`,
             rank: idx + 1,
-            icon: type === 'xp' ? '⚡' : type === 'streak' ? '🔥' : '🧠'
+            icon: type === 'xp' ? '⚡' : type === 'streak' ? '🔥' : '🧠',
+            avatarUrl: user.avatarUrl || null,
+            avatarCustomization: user.avatarCustomization || null,
           }))
 
           return NextResponse.json({
@@ -195,10 +197,10 @@ export async function GET(request: NextRequest) {
 
       const subtext =
         type === 'xp'
-          ? `${typeof d.streak === 'number' ? d.streak : 0} Day Streak`
+          ? `${value} XP`
           : type === 'streak'
-            ? `${typeof d.xp === 'number' ? d.xp : 0} XP`
-            : `${Math.round((typeof d.globalMastery === 'number' ? d.globalMastery : 0) * 100)}% Mastery`
+            ? `${value} Day Streak`
+            : `${Math.round(value * 100)}% Mastery`
 
       return {
         id: doc.id,
@@ -207,6 +209,8 @@ export async function GET(request: NextRequest) {
         subtext,
         rank: idx + 1,
         icon: type === 'xp' ? '⚡' : type === 'streak' ? '🔥' : '🧠',
+        avatarUrl: d.avatarUrl || null,
+        avatarCustomization: d.avatarCustomization || null,
       }
     })
 

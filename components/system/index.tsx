@@ -113,3 +113,7 @@ export function BrightHeading({ children, level = 1, className = '' }: { childre
     const Tag = `h${level}` as keyof JSX.IntrinsicElements
     return <Tag className={`font-heading ${styles[level]} ${className}`}>{children}</Tag>
 }
+
+export * from './DuoDialog'
+export * from './DialogProvider'
+export * from './DuoContextMenu'

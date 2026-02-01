@@ -6,8 +6,10 @@ import { useAuth } from '@/lib/auth-context';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
-import { ProfessorBrightMascot } from '@/components/learning';
+import { ProfessorBrightMascot, StreakCelebration } from '@/components/learning';
 import { FeedbackResponse } from '@/lib/professor-bright';
+import { createAvatar } from '@dicebear/core';
+import { avataaars } from '@dicebear/collection';
 
 interface LeaderboardEntry {
     id: string;
@@ -17,6 +19,8 @@ interface LeaderboardEntry {
     icon?: string;
     rank: number;
     isCurrentUser?: boolean;
+    avatarUrl?: string | null;
+    avatarCustomization?: any | null;
 }
 
 type LeaderboardType = 'xp' | 'streak' | 'mastery' | 'schools' | 'business';
@@ -227,8 +231,21 @@ export default function LeaderboardPage() {
                                         </div>
 
                                         {/* Entry Avatar/Icon */}
-                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-2xl mr-4 md:mr-6 shadow-inner">
-                                            {entry.icon || '👤'}
+                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mr-4 md:mr-6 shadow-inner overflow-hidden">
+                                            {entry.avatarCustomization ? (
+                                                <AvatarRenderer
+                                                    customization={entry.avatarCustomization}
+                                                    username={entry.name}
+                                                />
+                                            ) : entry.avatarUrl ? (
+                                                <img
+                                                    src={entry.avatarUrl}
+                                                    alt={entry.name}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <span className="text-2xl">{entry.icon || '👤'}</span>
+                                            )}
                                         </div>
 
                                         {/* Name and Subtext */}
@@ -256,7 +273,7 @@ export default function LeaderboardPage() {
                                                         : entry.value.toLocaleString()}
                                             </div>
                                             <p className="text-[var(--text-muted)] text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em]">
-                                                {activeTab === 'business' ? 'Net Worth' : activeTab === 'streak' ? 'Days' : activeTab === 'mastery' ? 'Skill' : 'Total XP'}
+                                                {activeTab === 'business' ? 'Net Worth' : activeTab === 'streak' ? 'Current Streak' : activeTab === 'mastery' ? 'Overall Mastery' : 'Academic XP'}
                                             </p>
                                         </div>
                                     </BrightLayer>
@@ -312,5 +329,34 @@ export default function LeaderboardPage() {
             {/* Professor Bright Mascot Feedback */}
             <ProfessorBrightMascot feedback={mascotFeedback} />
         </div>
+    );
+}
+
+function AvatarRenderer({ customization, username }: { customization: any, username: string }) {
+    const svg = React.useMemo(() => {
+        const c = customization;
+        // Normalize for v9 local rendering which might expect clothesColor
+        const avatar = createAvatar(avataaars, {
+            seed: username,
+            backgroundColor: [c.backgroundColor || 'FF8A8A'],
+            top: [c.top || 'shortFlat'],
+            hairColor: [c.hairColor || '2c1b18'],
+            clothing: [c.clothing || 'blazerAndShirt'],
+            clothesColor: [c.clothingColor || c.clothesColor || '262e33'],
+            accessories: [c.accessories || 'blank'],
+            eyes: [c.eyes || 'default'],
+            mouth: [c.mouth || 'smile'],
+            skinColor: [c.skinColor || 'ffdbb4'],
+            facialHair: [c.facialHair || 'blank'],
+            backgroundType: ['solid']
+        });
+        return avatar.toString();
+    }, [customization, username]);
+
+    return (
+        <div
+            className="w-full h-full"
+            dangerouslySetInnerHTML={{ __html: svg }}
+        />
     );
 }

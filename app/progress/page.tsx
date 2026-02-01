@@ -11,7 +11,7 @@ import { FeedbackResponse } from '@/lib/professor-bright'
 
 export default function ProgressPage() {
     const router = useRouter()
-    const { user, loading: authLoading } = useAuth()
+    const { user, userData, loading: authLoading } = useAuth()
 
     const [loading, setLoading] = useState(true)
     const [topics, setTopics] = useState<TopicMastery[]>([])
@@ -61,7 +61,7 @@ export default function ProgressPage() {
                     setOverallStats({
                         mastery: data.overview?.overallMastery || 0,
                         confidence: data.overview?.overallConfidence || 0,
-                        streak: data.session?.currentStreak || 0,
+                        streak: typeof userData?.streak === 'number' ? userData.streak : (data.session?.currentStreak || 0),
                         totalSkills: data.overview?.totalSkillsTracked || 0
                     })
 

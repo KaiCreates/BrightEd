@@ -31,23 +31,30 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
       return
     }
 
-    // Check completion status from userData (Firestore) first, fallback to localStorage
-    const onboardingDone = userData?.onboardingCompleted === true
-    const diagnosticDone = userData?.diagnosticCompleted === true
+    // Check completion status from userData (Firestore) with localStorage fallback
+    // This prevents random redirects to /welcome if Firestore is slow or flickering
+    const localOnboarding = typeof window !== 'undefined' ? localStorage.getItem('brighted_onboarding_complete') === 'true' : false
+    const localDiagnostic = typeof window !== 'undefined' ? localStorage.getItem('brighted_diagnostic_complete') === 'true' : false
 
-    // Sync to localStorage for fast checks on subsequent loads
+    const onboardingDone = userData?.onboardingCompleted === true || localOnboarding
+    const diagnosticDone = userData?.diagnosticCompleted === true || localDiagnostic
+
+    // Sync TO localStorage for fast checks on subsequent loads
     if (typeof window !== 'undefined') {
-      if (onboardingDone) localStorage.setItem('brighted_onboarding_complete', 'true')
-      if (diagnosticDone) localStorage.setItem('brighted_diagnostic_complete', 'true')
+      if (userData?.onboardingCompleted === true) localStorage.setItem('brighted_onboarding_complete', 'true')
+      if (userData?.diagnosticCompleted === true) localStorage.setItem('brighted_diagnostic_complete', 'true')
     }
 
     // Route logic
     if (!onboardingDone) {
       // User hasn't completed basic onboarding
       if (!isOnboarding || isDiagnostic) {
-        router.replace('/welcome')
-        setIsChecking(false)
-        return
+        // Double check loading state before forcing redirect
+        if (!loading && userData !== undefined) {
+          router.replace('/welcome')
+          setIsChecking(false)
+          return
+        }
       }
     } else if (!diagnosticDone) {
       // Onboarding done, but diagnostic not done
@@ -73,7 +80,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
         return
       }
       // Redirect root to home
-      if (pathname === '/' || isPublic) {
+      if (pathname === '/' || (isPublic && !isProtected)) {
         router.replace('/home')
         setIsChecking(false)
         return
@@ -81,7 +88,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
     }
 
     setIsChecking(false)
-  }, [loading, user, userData?.onboardingCompleted, userData?.diagnosticCompleted, pathname, router])
+  }, [loading, user, userData, pathname, router])
 
   // Show loading while checking auth state
   if (loading || isChecking) {

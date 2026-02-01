@@ -114,20 +114,28 @@ export default function AvatarCustomizationPage() {
         eyes: 'default',
         mouth: 'smile',
         clothing: 'blazerAndShirt',
-        clothesColor: '262e33',
+        clothingColor: '262e33',
         accessories: 'blank',
         facialHair: 'blank',
         skinColor: 'ffdbb4',
         backgroundColor: 'FF8A8A'
     });
 
+    const [hasInitialized, setHasInitialized] = useState(false);
+
     useEffect(() => {
-        if (userData?.avatarCustomization) {
+        if (userData?.avatarCustomization && !hasInitialized) {
             const saved = userData.avatarCustomization;
-            // Merge with default config to ensure all fields exist
-            setConfig((prev: any) => ({ ...prev, ...saved }));
+            // Handle legacy clothesColor if it exists
+            const { clothesColor, ...rest } = saved as any;
+            const normalizedSaved = {
+                ...rest,
+                clothingColor: saved.clothingColor || clothesColor || '262e33'
+            };
+            setConfig((prev: any) => ({ ...prev, ...normalizedSaved }));
+            setHasInitialized(true);
         }
-    }, [userData]);
+    }, [userData, hasInitialized]);
 
     const username = params?.username as string;
 
@@ -138,7 +146,7 @@ export default function AvatarCustomizationPage() {
             top: [c.top],
             hairColor: [c.hairColor],
             clothing: [c.clothing],
-            clothesColor: [c.clothesColor],
+            clothesColor: [c.clothingColor],
             accessories: [c.accessories],
             eyes: [c.eyes],
             mouth: [c.mouth],
@@ -151,7 +159,7 @@ export default function AvatarCustomizationPage() {
 
     const getCloudUrl = (c: any) => {
         const seedValue = encodeURIComponent(username);
-        return `https://api.dicebear.com/9.x/avataaars/svg?seed=${seedValue}&backgroundType=solid&backgroundColor=${c.backgroundColor}&top=${c.top}&hairColor=${c.hairColor}&clothing=${c.clothing}&clothingColor=${c.clothesColor}&accessories=${c.accessories}&eyes=${c.eyes}&mouth=${c.mouth}&skinColor=${c.skinColor}&facialHair=${c.facialHair}`;
+        return `https://api.dicebear.com/9.x/avataaars/svg?seed=${seedValue}&backgroundType=solid&backgroundColor=${c.backgroundColor}&top=${c.top}&hairColor=${c.hairColor}&clothing=${c.clothing}&clothingColor=${c.clothingColor}&accessories=${c.accessories}&eyes=${c.eyes}&mouth=${c.mouth}&skinColor=${c.skinColor}&facialHair=${c.facialHair}`;
     };
 
     const handleSave = async () => {
@@ -368,7 +376,7 @@ export default function AvatarCustomizationPage() {
                                                 <h3 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Colors</h3>
                                                 <div className="flex flex-wrap gap-2">
                                                     {CLOTHES_COLORS.map(c => (
-                                                        <ColorCircle key={c} color={c} active={config.clothesColor === c} onClick={() => updateField('clothesColor', c)} />
+                                                        <ColorCircle key={c} color={c} active={config.clothingColor === c} onClick={() => updateField('clothingColor', c)} />
                                                     ))}
                                                 </div>
                                             </div>
@@ -438,7 +446,7 @@ function OptionButton({ active, onClick, label, type, config }: { active: boolea
             skinColor: [config.skinColor],
             facialHair: [config.facialHair],
             hairColor: [config.hairColor],
-            clothesColor: [config.clothesColor],
+            clothesColor: [config.clothingColor],
         });
         return avatar.toString();
     }, [config]);

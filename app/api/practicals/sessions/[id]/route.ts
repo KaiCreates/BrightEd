@@ -6,6 +6,8 @@ import {
   registrationRemainingMinutes,
   marketFluctuation,
 } from '@/lib/stories-engine/simulations/business';
+import { adminDb } from '@/lib/firebase-admin';
+import { calculateXPUpdate, getDayKey } from '@/lib/xp-utils';
 
 export async function GET(
   request: NextRequest,
@@ -91,6 +93,24 @@ export async function PATCH(
       updates.state = body.state;
       if (body.state === 'completed' || body.state === 'failed') {
         updates.completedAt = new Date().toISOString();
+
+        // Award XP for practical completion
+        if (body.state === 'completed') {
+          try {
+            const userRef = adminDb.collection('users').doc(userId);
+            const userSnap = await userRef.get();
+            const userData = userSnap.data() || {};
+
+            // Significant reward for practical completion: 150 raw points -> ~75 points after modifier
+            const rawXpGain = 150;
+            const xpUpdate = calculateXPUpdate(userData, rawXpGain);
+
+            // Use FieldValue.increment for atomic updates
+            await userRef.update(xpUpdate.updates);
+          } catch (error) {
+            console.error('[XP Reward] Failed to award practical XP:', error);
+          }
+        }
       }
     }
     if (body.businessState) {

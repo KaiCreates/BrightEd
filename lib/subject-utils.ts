@@ -10,6 +10,8 @@ export type Subject =
     | 'Social Studies'
     | 'Geography'
     | 'History'
+    | 'Agricultural Science'
+    | 'Principles of Accounts'
     | 'General';
 
 export function getSubjectFromSourceFile(sourceFile: string): Subject {
@@ -54,6 +56,8 @@ export function getSubjectFromSourceFile(sourceFile: string): Subject {
     if (lower.includes('social')) return 'Social Studies';
     if (lower.includes('geography')) return 'Geography';
     if (lower.includes('history')) return 'History';
+    if (lower.includes('agri') || lower.includes('agricultural')) return 'Agricultural Science';
+    if (lower.includes('poa') || lower.includes('accounts')) return 'Principles of Accounts';
 
     return 'General';
 }
@@ -84,6 +88,10 @@ export function getSubjectStyle(subject: string): { icon: string; color: string;
             return { icon: '🗺️', color: 'bg-emerald-500', borderColor: 'border-emerald-600' };
         case 'History':
             return { icon: '📜', color: 'bg-amber-700', borderColor: 'border-amber-800' };
+        case 'Agricultural Science':
+            return { icon: '🌱', color: 'bg-emerald-600', borderColor: 'border-emerald-700' };
+        case 'Principles of Accounts':
+            return { icon: '📊', color: 'bg-blue-600', borderColor: 'border-blue-700' };
         default:
             return { icon: '📚', color: 'bg-gray-500', borderColor: 'border-gray-600' };
     }

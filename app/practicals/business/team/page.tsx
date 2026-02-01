@@ -1,7 +1,7 @@
 'use client';
 
-import BusinessSectionNav from '@/components/business/BusinessSectionNav';
-import { BrightHeading, BrightLayer } from '@/components/system';
+import BusinessDuolingoLayout from '@/components/business/BusinessDuolingoLayout';
+import { BrightHeading } from '@/components/system';
 import { useEconomyBusiness } from '@/lib/economy/use-economy-business';
 import OrgChart from '@/components/business/OrgChart';
 import PayrollManager from '@/components/business/PayrollManager';
@@ -20,39 +20,37 @@ export default function BusinessTeamPage() {
 
   if (!business) {
     return (
-      <div className="min-h-screen bg-[var(--bg-primary)]">
-        <BusinessSectionNav />
-        <main className="max-w-5xl mx-auto px-4 py-12">
-          <BrightLayer variant="glass" padding="lg" className="text-center">
+      <BusinessDuolingoLayout>
+        <div className="max-w-md mx-auto py-20 text-center">
+          <div className="duo-card">
             <BrightHeading level={2} className="mb-2">No business found</BrightHeading>
             <p className="text-[var(--text-secondary)]">Create a business first to manage your team.</p>
-          </BrightLayer>
-        </main>
-      </div>
+          </div>
+        </div>
+      </BusinessDuolingoLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <BusinessSectionNav />
-      <main className="max-w-7xl mx-auto px-4 py-10">
-        <div className="mb-10">
-          <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Team</div>
+    <BusinessDuolingoLayout>
+      <div className="space-y-10">
+        <header>
+          <div className="text-xs font-black uppercase tracking-widest text-[var(--brand-primary)]">Team</div>
           <BrightHeading level={1} className="mt-1">HR & Payroll</BrightHeading>
-          <p className="text-[var(--text-secondary)] mt-2 max-w-2xl">Hire, manage, and pay your staff.</p>
-        </div>
+          <p className="text-[var(--text-secondary)] mt-2 max-w-2xl font-medium">
+            Manage your employees, optimize wages, and hire new talent to grow your operations.
+          </p>
+        </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-7 space-y-8">
-            <OrgChart business={business} />
-          </div>
+        <div className="space-y-12">
+          <OrgChart business={business} />
 
-          <div className="lg:col-span-5 space-y-8">
+          <div className="space-y-12">
             <PayrollManager business={business} />
             <EmployeeShop business={business} />
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </BusinessDuolingoLayout>
   );
 }

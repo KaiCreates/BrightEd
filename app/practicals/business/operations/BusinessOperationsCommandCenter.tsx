@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { BrightHeading, BrightButton, BrightLayer } from '@/components/system';
 import BusinessRegistration from '@/components/business/BusinessRegistration';
-import BusinessSectionNav from '@/components/business/BusinessSectionNav';
+import BusinessDuolingoLayout from '@/components/business/BusinessDuolingoLayout';
 import {
   CinematicProvider,
   useCinematic,
@@ -23,6 +23,7 @@ import OrgChart from '@/components/business/OrgChart';
 import PayrollManager from '@/components/business/PayrollManager';
 import { BusinessStatsBar } from '@/components/business/BusinessStatsBar';
 import InventoryPanel from '@/components/business/InventoryPanel';
+import { useDialog } from '@/components/system';
 import {
   BusinessState,
   Order,
@@ -57,6 +58,7 @@ function CommandCenterContent() {
   const { user, userData, loading: authLoading } = useAuth();
   const { economyRuntimeActive } = useBusiness();
   const { showInterrupt } = useCinematic();
+  const { showConfirm, showAlert } = useDialog();
 
   const [business, setBusiness] = useState<BusinessState | null>(null);
   const [businessType, setBusinessType] = useState<BusinessType | null>(null);
@@ -641,26 +643,31 @@ function CommandCenterContent() {
             <BrightButton
               variant="danger"
               className="w-full"
-              onClick={async () => {
-                if (!window.confirm('Reset registration synchronization?')) return;
-                const token = await user?.getIdToken();
-                if (!token) return;
+              onClick={() => {
+                showConfirm(
+                  'Reset registration synchronization? This will restart your onboarding flow.',
+                  async () => {
+                    const token = await user?.getIdToken();
+                    if (!token) return;
 
-                try {
-                  const res = await fetch('/api/business/shutdown', {
-                    method: 'POST',
-                    headers: { 'Authorization': 'Bearer ' + token }
-                  });
+                    try {
+                      const res = await fetch('/api/business/shutdown', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token }
+                      });
 
-                  if (res.ok) {
-                    window.location.reload();
-                  } else {
-                    alert('Failed to reset. Please try again.');
-                  }
-                } catch (e) {
-                  console.error(e);
-                  alert('Connection error.');
-                }
+                      if (res.ok) {
+                        window.location.reload();
+                      } else {
+                        showAlert('Failed to reset. Please try again.');
+                      }
+                    } catch (e) {
+                      console.error(e);
+                      showAlert('Connection error. Please check your network.');
+                    }
+                  },
+                  { title: 'RESET DATA?', type: 'danger' }
+                );
               }}
             >
               Reset Registration
@@ -714,165 +721,148 @@ function CommandCenterContent() {
   }
 
   return (
-    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] relative overflow-hidden safe-padding pb-32">
-      <DashboardAmbience cashBalance={business!.cashBalance} />
+    <BusinessDuolingoLayout>
+      <div className="relative">
+        <DashboardAmbience cashBalance={business!.cashBalance} />
 
-      <BusinessSectionNav />
-
-      <main className="relative z-10 pt-4 md:pt-10 pb-32 px-4 max-w-[1600px] mx-auto">
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Operations</div>
-            <BrightHeading level={2} className="leading-tight heading-responsive">
-              {business!.businessName}
-            </BrightHeading>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 backdrop-blur-md">
-              <div className="text-[9px] font-black uppercase tracking-widest text-[var(--text-muted)]">Sim Time</div>
-              <div className="font-mono font-black text-[var(--text-primary)] tabular-nums">{simHour}:00</div>
-            </div>
-            <div className="px-4 py-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/30 backdrop-blur-md">
-              <div className="text-[9px] font-black uppercase tracking-widest text-[var(--text-muted)]">Type</div>
-              <div className="font-black text-[var(--state-success)] truncate max-w-[180px]">{businessType?.name ?? 'Business'}</div>
+        <main className="relative z-10 pt-4 md:pt-10 pb-32 px-4 max-w-[1600px] mx-auto">
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <div className="text-xs font-black uppercase tracking-widest text-[var(--brand-primary)]">Operations</div>
+              <BrightHeading level={1} className="leading-tight">
+                Command Center
+              </BrightHeading>
             </div>
           </div>
-        </div>
 
-        {business && (
-          <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-4 max-w-sm mx-auto w-full">
-              <BusinessCard3D
-                businessName={business.businessName}
-                tier="Startup"
-                ownerName={user?.displayName || 'Unknown Director'}
-                themeColor={business.branding?.themeColor}
-                logoUrl={business.branding?.logoUrl}
-                icon={business.branding?.icon}
-              />
-            </div>
-
-            <div className="lg:col-span-8 flex flex-col gap-6 w-full">
-              <div className="flex flex-wrap justify-end items-center gap-4">
-                <BrightButton
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    isPausedRef.current = !isPausedRef.current;
-                    const btn = document.getElementById('pause-btn-text');
-                    if (btn) btn.innerText = isPausedRef.current ? 'RESUME OPERATION' : 'PAUSE OPERATION';
-                  }}
-                  className="text-[var(--text-muted)] hover:text-white border border-[var(--border-subtle)] flex-1 sm:flex-none justify-center"
-                >
-                  <span className="mr-2">⏸</span> <span id="pause-btn-text">PAUSE OPERATION</span>
-                </BrightButton>
-                <BrightButton
-                  variant="danger"
-                  size="sm"
-                  onClick={async () => {
-                    if (confirm('ARE YOU SURE? This will liquidate your business and delete all progress.')) {
-                      await deleteDoc(doc(db, 'businesses', business.id));
-                    }
-                  }}
-                  className="bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500 hover:text-white flex-1 sm:flex-none justify-center"
-                >
-                  SHUTDOWN
-                </BrightButton>
+          {business && (
+            <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-4 max-w-sm mx-auto w-full">
+                <BusinessCard3D
+                  businessName={business.businessName}
+                  tier="Startup"
+                  ownerName={user?.displayName || 'Unknown Director'}
+                  themeColor={business.branding?.themeColor}
+                  logoUrl={business.branding?.logoUrl}
+                  icon={business.branding?.icon}
+                />
               </div>
 
-              <BusinessStatsBar
-                businessState={business}
-                pendingRevenue={orders
-                  .filter((o) => ['accepted', 'in_progress'].includes(o.status))
-                  .reduce((acc, o) => acc + o.totalAmount, 0)}
-                earnedToday={business.ordersCompleted * 50}
-              />
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-7 space-y-10 min-h-[500px]">
-            <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
-                Operations Console
-              </BrightHeading>
-              {business && businessType && (
-                <OrderDashboard
-                  businessState={business}
-                  businessType={businessType}
-                  orders={orders}
-                  onAcceptOrder={handleAcceptOrder}
-                  onRejectOrder={handleRejectOrder}
-                  onCompleteOrder={handleCompleteOrder}
-                  onFulfill={handleStartFulfillment}
-                />
-              )}
-            </div>
-
-            <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
-                Activity Feed
-              </BrightHeading>
-              <BrightLayer variant="glass" padding="none" className="min-h-[200px] relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-[var(--text-muted)] text-sm italic">
-                  Awaiting operational telemetry...
+              <div className="lg:col-span-8 flex flex-col gap-6 w-full">
+                <div className="flex flex-wrap justify-end items-center gap-4">
+                  <BrightButton
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      isPausedRef.current = !isPausedRef.current;
+                      const btn = document.getElementById('pause-btn-text');
+                      if (btn) btn.innerText = isPausedRef.current ? 'RESUME OPERATION' : 'PAUSE OPERATION';
+                    }}
+                    className="text-[var(--text-muted)] hover:text-white border border-[var(--border-subtle)] flex-1 sm:flex-none justify-center"
+                  >
+                    <span className="mr-2">⏸</span> <span id="pause-btn-text">PAUSE OPERATION</span>
+                  </BrightButton>
+                  <BrightButton
+                    variant="danger"
+                    size="sm"
+                    onClick={() => {
+                      showConfirm(
+                        'ARE YOU SURE? This will liquidate your business and delete all progress permanently.',
+                        async () => {
+                          await deleteDoc(doc(db, 'businesses', business.id));
+                        },
+                        { title: 'SHUTDOWN ENTITY', type: 'danger', confirmLabel: 'LIQUIDATE' }
+                      );
+                    }}
+                    className="bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500 hover:text-white flex-1 sm:flex-none justify-center"
+                  >
+                    SHUTDOWN
+                  </BrightButton>
                 </div>
-              </BrightLayer>
+
+                <BusinessStatsBar
+                  businessState={business}
+                  pendingRevenue={orders
+                    .filter((o) => ['accepted', 'in_progress'].includes(o.status))
+                    .reduce((acc, o) => acc + o.totalAmount, 0)}
+                  earnedToday={business.ordersCompleted * 50}
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-12">
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Workflow</div>
+              <BrightHeading level={2} className="text-3xl m-0">Operations Console</BrightHeading>
+              {business && businessType && (
+                <div className="mt-6">
+                  <OrderDashboard
+                    businessState={business}
+                    businessType={businessType}
+                    orders={orders}
+                    onAcceptOrder={handleAcceptOrder}
+                    onRejectOrder={handleRejectOrder}
+                    onCompleteOrder={handleCompleteOrder}
+                    onFulfill={handleStartFulfillment}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Customer Loyalty Dashboard */}
             {business && business.customerProfiles && Object.keys(business.customerProfiles).length > 0 && (
               <div>
-                <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
-                  Customer Relationships
-                </BrightHeading>
-                <LoyaltyDashboard
-                  customers={Object.values(business.customerProfiles).map(p => ({
-                    id: p.id,
-                    name: p.name,
-                    loyaltyScore: p.loyaltyScore,
-                    currentTier: p.currentTier,
-                    lastOrderDate: p.lastOrderDate,
-                    totalOrders: p.totalOrders,
-                    lifetimeValue: p.lifetimeValue
-                  }))}
-                />
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">CRM</div>
+                <BrightHeading level={2} className="text-3xl m-0">Customer Relationships</BrightHeading>
+                <div className="mt-6">
+                  <LoyaltyDashboard
+                    customers={Object.values(business.customerProfiles).map(p => ({
+                      id: p.id,
+                      name: p.name,
+                      loyaltyScore: p.loyaltyScore,
+                      currentTier: p.currentTier,
+                      lastOrderDate: p.lastOrderDate,
+                      totalOrders: p.totalOrders,
+                      lifetimeValue: p.lifetimeValue
+                    }))}
+                  />
+                </div>
               </div>
             )}
-          </div>
 
-          <div className="lg:col-span-5 space-y-10">
-            <div className="grid grid-cols-1 gap-10">
+            <div className="space-y-12">
               <div>
-                <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
-                  Human Resources
-                </BrightHeading>
-                {business && <OrgChart business={business} />}
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Team Management</div>
+                <BrightHeading level={2} className="text-3xl m-0">Human Resources</BrightHeading>
+                <div className="mt-6 flex flex-col gap-10">
+                  {business && <OrgChart business={business} />}
+                  {business && <PayrollManager business={business} />}
+                </div>
               </div>
-              {business && <PayrollManager business={business} />}
-            </div>
 
-            <div>
-              <BrightHeading level={4} className="mb-4 text-[var(--text-muted)] tracking-widest uppercase text-xs font-black">
-                Warehouse Management
-              </BrightHeading>
-              {business && <InventoryPanel inventory={business.inventory || {}} />}
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Logistics</div>
+                <BrightHeading level={2} className="text-3xl m-0">Warehouse Management</BrightHeading>
+                <div className="mt-6">
+                  {business && <InventoryPanel inventory={business.inventory || {}} />}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <AnimatePresence>
-          {activeFulfillmentOrder && businessType && (
-            <BusinessWorkspace
-              order={activeFulfillmentOrder}
-              businessType={businessType}
-              onComplete={(quality) => handleCompleteOrder(activeFulfillmentOrder.id, quality)}
-              onCancel={() => setActiveFulfillmentOrder(null)}
-            />
-          )}
-        </AnimatePresence>
-      </main>
-    </div>
+          <AnimatePresence>
+            {activeFulfillmentOrder && businessType && (
+              <BusinessWorkspace
+                order={activeFulfillmentOrder}
+                businessType={businessType}
+                onComplete={(quality) => handleCompleteOrder(activeFulfillmentOrder.id, quality)}
+                onCancel={() => setActiveFulfillmentOrder(null)}
+              />
+            )}
+          </AnimatePresence>
+        </main>
+      </div>
+    </BusinessDuolingoLayout>
   );
 }

@@ -1,0 +1,380 @@
+[
+    {
+        "id": "POB-01-00001_1",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Which of the following is a primary function of a business?",
+        "options": [
+            "Not hiring persons",
+            "Not making a profit",
+            "Producing goods and services and create employment",
+            "Supporting local charities"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The primary function of any business is to produce goods or services to satisfy the needs and wants of consumers and also provide employment to the people.",
+        "storyElement": "You're off to a great start! Understanding the core purpose of business is essential.",
+        "difficulty": 1,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_2",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 2,
+        "questionText": "What is the main objective of a non-profit organization?",
+        "options": [
+            "Maximizing profit for shareholders",
+            "Providing a service to the community",
+            "Increasing market share",
+            "Reducing operational costs"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Unlike for-profit businesses, non-profit organizations are primarily driven by a mission to serve the public or a specific group rather than generating profit.",
+        "storyElement": "Correct! Non-profits play a vital role in society by focusing on service over profit.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_3",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 3,
+        "questionText": "Barter is the exchange of goods or services without the use of ......",
+        "options": [
+            "Coins",
+            "Goats",
+            "KFC",
+            "Money"
+        ],
+        "correctAnswer": 3,
+        "explanation": "Barter is the exchange of goods or services without the use of money.",
+        "storyElement": "Correct! Barter is the exchange of goods or services without the use of money.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_4",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 4,
+        "questionText": "One disadvantage of barter is:",
+        "options": [
+            "Barter is not a good way of doing business",
+            "The is a double coincidence of wants",
+            "There is a standard unit of measurement",
+            "There is no double coincidence of wants"
+        ],
+        "correctAnswer": 1,
+        "explanation": "For barter to work, there must be a 'double coincidence of wants' (each person must want what the other has). The difficulty in finding such a match is a major disadvantage.",
+        "storyElement": "Correct! This difficulty led to the invention of money as a universal medium of exchange.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_5",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 5,
+        "questionText": "What is money?",
+        "options": [
+            "Money is a medium of exchange",
+            "Money is not a medium of exchange",
+            "Money has no value",
+            "Money is a dollar bill"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Money is anything that is generally accepted as a medium of exchange for goods and services.",
+        "storyElement": "Correct! Money is a medium of exchange.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_6",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 6,
+        "questionText": "What is a subsistence economy?",
+        "options": [
+            "An economy where people produce goods and services for their own use",
+            "An economy where people do not produce goods and services for their own use",
+            "An economy where people produce goods and services for others in the village",
+            "An economy where people produce goods and services for another country"
+        ],
+        "correctAnswer": 0,
+        "explanation": "In a subsistence economy, individuals or small groups produce only enough to support themselves, with little or no surplus for trade.",
+        "storyElement": "Correct! In a subsistence economy, production is for self-sufficiency.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_7",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 7,
+        "questionText": "Which of these are characteristics of Money?",
+        "options": [
+            "Scarcity, Portability, Divisibility, Durability, Acceptability",
+            "Scarcity, Portability, Divisibility, Durability, Acceptability, Standard of Value",
+            "Shiny, Hard to find, Expensive, Heavy",
+            "Paper, Coins, Rectangular, Round"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Money must have several qualities to work well: it must be scarce, easy to carry, divisible into smaller parts, long-lasting, widely accepted, and act as a standard of value.",
+        "storyElement": "Correct! These characteristics make money a reliable medium of exchange.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00001_8",
+        "objectiveId": "POB-01-00001",
+        "subjectId": "Principles of Business",
+        "variation": 8,
+        "questionText": "For money to be effective, it must be easy to carry around. Which characteristic of money does this describe?",
+        "options": [
+            "Durability",
+            "Divisibility",
+            "Portability",
+            "Homogeneity"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Portability ensures that money is lightweight and convenient to transport for daily transactions.",
+        "storyElement": "Excellent! Imagine trying to carry heavy stones to buy bread; portability matters.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00002_1",
+        "objectiveId": "POB-01-00002",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Mr. Edwards buys a new van for his delivery business on hire purchase. He agrees to pay a fixed amount every month for three years. Which function of money allows this transaction to take place?",
+        "options": [
+            "Store of value",
+            "Medium of exchange",
+            "Standard of deferred payment",
+            "Measure of value"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The 'Standard of deferred payment' function allows goods or services to be acquired now and paid for in the future (credit).",
+        "storyElement": "Mr. Edwards shakes hands with the dealer, knowing his future earnings will cover the monthly installments.",
+        "difficulty": 3,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-02-00001_1",
+        "objectiveId": "POB-02-00001",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Maria opens a small bakery using her own savings. She manages the daily operations herself and is personally responsible for all business debts. Which form of business organization is Maria operating?",
+        "options": [
+            "Partnership",
+            "Sole Trader",
+            "Private Limited Company",
+            "Co-operative"
+        ],
+        "correctAnswer": 1,
+        "explanation": "A Sole Trader is a business owned and controlled by one person. The owner has unlimited liability for all business debts.",
+        "storyElement": "Maria smiles as she puts the 'Open' sign on the door, proud to be her own boss.",
+        "difficulty": 1,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-02-00001_2",
+        "objectiveId": "POB-02-00001",
+        "subjectId": "Principles of Business",
+        "variation": 2,
+        "questionText": "One of the major risks of operating as a sole trader is that the owner is personally responsible for all business debts. What is this characteristic called?",
+        "options": [
+            "Limited liability",
+            "Unlimited liability",
+            "Separate legal entity",
+            "Capital continuity"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Unlimited liability means the owner's personal assets can be used to pay off the business's debts if it fails.",
+        "storyElement": "It's a risky game—if the shop goes under, the owner's personal savings are on the line.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-02-00002_1",
+        "objectiveId": "POB-02-00002",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Which business function involves coordinating resources to achieve organizational goals efficiently?",
+        "options": [
+            "Marketing",
+            "Production",
+            "Management",
+            "Accounting"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Management is the process of planning, organizing, leading, and controlling resources to achieve specific business objectives.",
+        "storyElement": "Like a conductor leading an orchestra, the manager ensures every department plays its part.",
+        "difficulty": 1,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00003_1",
+        "objectiveId": "POB-01-00003",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Which of the following best describes the primary objective of most private sector organizations?",
+        "options": [
+            "To provide free services to the community",
+            "To regulate the country's economy",
+            "To maximize profit for the owners",
+            "To maintain law and order"
+        ],
+        "correctAnswer": 2,
+        "explanation": "Private sector businesses primarily exist to make a profit for their owners or shareholders.",
+        "storyElement": "The board of directors reviews the annual report; the bottom line looks green.",
+        "difficulty": 1,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00003_2",
+        "objectiveId": "POB-01-00003",
+        "subjectId": "Principles of Business",
+        "variation": 2,
+        "questionText": "A family business wants to expand but keep control and restrict share sales. Which organization type should they form?",
+        "options": [
+            "Public Limited Company",
+            "Private Limited Company",
+            "Sole Trader",
+            "General Partnership"
+        ],
+        "correctAnswer": 1,
+        "explanation": "A Private Limited Company (Ltd) allows raising capital through shares while restricting their sale to the public, keeping control within a group.",
+        "storyElement": "The siblings agree to incorporate, ensuring strangers cannot buy into the family legacy.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00003_3",
+        "objectiveId": "POB-01-00003",
+        "subjectId": "Principles of Business",
+        "variation": 3,
+        "questionText": "Which document must a Public Limited Company use to invite the public to buy its shares?",
+        "options": [
+            "Memorandum of Association",
+            "Articles of Association",
+            "Prospectus",
+            "Partnership Deed"
+        ],
+        "correctAnswer": 2,
+        "explanation": "A Prospectus is a legal document used by a Public Limited Company to invite the public to invest and buy shares.",
+        "storyElement": "The company launches its IPO, releasing a detailed prospectus to potential investors.",
+        "difficulty": 3,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-02-00003_1",
+        "objectiveId": "POB-02-00003",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "What distinguishes a 'Company' from a Sole Trader or Partnership legally?",
+        "options": [
+            "It is a separate legal entity distinct from its owners",
+            "It is owned and controlled by the government",
+            "The owners have unlimited liability for debts",
+            "It must employ more than 50 people"
+        ],
+        "correctAnswer": 0,
+        "explanation": "An incorporated company is a separate legal entity, meaning it is legally distinct from its owners (shareholders).",
+        "storyElement": "Shareholders know that their personal assets are safe even if the company faces legal issues.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-02-00004_1",
+        "objectiveId": "POB-02-00004",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Mrs. Gomez pays fees to 'Chicken King' to use their logo, recipes, and uniforms. What is this arrangement?",
+        "options": [
+            "Joint Venture",
+            "Franchise",
+            "Holding Company",
+            "Cartel"
+        ],
+        "correctAnswer": 1,
+        "explanation": "A franchise allows a person (franchisee) to use the branding and systems of an established business (franchisor).",
+        "storyElement": "The secret spice blend fills the air—Mrs. Gomez is officially in business.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00004_1",
+        "objectiveId": "POB-01-00004",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "An economy has both a private sector for profit and a public sector providing free healthcare. This is a:",
+        "options": [
+            "Command Economy",
+            "Free Market Economy",
+            "Mixed Economy",
+            "Subsistence Economy"
+        ],
+        "correctAnswer": 2,
+        "explanation": "A Mixed Economy combines private enterprise (for profit) and government intervention (public services).",
+        "storyElement": "The business owner pays taxes that fund the local hospital—a partnership for welfare.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00005_1",
+        "objectiveId": "POB-01-00005",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "Which stakeholder group is primarily concerned with job security, fair wages, and safe conditions?",
+        "options": [
+            "Shareholders",
+            "Employees",
+            "Suppliers",
+            "Consumers"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Employees are stakeholders whose primary interests are wages, job security, and workplace safety.",
+        "storyElement": "The union representative negotiates better safety gear for the factory floor.",
+        "difficulty": 1,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00006_1",
+        "objectiveId": "POB-01-00006",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "What is the practice of hiding the true source of illegal funds through a legitimate business called?",
+        "options": [
+            "Money Laundering",
+            "Tax Avoidance",
+            "Bankruptcy",
+            "Liquidation"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Money laundering involves making the proceeds of crime appear legitimate by 'cleaning' them through a legal business transaction.",
+        "storyElement": "The authorities flagged the transaction; a juice stand shouldn't have millions in deposits.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+        "id": "POB-01-00007_1",
+        "objectiveId": "POB-01-00007",
+        "subjectId": "Principles of Business",
+        "variation": 1,
+        "questionText": "What the two unethical and illegal business practices are...?",
+        "options": [
+            "Money Laundering and Tax Evasion",
+            "Advertising and Marketing",
+            "Selling cupcakes with a food license",
+            "Making a profit"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Money laundering and tax evasion are illegal business practices.",
+        "storyElement": "The authorities flagged the transaction; a juice stand shouldn't have millions in deposits.",
+        "difficulty": 2,
+        "createdAt": "2026-02-01T00:00:00.000Z"
+    }
+]

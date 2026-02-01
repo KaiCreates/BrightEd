@@ -1,7 +1,7 @@
 'use client';
 
-import BusinessSectionNav from '@/components/business/BusinessSectionNav';
-import { BrightHeading, BrightLayer } from '@/components/system';
+import BusinessDuolingoLayout from '@/components/business/BusinessDuolingoLayout';
+import { BrightHeading } from '@/components/system';
 import { useEconomyBusiness } from '@/lib/economy/use-economy-business';
 import Marketplace from '@/components/business/Marketplace';
 import InventoryPanel from '@/components/business/InventoryPanel';
@@ -19,37 +19,33 @@ export default function BusinessSupplyPage() {
 
   if (!business) {
     return (
-      <div className="min-h-screen bg-[var(--bg-primary)]">
-        <BusinessSectionNav />
-        <main className="max-w-5xl mx-auto px-4 py-12">
-          <BrightLayer variant="glass" padding="lg" className="text-center">
+      <BusinessDuolingoLayout>
+        <div className="max-w-md mx-auto py-20 text-center">
+          <div className="duo-card">
             <BrightHeading level={2} className="mb-2">No business found</BrightHeading>
             <p className="text-[var(--text-secondary)]">Create a business first to access supply and inventory.</p>
-          </BrightLayer>
-        </main>
-      </div>
+          </div>
+        </div>
+      </BusinessDuolingoLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <BusinessSectionNav />
-      <main className="max-w-7xl mx-auto px-4 py-10">
-        <div className="mb-10">
-          <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Supply</div>
+    <BusinessDuolingoLayout>
+      <div className="space-y-10">
+        <header>
+          <div className="text-xs font-black uppercase tracking-widest text-[var(--brand-primary)]">Supply</div>
           <BrightHeading level={1} className="mt-1">Inventory & Market</BrightHeading>
-          <p className="text-[var(--text-secondary)] mt-2 max-w-2xl">Stock up and keep fulfillment running.</p>
-        </div>
+          <p className="text-[var(--text-secondary)] mt-2 max-w-2xl font-medium">
+            Procure raw materials, manage your stock levels, and keep your production lines moving.
+          </p>
+        </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-4">
-            <InventoryPanel inventory={business.inventory || {}} />
-          </div>
-          <div className="lg:col-span-8">
-            <Marketplace business={business} />
-          </div>
+        <div className="space-y-12">
+          <InventoryPanel inventory={business.inventory || {}} />
+          <Marketplace business={business} />
         </div>
-      </main>
-    </div>
+      </div>
+    </BusinessDuolingoLayout>
   );
 }

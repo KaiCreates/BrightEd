@@ -414,28 +414,97 @@ html {
    DUOLINGO-STYLE CARDS
    ============================================================================ */
 
+/* ============================================================================
+   DUOLINGO-STYLE CARDS & BUTTONS
+   ============================================================================ */
+
 .duo-card {
   background: var(--bg-elevated);
-  border-radius: 24px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 24px;
   border: 2px solid var(--border-subtle);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom-width: 5px; /* The 3D effect */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .duo-card:hover {
   border-color: var(--brand-primary);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  border-bottom-width: 7px;
 }
 
-.duo-card-success {
-  border-color: #58cc02;
-  background: linear-gradient(135deg, rgba(88, 204, 2, 0.05) 0%, rgba(88, 204, 2, 0.1) 100%);
+.duo-card:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
 }
 
-.duo-card-error {
-  border-color: #ff4b4b;
-  background: linear-gradient(135deg, rgba(255, 75, 75, 0.05) 0%, rgba(255, 75, 75, 0.1) 100%);
+/* Duolingo-style 3D Button */
+.duo-btn {
+  position: relative;
+  transition: all 0.1s ease;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.duo-btn-primary {
+  background: var(--brand-primary);
+  color: white;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 0 0 #0284c7; /* Darker blue shade */
+}
+
+.duo-btn-primary:hover {
+  background: #0ea5e9;
+  box-shadow: 0 5px 0 0 #0369a1;
+}
+
+.duo-btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 0 #0369a1;
+}
+
+.duo-btn-success {
+  background: #58cc02;
+  color: white;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 0 0 #46a302;
+}
+
+.duo-btn-success:hover {
+  background: #61e002;
+}
+
+.duo-btn-success:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 0 #46a302;
+}
+
+.duo-btn-secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 2px solid var(--border-subtle);
+  box-shadow: 0 5px 0 0 var(--border-subtle);
+}
+
+.duo-btn-secondary:hover {
+  background: var(--bg-secondary);
+}
+
+.duo-btn-secondary:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 0 var(--border-subtle);
 }
 
 /* Stat card with icon */
@@ -444,11 +513,12 @@ html {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 20px 16px;
+  padding: 16px;
   background: var(--bg-elevated);
-  border-radius: 20px;
+  border-radius: 16px;
   border: 2px solid var(--border-subtle);
-  min-width: 100px;
+  border-bottom-width: 4px;
+  min-width: 110px;
 }
 
 .stat-card-icon {

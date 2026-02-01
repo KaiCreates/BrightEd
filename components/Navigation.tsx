@@ -61,7 +61,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
   }
 
   return (
-    <nav className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out 
+    <nav className={`fixed left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ease-out 
         ${scrolled ? 'top-2 w-[99%] max-w-full' : 'top-4 w-[96%] max-w-[1920px]'}`}
     >
       <div className={`relative bg-[var(--bg-elevated)]/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] px-3 md:px-6 transition-all duration-300 ${scrolled ? 'py-2' : 'py-3'}`}>
@@ -145,12 +145,12 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
             {isAuthenticated && (
               <div className="flex items-center gap-1 md:gap-3 bg-white/5 px-2 md:px-4 py-1.5 rounded-2xl border border-white/10">
                 {/* Flag / Subject */}
-                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                <div className="hidden sm:flex items-center gap-1.5 group/stat cursor-pointer">
                   <span className="text-lg md:text-xl">🇹🇹</span>
                   <span className="text-xs md:text-sm font-black text-white/40 group-hover/stat:text-white transition-colors">11</span>
                 </div>
 
-                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+                <div className="hidden sm:block w-[1px] h-4 bg-white/10 mx-1" />
 
                 {/* Streak */}
                 <div className="flex items-center gap-1.5 group/stat cursor-pointer">
@@ -166,10 +166,10 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                   <span className="text-xs md:text-sm font-black text-blue-400">{userData?.bCoins?.toLocaleString() || '0'}</span>
                 </div>
 
-                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+                <div className="hidden xs:flex w-[1px] h-4 bg-white/10 mx-1" />
 
                 {/* Hearts / Consistency */}
-                <div className="flex items-center gap-1.5 group/stat cursor-pointer">
+                <div className="hidden xs:flex items-center gap-1.5 group/stat cursor-pointer">
                   <span className="text-lg md:text-xl filter drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">❤️</span>
                   <span className="text-xs md:text-sm font-black text-red-500">5</span>
                 </div>

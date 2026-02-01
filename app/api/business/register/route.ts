@@ -58,12 +58,20 @@ export async function POST(request: NextRequest) {
     if (!userDoc.exists) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
-    
+
     const userData = userDoc.data() || {};
     const ownerName = userData.firstName || userData.displayName || "Founder";
+    const userBCoins = typeof userData.bCoins === 'number' ? userData.bCoins : 0;
 
     if (userData.hasBusiness && userData.businessID) {
       return NextResponse.json({ error: 'Business already registered' }, { status: 403 });
+    }
+
+    const REGISTRATION_COST = 250;
+    if (userBCoins < REGISTRATION_COST) {
+      return NextResponse.json({
+        error: `Insufficient B-Coins. You need ${REGISTRATION_COST} B-Coins to register a business (you have ${userBCoins}).`
+      }, { status: 403 });
     }
 
     const cleanBranding = branding
@@ -137,39 +145,40 @@ export async function POST(request: NextRequest) {
 
     // ATOMIC BATCH OPERATION
     const batch = adminDb.batch();
-    
+
     // Create business document
     batch.set(adminDb.collection('businesses').doc(newBizId), businessData);
-    
+
     // Update user document atomically
     batch.update(userRef, {
       hasBusiness: true,
       businessID: newBizId,
       xp: FieldValue.increment(100),
+      bCoins: FieldValue.increment(-250), // Deduct registration cost
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     // Commit all operations atomically - all succeed or all fail
     await batch.commit();
-    
-    return NextResponse.json({ 
-      success: true, 
-      business: businessData, 
-      businessId: newBizId 
+
+    return NextResponse.json({
+      success: true,
+      business: businessData,
+      businessId: newBizId
     });
 
   } catch (error: any) {
     console.error('Registration Error');
-    
+
     // Better error handling for specific cases
     if (error.code === 'permission-denied') {
       return NextResponse.json({ error: 'Permission denied' }, { status: 403 });
     }
-    
+
     if (error.code === 'resource-exhausted') {
       return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
-    
+
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
   }
 }

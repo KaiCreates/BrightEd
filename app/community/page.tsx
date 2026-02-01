@@ -10,6 +10,8 @@ import { DMWindow } from '@/components/social/DMWindow'
 import { storage } from '@/lib/firebase'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { WhiteboardSession } from '@/components/whiteboard/WhiteboardSession'
+import { createAvatar } from '@dicebear/core'
+import { avataaars } from '@dicebear/collection'
 
 type DistrictId = 'lobby' | 'business' | 'tech' | 'science' | 'exam'
 
@@ -485,14 +487,14 @@ function CommunityHubInner() {
         {/* MOBILE OVERLAY */}
         {isMobileMenuOpen && (
           <div
-            className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 z-50 md:hidden backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
         )}
 
         {/* DRAWER CONTAINER (Districts + Channels) */}
         <div className={`
-          fixed inset-y-0 left-0 z-50 flex h-full
+          fixed inset-y-0 left-0 z-[60] flex h-full
           transition-transform duration-300 ease-in-out transform 
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
           md:relative md:translate-x-0
@@ -664,7 +666,12 @@ function CommunityHubInner() {
                             relative w-10 h-10 rounded-xl bg-[var(--bg-secondary)] border-b-[3px] border-black/20 overflow-hidden flex items-center justify-center text-sm font-black transition-transform hover:scale-110 active:scale-95
                             ${rank === 1 ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(255,191,0,0.3)]' : ''}
                           `}>
-                            {m.senderAvatarUrl ? (
+                            {m.senderAvatarCustomization ? (
+                              <AvatarRenderer
+                                customization={m.senderAvatarCustomization}
+                                username={m.senderName || 'User'}
+                              />
+                            ) : m.senderAvatarUrl ? (
                               <Image
                                 src={m.senderAvatarUrl}
                                 alt="Avatar"
@@ -1091,8 +1098,14 @@ function CommunityHubInner() {
                     className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/[0.03] transition-all group"
                   >
                     <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-sm font-black text-[var(--text-primary)] shadow-sm">
-                        {data.name?.charAt(0)?.toUpperCase() || 'U'}
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-sm font-black text-[var(--text-primary)] shadow-sm overflow-hidden">
+                        {data.avatarCustomization ? (
+                          <AvatarRenderer customization={data.avatarCustomization} username={data.name} />
+                        ) : data.avatarUrl ? (
+                          <img src={data.avatarUrl} alt={data.name} className="w-full h-full object-cover" />
+                        ) : (
+                          data.name?.charAt(0)?.toUpperCase() || 'U'
+                        )}
                       </div>
                       <span className="absolute -right-1 -bottom-1 w-4 h-4 rounded-full bg-green-500 border-[3px] border-[var(--bg-primary)] shadow-sm" />
                     </div>
@@ -1120,10 +1133,14 @@ function CommunityHubInner() {
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🔥</span>
                 <div className="flex-1">
-                  <div className="text-sm font-black text-[var(--text-primary)]">3-Day Streak</div>
+                  <div className="text-sm font-black text-[var(--text-primary)]">{userData?.streak || 0}-Day Streak</div>
                   <div className="h-1.5 w-full bg-white/10 rounded-full mt-1 overflow-hidden">
-                    <div className="h-full bg-orange-500 w-2/3 rounded-full" />
+                    <div
+                      className="h-full bg-orange-500 rounded-full transition-all duration-1000"
+                      style={{ width: `${Math.min(100, ((userData?.streak || 0) / 7) * 100)}%` }}
+                    />
                   </div>
+                  <div className="text-[8px] font-black uppercase tracking-widest text-[var(--text-muted)] mt-1">Goal: 7 Days</div>
                 </div>
               </div>
             </div>
@@ -1169,6 +1186,34 @@ function CommunityHubInner() {
       </div>
     </div>
   )
+}
+
+function AvatarRenderer({ customization, username }: { customization: any, username: string }) {
+  const svg = useMemo(() => {
+    const c = customization;
+    const avatar = createAvatar(avataaars, {
+      seed: username,
+      backgroundColor: [c.backgroundColor || 'FF8A8A'],
+      top: [c.top || 'shortFlat'],
+      hairColor: [c.hairColor || '2c1b18'],
+      clothing: [c.clothing || 'blazerAndShirt'],
+      clothesColor: [c.clothingColor || c.clothesColor || '262e33'],
+      accessories: [c.accessories || 'blank'],
+      eyes: [c.eyes || 'default'],
+      mouth: [c.mouth || 'smile'],
+      skinColor: [c.skinColor || 'ffdbb4'],
+      facialHair: [c.facialHair || 'blank'],
+      backgroundType: ['solid']
+    });
+    return avatar.toString();
+  }, [customization, username]);
+
+  return (
+    <div
+      className="w-full h-full"
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
 }
 
 export default function CommunityPage() {

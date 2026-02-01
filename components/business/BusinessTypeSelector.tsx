@@ -129,21 +129,21 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
 
                 {/* Header & Branding */}
                 <motion.div
-                    className="text-center mb-8 bg-[var(--bg-elevated)]/30 p-6 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-sm"
+                    className="text-center mb-8 duo-card border-none bg-[var(--bg-elevated)]/30 shadow-2xl backdrop-blur-sm"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                 >
                     <div className="flex items-center justify-center gap-3 mb-4">
-                        <div className="w-10 h-10 bg-[var(--brand-primary)] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[var(--brand-primary)]/20">
-                            <span className="text-xl font-black">B</span>
+                        <div className="w-12 h-12 bg-[var(--brand-primary)] rounded-2xl flex items-center justify-center text-white shadow-[0_5px_0_0_#0369a1]">
+                            <span className="text-2xl font-black">B</span>
                         </div>
-                        <span className="text-xl font-black tracking-tight text-[var(--text-primary)]">BrightEd <span className="text-[var(--brand-primary)]">Enterprise</span></span>
+                        <span className="text-2xl font-black uppercase tracking-widest text-[var(--text-primary)]">BrightEd <span className="text-[var(--brand-primary)]">Enterprise</span></span>
                     </div>
 
-                    <BrightHeading level={1} className="text-4xl md:text-5xl mb-3 tracking-tight">
-                        Choose Your <span className="text-[var(--brand-primary)] underline decoration-wavy decoration-4 underline-offset-8">Path</span>
+                    <BrightHeading level={1} className="text-4xl md:text-5xl mb-4 tracking-tighter">
+                        Choose Your <span className="text-[var(--brand-primary)] underline decoration-wavy decoration-8 underline-offset-8">Path</span>
                     </BrightHeading>
-                    <p className="text-sm md:text-base text-[var(--text-secondary)] font-medium max-w-xl mx-auto opacity-80">
+                    <p className="text-xs md:text-sm text-[var(--text-secondary)] font-black uppercase tracking-widest max-w-xl mx-auto opacity-70">
                         Select a business model. Your choice defines your starting capital, daily costs, and success metrics.
                     </p>
                 </motion.div>
@@ -178,21 +178,16 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                             onClick={() => handleTypeSelect(type)}
                                             className="w-full text-left group"
                                         >
-                                            <BrightLayer
-                                                variant="glass"
-                                                padding="md"
-                                                className={`relative overflow-hidden transition-all h-[340px] flex flex-col justify-between
-                          border-b-[6px] border-[var(--border-subtle)] 
-                          active:border-b-0 active:translate-y-[6px]
-                          hover:bg-white/[0.05] hover:border-b-[var(--brand-primary)]/50
+                                            <div
+                                                className={`relative duo-card h-[380px] flex flex-col justify-between transition-all group-hover:border-[var(--brand-primary)]
                           ${categoryStyles[type.category].glow}`}
                                             >
                                                 {/* Category Label */}
                                                 <div className={`
-                                                   absolute top-0 right-0 px-3 py-1 rounded-bl-xl text-[9px] font-black uppercase tracking-widest text-white shadow-sm
-                                                   ${type.category === 'service' ? 'bg-purple-500' :
-                                                        type.category === 'retail' ? 'bg-blue-500' :
-                                                            type.category === 'food' ? 'bg-orange-500' : 'bg-emerald-500'}
+                                                   absolute top-0 right-0 px-4 py-1.5 rounded-bl-2xl text-[10px] font-black uppercase tracking-widest text-white shadow-sm z-20
+                                                   ${type.category === 'service' ? 'bg-purple-500 shadow-[0_4px_0_0_#7e22ce]' :
+                                                        type.category === 'retail' ? 'bg-blue-500 shadow-[0_4px_0_0_#1d4ed8]' :
+                                                            type.category === 'food' ? 'bg-orange-500 shadow-[0_4px_0_0_#c2410c]' : 'bg-emerald-500 shadow-[0_4px_0_0_#047857]'}
                                                 `}>
                                                     {type.category}
                                                 </div>
@@ -200,34 +195,34 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                                 <div className="relative z-10 flex flex-col h-full">
                                                     {/* Visual Section */}
                                                     <div className="flex flex-col items-center text-center mb-4">
-                                                        <div className="w-16 h-16 rounded-2xl bg-white/[0.03] flex items-center justify-center text-5xl mb-3 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                                                        <div className="w-20 h-20 rounded-3xl bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] border-b-4 flex items-center justify-center text-5xl mb-4 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-500">
                                                             {type.emoji}
                                                         </div>
-                                                        <h3 className="text-lg font-black text-[var(--text-primary)] leading-tight">
+                                                        <h3 className="text-xl font-black text-[var(--text-primary)] leading-tight">
                                                             {type.name}
                                                         </h3>
                                                     </div>
 
                                                     {/* Body */}
-                                                    <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed font-medium line-clamp-3 mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                                                    <p className="text-xs text-[var(--text-secondary)] font-bold line-clamp-3 mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
                                                         {type.description}
                                                     </p>
 
                                                     {/* Footer Info */}
-                                                    <div className="mt-auto space-y-3">
+                                                    <div className="mt-auto space-y-4">
                                                         <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
-                                                            <span>Starting Capital</span>
+                                                            <span>Start Capital</span>
                                                             <span className="text-[var(--brand-accent)] text-xs">฿{type.startingCapital.toLocaleString()}</span>
                                                         </div>
 
-                                                        <div className="flex justify-between items-center">
-                                                            <div className="flex items-center gap-1.5">
-                                                                <span className="text-xs">📦</span>
-                                                                <span className="text-[10px] font-bold text-[var(--text-secondary)]">{type.products.length} Items</span>
+                                                        <div className="flex justify-between items-center bg-[var(--bg-secondary)] p-3 rounded-xl border-2 border-[var(--border-subtle)]">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-sm">📦</span>
+                                                                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)]">{type.products.length} Items</span>
                                                             </div>
-                                                            <div className="flex items-center gap-1.5">
-                                                                <span className="text-xs">🕒</span>
-                                                                <span className="text-[10px] font-bold text-[var(--text-secondary)]">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-sm">🕒</span>
+                                                                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)]">
                                                                     {type.category === 'food' ? 'Lunch' :
                                                                         type.category === 'retail' ? 'Evening' :
                                                                             type.category === 'service' ? 'Afternoon' : 'Day'}
@@ -235,14 +230,14 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                                             </div>
                                                         </div>
 
-                                                        <div className="pt-3 border-t border-white/5">
-                                                            <div className="text-center py-1.5 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] text-[10px] font-black uppercase tracking-widest group-hover:bg-[var(--brand-primary)] group-hover:text-white transition-all">
-                                                                Choose Path
+                                                        <div className="pt-2">
+                                                            <div className="duo-btn duo-btn-primary w-full text-[10px] group-hover:scale-105 transition-transform">
+                                                                CHOOSE PATH
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </BrightLayer>
+                                            </div>
                                         </button>
                                     </motion.div>
                                 ))}
@@ -270,18 +265,19 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                             exit={{ opacity: 0, x: -20 }}
                             className="max-w-xl mx-auto px-4"
                         >
-                            <BrightLayer variant="elevated" padding="lg" className="text-center border-b-[8px] border-[var(--brand-primary)]">
-                                <div className="w-24 h-24 rounded-3xl bg-white/[0.03] flex items-center justify-center text-7xl mx-auto mb-6 shadow-inner animate-bounce-slow">
+                            <div className="duo-card text-center overflow-hidden">
+                                <div className="absolute top-0 inset-x-0 h-1 bg-[var(--brand-primary)] opacity-50" />
+                                <div className="w-24 h-24 rounded-3xl bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] border-b-4 flex items-center justify-center text-7xl mx-auto mb-8 shadow-inner animate-bounce-slow">
                                     {selectedType.emoji}
                                 </div>
-                                <BrightHeading level={2} className="text-3xl mb-3 tracking-tight">
+                                <BrightHeading level={2} className="text-3xl mb-4 tracking-tighter">
                                     Name Your <span className="text-[var(--brand-primary)]">{selectedType.name}</span>
                                 </BrightHeading>
-                                <p className="text-[var(--text-secondary)] mb-10 font-medium">
+                                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-secondary)] mb-10 opacity-70">
                                     This name will appear on your official charter and credit card.
                                 </p>
 
-                                <div className="relative group">
+                                <div className="relative group max-w-md mx-auto">
                                     <input
                                         type="text"
                                         value={businessName}
@@ -290,34 +286,30 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                             selectedType.category === 'service' ? "Style Studio" :
                                                 selectedType.category === 'retail' ? "Corner Mart" :
                                                     "Creative Design Co."}`}
-                                        className="w-full px-8 py-5 text-2xl bg-[var(--bg-elevated)] border-2 border-[var(--border-subtle)] rounded-[2rem] 
+                                        className="w-full px-8 py-5 text-2xl bg-[var(--bg-secondary)] border-2 border-[var(--border-subtle)] border-b-4 rounded-3xl
                         text-[var(--text-primary)] placeholder:text-[var(--text-muted)] 
                         focus:border-[var(--brand-primary)] focus:outline-none transition-all text-center font-black shadow-inner"
                                         autoFocus
                                         maxLength={40}
                                     />
-                                    <div className="absolute inset-0 rounded-[2rem] border-4 border-[var(--brand-primary)]/0 group-focus-within:border-[var(--brand-primary)]/10 pointer-events-none transition-all" />
                                 </div>
 
-                                <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
-                                    <BrightButton
-                                        variant="ghost"
+                                <div className="mt-12 flex flex-col sm:flex-row justify-center gap-6">
+                                    <button
                                         onClick={handleBack}
-                                        className="order-2 sm:order-1"
+                                        className="duo-btn text-[var(--text-muted)] border-[var(--border-subtle)] px-8"
                                     >
                                         ← Back
-                                    </BrightButton>
-                                    <BrightButton
-                                        variant="primary"
-                                        size="lg"
+                                    </button>
+                                    <button
                                         onClick={handleNameSubmit}
                                         disabled={businessName.trim().length < 3}
-                                        className="order-1 sm:order-2 px-12 py-6 text-lg font-black"
+                                        className="duo-btn duo-btn-primary px-12 py-5 text-lg"
                                     >
-                                        Next Step →
-                                    </BrightButton>
+                                        Confirm Name →
+                                    </button>
                                 </div>
-                            </BrightLayer>
+                            </div>
                         </motion.div>
                     )}
 
@@ -439,19 +431,17 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                                 </div>
                                             </div>
 
-                                            <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4">
-                                                <BrightButton variant="ghost" onClick={handleBack} className="w-full sm:w-auto">
+                                            <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6">
+                                                <button onClick={handleBack} className="duo-btn text-[var(--text-muted)] border-[var(--border-subtle)] px-8 w-full sm:w-auto">
                                                     ← Back
-                                                </BrightButton>
-                                                <BrightButton
-                                                    variant="primary"
-                                                    size="lg"
+                                                </button>
+                                                <button
                                                     onClick={() => setStep('confirm')}
                                                     disabled={logoUploading}
-                                                    className="w-full sm:w-auto px-12 py-5 text-lg font-black border-b-4 border-black/20"
+                                                    className="duo-btn duo-btn-primary px-12 py-5 text-lg w-full sm:w-auto"
                                                 >
                                                     Finalize Identity →
-                                                </BrightButton>
+                                                </button>
                                             </div>
                                         </div>
                                     </BrightLayer>
@@ -523,22 +513,19 @@ export function BusinessTypeSelector({ onSelect, onBack }: BusinessTypeSelectorP
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                        <BrightButton
-                                            variant="ghost"
+                                    <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                        <button
                                             onClick={handleBack}
-                                            className="order-2 sm:order-1"
+                                            className="duo-btn text-[var(--text-muted)] border-[var(--border-subtle)] px-8 order-2 sm:order-1"
                                         >
                                             ← Adjust Brand
-                                        </BrightButton>
-                                        <BrightButton
-                                            variant="primary"
-                                            size="lg"
+                                        </button>
+                                        <button
                                             onClick={handleConfirm}
-                                            className="order-1 sm:order-2 px-16 py-6 text-xl font-black border-b-[6px] border-black/20"
+                                            className="duo-btn duo-btn-primary px-16 py-6 text-xl order-1 sm:order-2"
                                         >
                                             Launch My Empire 🥂
-                                        </BrightButton>
+                                        </button>
                                     </div>
                                 </div>
                             </BrightLayer>

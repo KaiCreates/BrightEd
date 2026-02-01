@@ -20,6 +20,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Toaster } from 'react-hot-toast'
 import { BusinessProvider } from '@/lib/business-context'
 import { AuthGate } from '@/components/AuthGate'
+import { DialogProvider } from '@/components/system'
 
 export default function RootLayout({
   children,
@@ -34,27 +35,29 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased text-[var(--text-primary)] bg-[var(--bg-primary)] min-h-screen">
         <ErrorBoundary>
-          <AuthProvider>
-            <BusinessProvider>
-              <ThemeProvider>
-                <ConsoleBrandSplash />
-                <Toaster position="top-right" toastOptions={{
-                  duration: 4000,
-                  style: {
-                    background: 'var(--bg-elevated)',
-                    color: 'var(--text-primary)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: '12px',
-                    backdropFilter: 'blur(10px)',
-                  }
-                }} />
-                <AuthGate>
-                  <ConditionalNavigation />
-                  <ConditionalMain>{children}</ConditionalMain>
-                </AuthGate>
-              </ThemeProvider>
-            </BusinessProvider>
-          </AuthProvider>
+          <DialogProvider>
+            <AuthProvider>
+              <BusinessProvider>
+                <ThemeProvider>
+                  <ConsoleBrandSplash />
+                  <Toaster position="top-right" toastOptions={{
+                    duration: 4000,
+                    style: {
+                      background: 'var(--bg-elevated)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '12px',
+                      backdropFilter: 'blur(10px)',
+                    }
+                  }} />
+                  <AuthGate>
+                    <ConditionalNavigation />
+                    <ConditionalMain>{children}</ConditionalMain>
+                  </AuthGate>
+                </ThemeProvider>
+              </BusinessProvider>
+            </AuthProvider>
+          </DialogProvider>
         </ErrorBoundary>
       </body>
     </html>

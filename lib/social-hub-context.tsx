@@ -49,6 +49,7 @@ interface Message {
     senderId: string;
     senderName?: string;
     senderAvatarUrl?: string;
+    senderAvatarCustomization?: any;
     businessPrestige?: number;
     timestamp: Timestamp | null;
     fileUrl?: string;
@@ -74,7 +75,7 @@ interface SocialHubContextType {
     activeRoom: Room | null;
     rooms: Room[];
     messages: Message[];
-    onlineUsers: { [uid: string]: { name: string; lastSeen: number } };
+    onlineUsers: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } };
     typingUsers: Array<{ uid: string; name: string }>;
     dmWindows: DMWindow[];
     blockedUsers: string[];
@@ -110,7 +111,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [activeRoom, setActiveRoomState] = useState<Room | null>(null);
     const [rooms, setRooms] = useState<Room[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
-    const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; lastSeen: number } }>({});
+    const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } }>({});
     const [typingUsers, setTypingUsers] = useState<Array<{ uid: string; name: string }>>([]);
     const [dmWindows, setDmWindows] = useState<DMWindow[]>([]);
     const [blockedUsers, setBlockedUsers] = useState<string[]>([]);
@@ -323,6 +324,8 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                 // User is connected - set online status
                 set(presenceRef, {
                     name: userName,
+                    avatarUrl: userData?.avatarUrl || null,
+                    avatarCustomization: userData?.avatarCustomization || null,
                     lastSeen: Date.now(),
                     online: true
                 });
@@ -330,6 +333,8 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                 // Set offline when disconnected
                 onDisconnect(presenceRef).set({
                     name: userName,
+                    avatarUrl: userData?.avatarUrl || null,
+                    avatarCustomization: userData?.avatarCustomization || null,
                     lastSeen: Date.now(),
                     online: false
                 });
@@ -343,11 +348,13 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         const unsubscribeOnline = onValue(onlineQuery, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                const online: { [uid: string]: { name: string; lastSeen: number } } = {};
+                const online: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } } = {};
                 Object.keys(data).forEach((uid) => {
                     if (data[uid]?.online === true) {
                         online[uid] = {
                             name: data[uid].name || 'User',
+                            avatarUrl: data[uid].avatarUrl || null,
+                            avatarCustomization: data[uid].avatarCustomization || null,
                             lastSeen: data[uid].lastSeen || Date.now()
                         };
                     }
@@ -364,6 +371,8 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             // Clean up on disconnect
             set(presenceRef, {
                 name: userName,
+                avatarUrl: userData?.avatarUrl || null,
+                avatarCustomization: userData?.avatarCustomization || null,
                 lastSeen: Date.now(),
                 online: false
             }).catch(() => { });
@@ -499,6 +508,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             senderId: user.uid,
             senderName: userData?.firstName || 'User',
             senderAvatarUrl: userData?.avatarUrl || null,
+            senderAvatarCustomization: userData?.avatarCustomization || null,
             businessPrestige,
             timestamp: serverTimestamp(),
             fileUrl: fileUrl || null,
@@ -531,6 +541,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             senderId: user.uid,
             senderName: userData?.firstName || 'User',
             senderAvatarUrl: userData?.avatarUrl || null,
+            senderAvatarCustomization: userData?.avatarCustomization || null,
             timestamp: serverTimestamp()
         });
     }, [user, userData?.firstName, userData?.avatarUrl]);
