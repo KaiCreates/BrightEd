@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { adminDb } from '@/lib/firebase-admin'
 import { verifyAuth } from '@/lib/auth-server'
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,6 +15,9 @@ function isValidUsername(username: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 20, 60000, 'user:profile:POST')
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!)
+
     const decoded = await verifyAuth(request)
     const uid = decoded.uid
 

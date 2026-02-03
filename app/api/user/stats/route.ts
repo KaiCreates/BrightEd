@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { verifyAuth } from '@/lib/auth-server';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 60, 60000, 'user:stats:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId') || decodedToken.uid;

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getOrCreateProfile, parseProfile, updateProfile } from '@/lib/stories-engine';
 import type { AgeBracket } from '@/lib/stories-engine/types';
 import { verifyAuth } from '@/lib/auth-server';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 // Removed DEFAULT_USER - strictly authenticated now
 
@@ -12,6 +13,9 @@ async function getUserId(request: NextRequest): Promise<string> {
 
 export async function GET(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 60, 60000, 'stories:profile:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const userId = await getUserId(request);
     const profile = await getOrCreateProfile(userId);
     const parsed = parseProfile(profile);
@@ -40,6 +44,9 @@ export async function GET(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 30, 60000, 'stories:profile:PATCH');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const userId = await getUserId(request);
 
     const body = (await request.json()) as {

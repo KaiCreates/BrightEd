@@ -13,9 +13,18 @@
             }
         },
         "presence": {
+            ".read": "auth != null",
             "$uid": {
                 ".read": "auth != null",
                 ".write": "$uid === auth.uid"
+            }
+        },
+        "typing": {
+            "$roomId": {
+                ".read": "auth != null",
+                "$uid": {
+                    ".write": "$uid === auth.uid"
+                }
             }
         },
         ".read": false,

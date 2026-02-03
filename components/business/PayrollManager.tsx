@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import { Employee, BusinessState } from '@/lib/economy/economy-types';
 import { BrightHeading, useDialog } from '@/components/system';
-import { doc, updateDoc, increment, arrayRemove } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import EmployeeIDCard from '@/components/business/EmployeeIDCard';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/lib/auth-context';
 import {
     DndContext,
     DragEndEvent,
@@ -76,6 +75,7 @@ export default function PayrollManager({ business }: PayrollManagerProps) {
     const totalOwed = employees.reduce((sum, e) => sum + (e.unpaidWages || 0), 0);
     const { showAlert, showConfirm } = useDialog();
     const [activeId, setActiveId] = useState<string | null>(null);
+    const { user } = useAuth();
 
     const { professor, showSuccess: showProfessorSuccess, showWarning, showHint } = useProfessor({
         initialMessage: "Drag the cash stack to an employee card to pay their wages instantly!"
@@ -86,6 +86,32 @@ export default function PayrollManager({ business }: PayrollManagerProps) {
         useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
     );
 
+    const postEmployeeAction = async (payload: {
+        businessId: string;
+        action: 'hire' | 'decline' | 'pay' | 'pay_all' | 'fire' | 'assign_specialization';
+        candidateId?: string;
+        employeeId?: string;
+        specialization?: string;
+    }) => {
+        if (!user) throw new Error('Not authenticated');
+
+        const token = await user.getIdToken();
+        const response = await fetch('/api/business/employees', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to process employee action');
+        }
+        return data;
+    };
+
     const handlePayEmployee = async (employee: Employee) => {
         if (!employee || employee.unpaidWages <= 0) return;
 
@@ -94,39 +120,33 @@ export default function PayrollManager({ business }: PayrollManagerProps) {
             return;
         }
 
-        const bizRef = doc(db, 'businesses', business.id);
-        const updatedEmployees = employees.map(e => {
-            if (e.id === employee.id) {
-                return {
-                    ...e,
-                    unpaidWages: 0,
-                    stats: {
-                        ...e.stats,
-                        morale: Math.min(100, (e.stats.morale || 0) + 10)
-                    }
-                };
-            }
-            return e;
-        });
-
-        await updateDoc(bizRef, {
-            employees: updatedEmployees,
-            cashBalance: increment(-employee.unpaidWages),
-            balance: increment(-employee.unpaidWages)
-        });
-
-        showProfessorSuccess(`Paid ฿${employee.unpaidWages.toLocaleString()} to ${employee.name}!`);
+        try {
+            await postEmployeeAction({
+                businessId: business.id,
+                action: 'pay',
+                employeeId: employee.id
+            });
+            showProfessorSuccess(`Paid ฿${employee.unpaidWages.toLocaleString()} to ${employee.name}!`);
+        } catch (error: any) {
+            console.error('Failed to pay employee:', error);
+            showAlert(error.message || 'Failed to pay employee. Please try again.');
+        }
     };
 
     const handleFire = (employee: Employee) => {
         showConfirm(
             `Terminate ${employee.name}'s employment? All outstanding wages (฿${employee.unpaidWages}) will be forfeited.`,
             async () => {
-                const bizRef = doc(db, 'businesses', business.id);
-                await updateDoc(bizRef, {
-                    employees: arrayRemove(employee),
-                    staffCount: increment(-1)
-                });
+                try {
+                    await postEmployeeAction({
+                        businessId: business.id,
+                        action: 'fire',
+                        employeeId: employee.id
+                    });
+                } catch (error: any) {
+                    console.error('Failed to fire employee:', error);
+                    showAlert(error.message || 'Failed to fire employee. Please try again.');
+                }
             },
             { title: 'TERMINATE CONTRACT', type: 'danger', confirmLabel: 'FIRE' }
         );
@@ -142,22 +162,16 @@ export default function PayrollManager({ business }: PayrollManagerProps) {
         showConfirm(
             `Are you sure you want to disburse ฿${totalOwed.toLocaleString()} in total wages?`,
             async () => {
-                const bizRef = doc(db, 'businesses', business.id);
-                const updatedEmployees = employees.map(e => ({
-                    ...e,
-                    unpaidWages: 0,
-                    stats: {
-                        ...e.stats,
-                        morale: Math.min(100, (e.stats.morale || 0) + 12)
-                    }
-                }));
-
-                await updateDoc(bizRef, {
-                    employees: updatedEmployees,
-                    cashBalance: increment(-totalOwed),
-                    balance: increment(-totalOwed)
-                });
-                showProfessorSuccess("All salaries paid! Employee morale boosted.");
+                try {
+                    await postEmployeeAction({
+                        businessId: business.id,
+                        action: 'pay_all'
+                    });
+                    showProfessorSuccess("All salaries paid! Employee morale boosted.");
+                } catch (error: any) {
+                    console.error('Failed to pay all employees:', error);
+                    showAlert(error.message || 'Failed to process payroll. Please try again.');
+                }
             },
             { title: 'DISBURSE PAYROLL', confirmLabel: 'PAY ALL' }
         );

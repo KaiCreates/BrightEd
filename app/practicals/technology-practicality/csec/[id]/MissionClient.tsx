@@ -5,14 +5,32 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { doc, increment, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 import type { BrightOSMission } from '@/lib/brightos/csec-roadmap-missions';
 import { getMissionCooldown, registerMissionCompletionAndMaybeCooldown } from '@/lib/brightos/mission-rewards';
 import { awardFixedMissionXP } from '@/lib/brightos/mission-xp';
 import { markMissionCompleted } from '@/lib/brightos/mission-progress';
 import { endLiveSession, startLiveSession } from '@/lib/brightos/live-sessions';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/lib/auth-context';
 
-type WindowId = 'taskmgr' | 'terminal' | 'settings' | 'browser' | 'automation' | 'explorer' | 'stuck_app' | 'uninstall' | 'registry';
+const MISSION_XP_REWARD = 100;
+const MISSION_BCOIN_REWARD = 50;
+
+type WindowId =
+  | 'taskmgr'
+  | 'terminal'
+  | 'settings'
+  | 'browser'
+  | 'automation'
+  | 'explorer'
+  | 'stuck_app'
+  | 'uninstall'
+  | 'registry'
+  | 'devmgr'
+  | 'mail'
+  | 'chat';
 
 type WindowState = {
   id: WindowId;
@@ -27,23 +45,512 @@ type WindowState = {
 };
 
 type RuntimeState = {
-  power: 'booting' | 'lock' | 'on' | 'shutting-down' | 'off';
+  power: 'intro' | 'booting' | 'lock' | 'on' | 'reward' | 'shutting-down' | 'off';
   boot_phase: 0 | 1 | 2 | 3 | 4 | 5;
   cpu_load: number;
-  network: { status: 'Connected' | 'Disconnected' | 'Slow'; ip_renewed: boolean };
+  network: {
+    status: 'Connected' | 'Disconnected' | 'Slow';
+    ip_renewed: boolean;
+    ip: string;
+    dns: { primary: string };
+    suspicious_connection: { active: boolean };
+  };
   window: { stuck_app: { open: boolean } };
   process: { high_cpu: { running: boolean } };
-  disk: { free_space_mb: number };
-  files: { tmp: { count: number } };
+  disk: { free_space_mb: number; volumes: string[] };
+  files: { tmp: { count: number }; restored: boolean; renamed_prefix: string; renamed_count: number; total: number };
   recycle_bin: { empty: boolean };
   file: { opened: string | null };
-  terminal: { history: string[] };
+  terminal: { history: string[]; last_command: string | null; last_output: string };
   notifications: Array<{ id: string; kind: 'alert' | 'info'; title: string; body: string }>;
   apps: Record<string, { name: string; installed: boolean; malware: boolean; reinstall: boolean; process?: string; registryKeys?: string[] }>;
   registry: Record<string, string>;
+
+  audio: { output: boolean };
+  device: { audio: { driver_status: 'outdated' | 'updated' } };
+  display: { resolution: string };
+  power_settings: { screen_off_minutes_on_battery: number };
+  keyboard: { filter_keys: { enabled: boolean } };
+  specs: { checked: boolean };
+
+  printer: { queue: { count: number }; ip: string; reachable: boolean };
+  router: {
+    admin_password_changed: boolean;
+    wifi: { security: string };
+    port_forwarding: string[];
+    blocked_macs: string[];
+  };
+  unknown_device: { mac: string };
+  browser: { redirects: boolean; extensions: { malicious: number } };
+  mail: { flagged_phishing: boolean };
+  defend: { threats: { active: number; quarantined: number } };
+  account: { user: { password_reset: boolean } };
+  system: { restore: { completed: boolean }; crash_rate: number };
+  hardware: { ram_gb: number };
+  firewall: { inbound: { blocked_ports: number[] } };
+  folder: { encrypted_paths: string[] };
+  forensics: { bruteforce_timestamp: string };
+  web: { validation: { blocks_sql_injection: boolean } };
+  ransomware: { lock_screen: boolean };
+  incident: { pid_identified: boolean; resolved: boolean };
+  ping: { packet_loss_percent: number };
+  trace: { loss_hop_index: number };
+  ftp: { uploaded: string[] };
+  automation: { flow: { valid: boolean }; outputs: Record<string, any> };
+  validation: { rejects_common_password: boolean; min_length: number };
+  script: { output: number | null; terminates: boolean };
+  vars: { A: number; B: number };
+  list: { sorted: boolean };
 };
 
 type TerminalLine = { id: string; kind: 'in' | 'out' | 'sys'; text: string };
+
+type StoryEmail = {
+  id: string;
+  from: string;
+  subject: string;
+  preview: string;
+  body: string;
+  attachments?: string[];
+  unread?: boolean;
+};
+
+type StoryChatMessage = {
+  id: string;
+  from: string;
+  text: string;
+  atOffsetMs: number;
+};
+
+type StoryEvent =
+  | { kind: 'notify'; atOffsetMs: number; level: 'info' | 'alert'; title: string; body: string }
+  | { kind: 'email'; atOffsetMs: number; emailId: string }
+  | { kind: 'document'; atOffsetMs: number; path: string };
+
+function PhoneMessageOutro({
+  mission,
+  userLabel,
+  userAvatarUrl,
+  npcLabel,
+  npcAvatarUrl,
+  xpReward,
+  bCoinReward,
+  onDone,
+}: {
+  mission: BrightOSMission;
+  userLabel: string;
+  userAvatarUrl: string;
+  npcLabel: string;
+  npcAvatarUrl: string;
+  xpReward: number;
+  bCoinReward: number;
+  onDone: () => void;
+}) {
+  const script = useMemo(() => {
+    const userLine = `All set, ${mission.client.name}. Your computer is fixed and running smoothly again.`;
+    const thanks = mission.client.mood === 'Panic'
+      ? 'Thank you so much! I thought it was done for.'
+      : mission.client.mood === 'Angry'
+        ? 'Alright, it finally works. Thanks for fixing it.'
+        : mission.client.mood === 'Confused'
+          ? 'Ohhh, I see it now. Thanks for sorting it out.'
+          : 'Thanks! Everything looks perfect now.';
+
+    return [
+      { from: 'user' as const, text: userLine },
+      { from: 'npc' as const, text: thanks },
+      { from: 'npc' as const, text: `Reward sent: +${xpReward} XP and +${bCoinReward} B-Coins.` },
+    ];
+  }, [bCoinReward, mission.client.mood, mission.client.name, xpReward]);
+
+  const [msgIndex, setMsgIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [closing, setClosing] = useState(false);
+  const [showRewards, setShowRewards] = useState(false);
+
+  useEffect(() => {
+    if (closing || showRewards) return;
+    const current = script[msgIndex];
+    if (!current) return;
+
+    if (charIndex < current.text.length) {
+      const id = window.setTimeout(() => setCharIndex((p) => p + 1), current.from === 'npc' ? 30 : 24);
+      return () => window.clearTimeout(id);
+    }
+
+    if (msgIndex < script.length - 1) {
+      const id = window.setTimeout(() => {
+        setMsgIndex((p) => p + 1);
+        setCharIndex(0);
+      }, 850);
+      return () => window.clearTimeout(id);
+    }
+
+    const id = window.setTimeout(() => {
+      setShowRewards(true);
+    }, 800);
+    return () => window.clearTimeout(id);
+  }, [charIndex, closing, msgIndex, script, showRewards]);
+
+  useEffect(() => {
+    if (!showRewards) return;
+    const id = window.setTimeout(() => {
+      setClosing(true);
+      window.setTimeout(() => onDone(), 800);
+    }, 4200);
+    return () => window.clearTimeout(id);
+  }, [onDone, showRewards]);
+
+  const visibleMessages = useMemo(() => {
+    const out: Array<{ from: 'npc' | 'user'; text: string }> = [];
+    script.forEach((m, i) => {
+      if (i < msgIndex) out.push(m);
+      if (i === msgIndex) out.push({ ...m, text: m.text.slice(0, charIndex) });
+    });
+    return out;
+  }, [charIndex, msgIndex, script]);
+
+  return (
+    <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-black" />
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+        <AnimatePresence mode="wait">
+          {!closing ? (
+            <motion.div
+              key="phone-open"
+              initial={{ opacity: 0, scale: 0.92, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 18 }}
+              transition={{ duration: 0.35 }}
+              className="w-full max-w-[420px]"
+            >
+              <div className="rounded-[2.25rem] border border-white/15 bg-black/70 overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
+                <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-full border border-white/10 bg-white/5 overflow-hidden">
+                      <img src={npcAvatarUrl} alt={npcLabel} className="h-full w-full" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Mission Wrap-up</div>
+                      <div className="mt-0.5 text-sm font-black text-white">{npcLabel}</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setClosing(true);
+                      window.setTimeout(() => onDone(), 350);
+                    }}
+                    className="h-9 px-3 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-zinc-200 transition-colors"
+                  >
+                    {showRewards ? 'Continue' : 'Skip'}
+                  </button>
+                </div>
+
+                <div className="p-5 h-[520px] overflow-auto sleek-scrollbar flex flex-col gap-3">
+                  {visibleMessages.map((m, idx) => {
+                    const mine = m.from === 'user';
+                    const avatar = mine ? userAvatarUrl : npcAvatarUrl;
+                    const label = mine ? userLabel : npcLabel;
+                    return (
+                      <div key={idx} className={`flex items-end gap-2 ${mine ? 'justify-end' : 'justify-start'}`}>
+                        {!mine ? (
+                          <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
+                            <img src={avatar} alt={label} className="h-full w-full" />
+                          </div>
+                        ) : null}
+                        <div
+                          className={`max-w-[78%] rounded-2xl border px-4 py-3 text-sm leading-relaxed ${mine
+                            ? 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 text-white'
+                            : 'border-white/10 bg-white/[0.03] text-zinc-200'
+                            }`}
+                        >
+                          {m.text}
+                        </div>
+                        {mine ? (
+                          <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
+                            <img src={avatar} alt={label} className="h-full w-full" />
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+
+                  {showRewards ? (
+                    <div className="mt-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-200">Mission Rewards</div>
+                      <div className="mt-4 grid grid-cols-2 gap-3">
+                        <div className="rounded-xl border border-white/10 bg-black/40 p-3">
+                          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">XP</div>
+                          <div className="mt-2 text-2xl font-black text-white">+{xpReward}</div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-black/40 p-3">
+                          <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">B-Coins</div>
+                          <div className="mt-2 text-2xl font-black text-amber-300">+{bCoinReward}</div>
+                        </div>
+                      </div>
+                      <div className="mt-4 text-xs text-emerald-100/80">Rewards have been added to your profile.</div>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="mt-4 text-center text-xs text-zinc-500">Mission complete • rewards applied</div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="phone-close"
+              initial={{ opacity: 1, scale: 1 }}
+              animate={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.35 }}
+              className="w-full max-w-[420px]"
+            >
+              <div className="rounded-[2.25rem] border border-white/15 bg-black/70 h-[620px]" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+function PhoneMessageIntro({
+  mission,
+  userLabel,
+  userAvatarUrl,
+  npcLabel,
+  npcAvatarUrl,
+  onDone,
+}: {
+  mission: BrightOSMission;
+  userLabel: string;
+  userAvatarUrl: string;
+  npcLabel: string;
+  npcAvatarUrl: string;
+  onDone: () => void;
+}) {
+  const script = useMemo(() => {
+    const opener = mission.client.dialogue_start;
+    const userLine = mission.id === 'tech-5'
+      ? 'Ok. I’m going to check your drivers and get the audio working again.'
+      : mission.id === 'tech-6'
+        ? 'Ok. I’ll adjust the display settings and fix the resolution.'
+        : mission.id === 'tech-3'
+          ? 'Ok. I’ll clean up storage and free up space.'
+          : mission.id === 'tech-13'
+            ? 'Ok. I’m going to run a deep scan and quarantine anything suspicious.'
+            : 'Ok. I’m on it. I’ll troubleshoot and fix it.';
+    const closer = 'Thanks. Please hurry, I really need it working.';
+
+    return [
+      { from: 'npc' as const, text: opener },
+      { from: 'user' as const, text: userLine },
+      { from: 'npc' as const, text: closer },
+    ];
+  }, [mission.client.dialogue_start, mission.id]);
+
+  const [msgIndex, setMsgIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    if (closing) return;
+    const current = script[msgIndex];
+    if (!current) return;
+
+    if (charIndex < current.text.length) {
+      const id = window.setTimeout(() => setCharIndex((p) => p + 1), current.from === 'npc' ? 32 : 26);
+      return () => window.clearTimeout(id);
+    }
+
+    if (msgIndex < script.length - 1) {
+      const id = window.setTimeout(() => {
+        setMsgIndex((p) => p + 1);
+        setCharIndex(0);
+      }, 900);
+      return () => window.clearTimeout(id);
+    }
+
+    const id = window.setTimeout(() => {
+      setClosing(true);
+      window.setTimeout(() => onDone(), 800);
+    }, 1200);
+    return () => window.clearTimeout(id);
+  }, [charIndex, closing, msgIndex, onDone, script]);
+
+  const visibleMessages = useMemo(() => {
+    const out: Array<{ from: 'npc' | 'user'; text: string }> = [];
+    script.forEach((m, i) => {
+      if (i < msgIndex) out.push(m);
+      if (i === msgIndex) out.push({ ...m, text: m.text.slice(0, charIndex) });
+    });
+    return out;
+  }, [charIndex, msgIndex, script]);
+
+  return (
+    <div className="min-h-screen bg-[#050B14] relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-primary)]/10 via-transparent to-black" />
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+        <AnimatePresence mode="wait">
+          {!closing ? (
+            <motion.div
+              key="phone-open"
+              initial={{ opacity: 0, scale: 0.92, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 18 }}
+              transition={{ duration: 0.35 }}
+              className="w-full max-w-[420px]"
+            >
+              <div className="rounded-[2.25rem] border border-white/15 bg-black/70 overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
+                <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-full border border-white/10 bg-white/5 overflow-hidden">
+                      <img src={npcAvatarUrl} alt={npcLabel} className="h-full w-full" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Messages</div>
+                      <div className="mt-0.5 text-sm font-black text-white">{npcLabel}</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setClosing(true);
+                      window.setTimeout(() => onDone(), 350);
+                    }}
+                    className="h-9 px-3 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-zinc-200 transition-colors"
+                  >
+                    Skip
+                  </button>
+                </div>
+
+                <div className="p-5 h-[520px] overflow-auto sleek-scrollbar flex flex-col gap-3">
+                  {visibleMessages.map((m, idx) => {
+                    const mine = m.from === 'user';
+                    const avatar = mine ? userAvatarUrl : npcAvatarUrl;
+                    const label = mine ? userLabel : npcLabel;
+                    return (
+                      <div key={idx} className={`flex items-end gap-2 ${mine ? 'justify-end' : 'justify-start'}`}>
+                        {!mine ? (
+                          <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
+                            <img src={avatar} alt={label} className="h-full w-full" />
+                          </div>
+                        ) : null}
+                        <div
+                          className={`max-w-[78%] rounded-2xl border px-4 py-3 text-sm leading-relaxed ${mine
+                            ? 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 text-white'
+                            : 'border-white/10 bg-white/[0.03] text-zinc-200'
+                            }`}
+                        >
+                          {m.text}
+                          {idx === visibleMessages.length - 1 && msgIndex === script.length - 1 && charIndex >= script[msgIndex]?.text.length ? null : null}
+                        </div>
+                        {mine ? (
+                          <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
+                            <img src={avatar} alt={label} className="h-full w-full" />
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-4 text-center text-xs text-zinc-500">Incoming support ticket…</div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="phone-close"
+              initial={{ opacity: 1, scale: 1 }}
+              animate={{ opacity: 0, scale: 0.85 }}
+              transition={{ duration: 0.35 }}
+              className="w-full max-w-[420px]"
+            >
+              <div className="rounded-[2.25rem] border border-white/15 bg-black/70 h-[620px]" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+function DeviceManagerWindow({
+  state,
+  onState,
+  onNotify,
+}: {
+  state: RuntimeState;
+  onState: (fn: (p: RuntimeState) => RuntimeState) => void;
+  onNotify: (kind: 'alert' | 'info', title: string, body: string) => void;
+}) {
+  const driver = state.device.audio.driver_status;
+  return (
+    <div className="h-full flex flex-col gap-4">
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Device Manager (Drivers)</div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
+        <div className="px-4 py-3 border-b border-white/10">
+          <div className="text-sm font-black text-white">Sound, video and game controllers</div>
+          <div className="mt-1 text-xs text-zinc-400">Audio Device • Driver: <span className={driver === 'updated' ? 'text-emerald-300' : 'text-amber-200'}>{driver}</span></div>
+        </div>
+        <div className="p-4">
+          <div className="text-xs text-zinc-400">Status</div>
+          <div className="mt-2 text-sm text-zinc-200">
+            {driver === 'updated'
+              ? 'This device is working properly.'
+              : 'Driver issue detected. Audio output may be unavailable.'}
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              onClick={() => {
+                if (driver === 'updated') return;
+                onState((p) => ({ ...p, device: { ...p.device, audio: { driver_status: 'updated' } }, audio: { output: true } }));
+                onNotify('info', 'DEVICE MANAGER', 'Audio driver updated. Output restored.');
+              }}
+              disabled={driver === 'updated'}
+              className={`h-10 px-4 rounded-2xl border text-[10px] font-black uppercase tracking-[0.25em] transition-colors ${driver === 'updated'
+                ? 'border-white/10 bg-white/[0.03] text-zinc-500'
+                : 'border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-white'
+                }`}
+            >
+              Update Driver
+            </button>
+            <button
+              onClick={() => {
+                onNotify('info', 'DEVICE MANAGER', 'Scan complete.');
+              }}
+              className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+            >
+              Scan for hardware changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type Briefing = {
+  ticketId: string;
+  category: string;
+  priority: 'P1' | 'P2' | 'P3' | 'P4';
+  urgency: 'Critical' | 'High' | 'Medium' | 'Low';
+  deviceOwner: { name: string; role: string; email: string };
+  policyBanner: string;
+  slaMinutes: number;
+  summary: string;
+  steps: string[];
+  attachments: string[];
+};
+
+type StoryPack = {
+  briefing: Briefing;
+  emails: StoryEmail[];
+  chat: StoryChatMessage[];
+  events: StoryEvent[];
+  pinnedApps: Array<'mail' | 'chat'>;
+  accent: 'emerald' | 'amber' | 'sky' | 'red' | 'zinc';
+};
 
 type AllowedTool = BrightOSMission['tools_allowed'][number];
 
@@ -51,6 +558,491 @@ type AppId = AllowedTool;
 
 function uid(prefix: string) {
   return `${prefix}_${Math.random().toString(16).slice(2)}_${Date.now()}`;
+}
+
+function pickAccent(preset: BrightOSMission['brightos_desktop']['ui_preset']): StoryPack['accent'] {
+  if (preset === 'smallbiz_admin') return 'amber';
+  if (preset === 'techfix_shop') return 'sky';
+  if (preset === 'automation_lab') return 'emerald';
+  if (preset === 'csec_soc') return 'red';
+  return 'zinc';
+}
+
+function inferScenario(mission: BrightOSMission) {
+  const s = mission.success_condition;
+  if (s.includes('router.')) return 'router';
+  if (s.includes('browser.redirects') || s.includes('browser.extensions')) return 'browser_cleanup';
+  if (s.includes('mail.flagged_phishing')) return 'phishing';
+  if (s.includes('defend.threats')) return 'malware_scan';
+  if (s.includes('firewall.inbound')) return 'firewall';
+  if (s.includes('ftp.uploaded')) return 'ftp';
+  if (s.includes('forensics.bruteforce_timestamp')) return 'forensics';
+  if (s.includes('folder.encrypted')) return 'encryption';
+  if (s.includes('files.restored') || s.includes('ransomware.lock_screen')) return 'ransomware';
+  if (s.includes('disk.free_space') || s.includes('files.tmp.count') || s.includes('recycle_bin')) return 'storage_cleanup';
+  if (s.includes('terminal.last_command') || s.includes('ping.') || s.includes('trace.')) return 'terminal_network';
+  if (s.includes('automation.') || s.includes('validation.') || s.includes('script.') || s.includes('vars.') || s.includes('list.')) return 'automation';
+  if (s.includes('hardware.ram_gb')) return 'hardware';
+  return 'general';
+}
+
+function buildStoryPack(mission: BrightOSMission, company: { name: string; dept: string; hostname: string }): StoryPack {
+  const scenario = inferScenario(mission);
+  const accent = pickAccent(mission.brightos_desktop.ui_preset);
+  const ticketId = `${company.hostname}-${String(mission.rank).padStart(2, '0')}-${mission.id.toUpperCase()}`;
+
+  const deviceOwner = {
+    name: mission.client.name,
+    role: mission.client.role,
+    email: `${mission.client.name.toLowerCase().replace(/[^a-z]+/g, '.').replace(/^\.|\.$/g, '') || 'user'}@${company.name.toLowerCase().replace(/[^a-z]+/g, '')}.com`,
+  };
+
+  const baseSla = mission.rank <= 1 ? 45 : mission.rank === 2 ? 35 : mission.rank === 3 ? 25 : mission.rank === 4 ? 20 : 15;
+  const slaMinutes = scenario === 'ransomware' || scenario === 'firewall' ? Math.min(20, baseSla) : baseSla;
+
+  const policyBanner =
+    scenario === 'ransomware' || scenario === 'forensics' || mission.brightos_desktop.ui_preset === 'csec_soc'
+      ? 'POLICY: Incident Response — preserve evidence, document actions, and escalate critical events.'
+      : scenario === 'phishing'
+        ? 'POLICY: Email Security — never share credentials, report phishing immediately.'
+        : scenario === 'encryption'
+          ? 'POLICY: Data Protection — encrypt sensitive folders before transfer.'
+          : 'POLICY: Acceptable Use — follow company IT guidelines and log all changes.';
+
+  const summary =
+    scenario === 'router'
+      ? 'Secure the router configuration and remove unauthorized access.'
+      : scenario === 'browser_cleanup'
+        ? 'Stop browser redirects by removing the malicious extension.'
+        : scenario === 'phishing'
+          ? 'Identify and flag a suspicious email impersonating an admin.'
+          : scenario === 'firewall'
+            ? 'Block a risky inbound port to reduce the attack surface.'
+            : scenario === 'ransomware'
+              ? 'Restore from backup and bring the system back online safely.'
+              : scenario === 'forensics'
+                ? 'Review logs and extract the timestamp of the brute force attempt.'
+                : scenario === 'ftp'
+                  ? 'Upload the required file to the server and confirm transfer.'
+                  : scenario === 'automation'
+                    ? 'Apply the correct logic and run the test simulation.'
+                    : 'Resolve the ticket using the allowed tools and confirm success.';
+
+  const priority: Briefing['priority'] = scenario === 'ransomware' ? 'P1' : mission.rank >= 4 ? 'P2' : mission.rank >= 2 ? 'P3' : 'P4';
+  const urgency: Briefing['urgency'] = priority === 'P1' ? 'Critical' : priority === 'P2' ? 'High' : priority === 'P3' ? 'Medium' : 'Low';
+
+  const attachments: string[] = [];
+  if (scenario === 'forensics') attachments.push('C:/Logs/access.log');
+  if (scenario === 'ftp') attachments.push('C:/Users/Student/Desktop/index.html');
+  if (scenario === 'encryption') attachments.push('C:/Users/Student/Documents/Clinic/Records/');
+  if (scenario === 'ransomware') attachments.push('E:/Backup/');
+  if (scenario === 'router') attachments.push('Router/Clients: 3 (one unknown)');
+
+  const emails: StoryEmail[] = [];
+  const chat: StoryChatMessage[] = [];
+  const events: StoryEvent[] = [];
+
+  const inboxBaseId = `${mission.id}-inbox-1`;
+  if (scenario === 'phishing') {
+    emails.push({
+      id: inboxBaseId,
+      from: 'admin@g00gle.com',
+      subject: 'Urgent password reset required',
+      preview: 'Your account will be disabled in 30 minutes…',
+      body: 'We detected unusual activity. Click the link to reset your password immediately.\n\n— IT Admin',
+      attachments: ['phishing_screenshot.png'],
+      unread: true,
+    });
+    events.push({ kind: 'notify', atOffsetMs: 2500, level: 'alert', title: 'MAIL', body: 'New message received: Urgent password reset required' });
+    events.push({ kind: 'email', atOffsetMs: 2500, emailId: inboxBaseId });
+  }
+
+  if (scenario === 'ransomware') {
+    emails.push({
+      id: inboxBaseId,
+      from: 'ops@caribsec.local',
+      subject: 'Ransomware outbreak - restore guidance',
+      preview: 'Use backup drive E: to restore encrypted documents…',
+      body: 'Do NOT pay ransom. Restore from E:/Backup/. Document every step. If you see unusual persistence, escalate to SOC.',
+      attachments: ['restore_runbook.pdf'],
+      unread: true,
+    });
+    events.push({ kind: 'notify', atOffsetMs: 3500, level: 'alert', title: 'SECURITY', body: 'Incident Severity: HIGH — follow IR policy.' });
+  }
+
+  if (scenario === 'router') {
+    chat.push({ id: `${mission.id}-chat-1`, from: 'NetworkOps', text: 'Need the router hardened ASAP. Change admin creds + block unknown device.', atOffsetMs: 4000 });
+  }
+
+  if (scenario === 'forensics') {
+    chat.push({ id: `${mission.id}-chat-1`, from: 'SOC Analyst', text: 'Please pull first brute force timestamp from access.log and reply with the exact value.', atOffsetMs: 3500 });
+    events.push({ kind: 'document', atOffsetMs: 0, path: 'C:/Logs/access.log' });
+  }
+
+  if (scenario === 'automation') {
+    chat.push({ id: `${mission.id}-chat-1`, from: 'Trainer', text: 'Open Automation App and run the test once your logic is correct.', atOffsetMs: 2500 });
+  }
+
+  if (scenario === 'ftp') {
+    chat.push({ id: `${mission.id}-chat-1`, from: 'WebAdmin', text: 'Need index.html uploaded to /public_html via FTP. Use the sim command if needed.', atOffsetMs: 3000 });
+  }
+
+  if (scenario === 'firewall') {
+    events.push({ kind: 'notify', atOffsetMs: 2000, level: 'alert', title: 'SECURITY', body: 'Inbound Telnet traffic detected — recommend blocking port 23.' });
+  }
+
+  return {
+    briefing: {
+      ticketId,
+      category:
+        scenario === 'router'
+          ? 'Network / Router'
+          : scenario === 'phishing'
+            ? 'Security / Email'
+            : scenario === 'firewall'
+              ? 'Security / Firewall'
+              : scenario === 'automation'
+                ? 'Programming / Logic'
+                : scenario === 'storage_cleanup'
+                  ? 'System / Storage'
+                  : 'IT Support',
+      priority,
+      urgency,
+      deviceOwner,
+      policyBanner,
+      slaMinutes,
+      summary,
+      steps: mission.steps_to_solve,
+      attachments,
+    },
+    emails,
+    chat,
+    events,
+    pinnedApps: ['mail', 'chat'],
+    accent,
+  };
+}
+
+function MailApp({ emails }: { emails: StoryEmail[] }) {
+  const [selected, setSelected] = useState<string | null>(emails[0]?.id ?? null);
+  const current = emails.find((e) => e.id === selected) || null;
+  return (
+    <div className="h-full grid grid-cols-[260px_1fr] gap-4">
+      <div className="rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
+        <div className="px-4 py-3 border-b border-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Inbox</div>
+        <div className="h-[calc(100%-2.5rem)] overflow-auto">
+          {emails.length === 0 ? (
+            <div className="p-4 text-sm text-zinc-400">No messages.</div>
+          ) : (
+            emails.map((m) => (
+              <button
+                key={m.id}
+                onClick={() => setSelected(m.id)}
+                className={`w-full text-left px-4 py-3 border-b border-white/5 hover:bg-white/[0.04] transition-colors ${selected === m.id ? 'bg-white/[0.06]' : ''}`}
+              >
+                <div className="text-xs font-bold text-white truncate">{m.subject}</div>
+                <div className="mt-0.5 text-[11px] text-zinc-400 truncate">{m.from}</div>
+                <div className="mt-1 text-[11px] text-zinc-400/80 truncate">{m.preview}</div>
+              </button>
+            ))
+          )}
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 overflow-auto">
+        {!current ? (
+          <div className="text-sm text-zinc-300">Select a message.</div>
+        ) : (
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">From</div>
+            <div className="mt-1 text-sm text-white font-semibold">{current.from}</div>
+            <div className="mt-4 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Subject</div>
+            <div className="mt-1 text-sm text-white font-semibold">{current.subject}</div>
+            <div className="mt-4 whitespace-pre-wrap text-sm text-zinc-200 leading-relaxed">{current.body}</div>
+            {current.attachments?.length ? (
+              <div className="mt-6">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Attachments</div>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {current.attachments.map((a) => (
+                    <div key={a} className="px-3 py-2 rounded-xl border border-white/10 bg-black/20 text-xs text-zinc-200 font-mono">{a}</div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ChatApp({ messages }: { messages: Array<{ from: string; text: string }> }) {
+  return (
+    <div className="h-full rounded-2xl border border-white/10 bg-black/30 overflow-hidden flex flex-col">
+      <div className="px-4 py-3 border-b border-white/10 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Team Chat</div>
+      <div className="flex-1 p-4 overflow-auto space-y-3">
+        {messages.length === 0 ? (
+          <div className="text-sm text-zinc-400">No messages.</div>
+        ) : (
+          messages.map((m, idx) => (
+            <div key={idx} className="rounded-2xl border border-white/10 bg-black/20 p-3">
+              <div className="text-[11px] font-black text-white/80">{m.from}</div>
+              <div className="mt-1 text-sm text-zinc-200">{m.text}</div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function BriefingOverlay({
+  briefing,
+  now,
+  startAt,
+  accent,
+  onAcknowledge,
+}: {
+  briefing: Briefing;
+  now: Date;
+  startAt: number;
+  accent: StoryPack['accent'];
+  onAcknowledge: () => void;
+}) {
+  const deadline = startAt + briefing.slaMinutes * 60_000;
+  const remainingMs = Math.max(0, deadline - now.getTime());
+  const mins = Math.floor(remainingMs / 60_000);
+  const secs = Math.floor((remainingMs % 60_000) / 1000);
+  const slaLabel = `${mins}:${String(secs).padStart(2, '0')}`;
+  const accentClass =
+    accent === 'emerald'
+      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
+      : accent === 'amber'
+        ? 'border-amber-500/30 bg-amber-500/10 text-amber-200'
+        : accent === 'sky'
+          ? 'border-sky-500/30 bg-sky-500/10 text-sky-200'
+          : accent === 'red'
+            ? 'border-red-500/30 bg-red-500/10 text-red-200'
+            : 'border-white/10 bg-white/[0.03] text-zinc-200';
+
+  return (
+    <div className="absolute inset-0 z-[300]">
+      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 flex items-center justify-center p-6">
+        <div className="w-full max-w-3xl rounded-[2rem] border border-white/20 bg-black/80 overflow-hidden">
+          <div className="p-6 border-b border-white/10 flex items-start justify-between gap-6">
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Mission Briefing</div>
+              <div className="mt-2 text-2xl font-black text-white">Ticket {briefing.ticketId}</div>
+              <div className="mt-2 text-sm text-zinc-300/80">{briefing.category} • Priority {briefing.priority} • Urgency {briefing.urgency}</div>
+            </div>
+            <div className={`shrink-0 rounded-2xl border px-4 py-3 ${accentClass}`}>
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] opacity-80">SLA Remaining</div>
+              <div className="mt-1 text-xl font-black">{slaLabel}</div>
+            </div>
+          </div>
+
+          <div className="p-6 grid gap-5">
+            <div className={`rounded-2xl border px-4 py-3 ${accentClass}`}>
+              <div className="text-[10px] font-black uppercase tracking-[0.25em]">{briefing.policyBanner}</div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Device Owner</div>
+                <div className="mt-2 text-sm text-white font-black">{briefing.deviceOwner.name}</div>
+                <div className="mt-1 text-xs text-zinc-300/80">{briefing.deviceOwner.role}</div>
+                <div className="mt-2 text-xs text-zinc-300/80 font-mono">{briefing.deviceOwner.email}</div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Summary</div>
+                <div className="mt-2 text-sm text-zinc-200 leading-relaxed">{briefing.summary}</div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Steps to Solve</div>
+              <div className="mt-3 grid gap-1.5 text-sm text-zinc-200/90">
+                {briefing.steps.slice(0, 8).map((s) => (
+                  <div key={s}>- {s}</div>
+                ))}
+              </div>
+            </div>
+
+            {briefing.attachments.length ? (
+              <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Attachments / Context</div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {briefing.attachments.slice(0, 8).map((a) => (
+                    <div key={a} className="px-3 py-2 rounded-xl border border-white/10 bg-black/20 text-xs text-zinc-200 font-mono">{a}</div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="p-6 border-t border-white/10 flex items-center justify-between gap-4">
+            <div className="text-xs text-zinc-400">Acknowledge the briefing to proceed to the lock screen.</div>
+            <button
+              onClick={onAcknowledge}
+              className="h-12 px-6 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
+            >
+              Acknowledge & Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BrowserWindow({
+  mission,
+  state,
+  onState,
+  onNotify,
+}: {
+  mission: BrightOSMission;
+  state: RuntimeState;
+  onState: (fn: (p: RuntimeState) => RuntimeState) => void;
+  onNotify: (kind: 'alert' | 'info', title: string, body: string) => void;
+}) {
+  const wantsRouter = mission.success_condition.includes('router.');
+  const wantsRedirectFix = mission.success_condition.includes('browser.redirects') || mission.success_condition.includes('browser.extensions');
+  const wantsPhishing = mission.success_condition.includes('mail.flagged_phishing');
+
+  return (
+    <div className="h-full flex flex-col gap-4">
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Browser</div>
+
+      {wantsRouter && (
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Router Admin (192.168.0.1)</div>
+          <div className="mt-2 text-xs text-zinc-400">Device: {state.unknown_device.mac} • Wi‑Fi Security: {state.router.wifi.security}</div>
+          <div className="mt-4 grid gap-2">
+            <button
+              onClick={() => {
+                onState((p) => ({ ...p, router: { ...p.router, admin_password_changed: true } }));
+                onNotify('info', 'ROUTER', 'Admin password updated.');
+              }}
+              className="h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+            >
+              Change Admin Password
+            </button>
+            <button
+              onClick={() => {
+                onState((p) => ({ ...p, router: { ...p.router, wifi: { security: 'WPA2' } } }));
+                onNotify('info', 'ROUTER', 'Wi‑Fi security set to WPA2.');
+              }}
+              className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+            >
+              Set Wi‑Fi Security: WPA2
+            </button>
+            <button
+              onClick={() => {
+                onState((p) => ({ ...p, router: { ...p.router, port_forwarding: Array.from(new Set([...(p.router.port_forwarding || []), '80'])) } }));
+                onNotify('info', 'ROUTER', 'Port forwarding rule added: 80.');
+              }}
+              className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+            >
+              Add Port Forward: 80
+            </button>
+            <button
+              onClick={() => {
+                onState((p) => ({ ...p, router: { ...p.router, blocked_macs: Array.from(new Set([...(p.router.blocked_macs || []), p.unknown_device.mac])) } }));
+                onNotify('info', 'ROUTER', 'Unknown device blocked.');
+              }}
+              className="h-10 px-4 rounded-2xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100 transition-colors"
+            >
+              Block MAC
+            </button>
+          </div>
+        </div>
+      )}
+
+      {wantsRedirectFix && (
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Extensions</div>
+          <div className="mt-2 text-xs text-zinc-400">Malicious: {state.browser.extensions.malicious}</div>
+          <button
+            onClick={() => {
+              onState((p) => ({ ...p, browser: { redirects: false, extensions: { malicious: 0 } } }));
+              onNotify('info', 'BROWSER', 'Malicious extension removed. Redirects stopped.');
+            }}
+            className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+          >
+            Remove Malicious Extension
+          </button>
+        </div>
+      )}
+
+      {wantsPhishing && (
+        <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm font-black text-white">Inbox</div>
+          <div className="mt-2 text-xs text-zinc-400">From: admin@g00gle.com</div>
+          <div className="mt-2 text-sm text-zinc-200">Subject: Urgent password reset required</div>
+          <button
+            onClick={() => {
+              onState((p) => ({ ...p, mail: { flagged_phishing: true } }));
+              onNotify('alert', 'MAIL', 'Email flagged as phishing.');
+            }}
+            className="mt-3 h-10 px-4 rounded-2xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100 transition-colors"
+          >
+            Flag as Phishing
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AutomationWindow({
+  mission,
+  state,
+  onState,
+  onNotify,
+}: {
+  mission: BrightOSMission;
+  state: RuntimeState;
+  onState: (fn: (p: RuntimeState) => RuntimeState) => void;
+  onNotify: (kind: 'alert' | 'info', title: string, body: string) => void;
+}) {
+  return (
+    <div className="h-full flex flex-col gap-4">
+      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Automation App</div>
+
+      <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+        <div className="text-sm font-black text-white">Mission Lab</div>
+        <div className="mt-2 text-xs text-zinc-400">Configure and run. Completion auto-checks.</div>
+
+        <div className="mt-4 grid gap-2">
+          <button
+            onClick={() => {
+              if (mission.id === 'tech-31') onState((p) => ({ ...p, automation: { ...p.automation, flow: { valid: true } } }));
+              if (mission.id === 'tech-32') onState((p) => ({ ...p, automation: { ...p.automation, outputs: { ...p.automation.outputs, shutdown_triggered: true } } }));
+              if (mission.id === 'tech-33') onState((p) => ({ ...p, automation: { ...p.automation, outputs: { ...p.automation.outputs, moved_to_spam: true } } }));
+              if (mission.id === 'tech-34') onState((p) => ({ ...p, automation: { ...p.automation, outputs: { ...p.automation.outputs, fan_speed: 100 } } }));
+              if (mission.id === 'tech-35') onState((p) => ({ ...p, validation: { rejects_common_password: true, min_length: 8 } }));
+              if (mission.id === 'tech-36') onState((p) => ({ ...p, files: { ...p.files, renamed_prefix: 'img_', renamed_count: p.files.total } }));
+              if (mission.id === 'tech-37') onState((p) => ({ ...p, script: { ...p.script, output: 15 } }));
+              if (mission.id === 'tech-38') onState((p) => ({ ...p, script: { ...p.script, terminates: true }, cpu_load: 22 }));
+              if (mission.id === 'tech-39') onState((p) => ({ ...p, vars: { A: 10, B: 5 } }));
+              if (mission.id === 'tech-40') onState((p) => ({ ...p, list: { sorted: true } }));
+              if (mission.id === 'tech-48') onState((p) => ({ ...p, web: { validation: { blocks_sql_injection: true } } }));
+              onNotify('info', 'AUTOMATION', 'Simulation updated.');
+            }}
+            className="h-11 px-5 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 transition-colors text-[10px] font-black uppercase tracking-[0.25em] text-white"
+          >
+            Apply Fix / Run Test
+          </button>
+          <div className="text-xs text-zinc-400">
+            Current: flow.valid={String(state.automation.flow.valid)} • outputs={JSON.stringify(state.automation.outputs)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function normPath(p: string) {
@@ -322,6 +1314,96 @@ function pickFromPool(pool: string[]) {
   return pool[Math.floor(Math.random() * pool.length)] || pool[0] || '';
 }
 
+function normalizeConditionPath(path: string) {
+  const p = path.trim();
+  if (p === 'network_status') return 'network.status';
+  if (p.startsWith('power.')) return p.replace(/^power\./, 'power_settings.');
+  return p;
+}
+
+function fileExistsInState(state: RuntimeState, needleRaw: string) {
+  const needle = normPath(String(needleRaw));
+  const opened = state.file.opened ? normPath(state.file.opened) : '';
+  if (opened && (opened === needle || opened.endsWith(`/${needle}`) || opened.endsWith(needle))) return true;
+  return false;
+}
+
+function fileExistsInFs(fs: string[], needleRaw: string) {
+  const needle = normPath(String(needleRaw));
+  return fs.some((p) => {
+    const n = normPath(p);
+    return n === needle || n.endsWith(`/${needle}`) || n.endsWith(needle);
+  });
+}
+
+function evalLeft(state: RuntimeState, left: string, fsEntries: string[]) {
+  const raw = left.trim();
+
+  const funcMatch = raw.match(/^([a-zA-Z_][\w\.]*)\((.*)\)$/);
+  if (funcMatch) {
+    const fn = funcMatch[1];
+    const argsRaw = funcMatch[2];
+    const args = argsRaw
+      ? argsRaw
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .map(parseValue)
+      : [];
+
+    if (fn === 'file.exists') {
+      const needle = String(args[0] ?? '');
+      return fileExistsInFs(fsEntries, needle) || fileExistsInState(state, needle);
+    }
+    if (fn === 'folder.encrypted') {
+      const target = normPath(String(args[0] ?? ''));
+      return state.folder.encrypted_paths.map(normPath).includes(target);
+    }
+    if (fn === 'app.installed') {
+      const name = String(args[0] ?? '').toLowerCase();
+      const found = Object.values(state.apps).find((a) => a.name.toLowerCase() === name);
+      return Boolean(found?.installed);
+    }
+  }
+
+  const methodMatch = raw.match(/^(.+?)\.(contains|startsWith)\((.*)\)$/);
+  if (methodMatch) {
+    const basePath = normalizeConditionPath(methodMatch[1] ?? '');
+    const method = methodMatch[2];
+    const parsedArg = parseValue(methodMatch[3] ?? '');
+    const arg =
+      typeof parsedArg === 'string' && parsedArg.includes('.') && getPath(state, normalizeConditionPath(parsedArg)) !== undefined
+        ? getPath(state, normalizeConditionPath(parsedArg))
+        : parsedArg;
+
+    const baseVal = basePath.startsWith('drive.')
+      ? fsEntries
+        .map(normPath)
+        .filter((p) => p.toUpperCase().startsWith(`${String(basePath.split('.')[1] ?? '').toUpperCase()}:\/`))
+      : getPath(state, basePath);
+
+    if (method === 'contains') {
+      if (Array.isArray(baseVal)) {
+        if (typeof arg === 'string') {
+          const needle = String(arg);
+          return baseVal.some((v) => String(v).includes(needle) || String(v).endsWith(needle));
+        }
+        return baseVal.includes(arg);
+      }
+      if (typeof baseVal === 'string') return baseVal.includes(String(arg));
+      return false;
+    }
+
+    if (method === 'startsWith') {
+      if (typeof baseVal === 'string') return baseVal.startsWith(String(arg));
+      return false;
+    }
+  }
+
+  const normalized = normalizeConditionPath(raw);
+  return getPath(state, normalized);
+}
+
 function getPath(obj: any, path: string) {
   return path.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
 }
@@ -348,7 +1430,8 @@ function evalCondition(state: RuntimeState, cond: string) {
 
   const leftPath = leftRaw.trim();
   const rightVal = parseValue(rightRaw);
-  const leftVal = getPath(state, leftPath);
+  // fsEntries is not available here; evalSuccess wraps evalCondition with it
+  const leftVal = getPath(state, normalizeConditionPath(leftPath));
 
   switch (op) {
     case '==':
@@ -368,14 +1451,39 @@ function evalCondition(state: RuntimeState, cond: string) {
   }
 }
 
-function evalSuccess(state: RuntimeState, expr: string) {
+function evalSuccess(state: RuntimeState, expr: string, fsEntries: string[]) {
   const orParts = expr.split('||').map((s) => s.trim()).filter(Boolean);
   if (orParts.length === 0) return false;
 
   return orParts.some((part) => {
     const andParts = part.split('&&').map((s) => s.trim()).filter(Boolean);
     if (andParts.length === 0) return false;
-    return andParts.every((c) => evalCondition(state, c));
+    return andParts.every((c) => {
+      const ops = ['>=', '<=', '==', '!=', '>', '<'] as const;
+      const op = ops.find((o) => c.includes(o));
+      if (!op) return false;
+      const [leftRaw, rightRaw] = c.split(op);
+      if (!leftRaw || rightRaw == null) return false;
+      const rightVal = parseValue(rightRaw);
+      const leftVal = evalLeft(state, leftRaw, fsEntries);
+
+      switch (op) {
+        case '==':
+          return leftVal === rightVal;
+        case '!=':
+          return leftVal !== rightVal;
+        case '>':
+          return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal > rightVal;
+        case '<':
+          return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal < rightVal;
+        case '>=':
+          return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal >= rightVal;
+        case '<=':
+          return typeof leftVal === 'number' && typeof rightVal === 'number' && leftVal <= rightVal;
+        default:
+          return false;
+      }
+    });
   });
 }
 
@@ -521,21 +1629,78 @@ function initRuntime(mission: BrightOSMission): RuntimeState {
     'HKCU\\Software\\BrightOS\\User\\Input\\Touchpad': '1',
   };
 
+  const hasDriveE = mission.initial_state.file_system.some((p) => normPath(p).toUpperCase().startsWith('E:/'));
+  const hasDriveD = mission.initial_state.file_system.some((p) => normPath(p).toUpperCase().startsWith('D:/'));
+
+  const networkInitialIp = mission.initial_state.network_status === 'Disconnected' ? '169.254.22.10' : '192.168.1.101';
+  const wantsPrinterQueue = mission.success_condition.includes('printer.queue.count');
+  const wantsThreats = mission.success_condition.includes('defend.threats');
+  const wantsBrowserFix = mission.success_condition.includes('browser.redirects') || mission.success_condition.includes('browser.extensions');
+  const wantsRansomware = mission.success_condition.includes('ransomware.');
+  const wantsFirewall = mission.success_condition.includes('firewall.');
+  const wantsEncryption = mission.success_condition.includes('folder.encrypted');
+
+  const baseVolumes = ['C:'];
+  if (hasDriveD) baseVolumes.push('D:');
+  if (hasDriveE) baseVolumes.push('E:');
+
   return {
-    power: 'booting',
+    power: 'intro',
     boot_phase: 0,
     cpu_load: mission.initial_state.cpu_load,
-    network: { status: mission.initial_state.network_status, ip_renewed: false },
+    network: {
+      status: mission.initial_state.network_status,
+      ip_renewed: false,
+      ip: networkInitialIp,
+      dns: { primary: '1.1.1.1' },
+      suspicious_connection: { active: mission.id === 'tech-41' },
+    },
     window: { stuck_app: { open: mission.id === 'tech-1' } },
     process: { high_cpu: { running: mission.id === 'tech-2' } },
-    disk: { free_space_mb: storageLow ? 120 : 850 },
-    files: { tmp: { count: tmpCount } },
+    disk: { free_space_mb: storageLow ? 120 : 850, volumes: baseVolumes },
+    files: { tmp: { count: tmpCount }, restored: false, renamed_prefix: '', renamed_count: 0, total: Math.max(0, mission.initial_state.file_system.length) },
     recycle_bin: { empty: !recycleHas },
     file: { opened: null },
-    terminal: { history: mission.initial_state.terminal_history },
+    terminal: { history: mission.initial_state.terminal_history, last_command: null, last_output: '' },
     notifications: [],
     apps: defaultApps,
     registry: defaultRegistry,
+
+    audio: { output: mission.id !== 'tech-5' },
+    device: { audio: { driver_status: mission.id === 'tech-5' ? 'outdated' : 'updated' } },
+    display: { resolution: mission.id === 'tech-6' ? '800x600' : '1920x1080' },
+    power_settings: { screen_off_minutes_on_battery: mission.id === 'tech-9' ? 10 : 5 },
+    keyboard: { filter_keys: { enabled: mission.id === 'tech-12' } },
+    specs: { checked: false },
+
+    printer: { queue: { count: wantsPrinterQueue ? 6 : 0 }, ip: '192.168.0.50', reachable: false },
+    router: {
+      admin_password_changed: false,
+      wifi: { security: mission.id === 'tech-26' ? 'WEP' : 'WPA2' },
+      port_forwarding: [],
+      blocked_macs: [],
+    },
+    unknown_device: { mac: 'A4:5E:60:1C:9B:21' },
+    browser: { redirects: wantsBrowserFix, extensions: { malicious: wantsBrowserFix ? 1 : 0 } },
+    mail: { flagged_phishing: false },
+    defend: { threats: { active: wantsThreats ? 2 : 0, quarantined: 0 } },
+    account: { user: { password_reset: false } },
+    system: { restore: { completed: false }, crash_rate: 2 },
+    hardware: { ram_gb: mission.id === 'tech-20' ? 4 : 8 },
+    firewall: { inbound: { blocked_ports: wantsFirewall ? [] : [] } },
+    folder: { encrypted_paths: wantsEncryption ? [] : [] },
+    forensics: { bruteforce_timestamp: '' },
+    web: { validation: { blocks_sql_injection: false } },
+    ransomware: { lock_screen: wantsRansomware },
+    incident: { pid_identified: false, resolved: false },
+    ping: { packet_loss_percent: 0 },
+    trace: { loss_hop_index: 0 },
+    ftp: { uploaded: [] },
+    automation: { flow: { valid: false }, outputs: {} },
+    validation: { rejects_common_password: false, min_length: 0 },
+    script: { output: null, terminates: false },
+    vars: { A: 5, B: 10 },
+    list: { sorted: false },
   } satisfies RuntimeState;
 }
 
@@ -546,6 +1711,9 @@ function initialWindows(mission: BrightOSMission): Record<WindowId, WindowState>
     settings: { id: 'settings', title: 'Settings', open: false, minimized: false, z: 2, x: 120, y: 120, w: 620, h: 460 },
     browser: { id: 'browser', title: 'Browser', open: false, minimized: false, z: 1, x: 180, y: 120, w: 760, h: 480 },
     automation: { id: 'automation', title: 'Automation App', open: false, minimized: false, z: 1, x: 220, y: 130, w: 720, h: 440 },
+    devmgr: { id: 'devmgr', title: 'Device Manager', open: false, minimized: false, z: 1, x: 210, y: 140, w: 720, h: 480 },
+    mail: { id: 'mail', title: 'Mail', open: false, minimized: false, z: 1, x: 260, y: 140, w: 820, h: 520 },
+    chat: { id: 'chat', title: 'Teams', open: false, minimized: false, z: 1, x: 300, y: 160, w: 760, h: 520 },
     explorer: { id: 'explorer', title: 'File Explorer', open: false, minimized: false, z: 1, x: 160, y: 120, w: 820, h: 520 },
     uninstall: { id: 'uninstall', title: 'Uninstall or change a program', open: false, minimized: false, z: 1, x: 200, y: 140, w: 740, h: 500 },
     registry: { id: 'registry', title: 'Registry Editor', open: false, minimized: false, z: 1, x: 240, y: 160, w: 680, h: 540 },
@@ -553,9 +1721,8 @@ function initialWindows(mission: BrightOSMission): Record<WindowId, WindowState>
   };
 
   const allowed = new Set(mission.tools_allowed);
-  if (allowed.has('Task Manager')) wins.taskmgr.open = true;
+  // Default behavior: only Terminal starts open. Other tools are available via desktop icons / Start Menu.
   if (allowed.has('Terminal')) wins.terminal.open = true;
-  if (allowed.has('Settings')) wins.settings.open = true;
 
   return wins;
 }
@@ -778,7 +1945,7 @@ function Window({
   children: ReactNode;
 }) {
   const isLight = theme === 'light';
-  if (win.minimized) return null;
+  if (!win.open || win.minimized) return null;
 
   return (
     <motion.div
@@ -841,6 +2008,7 @@ function Terminal({
   mission,
   state,
   fsEntries,
+  onFsEntries,
   lines,
   input,
   setInput,
@@ -850,6 +2018,7 @@ function Terminal({
   mission: BrightOSMission;
   state: RuntimeState;
   fsEntries: string[];
+  onFsEntries: (fn: (prev: string[]) => string[]) => void;
   lines: TerminalLine[];
   input: string;
   setInput: (v: string) => void;
@@ -866,12 +2035,27 @@ function Terminal({
     if (!cmd) return;
     push([{ id: uid('in'), kind: 'in', text: cmd }]);
 
+    const setTermMeta = (out: string, mut?: (p: RuntimeState) => RuntimeState) => {
+      onState((p) => {
+        const next = mut ? mut(p) : p;
+        return {
+          ...next,
+          terminal: {
+            ...next.terminal,
+            history: [...next.terminal.history, cmd],
+            last_command: cmd,
+            last_output: out,
+          },
+        };
+      });
+    };
+
     const low = cmd.toLowerCase();
 
     if (low === 'help') {
-      push([
-        { id: uid('o'), kind: 'out', text: 'Commands: dir, ipconfig /renew, tracert, netstat -ano, apps, reg get/set/delete' },
-      ]);
+      const out = 'Commands: dir, ipconfig /renew, ping google.com, tracert google.com, netstat -ano, tasklist, type <file>, del <file>, force-delete <file>, ftp upload <file>, apps, reg get/set/delete';
+      push([{ id: uid('o'), kind: 'out', text: out }]);
+      setTermMeta(out);
       return;
     }
 
@@ -882,29 +2066,105 @@ function Terminal({
 
     if (low === 'dir') {
       const items = fsEntries;
+      const header = ` Directory of C:/`;
+      const rows = items.slice(0, 60).map((p) => ` ${p}`);
+      const out = [header, ...rows].join('\n');
       push([
-        { id: uid('o'), kind: 'out', text: ` Directory of ${state.files ? 'C:/' : 'system'}` },
-        ...items.slice(0, 60).map((p) => ({ id: uid('o'), kind: 'out' as const, text: ` ${p}` })),
+        { id: uid('o'), kind: 'out', text: header },
+        ...rows.map((t) => ({ id: uid('o'), kind: 'out' as const, text: t })),
       ]);
-      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      setTermMeta(out);
       return;
     }
 
     if (low === 'ipconfig /renew') {
+      const out = ['Windows IP Configuration', 'Renewing adapter… OK', 'IPv4 Address. . . . . . . . . . . : 192.168.0.101'].join('\n');
       push([
         { id: uid('o'), kind: 'out', text: 'Windows IP Configuration' },
         { id: uid('o'), kind: 'out', text: 'Renewing adapter… OK' },
       ]);
-      onState((p) => ({ ...p, network: { ...p.network, status: 'Connected', ip_renewed: true }, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      setTermMeta(out, (p) => ({ ...p, network: { ...p.network, status: 'Connected', ip_renewed: true, ip: '192.168.0.101' } }));
       return;
     }
 
     if (low === 'netstat -ano') {
+      const suspicious = state.network.suspicious_connection.active;
+      const header = 'Proto  Local Address          Foreign Address        State           PID';
+      const row1 = suspicious
+        ? 'TCP    192.168.1.101:51322    203.0.113.66:4444       ESTABLISHED     1104   *FLAGGED*'
+        : 'TCP    192.168.1.101:51322    13.107.6.171:443       ESTABLISHED     1104';
+      const out = [header, row1].join('\n');
       push([
-        { id: uid('o'), kind: 'out', text: 'Proto  Local Address          Foreign Address        State           PID' },
-        { id: uid('o'), kind: 'out', text: 'TCP    192.168.1.101:51322    13.107.6.171:443       ESTABLISHED     1104' },
+        { id: uid('o'), kind: 'out', text: header },
+        { id: uid('o'), kind: 'out', text: row1 },
       ]);
-      onState((p) => ({ ...p, terminal: { ...p.terminal, history: [...p.terminal.history, cmd] } }));
+      setTermMeta(out);
+      return;
+    }
+
+    if (low === 'tracert google.com') {
+      const header = 'Tracing route to google.com over a maximum of 30 hops:';
+      const hop = state.network.status === 'Slow' ? 3 : 1;
+      const out = [header, `Hop ${hop}: * * * Request timed out.`].join('\n');
+      push([{ id: uid('o'), kind: 'out', text: header }, { id: uid('o'), kind: 'out', text: `Hop ${hop}: * * * Request timed out.` }]);
+      setTermMeta(out, (p) => ({ ...p, trace: { ...p.trace, loss_hop_index: hop } }));
+      return;
+    }
+
+    if (low === 'ping google.com') {
+      const loss = state.network.status === 'Disconnected' ? 100 : state.network.status === 'Slow' ? 50 : 0;
+      const out = loss === 100 ? 'Request timed out. (4/4 lost)' : loss === 50 ? 'Packets: Sent=4 Received=2 Lost=2 (50% loss)' : 'Packets: Sent=4 Received=4 Lost=0 (0% loss)';
+      push([{ id: uid('o'), kind: 'out', text: out }]);
+      setTermMeta(out, (p) => ({ ...p, ping: { ...p.ping, packet_loss_percent: loss } }));
+      return;
+    }
+
+    if (low === 'tasklist') {
+      const header = 'Image Name                     PID   Session Name        Mem Usage';
+      const row = state.network.suspicious_connection.active
+        ? 'stealth_conn.exe               1104  Console             12,512 K   *FLAGGED*'
+        : 'explorer.exe                   1400  Console             42,120 K';
+      const out = [header, row].join('\n');
+      push([{ id: uid('o'), kind: 'out', text: header }, { id: uid('o'), kind: 'out', text: row }]);
+      setTermMeta(out, (p) => ({ ...p, incident: { ...p.incident, pid_identified: true } }));
+      return;
+    }
+
+    if (low.startsWith('type ')) {
+      const target = cmd.slice(5).trim();
+      if (target.toLowerCase().endsWith('access.log')) {
+        const ts = '2026-01-27T03:12:44Z';
+        const out = `... FAILED LOGIN ... ${ts} ...`;
+        push([{ id: uid('o'), kind: 'out', text: out }]);
+        setTermMeta(out, (p) => ({ ...p, forensics: { ...p.forensics, bruteforce_timestamp: ts } }));
+        return;
+      }
+      const out = `Cannot open ${target}`;
+      push([{ id: uid('o'), kind: 'out', text: out }]);
+      setTermMeta(out);
+      return;
+    }
+
+    if (low.startsWith('ftp upload')) {
+      const target = cmd.slice('ftp upload'.length).trim().replace(/^"|"$/g, '');
+      const base = normPath(target).split('/').pop() || target;
+      const out = `Uploading ${base}... OK`;
+      push([{ id: uid('o'), kind: 'out', text: out }]);
+      setTermMeta(out, (p) => ({ ...p, ftp: { ...p.ftp, uploaded: Array.from(new Set([...(p.ftp.uploaded || []), base])) } }));
+      return;
+    }
+
+    if (low.startsWith('del ') || low.startsWith('delete ') || low.startsWith('force-delete ')) {
+      const target = cmd
+        .replace(/^del\s+/i, '')
+        .replace(/^delete\s+/i, '')
+        .replace(/^force-delete\s+/i, '')
+        .trim();
+      const norm = normPath(target);
+      onFsEntries((prev) => prev.map(normPath).filter((p) => p !== norm && !p.endsWith(`/${norm}`) && !p.endsWith(norm)));
+      const out = `Deleted: ${target}`;
+      push([{ id: uid('o'), kind: 'out', text: out }]);
+      setTermMeta(out);
       return;
     }
 
@@ -946,6 +2206,7 @@ function Terminal({
     }
 
     push([{ id: uid('o'), kind: 'out', text: 'Command not recognized.' }]);
+    setTermMeta('Command not recognized.');
   }
 
   return (
@@ -1070,18 +2331,39 @@ function TaskManager({ state, onEndHighCpu }: { state: RuntimeState; onEndHighCp
 }
 
 function Settings({
+  mission,
   state,
   onCleanTmp,
   onEmptyRecycle,
   theme,
   onToggleTheme,
+  onState,
+  onNotify,
+  onOpenWindow,
 }: {
+  mission: BrightOSMission;
   state: RuntimeState;
   onCleanTmp: () => void;
   onEmptyRecycle: () => void;
   theme: 'dark' | 'light';
   onToggleTheme: () => void;
+  onState: (fn: (p: RuntimeState) => RuntimeState) => void;
+  onNotify: (kind: 'alert' | 'info', title: string, body: string) => void;
+  onOpenWindow: (id: WindowId) => void;
 }) {
+  const wantsResolution = mission.success_condition.includes('display.resolution');
+  const wantsPower = mission.success_condition.includes('power.screen_off_minutes_on_battery');
+  const wantsFilterKeys = mission.success_condition.includes('keyboard.filter_keys.enabled');
+  const wantsSpecs = mission.success_condition.includes('specs.checked');
+  const wantsPartition = mission.success_condition.includes('disk.volumes');
+  const wantsRestore = mission.success_condition.includes('system.restore.');
+  const wantsPasswordReset = mission.success_condition.includes('account.user.password_reset');
+  const wantsPrinter = mission.success_condition.includes('printer.queue.count') || mission.success_condition.includes('printer.ip') || mission.success_condition.includes('printer.reachable');
+  const wantsDns = mission.success_condition.includes('network.dns');
+  const wantsThreats = mission.success_condition.includes('defend.threats');
+  const wantsFirewall = mission.success_condition.includes('firewall.inbound');
+  const wantsRam = mission.success_condition.includes('hardware.ram_gb');
+
   return (
     <div>
       <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Storage</div>
@@ -1135,6 +2417,255 @@ function Settings({
             </button>
           </div>
         </div>
+
+        {(wantsResolution || wantsPower || wantsFilterKeys || wantsSpecs || wantsPartition || wantsRestore || wantsPasswordReset || wantsPrinter || wantsDns || wantsThreats || wantsFirewall || wantsRam || mission.id === 'tech-5') && (
+          <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div className="text-sm font-black text-white">System Tools</div>
+            <div className="mt-2 text-xs text-zinc-400">Quick actions for this mission.</div>
+
+            <div className="mt-4 grid gap-3">
+              {(mission.id === 'tech-5' || mission.success_condition.includes('device.audio.driver_status') || mission.success_condition.includes('audio.output')) && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Device Manager</div>
+                  <div className="mt-2 text-sm text-zinc-200">Audio output: <span className="font-mono">{String(state.audio.output)}</span> • Driver: <span className="font-mono">{state.device.audio.driver_status}</span></div>
+                  <button
+                    onClick={() => onOpenWindow('devmgr')}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Open Device Manager
+                  </button>
+                </div>
+              )}
+
+              {wantsResolution && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Display</div>
+                  <div className="mt-2 text-sm text-zinc-200">Resolution: <span className="font-mono">{state.display.resolution}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, display: { resolution: '1920x1080' } }));
+                      onNotify('info', 'SETTINGS', 'Display resolution updated to 1920x1080.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Set 1920x1080
+                  </button>
+                </div>
+              )}
+
+              {wantsPower && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Power</div>
+                  <div className="mt-2 text-sm text-zinc-200">Screen off (battery): <span className="font-mono">{state.power_settings.screen_off_minutes_on_battery} min</span></div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        onState((p) => ({ ...p, power_settings: { screen_off_minutes_on_battery: 2 } }));
+                        onNotify('info', 'SETTINGS', 'Battery screen-off set to 2 minutes.');
+                      }}
+                      className="h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                    >
+                      2 min
+                    </button>
+                    <button
+                      onClick={() => {
+                        onState((p) => ({ ...p, power_settings: { screen_off_minutes_on_battery: 5 } }));
+                        onNotify('info', 'SETTINGS', 'Battery screen-off set to 5 minutes.');
+                      }}
+                      className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                    >
+                      5 min
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {wantsFilterKeys && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Accessibility</div>
+                  <div className="mt-2 text-sm text-zinc-200">Filter Keys: <span className="font-mono">{String(state.keyboard.filter_keys.enabled)}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, keyboard: { filter_keys: { enabled: true } } }));
+                      onNotify('info', 'SETTINGS', 'Filter Keys enabled.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Enable Filter Keys
+                  </button>
+                </div>
+              )}
+
+              {wantsSpecs && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">System Info</div>
+                  <div className="mt-2 text-sm text-zinc-200">Specs checked: <span className="font-mono">{String(state.specs.checked)}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, specs: { checked: true } }));
+                      onNotify('info', 'SETTINGS', 'System requirements checked.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Mark Checked
+                  </button>
+                </div>
+              )}
+
+              {wantsPartition && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Disk Management</div>
+                  <div className="mt-2 text-sm text-zinc-200">Volumes: <span className="font-mono">{state.disk.volumes.join(', ')}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => {
+                        const next = Array.from(new Set([...(p.disk.volumes || []), 'D:']));
+                        return { ...p, disk: { ...p.disk, volumes: next } };
+                      });
+                      onNotify('info', 'SETTINGS', 'Created volume D:.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Create D: Volume
+                  </button>
+                </div>
+              )}
+
+              {wantsRestore && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Recovery</div>
+                  <div className="mt-2 text-sm text-zinc-200">Restore completed: <span className="font-mono">{String(state.system.restore.completed)}</span> • Crash rate: <span className="font-mono">{state.system.crash_rate}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, system: { restore: { completed: true }, crash_rate: 0 } }));
+                      onNotify('info', 'SETTINGS', 'System Restore completed.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Run System Restore
+                  </button>
+                </div>
+              )}
+
+              {wantsPasswordReset && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Accounts</div>
+                  <div className="mt-2 text-sm text-zinc-200">Password reset: <span className="font-mono">{String(state.account.user.password_reset)}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, account: { user: { password_reset: true } } }));
+                      onNotify('info', 'SETTINGS', 'User password reset completed.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Reset Password
+                  </button>
+                </div>
+              )}
+
+              {wantsPrinter && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Printers</div>
+                  <div className="mt-2 text-sm text-zinc-200">Queue: <span className="font-mono">{state.printer.queue.count}</span> • IP: <span className="font-mono">{state.printer.ip}</span> • Reachable: <span className="font-mono">{String(state.printer.reachable)}</span></div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button
+                      onClick={() => {
+                        onState((p) => ({ ...p, printer: { ...p.printer, queue: { count: 0 } } }));
+                        onNotify('info', 'PRINTER', 'All print jobs cancelled.');
+                      }}
+                      className="h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                    >
+                      Clear Queue
+                    </button>
+                    <button
+                      onClick={() => {
+                        onState((p) => ({ ...p, printer: { ...p.printer, ip: '192.168.0.50', reachable: true } }));
+                        onNotify('info', 'PRINTER', 'Printer configured and reachable.');
+                      }}
+                      className="h-10 px-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                    >
+                      Set IP 192.168.0.50
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {wantsDns && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Network</div>
+                  <div className="mt-2 text-sm text-zinc-200">DNS: <span className="font-mono">{state.network.dns.primary}</span> • Status: <span className="font-mono">{state.network.status}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, network: { ...p.network, status: 'Connected', dns: { primary: '8.8.8.8' } } }));
+                      onNotify('info', 'NETWORK', 'DNS set to 8.8.8.8.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Set DNS 8.8.8.8
+                  </button>
+                </div>
+              )}
+
+              {wantsThreats && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Defend</div>
+                  <div className="mt-2 text-sm text-zinc-200">Active threats: <span className="font-mono">{state.defend.threats.active}</span> • Quarantined: <span className="font-mono">{state.defend.threats.quarantined}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({
+                        ...p,
+                        defend: { threats: { active: 0, quarantined: Math.max(1, p.defend.threats.quarantined + Math.max(1, p.defend.threats.active)) } },
+                      }));
+                      onNotify('info', 'DEFEND', 'Deep scan complete. Threats quarantined.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100 transition-colors"
+                  >
+                    Deep Scan & Quarantine
+                  </button>
+                </div>
+              )}
+
+              {wantsFirewall && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Firewall</div>
+                  <div className="mt-2 text-sm text-zinc-200">Blocked inbound ports: <span className="font-mono">{(state.firewall.inbound.blocked_ports || []).join(', ') || 'none'}</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({
+                        ...p,
+                        firewall: {
+                          inbound: {
+                            blocked_ports: Array.from(new Set([...(p.firewall.inbound.blocked_ports || []), 23])),
+                          },
+                        },
+                      }));
+                      onNotify('info', 'FIREWALL', 'Blocked inbound port 23.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/15 text-[10px] font-black uppercase tracking-[0.25em] text-red-100 transition-colors"
+                  >
+                    Block Port 23
+                  </button>
+                </div>
+              )}
+
+              {wantsRam && (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">Hardware</div>
+                  <div className="mt-2 text-sm text-zinc-200">RAM: <span className="font-mono">{state.hardware.ram_gb}GB</span></div>
+                  <button
+                    onClick={() => {
+                      onState((p) => ({ ...p, hardware: { ram_gb: 8 } }));
+                      onNotify('info', 'HARDWARE', 'Installed 8GB RAM module.');
+                    }}
+                    className="mt-3 h-10 px-4 rounded-2xl border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/15 hover:bg-[var(--brand-primary)]/25 text-[10px] font-black uppercase tracking-[0.25em] text-white transition-colors"
+                  >
+                    Install 8GB RAM
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1147,6 +2678,9 @@ function FileExplorer({
   onOpen,
   onDeleteToRecycle,
   onEmptyRecycle,
+  onCopyToDrive,
+  onZipFolder,
+  onEncryptFolder,
   theme,
 }: {
   entries: string[];
@@ -1155,6 +2689,9 @@ function FileExplorer({
   onOpen: (path: string) => void;
   onDeleteToRecycle: (path: string) => void;
   onEmptyRecycle: () => void;
+  onCopyToDrive: (path: string, drive: 'D' | 'E') => void;
+  onZipFolder: (path: string) => void;
+  onEncryptFolder: (path: string) => void;
   theme: 'dark' | 'light';
 }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -1296,6 +2833,57 @@ function FileExplorer({
             </button>
             <button
               onClick={() => {
+                if (!selected) return;
+                onZipFolder(selected);
+              }}
+              disabled={!selected}
+              className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left transition-colors ${!selected
+                ? isLight
+                  ? 'border-black/10 bg-black/[0.02] text-zinc-500'
+                  : 'border-white/10 bg-white/[0.02] text-zinc-500'
+                : isLight
+                  ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                  : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+                }`}
+            >
+              Zip
+            </button>
+            <button
+              onClick={() => {
+                if (!selected) return;
+                onCopyToDrive(selected, 'E');
+              }}
+              disabled={!selected}
+              className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left transition-colors ${!selected
+                ? isLight
+                  ? 'border-black/10 bg-black/[0.02] text-zinc-500'
+                  : 'border-white/10 bg-white/[0.02] text-zinc-500'
+                : isLight
+                  ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                  : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+                }`}
+            >
+              Copy to E:
+            </button>
+            <button
+              onClick={() => {
+                if (!selected) return;
+                onEncryptFolder(selected);
+              }}
+              disabled={!selected}
+              className={`h-10 px-3 rounded-2xl border text-xs font-bold text-left transition-colors ${!selected
+                ? isLight
+                  ? 'border-black/10 bg-black/[0.02] text-zinc-500'
+                  : 'border-white/10 bg-white/[0.02] text-zinc-500'
+                : isLight
+                  ? 'border-black/10 bg-black/[0.03] hover:bg-black/[0.06] text-zinc-900'
+                  : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.06] text-white'
+                }`}
+            >
+              Encrypt
+            </button>
+            <button
+              onClick={() => {
                 if (location !== 'recycle') return;
                 onEmptyRecycle();
                 setSelected(null);
@@ -1383,6 +2971,7 @@ function FileExplorer({
 
 export default function MissionClient({ mission }: { mission: BrightOSMission }) {
   const router = useRouter();
+  const { user, userData } = useAuth();
 
   const [now, setNow] = useState(() => new Date());
   const [wallpaper, setWallpaper] = useState('');
@@ -1414,6 +3003,15 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
     { id: uid('sys'), kind: 'sys', text: 'Terminal: try help, dir, ipconfig /renew, tracert, netstat -ano' },
   ]);
   const [termInput, setTermInput] = useState('');
+
+  const [briefingAccepted, setBriefingAccepted] = useState(false);
+  const briefingStartRef = useRef<number>(Date.now());
+  const eventsStartedRef = useRef(false);
+  const eventTimersRef = useRef<number[]>([]);
+  const [inbox, setInbox] = useState<StoryEmail[]>([]);
+  const [chatMessages, setChatMessages] = useState<Array<{ from: string; text: string }>>([]);
+
+  const npcSeedRef = useRef(String(Math.random()).slice(2));
 
   const rewardGrantedRef = useRef(false);
   const [missionComplete, setMissionComplete] = useState(false);
@@ -1457,11 +3055,36 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
 
   useEffect(() => {
     setTheme('dark');
+    setState(initRuntime(mission));
+    setWins(initialWindows(mission));
+    setActiveWin(mission.id === 'tech-1' ? 'stuck_app' : 'terminal');
     setFsEntries(mission.initial_state.file_system.map(normPath));
     setExplorerLocation('pc');
     setStartOpen(false);
     setStartQuery('');
+    setPassword('');
+    setLoginBusy(false);
+    setLoginError(null);
+    setBriefingAccepted(false);
+    briefingStartRef.current = Date.now();
+    eventsStartedRef.current = false;
+    npcSeedRef.current = String(Math.random()).slice(2);
+    eventTimersRef.current.forEach((t) => window.clearTimeout(t));
+    eventTimersRef.current = [];
+    setInbox([]);
+    setChatMessages([]);
   }, [mission.id, mission.initial_state.file_system]);
+
+  const company = useMemo(() => {
+    const preset = mission.brightos_desktop.ui_preset;
+    if (preset === 'smallbiz_admin') return { name: 'IslandMart Ltd.', dept: 'IT / Operations', hostname: `IM-${mission.id.toUpperCase()}` };
+    if (preset === 'techfix_shop') return { name: 'TechFix Service Desk', dept: 'Repairs & Support', hostname: `TFX-${mission.id.toUpperCase()}` };
+    if (preset === 'automation_lab') return { name: 'BrightEd Automation Lab', dept: 'DevOps Training', hostname: `LAB-${mission.id.toUpperCase()}` };
+    if (preset === 'csec_soc') return { name: 'CaribSec SOC', dept: 'Security Operations', hostname: `SOC-${mission.id.toUpperCase()}` };
+    return { name: 'BrightEd Home Support', dept: 'Helpdesk', hostname: `BE-${mission.id.toUpperCase()}` };
+  }, [mission.brightos_desktop.ui_preset, mission.id]);
+
+  const story = useMemo(() => buildStoryPack(mission, company), [mission, company]);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -1477,6 +3100,40 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
 
   useEffect(() => {
     if (state.power !== 'on') return;
+
+    if (!eventsStartedRef.current) {
+      eventsStartedRef.current = true;
+
+      setInbox(story.emails);
+      setChatMessages([]);
+
+      story.chat.forEach((m) => {
+        const t = window.setTimeout(() => {
+          setChatMessages((prev) => [...prev, { from: m.from, text: m.text }]);
+          notify('info', 'CHAT', `New message from ${m.from}`);
+        }, m.atOffsetMs);
+        eventTimersRef.current.push(t);
+      });
+
+      story.events.forEach((ev) => {
+        const t = window.setTimeout(() => {
+          if (ev.kind === 'notify') notify(ev.level, ev.title, ev.body);
+          if (ev.kind === 'document') {
+            setFsEntries((prev) => {
+              const next = prev.map(normPath);
+              const p = normPath(ev.path);
+              if (!next.includes(p)) next.push(p);
+              return next;
+            });
+          }
+          if (ev.kind === 'email') {
+            const msg = story.emails.find((m) => m.id === ev.emailId);
+            if (msg) notify('alert', 'MAIL', `New email: ${msg.subject}`);
+          }
+        }, ev.atOffsetMs);
+        eventTimersRef.current.push(t);
+      });
+    }
 
     const id = window.setInterval(() => {
       setState((p) => {
@@ -1594,9 +3251,14 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
       { id: 'explorer' as const, title: 'File Explorer', subtitle: 'Browse files', disabled: false },
       { id: 'uninstall' as const, title: 'Uninstall Programs', subtitle: 'Installed apps', disabled: false },
       { id: 'registry' as const, title: 'Registry Editor', subtitle: 'System registry', disabled: false },
+      { id: 'devmgr' as const, title: 'Device Manager', subtitle: 'Drivers', disabled: false },
+      { id: 'mail' as const, title: 'Mail', subtitle: 'Inbox', disabled: false },
+      { id: 'chat' as const, title: 'Teams', subtitle: 'Chat', disabled: false },
       { id: 'terminal' as const, title: 'Terminal', subtitle: 'Commands', disabled: !allowed.has('Terminal') },
       { id: 'settings' as const, title: 'Settings', subtitle: 'System', disabled: !allowed.has('Settings') },
       { id: 'taskmgr' as const, title: 'Task Manager', subtitle: 'Processes', disabled: !allowed.has('Task Manager') },
+      { id: 'browser' as const, title: 'Browser', subtitle: 'Web', disabled: !allowed.has('Browser') },
+      { id: 'automation' as const, title: 'Automation App', subtitle: 'Blocks & Scripts', disabled: !allowed.has('Automation App') },
     ];
   }, [mission.tools_allowed]);
 
@@ -1687,36 +3349,54 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
 
     if (!rewardGrantedRef.current) {
       rewardGrantedRef.current = true;
-      awardFixedMissionXP(`brightos:csec:${mission.id}`, 300, 'Mission complete');
-      markMissionCompleted(`brightos:csec:${mission.id}`, 300);
+      awardFixedMissionXP(`brightos:csec:${mission.id}`, MISSION_XP_REWARD, 'Mission complete');
+      markMissionCompleted(`brightos:csec:${mission.id}`, MISSION_XP_REWARD);
+
+      if (user && db) {
+        const todayKey = new Date().toISOString().slice(0, 10);
+        const isNewDay = (userData?.lastLearningDay || '') !== todayKey;
+        const updates: any = {
+          xp: increment(MISSION_XP_REWARD),
+          bCoins: increment(MISSION_BCOIN_REWARD),
+          lastLearningDay: todayKey,
+          lastLearningAt: serverTimestamp(),
+          lastActive: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        updates.xp_today = isNewDay ? MISSION_XP_REWARD : increment(MISSION_XP_REWARD);
+        updateDoc(doc(db, 'users', user.uid), updates).catch(() => undefined);
+      }
 
       const sid = liveSessionIdRef.current;
       if (sid && !liveSessionEndedRef.current) {
-        endLiveSession(sid, { status: 'completed', xpEarned: 300 });
+        endLiveSession(sid, { status: 'completed', xpEarned: MISSION_XP_REWARD });
         liveSessionEndedRef.current = true;
       }
       const { cooldown } = registerMissionCompletionAndMaybeCooldown(`brightos:csec:${mission.id}`);
 
-      push([{ id: uid('sys'), kind: 'sys', text: 'Mission complete. +300 XP earned.' }]);
+      push([{
+        id: uid('sys'),
+        kind: 'sys',
+        text: `Mission complete. +${MISSION_XP_REWARD} XP and +${MISSION_BCOIN_REWARD} B-Coins earned.`,
+      }]);
 
       if (cooldown) {
         setCooldownUntil(cooldown.until);
         push([{ id: uid('sys'), kind: 'sys', text: `Cooldown active. Try again later.` }]);
       }
 
-      // Auto-shutdown after 4 seconds to let user read the message
       window.setTimeout(() => {
-        setState((p) => ({ ...p, power: 'shutting-down' }));
-      }, 4000);
+        setState((p) => ({ ...p, power: 'reward' }));
+      }, 900);
     }
-  }, [mission.id, missionComplete]);
+  }, [mission.id, missionComplete, user, userData]);
 
   useEffect(() => {
     if (missionComplete) return;
     if (state.power !== 'on') return;
-    const ok = evalSuccess(state, mission.success_condition);
+    const ok = evalSuccess(state, mission.success_condition, fsEntries);
     if (ok) completeMissionOnce();
-  }, [mission.success_condition, state, state.power, missionComplete, completeMissionOnce]);
+  }, [mission.success_condition, state, state.power, missionComplete, completeMissionOnce, fsEntries]);
 
   if (cooldownActive) {
     return (
@@ -1737,6 +3417,27 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
           </div>
         </div>
       </div>
+    );
+  }
+
+  if (state.power === 'intro') {
+    const userLabel = (userData?.displayName || userData?.username || user?.displayName || 'Student').trim() || 'Student';
+    const userSeed = encodeURIComponent(userLabel || 'student');
+    const userAvatarUrl = userData?.avatarUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${userSeed}&backgroundType=solid&backgroundColor=2C3E50`;
+    const npcSeed = encodeURIComponent(`${mission.client.name}-${mission.id}-${npcSeedRef.current}`);
+    const npcAvatarUrl = `https://api.dicebear.com/9.x/avataaars/svg?seed=${npcSeed}&backgroundType=solid&backgroundColor=FF8A8A`;
+    return (
+      <PhoneMessageIntro
+        mission={mission}
+        userLabel={userLabel}
+        userAvatarUrl={userAvatarUrl}
+        npcLabel={mission.client.name}
+        npcAvatarUrl={npcAvatarUrl}
+        onDone={() => {
+          setBriefingAccepted(true);
+          setState((p) => ({ ...p, power: 'booting', boot_phase: 0 }));
+        }}
+      />
     );
   }
 
@@ -1836,6 +3537,28 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
     );
   }
 
+  if (state.power === 'reward') {
+    const userLabel = (userData?.displayName || userData?.username || user?.displayName || 'Student').trim() || 'Student';
+    const userSeed = encodeURIComponent(userLabel || 'student');
+    const userAvatarUrl = userData?.avatarUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${userSeed}&backgroundType=solid&backgroundColor=2C3E50`;
+    const npcSeed = encodeURIComponent(`${mission.client.name}-${mission.id}-${npcSeedRef.current}`);
+    const npcAvatarUrl = `https://api.dicebear.com/9.x/avataaars/svg?seed=${npcSeed}&backgroundType=solid&backgroundColor=FF8A8A`;
+    return (
+      <PhoneMessageOutro
+        mission={mission}
+        userLabel={userLabel}
+        userAvatarUrl={userAvatarUrl}
+        npcLabel={mission.client.name}
+        npcAvatarUrl={npcAvatarUrl}
+        xpReward={MISSION_XP_REWARD}
+        bCoinReward={MISSION_BCOIN_REWARD}
+        onDone={() => {
+          setState((p) => ({ ...p, power: 'shutting-down' }));
+        }}
+      />
+    );
+  }
+
   if (state.power === 'shutting-down') {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -1924,7 +3647,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         <div className="absolute top-4 left-4 z-[200] border border-white/20 bg-black/45 px-4 py-3">
           <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">BrightOS Live Mission</div>
           <div className="mt-1 text-white font-black">{mission.title}</div>
-          <div className="mt-1 text-xs text-zinc-300/80">{mission.client.name} • {mission.csec_alignment.concept}</div>
+          <div className="mt-1 text-xs text-zinc-300/80">{company.name} • {company.dept} • {company.hostname}</div>
         </div>
 
         <div className="absolute top-4 right-4 z-[200] border border-white/20 bg-black/45 px-4 py-3 max-w-[460px]">
@@ -1932,9 +3655,16 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
           <div className="mt-1 text-sm text-zinc-200">{mission.client.dialogue_start}</div>
           <div className="mt-2 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Objective</div>
           <div className="mt-1 text-xs text-zinc-200/90">Fix the issue and the system will auto-check completion.</div>
+          <div className="mt-3 text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Steps</div>
+          <div className="mt-2 grid gap-1 text-xs text-zinc-300/80">
+            {mission.steps_to_solve.slice(0, 6).map((s) => (
+              <div key={s} className="leading-tight">- {s}</div>
+            ))}
+          </div>
         </div>
 
         <div className="absolute left-4 top-24 z-[180] grid grid-cols-1 gap-3">
+          <DesktopIcon title="Device Manager" subtitle="Drivers" icon="🧰" onOpen={() => taskbarToggle('devmgr')} disabled={stuckLock} />
           <DesktopIcon
             title="This PC"
             subtitle="File Explorer"
@@ -1977,6 +3707,9 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
           )}
           {allowedTools.includes('Browser') && (
             <DesktopIcon title="Browser" subtitle="Web" icon="🌐" onOpen={() => taskbarToggle('browser')} disabled={stuckLock} />
+          )}
+          {allowedTools.includes('Automation App') && (
+            <DesktopIcon title="Automation" subtitle="Lab" icon="🧠" onOpen={() => taskbarToggle('automation')} disabled={stuckLock} />
           )}
         </div>
 
@@ -2075,6 +3808,72 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         </Window>
 
         <Window
+          win={wins.devmgr}
+          active={activeWin === 'devmgr'}
+          onClose={() => close('devmgr')}
+          onFocus={() => focus('devmgr')}
+          theme={theme}
+          onDownMove={(e: any) => {
+            const w = wins.devmgr;
+            drag.current = { id: 'devmgr', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('devmgr');
+          }}
+          onDownResize={(e: any) => {
+            const w = wins.devmgr;
+            drag.current = { id: 'devmgr', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('devmgr');
+          }}
+        >
+          <div className="p-6 h-full overflow-auto sleek-scrollbar">
+            <DeviceManagerWindow state={state} onState={(fn) => setState(fn)} onNotify={notify} />
+          </div>
+        </Window>
+
+        <Window
+          win={wins.mail}
+          active={activeWin === 'mail'}
+          onClose={() => close('mail')}
+          onFocus={() => focus('mail')}
+          theme={theme}
+          onDownMove={(e: any) => {
+            const w = wins.mail;
+            drag.current = { id: 'mail', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('mail');
+          }}
+          onDownResize={(e: any) => {
+            const w = wins.mail;
+            drag.current = { id: 'mail', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('mail');
+          }}
+        >
+          <div className="p-6 h-full overflow-auto sleek-scrollbar">
+            <MailApp emails={inbox} />
+          </div>
+        </Window>
+
+        <Window
+          win={wins.chat}
+          active={activeWin === 'chat'}
+          onClose={() => close('chat')}
+          onFocus={() => focus('chat')}
+          theme={theme}
+          onDownMove={(e: any) => {
+            const w = wins.chat;
+            drag.current = { id: 'chat', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('chat');
+          }}
+          onDownResize={(e: any) => {
+            const w = wins.chat;
+            drag.current = { id: 'chat', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('chat');
+          }}
+        >
+          <div className="p-6 h-full overflow-auto sleek-scrollbar">
+            <ChatApp messages={chatMessages} />
+          </div>
+        </Window>
+
+        <Window
           win={wins.terminal}
           active={activeWin === 'terminal'}
           onClose={() => close('terminal')}
@@ -2095,6 +3894,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
             mission={mission}
             state={state}
             fsEntries={fsEntries}
+            onFsEntries={(fn) => setFsEntries(fn)}
             lines={termLines}
             input={termInput}
             setInput={setTermInput}
@@ -2126,7 +3926,8 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
               location={explorerLocation}
               onSetLocation={setExplorerLocation}
               onOpen={(path) => {
-                setState((p) => ({ ...p, file: { opened: path } }));
+                const name = normPath(path).split('/').filter(Boolean).pop() || path;
+                setState((p) => ({ ...p, file: { opened: name } }));
                 notify('info', 'SYSTEM', `Opened ${path}.`);
               }}
               onDeleteToRecycle={(path) => {
@@ -2139,7 +3940,93 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
                 setState((p) => ({ ...p, recycle_bin: { empty: true } }));
                 notify('info', 'SYSTEM', 'Recycle Bin emptied.');
               }}
+              onCopyToDrive={(path, drive) => {
+                const base = normPath(path).split('/').filter(Boolean).pop() || path;
+                setFsEntries((prev) => {
+                  const next = prev.map(normPath);
+                  const dest = `${drive}:/${base}`;
+                  if (!next.includes(dest)) next.push(dest);
+                  return next;
+                });
+                notify('info', 'SYSTEM', `Copied ${base} to ${drive}:/`);
+              }}
+              onZipFolder={(path) => {
+                const norm = normPath(path);
+                const base = norm.replace(/\/+$/, '').split('/').filter(Boolean).pop() || 'Archive';
+                const zipName = `${base}.zip`;
+                setFsEntries((prev) => {
+                  const next = prev.map(normPath);
+                  const inSameFolder = norm.includes('/') ? norm.split('/').slice(0, -1).join('/') : 'C:';
+                  const dest = `${inSameFolder}/${zipName}`.replace(/\/+/, '/');
+                  if (!next.includes(dest)) next.push(dest);
+                  return next;
+                });
+                notify('info', 'SYSTEM', `Created ${zipName}`);
+              }}
+              onEncryptFolder={(path) => {
+                const norm = normPath(path);
+                setState((p) => {
+                  const existing = p.folder.encrypted_paths.map(normPath);
+                  if (existing.includes(norm)) return p;
+                  return { ...p, folder: { encrypted_paths: [...p.folder.encrypted_paths, norm] } };
+                });
+                notify('info', 'SYSTEM', `Encrypted ${path}`);
+              }}
               theme={theme}
+            />
+          </div>
+        </Window>
+
+        <Window
+          win={wins.browser}
+          active={activeWin === 'browser'}
+          onClose={() => close('browser')}
+          onFocus={() => focus('browser')}
+          theme={theme}
+          onDownMove={(e: any) => {
+            const w = wins.browser;
+            drag.current = { id: 'browser', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('browser');
+          }}
+          onDownResize={(e: any) => {
+            const w = wins.browser;
+            drag.current = { id: 'browser', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('browser');
+          }}
+        >
+          <div className="p-6 h-full overflow-auto sleek-scrollbar">
+            <BrowserWindow
+              mission={mission}
+              state={state}
+              onState={(fn) => setState(fn)}
+              onNotify={notify}
+            />
+          </div>
+        </Window>
+
+        <Window
+          win={wins.automation}
+          active={activeWin === 'automation'}
+          onClose={() => close('automation')}
+          onFocus={() => focus('automation')}
+          theme={theme}
+          onDownMove={(e: any) => {
+            const w = wins.automation;
+            drag.current = { id: 'automation', mode: 'move', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('automation');
+          }}
+          onDownResize={(e: any) => {
+            const w = wins.automation;
+            drag.current = { id: 'automation', mode: 'resize', sx: e.clientX, sy: e.clientY, x: w.x, y: w.y, w: w.w, h: w.h };
+            focus('automation');
+          }}
+        >
+          <div className="p-6 h-full overflow-auto sleek-scrollbar">
+            <AutomationWindow
+              mission={mission}
+              state={state}
+              onState={(fn) => setState(fn)}
+              onNotify={notify}
             />
           </div>
         </Window>
@@ -2192,13 +4079,14 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
         >
           <div className="p-6 h-full overflow-auto sleek-scrollbar">
             <Settings
+              mission={mission}
               state={state}
               onCleanTmp={() => {
                 setFsEntries((prev) => prev.map(normPath).filter((p) => !p.toLowerCase().endsWith('.tmp')));
                 setState((p) => ({
                   ...p,
                   files: { ...p.files, tmp: { count: 0 } },
-                  disk: { free_space_mb: p.disk.free_space_mb + 320 },
+                  disk: { ...p.disk, free_space_mb: p.disk.free_space_mb + 320 },
                 }));
                 push([{ id: uid('sys'), kind: 'sys', text: 'Temporary files deleted.' }]);
                 notify('info', 'SYSTEM', 'Storage cleanup completed.');
@@ -2208,7 +4096,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
                 setState((p) => ({
                   ...p,
                   recycle_bin: { empty: true },
-                  disk: { free_space_mb: p.disk.free_space_mb + 420 },
+                  disk: { ...p.disk, free_space_mb: p.disk.free_space_mb + 420 },
                 }));
                 push([{ id: uid('sys'), kind: 'sys', text: 'Recycle Bin emptied.' }]);
                 notify('info', 'SYSTEM', 'Recycle Bin emptied.');
@@ -2218,6 +4106,9 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
                 setTheme((p) => (p === 'light' ? 'dark' : 'light'));
                 notify('info', 'SYSTEM', 'Theme updated.');
               }}
+              onState={(fn) => setState(fn)}
+              onNotify={notify}
+              onOpenWindow={(id) => taskbarToggle(id)}
             />
           </div>
         </Window>

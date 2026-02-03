@@ -11,6 +11,7 @@ export interface UserData {
     mastery: number | Record<string, number>;
     globalMastery?: number;
     streak: number;
+    lastUsernameChange?: number;
     lastStreakDay?: string;
     lastLearningDay?: string;
     lastLearningAt?: any;
@@ -82,6 +83,8 @@ export interface UserData {
         facialHair?: string;
         skinColor?: string;
     };
+    blockedUsers?: string[];
+    mutedUsers?: string[];
 }
 
 interface AuthContextType {

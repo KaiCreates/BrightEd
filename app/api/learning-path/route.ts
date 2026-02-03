@@ -410,9 +410,13 @@ function getObjectiveIdsWithQuestions(): Set<string> {
 import { verifyAuth } from '@/lib/auth-server';
 import { adminDb } from '@/lib/firebase-admin';
 import { NextRequest } from 'next/server';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 10, 60000, 'learning-path:POST');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     console.log('[Learning Path POST] Starting request');
 
     // Auth is optional - learning paths use public syllabus data
@@ -515,6 +519,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 30, 60000, 'learning-path:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     // Auth is optional - learning paths use public syllabus data
     try {
       await verifyAuth(request);

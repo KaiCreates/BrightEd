@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 import { getSessionById, updateSession } from '@/lib/stories-store';
 import {
   tickRegistration,
@@ -14,6 +15,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const limiter = rateLimit(request, 60, 60000, 'stories:session:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 
@@ -74,6 +78,9 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const limiter = rateLimit(request, 30, 60000, 'stories:session:PATCH');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 

@@ -5,7 +5,6 @@ import { ConditionalMain } from '@/components/ConditionalMain'
 import { ThemeProvider } from '@/lib/theme-context'
 import { AuthProvider } from '@/lib/auth-context'
 import { ConsoleBrandSplash } from '@/components/ConsoleBrandSplash'
-import { SocialHubProvider } from '@/lib/social-hub-context'
 
 export const metadata: Metadata = {
   title: 'BrightEd - Adaptive Learning for CXC',
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Toaster } from 'react-hot-toast'
-import { BusinessProvider } from '@/lib/business-context'
 import { AuthGate } from '@/components/AuthGate'
 import { DialogProvider } from '@/components/system'
 import { PostHogProvider } from '@/components/providers/PostHogProvider'
@@ -42,27 +40,23 @@ export default function RootLayout({
             <PostHogPageView />
             <DialogProvider>
               <AuthProvider>
-                <SocialHubProvider>
-                  <BusinessProvider>
-                    <ThemeProvider>
-                      <ConsoleBrandSplash />
-                      <Toaster position="top-right" toastOptions={{
-                        duration: 4000,
-                        style: {
-                          background: 'var(--bg-elevated)',
-                          color: 'var(--text-primary)',
-                          border: '1px solid var(--border-subtle)',
-                          borderRadius: '12px',
-                          backdropFilter: 'blur(10px)',
-                        }
-                      }} />
-                      <AuthGate>
-                        <ConditionalNavigation />
-                        <ConditionalMain>{children}</ConditionalMain>
-                      </AuthGate>
-                    </ThemeProvider>
-                  </BusinessProvider>
-                </SocialHubProvider>
+                <ThemeProvider>
+                  <ConsoleBrandSplash />
+                  <Toaster position="top-right" toastOptions={{
+                    duration: 4000,
+                    style: {
+                      background: 'var(--bg-elevated)',
+                      color: 'var(--text-primary)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '12px',
+                      backdropFilter: 'blur(10px)',
+                    }
+                  }} />
+                  <AuthGate>
+                    <ConditionalNavigation />
+                    <ConditionalMain>{children}</ConditionalMain>
+                  </AuthGate>
+                </ThemeProvider>
               </AuthProvider>
             </DialogProvider>
           </PostHogProvider>

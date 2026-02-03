@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { useAuth } from './auth-context';
 import { db, realtimeDb, isFirebaseReady } from './firebase';
+import { FirebaseMonitor } from './firebase-monitor';
 import {
     collection,
     doc,
@@ -119,63 +120,40 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true);
     const lastMessageTimeRef = useRef<number>(0);
     const typingWriteRef = useRef<{ lastAt: number; lastState: boolean }>({ lastAt: 0, lastState: false });
+    const ensuredRoomIdsRef = useRef<Set<string>>(new Set());
+    const businessPrestigeRef = useRef<number>(0);
 
-    // Initialize subject lounges
     useEffect(() => {
-        if (!user) return;
+        if (!user) {
+            setBlockedUsers([]);
+            setMutedUsers([]);
+            return;
+        }
+        setBlockedUsers(userData?.blockedUsers || []);
+        setMutedUsers(userData?.mutedUsers || []);
+    }, [user, userData?.blockedUsers, userData?.mutedUsers]);
 
-        const subjectLounges = [
-            { name: 'Principles of Business', subject: 'Principles of Business' },
-            { name: 'Mathematics', subject: 'Mathematics' },
-            { name: 'English A', subject: 'English A' },
-            { name: 'Information Technology', subject: 'Information Technology' },
-            { name: 'Chemistry', subject: 'Chemistry' }
-        ];
+    useEffect(() => {
+        if (!user || !userData?.businessID || !isFirebaseReady || !db) {
+            businessPrestigeRef.current = 0;
+            return;
+        }
 
-        const initializeRooms = async () => {
-            if (!isFirebaseReady || !db) return;
-            try {
-                for (const lounge of subjectLounges) {
-                    const roomRef = doc(db, 'rooms', lounge.name);
-                    const roomSnap = await getDoc(roomRef);
+        let cancelled = false;
+        getDoc(doc(db, 'businesses', userData.businessID))
+            .then((snap) => {
+                if (cancelled) return;
+                businessPrestigeRef.current = snap.exists() ? (snap.data().valuation || 0) : 0;
+            })
+            .catch(() => {
+                if (cancelled) return;
+                businessPrestigeRef.current = 0;
+            });
 
-                    if (!roomSnap.exists()) {
-                        await setDoc(roomRef, {
-                            name: lounge.name,
-                            type: 'public',
-                            subject: lounge.subject,
-                            members: [],
-                            createdAt: serverTimestamp()
-                        });
-                    }
-                }
-            } catch (error: any) {
-                if (error.code === 'failed-precondition' || error.message.includes('terminated')) {
-                    console.warn('Firestore client terminated, skipping room init');
-                } else {
-                    console.error('Error initializing rooms:', error);
-                }
-            }
+        return () => {
+            cancelled = true;
         };
-
-        initializeRooms();
-    }, [user]);
-
-    // Load user's blocked list
-    useEffect(() => {
-        if (!user || !isFirebaseReady || !db) return;
-
-        const userRef = doc(db, 'users', user.uid);
-        const unsubscribe = onSnapshot(userRef, (snap) => {
-            if (snap.exists()) {
-                const data = snap.data();
-                setBlockedUsers(data.blockedUsers || []);
-                setMutedUsers(data.mutedUsers || []);
-            }
-        });
-
-        return () => unsubscribe();
-    }, [user]);
+    }, [user, userData?.businessID]);
 
     // Load user's private rooms (subject lounges are always available, so we only load private rooms)
     useEffect(() => {
@@ -193,6 +171,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         const unsubscribe = onSnapshot(
             q,
             (snapshot) => {
+                FirebaseMonitor.trackRead('rooms', snapshot.docChanges().length || snapshot.size);
                 const privateRooms: Room[] = [];
                 snapshot.forEach((doc) => {
                     privateRooms.push({ id: doc.id, ...doc.data() } as Room);
@@ -226,6 +205,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             const unsubscribe = onSnapshot(
                 q,
                 (snapshot) => {
+                    FirebaseMonitor.trackRead('room_messages', snapshot.docChanges().length || snapshot.size);
                     const msgs: Message[] = [];
                     snapshot.forEach((doc) => {
                         const data = doc.data();
@@ -420,17 +400,22 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
         // If it's a subject lounge, ensure it exists in Firestore
         if (room.type === 'public') {
-            const roomRef = doc(db, 'rooms', room.id);
-            const roomSnap = await getDoc(roomRef);
+            if (!ensuredRoomIdsRef.current.has(room.id)) {
+                ensuredRoomIdsRef.current.add(room.id);
+                const roomRef = doc(db, 'rooms', room.id);
+                const roomSnap = await getDoc(roomRef);
+                FirebaseMonitor.trackRead('rooms', 1);
 
-            if (!roomSnap.exists()) {
-                await setDoc(roomRef, {
-                    name: room.name,
-                    type: 'public',
-                    subject: room.subject,
-                    members: [],
-                    createdAt: serverTimestamp()
-                });
+                if (!roomSnap.exists()) {
+                    await setDoc(roomRef, {
+                        name: room.name,
+                        type: 'public',
+                        subject: room.subject,
+                        members: [],
+                        createdAt: serverTimestamp()
+                    });
+                    FirebaseMonitor.trackWrite('rooms', 1);
+                }
             }
         }
 
@@ -462,6 +447,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
         const q = query(collection(db, 'rooms'), where('code', '==', code));
         const snapshot = await getDocs(q);
+        FirebaseMonitor.trackRead('rooms', snapshot.size);
 
         if (snapshot.empty) return false;
 
@@ -472,6 +458,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             await updateDoc(doc(db, 'rooms', roomDoc.id), {
                 members: arrayUnion(user.uid)
             });
+            FirebaseMonitor.trackWrite('rooms', 1);
         }
 
         const roomToJoin = { id: roomDoc.id, ...roomData } as Room;
@@ -493,15 +480,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         }
         lastMessageTimeRef.current = now;
 
-        // Get business valuation for prestige
-        let businessPrestige = 0;
-        if (userData?.businessID) {
-            const bizRef = doc(db, 'businesses', userData.businessID);
-            const bizSnap = await getDoc(bizRef);
-            if (bizSnap.exists()) {
-                businessPrestige = bizSnap.data().valuation || 0;
-            }
-        }
+        const businessPrestige = businessPrestigeRef.current || 0;
 
         await addDoc(collection(db, 'rooms', activeRoom.id, 'messages'), {
             text,
@@ -519,6 +498,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             whiteboardThumbnailUrl: options?.whiteboardThumbnailUrl || null,
             reactions: {}
         });
+        FirebaseMonitor.trackWrite('room_messages', 1);
     }, [user, activeRoom, userData]);
 
     const sendDM = useCallback(async (userId: string, text: string) => {
@@ -529,11 +509,13 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
         // Ensure DM room exists
         const dmSnap = await getDoc(dmRef);
+        FirebaseMonitor.trackRead('dms', 1);
         if (!dmSnap.exists()) {
             await setDoc(dmRef, {
                 participants: [user.uid, userId],
                 createdAt: serverTimestamp()
             });
+            FirebaseMonitor.trackWrite('dms', 1);
         }
 
         await addDoc(collection(db, 'dms', roomId, 'messages'), {
@@ -544,59 +526,48 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             senderAvatarCustomization: userData?.avatarCustomization || null,
             timestamp: serverTimestamp()
         });
+        FirebaseMonitor.trackWrite('dm_messages', 1);
     }, [user, userData?.firstName, userData?.avatarUrl]);
 
     const addReaction = useCallback(async (messageId: string, emoji: string) => {
         if (!user || !activeRoom) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
-        const messageSnap = await getDoc(messageRef);
+        const msg = messages.find((m) => m.id === messageId);
+        const emojiReactions = (msg?.reactions?.[emoji] || []) as string[];
+        const hasReacted = emojiReactions.includes(user.uid);
 
-        if (!messageSnap.exists()) return;
-
-        const reactions = messageSnap.data().reactions || {};
-        const emojiReactions = reactions[emoji] || [];
-
-        if (emojiReactions.includes(user.uid)) {
-            // Remove reaction
-            await updateDoc(messageRef, {
-                [`reactions.${emoji}`]: emojiReactions.filter((uid: string) => uid !== user.uid)
-            });
-        } else {
-            // Add reaction
-            await updateDoc(messageRef, {
-                [`reactions.${emoji}`]: arrayUnion(user.uid)
-            });
-        }
-    }, [user, activeRoom]);
+        await updateDoc(messageRef, {
+            [`reactions.${emoji}`]: hasReacted ? arrayRemove(user.uid) : arrayUnion(user.uid)
+        });
+        FirebaseMonitor.trackWrite('room_messages', 1);
+    }, [user, activeRoom, messages]);
 
     const editMessage = useCallback(async (messageId: string, newText: string) => {
         if (!user || !activeRoom || !newText.trim()) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
-        const snap = await getDoc(messageRef);
-        if (!snap.exists()) return;
-        const data = snap.data();
-        if (data.senderId !== user.uid) {
+        const msg = messages.find((m) => m.id === messageId);
+        if (msg && msg.senderId !== user.uid) {
             throw new Error('You can only edit your own messages');
         }
         await updateDoc(messageRef, {
             text: newText,
         });
-    }, [user, activeRoom]);
+        FirebaseMonitor.trackWrite('room_messages', 1);
+    }, [user, activeRoom, messages]);
 
     const deleteMessage = useCallback(async (messageId: string) => {
         if (!user || !activeRoom) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
-        const snap = await getDoc(messageRef);
-        if (!snap.exists()) return;
-        const data = snap.data();
-        if (data.senderId !== user.uid) {
+        const msg = messages.find((m) => m.id === messageId);
+        if (msg && msg.senderId !== user.uid) {
             throw new Error('You can only delete your own messages');
         }
         await deleteDoc(messageRef);
-    }, [user, activeRoom]);
+        FirebaseMonitor.trackDelete('room_messages', 1);
+    }, [user, activeRoom, messages]);
 
     const openDM = useCallback((userId: string, userName: string) => {
         setDmWindows((prev) => {
@@ -630,6 +601,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(userRef, {
             blockedUsers: arrayUnion(userId)
         });
+        FirebaseMonitor.trackWrite('users', 1);
     }, [user]);
 
     const unblockUser = useCallback(async (userId: string) => {
@@ -639,6 +611,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(userRef, {
             blockedUsers: arrayRemove(userId)
         });
+        FirebaseMonitor.trackWrite('users', 1);
     }, [user]);
 
     const muteUser = useCallback(async (userId: string) => {
@@ -648,6 +621,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(userRef, {
             mutedUsers: arrayUnion(userId)
         });
+        FirebaseMonitor.trackWrite('users', 1);
     }, [user]);
 
     const unmuteUser = useCallback(async (userId: string) => {
@@ -657,6 +631,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(userRef, {
             mutedUsers: arrayRemove(userId)
         });
+        FirebaseMonitor.trackWrite('users', 1);
     }, [user]);
 
     const reportMessage = useCallback(async (messageId: string, reason: string) => {
@@ -664,6 +639,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
         const messageSnap = await getDoc(messageRef);
+        FirebaseMonitor.trackRead('room_messages', 1);
 
         if (!messageSnap.exists()) return;
 
@@ -677,6 +653,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             timestamp: serverTimestamp(),
             status: 'pending'
         });
+        FirebaseMonitor.trackWrite('moderation_queue', 1);
     }, [user, activeRoom]);
 
     const reportUser = useCallback(async (userId: string, reason: string) => {
@@ -690,6 +667,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             timestamp: serverTimestamp(),
             status: 'pending'
         });
+        FirebaseMonitor.trackWrite('moderation_queue', 1);
     }, [user]);
 
     const leaveRoom = useCallback(async (roomId: string) => {
@@ -699,6 +677,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(roomRef, {
             members: arrayRemove(user.uid)
         });
+        FirebaseMonitor.trackWrite('rooms', 1);
 
         if (activeRoom?.id === roomId) {
             setActiveRoom(null);
@@ -709,11 +688,13 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         if (!user) return;
         const roomRef = doc(db, 'rooms', roomId);
         const roomSnap = await getDoc(roomRef);
+        FirebaseMonitor.trackRead('rooms', 1);
 
         if (roomSnap.exists()) {
             const data = roomSnap.data();
             if (data.ownerId === user.uid) {
                 await deleteDoc(roomRef);
+                FirebaseMonitor.trackDelete('rooms', 1);
                 if (activeRoom?.id === roomId) {
                     setActiveRoom(null);
                 }
@@ -734,6 +715,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             timestamp: serverTimestamp(),
             status: 'pending'
         });
+        FirebaseMonitor.trackWrite('moderation_queue', 1);
     }, [user]);
 
     return (

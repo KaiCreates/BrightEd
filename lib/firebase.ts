@@ -1,6 +1,6 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, initializeFirestore } from "firebase/firestore";
+import { enableIndexedDbPersistence, enableMultiTabIndexedDbPersistence, initializeFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 import { getAnalytics, isSupported } from "firebase/analytics";
@@ -45,6 +45,12 @@ export const db = isFirebaseReady ? initializeFirestore(app, {
 }) : null as any;
 export const realtimeDb = isFirebaseReady ? getDatabase(app) : null as any;
 export const storage = isFirebaseReady ? getStorage(app) : null as any;
+
+if (typeof window !== 'undefined' && isFirebaseReady && db) {
+    enableMultiTabIndexedDbPersistence(db).catch(() => {
+        enableIndexedDbPersistence(db).catch(() => { });
+    });
+}
 
 if (typeof window !== 'undefined' && !isFirebaseReady) {
     console.warn("Firebase configuration is missing or invalid. Authentication and database features will be disabled.");

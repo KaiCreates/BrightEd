@@ -95,11 +95,11 @@ function isSameGroup(prev: any | null, cur: any) {
   return curTs.getTime() - prevTs.getTime() < 2 * 60 * 1000
 }
 
-function TypingIndicator({ names }: { names: string[] }) {
+function TypingIndicator({ names, className }: { names: string[]; className?: string }) {
   if (names.length === 0) return null
   const label = names.length === 1 ? `${names[0]} is typing` : `${names[0]} and ${names.length - 1} others are typing`
   return (
-    <div className="px-6 pb-2">
+    <div className={className || "px-6 pb-2"}>
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black/10 border border-white/5 backdrop-blur-md">
         <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">{label}</span>
         <span className="inline-flex items-end gap-1">
@@ -473,6 +473,7 @@ function CommunityHubInner() {
   const reactionsPalette = ['🔥', '💯', '👏', '💡']
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isRightPanelOpen, setIsRightPanelOpen] = useState(false)
 
   return (
     <div className="min-h-[calc(100vh-96px)] w-full text-[var(--text-primary)] relative">
@@ -489,6 +490,14 @@ function CommunityHubInner() {
           <div
             className="fixed inset-0 bg-black/60 z-50 md:hidden backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+
+        {/* RIGHT PANEL MOBILE OVERLAY */}
+        {isRightPanelOpen && (
+          <div
+            className="fixed inset-0 bg-black/60 z-50 lg:hidden backdrop-blur-sm"
+            onClick={() => setIsRightPanelOpen(false)}
           />
         )}
 
@@ -624,6 +633,13 @@ function CommunityHubInner() {
                   {Math.max(1, Object.keys(onlineUsers).length)} Online
                 </span>
               </div>
+              <button
+                onClick={() => setIsRightPanelOpen(true)}
+                className="lg:hidden text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full bg-white/[0.03] hover:bg-white/[0.06] text-[var(--text-secondary)] transition-colors border border-white/10"
+                aria-label="Open active scholars"
+              >
+                Scholars
+              </button>
               <button
                 onClick={() => {
                   const should = confirm('Report this channel?')
@@ -1002,6 +1018,7 @@ function CommunityHubInner() {
           </div>
 
           <div className="md:hidden fixed left-0 right-0 bottom-[72px] px-4 z-40">
+            <TypingIndicator names={typingUsers.map((u) => u.name)} className="px-0 pb-2" />
             {fileUploading ? (
               <div className="mb-2 px-3 py-2 rounded-[var(--radius-main)] bg-white/[0.03] border border-white/10">
                 <div className="flex items-center justify-between">
@@ -1072,9 +1089,25 @@ function CommunityHubInner() {
         </main>
 
         {/* RIGHT PANEL: ACTIVE SCHOLARS */}
-        <aside className="hidden lg:flex w-72 bg-[var(--bg-primary)] border-l border-white/5 p-6 flex-col gap-8 relative z-10 overflow-hidden">
+        <aside
+          className={`
+            fixed inset-y-0 right-0 z-[60] w-80 max-w-[85vw]
+            bg-[var(--bg-primary)] border-l border-white/5 p-6 flex flex-col gap-8 relative overflow-hidden
+            transition-transform duration-300 ease-in-out transform
+            ${isRightPanelOpen ? 'translate-x-0' : 'translate-x-full'}
+            lg:static lg:translate-x-0 lg:w-72 lg:max-w-none
+          `}
+        >
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--brand-primary)]/5 blur-3xl rounded-full" />
+
+          <button
+            onClick={() => setIsRightPanelOpen(false)}
+            className="lg:hidden absolute top-4 right-4 w-10 h-10 rounded-[var(--radius-pill)] bg-white/[0.03] border border-white/10 text-[var(--text-secondary)]"
+            aria-label="Close active scholars"
+          >
+            ✕
+          </button>
 
           <button
             onClick={handleJoinStudyRoom}
@@ -1220,6 +1253,8 @@ function AvatarRenderer({ customization, username }: { customization: any, usern
 
 export default function CommunityPage() {
   return (
-    <CommunityHubInner />
+    <SocialHubProvider>
+      <CommunityHubInner />
+    </SocialHubProvider>
   )
 }

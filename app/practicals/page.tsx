@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -14,6 +15,7 @@ import { useAuth } from '@/lib/auth-context';
 
 export default function PracticalsPage() {
   const { userData } = useAuth();
+  const router = useRouter();
   const [malwareCompletion, setMalwareCompletion] = useState<ReturnType<typeof getMissionCompletion> | null>(null);
   const [sessions, setSessions] = useState<BrightOSLiveSession[]>([]);
   const [csecProgress, setCsecProgress] = useState<{ completed: number; xp: number }>({ completed: 0, xp: 0 });
@@ -40,6 +42,20 @@ export default function PracticalsPage() {
       });
     }, 1000);
   }, []);
+
+  const resumeSession = sessions.find((s) => s.status === 'started') ?? null;
+  const resumeHref = resumeSession
+    ? resumeSession.mode === 'malware-incident'
+      ? '/practicals/technology-practicality/malware-incident'
+      : resumeSession.missionId
+        ? `/practicals/technology-practicality/csec/${resumeSession.missionId}`
+        : '/practicals/technology-practicality/csec-roadmap'
+    : null;
+  const resumeLabel = resumeSession
+    ? resumeSession.mode === 'malware-incident'
+      ? 'Resume Incident'
+      : 'Resume Mission'
+    : null;
 
   return (
     <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] pb-24 safe-padding overflow-x-hidden">
@@ -71,6 +87,41 @@ export default function PracticalsPage() {
             <p className="text-[var(--text-secondary)] text-lg md:text-xl font-medium leading-relaxed mb-8">
               Step into high-fidelity simulations where every click reacts to the system state. You aren&apos;t just reading—you&apos;re the technician.
             </p>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3">
+              <BrightButton
+                size="lg"
+                variant="primary"
+                onClick={() => router.push('/practicals/technology-practicality/malware-incident')}
+                className="w-full sm:w-auto"
+              >
+                Start a Live Incident
+              </BrightButton>
+
+              <BrightButton
+                size="lg"
+                variant="secondary"
+                onClick={() => router.push('/practicals/technology-practicality/csec-roadmap')}
+                className="w-full sm:w-auto"
+              >
+                Open CSEC Roadmap
+              </BrightButton>
+
+              {resumeHref && resumeLabel && (
+                <BrightButton
+                  size="lg"
+                  variant="outline"
+                  onClick={() => router.push(resumeHref)}
+                  className="w-full sm:w-auto"
+                >
+                  {resumeLabel}
+                </BrightButton>
+              )}
+            </div>
+
+            <div className="mt-5 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
+              Up to <span className="text-[var(--brand-primary)]">+100 XP</span> per mission • Live sessions tracked • Real tools
+            </div>
           </div>
 
           <motion.div
@@ -85,7 +136,7 @@ export default function PracticalsPage() {
                 </div>
                 <div>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Global Progress</div>
-                  <div className="text-xl font-black text-[var(--text-primary)]">Practicals Clear</div>
+                  <div className="text-xl font-black text-[var(--text-primary)]">Mission Dashboard</div>
                 </div>
               </div>
               <div className="space-y-4">
@@ -109,6 +160,14 @@ export default function PracticalsPage() {
                     +{csecProgress.xp + (malwareCompletion?.xpEarned || 0)} XP
                   </div>
                 </div>
+
+                {resumeHref && (
+                  <div className="pt-2">
+                    <BrightButton size="md" variant="outline" onClick={() => router.push(resumeHref)} className="w-full">
+                      Continue Where You Left Off
+                    </BrightButton>
+                  </div>
+                )}
               </div>
             </BrightLayer>
           </motion.div>
@@ -354,7 +413,24 @@ export default function PracticalsPage() {
                           </div>
                         </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex flex-col items-end gap-2">
+                        {s.status === 'started' && (
+                          <BrightButton
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              const href = s.mode === 'malware-incident'
+                                ? '/practicals/technology-practicality/malware-incident'
+                                : s.missionId
+                                  ? `/practicals/technology-practicality/csec/${s.missionId}`
+                                  : '/practicals/technology-practicality/csec-roadmap';
+                              router.push(href);
+                            }}
+                          >
+                            Resume
+                          </BrightButton>
+                        )}
+
                         {s.xpEarned && (
                           <div className="text-lg font-black text-emerald-500">+{s.xpEarned} XP</div>
                         )}
@@ -371,12 +447,14 @@ export default function PracticalsPage() {
         {/* Hub Selection Section */}
         <section>
           <div className="grid gap-6 md:grid-cols-3">
-            <BrightLayer variant="elevated" padding="sm" className="bg-[var(--bg-secondary)]/30 border-b-[6px] border-[var(--border-subtle)] opacity-70">
-              <div className="text-2xl mb-2">📊</div>
-              <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Coming Soon</div>
-              <div className="font-black text-[var(--text-primary)] mb-1">Financial Literacy</div>
-              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Reports, market shifts, and delayed consequences.</p>
-            </BrightLayer>
+            <Link href="/practicals/business" className="group">
+              <BrightLayer variant="elevated" padding="sm" className="h-full bg-amber-500/5 border-b-[6px] border-amber-700 hover:border-amber-500 hover:-translate-y-1 transition-all cursor-pointer">
+                <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">📊</div>
+                <div className="text-xs font-black uppercase tracking-widest text-amber-500 mb-1">Active Hub</div>
+                <div className="font-black text-[var(--text-primary)] mb-1">Financial Literacy</div>
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Reports, market shifts, and delayed consequences.</p>
+              </BrightLayer>
+            </Link>
 
             <Link href="/practicals/science/biology" className="group">
               <BrightLayer variant="elevated" padding="sm" className="h-full bg-emerald-500/5 border-b-[6px] border-emerald-700 hover:border-emerald-500 hover:-translate-y-1 transition-all cursor-pointer">
@@ -387,12 +465,18 @@ export default function PracticalsPage() {
               </BrightLayer>
             </Link>
 
-            <BrightLayer variant="elevated" padding="sm" className="bg-[var(--bg-secondary)]/30 border-b-[6px] border-[var(--border-subtle)] opacity-70">
-              <div className="text-2xl mb-2">🎯</div>
-              <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-1">Coming Soon</div>
-              <div className="font-black text-[var(--text-primary)] mb-1">Career Paths</div>
-              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Real professional simulations with higher stakes.</p>
-            </BrightLayer>
+            <Link href="/progress" className="group">
+              <BrightLayer
+                variant="elevated"
+                padding="sm"
+                className="h-full bg-[var(--brand-primary)]/5 border-b-[6px] border-[var(--brand-primary)]/40 hover:border-[var(--brand-primary)] hover:-translate-y-1 transition-all cursor-pointer"
+              >
+                <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">🏆</div>
+                <div className="text-xs font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Track Progress</div>
+                <div className="font-black text-[var(--text-primary)] mb-1">XP, Streaks, Unlocks</div>
+                <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">See what you cleared and what to tackle next.</p>
+              </BrightLayer>
+            </Link>
           </div>
         </section>
       </div>

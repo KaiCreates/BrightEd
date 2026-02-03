@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 import {
   getSessions,
   createSession,
@@ -16,6 +17,9 @@ import type { DifficultyContext, AgeBracket } from '@/lib/stories-engine/types';
 
 export async function GET(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 60, 60000, 'stories:sessions:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 
@@ -37,6 +41,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 15, 60000, 'stories:sessions:POST');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 

@@ -9,6 +9,7 @@ import { useAuth } from '@/lib/auth-context' // Assuming auth context exists
 import { StreakCelebration, ProfessorBrightMascot } from '@/components/learning'
 import { FeedbackResponse } from '@/lib/professor-bright'
 import LabProgress from '@/components/science/LabProgress'
+import { resolveMasteryPercent } from '@/lib/user-stats'
 
 export default function ProgressPage() {
     const router = useRouter()
@@ -42,6 +43,11 @@ export default function ProgressPage() {
 
                 if (res.ok) {
                     const data = await res.json()
+                    const masteryPercent = resolveMasteryPercent(userData)
+                    const resolvedMastery = masteryPercent > 0 ? masteryPercent : (data.overview?.overallMastery || 0)
+                    const resolvedStreak = typeof userData?.streak === 'number'
+                        ? userData.streak
+                        : (data.session?.currentStreak || 0)
 
                     // Transform NABLE data to TopicMastery format
                     // Assuming NABLE skills are essentially topics or can be mapped
@@ -60,14 +66,14 @@ export default function ProgressPage() {
                     setTopics(transformedTopics)
 
                     setOverallStats({
-                        mastery: data.overview?.overallMastery || 0,
+                        mastery: resolvedMastery,
                         confidence: data.overview?.overallConfidence || 0,
-                        streak: typeof userData?.streak === 'number' ? userData.streak : (data.session?.currentStreak || 0),
+                        streak: resolvedStreak,
                         totalSkills: data.overview?.totalSkillsTracked || 0
                     })
 
                     // Mascot Feedback Logic
-                    const mastery = data.overview?.overallMastery || 0
+                    const mastery = resolvedMastery
                     setTimeout(() => {
                         setMascotFeedback({
                             tone: mastery > 70 ? 'celebratory' : 'supportive',
@@ -87,7 +93,17 @@ export default function ProgressPage() {
         }
 
         fetchData()
-    }, [user, authLoading, router])
+    }, [user, authLoading, router, userData])
+
+    useEffect(() => {
+        if (!userData) return
+        const masteryPercent = resolveMasteryPercent(userData)
+        setOverallStats((prev) => ({
+            ...prev,
+            mastery: masteryPercent > 0 ? masteryPercent : prev.mastery,
+            streak: typeof userData.streak === 'number' ? userData.streak : prev.streak
+        }))
+    }, [userData])
 
     // Helper to make IDs looks like names (e.g., "algebra_basics" -> "Algebra Basics")
     const formatTopicName = (id: string) => {

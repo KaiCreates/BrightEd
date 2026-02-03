@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
 import { adminDb } from '@/lib/firebase-admin';
 import { z } from 'zod';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 import { 
   generateOrdersForTick, 
   acceptOrder, 
@@ -111,6 +112,9 @@ async function updateBusinessState(businessId: string, updates: Partial<Business
 // Calculate new orders for a business tick
 export async function POST(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 30, 60000, 'economy:calculate:POST');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const body = await request.json();
     
@@ -212,6 +216,9 @@ export async function POST(request: NextRequest) {
 // Handle order actions (accept, reject, start, complete, fail)
 export async function PUT(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 120, 60000, 'economy:calculate:PUT');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const body = await request.json();
     

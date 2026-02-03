@@ -17,7 +17,7 @@ import BusinessCard3D from '@/components/business/BusinessCard3D';
 import { useAuth } from '@/lib/auth-context';
 import { useBusiness } from '@/lib/business-context';
 import { db } from '@/lib/firebase';
-import { collection, query, where, doc, onSnapshot, updateDoc, deleteDoc } from 'firebase/firestore';
+import { updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import BusinessWorkspace from '@/components/business/BusinessWorkspace';
 import OrgChart from '@/components/business/OrgChart';
 import PayrollManager from '@/components/business/PayrollManager';
@@ -25,10 +25,7 @@ import { BusinessStatsBar } from '@/components/business/BusinessStatsBar';
 import InventoryPanel from '@/components/business/InventoryPanel';
 import { useDialog } from '@/components/system';
 import {
-  BusinessState,
   Order,
-  BusinessType,
-  getBusinessType,
   generateOrdersForTick,
   saveNewOrders,
   acceptOrder,
@@ -37,7 +34,6 @@ import {
   failOrder,
   updateBusinessFinancials,
   updateOrderStatus,
-  fetchActiveOrders,
   collectDuePayments,
   CustomerProfile,
   createCustomerProfile,
@@ -56,14 +52,9 @@ export default function BusinessOperationsCommandCenter() {
 
 function CommandCenterContent() {
   const { user, userData, loading: authLoading } = useAuth();
-  const { economyRuntimeActive } = useBusiness();
+  const { economyRuntimeActive, economyBusiness, economyBusinessType, economyOrders, loading: businessLoading } = useBusiness();
   const { showInterrupt } = useCinematic();
   const { showConfirm, showAlert } = useDialog();
-
-  const [business, setBusiness] = useState<BusinessState | null>(null);
-  const [businessType, setBusinessType] = useState<BusinessType | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
   const [activeFulfillmentOrder, setActiveFulfillmentOrder] = useState<Order | null>(null);
 
@@ -90,90 +81,10 @@ function CommandCenterContent() {
     return () => clearInterval(interval);
   }, [economyRuntimeActive]);
 
-  useEffect(() => {
-    if (authLoading || !user) return;
-
-    if (!userData?.businessID) {
-      setBusiness(null);
-      setLoading(false);
-      return;
-    }
-
-    const bizRef = doc(db, 'businesses', userData.businessID);
-
-    const unsub = onSnapshot(bizRef, (snap) => {
-      if (snap.exists()) {
-        const data: any = snap.data();
-        const bizState: BusinessState = {
-          id: snap.id,
-          playerId: data.ownerId,
-          businessTypeId: data.businessTypeId,
-          businessName: data.name,
-          branding: data.branding ?? {},
-          cashBalance: data.balance !== undefined ? data.balance : (data.cashBalance ?? 0),
-          totalRevenue: data.totalRevenue ?? 0,
-          totalExpenses: data.totalExpenses ?? 0,
-          reputation: data.reputation ?? 50,
-          customerSatisfaction: data.customerSatisfaction ?? 70,
-          reviewCount: data.reviewCount ?? 0,
-          operatingHours: data.operatingHours ?? { open: 8, close: 20 },
-          staffCount: data.staffCount ?? 1,
-          maxConcurrentOrders: data.maxConcurrentOrders ?? 3,
-          inventory: data.inventory ?? {},
-          employees: data.employees ?? [],
-          marketState: data.marketState ?? { lastRestock: '', nextRestock: '', items: [] },
-          customerProfiles: data.customerProfiles ?? {},
-          recruitmentPool: data.recruitmentPool ?? [],
-          lastRecruitmentTime: data.lastRecruitmentTime ?? '',
-          lastPayrollTime: data.lastPayrollTime ?? '',
-          reviews: data.reviews ?? [],
-          activeOrders: data.activeOrders ?? [],
-          ordersCompleted: data.ordersCompleted ?? 0,
-          ordersFailed: data.ordersFailed ?? 0,
-          createdAt: data.createdAt?.toDate?.()?.toISOString() || new Date().toISOString(),
-          lastActiveAt: data.lastActiveAt?.toDate?.()?.toISOString() || new Date().toISOString(),
-        };
-
-        setBusiness(bizState);
-
-        if (bizState.lastPayrollTime) {
-          const dbTime = new Date(bizState.lastPayrollTime).getTime();
-          if (dbTime > lastPayrollRunRef.current) {
-            lastPayrollRunRef.current = dbTime;
-          }
-        }
-
-        if (data.businessTypeId) {
-          const type = getBusinessType(data.businessTypeId);
-          setBusinessType(type || null);
-        }
-      } else {
-        setBusiness(null);
-      }
-      setLoading(false);
-    });
-
-    return () => unsub();
-  }, [user, userData?.businessID, authLoading]);
-
-  useEffect(() => {
-    const businessId = business?.id;
-    if (!businessId) return;
-
-    fetchActiveOrders(businessId).then(setOrders);
-
-    const ordersQuery = query(collection(db, 'businesses', businessId, 'orders'));
-    const unsub = onSnapshot(ordersQuery, (snap) => {
-      const activeOrders = snap.docs
-        .map((d) => ({ id: d.id, ...d.data() } as Order))
-        .filter((o) => ['pending', 'accepted', 'in_progress'].includes(o.status))
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
-      setOrders(activeOrders);
-    });
-
-    return () => unsub();
-  }, [business?.id]);
+  const business = economyBusiness;
+  const businessType = economyBusinessType;
+  const orders = economyOrders;
+  const loading = authLoading || businessLoading;
 
   useEffect(() => {
     if (!business || !businessType) return;

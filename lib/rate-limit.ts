@@ -4,16 +4,49 @@ import { NextRequest, NextResponse } from 'next/server';
  * Very simple in-memory rate limiter for Production Hardening.
  * In a distributed environment, this should use Redis/Upstash.
  */
-const rateLimitMap = new Map<string, { count: number, resetAt: number }>();
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
-export function rateLimit(request: NextRequest, limit: number = 10, windowMs: number = 60000) {
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+const MAX_ENTRIES = 5000;
+const CLEANUP_INTERVAL_MS = 5 * 60 * 1000;
+let lastCleanupAt = 0;
+
+function getClientIp(request: NextRequest) {
+    const forwarded = request.headers.get('x-forwarded-for');
+    if (forwarded) return forwarded.split(',')[0]?.trim() || 'unknown';
+    return request.ip || 'unknown';
+}
+
+function cleanup(now: number) {
+    if (now - lastCleanupAt < CLEANUP_INTERVAL_MS) return;
+    lastCleanupAt = now;
+
+    for (const [k, v] of rateLimitMap.entries()) {
+        if (now > v.resetAt) rateLimitMap.delete(k);
+    }
+
+    if (rateLimitMap.size <= MAX_ENTRIES) return;
+
+    const over = rateLimitMap.size - MAX_ENTRIES;
+    let removed = 0;
+    for (const k of rateLimitMap.keys()) {
+        rateLimitMap.delete(k);
+        removed++;
+        if (removed >= over) break;
+    }
+}
+
+export function rateLimit(request: NextRequest, limit: number = 10, windowMs: number = 60000, key?: string) {
     const now = Date.now();
+    cleanup(now);
 
-    const record = rateLimitMap.get(ip);
+    const ip = getClientIp(request);
+    const routeKey = key || request.nextUrl?.pathname || 'unknown';
+    const bucketKey = `${ip}:${routeKey}`;
+
+    const record = rateLimitMap.get(bucketKey);
 
     if (!record || now > record.resetAt) {
-        rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs });
+        rateLimitMap.set(bucketKey, { count: 1, resetAt: now + windowMs });
         return { success: true };
     }
 
@@ -22,6 +55,8 @@ export function rateLimit(request: NextRequest, limit: number = 10, windowMs: nu
     }
 
     record.count++;
+    rateLimitMap.delete(bucketKey);
+    rateLimitMap.set(bucketKey, record);
     return { success: true };
 }
 

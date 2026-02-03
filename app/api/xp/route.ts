@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
 import { z } from 'zod';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 // Request validation schemas
 const XPUpdateSchema = z.object({
@@ -41,6 +42,9 @@ function calculateXP(correct: boolean, difficulty: number, timeSpent: number): n
 
 export async function POST(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 30, 60000, 'xp:POST');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 
@@ -79,6 +83,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const limiter = rateLimit(request, 60, 60000, 'xp:GET');
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
     const decodedToken = await verifyAuth(request);
     const userId = decodedToken.uid;
 

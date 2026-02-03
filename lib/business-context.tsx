@@ -3,7 +3,8 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useAuth } from './auth-context';
 import { db, isFirebaseReady } from './firebase';
-import { collection, doc, onSnapshot, query, updateDoc, writeBatch } from 'firebase/firestore';
+import { FirebaseMonitor } from './firebase-monitor';
+import { collection, doc, limit, onSnapshot, query, updateDoc, where, writeBatch } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import {
     BusinessState,
@@ -35,6 +36,9 @@ interface BusinessData {
 
 interface BusinessContextType {
     business: BusinessData | null;
+    economyBusiness: BusinessState | null;
+    economyBusinessType: BusinessType | null;
+    economyOrders: Order[];
     loading: boolean;
     deleteBusiness: () => Promise<void>;
     pauseBusiness: (isPaused: boolean) => Promise<void>;
@@ -46,6 +50,9 @@ const BusinessContext = createContext<BusinessContextType | undefined>(undefined
 export function BusinessProvider({ children }: { children: React.ReactNode }) {
     const { user, userData } = useAuth();
     const [business, setBusiness] = useState<BusinessData | null>(null);
+    const [economyBusiness, setEconomyBusiness] = useState<BusinessState | null>(null);
+    const [economyBusinessType, setEconomyBusinessType] = useState<BusinessType | null>(null);
+    const [economyOrders, setEconomyOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
 
     const economyBusinessRef = useRef<BusinessState | null>(null);
@@ -62,12 +69,15 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
     // Firebase sync optimization: Only sync every 30 seconds instead of every tick
     const lastFirebaseSyncRef = useRef<number>(Date.now());
-    const FIREBASE_SYNC_INTERVAL = 30000; // 30 seconds (was: every 3 second tick)
+    const FIREBASE_SYNC_INTERVAL = 60000; // 60 seconds (was: every 3 second tick)
 
 
     useEffect(() => {
         if (!user || !userData?.hasBusiness || !userData?.businessID || !isFirebaseReady || !db) {
             setBusiness(null);
+            setEconomyBusiness(null);
+            setEconomyBusinessType(null);
+            setEconomyOrders([]);
             setLoading(false);
             return;
         }
@@ -76,6 +86,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
         const unsubscribe = onSnapshot(
             businessRef,
             (snapshot) => {
+                FirebaseMonitor.trackRead('businesses', snapshot.metadata?.hasPendingWrites ? 0 : 1);
                 if (snapshot.exists()) {
                     const data: any = snapshot.data();
                     setBusiness({ id: snapshot.id, ...data } as BusinessData);
@@ -111,12 +122,17 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     };
 
                     economyBusinessRef.current = econ;
-                    economyTypeRef.current = data.businessTypeId ? (getBusinessType(data.businessTypeId) || null) : null;
+                    const econType = data.businessTypeId ? (getBusinessType(data.businessTypeId) || null) : null;
+                    economyTypeRef.current = econType;
+                    setEconomyBusiness(econ);
+                    setEconomyBusinessType(econType);
                 } else {
                     setBusiness(null);
                     economyBusinessRef.current = null;
                     economyTypeRef.current = null;
                     isPausedRef.current = false;
+                    setEconomyBusiness(null);
+                    setEconomyBusinessType(null);
                 }
                 setLoading(false);
             },
@@ -126,6 +142,8 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 economyBusinessRef.current = null;
                 economyTypeRef.current = null;
                 isPausedRef.current = false;
+                setEconomyBusiness(null);
+                setEconomyBusinessType(null);
                 setLoading(false);
             }
         );
@@ -136,17 +154,23 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (!userData?.businessID || !isFirebaseReady || !db) {
             ordersRef.current = [];
+            setEconomyOrders([]);
             return;
         }
 
-        const ordersQuery = query(collection(db, 'businesses', userData.businessID, 'orders'));
+        const ordersQuery = query(
+            collection(db, 'businesses', userData.businessID, 'orders'),
+            where('status', 'in', ['pending', 'accepted', 'in_progress']),
+            limit(120)
+        );
         const unsub = onSnapshot(ordersQuery, (snap) => {
+            FirebaseMonitor.trackRead('business_orders', snap.docChanges().length || snap.size);
             const activeOrders = snap.docs
                 .map((d) => ({ id: d.id, ...d.data() } as any))
-                .filter((o: any) => ['pending', 'accepted', 'in_progress'].includes(o.status))
                 .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
             ordersRef.current = activeOrders as Order[];
+            setEconomyOrders(activeOrders as Order[]);
         });
 
         return () => unsub();
@@ -250,6 +274,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                             recruitmentPool: updatedPool,
                             lastRecruitmentTime: new Date().toISOString(),
                         }).catch(console.error);
+                        FirebaseMonitor.trackWrite('businesses', 1);
                     }
                 }
 
@@ -410,6 +435,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     });
 
                     updateDoc(bizRef, { employees: updatedEmployees });
+                    FirebaseMonitor.trackWrite('businesses', 1);
                 }
 
                 // Economy tick: generate new orders & manage lifecycle
@@ -499,6 +525,8 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
             // Commit all operations atomically
             await batch.commit();
+            FirebaseMonitor.trackDelete('businesses', 1);
+            FirebaseMonitor.trackWrite('users', 1);
             setBusiness(null);
         } catch (error) {
             console.error('Error deleting business:', error);
@@ -513,10 +541,11 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
         await updateDoc(businessRef, {
             status: isPaused ? 'paused' : 'active'
         });
+        FirebaseMonitor.trackWrite('businesses', 1);
     };
 
     return (
-        <BusinessContext.Provider value={{ business, loading, deleteBusiness, pauseBusiness, economyRuntimeActive: !!userData?.businessID }}>
+        <BusinessContext.Provider value={{ business, economyBusiness, economyBusinessType, economyOrders, loading, deleteBusiness, pauseBusiness, economyRuntimeActive: !!userData?.businessID }}>
             {children}
         </BusinessContext.Provider>
     );

@@ -4,6 +4,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { z } from 'zod';
 import { calculateXPUpdate, getDayKey } from '@/lib/xp-utils';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 // Schema for lab completion XP
 const LabCompleteSchema = z.object({
@@ -14,6 +15,9 @@ const LabCompleteSchema = z.object({
 
 export async function POST(request: NextRequest) {
     try {
+        const limiter = rateLimit(request, 10, 60000, 'labs:complete');
+        if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
         const decodedToken = await verifyAuth(request);
         const userId = decodedToken.uid;
 

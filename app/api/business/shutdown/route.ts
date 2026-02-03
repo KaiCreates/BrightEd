@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { verifyAuth } from '@/lib/auth-server';
 import * as admin from 'firebase-admin';
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
     try {
+        const limiter = rateLimit(request, 2, 60000, 'business:shutdown:POST');
+        if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+
         const decodedToken = await verifyAuth(request);
         const userId = decodedToken.uid;
 

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { adminDb } from '@/lib/firebase-admin'
 import { verifyAuth } from '@/lib/auth-server'
+import { rateLimit, handleRateLimit } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
 
@@ -42,11 +43,14 @@ function displayNameFromUser(data: any, fallbackId: string) {
  */
 export async function GET(request: NextRequest) {
   try {
-    await verifyAuth(request)
-
     const { searchParams } = new URL(request.url)
     const type = (searchParams.get('type') || 'xp') as LeaderboardType
     const limit = clampInt(searchParams.get('limit'), { min: 1, max: 50, fallback: 20 })
+
+    const limiter = rateLimit(request, type === 'schools' ? 3 : 20, 60000, `leaderboards:${type}`)
+    if (!limiter.success) return handleRateLimit(limiter.retryAfter!)
+
+    await verifyAuth(request)
 
     if (!['xp', 'streak', 'mastery', 'schools'].includes(type)) {
       return NextResponse.json({ error: 'Invalid leaderboard type' }, { status: 400 })
@@ -127,6 +131,13 @@ export async function GET(request: NextRequest) {
     // FALLBACK: Direct query (expensive but ensures functionality)
     // This runs if cache doesn't exist yet
     if (type === 'schools') {
+      if (process.env.NODE_ENV === 'production') {
+        return NextResponse.json(
+          { error: 'Schools leaderboard cache not ready yet. Please try again shortly.' },
+          { status: 503 }
+        )
+      }
+
       // Note: Firestore has no server-side group-by. This aggregates in memory.
       // For large datasets, run aggregate-leaderboards.ts to pre-compute.
       const usersSnap = await adminDb.collection('users').get()

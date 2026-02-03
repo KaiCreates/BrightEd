@@ -12,6 +12,7 @@ import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore'
 import { ProfessorBrightMascot } from '@/components/learning'
 import { FeedbackResponse } from '@/lib/professor-bright'
 import { ALL_ACHIEVEMENTS, checkAchievement } from '@/lib/achievements'
+import { resolveMasteryPercent } from '@/lib/user-stats'
 
 export default function HomePage() {
     const router = useRouter()
@@ -27,21 +28,10 @@ export default function HomePage() {
         loading: boolean
     }>({ xpTop: null, streakTop: null, topBusiness: null, loading: true })
 
-    // Calculate Mastery
-    const getMasteryValue = (val: any): number => {
-        if (typeof val === 'number') return val;
-        if (typeof val === 'object' && val !== null) {
-            const values = Object.values(val).filter(v => typeof v === 'number') as number[];
-            if (values.length === 0) return 0.1;
-            const sum = values.reduce((a, b) => a + b, 0);
-            return sum / (values.length * 10.0); // 0.1-10 scale
-        }
-        return 0.1;
-    };
-    const mastery = getMasteryValue(userData?.mastery || userData?.subjectProgress);
+    const masteryPercent = resolveMasteryPercent(userData);
 
     const HOME_STATS = [
-        { label: 'Mastery', value: Math.round(mastery * 100).toString(), unit: '%', icon: '🧠', color: 'text-purple-500' },
+        { label: 'Mastery', value: masteryPercent.toString(), unit: '%', icon: '🧠', color: 'text-purple-500' },
         { label: 'Consistency', value: Math.round(userData?.consistency || 0).toString(), unit: '%', icon: '📈', color: 'text-blue-500' },
         { label: 'Streak', value: (userData?.streak || 0).toString(), unit: 'Days', icon: '🔥', color: 'text-orange-500' },
         { label: 'Wealth', value: (userData?.xp || 0).toLocaleString(), unit: 'Total', icon: '⚡', color: 'text-yellow-500' },

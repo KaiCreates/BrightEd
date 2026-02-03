@@ -13,6 +13,7 @@ import { ProfessorBrightMascot } from '@/components/learning';
 import { ALL_ACHIEVEMENTS, checkAchievement } from '@/lib/achievements';
 import { createAvatar } from '@dicebear/core';
 import { avataaars } from '@dicebear/collection';
+import { resolveMasteryPercent } from '@/lib/user-stats';
 
 export default function UserProfilePage() {
     const params = useParams();
@@ -67,6 +68,7 @@ export default function UserProfilePage() {
     const [socialList, setSocialList] = useState<any[]>([]);
     const [socialLoading, setSocialLoading] = useState(false);
     const [bizValuation, setBizValuation] = useState(0);
+    const masteryPercent = resolveMasteryPercent(profileData);
 
     useEffect(() => {
         const fetchSocialDetails = async () => {
@@ -333,7 +335,7 @@ export default function UserProfilePage() {
                                 {isOwner && (
                                     <>
                                         <StatCard icon="💰" label="B-Coins" value={profileData.bCoins?.toLocaleString() || 0} color="text-[var(--brand-primary)]" />
-                                        <StatCard icon="🧠" label="Mastery" value={`${Math.round((profileData.globalMastery || 0) * 100)}%`} color="text-purple-500" />
+                                        <StatCard icon="🧠" label="Mastery" value={`${masteryPercent}%`} color="text-purple-500" />
                                     </>
                                 )}
                             </div>

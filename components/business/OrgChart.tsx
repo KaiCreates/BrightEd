@@ -1,12 +1,11 @@
 'use client';
 
 import { BusinessState, Employee } from '@/lib/economy/economy-types';
-import { BrightLayer, BrightHeading, BrightButton, useDialog } from '@/components/system';
-import { doc, updateDoc, arrayRemove, increment } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
-import { getAvailableSpecializations, assignSpecialization } from '@/lib/economy/employee-skills';
+import { BrightLayer, BrightHeading, useDialog } from '@/components/system';
+import { getAvailableSpecializations } from '@/lib/economy/employee-skills';
 import { useState } from 'react';
 import EmployeeIDCard from '@/components/business/EmployeeIDCard';
+import { useAuth } from '@/lib/auth-context';
 
 interface OrgChartProps {
     business: BusinessState;
@@ -15,32 +14,67 @@ interface OrgChartProps {
 export default function OrgChart({ business }: OrgChartProps) {
     const employees = business.employees || [];
     const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
-    const { showConfirm } = useDialog();
+    const { showConfirm, showAlert } = useDialog();
+    const { user } = useAuth();
+
+    const postEmployeeAction = async (payload: {
+        businessId: string;
+        action: 'hire' | 'decline' | 'pay' | 'pay_all' | 'fire' | 'assign_specialization';
+        candidateId?: string;
+        employeeId?: string;
+        specialization?: string;
+    }) => {
+        if (!user) throw new Error('Not authenticated');
+
+        const token = await user.getIdToken();
+        const response = await fetch('/api/business/employees', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to process employee action');
+        }
+        return data;
+    };
 
     const handleFire = (employee: Employee) => {
         showConfirm(
             `Are you sure you want to fire ${employee.name}? This action cannot be undone and may affect your reputation.`,
             async () => {
-                const bizRef = doc(db, 'businesses', business.id);
-                await updateDoc(bizRef, {
-                    employees: arrayRemove(employee),
-                    staffCount: increment(-1)
-                });
+                try {
+                    await postEmployeeAction({
+                        businessId: business.id,
+                        action: 'fire',
+                        employeeId: employee.id
+                    });
+                } catch (error: any) {
+                    console.error('Failed to fire employee:', error);
+                    showAlert(error.message || 'Failed to fire employee. Please try again.');
+                }
             },
             { title: 'TERMINATE CONTRACT', type: 'danger', confirmLabel: 'FIRE' }
         );
     };
 
     const handleAssignSpecialization = async (employee: Employee, specialization: string) => {
-        const updatedEmployee = assignSpecialization(employee, specialization as any);
-        const bizRef = doc(db, 'businesses', business.id);
-        const updatedEmployees = employees.map(e => e.id === employee.id ? updatedEmployee : e);
-
-        await updateDoc(bizRef, {
-            employees: updatedEmployees
-        });
-
-        setSelectedEmployee(null);
+        try {
+            await postEmployeeAction({
+                businessId: business.id,
+                action: 'assign_specialization',
+                employeeId: employee.id,
+                specialization
+            });
+            setSelectedEmployee(null);
+        } catch (error: any) {
+            console.error('Failed to assign specialization:', error);
+            showAlert(error.message || 'Failed to assign specialization. Please try again.');
+        }
     };
 
     return (

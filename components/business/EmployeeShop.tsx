@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { BrightHeading, useDialog } from '@/components/system';
 import { BusinessState, Employee } from '@/lib/economy/economy-types';
-import { doc, updateDoc, arrayUnion, increment } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import EmployeeIDCard from '@/components/business/EmployeeIDCard';
+import { useAuth } from '@/lib/auth-context';
 
 interface EmployeeShopProps {
     business: BusinessState;
@@ -14,6 +12,33 @@ interface EmployeeShopProps {
 export default function EmployeeShop({ business }: EmployeeShopProps) {
     const candidates = business.recruitmentPool || [];
     const { showAlert, showConfirm } = useDialog();
+    const { user } = useAuth();
+
+    const postEmployeeAction = async (payload: {
+        businessId: string;
+        action: 'hire' | 'decline' | 'pay' | 'pay_all' | 'fire' | 'assign_specialization';
+        candidateId?: string;
+        employeeId?: string;
+        specialization?: string;
+    }) => {
+        if (!user) throw new Error('Not authenticated');
+
+        const token = await user.getIdToken();
+        const response = await fetch('/api/business/employees', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to process employee action');
+        }
+        return data;
+    };
 
     const handleHire = (candidate: Employee) => {
         const hiringCost = Math.floor(candidate.salaryPerDay * 1);
@@ -26,30 +51,15 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
         showConfirm(
             `Hire ${candidate.name} for a daily rate of ฿${candidate.salaryPerDay}? A 1-day deposit (฿${hiringCost}) is required.`,
             async () => {
-                const bizRef = doc(db, 'businesses', business.id);
-                const newPool = candidates.filter(c => c.id !== candidate.id);
-
-                const employeeRecord = {
-                    ...candidate,
-                    unpaidWages: 0,
-                    hiredAt: new Date().toISOString(),
-                    stats: {
-                        ...candidate.stats,
-                        morale: 100
-                    }
-                };
-
                 try {
-                    await updateDoc(bizRef, {
-                        cashBalance: increment(-hiringCost),
-                        balance: increment(-hiringCost),
-                        employees: arrayUnion(employeeRecord),
-                        recruitmentPool: newPool,
-                        staffCount: increment(1)
+                    await postEmployeeAction({
+                        businessId: business.id,
+                        action: 'hire',
+                        candidateId: candidate.id
                     });
-                } catch (e) {
+                } catch (e: any) {
                     console.error("Hiring failed:", e);
-                    showAlert("Failed to process hiring. Please check your connection and try again.");
+                    showAlert(e.message || "Failed to process hiring. Please check your connection and try again.");
                 }
             },
             { title: 'CONFIRM HIRING', confirmLabel: 'HIRE' }
@@ -57,11 +67,16 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
     };
 
     const handleDecline = async (candidate: Employee) => {
-        const bizRef = doc(db, 'businesses', business.id);
-        const newPool = candidates.filter(c => c.id !== candidate.id);
-        await updateDoc(bizRef, {
-            recruitmentPool: newPool
-        });
+        try {
+            await postEmployeeAction({
+                businessId: business.id,
+                action: 'decline',
+                candidateId: candidate.id
+            });
+        } catch (e: any) {
+            console.error("Decline failed:", e);
+            showAlert(e.message || "Failed to decline candidate. Please try again.");
+        }
     };
 
     return (

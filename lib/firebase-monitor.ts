@@ -27,6 +27,7 @@ export class FirebaseMonitor {
   };
   
   private static stats: DailyStats | null = null;
+  private static saveTimer: ReturnType<typeof setTimeout> | null = null;
   
   /**
    * Initialize monitor and load existing stats
@@ -223,12 +224,18 @@ export class FirebaseMonitor {
    */
   private static save(): void {
     if (typeof window === 'undefined' || !this.stats) return;
-    
-    try {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.stats));
-    } catch (error) {
-      console.error('Failed to save Firebase usage stats:', error);
-    }
+
+    if (this.saveTimer) return;
+
+    this.saveTimer = setTimeout(() => {
+      this.saveTimer = null;
+      try {
+        if (!this.stats) return;
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.stats));
+      } catch (error) {
+        console.error('Failed to save Firebase usage stats:', error);
+      }
+    }, 1000);
   }
   
   /**

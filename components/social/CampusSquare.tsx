@@ -13,7 +13,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 const REACTIONS = ['🔥', '💯', '👏', '💡'];
 
 export function CampusSquare() {
-    const { activeRoom, messages, sendMessage, addReaction, openDM, reportMessage, reportRoom } = useSocialHub();
+    const { activeRoom, messages, sendMessage, addReaction, openDM, reportMessage, reportRoom, typingUsers, setTyping } = useSocialHub();
     const { user, userData } = useAuth();
     const [messageText, setMessageText] = useState('');
     const [showReactions, setShowReactions] = useState<string | null>(null);
@@ -22,6 +22,7 @@ export function CampusSquare() {
     const [uploadProgress, setUploadProgress] = useState(0);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (messages.length > 0 && messagesEndRef.current) {
@@ -37,6 +38,26 @@ export function CampusSquare() {
             setMessageText('');
         } catch (error: any) {
             alert(error.message || 'Failed to send message');
+        }
+    };
+
+    const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.target.value;
+        setMessageText(text);
+
+        // Notify that user is typing
+        if (text.trim()) {
+            setTyping(true);
+            // Clear previous timeout
+            if (typingTimeoutRef.current) {
+                clearTimeout(typingTimeoutRef.current);
+            }
+            // Set typing to false after 3 seconds of inactivity
+            typingTimeoutRef.current = setTimeout(() => {
+                setTyping(false);
+            }, 3000);
+        } else {
+            setTyping(false);
         }
     };
 
@@ -324,6 +345,23 @@ export function CampusSquare() {
 
             {/* Input Area */}
             <div className="p-4 border-t border-white/10">
+                {/* Typing Indicator */}
+                {typingUsers.length > 0 && (
+                    <div className="mb-2 px-2">
+                        <span className="text-xs text-[var(--text-muted)] italic">
+                            {typingUsers.length === 1
+                                ? `${typingUsers[0].name} is typing...`
+                                : typingUsers.length === 2
+                                    ? `${typingUsers[0].name} and ${typingUsers[1].name} are typing...`
+                                    : `${typingUsers[0].name} and ${typingUsers.length - 1} others are typing...`}
+                        </span>
+                        <span className="inline-flex ml-1">
+                            <span className="w-1 h-1 bg-[var(--brand-primary)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                            <span className="w-1 h-1 bg-[var(--brand-primary)] rounded-full animate-bounce ml-0.5" style={{ animationDelay: '150ms' }} />
+                            <span className="w-1 h-1 bg-[var(--brand-primary)] rounded-full animate-bounce ml-0.5" style={{ animationDelay: '300ms' }} />
+                        </span>
+                    </div>
+                )}
                 {fileUploading && (
                     <div className="mb-3">
                         <div className="flex items-center justify-between mb-1">
@@ -357,7 +395,7 @@ export function CampusSquare() {
                     />
                     <textarea
                         value={messageText}
-                        onChange={(e) => setMessageText(e.target.value)}
+                        onChange={handleMessageChange}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault();

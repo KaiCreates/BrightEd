@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/lib/auth-context'
-import { useSocialHub } from '@/lib/social-hub-context'
 import { BrightHeading, BrightButton, BrightLayer } from '@/components/system'
-import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, collection, query, where, getDocs, arrayRemove } from 'firebase/firestore'
 import { db, auth } from '@/lib/firebase'
 import { updateProfile, updateEmail, sendPasswordResetEmail, signOut } from 'firebase/auth'
 import { toast } from 'react-hot-toast'
@@ -15,7 +14,7 @@ import { toast } from 'react-hot-toast'
 export default function ProfileSettingsPage({ params }: { params: { username: string } }) {
     const router = useRouter()
     const { user, userData, loading } = useAuth()
-    const { unblockUser, blockedUsers } = useSocialHub()
+    const blockedUsers = userData?.blockedUsers || []
     const [blockedList, setBlockedList] = useState<any[]>([])
     const [loadingBlocked, setLoadingBlocked] = useState(false)
 
@@ -75,7 +74,10 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
 
     const handleUnblock = async (userId: string) => {
         try {
-            await unblockUser(userId)
+            if (!user) return
+            await updateDoc(doc(db, 'users', user.uid), {
+                blockedUsers: arrayRemove(userId)
+            })
             toast.success('User unblocked')
         } catch (err) {
             console.error("Failed to unblock:", err)
