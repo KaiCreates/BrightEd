@@ -9,8 +9,10 @@ export function ConditionalNavigation() {
   const isLandingPage = pathname === '/' || pathname === '/signup' || pathname === '/login' || (pathname?.startsWith('/welcome') && !pathname?.startsWith('/welcome/diagnostic'))
   const isImmersivePractical = pathname?.startsWith('/practicals/technology-practicality')
 
-  // Hide navigation on onboarding pages
-  if (isOnboardingPage) {
+  const isDiagnostic = pathname?.startsWith('/welcome/diagnostic')
+
+  // Use minimal navigation for diagnostic
+  if (isDiagnostic) {
     return <Navigation variant="minimal" />
   }
 

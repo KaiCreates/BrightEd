@@ -621,7 +621,7 @@ function CommunityHubInner() {
               <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)]">
-                  {Object.keys(onlineUsers).length} Online
+                  {Math.max(1, Object.keys(onlineUsers).length)} Online
                 </span>
               </div>
               <button
@@ -829,39 +829,41 @@ function CommunityHubInner() {
                             </div>
                           </div>
 
-                          <div className={`absolute -top-10 ${isMine ? 'right-0' : 'left-0'} hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-200 transform group-hover:-translate-y-1`}>
+                          <div className={`absolute bottom-1 right-1 hidden md:flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-200`}>
                             <button
                               onClick={() => openDM(m.senderId, m.senderName || 'User')}
-                              className={`text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl border transition-all ${isMine ? 'bg-[#1CB0F6] text-white border-[#1899D6] border-b-[3px] active:border-b-0 active:translate-y-[2px]' : 'bg-white text-[#3C3C3C] border-[#E5E5E5] border-b-[3px] active:border-b-0 active:translate-y-[2px]'}`}
+                              className="text-sm p-1.5 rounded bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all backdrop-blur-sm"
+                              title="Direct Message"
                             >
-                              DM
+                              💬
                             </button>
 
                             {isMine ? (
                               <>
                                 <button
                                   onClick={() => handleStartEdit(m.id, m.text)}
-                                  className="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl bg-white text-[#3C3C3C] border-[#E5E5E5] border-b-[3px] active:border-b-0 active:translate-y-[2px] transition-all"
+                                  className="text-sm p-1.5 rounded bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all backdrop-blur-sm"
                                   disabled={editingId === m.id}
+                                  title="Edit Message"
                                 >
-                                  Edit
+                                  ✏️
                                 </button>
                                 <button
                                   onClick={() => handleDelete(m.id)}
-                                  className="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl bg-red-100 text-red-500 border-red-200 border-b-[3px] active:border-b-0 active:translate-y-[2px] transition-all"
+                                  className="text-sm p-1.5 rounded bg-red-500/10 hover:bg-red-500/20 text-red-200 hover:text-red-100 transition-all backdrop-blur-sm"
+                                  title="Delete Message"
                                 >
-                                  Delete
+                                  🗑️
                                 </button>
                               </>
                             ) : (
-                              <>
-                                <button
-                                  onClick={() => reportMessage(m.id, 'Inappropriate content')}
-                                  className="text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl bg-white text-red-500 border-[#E5E5E5] border-b-[3px] active:border-b-0 active:translate-y-[2px] transition-all"
-                                >
-                                  Report
-                                </button>
-                              </>
+                              <button
+                                onClick={() => reportMessage(m.id, 'Inappropriate content')}
+                                className="text-sm p-1.5 rounded bg-red-500/10 hover:bg-red-500/20 text-red-200 hover:text-red-100 transition-all backdrop-blur-sm"
+                                title="Report Message"
+                              >
+                                🚩
+                              </button>
                             )}
                           </div>
 
@@ -1218,8 +1220,6 @@ function AvatarRenderer({ customization, username }: { customization: any, usern
 
 export default function CommunityPage() {
   return (
-    <SocialHubProvider>
-      <CommunityHubInner />
-    </SocialHubProvider>
+    <CommunityHubInner />
   )
 }

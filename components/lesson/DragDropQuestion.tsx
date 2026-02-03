@@ -210,7 +210,7 @@ export default function DragDropQuestion({
                 : item
                   ? 'border-[var(--border-subtle)] bg-[var(--bg-elevated)] border-b-4'
                   : 'border-dashed border-[var(--border-subtle)] bg-[var(--bg-secondary)]'
-                } ${isComplete && isCorrect ? 'border-[#58CC02] border-b-[#46A302] bg-[#D7FFB8]' : ''} 
+                } ${isComplete && isCorrect ? 'border-[#58CC02] border-b-[#46A302] bg-[#D7FFB8]' : ''}
                   ${isComplete && isCorrect === false ? 'border-[#FF4B4B] border-b-[#D33131] bg-[#FFDFE0]' : ''}
                 `}
               layout

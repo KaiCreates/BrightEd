@@ -8,6 +8,7 @@ import { TopicMasteryDashboard, TopicMastery } from '@/components/learning'
 import { useAuth } from '@/lib/auth-context' // Assuming auth context exists
 import { StreakCelebration, ProfessorBrightMascot } from '@/components/learning'
 import { FeedbackResponse } from '@/lib/professor-bright'
+import LabProgress from '@/components/science/LabProgress'
 
 export default function ProgressPage() {
     const router = useRouter()
@@ -143,6 +144,9 @@ export default function ProgressPage() {
                         trend="neutral"
                     />
                 </div>
+
+                {/* Lab Progress Section */}
+                <LabProgress userData={userData} />
 
                 {/* Main Dashboard */}
                 <TopicMasteryDashboard

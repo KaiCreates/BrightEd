@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAuth } from '@/lib/auth-server';
 import { adminDb } from '@/lib/firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 import { z } from 'zod';
 import { calculateXPUpdate, getDayKey } from '@/lib/xp-utils';
 
@@ -53,12 +54,21 @@ export async function POST(request: NextRequest) {
         // Calculate XP with daily cap
         const { xpGain, xpToday, isCapped, updates } = calculateXPUpdate(userData, xpReward, todayKey);
 
+        // Calculate B-Coins reward (25-45 coins randomized)
+        const coinsEarned = Math.floor(Math.random() * (45 - 25 + 1)) + 25;
+
         // Add lab completion tracking
         updates[`completedLabs.${labId}`] = todayKey;
         updates[`labScores.${labId}`] = {
             score: score || 100,
             completedAt: new Date().toISOString()
         };
+
+        // Update user balances (assuming user model has cashBalance/balance like business)
+        // If not, we'll create them or increment them. 
+        // Note: FieldValue.increment() works even if field doesn't exist (treats as 0)
+        updates['cashBalance'] = FieldValue.increment(coinsEarned);
+        updates['balance'] = FieldValue.increment(coinsEarned);
 
         // Apply updates
         await userRef.update(updates);
@@ -68,10 +78,11 @@ export async function POST(request: NextRequest) {
             xpGain,
             xpToday,
             isCapped,
+            coinsEarned,
             newTotal: (userData.xp || 0) + xpGain,
             message: isCapped
-                ? `Daily cap reached! Earned ${xpGain} XP`
-                : `Earned ${xpGain} XP for completing ${labId}`
+                ? `Daily cap reached! Earned ${xpGain} XP & ฿${coinsEarned}`
+                : `Earned ${xpGain} XP & ฿${coinsEarned} for completing ${labId}`
         });
 
     } catch (error: any) {

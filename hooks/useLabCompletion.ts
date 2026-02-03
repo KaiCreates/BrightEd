@@ -7,6 +7,7 @@ interface LabCompletionResult {
     success: boolean;
     xpGain: number;
     xpToday: number;
+    coinsEarned?: number;
     isCapped: boolean;
     alreadyCompleted?: boolean;
     message: string;
@@ -58,9 +59,10 @@ export function useLabCompletion() {
                 success: true,
                 xpGain: data.xpGain || 0,
                 xpToday: data.xpToday || 0,
+                coinsEarned: data.coinsEarned || 0,
                 isCapped: data.isCapped || false,
                 alreadyCompleted: data.alreadyCompleted,
-                message: data.message || `Earned ${data.xpGain} XP!`
+                message: data.message || `Earned ${data.xpGain} XP & ฿${data.coinsEarned}!`
             };
 
             setResult(completionResult);

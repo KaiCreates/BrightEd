@@ -99,12 +99,13 @@ const MascotOwl = ({ pose = 'owl-happy', size = 'sm' }: { pose?: string, size?: 
 function DiagnosticContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const { user } = useAuth()
+    const { user, userData } = useAuth()
 
-    // Params from Welcome Flow
-    const subjects = searchParams?.get('subjects')?.split(',') || []
-    const source = searchParams?.get('source') || ''
-    const lvls = searchParams?.get('lvls') || '{}'
+    // Params from Welcome Flow, fallback to user data
+    const subjects = userData?.subjects || searchParams?.get('subjects')?.split(',') || []
+    const source = userData?.source || searchParams?.get('source') || ''
+    const lvlsStr = searchParams?.get('lvls') || '{}'
+    const lvls = userData?.proficiencies || JSON.parse(lvlsStr)
 
     // State
     const [phase, setPhase] = useState<'ready' | 'testing' | 'analyzing' | 'complete'>('ready')
@@ -275,7 +276,7 @@ function DiagnosticContent() {
     const progress = (questionIndex / 10) * 100
 
     return (
-        <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center p-6 pt-20">
+        <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center p-6 pt-36">
             <div className="w-full max-w-2xl mb-12">
                 <div className="flex justify-between items-end mb-3">
                     <div className="flex items-center gap-3">

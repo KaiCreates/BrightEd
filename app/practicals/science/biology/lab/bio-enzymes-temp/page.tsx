@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core';
 import ProfessorBright, { useProfessor } from '@/components/science/ProfessorBright';
 import { createParticles, Particle, itemVariants } from '@/lib/science/virtual-lab.types';
+import { useLabCompletion } from '@/hooks/useLabCompletion';
 
 // ==========================================
 // TYPES
@@ -203,6 +204,8 @@ export default function EnzymeLabV2Page() {
         initialMessage: "Let's test how temperature affects enzyme activity. Add amylase and starch to each water bath!"
     });
 
+    const { completeLab, result } = useLabCompletion();
+
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
         useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
@@ -305,6 +308,7 @@ export default function EnzymeLabV2Page() {
 
         // Check if all 3 tested
         if (results.length + 1 >= 3) {
+            completeLab('bio-enzymes-temp', 300);
             setTimeout(() => setShowSuccess(true), 2000);
         }
     };
@@ -345,6 +349,13 @@ export default function EnzymeLabV2Page() {
                                 </div>
                             );
                         })}
+                    </div>
+
+                    <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C] mb-10">
+                        <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
+                        <div className="text-3xl font-black text-amber-400">
+                            {result?.xpGain !== undefined ? `+${result.xpGain}` : '+300'}
+                        </div>
                     </div>
 
                     <a

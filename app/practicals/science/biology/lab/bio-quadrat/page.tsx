@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core';
 import ProfessorBright, { useProfessor } from '@/components/science/ProfessorBright';
 import { createParticles, Particle, itemVariants } from '@/lib/science/virtual-lab.types';
+import { useLabCompletion } from '@/hooks/useLabCompletion';
 
 // ==========================================
 // TYPES
@@ -257,11 +258,14 @@ export default function QuadratLabV2Page() {
         setHoverPosition(null);
     };
 
-    const handleComplete = () => {
+    const { completeLab, result } = useLabCompletion();
+
+    const handleComplete = async () => {
         if (samples.length < 5) {
             showWarning("You need at least 5 samples for any meaningful data!");
             return;
         }
+        await completeLab('bio-quadrat', 200, Math.min(100, samples.length * 10));
         setShowSuccess(true);
     };
 
@@ -305,7 +309,9 @@ export default function QuadratLabV2Page() {
                     <div className="grid grid-cols-2 gap-6 mb-10 max-w-md mx-auto">
                         <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
-                            <div className="text-3xl font-black text-amber-400">+200</div>
+                            <div className="text-3xl font-black text-amber-400">
+                                {result?.xpGain !== undefined ? `+${result.xpGain}` : '+200'}
+                            </div>
                         </div>
                         <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Reliability</div>

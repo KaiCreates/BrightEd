@@ -5,6 +5,7 @@ import { ConditionalMain } from '@/components/ConditionalMain'
 import { ThemeProvider } from '@/lib/theme-context'
 import { AuthProvider } from '@/lib/auth-context'
 import { ConsoleBrandSplash } from '@/components/ConsoleBrandSplash'
+import { SocialHubProvider } from '@/lib/social-hub-context'
 
 export const metadata: Metadata = {
   title: 'BrightEd - Adaptive Learning for CXC',
@@ -21,6 +22,8 @@ import { Toaster } from 'react-hot-toast'
 import { BusinessProvider } from '@/lib/business-context'
 import { AuthGate } from '@/components/AuthGate'
 import { DialogProvider } from '@/components/system'
+import { PostHogProvider } from '@/components/providers/PostHogProvider'
+import PostHogPageView from '@/components/analytics/PostHogPageView'
 
 export default function RootLayout({
   children,
@@ -35,29 +38,34 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased text-[var(--text-primary)] bg-[var(--bg-primary)] min-h-screen">
         <ErrorBoundary>
-          <DialogProvider>
-            <AuthProvider>
-              <BusinessProvider>
-                <ThemeProvider>
-                  <ConsoleBrandSplash />
-                  <Toaster position="top-right" toastOptions={{
-                    duration: 4000,
-                    style: {
-                      background: 'var(--bg-elevated)',
-                      color: 'var(--text-primary)',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: '12px',
-                      backdropFilter: 'blur(10px)',
-                    }
-                  }} />
-                  <AuthGate>
-                    <ConditionalNavigation />
-                    <ConditionalMain>{children}</ConditionalMain>
-                  </AuthGate>
-                </ThemeProvider>
-              </BusinessProvider>
-            </AuthProvider>
-          </DialogProvider>
+          <PostHogProvider>
+            <PostHogPageView />
+            <DialogProvider>
+              <AuthProvider>
+                <SocialHubProvider>
+                  <BusinessProvider>
+                    <ThemeProvider>
+                      <ConsoleBrandSplash />
+                      <Toaster position="top-right" toastOptions={{
+                        duration: 4000,
+                        style: {
+                          background: 'var(--bg-elevated)',
+                          color: 'var(--text-primary)',
+                          border: '1px solid var(--border-subtle)',
+                          borderRadius: '12px',
+                          backdropFilter: 'blur(10px)',
+                        }
+                      }} />
+                      <AuthGate>
+                        <ConditionalNavigation />
+                        <ConditionalMain>{children}</ConditionalMain>
+                      </AuthGate>
+                    </ThemeProvider>
+                  </BusinessProvider>
+                </SocialHubProvider>
+              </AuthProvider>
+            </DialogProvider>
+          </PostHogProvider>
         </ErrorBoundary>
       </body>
     </html>

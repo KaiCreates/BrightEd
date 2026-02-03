@@ -13,10 +13,12 @@ service cloud.firestore {
     
     // --- USER PROFILE RULES ---
     match /users/{userId} {
-      // User documents may contain PII; restrict reads to the owner.
-      allow read: if isAuthenticated() && isOwner(userId);
-      // Only the user can edit their own profile
+      // Allow authenticated users to view profiles (needed for Search and Social features)
+      allow read: if isAuthenticated();
+      // Only the user can edit their own profile, EXCEPT for followers updates
       allow write: if isAuthenticated() && isOwner(userId);
+      allow update: if isAuthenticated() && 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['followers']);
       
       match /progress/{document=**} {
         // Progress is strictly private

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { UserData } from '@/lib/auth-context'
-import { NABLEState, createInitialState, loadState } from '@/lib/nable'
+import { NABLEState } from '@/lib/nable'
 
 interface UseQuestionLoaderProps {
     objectiveId: string | null

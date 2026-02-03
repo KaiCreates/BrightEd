@@ -274,7 +274,7 @@ export default function DiffusionLabPage() {
                         )}
 
                         <div className="mt-8 p-4 rounded-2xl bg-[#1B1B2F] border border-[#3D3D5C]">
-                            <div className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-3">What's Happening?</div>
+                            <div className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-3">What&apos;s Happening?</div>
                             <p className="text-xs text-zinc-400 leading-relaxed">
                                 KMnO₄ molecules have kinetic energy and move randomly, spreading from high concentration (crystal) to low (water).
                             </p>

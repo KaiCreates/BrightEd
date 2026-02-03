@@ -14,10 +14,19 @@ import {
 } from '@/lib/economy/pricing-engine';
 import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import ProfessorBright, { useProfessor } from '@/components/science/ProfessorBright';
 
 interface MarketplaceProps {
     business: BusinessState;
 }
+
+// Purchase Particle Effect
+type PurchaseParticle = {
+    id: number;
+    x: number;
+    y: number;
+    text: string;
+};
 
 // Initialize supply/demand curves for market items
 const initializePricingCurves = (items: MarketItem[]): Map<string, SupplyDemandCurve> => {
@@ -41,8 +50,13 @@ export default function Marketplace({ business }: MarketplaceProps) {
     const [timeLeft, setTimeLeft] = useState<string>('00:00');
     const [isRestocking, setIsRestocking] = useState(false);
     const [pricingCurves, setPricingCurves] = useState<Map<string, SupplyDemandCurve>>(new Map());
+    const [particles, setParticles] = useState<PurchaseParticle[]>([]);
     const { showAlert } = useDialog();
     const anySrcLoader = ({ src }: { src: string }) => src;
+
+    const { professor, showSuccess: showProfessorSuccess, showHint } = useProfessor({
+        initialMessage: "Buy materials when prices are low! Watch for the green indicators."
+    });
 
     useEffect(() => {
         if (business.marketState?.items && business.marketState.items.length > 0) {
@@ -70,6 +84,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
                 setIsRestocking(true);
                 try {
                     await ensureMarketRestock(business.id);
+                    showProfessorSuccess("Market Restocked! Check for new deals.");
                 } finally {
                     if (mounted) setIsRestocking(false);
                 }
@@ -100,7 +115,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
         };
     }, [business.id, business.marketState?.nextRestock, isRestocking]);
 
-    const handleBuy = async (item: MarketItem, quantity: number) => {
+    const handleBuy = async (item: MarketItem, quantity: number, event: React.MouseEvent) => {
         const curve = pricingCurves.get(item.id);
         const dynamicPrice = curve ? calculatePrice(curve) : item.price;
         const cost = dynamicPrice * quantity;
@@ -113,6 +128,17 @@ export default function Marketplace({ business }: MarketplaceProps) {
             showAlert("Not enough stock available in the market right now. Wait for the next restock!", { title: 'OUT OF STOCK' });
             return;
         }
+
+        // Add particles
+        const rect = (event.target as HTMLElement).getBoundingClientRect();
+        const newParticle = {
+            id: Date.now(),
+            x: event.clientX,
+            y: event.clientY,
+            text: `+${quantity} ${item.name}`
+        };
+        setParticles(prev => [...prev, newParticle]);
+        setTimeout(() => setParticles(prev => prev.filter(p => p.id !== newParticle.id)), 1000);
 
         const bizRef = doc(db, 'businesses', business.id);
         const newMarketItems = marketItems.map(i =>
@@ -138,6 +164,10 @@ export default function Marketplace({ business }: MarketplaceProps) {
             balance: increment(-cost),
             'marketState.items': newMarketItems
         });
+
+        if (quantity >= 5) {
+            showProfessorSuccess(`Smart move! Bulk buying ${item.name} saves time.`);
+        }
     };
 
     const getDefaultMarketItems = (): MarketItem[] => [
@@ -164,7 +194,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
     }));
 
     return (
-        <div className="duo-card p-8 space-y-8 flex flex-col h-full">
+        <div className="duo-card p-8 space-y-8 flex flex-col h-full relative">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[var(--brand-primary)] mb-1">Logistics</div>
@@ -248,14 +278,14 @@ export default function Marketplace({ business }: MarketplaceProps) {
                                 <div className="mt-auto space-y-3">
                                     <button
                                         disabled={item.stock < 1 || business.cashBalance < dynamicPrice}
-                                        onClick={() => handleBuy(item, 1)}
+                                        onClick={(e) => handleBuy(item, 1, e)}
                                         className="duo-btn w-full text-[10px] py-2 border-b-4 border-black/10"
                                     >
                                         Buy 1 Units
                                     </button>
                                     <button
                                         disabled={item.stock < 5 || business.cashBalance < dynamicPrice * 5}
-                                        onClick={() => handleBuy(item, 5)}
+                                        onClick={(e) => handleBuy(item, 5, e)}
                                         className="duo-btn duo-btn-primary w-full text-[10px] py-2"
                                     >
                                         Bulk Buy (5)
@@ -266,6 +296,24 @@ export default function Marketplace({ business }: MarketplaceProps) {
                     );
                 })}
             </div>
+
+            {/* Floating Particles */}
+            <AnimatePresence>
+                {particles.map((p) => (
+                    <motion.div
+                        key={p.id}
+                        initial={{ opacity: 1, y: 0, x: 0 }}
+                        animate={{ opacity: 0, y: -100 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed pointer-events-none z-[100] text-emerald-400 font-black text-xl drop-shadow-lg"
+                        style={{ top: p.y, left: p.x }}
+                    >
+                        {p.text}
+                    </motion.div>
+                ))}
+            </AnimatePresence>
+
+            <ProfessorBright state={professor} />
         </div>
     );
 }

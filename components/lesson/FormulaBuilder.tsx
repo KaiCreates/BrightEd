@@ -18,7 +18,7 @@ export default function FormulaBuilder({ question, parts, correctFormula, onComp
   const addPart = (part: string) => {
     setFormula(prev => [...prev, part])
     setAvailableParts(prev => prev.filter(p => p !== part))
-    
+
     // Check if formula is complete
     if (formula.length + 1 === correctFormula.length) {
       checkAnswer([...formula, part])
@@ -35,7 +35,7 @@ export default function FormulaBuilder({ question, parts, correctFormula, onComp
   const checkAnswer = (currentFormula: string[]) => {
     const isCorrect = currentFormula.length === correctFormula.length &&
       currentFormula.every((part, index) => part === correctFormula[index])
-    
+
     setIsComplete(true)
     onComplete(isCorrect)
   }
@@ -43,7 +43,7 @@ export default function FormulaBuilder({ question, parts, correctFormula, onComp
   return (
     <div className="space-y-6">
       <h3 className="text-2xl font-heading font-semibold text-navy-dark mb-6">{question}</h3>
-      
+
       {/* Formula Display */}
       <div className="bg-gray-50 rounded-xl p-6 min-h-[120px] border-2 border-gray-200">
         <p className="text-sm text-gray-600 mb-3">Build your formula:</p>

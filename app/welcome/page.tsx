@@ -525,6 +525,11 @@ function WelcomeContent() {
         if (source) params.set('source', source)
         params.set('lvls', JSON.stringify(proficiencies))
 
+        if (user && to === '/welcome/diagnostic') {
+            router.push(to)
+            return
+        }
+
         router.push(`${to}?${params.toString()}`)
     }
 

@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useAuth } from '@/lib/auth-context'
 
 interface PrefetchOptions {
   objectiveIds: string[]
   subjectId?: string
   bufferSize?: number
 }
-
-import { useAuth } from '@/lib/auth-context'
 
 export function useQuestionPrefetch({ objectiveIds, subjectId, bufferSize = 5 }: PrefetchOptions) {
   const { user } = useAuth()

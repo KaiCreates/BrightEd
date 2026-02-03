@@ -23,7 +23,7 @@ export default function MathDiagram({ type, data }: MathDiagramProps) {
       if (!ctx) return
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
+
       // Set up canvas
       const centerX = canvas.width / 2
       const centerY = canvas.height / 2
@@ -35,7 +35,7 @@ export default function MathDiagram({ type, data }: MathDiagramProps) {
         ctx.strokeStyle = '#3B82F6'
         ctx.lineWidth = 3
         ctx.stroke()
-        
+
         // Draw radius line
         ctx.beginPath()
         ctx.moveTo(centerX, centerY)
@@ -43,7 +43,7 @@ export default function MathDiagram({ type, data }: MathDiagramProps) {
         ctx.strokeStyle = '#EF4444'
         ctx.lineWidth = 2
         ctx.stroke()
-        
+
         // Label radius
         ctx.fillStyle = '#1F2937'
         ctx.font = '14px Arial'
@@ -66,7 +66,7 @@ export default function MathDiagram({ type, data }: MathDiagramProps) {
         ctx.strokeStyle = '#3B82F6'
         ctx.lineWidth = 3
         ctx.strokeRect(centerX - width / 2, centerY - height / 2, width, height)
-        
+
         // Label dimensions
         ctx.fillStyle = '#1F2937'
         ctx.font = '14px Arial'
@@ -101,7 +101,7 @@ export default function MathDiagram({ type, data }: MathDiagramProps) {
           {/* Axes */}
           <line x1="50" y1="250" x2="350" y2="250" stroke="#1F2937" strokeWidth="2" />
           <line x1="50" y1="250" x2="50" y2="50" stroke="#1F2937" strokeWidth="2" />
-          
+
           {/* Points */}
           {data?.points?.map((point, index) => (
             <g key={index}>

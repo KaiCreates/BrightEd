@@ -6,6 +6,7 @@ import ScienceLabLayout from '@/components/science/ScienceLabLayout';
 import { BrightLayer } from '@/components/system';
 import { simulateOsmosis } from '@/lib/science/chemical-logic';
 import { scoreEquipmentChoice } from '@/lib/science/lab-inventory';
+import { useLabCompletion } from '@/hooks/useLabCompletion';
 
 interface PotatoStrip {
     id: string;
@@ -32,6 +33,8 @@ export default function OsmosisLabPage() {
     const [showResults, setShowResults] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [labLog, setLabLog] = useState<string[]>([]);
+
+    const { completeLab, result } = useLabCompletion();
 
     const solutions = [
         { id: 'hypotonic', name: 'Distilled Water', color: 'bg-blue-400', icon: '💧' },
@@ -122,7 +125,8 @@ export default function OsmosisLabPage() {
         }));
     }, [strips]);
 
-    const handleComplete = () => {
+    const handleComplete = async () => {
+        await completeLab('bio-osmosis-potato', 250, score);
         setShowSuccess(true);
     };
 
@@ -156,7 +160,9 @@ export default function OsmosisLabPage() {
                         </div>
                         <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
-                            <div className="text-3xl font-black text-amber-400">+250</div>
+                            <div className="text-3xl font-black text-amber-400">
+                                {result?.xpGain !== undefined ? `+${result.xpGain}` : '+250'}
+                            </div>
                         </div>
                     </div>
 
@@ -256,8 +262,8 @@ export default function OsmosisLabPage() {
                                         onClick={handleCutStrip}
                                         disabled={strips.length >= 3}
                                         className={`px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition-all ${strips.length >= 3
-                                                ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
-                                                : 'bg-emerald-500 text-white hover:bg-emerald-400'
+                                            ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
+                                            : 'bg-emerald-500 text-white hover:bg-emerald-400'
                                             }`}
                                     >
                                         Cut Strip ({strips.length}/3)
@@ -361,8 +367,8 @@ export default function OsmosisLabPage() {
                                             <div
                                                 key={sol.id}
                                                 className={`p-6 rounded-3xl border-2 transition-all ${stripInSolution
-                                                        ? 'border-emerald-500/50 bg-emerald-500/5'
-                                                        : 'border-[#3D3D5C] bg-[#131325] hover:border-white/20'
+                                                    ? 'border-emerald-500/50 bg-emerald-500/5'
+                                                    : 'border-[#3D3D5C] bg-[#131325] hover:border-white/20'
                                                     }`}
                                             >
                                                 <div className="flex items-center justify-between mb-4">

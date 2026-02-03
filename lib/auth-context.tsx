@@ -67,6 +67,8 @@ export interface UserData {
     avatarUpdatedAt?: string;
     following?: string[];
     followers?: string[];
+    source?: string;
+    proficiencies?: Record<string, string>;
     avatarCustomization?: {
         presetId?: string;
         backgroundColor?: string;

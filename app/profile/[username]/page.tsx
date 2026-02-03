@@ -22,6 +22,7 @@ export default function UserProfilePage() {
     const [loading, setLoading] = useState(true);
     const [isOwner, setIsOwner] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const [showSocialModal, setShowSocialModal] = useState(false);
 
     const username = params?.username as string;
 
@@ -123,6 +124,12 @@ export default function UserProfilePage() {
                 await updateDoc(doc(db, 'users', profileUserId), {
                     followers: arrayRemove(currentUserId)
                 });
+
+                // Optimistic Update
+                setProfileData((prev: any) => ({
+                    ...prev,
+                    followers: prev.followers.filter((id: string) => id !== currentUserId)
+                }));
             } else {
                 // Follow
                 await updateDoc(doc(db, 'users', currentUserId), {
@@ -131,9 +138,19 @@ export default function UserProfilePage() {
                 await updateDoc(doc(db, 'users', profileUserId), {
                     followers: arrayUnion(currentUserId)
                 });
+
+                // Optimistic Update
+                setProfileData((prev: any) => ({
+                    ...prev,
+                    followers: [...(prev.followers || []), currentUserId]
+                }));
             }
+
+            // Force refresh of social list if open
+            setSocialTab(prev => prev);
         } catch (error) {
             console.error("Error toggling follow:", error);
+            // Revert on error (could implement full revert logic here, simplicity for now)
         }
     };
 
@@ -386,7 +403,12 @@ export default function UserProfilePage() {
                             </div>
                             {socialList.length > 0 && (
                                 <div className="p-4 bg-white/5 border-t border-white/5">
-                                    <button className="w-full text-center text-xs font-black uppercase tracking-[0.2em] text-[var(--brand-primary)] hover:underline">View All</button>
+                                    <button
+                                        onClick={() => setShowSocialModal(true)}
+                                        className="w-full text-center text-xs font-black uppercase tracking-[0.2em] text-[var(--brand-primary)] hover:underline"
+                                    >
+                                        View All
+                                    </button>
                                 </div>
                             )}
                         </BrightLayer>
@@ -428,6 +450,15 @@ export default function UserProfilePage() {
                         onClose={() => setShowSearch(false)}
                         currentUser={currentUserData}
                         onFollow={handleFollowToggle}
+                    />
+                )}
+                {showSocialModal && (
+                    <SocialListModal
+                        isOpen={showSocialModal}
+                        onClose={() => setShowSocialModal(false)}
+                        initialTab={socialTab}
+                        profileData={profileData}
+                        onFollow={handleFollowToggle} // Recycled but works for quick toggle if logic matches
                     />
                 )}
             </AnimatePresence>
@@ -602,4 +633,106 @@ function UserSearchModal({ isOpen, onClose, currentUser, onFollow }: { isOpen: b
             </motion.div>
         </div>
     );
+}
+
+function SocialListModal({ isOpen, onClose, initialTab, profileData, onFollow }: { isOpen: boolean, onClose: () => void, initialTab: 'following' | 'followers', profileData: any, onFollow: () => void }) {
+    const [activeTab, setActiveTab] = useState(initialTab);
+    const [users, setUsers] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchAll = async () => {
+            setLoading(true);
+            const ids = activeTab === 'following' ? (profileData.following || []) : (profileData.followers || []);
+
+            if (ids.length === 0) {
+                setUsers([]);
+                setLoading(false);
+                return;
+            }
+
+            try {
+                // Fetch in chunks of 10 for performance if list is huge, but here we do simple all
+                const details = await Promise.all(ids.map(async (id: string) => {
+                    const d = await getDoc(doc(db, 'users', id));
+                    return d.exists() ? { id: d.id, ...d.data() } : null;
+                }));
+                setUsers(details.filter(Boolean));
+            } catch (error) {
+                console.error("Error fetching full social list:", error);
+            }
+            setLoading(false);
+        }
+        fetchAll();
+    }, [activeTab, profileData]);
+
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+            <motion.div
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="absolute inset-0 bg-black/60 backdrop-blur-md"
+            />
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="relative w-full max-w-lg bg-[#0e1217] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col h-[70vh]"
+            >
+                {/* Header Tabs */}
+                <div className="flex border-b border-white/10">
+                    <button
+                        onClick={() => setActiveTab('following')}
+                        className={`flex-1 py-4 text-center text-sm font-black uppercase tracking-widest transition-colors ${activeTab === 'following' ? 'text-white border-b-2 border-[#1CB0F6]' : 'text-[var(--text-muted)] hover:text-white'}`}
+                    >
+                        Following
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('followers')}
+                        className={`flex-1 py-4 text-center text-sm font-black uppercase tracking-widest transition-colors ${activeTab === 'followers' ? 'text-white border-b-2 border-[#1CB0F6]' : 'text-[var(--text-muted)] hover:text-white'}`}
+                    >
+                        Followers
+                    </button>
+                </div>
+
+                {/* List */}
+                <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                    {loading ? (
+                        <div className="p-8 flex justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1CB0F6]" /></div>
+                    ) : users.length > 0 ? (
+                        users.map(u => (
+                            <Link key={u.id} href={`/profile/${u.username}`} onClick={onClose}>
+                                <div className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 overflow-hidden relative border border-white/10">
+                                            <Image
+                                                src={u.avatarUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${u.username}`}
+                                                fill
+                                                alt={u.username}
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className="font-bold text-white text-sm">{u.firstName || u.username}</div>
+                                            <div className="text-[10px] text-[var(--text-muted)] font-black uppercase">@{u.username}</div>
+                                        </div>
+                                    </div>
+                                    <div className="text-[#1CB0F6] opacity-0 group-hover:opacity-100 transition-opacity">
+                                        →
+                                    </div>
+                                </div>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="text-center mt-20 text-[var(--text-muted)] text-sm">No users found.</div>
+                    )}
+                </div>
+
+                {/* Close Footer */}
+                <div className="p-4 border-t border-white/10 bg-[#0e1217]">
+                    <button onClick={onClose} className="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold transition-colors">
+                        Close
+                    </button>
+                </div>
+            </motion.div>
+        </div>
+    )
 }

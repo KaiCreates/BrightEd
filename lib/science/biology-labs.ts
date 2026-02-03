@@ -99,5 +99,58 @@ export const BIOLOGY_LABS: BiologyLab[] = [
         description: 'Explore a virtual field and throw a quadrat to estimate the population of a weed species.',
         xpReward: 200,
         featured: true
+    },
+    {
+        id: 'bio-food-tests',
+        title: 'Food Tests: Starch, Protein, Lipids',
+        section: 'Section A',
+        skills: ['MM', 'AI', 'ORR'],
+        objectives: [
+            'Test food samples for reducing sugars using Benedict’s solution',
+            'Test for protein using Biuret reagent',
+            'Test for starch using Iodine solution',
+            'Test for fats using the Emulsion test'
+        ],
+        description: 'Perform standard food tests on various samples to identify the nutrients they contain.',
+        xpReward: 300
+    },
+    {
+        id: 'bio-transpiration',
+        title: 'Transpiration Rate (Potometer)',
+        section: 'Section B',
+        skills: ['MM', 'AI', 'ORR'],
+        objectives: [
+            'Measure the rate of water uptake by a leafy shoot',
+            'Investigate the effect of wind, humidity, and light on transpiration',
+            'Calculate the rate of transpiration'
+        ],
+        description: 'Use a potometer to measure how environmental factors affect the rate of transpiration in a cut shoot.',
+        xpReward: 300
+    },
+    {
+        id: 'bio-breathing-rate',
+        title: 'Breathing Rate & Exercise',
+        section: 'Section B',
+        skills: ['MM', 'PD', 'AI'],
+        objectives: [
+            'Measure breathing rate at rest and after exercise',
+            'Investigate the recovery time after physical activity',
+            'Understand the link between respiration and energy demand'
+        ],
+        description: 'Guide a virtual test subject through different exercises and measure their breathing rate.',
+        xpReward: 250
+    },
+    {
+        id: 'bio-pulse-rate',
+        title: 'Pulse Rate Investigation',
+        section: 'Section B',
+        skills: ['MM', 'ORR', 'AI'],
+        objectives: [
+            'Locate pulse points on the body',
+            'Measure heart rate at rest and during activity',
+            'Graph the relationship between exercise and heart rate'
+        ],
+        description: 'Learn to measure pulse accurately and investigate how different intensities of exercise affect heart rate.',
+        xpReward: 200
     }
 ];

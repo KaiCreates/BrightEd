@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core';
 import ProfessorBright, { useProfessor } from '@/components/science/ProfessorBright';
 import { createParticles, Particle, itemVariants } from '@/lib/science/virtual-lab.types';
+import { useLabCompletion } from '@/hooks/useLabCompletion';
 
 // ==========================================
 // TYPES
@@ -177,6 +178,8 @@ export default function PhotosynthesisLabV2Page() {
         initialMessage: "We need to test this leaf for starch. Start by boiling it!"
     });
 
+    const { completeLab, result } = useLabCompletion();
+
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
         useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
@@ -239,6 +242,7 @@ export default function PhotosynthesisLabV2Page() {
             setCurrentStep(prev => prev + 1);
 
             if (currentStep === 3) {
+                completeLab('bio-photosynthesis', 150, score);
                 setTimeout(() => setShowSuccess(true), 2000);
             }
         } else {
@@ -319,7 +323,9 @@ export default function PhotosynthesisLabV2Page() {
                         </div>
                         <div className="p-6 rounded-3xl bg-white/5 border border-[#3D3D5C]">
                             <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">XP Earned</div>
-                            <div className="text-3xl font-black text-amber-400">+150</div>
+                            <div className="text-3xl font-black text-amber-400">
+                                {result?.xpGain !== undefined ? `+${result.xpGain}` : '+150'}
+                            </div>
                         </div>
                     </div>
                     <a
