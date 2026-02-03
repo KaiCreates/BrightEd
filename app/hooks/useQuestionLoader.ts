@@ -105,7 +105,7 @@ export function useQuestionLoader({
                 } as any);
 
                 // Process Progress
-                const progressData = await progressRes.json();
+                const progressData = progressRes.ok ? await progressRes.json() : { progress: {} };
                 const existingProgress = progressData.progress && progressData.progress[objectiveId!];
                 const serverStars = existingProgress?.stars ?? 0;
 

@@ -7,7 +7,8 @@ import { NextRequest, NextResponse } from 'next/server';
 const rateLimitMap = new Map<string, { count: number, resetAt: number }>();
 
 export function rateLimit(request: NextRequest, limit: number = 10, windowMs: number = 60000) {
-    const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ip = request.ip || forwardedFor?.split(',')[0]?.trim() || 'unknown';
     const now = Date.now();
 
     const record = rateLimitMap.get(ip);
