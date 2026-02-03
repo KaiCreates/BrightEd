@@ -62,13 +62,20 @@ function coerceCorrectAnswerIndex(raw: unknown, optionCount: number): number | n
 
   let idx: number | null = null;
   if (typeof raw === 'number' && Number.isFinite(raw)) {
-    idx = Math.trunc(raw);
+    const n = Math.trunc(raw);
+    if (n >= 0 && n < optionCount) return n;
+    if (n >= 1 && n <= optionCount) return n - 1;
+    return null;
   } else if (typeof raw === 'string') {
     const t = raw.trim();
     if (/^[A-D]$/i.test(t)) {
       idx = t.toUpperCase().charCodeAt(0) - 65;
     } else if (/^\d+$/.test(t)) {
-      idx = parseInt(t, 10);
+      const n = parseInt(t, 10);
+      if (n === 0) return 0;
+      if (n >= 1 && n <= optionCount) return n - 1;
+      if (n >= 0 && n < optionCount) return n;
+      return null;
     }
   }
 
