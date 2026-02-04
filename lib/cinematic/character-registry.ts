@@ -5,6 +5,7 @@
  */
 
 import { Character, CharacterRole } from './character-types';
+import { getDicebearAvatarUrl } from '../avatars';
 
 // ============================================================================
 // CORE CHARACTERS
@@ -18,7 +19,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'luka',
         name: 'Luka',
         role: 'mentor',
-        avatar: '/characters/luka.png',
+        avatar: getDicebearAvatarUrl('luka'),
         emoji: '🦉',
         personality: 'warm',
         voiceTone: 'Wise, encouraging, patient. Speaks in calm, measured sentences with occasional humor.',
@@ -33,7 +34,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'marcus',
         name: 'Marcus Chen',
         role: 'bank_officer',
-        avatar: '/characters/marcus.png',
+        avatar: getDicebearAvatarUrl('marcus-chen'),
         emoji: '🧑🏽‍💼',
         personality: 'professional',
         voiceTone: 'Formal, measured. Uses financial terminology naturally. Rarely shows emotion.',
@@ -48,7 +49,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'diana',
         name: 'Diana Baptiste',
         role: 'tax_officer',
-        avatar: '/characters/diana.png',
+        avatar: getDicebearAvatarUrl('diana-baptiste'),
         emoji: '🧾',
         personality: 'stern',
         voiceTone: 'Precise, deadline-focused. Quotes regulations. Surprisingly helpful when you comply.',
@@ -63,7 +64,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'andre',
         name: 'Andre Williams',
         role: 'supplier',
-        avatar: '/characters/andre.png',
+        avatar: getDicebearAvatarUrl('andre-williams'),
         emoji: '🧑🏽‍🍳',
         personality: 'shrewd',
         voiceTone: 'Friendly but business-savvy. Always calculating. Respects good negotiators.',
@@ -78,7 +79,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'keisha',
         name: 'Keisha Thompson',
         role: 'employee',
-        avatar: '/characters/keisha.png',
+        avatar: getDicebearAvatarUrl('keisha-thompson'),
         emoji: '👩🏽‍💼',
         personality: 'warm',
         voiceTone: 'Direct, hardworking. Values fairness. Will speak up when something is wrong.',
@@ -93,7 +94,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'ramjohn',
         name: 'Mr. Ramjohn',
         role: 'regulator',
-        avatar: '/characters/ramjohn.png',
+        avatar: getDicebearAvatarUrl('mr-ramjohn'),
         emoji: '👔',
         personality: 'stern',
         voiceTone: 'Bureaucratic, process-oriented. Quotes form numbers. Thorough but slow.',
@@ -108,7 +109,7 @@ export const CHARACTERS: Record<string, Character> = {
         id: 'mendy',
         name: 'Mendy',
         role: 'mentor',
-        avatar: '/characters/mendy.png',
+        avatar: getDicebearAvatarUrl('mendy'),
         emoji: '🦊',
         personality: 'warm',
         voiceTone: 'Playful, encouraging. Celebrates wins enthusiastically. Good for lighter moments.',

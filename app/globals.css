@@ -80,6 +80,17 @@
   }
 }
 
+/* Operations page blur tuning */
+.operations-page {
+  --glass-blur: 4px;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .operations-page {
+  --glass-blur: 3px;
+  --bg-glass: rgba(255, 255, 255, 0.08);
+}
+
 @keyframes list-slide-in {
   from {
     opacity: 0;
@@ -94,6 +105,42 @@
 
 .animate-list-item {
   animation: list-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes boom-wave {
+  0% {
+    transform: scaleY(0.6);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.7);
+    opacity: 0.7;
+  }
+}
+
+.boom-wave-bar {
+  transform-origin: bottom;
+  animation: boom-wave 0.9s ease-in-out infinite;
+}
+
+@keyframes brightos-boot {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.brightos-boot-dot {
+  animation: brightos-boot 1s ease-in-out infinite;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');

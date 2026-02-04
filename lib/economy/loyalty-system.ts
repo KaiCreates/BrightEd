@@ -6,6 +6,7 @@
 export interface CustomerProfile {
     id: string;
     name: string;
+    avatarSeed?: string;
     loyaltyScore: number; // 0-100
     currentTier: number; // 0-4
     lastOrderDate: string;
@@ -239,6 +240,7 @@ export function createCustomerProfile(
     return {
         id: customerId,
         name: customerName,
+        avatarSeed: customerId,
         loyaltyScore: 0,
         currentTier: 0,
         lastOrderDate: new Date().toISOString(),

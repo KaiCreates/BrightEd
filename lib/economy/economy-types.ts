@@ -250,10 +250,20 @@ export interface BusinessState {
     inventory: Record<string, number>; // ItemId -> Quantity
     marketState: MarketState;
 
+    // Tools & Stock Exchange
+    ownedTools?: string[];
+    stockMarket?: StockMarketState;
+    stockPortfolio?: StockPortfolio;
+
+    // Net Worth / Valuation
+    netWorth?: number;
+    valuation?: number;
+
     // NEW: Customer Relationships
     customerProfiles?: Record<string, {
         id: string;
         name: string;
+        avatarSeed?: string;
         loyaltyScore: number;
         currentTier: number;
         lastOrderDate: string;
@@ -349,6 +359,73 @@ export interface MarketState {
     lastRestock: string;
     nextRestock: string;
     items: MarketItem[];
+}
+
+// ============================================================================
+// STOCK EXCHANGE (Business Trading)
+// ============================================================================
+
+export interface StockListingDefinition {
+    symbol: string;
+    name: string;
+    sector: string;
+    basePrice: number;
+    volatility: number; // 0-1 daily swing multiplier
+}
+
+export interface StockPricePoint {
+    at: string;
+    price: number;
+}
+
+export interface StockListingState extends StockListingDefinition {
+    price: number;
+    changePercent: number;
+    history: StockPricePoint[];
+}
+
+export interface StockMarketState {
+    lastTick: string;
+    listings: StockListingState[];
+}
+
+export interface StockHolding {
+    symbol: string;
+    shares: number;
+    avgCost: number;
+}
+
+export interface StockTransaction {
+    id: string;
+    symbol: string;
+    type: 'buy' | 'sell';
+    shares: number;
+    price: number;
+    total: number;
+    executedAt: string;
+}
+
+export interface StockPortfolio {
+    cashReserved: number;
+    holdings: StockHolding[];
+    transactions: StockTransaction[];
+    realizedPnL: number;
+}
+
+// ============================================================================
+// BUSINESS TOOLS & MARKET UPGRADES
+// ============================================================================
+
+export type ToolCategory = 'operations' | 'marketing' | 'technology' | 'compliance' | 'talent';
+
+export interface BusinessTool {
+    id: string;
+    name: string;
+    description: string;
+    cost: number;
+    category: ToolCategory;
+    boostLabel: string;
+    businessCategories?: BusinessCategory[];
 }
 
 // ============================================================================

@@ -42,6 +42,8 @@ export default function BusinessReportsPage() {
   const revenue = business.totalRevenue || 0;
   const expenses = business.totalExpenses || 0;
   const cash = business.cashBalance || 0;
+  const netWorth = business.netWorth ?? cash;
+  const valuation = business.valuation ?? netWorth;
   const profit = revenue - expenses;
   const margin = revenue > 0 ? ((profit / revenue) * 100).toFixed(1) : '0.0';
   const ordersCompleted = business.ordersCompleted || 0;
@@ -140,6 +142,17 @@ export default function BusinessReportsPage() {
               <BrightHeading level={3} className="mb-8">Ledger Summary</BrightHeading>
 
               <div className="space-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-5 bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-subtle)] border-b-4">
+                    <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2">Net Worth</div>
+                    <div className="text-3xl font-black text-[var(--brand-primary)]">฿ {netWorth.toLocaleString()}</div>
+                  </div>
+                  <div className="p-5 bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-subtle)] border-b-4">
+                    <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2">Valuation</div>
+                    <div className="text-3xl font-black text-[var(--brand-accent)]">฿ {valuation.toLocaleString()}</div>
+                  </div>
+                </div>
+
                 <div className="p-5 bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-subtle)] border-b-4">
                   <div className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2">Cash On Hand</div>
                   <div className="text-4xl font-black text-[var(--text-primary)]">฿ {cash.toLocaleString()}</div>

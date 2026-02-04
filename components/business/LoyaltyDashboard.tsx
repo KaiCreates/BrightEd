@@ -8,10 +8,12 @@
 import { motion } from 'framer-motion';
 import { BrightLayer, BrightHeading } from '@/components/system';
 import { LOYALTY_TIERS, getLoyaltyTier } from '@/lib/economy/loyalty-system';
+import { getDicebearAvatarUrl } from '@/lib/avatars';
 
 interface CustomerData {
     id: string;
     name: string;
+    avatarSeed?: string;
     loyaltyScore: number;
     currentTier: number;
     lastOrderDate: string;
@@ -115,6 +117,7 @@ export function LoyaltyDashboard({ customers }: LoyaltyDashboardProps) {
                             const daysSinceOrder = Math.floor(
                                 (Date.now() - new Date(customer.lastOrderDate).getTime()) / (1000 * 60 * 60 * 24)
                             );
+                            const avatarUrl = getDicebearAvatarUrl(customer.avatarSeed ?? customer.id);
 
                             return (
                                 <motion.div
@@ -125,7 +128,14 @@ export function LoyaltyDashboard({ customers }: LoyaltyDashboardProps) {
                                     className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-elevated)]/30 border border-[var(--border-subtle)] hover:border-[var(--brand-primary)]/40 transition-colors"
                                 >
                                     <div className="flex items-center gap-3 min-w-0">
-                                        <div className="text-xl flex-shrink-0">{tier.icon}</div>
+                                        <div className="relative flex-shrink-0">
+                                            <img
+                                                src={avatarUrl}
+                                                alt={customer.name}
+                                                className="h-10 w-10 rounded-xl border border-[var(--border-subtle)] object-cover"
+                                            />
+                                            <span className="absolute -bottom-1 -right-1 text-xs">{tier.icon}</span>
+                                        </div>
                                         <div className="min-w-0">
                                             <div className="font-bold text-sm text-[var(--text-primary)] truncate">
                                                 {customer.name}

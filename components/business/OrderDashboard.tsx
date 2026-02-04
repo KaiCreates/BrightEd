@@ -5,11 +5,11 @@
  * Displays active orders, pending payments, and financial summary.
  */
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrightLayer, BrightButton, BrightHeading } from '@/components/system';
 import { Order, OrderStatus, BusinessState, QualityTier } from '@/lib/economy/economy-types';
 import { BusinessType } from '@/lib/economy/economy-types';
+import { getDicebearAvatarUrl } from '@/lib/avatars';
 
 interface OrderDashboardProps {
     businessState: BusinessState;
@@ -48,6 +48,7 @@ const QUALITY_EMOJI: Record<QualityTier, string> = {
 };
 
 export function OrderDashboard({
+    businessState,
     businessType,
     orders,
     onAcceptOrder,
@@ -78,6 +79,9 @@ export function OrderDashboard({
         return `${mins}m`;
     };
 
+    const getAvatarSeed = (order: Order) =>
+        businessState.customerProfiles?.[order.customerId]?.avatarSeed ?? order.customerId;
+
     return (
         <div className="space-y-8 layout-transition">
             {/* Incoming Orders (Pending) */}
@@ -107,6 +111,7 @@ export function OrderDashboard({
                                 <OrderCard
                                     order={order}
                                     businessType={businessType}
+                                    customerAvatarSeed={getAvatarSeed(order)}
                                     onAccept={() => onAcceptOrder(order.id)}
                                     onReject={() => onRejectOrder(order.id)}
                                     showActions={true}
@@ -147,6 +152,7 @@ export function OrderDashboard({
                                 <OrderCard
                                     order={order}
                                     businessType={businessType}
+                                    customerAvatarSeed={getAvatarSeed(order)}
                                     onComplete={() => onCompleteOrder(order.id)}
                                     onFulfill={() => onFulfill(order)}
                                     showActions={true}
@@ -177,7 +183,14 @@ export function OrderDashboard({
                                     animate={{ opacity: 1, x: 0 }}
                                     className="flex-none min-w-[140px] bg-[var(--bg-elevated)]/40 rounded-xl px-4 py-3 border border-[var(--border-subtle)] hover:border-[var(--brand-primary)]/40 transition-all cursor-default"
                                 >
-                                    <p className="text-[10px] font-black text-[var(--text-secondary)] uppercase truncate mb-1">{order.customerName}</p>
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <img
+                                            src={getDicebearAvatarUrl(getAvatarSeed(order))}
+                                            alt={order.customerName}
+                                            className="h-6 w-6 rounded-full border border-white/10 object-cover"
+                                        />
+                                        <p className="text-[10px] font-black text-[var(--text-secondary)] uppercase truncate">{order.customerName}</p>
+                                    </div>
                                     <p className="text-sm font-black text-[var(--state-success)]">+฿{order.paidAmount + order.tipAmount}</p>
                                 </motion.div>
                             ))}
@@ -196,6 +209,7 @@ export function OrderDashboard({
 interface OrderCardProps {
     order: Order;
     businessType: BusinessType;
+    customerAvatarSeed?: string;
     onAccept?: () => void;
     onReject?: () => void;
     onComplete?: () => void;
@@ -206,6 +220,7 @@ interface OrderCardProps {
 
 function OrderCard({
     order,
+    customerAvatarSeed,
     onAccept,
     onReject,
     onComplete,
@@ -242,6 +257,7 @@ function OrderCard({
     const narrative = (order as any).narrative;
     const narrativeData = (order as any).narrativeData;
     const consequenceMessage = (order as any).consequenceMessage;
+    const avatarUrl = getDicebearAvatarUrl(customerAvatarSeed ?? order.customerId);
 
     return (
         <BrightLayer
@@ -255,7 +271,14 @@ function OrderCard({
         >
             <div className="flex justify-between items-start mb-4 gap-2">
                 <div className="flex items-center gap-3 min-w-0">
-                    <span className="text-xl filter drop-shadow-sm group-hover/card:scale-110 transition-transform flex-shrink-0">{moodEmoji[order.customerMood]}</span>
+                    <div className="relative flex-shrink-0">
+                        <img
+                            src={avatarUrl}
+                            alt={order.customerName}
+                            className="h-10 w-10 rounded-2xl border border-white/10 object-cover"
+                        />
+                        <span className="absolute -bottom-1 -right-1 text-xs">{moodEmoji[order.customerMood]}</span>
+                    </div>
                     <div className="min-w-0">
                         <span className="block font-black text-sm text-[var(--text-primary)] leading-tight mb-1 truncate">{order.customerName}</span>
                         <div className="flex items-center gap-2 flex-wrap">

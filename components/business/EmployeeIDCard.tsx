@@ -3,6 +3,7 @@
 import { Employee } from '@/lib/economy/economy-types';
 import { motion } from 'framer-motion';
 import { DuoContextMenu } from '@/components/system';
+import { getDicebearAvatarUrl } from '@/lib/avatars';
 
 interface EmployeeIDCardProps {
     employee: Employee;
@@ -47,7 +48,7 @@ export default function EmployeeIDCard({
         return '😫';
     };
 
-    const avatarUrl = `https://api.dicebear.com/9.x/avataaars/svg?seed=${employee.id}&backgroundColor=b6e3f4,c0aede,d1d4f9&backgroundType=solid`;
+    const avatarUrl = getDicebearAvatarUrl(employee.id);
 
     const contextMenuItems = [
         {

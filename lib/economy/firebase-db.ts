@@ -29,6 +29,8 @@ import {
     BusinessType,
     Review
 } from './economy-types';
+import { initStockMarketState, initStockPortfolio } from './stock-market';
+import { getNetWorthSnapshot } from './valuation';
 
 const COLLECTIONS = {
     BUSINESSES: 'businesses',
@@ -49,6 +51,9 @@ function getDefaultMarketItems() {
         { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 180, maxStock: 180, image: '/products/Fries.png', icon: '🍟' },
         { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 150, maxStock: 150, image: '/products/Peppers.jpg', icon: '🌶️' },
         { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 240, maxStock: 240, image: '/products/Salt.png', icon: '🧂' },
+        { id: 'eco_tshirt', name: 'Eco Tee', price: 28, stock: 120, maxStock: 120, icon: '🧵' },
+        { id: 'eco_tote', name: 'Canvas Tote', price: 18, stock: 160, maxStock: 160, icon: '👜' },
+        { id: 'upcycle_denim', name: 'Upcycled Denim Jacket', price: 52, stock: 90, maxStock: 90, icon: '🧥' },
     ];
 }
 
@@ -131,6 +136,9 @@ export async function createEconomyBusiness(
         Object.entries(branding).filter(([_, v]) => v !== undefined)
     ) : {};
 
+    const stockMarket = initStockMarketState();
+    const stockPortfolio = initStockPortfolio();
+
     const initialState: BusinessState = {
         id: businessId,
         playerId: userId,
@@ -165,6 +173,15 @@ export async function createEconomyBusiness(
             nextRestock: new Date(Date.now() + 300000).toISOString()
         },
 
+        // Tools & Stock Exchange
+        ownedTools: [],
+        stockMarket,
+        stockPortfolio,
+
+        // Net Worth
+        netWorth: businessType.startingCapital,
+        valuation: businessType.startingCapital,
+
         // Recruitment
         recruitmentPool: [],
         lastRecruitmentTime: new Date().toISOString(),
@@ -187,6 +204,8 @@ export async function createEconomyBusiness(
         lastActiveAt: new Date().toISOString(),
     };
 
+    const netWorthSnapshot = getNetWorthSnapshot(initialState);
+
     // Create document in Firestore
     // We use a batch to ensure the business is created AND the user record is updated atomically
     const batch = writeBatch(db);
@@ -196,6 +215,8 @@ export async function createEconomyBusiness(
         ownerId: userId, // For permission query
         ...initialState,
         branding: cleanBranding,
+        netWorth: netWorthSnapshot.netWorth,
+        valuation: netWorthSnapshot.valuation,
         employees: [{
             id: `emp_${Date.now()}`,
             name: `${userRef.id.slice(0, 5)} Manager`,
@@ -219,7 +240,6 @@ export async function createEconomyBusiness(
         // Keep compatible with legacy fields
         name: businessName,
         balance: businessType.startingCapital,
-        valuation: businessType.startingCapital, // Simple valuation start
         status: 'active',
     });
 
@@ -264,6 +284,11 @@ export async function fetchBusinessState(businessId: string): Promise<BusinessSt
         inventory: data.inventory ?? {},
         employees: data.employees ?? [],
         marketState: data.marketState ?? { items: [], lastRestock: '', nextRestock: '' },
+        ownedTools: data.ownedTools ?? [],
+        stockMarket: data.stockMarket ?? initStockMarketState(),
+        stockPortfolio: data.stockPortfolio ?? initStockPortfolio(),
+        netWorth: data.netWorth ?? data.valuation ?? 0,
+        valuation: data.valuation ?? 0,
         customerProfiles: data.customerProfiles ?? {},
         recruitmentPool: data.recruitmentPool ?? [],
         lastRecruitmentTime: data.lastRecruitmentTime ?? '',
@@ -304,6 +329,11 @@ export async function updateBusinessFinancials(
         totalExpensesDelta?: number;
         customerProfiles?: Record<string, any>;
         customerProfileUpdate?: { customerId: string; profile: any };
+        ownedTools?: string[];
+        stockMarket?: any;
+        stockPortfolio?: any;
+        netWorth?: number;
+        valuation?: number;
     }
 ) {
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
@@ -374,6 +404,12 @@ export async function updateBusinessFinancials(
     }
 
     if (updates.lastPayrollTime !== undefined) firestoreUpdates.lastPayrollTime = updates.lastPayrollTime;
+
+    if (updates.ownedTools !== undefined) firestoreUpdates.ownedTools = updates.ownedTools;
+    if (updates.stockMarket !== undefined) firestoreUpdates.stockMarket = updates.stockMarket;
+    if (updates.stockPortfolio !== undefined) firestoreUpdates.stockPortfolio = updates.stockPortfolio;
+    if (updates.netWorth !== undefined) firestoreUpdates.netWorth = updates.netWorth;
+    if (updates.valuation !== undefined) firestoreUpdates.valuation = updates.valuation;
 
     // Customer profiles
     if (updates.customerProfileUpdate !== undefined) {

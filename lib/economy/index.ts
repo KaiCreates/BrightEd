@@ -25,3 +25,4 @@ export * from './pricing-engine';
 export * from './loyalty-system';
 export * from './employee-skills';
 export * from './order-narratives';
+export * from './stock-market';

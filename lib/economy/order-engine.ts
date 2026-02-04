@@ -355,16 +355,29 @@ export function generateOrdersForTick(
     // FIX: Boost low reputation floor to ensure new businesses get a chance
     const repMultiplier = Math.max(0.5, getReputationMultiplier(config, businessState.reputation));
 
+    const satisfaction = businessState.customerSatisfaction ?? 70;
+    const satisfactionMultiplier = Math.max(0.9, Math.min(1.8, satisfaction / 60));
+
     const saturationMultiplier = getSaturationMultiplier(businessState.cashBalance);
 
     // Theoretical 1M Market Pool influence
     // FIX: Ensure baseRate is never effectively zero due to multipliers
-    const baseRate = Math.max(1, config.baseOrdersPerHour) * (tickMinutes / 60);
-    const expectedOrders = baseRate * hourlyMultiplier * repMultiplier * saturationMultiplier * stockMultiplier;
+    const baseRate = Math.max(2, config.baseOrdersPerHour) * (tickMinutes / 60);
+    const attentionBoost = activeOrderCount === 0 ? 1.75 : activeOrderCount < maxCap * 0.4 ? 1.35 : 1;
+    const expectedOrders = baseRate
+        * hourlyMultiplier
+        * repMultiplier
+        * satisfactionMultiplier
+        * saturationMultiplier
+        * stockMultiplier
+        * attentionBoost;
+
+    const minFlow = activeOrderCount === 0 ? 1.1 : 0.6;
+    const adjustedExpectedOrders = Math.max(expectedOrders, minFlow);
 
     // 4. GENERATION
     const orders: Order[] = [];
-    let remaining = expectedOrders;
+    let remaining = adjustedExpectedOrders;
 
     while (remaining > 0 && orders.length < 10) {
         if (Math.random() < remaining) {

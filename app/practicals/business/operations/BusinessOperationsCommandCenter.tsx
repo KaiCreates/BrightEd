@@ -598,7 +598,7 @@ function CommandCenterContent() {
               <BrightLayer
                 variant="glass"
                 padding="lg"
-                className="border-dashed border-2 border-[var(--brand-primary)]/30 backdrop-blur-xl"
+                className="border-dashed border-2 border-[var(--brand-primary)]/30 backdrop-blur-sm"
               >
                 <div className="text-6xl mb-6">🚀</div>
                 <BrightHeading level={2} className="mb-4">
@@ -633,7 +633,7 @@ function CommandCenterContent() {
 
   return (
     <BusinessDuolingoLayout>
-      <div className="relative">
+      <div className="relative operations-page">
         <DashboardAmbience cashBalance={business!.cashBalance} />
 
         <main className="relative z-10 pt-4 md:pt-10 pb-32 px-4 max-w-[1600px] mx-auto">
@@ -731,6 +731,7 @@ function CommandCenterContent() {
                     customers={Object.values(business.customerProfiles).map(p => ({
                       id: p.id,
                       name: p.name,
+                      avatarSeed: p.avatarSeed,
                       loyaltyScore: p.loyaltyScore,
                       currentTier: p.currentTier,
                       lastOrderDate: p.lastOrderDate,

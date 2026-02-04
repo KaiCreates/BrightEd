@@ -19,6 +19,8 @@ import {
     updateBusinessFinancials,
     updateOrderStatus
 } from '@/lib/economy';
+import { getNetWorthSnapshot } from '@/lib/economy/valuation';
+import { initStockMarketState, initStockPortfolio, tickStockMarket } from '@/lib/economy/stock-market';
 
 interface BusinessData {
     id: string;
@@ -62,6 +64,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     const lastAutoWorkRef = useRef<number>(0);
     const lastWageAccrualRef = useRef<number>(0);
     const lastEconomyTickRef = useRef<number>(Date.now());
+    const lastStockTickRef = useRef<number>(0);
 
     const isPausedRef = useRef<boolean>(false);
 
@@ -110,6 +113,11 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                         inventory: data.inventory ?? {},
                         employees: data.employees ?? [],
                         marketState: data.marketState ?? { lastRestock: '', nextRestock: '', items: [] },
+                        ownedTools: data.ownedTools ?? [],
+                        stockMarket: data.stockMarket ?? initStockMarketState(),
+                        stockPortfolio: data.stockPortfolio ?? initStockPortfolio(),
+                        netWorth: data.netWorth ?? data.valuation ?? 0,
+                        valuation: data.valuation ?? 0,
                         recruitmentPool: data.recruitmentPool ?? [],
                         lastRecruitmentTime: data.lastRecruitmentTime ?? '',
                         lastPayrollTime: data.lastPayrollTime ?? '',
@@ -220,6 +228,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 if (!businessState || !businessType) return;
                 if (isPausedRef.current) return;
 
+                let workingState = businessState;
                 const now = Date.now();
                 const orders = ordersRef.current;
 
@@ -235,6 +244,18 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                     newReviews: []
                 };
                 let hasBizUpdates = false;
+
+                // Stock market tick (every 60 seconds)
+                if (now - lastStockTickRef.current >= 60000) {
+                    const updatedMarket = tickStockMarket(
+                        workingState.stockMarket ?? initStockMarketState(),
+                        new Date()
+                    );
+                    lastStockTickRef.current = now;
+                    workingState = { ...workingState, stockMarket: updatedMarket };
+                    bizUpdates.stockMarket = updatedMarket;
+                    hasBizUpdates = true;
+                }
 
                 // Recruitment refresh (every 2 minutes)
                 const lastRecruit = businessState.lastRecruitmentTime ? new Date(businessState.lastRecruitmentTime).getTime() : 0;
@@ -488,6 +509,35 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 // COMMIT AGGREGATED UPDATES (throttled to reduce Firebase writes by 97%)
                 // Only sync to Firebase every 30 seconds, not every tick
                 const shouldSyncToFirebase = (now - lastFirebaseSyncRef.current) >= FIREBASE_SYNC_INTERVAL;
+
+                if (shouldSyncToFirebase) {
+                    const derivedInventory = { ...(workingState.inventory || {}) };
+                    Object.entries(bizUpdates.inventoryDeltas || {}).forEach(([itemId, delta]) => {
+                        const currentQty = derivedInventory[itemId] || 0;
+                        const nextQty = currentQty + (delta as number);
+                        if (nextQty > 0) {
+                            derivedInventory[itemId] = nextQty;
+                        } else {
+                            delete derivedInventory[itemId];
+                        }
+                    });
+
+                    const derivedState: BusinessState = {
+                        ...workingState,
+                        cashBalance: workingState.cashBalance + (bizUpdates.cashDelta || 0),
+                        inventory: derivedInventory,
+                        stockMarket: bizUpdates.stockMarket || workingState.stockMarket,
+                        stockPortfolio: bizUpdates.stockPortfolio || workingState.stockPortfolio,
+                        ownedTools: bizUpdates.ownedTools || workingState.ownedTools,
+                    };
+
+                    const netWorthSnapshot = getNetWorthSnapshot(derivedState);
+                    if (netWorthSnapshot.netWorth !== workingState.netWorth || netWorthSnapshot.valuation !== workingState.valuation) {
+                        bizUpdates.netWorth = netWorthSnapshot.netWorth;
+                        bizUpdates.valuation = netWorthSnapshot.valuation;
+                        hasBizUpdates = true;
+                    }
+                }
 
                 if (hasBizUpdates && shouldSyncToFirebase) {
                     lastFirebaseSyncRef.current = now;

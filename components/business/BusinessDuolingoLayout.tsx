@@ -11,9 +11,12 @@ const NAV_ITEMS = [
     { href: '/practicals/business', label: 'Hub', icon: '🏠' },
     { href: '/practicals/business/operations', label: 'Operations', icon: '⚡' },
     { href: '/practicals/business/supply', label: 'Supply', icon: '📦' },
+    { href: '/practicals/business/market', label: 'Market', icon: '🧰' },
     { href: '/practicals/business/team', label: 'Team', icon: '👥' },
     { href: '/practicals/business/credit', label: 'Credit', icon: '💳' },
+    { href: '/practicals/business/stocks', label: 'Stocks', icon: '📈' },
     { href: '/practicals/business/reports', label: 'Reports', icon: '📊' },
+    { href: '/practicals/business/meetings', label: 'Meetings', icon: '🧑‍💼' },
 ];
 
 export default function BusinessDuolingoLayout({ children }: { children: React.ReactNode }) {
@@ -98,8 +101,8 @@ export default function BusinessDuolingoLayout({ children }: { children: React.R
             </main>
 
             {/* Mobile Bottom Nav */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-[var(--bg-elevated)] border-t-2 border-[var(--border-subtle)] lg:hidden flex items-center justify-around p-2 z-50 safe-area-inset-bottom">
-                {NAV_ITEMS.slice(0, 5).map((item) => {
+            <nav className="fixed bottom-0 left-0 right-0 bg-[var(--bg-elevated)] border-t-2 border-[var(--border-subtle)] lg:hidden flex items-center gap-2 p-2 z-50 safe-area-inset-bottom overflow-x-auto sleek-scrollbar">
+                {NAV_ITEMS.map((item) => {
                     const active = pathname === item.href;
                     const isLocked = !hasBusiness && item.href !== '/practicals/business';
 
@@ -107,7 +110,7 @@ export default function BusinessDuolingoLayout({ children }: { children: React.R
                         <Link
                             key={item.href}
                             href={isLocked ? '#' : item.href}
-                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all relative ${active ? 'text-[var(--brand-primary)]' : 'text-[var(--text-muted)]'
+                            className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all relative min-w-[64px] ${active ? 'text-[var(--brand-primary)]' : 'text-[var(--text-muted)]'
                                 } ${isLocked ? 'opacity-40 grayscale pointer-events-none' : ''}`}
                         >
                             <span className="text-2xl">{item.icon}</span>

@@ -14,6 +14,7 @@ interface BusinessFeedItem {
     ownerId: string;
     ownerName?: string;
     valuation: number;
+    netWorth?: number;
     status: string;
 }
 
@@ -74,7 +75,7 @@ const BusinessItem = ({ biz, idx, rankBadge }: { biz: BusinessFeedItem, idx: num
 
                 <div className="text-right">
                     <div className="flex items-center justify-end gap-1 text-[var(--brand-primary)] font-black text-sm mb-1">
-                        <BCoinIcon size={12} /> {biz.valuation.toLocaleString()}
+                        <BCoinIcon size={12} /> {(biz.valuation || biz.netWorth || 0).toLocaleString()}
                     </div>
                     <div className={`text-[8px] font-black uppercase px-2 py-0.5 rounded border ${rankBadge.color}`}>
                         {rankBadge.label}

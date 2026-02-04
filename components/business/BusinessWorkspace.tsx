@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { Order, BusinessType } from '@/lib/economy/economy-types';
 import { BCoinIcon } from '@/components/BCoinIcon';
+import { getDicebearAvatarUrl } from '@/lib/avatars';
 
 interface BusinessWorkspaceProps {
     order: Order;
@@ -101,6 +102,7 @@ export default function BusinessWorkspace({ order, businessType, onComplete, onC
     if (steps.length === 0) return null;
 
     const currentStep = steps[currentStepIdx];
+    const customerAvatarUrl = getDicebearAvatarUrl(order.customerId);
 
     return (
         <motion.div
@@ -114,7 +116,14 @@ export default function BusinessWorkspace({ order, businessType, onComplete, onC
                 <div className="flex items-center gap-4">
                     <button onClick={onCancel} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">✕ Exit Workspace</button>
                     <div className="h-6 w-px bg-[var(--border-subtle)]" />
-                    <BrightHeading level={4} className="m-0">Business Workspace: {order.customerName}</BrightHeading>
+                    <div className="flex items-center gap-3">
+                        <img
+                            src={customerAvatarUrl}
+                            alt={order.customerName}
+                            className="h-10 w-10 rounded-2xl border border-[var(--border-subtle)] object-cover"
+                        />
+                        <BrightHeading level={4} className="m-0">Business Workspace: {order.customerName}</BrightHeading>
+                    </div>
                 </div>
                 <div className="flex items-center gap-6">
                     <div className="text-right">

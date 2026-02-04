@@ -182,6 +182,9 @@ export default function Marketplace({ business }: MarketplaceProps) {
         { id: 'fries_pack', name: 'Frozen Fries', price: 10, stock: 180, maxStock: 180, image: '/products/Fries.png', icon: '🍟' },
         { id: 'peppers_fresh', name: 'Fresh Peppers', price: 5, stock: 150, maxStock: 150, image: '/products/Peppers.jpg', icon: '🌶️' },
         { id: 'salt_pack', name: 'Sea Salt', price: 4, stock: 240, maxStock: 240, image: '/products/Salt.png', icon: '🧂' },
+        { id: 'eco_tshirt', name: 'Eco Tee', price: 28, stock: 120, maxStock: 120, icon: '🧵' },
+        { id: 'eco_tote', name: 'Canvas Tote', price: 18, stock: 160, maxStock: 160, icon: '👜' },
+        { id: 'upcycle_denim', name: 'Upcycled Denim Jacket', price: 52, stock: 90, maxStock: 90, icon: '🧥' },
     ];
 
     const marketItems = (business.marketState?.items && business.marketState.items.length > 0

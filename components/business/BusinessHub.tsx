@@ -76,6 +76,13 @@ export default function BusinessHub() {
             color: 'text-blue-500'
         },
         {
+            href: '/practicals/business/market',
+            label: 'Market',
+            desc: 'Upgrade tools and systems',
+            icon: '🧰',
+            color: 'text-indigo-500'
+        },
+        {
             href: '/practicals/business/team',
             label: 'Team',
             desc: 'Manage payroll and hire staff',
@@ -90,11 +97,25 @@ export default function BusinessHub() {
             color: 'text-purple-500'
         },
         {
+            href: '/practicals/business/stocks',
+            label: 'Stocks',
+            desc: 'Trade and grow your portfolio',
+            icon: '📈',
+            color: 'text-rose-500'
+        },
+        {
             href: '/practicals/business/reports',
             label: 'Reports',
             desc: 'Financials and performance',
             icon: '📊',
             color: 'text-cyan-500'
+        },
+        {
+            href: '/practicals/business/meetings',
+            label: 'Meetings',
+            desc: 'Run business calls & decisions',
+            icon: '🧑‍💼',
+            color: 'text-amber-500'
         },
     ];
 

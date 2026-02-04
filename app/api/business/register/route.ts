@@ -5,6 +5,8 @@ import { z } from 'zod';
 import * as admin from 'firebase-admin';
 import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
 import { getBusinessType } from '@/lib/economy';
+import { getNetWorthSnapshot } from '@/lib/economy/valuation';
+import { initStockMarketState, initStockPortfolio } from '@/lib/economy/stock-market';
 
 const RegistrationSchema = z.object({
   name: z.string().min(3).max(50),
@@ -80,7 +82,7 @@ export async function POST(request: NextRequest) {
 
     const startingCapital = selectedType.startingCapital;
 
-    const businessData = {
+    const businessData: any = {
       // Ownership
       id: newBizId,
       ownerId: userId,
@@ -119,6 +121,10 @@ export async function POST(request: NextRequest) {
         nextRestock: new Date(Date.now() + 300000).toISOString(),
         items: [],
       },
+      ownedTools: [],
+      stockMarket: initStockMarketState(),
+      stockPortfolio: initStockPortfolio(),
+      netWorth: startingCapital,
       recruitmentPool: [],
       lastRecruitmentTime: nowIso,
       lastPayrollTime: nowIso,
@@ -142,6 +148,10 @@ export async function POST(request: NextRequest) {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     };
+
+    const netWorthSnapshot = getNetWorthSnapshot(businessData);
+    businessData.netWorth = netWorthSnapshot.netWorth;
+    businessData.valuation = netWorthSnapshot.valuation;
 
     // ATOMIC BATCH OPERATION
     const batch = adminDb.batch();

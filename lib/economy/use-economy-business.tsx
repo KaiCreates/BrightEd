@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import { db, isFirebaseReady } from '@/lib/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { BusinessState, BusinessType, getBusinessType } from '@/lib/economy';
+import { initStockMarketState, initStockPortfolio } from '@/lib/economy/stock-market';
 
 export function useEconomyBusiness() {
   const { user, userData, loading: authLoading } = useAuth();
@@ -54,6 +55,11 @@ export function useEconomyBusiness() {
           employees: data.employees ?? [],
           inventory: data.inventory ?? {},
           marketState: data.marketState ?? { lastRestock: '', nextRestock: '', items: [] },
+          ownedTools: data.ownedTools ?? [],
+          stockMarket: data.stockMarket ?? initStockMarketState(),
+          stockPortfolio: data.stockPortfolio ?? initStockPortfolio(),
+          netWorth: data.netWorth ?? data.valuation ?? 0,
+          valuation: data.valuation ?? 0,
           recruitmentPool: data.recruitmentPool ?? [],
           lastRecruitmentTime: data.lastRecruitmentTime ?? '',
           lastPayrollTime: data.lastPayrollTime ?? '',

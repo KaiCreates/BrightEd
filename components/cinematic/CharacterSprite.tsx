@@ -164,17 +164,24 @@ export function CharacterSprite({
                     animate={emotion}
                 >
                     {/* Character Image or Emoji Fallback */}
-                    <div className="w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br from-white/10 to-transparent">
-                        {/* TODO: Replace with actual character images when generated */}
-                        <span
-                            className="select-none"
-                            style={{
-                                fontSize: size === 'xl' ? '4rem' : size === 'lg' ? '3rem' : size === 'md' ? '2rem' : '1.5rem'
-                            }}
-                        >
-                            {character.emoji}
-                        </span>
-                    </div>
+                    {character.avatar ? (
+                        <img
+                            src={character.avatar}
+                            alt={character.name}
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br from-white/10 to-transparent">
+                            <span
+                                className="select-none"
+                                style={{
+                                    fontSize: size === 'xl' ? '4rem' : size === 'lg' ? '3rem' : size === 'md' ? '2rem' : '1.5rem'
+                                }}
+                            >
+                                {character.emoji}
+                            </span>
+                        </div>
+                    )}
 
                     {/* Emotion Indicator Overlay */}
                     {emotion !== 'neutral' && emotionVisual.glowColor && (

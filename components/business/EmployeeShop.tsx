@@ -4,6 +4,7 @@ import { BrightHeading, useDialog } from '@/components/system';
 import { BusinessState, Employee } from '@/lib/economy/economy-types';
 import EmployeeIDCard from '@/components/business/EmployeeIDCard';
 import { useAuth } from '@/lib/auth-context';
+import { getDicebearAvatarUrl } from '@/lib/avatars';
 
 interface EmployeeShopProps {
     business: BusinessState;
@@ -93,7 +94,7 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
                     {candidates.slice(0, 3).map(c => (
                         <div key={c.id} className="w-12 h-12 rounded-2xl border-4 border-[var(--bg-primary)] bg-[var(--bg-elevated)] overflow-hidden shadow-lg transition-transform hover:translate-y-[-4px] hover:z-20">
                             <img
-                                src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${c.id}&backgroundColor=b6e3f4,c0aede,d1d4f9&backgroundType=solid`}
+                                src={getDicebearAvatarUrl(c.id)}
                                 alt="candidate"
                                 className="w-full h-full object-cover"
                             />

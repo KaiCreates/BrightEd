@@ -22,6 +22,11 @@ export function getFirebaseAdmin() {
     } else if (typeof serviceAccountPathEnv === 'string' && serviceAccountPathEnv.trim()) {
         const p = path.isAbsolute(serviceAccountPathEnv) ? serviceAccountPathEnv : path.join(process.cwd(), serviceAccountPathEnv);
         serviceAccount = JSON.parse(fs.readFileSync(p, 'utf8'));
+    } else if (process.env.NODE_ENV !== 'production') {
+        const fallbackPath = path.join(process.cwd(), 'brighted-b36ba-firebase-adminsdk-fbsvc-0a17e6fa4d.json');
+        if (fs.existsSync(fallbackPath)) {
+            serviceAccount = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+        }
     }
 
     if (!serviceAccount) {

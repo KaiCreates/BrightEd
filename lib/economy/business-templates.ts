@@ -621,6 +621,237 @@ export const BUSINESS_FREELANCE: BusinessType = {
 };
 
 // ============================================================================
+// SERVICE BUSINESS: Mobile Repair Lab
+// ============================================================================
+
+const REPAIR_LAB_PRODUCTS: ProductTemplate[] = [
+    {
+        id: 'screen_repair',
+        name: 'Screen Replacement',
+        description: 'Precision screen swap and calibration',
+        basePrice: 120,
+        baseCost: 20,
+        baseTimeMinutes: 45,
+        category: 'repairs',
+        qualityFactors: ['precision', 'technical_skill'],
+    },
+    {
+        id: 'battery_swap',
+        name: 'Battery Swap',
+        description: 'Fast power upgrade with safety checks',
+        basePrice: 80,
+        baseCost: 15,
+        baseTimeMinutes: 30,
+        category: 'repairs',
+        qualityFactors: ['technical_skill', 'speed'],
+    },
+    {
+        id: 'device_diagnostic',
+        name: 'Device Diagnostic',
+        description: 'Full health check with repair plan',
+        basePrice: 40,
+        baseCost: 5,
+        baseTimeMinutes: 20,
+        category: 'diagnostics',
+        qualityFactors: ['analysis', 'communication'],
+    },
+];
+
+const REPAIR_LAB_COSTS: OperatingCostTemplate = {
+    rentPerDay: 70,
+    utilitiesPerDay: 18,
+    staffPerHour: 14,
+    maintenanceChance: 0.03,
+};
+
+const REPAIR_LAB_DEMAND: DemandConfig = {
+    baseOrdersPerHour: 1.2,
+    maxConcurrentOrders: 4,
+    maxConcurrentCustomers: 12,
+    marketScale: 850000,
+    hourlyMultipliers: {
+        9: 0.6, 10: 1.0, 11: 1.2, 12: 0.9, 13: 0.8, 14: 1.0,
+        15: 1.3, 16: 1.1, 17: 0.9, 18: 0.6,
+    },
+    reputationFloor: 0.35,
+    reputationCeiling: 2.1,
+    customerTypeProbabilities: { walk_in: 0.55, regular: 0.3, business: 0.1, vip: 0.05 },
+    avgItemsPerOrder: 1.1,
+    orderValueRange: { min: 40, max: 180 },
+};
+
+export const BUSINESS_MOBILE_REPAIR: BusinessType = {
+    id: 'mobile_repair',
+    category: 'service',
+    name: 'Mobile Repair Lab',
+    description: 'Young tech founders fixing devices at lightning speed. Precision and trust are everything.',
+    icon: '/business/mobile-repair.png',
+    emoji: '📱',
+    startingCapital: 900,
+    products: REPAIR_LAB_PRODUCTS,
+    operatingCosts: REPAIR_LAB_COSTS,
+    demandConfig: REPAIR_LAB_DEMAND,
+    characterGuide: 'luka',
+};
+
+// ============================================================================
+// RETAIL BUSINESS: Eco Fashion Pop-up
+// ============================================================================
+
+const ECO_FASHION_PRODUCTS: ProductTemplate[] = [
+    {
+        id: 'eco_tshirt',
+        name: 'Eco Tee',
+        description: 'Organic cotton tee drop',
+        basePrice: 45,
+        baseCost: 20,
+        baseTimeMinutes: 2,
+        category: 'apparel',
+        qualityFactors: [],
+        requiresInventory: true,
+        inventoryItemId: 'eco_tshirt',
+        inventoryPerUnit: 1,
+    },
+    {
+        id: 'eco_tote',
+        name: 'Canvas Tote',
+        description: 'Reusable tote bag collection',
+        basePrice: 30,
+        baseCost: 12,
+        baseTimeMinutes: 1,
+        category: 'accessories',
+        qualityFactors: [],
+        requiresInventory: true,
+        inventoryItemId: 'eco_tote',
+        inventoryPerUnit: 1,
+    },
+    {
+        id: 'upcycle_denim',
+        name: 'Upcycled Denim Jacket',
+        description: 'Limited denim refurb drop',
+        basePrice: 90,
+        baseCost: 40,
+        baseTimeMinutes: 2,
+        category: 'apparel',
+        qualityFactors: [],
+        requiresInventory: true,
+        inventoryItemId: 'upcycle_denim',
+        inventoryPerUnit: 1,
+    },
+];
+
+const ECO_FASHION_COSTS: OperatingCostTemplate = {
+    rentPerDay: 80,
+    utilitiesPerDay: 20,
+    staffPerHour: 10,
+    maintenanceChance: 0.01,
+};
+
+const ECO_FASHION_DEMAND: DemandConfig = {
+    baseOrdersPerHour: 4,
+    maxConcurrentOrders: 12,
+    maxConcurrentCustomers: 40,
+    marketScale: 950000,
+    hourlyMultipliers: {
+        10: 0.7, 11: 0.9, 12: 1.2, 13: 1.4, 14: 1.1,
+        15: 0.9, 16: 1.0, 17: 1.3, 18: 1.5, 19: 1.0,
+    },
+    reputationFloor: 0.25,
+    reputationCeiling: 2.0,
+    customerTypeProbabilities: { walk_in: 0.6, regular: 0.3, business: 0.05, vip: 0.05 },
+    avgItemsPerOrder: 2.2,
+    orderValueRange: { min: 25, max: 120 },
+};
+
+export const BUSINESS_ECO_FASHION: BusinessType = {
+    id: 'eco_fashion',
+    category: 'retail',
+    name: 'Eco Fashion Pop-up',
+    description: 'Sustainable fashion drops with limited inventory. Curate hype and manage stock.',
+    icon: '/business/eco-fashion.png',
+    emoji: '🧵',
+    startingCapital: 1200,
+    products: ECO_FASHION_PRODUCTS,
+    operatingCosts: ECO_FASHION_COSTS,
+    demandConfig: ECO_FASHION_DEMAND,
+    characterGuide: 'andre',
+};
+
+// ============================================================================
+// DIGITAL BUSINESS: Drone Media Studio
+// ============================================================================
+
+const DRONE_MEDIA_PRODUCTS: ProductTemplate[] = [
+    {
+        id: 'drone_shoot',
+        name: 'Drone Shoot',
+        description: 'Cinematic aerial footage capture',
+        basePrice: 220,
+        baseCost: 0,
+        baseTimeMinutes: 180,
+        category: 'production',
+        qualityFactors: ['technical_skill', 'creativity'],
+    },
+    {
+        id: 'social_reel',
+        name: 'Social Highlight Reel',
+        description: '15-30 sec reel for socials',
+        basePrice: 90,
+        baseCost: 0,
+        baseTimeMinutes: 60,
+        category: 'editing',
+        qualityFactors: ['creativity', 'trend_awareness'],
+    },
+    {
+        id: 'event_highlight',
+        name: 'Event Highlight Film',
+        description: 'Full event recap with motion graphics',
+        basePrice: 350,
+        baseCost: 0,
+        baseTimeMinutes: 240,
+        category: 'production',
+        qualityFactors: ['storytelling', 'technical_skill'],
+    },
+];
+
+const DRONE_MEDIA_COSTS: OperatingCostTemplate = {
+    rentPerDay: 0,
+    utilitiesPerDay: 0,
+    softwarePerMonth: 160,
+    maintenanceChance: 0.02,
+};
+
+const DRONE_MEDIA_DEMAND: DemandConfig = {
+    baseOrdersPerHour: 0.6,
+    maxConcurrentOrders: 6,
+    maxConcurrentCustomers: 12,
+    marketScale: 900000,
+    hourlyMultipliers: {
+        9: 0.8, 10: 1.0, 11: 1.2, 12: 0.9, 13: 0.7,
+        14: 1.1, 15: 1.3, 16: 1.0, 17: 0.8,
+    },
+    reputationFloor: 0.15,
+    reputationCeiling: 2.6,
+    customerTypeProbabilities: { walk_in: 0.2, regular: 0.35, business: 0.35, vip: 0.1 },
+    avgItemsPerOrder: 1.1,
+    orderValueRange: { min: 60, max: 400 },
+};
+
+export const BUSINESS_DRONE_MEDIA: BusinessType = {
+    id: 'drone_media',
+    category: 'digital',
+    name: 'Drone Media Studio',
+    description: 'Capture cinematic stories from above. Creative skill and turnaround speed win contracts.',
+    icon: '/business/drone-media.png',
+    emoji: '🎥',
+    startingCapital: 600,
+    products: DRONE_MEDIA_PRODUCTS,
+    operatingCosts: DRONE_MEDIA_COSTS,
+    demandConfig: DRONE_MEDIA_DEMAND,
+    characterGuide: 'luka',
+};
+
+// ============================================================================
 // BUSINESS REGISTRY
 // ============================================================================
 
@@ -629,6 +860,9 @@ export const ALL_BUSINESS_TYPES: BusinessType[] = [
     BUSINESS_MINIMART,
     BUSINESS_FOODTRUCK,
     BUSINESS_FREELANCE,
+    BUSINESS_MOBILE_REPAIR,
+    BUSINESS_ECO_FASHION,
+    BUSINESS_DRONE_MEDIA,
 ];
 
 export const BUSINESS_TYPE_MAP: Record<string, BusinessType> = {
@@ -636,6 +870,9 @@ export const BUSINESS_TYPE_MAP: Record<string, BusinessType> = {
     minimart: BUSINESS_MINIMART,
     foodtruck: BUSINESS_FOODTRUCK,
     freelance_design: BUSINESS_FREELANCE,
+    mobile_repair: BUSINESS_MOBILE_REPAIR,
+    eco_fashion: BUSINESS_ECO_FASHION,
+    drone_media: BUSINESS_DRONE_MEDIA,
 };
 
 export function getBusinessType(id: string): BusinessType | undefined {
