@@ -3,7 +3,7 @@
 import BusinessDuolingoLayout from '@/components/business/BusinessDuolingoLayout';
 import { BrightHeading } from '@/components/system';
 import { useEconomyBusiness } from '@/lib/economy/use-economy-business';
-import BusinessMeetingTablet from '@/components/business/BusinessMeetingTablet';
+import IpadReplica from '@/components/ipad/IpadReplica';
 import { CinematicProvider } from '@/components/cinematic';
 
 export default function BusinessMeetingsPage() {
@@ -42,7 +42,12 @@ export default function BusinessMeetingsPage() {
             </p>
           </header>
 
-          <BusinessMeetingTablet business={business} businessType={businessType} />
+          <IpadReplica
+            businessName={business.name}
+            businessHealth={Math.min(100, Math.max(10, business.reputation ?? 78))}
+            contactName={business.ownerName || 'Owner'}
+            variant="business"
+          />
         </div>
       </CinematicProvider>
     </BusinessDuolingoLayout>
