@@ -23,8 +23,6 @@
     "@opentelemetry/resources": "^2.5.0",
     "@opentelemetry/sdk-trace-base": "^2.5.0",
     "@opentelemetry/sdk-trace-node": "^2.5.0",
-    "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.91.1",
     "@types/react-window": "^1.8.8",
     "firebase": "^12.8.0",
     "firebase-admin": "^13.6.0",

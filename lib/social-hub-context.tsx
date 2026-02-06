@@ -527,7 +527,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             timestamp: serverTimestamp()
         });
         FirebaseMonitor.trackWrite('dm_messages', 1);
-    }, [user, userData?.firstName, userData?.avatarUrl]);
+    }, [user, userData?.firstName, userData?.avatarUrl, userData?.avatarCustomization]);
 
     const addReaction = useCallback(async (messageId: string, emoji: string) => {
         if (!user || !activeRoom) return;

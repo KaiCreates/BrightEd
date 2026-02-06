@@ -165,7 +165,7 @@ export default function BreathingRateLabPage() {
         }
 
         return () => clearInterval(interval);
-    }, [status, activeActivity]);
+    }, [status, activeActivity, showProfessorSuccess]);
 
     // Stopwatch logic
     useEffect(() => {

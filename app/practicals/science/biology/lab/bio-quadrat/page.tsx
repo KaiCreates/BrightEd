@@ -171,12 +171,12 @@ export default function QuadratLabV2Page() {
     // Generate random weed patches
     const weeds = useMemo(() => {
         const patches: WeedPatch[] = [];
-        const numWeeds = 50 + Math.floor(Math.random() * 30);
+        const numWeeds = 50;
         for (let i = 0; i < numWeeds; i++) {
             patches.push({
                 id: `weed-${i}`,
-                x: Math.random() * 95,
-                y: Math.random() * 95
+                x: (i * 17) % 95, // Deterministic based on index
+                y: ((i * 23) % 95) // Deterministic based on index
             });
         }
         return patches;
@@ -209,10 +209,11 @@ export default function QuadratLabV2Page() {
     const handleDragOver = (event: any) => {
         if (event.over?.id === 'field') {
             setHoveringField(true);
-            // Random position for preview
+            // Deterministic position for preview based on timestamp
+            const time = Date.now() / 1000;
             setHoverPosition({
-                x: Math.random() * 75,
-                y: Math.random() * 75
+                x: (time * 7) % 75,
+                y: (time * 11) % 75
             });
         } else {
             setHoveringField(false);
@@ -230,9 +231,9 @@ export default function QuadratLabV2Page() {
             return;
         }
 
-        // Random placement
-        const x = Math.random() * 75;
-        const y = Math.random() * 75;
+        // Deterministic placement
+        const x = (samples.length * 13) % 75;
+        const y = (samples.length * 17) % 75;
         const count = countWeedsInQuadrat(x, y);
 
         const newSample: QuadratSample = {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { Order, BusinessType } from '@/lib/economy/economy-types';
 import { BCoinIcon } from '@/components/BCoinIcon';
@@ -117,9 +118,11 @@ export default function BusinessWorkspace({ order, businessType, onComplete, onC
                     <button onClick={onCancel} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">✕ Exit Workspace</button>
                     <div className="h-6 w-px bg-[var(--border-subtle)]" />
                     <div className="flex items-center gap-3">
-                        <img
+                        <Image
                             src={customerAvatarUrl}
                             alt={order.customerName}
+                            width={40}
+                            height={40}
                             className="h-10 w-10 rounded-2xl border border-[var(--border-subtle)] object-cover"
                         />
                         <BrightHeading level={4} className="m-0">Business Workspace: {order.customerName}</BrightHeading>

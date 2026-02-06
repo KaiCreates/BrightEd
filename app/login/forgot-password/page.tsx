@@ -17,12 +17,10 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      const { isFirebaseReady, auth: firebaseAuth } = await import('@/lib/firebase');
-      if (!isFirebaseReady || !firebaseAuth) {
-        setError('System temporarily unavailable. Please try again later.');
-        return;
-      }
-      await sendPasswordResetEmail(firebaseAuth, email);
+      const { sendPasswordResetEmail } = await import('firebase/auth');
+      const { getFirebaseAuth } = await import('@/lib/firebase');
+      const auth = getFirebaseAuth();
+      await sendPasswordResetEmail(auth, email);
       setSent(true);
     } catch (err: any) {
       console.error('Password reset error:', err);

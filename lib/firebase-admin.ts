@@ -22,11 +22,6 @@ export function getFirebaseAdmin() {
     } else if (typeof serviceAccountPathEnv === 'string' && serviceAccountPathEnv.trim()) {
         const p = path.isAbsolute(serviceAccountPathEnv) ? serviceAccountPathEnv : path.join(process.cwd(), serviceAccountPathEnv);
         serviceAccount = JSON.parse(fs.readFileSync(p, 'utf8'));
-    } else if (process.env.NODE_ENV !== 'production') {
-        const fallbackPath = path.join(process.cwd(), 'brighted-b36ba-firebase-adminsdk-fbsvc-0a17e6fa4d.json');
-        if (fs.existsSync(fallbackPath)) {
-            serviceAccount = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
-        }
     }
 
     if (!serviceAccount) {
@@ -34,7 +29,7 @@ export function getFirebaseAdmin() {
             // Only throw if we're actually running in prod and not building
             throw new Error('Missing Firebase Admin credentials. Set FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON (recommended) or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH / GOOGLE_APPLICATION_CREDENTIALS.');
         }
-        console.warn('Firebase Admin credentials missing. Skipping initialization during build/dev if not strictly required.');
+        console.warn('Firebase Admin credentials missing. Provide FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON, FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64, or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH.');
         // Return a dummy app or handle it in the getters
         return null as any;
     }

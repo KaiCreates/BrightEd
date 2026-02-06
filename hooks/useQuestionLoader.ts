@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { UserData } from '@/lib/auth-context'
 import { NABLEState } from '@/lib/nable'
@@ -21,7 +20,8 @@ export function useQuestionLoader({
     authLoading,
     authenticatedFetch
 }: UseQuestionLoaderProps) {
-    const router = useRouter()
+    const userId = user?.uid
+    const mastery = userData?.mastery
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [simulationSteps, setSimulationSteps] = useState<any[]>([])
@@ -40,7 +40,7 @@ export function useQuestionLoader({
 
     useEffect(() => {
         // Create a unique key for this fetch based on stable params
-        const currentFetchKey = `${objectiveId}-${subjectId}-${user?.uid}`
+        const currentFetchKey = `${objectiveId}-${subjectId}-${userId}`
 
         // Skip if we've already fetched for this exact configuration
         if (hasFetched.current && fetchKey.current === currentFetchKey) {
@@ -58,7 +58,7 @@ export function useQuestionLoader({
             }
 
             if (authLoading) return
-            if (!user) {
+            if (!userId) {
                 // Handled by auth protection wrapper usually, but safe guard
                 return
             }
@@ -70,7 +70,7 @@ export function useQuestionLoader({
 
                 // 2. Load NABLE State via Secure API (Production Fortress)
                 const [progressRes, nableStatusRes] = await Promise.all([
-                    authenticatedFetch(`/api/progress?userId=${user.uid}`),
+                    authenticatedFetch(`/api/progress?userId=${userId}`),
                     authenticatedFetch(`/api/nable/status`)
                 ]);
 
@@ -83,7 +83,7 @@ export function useQuestionLoader({
                 // We recreate the state structure from the API response for the frontend
                 // This keeps the UI working without exposing the full engine logic
                 setNableState({
-                    userId: user.uid,
+                    userId,
                     knowledgeGraph: nableData.skills.details.reduce((acc: any, skill: any) => {
                         acc[skill.id] = {
                             mastery: skill.mastery / 100,
@@ -125,7 +125,7 @@ export function useQuestionLoader({
 
                 // Fetch question with mastery for adaptive difficulty
                 const subjectParam = subjectId ? `&subjectId=${encodeURIComponent(subjectId)}` : ''
-                const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
+                const masteryParam = mastery ? `&mastery=${mastery}` : ''
 
                 // Pass real-time NABLE stats for immediate difficulty adaptation
                 // Use nableData directly to avoid React state update delay
@@ -159,8 +159,7 @@ export function useQuestionLoader({
         loadQuestion()
 
         return () => { cancelled = true; }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [objectiveId, subjectId, user?.uid, authLoading])
+    }, [objectiveId, subjectId, userId, authLoading, authenticatedFetch, mastery])
 
     return {
         loading,

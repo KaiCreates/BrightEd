@@ -59,9 +59,11 @@ export default function SignUpPage() {
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [termsAccepted, setTermsAccepted] = useState(false)
 
   const subjectsParam = searchParams?.get('subjects')
   const hasSubjects = !!subjectsParam
+  const notifyParam = searchParams?.get('notify')
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -90,9 +92,14 @@ export default function SignUpPage() {
       return
     }
 
+    if (!termsAccepted) {
+      setError('Please accept the Privacy Policy and Terms & Conditions to continue.')
+      return
+    }
+
     const { isFirebaseReady } = await import('@/lib/firebase')
     if (!isFirebaseReady) {
-      setError("System temporary unavailable: Firebase configuration is missing.")
+      setError("Authentication service is temporarily unavailable. Please try again later.")
       return
     }
 
@@ -179,7 +186,8 @@ export default function SignUpPage() {
         examTrack: examParam || 'CSEC',
         formLevel: formParam || '3',
         country: countryParam || 'Trinidad and Tobago',
-        school: schoolParam || null
+        school: schoolParam || null,
+        notificationPermission: notifyParam || null
       })
 
       // 3. Initialize Learning Path
@@ -314,6 +322,36 @@ export default function SignUpPage() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
               />
+
+              <label className="flex items-start gap-3 rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-4 text-sm font-bold text-[var(--text-secondary)]">
+                <input
+                  type="checkbox"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-[var(--border-subtle)] text-[var(--brand-secondary)]"
+                  required
+                />
+                <span>
+                  I agree to the{' '}
+                  <a
+                    href="/privacy-policy.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[var(--brand-secondary)] underline"
+                  >
+                    Privacy Policy
+                  </a>{' '}
+                  and{' '}
+                  <a
+                    href="/terms-and-conditions.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[var(--brand-secondary)] underline"
+                  >
+                    Terms &amp; Conditions
+                  </a>.
+                </span>
+              </label>
 
               {error && (
                 <div className="p-4 bg-red-50 text-red-500 font-bold rounded-2xl border-2 border-red-100 text-sm">

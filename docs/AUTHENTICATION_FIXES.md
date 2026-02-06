@@ -33,7 +33,7 @@ This document outlines the fixes applied to prevent users from bypassing authent
 ## Files Modified
 
 1. **`app/page.tsx`**
-   - Added Supabase authentication check
+   - Added Firebase authentication check
    - Redirects to `/landing` if not authenticated
    - Shows loading state while checking auth
 
@@ -92,7 +92,7 @@ This document outlines the fixes applied to prevent users from bypassing authent
 
 - **Middleware Protection**: Server-side protection ensures users can't bypass client-side checks
 - **RLS Policies**: Database-level security ensures users can only access their own data
-- **Session Management**: Supabase handles session tokens securely
+- **Session Management**: Firebase Auth handles session tokens securely
 - **Route Guards**: Multiple layers of protection (middleware + client-side checks)
 
 ## Future Enhancements

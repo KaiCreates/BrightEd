@@ -113,7 +113,7 @@ export default function Marketplace({ business }: MarketplaceProps) {
             mounted = false;
             clearInterval(timer);
         };
-    }, [business.id, business.marketState?.nextRestock, isRestocking]);
+    }, [business.id, business.marketState?.nextRestock, isRestocking, showProfessorSuccess]);
 
     const handleBuy = async (item: MarketItem, quantity: number, event: React.MouseEvent) => {
         const curve = pricingCurves.get(item.id);

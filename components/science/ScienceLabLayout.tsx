@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrightLayer, BrightHeading } from '@/components/system';
@@ -28,6 +28,11 @@ export default function ScienceLabLayout({
 }: ScienceLabLayoutProps) {
     const [showInventory, setShowInventory] = useState(false);
     const [showReport, setShowReport] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     return (
         <div className="fixed inset-0 bg-[#0A0F18] text-white overflow-hidden flex flex-col z-[100]">
@@ -162,7 +167,7 @@ export default function ScienceLabLayout({
                                 <h1 className="text-4xl font-serif font-bold italic tracking-tight">{labTitle}</h1>
                                 <div className="mt-4 flex gap-6 text-[10px] font-black uppercase tracking-widest text-zinc-400">
                                     <span>Subject: Biology</span>
-                                    <span>Date: {new Date().toLocaleDateString()}</span>
+                                    <span>Date: {isMounted ? new Date().toLocaleDateString() : '--/--/--'}</span>
                                 </div>
                             </div>
 

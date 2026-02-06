@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     DndContext,
@@ -168,6 +168,24 @@ export default function TranspirationLabPage() {
         useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
     );
 
+    const handleFinish = useCallback(async () => {
+        await completeLab('bio-transpiration', 300);
+        setShowSuccess(true);
+    }, [completeLab]);
+
+    const handleStop = useCallback(() => {
+        setIsRunning(false);
+        const distance = Math.round(bubblePos); // Simplified distance
+        setResults(prev => [...prev, { factor: activeFactor === 'none' ? 'Control' : activeFactor, distance }]);
+        showProfessorSuccess(`Measurement complete! Bubble moved ${distance}mm.`);
+
+        // Complete Lab Condition: 3 different tests
+        const factorsTested = new Set([...results.map(r => r.factor), activeFactor === 'none' ? 'Control' : activeFactor]);
+        if (factorsTested.size >= 3) {
+            setTimeout(() => handleFinish(), 1500);
+        }
+    }, [bubblePos, activeFactor, results, showProfessorSuccess, handleFinish]);
+
     // Simulation Loop
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -197,7 +215,7 @@ export default function TranspirationLabPage() {
         }
 
         return () => clearInterval(interval);
-    }, [isRunning, activeFactor]);
+    }, [isRunning, activeFactor, handleStop]);
 
     const handleStart = () => {
         if (bubblePos >= 100) {
@@ -207,28 +225,11 @@ export default function TranspirationLabPage() {
         showProfessorSuccess("Measurement started! Watch the air bubble move.");
     };
 
-    const handleStop = () => {
-        setIsRunning(false);
-        const distance = Math.round(bubblePos); // Simplified distance
-        setResults(prev => [...prev, { factor: activeFactor === 'none' ? 'Control' : activeFactor, distance }]);
-        showProfessorSuccess(`Measurement complete! Bubble moved ${distance}mm.`);
-
-        // Complete Lab Condition: 3 different tests
-        const factorsTested = new Set([...results.map(r => r.factor), activeFactor === 'none' ? 'Control' : activeFactor]);
-        if (factorsTested.size >= 3) {
-            setTimeout(() => handleFinish(), 1500);
-        }
-    };
 
     const handleReset = () => {
         setIsRunning(false);
         setBubblePos(0);
         setTimer(0);
-    };
-
-    const handleFinish = async () => {
-        await completeLab('bio-transpiration', 300);
-        setShowSuccess(true);
     };
 
     const handleDragStart = (event: DragStartEvent) => {

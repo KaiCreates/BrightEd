@@ -7,7 +7,7 @@ import { useSocialHub } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
 import { UserSocialBadge } from './UserSocialBadge';
 import { BrightButton } from '@/components/system';
-import { db } from '@/lib/firebase';
+import { getFirebaseDb } from '@/lib/firebase';
 import { collection, query, orderBy, onSnapshot, Timestamp, limit } from 'firebase/firestore';
 import ReactMarkdown from 'react-markdown';
 
@@ -25,11 +25,22 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
     const { user } = useAuth();
     const [messages, setMessages] = useState<Array<{ id: string; text: string; senderId: string; senderAvatarUrl?: string; timestamp: Timestamp | null }>>([]);
     const [messageText, setMessageText] = useState('');
+    const [isMounted, setIsMounted] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const formatTimestamp = (timestamp?: string) => {
+        if (!timestamp) return '';
+        return isMounted ? new Date(timestamp).toLocaleTimeString() : '--:--';
+    };
 
     useEffect(() => {
         if (!roomId || !user) return;
 
+        const db = getFirebaseDb();
         const messagesRef = collection(db, 'dms', roomId, 'messages');
         const q = query(messagesRef, orderBy('timestamp', 'desc'), limit(80));
 
@@ -157,7 +168,7 @@ export function DMWindow({ userId, userName, roomId, isMinimized, onClose, onMin
                                     <ReactMarkdown>{message.text}</ReactMarkdown>
                                 </div>
                                 <p className={`text-[10px] uppercase font-black mt-2 text-white/40`}>
-                                    {message.timestamp?.toDate().toLocaleTimeString()}
+                                    {formatTimestamp(message.timestamp?.toDate().toISOString())}
                                 </p>
                             </div>
                         </div>

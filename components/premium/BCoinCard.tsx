@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import NextImage from 'next/image'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 interface BCoinCardProps {
     balance: number
@@ -14,10 +14,20 @@ export default function BCoinCard({ balance, tier, cardHolder }: BCoinCardProps)
     const x = useMotionValue(0)
     const y = useMotionValue(0)
     const [showNumber, setShowNumber] = useState(false)
-    const [cardNumber] = useState(() => {
-        // Generate random 16 digit number
-        return Array.from({ length: 16 }, () => Math.floor(Math.random() * 10)).join('')
-    })
+    const cardNumber = useMemo(() => {
+        const seed = `${cardHolder}-${tier}-${balance}`
+        let hash = 0
+        for (let i = 0; i < seed.length; i += 1) {
+            hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+        }
+        let value = hash || 1
+        let digits = ''
+        for (let i = 0; i < 16; i += 1) {
+            value = (value * 1103515245 + 12345) >>> 0
+            digits += String(value % 10)
+        }
+        return digits
+    }, [cardHolder, tier, balance])
 
     const mouseXSpring = useSpring(x)
     const mouseYSpring = useSpring(y)
@@ -126,6 +136,7 @@ export default function BCoinCard({ balance, tier, cardHolder }: BCoinCardProps)
                                     src="/b-coin.png"
                                     alt="B-Coin"
                                     fill
+                                    sizes="48px"
                                     className={`object-contain ${balance === 0 ? 'filter grayscale opacity-50' : 'drop-shadow-lg'}`}
                                 />
                             </motion.div>

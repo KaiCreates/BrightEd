@@ -1,6 +1,6 @@
 /**
  * Stats Updater Utility
- * Updates user stats (XP, streak, consistency) in Supabase
+ * Updates user stats (XP, streak, consistency) via the stats API
  */
 
 export async function updateUserStats(points: number, type: 'story' | 'question') {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScienceLabLayout from '@/components/science/ScienceLabLayout';
 import { BrightLayer } from '@/components/system';
@@ -42,9 +42,16 @@ export default function OsmosisLabPage() {
         { id: 'hypertonic', name: '1M Sucrose', color: 'bg-amber-500', icon: '🧂' }
     ];
 
-    const addLog = useCallback((entry: string) => {
-        setLabLog(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${entry}`]);
+    const [isMounted, setIsMounted] = useState(false);
+    
+    useEffect(() => {
+        setIsMounted(true);
     }, []);
+
+    const addLog = useCallback((entry: string) => {
+        const timestamp = isMounted ? new Date().toLocaleTimeString() : '--:--';
+        setLabLog(prev => [...prev, `[${timestamp}] ${entry}`]);
+    }, [isMounted]);
 
     const handleCutStrip = () => {
         if (strips.length >= 3) {
@@ -53,7 +60,7 @@ export default function OsmosisLabPage() {
         }
 
         // Check for uniformity
-        const variance = Math.abs(Math.random() * 0.4 - 0.2); // Simulate cutting precision
+        const variance = Math.abs(((strips.length * 7) % 40) * 0.01 - 0.2); // Deterministic based on strip count
         const actualLength = +(stripLength + variance).toFixed(1);
 
         const newStrip: PotatoStrip = {

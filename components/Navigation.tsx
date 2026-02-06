@@ -48,7 +48,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
         <div className="bg-[var(--bg-elevated)]/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 opacity-80 hover:opacity-100 transition-opacity">
             <div className="relative w-8 h-8">
-              <Image src="/BrightEdLogo.png" alt="Logo" fill className="object-contain" />
+              <Image src="/BrightEdLogo.png" alt="Logo" fill sizes="32px" className="object-contain" />
             </div>
             <span className="font-bold text-lg tracking-tight">BrightEd</span>
           </Link>
@@ -78,6 +78,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                 src="/BrightEdLogo.png"
                 alt="BrightEd Logo"
                 fill
+                sizes="(max-width: 768px) 32px, 40px"
                 className="object-contain relative z-10"
                 priority
               />

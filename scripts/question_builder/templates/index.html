@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrightEd Question Builder - CXC/CAPE MCQ Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --white: #ffffff;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 320px;
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+            padding: 1.5rem;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .stats-overview {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-overview h3 {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-overview .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .subject-list {
+            list-style: none;
+        }
+
+        .subject-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .subject-button:hover {
+            border-color: var(--primary);
+            background: var(--gray-100);
+        }
+
+        .subject-button.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .subject-name {
+            font-weight: 500;
+            text-align: left;
+            flex: 1;
+        }
+
+        .subject-code {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--gray-200);
+            border-radius: 0.25rem;
+            margin-left: 0.5rem;
+        }
+
+        .subject-button.active .subject-code {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .question-count {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-left: 0.5rem;
+        }
+
+        .subject-button.active .question-count {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 320px;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--gray-600);
+        }
+
+        /* Form Styles */
+        .form-card {
+            background: var(--white);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--gray-800);
+        }
+
+        .form-label .required {
+            color: var(--danger);
+            margin-left: 0.25rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Choice Options */
+        .choices-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .choice-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .choice-label {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-200);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .choice-label:hover {
+            background: var(--gray-300);
+        }
+
+        .choice-label.selected {
+            background: var(--success);
+            color: white;
+        }
+
+        .choice-input {
+            flex: 1;
+        }
+
+        .choice-radio {
+            display: none;
+        }
+
+        /* Action Buttons */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--gray-300);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background: #16a34a;
+        }
+
+        /* Validation Panel */
+        .validation-panel {
+            background: var(--gray-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .validation-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .validation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .validation-list {
+            list-style: none;
+        }
+
+        .validation-item {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .validation-item.error {
+            color: var(--danger);
+        }
+
+        .validation-item.warning {
+            color: var(--warning);
+        }
+
+        .validation-item.suggestion {
+            color: var(--gray-600);
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .status-warning {
+            background: #fef9c3;
+            color: #854d0e;
+            border: 1px solid #fde047;
+        }
+
+        /* Demo Mode Banner */
+        .demo-banner {
+            background: linear-gradient(90deg, var(--warning), #f59e0b);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            font-weight: 500;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 280px;
+            }
+            .main-content {
+                margin-left: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .app-container {
+                flex-direction: column;
+            }
+        }
+
+        /* Stats for selected subject */
+        .subject-stats {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .subject-stats h4 {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>📚 BrightEd</h1>
+                <p>CXC/CAPE Question Builder</p>
+            </div>
+
+            <div class="stats-overview">
+                <h3>Total Questions</h3>
+                <div class="stat-number" id="totalQuestions">0</div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-size: 1rem;">Select Subject</h3>
+            <ul class="subject-list" id="subjectList">
+                <!-- Populated by JavaScript -->
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% if not firebase_enabled %}
+            <div class="demo-banner">
+                ⚠️ DEMO MODE: Firebase not connected. Questions will not be saved to database.
+                Add your firebase_key.json to enable full functionality.
+            </div>
+            {% endif %}
+
+            <div class="page-header">
+                <h2 id="pageTitle">Add New Question</h2>
+                <p>Create CXC/CAPE compliant multiple choice questions</p>
+            </div>
+
+            <!-- Subject Stats -->
+            <div class="subject-stats" id="subjectStats" style="display: none;">
+                <h4>Subject Statistics</h4>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="subjectTotal">0</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="subjectTopics">0</div>
+                        <div class="stat-label">Topics</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="subjectRecent">0</div>
+                        <div class="stat-label">Added Today</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="statusMessage" class="status-message"></div>
+
+            <!-- Question Form -->
+            <form id="questionForm" class="form-card">
+                <div class="form-section">
+                    <label class="form-label">
+                        Selected Subject <span class="required">*</span>
+                    </label>
+                    <input type="text" id="selectedSubjectDisplay" class="form-input" readonly 
+                           placeholder="Select a subject from the sidebar">
+                    <input type="hidden" id="subjectId" name="subjectId">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-section">
+                        <label class="form-label">Topic (Optional)</label>
+                        <input type="text" id="topicId" name="topicId" class="form-input" 
+                               placeholder="e.g., Algebra, Photosynthesis">
+                    </div>
+                    <div class="form-section">
+                        <label class="form-label">Exam Level</label>
+                        <select id="examLevel" name="examLevel" class="form-select">
+                            <option value="csec">CSEC</option>
+                            <option value="cape">CAPE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label">
+                        Question Stem <span class="required">*</span>
+                    </label>
+                    <textarea id="question" name="question" class="form-textarea" rows="3"
+                              placeholder="Enter your question here..."></textarea>
+                    <small style="color: var(--gray-600); font-size: 0.875rem;">
+                        Max 35 words. Avoid negative phrasing (NOT, EXCEPT). CXC standard format.
+                    </small>
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label">
+                        Answer Choices <span class="required">*</span>
+                        <span style="font-weight: normal; color: var(--gray-600);">— Select the correct answer</span>
+                    </label>
+                    <div class="choices-container">
+                        <div class="choice-row">
+                            <label class="choice-label" data-choice="A">A</label>
+                            <input type="text" name="choiceA" class="form-input choice-input" 
+                                   placeholder="Option A" required>
+                            <input type="radio" name="correctAnswer" value="A" class="choice-radio" id="radioA">
+                        </div>
+                        <div class="choice-row">
+                            <label class="choice-label" data-choice="B">B</label>
+                            <input type="text" name="choiceB" class="form-input choice-input" 
+                                   placeholder="Option B" required>
+                            <input type="radio" name="correctAnswer" value="B" class="choice-radio" id="radioB">
+                        </div>
+                        <div class="choice-row">
+                            <label class="choice-label" data-choice="C">C</label>
+                            <input type="text" name="choiceC" class="form-input choice-input" 
+                                   placeholder="Option C" required>
+                            <input type="radio" name="correctAnswer" value="C" class="choice-radio" id="radioC">
+                        </div>
+                        <div class="choice-row">
+                            <label class="choice-label" data-choice="D">D</label>
+                            <input type="text" name="choiceD" class="form-input choice-input" 
+                                   placeholder="Option D" required>
+                            <input type="radio" name="correctAnswer" value="D" class="choice-radio" id="radioD">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-section">
+                        <label class="form-label">Difficulty</label>
+                        <select id="difficulty" name="difficulty" class="form-select">
+                            <option value="easy">Easy (Recall)</option>
+                            <option value="medium" selected>Medium (Application)</option>
+                            <option value="hard">Hard (Analysis/Evaluation)</option>
+                        </select>
+                    </div>
+                    <div class="form-section">
+                        <label class="form-label">Created By</label>
+                        <input type="text" id="createdBy" name="createdBy" class="form-input" 
+                               placeholder="Teacher ID or Name">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label">
+                        Explanation for Wrong Answers
+                        <small style="font-weight: normal; color: var(--gray-600);">— Shown to students who get it wrong</small>
+                    </label>
+                    <textarea id="explanation" name="explanation" class="form-textarea" rows="3"
+                              placeholder="Why is the correct answer right? Common misconception? (Auto-generate with button below)"></textarea>
+                    <button type="button" id="btnGenerateExplanation" class="btn btn-secondary" style="margin-top: 0.5rem;">
+                        🧠 Generate with AI (Ollama)
+                    </button>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="btnValidate" class="btn btn-secondary">
+                        🔍 Validate
+                    </button>
+                    <button type="button" id="btnAutocorrect" class="btn btn-secondary">
+                        ✨ Auto-Correct
+                    </button>
+                    <button type="submit" id="btnSubmit" class="btn btn-primary" disabled>
+                        💾 Save Question
+                    </button>
+                </div>
+
+                <!-- Validation Results Panel -->
+                <div class="validation-panel" id="validationPanel" style="display: none;">
+                    <div class="validation-header">
+                        <span id="validationBadge" class="validation-badge badge-warning">
+                            Validation Pending
+                        </span>
+                    </div>
+                    <ul class="validation-list" id="validationList">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // Global state
+        let subjects = [];
+        let selectedSubject = null;
+        let currentValidation = null;
+
+        // DOM Elements
+        const subjectList = document.getElementById('subjectList');
+        const subjectIdInput = document.getElementById('subjectId');
+        const selectedSubjectDisplay = document.getElementById('selectedSubjectDisplay');
+        const questionForm = document.getElementById('questionForm');
+        const btnValidate = document.getElementById('btnValidate');
+        const btnAutocorrect = document.getElementById('btnAutocorrect');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const validationPanel = document.getElementById('validationPanel');
+        const validationBadge = document.getElementById('validationBadge');
+        const validationList = document.getElementById('validationList');
+        const statusMessage = document.getElementById('statusMessage');
+        const subjectStats = document.getElementById('subjectStats');
+        const btnGenerateExplanation = document.getElementById('btnGenerateExplanation');
+        const explanationInput = document.getElementById('explanation');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSubjects();
+            loadOverviewStats();
+            setupEventListeners();
+        });
+
+        // Load subjects from API
+        async function loadSubjects() {
+            try {
+                const response = await fetch('/api/subjects');
+                const data = await response.json();
+                subjects = data.subjects || [];
+                renderSubjectList();
+            } catch (error) {
+                console.error('Error loading subjects:', error);
+                showStatus('Failed to load subjects', 'error');
+            }
+        }
+
+        // Load overview statistics
+        async function loadOverviewStats() {
+            try {
+                const response = await fetch('/api/stats/overview');
+                const data = await response.json();
+                document.getElementById('totalQuestions').textContent = data.totalQuestions || 0;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Render subject list in sidebar
+        function renderSubjectList() {
+            subjectList.innerHTML = subjects.map(subject => `
+                <li class="subject-item">
+                    <button type="button" class="subject-button" data-subject-id="${subject.id}">
+                        <span class="subject-name">${subject.name}</span>
+                        <span class="subject-code">${subject.code || subject.id.substring(0,3).toUpperCase()}</span>
+                        <span class="question-count" id="count-${subject.id}">0</span>
+                    </button>
+                </li>
+            `).join('');
+
+            // Add click handlers
+            subjectList.querySelectorAll('.subject-button').forEach(btn => {
+                btn.addEventListener('click', () => selectSubject(btn.dataset.subjectId));
+            });
+
+            // Load individual subject stats
+            subjects.forEach(subject => loadSubjectStats(subject.id));
+        }
+
+        // Load stats for a specific subject
+        async function loadSubjectStats(subjectId) {
+            try {
+                const response = await fetch(`/api/subjects/${subjectId}/stats`);
+                const data = await response.json();
+                const countEl = document.getElementById(`count-${subjectId}`);
+                if (countEl) {
+                    countEl.textContent = data.total || 0;
+                }
+            } catch (error) {
+                console.error(`Error loading stats for ${subjectId}:`, error);
+            }
+        }
+
+        // Select a subject
+        async function selectSubject(subjectId) {
+            selectedSubject = subjects.find(s => s.id === subjectId);
+            if (!selectedSubject) return;
+
+            // Update UI
+            subjectList.querySelectorAll('.subject-button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.subjectId === subjectId);
+            });
+
+            subjectIdInput.value = subjectId;
+            selectedSubjectDisplay.value = selectedSubject.name;
+
+            // Load and show subject stats
+            try {
+                const response = await fetch(`/api/subjects/${subjectId}/stats`);
+                const data = await response.json();
+                
+                document.getElementById('subjectTotal').textContent = data.total || 0;
+                document.getElementById('subjectTopics').textContent = Object.keys(data.byTopic || {}).length;
+                document.getElementById('subjectRecent').textContent = '—';
+                
+                subjectStats.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading subject stats:', error);
+            }
+
+            showStatus(`Selected: ${selectedSubject.name}`, 'success');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Choice selection
+            document.querySelectorAll('.choice-label').forEach(label => {
+                label.addEventListener('click', () => {
+                    const choice = label.dataset.choice;
+                    document.getElementById(`radio${choice}`).checked = true;
+                    
+                    // Update visual selection
+                    document.querySelectorAll('.choice-label').forEach(l => l.classList.remove('selected'));
+                    label.classList.add('selected');
+                    
+                    checkFormValidity();
+                });
+            });
+
+            // Form input changes
+            questionForm.addEventListener('input', checkFormValidity);
+
+            // Validate button
+            btnValidate.addEventListener('click', validateQuestion);
+
+            // Auto-correct button
+            btnAutocorrect.addEventListener('click', autocorrectQuestion);
+
+            // Generate explanation button
+            btnGenerateExplanation.addEventListener('click', generateExplanation);
+
+            // Submit form
+            questionForm.addEventListener('submit', submitQuestion);
+        }
+
+        // Check if form is valid for submission
+        function checkFormValidity() {
+            const subjectId = subjectIdInput.value;
+            const question = document.getElementById('question').value.trim();
+            const choiceA = document.querySelector('[name="choiceA"]').value.trim();
+            const choiceB = document.querySelector('[name="choiceB"]').value.trim();
+            const choiceC = document.querySelector('[name="choiceC"]').value.trim();
+            const choiceD = document.querySelector('[name="choiceD"]').value.trim();
+            const correctAnswer = document.querySelector('[name="correctAnswer"]:checked');
+
+            const isValid = subjectId && question && choiceA && choiceB && choiceC && choiceD && correctAnswer;
+            btnSubmit.disabled = !isValid;
+        }
+
+        // Validate question
+        async function validateQuestion() {
+            const data = getFormData();
+            
+            if (!data.subjectId) {
+                showStatus('Please select a subject first', 'error');
+                return;
+            }
+
+            btnValidate.disabled = true;
+            btnValidate.innerHTML = '<span class="loading"></span> Validating...';
+
+            try {
+                const response = await fetch('/api/validate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                currentValidation = await response.json();
+                displayValidation(currentValidation);
+            } catch (error) {
+                console.error('Validation error:', error);
+                showStatus('Validation failed', 'error');
+            } finally {
+                btnValidate.disabled = false;
+                btnValidate.innerHTML = '🔍 Validate';
+            }
+        }
+
+        // Display validation results
+        function displayValidation(result) {
+            validationPanel.style.display = 'block';
+            
+            const badge = result.badge || {};
+            validationBadge.className = `validation-badge badge-${badge.color || 'warning'}`;
+            validationBadge.innerHTML = `${badge.icon || '⚠️'} ${badge.label || 'Unknown'}`;
+
+            const items = [];
+            
+            result.errors?.forEach(error => {
+                items.push(`<li class="validation-item error">❌ ${escapeHtml(error)}</li>`);
+            });
+            
+            result.warnings?.forEach(warning => {
+                items.push(`<li class="validation-item warning">⚠️ ${escapeHtml(warning)}</li>`);
+            });
+            
+            result.suggestions?.forEach(suggestion => {
+                items.push(`<li class="validation-item suggestion">💡 ${escapeHtml(suggestion)}</li>`);
+            });
+
+            if (items.length === 0) {
+                items.push('<li class="validation-item">✅ No issues found</li>');
+            }
+
+            validationList.innerHTML = items.join('');
+        }
+
+        // Auto-correct question
+        async function autocorrectQuestion() {
+            const question = document.getElementById('question').value;
+            const choices = {
+                A: document.querySelector('[name="choiceA"]').value,
+                B: document.querySelector('[name="choiceB"]').value,
+                C: document.querySelector('[name="choiceC"]').value,
+                D: document.querySelector('[name="choiceD"]').value,
+            };
+
+            if (!question.trim()) {
+                showStatus('Please enter a question first', 'error');
+                return;
+            }
+
+            btnAutocorrect.disabled = true;
+            btnAutocorrect.innerHTML = '<span class="loading"></span> Correcting...';
+
+            try {
+                const response = await fetch('/api/autocorrect', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question, choices })
+                });
+
+                const result = await response.json();
+                
+                // Apply corrections
+                document.getElementById('question').value = result.question;
+                document.querySelector('[name="choiceA"]').value = result.choices.A;
+                document.querySelector('[name="choiceB"]').value = result.choices.B;
+                document.querySelector('[name="choiceC"]').value = result.choices.C;
+                document.querySelector('[name="choiceD"]').value = result.choices.D;
+
+                // Show what changed
+                const changes = result.changes_made || [];
+                if (changes.length > 0) {
+                    showStatus(`Auto-corrected: ${changes.join(', ')}`, 'success');
+                } else {
+                    showStatus('No corrections needed', 'success');
+                }
+
+                // Re-validate after correction
+                if (result.validation_after_correction) {
+                    displayValidation(result.validation_after_correction);
+                }
+
+            } catch (error) {
+                console.error('Auto-correct error:', error);
+                showStatus('Auto-correction failed', 'error');
+            } finally {
+                btnAutocorrect.disabled = false;
+                btnAutocorrect.innerHTML = '✨ Auto-Correct';
+            }
+        }
+
+        // Generate explanation using Ollama
+        async function generateExplanation() {
+            const data = getFormData();
+            
+            if (!data.question || !data.correctAnswer) {
+                showStatus('Please enter a question and select the correct answer first', 'error');
+                return;
+            }
+
+            btnGenerateExplanation.disabled = true;
+            btnGenerateExplanation.innerHTML = '<span class="loading"></span> Generating...';
+
+            try {
+                const response = await fetch('/api/explain', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.explanation) {
+                    explanationInput.value = result.explanation;
+                    const source = result.source === 'ollama' ? '🧠 AI' : '📝 Template';
+                    showStatus(`Explanation generated (${source})`, 'success');
+                } else {
+                    showStatus('Failed to generate explanation', 'error');
+                }
+            } catch (error) {
+                console.error('Explanation generation error:', error);
+                showStatus('Failed to generate explanation', 'error');
+            } finally {
+                btnGenerateExplanation.disabled = false;
+                btnGenerateExplanation.innerHTML = '🧠 Generate with AI (Ollama)';
+            }
+        }
+
+        // Submit question
+        async function submitQuestion(e) {
+            e.preventDefault();
+            
+            const data = getFormData();
+            
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="loading"></span> Saving...';
+
+            try {
+                const response = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ...data,
+                        strictMode: true
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showStatus('Question saved successfully!', 'success');
+                    questionForm.reset();
+                    document.querySelectorAll('.choice-label').forEach(l => l.classList.remove('selected'));
+                    validationPanel.style.display = 'none';
+                    
+                    // Refresh stats
+                    loadOverviewStats();
+                    if (selectedSubject) {
+                        loadSubjectStats(selectedSubject.id);
+                    }
+                } else {
+                    showStatus(result.message || 'Failed to save question', 'error');
+                    if (result.validation) {
+                        displayValidation(result.validation);
+                    }
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                showStatus('Failed to save question', 'error');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '💾 Save Question';
+                checkFormValidity();
+            }
+        }
+
+        // Get form data as object
+        function getFormData() {
+            const correctAnswerEl = document.querySelector('[name="correctAnswer"]:checked');
+            
+            return {
+                subjectId: document.getElementById('subjectId').value,
+                topicId: document.getElementById('topicId').value || null,
+                examLevel: document.getElementById('examLevel').value,
+                question: document.getElementById('question').value,
+                choices: {
+                    A: document.querySelector('[name="choiceA"]').value,
+                    B: document.querySelector('[name="choiceB"]').value,
+                    C: document.querySelector('[name="choiceC"]').value,
+                    D: document.querySelector('[name="choiceD"]').value,
+                },
+                correctAnswer: correctAnswerEl ? correctAnswerEl.value : 'A',
+                difficulty: document.getElementById('difficulty').value,
+                createdBy: document.getElementById('createdBy').value || 'anonymous',
+                explanation: document.getElementById('explanation').value || null,
+            };
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message status-${type} show`;
+            
+            setTimeout(() => {
+                statusMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

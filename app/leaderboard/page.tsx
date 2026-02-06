@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useAuth } from '@/lib/auth-context';
 import { BrightLayer, BrightHeading, BrightButton } from '@/components/system';
 import { db } from '@/lib/firebase';
@@ -231,17 +232,19 @@ export default function LeaderboardPage() {
                                         </div>
 
                                         {/* Entry Avatar/Icon */}
-                                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mr-4 md:mr-6 shadow-inner overflow-hidden">
+                                        <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mr-4 md:mr-6 shadow-inner overflow-hidden">
                                             {entry.avatarCustomization ? (
                                                 <AvatarRenderer
                                                     customization={entry.avatarCustomization}
                                                     username={entry.name}
                                                 />
                                             ) : entry.avatarUrl ? (
-                                                <img
+                                                <Image
                                                     src={entry.avatarUrl}
                                                     alt={entry.name}
-                                                    className="w-full h-full object-cover"
+                                                    fill
+                                                    sizes="56px"
+                                                    className="object-cover"
                                                 />
                                             ) : (
                                                 <span className="text-2xl">{entry.icon || '👤'}</span>

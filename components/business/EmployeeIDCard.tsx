@@ -2,6 +2,7 @@
 
 import { Employee } from '@/lib/economy/economy-types';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { DuoContextMenu } from '@/components/system';
 import { getDicebearAvatarUrl } from '@/lib/avatars';
 
@@ -108,9 +109,11 @@ export default function EmployeeIDCard({
             {/* Avatar & Key Metric */}
             <div className="px-6 -mt-10 mb-4 relative z-10 flex justify-between items-end">
                 <div className="w-24 h-24 rounded-[2rem] bg-[var(--bg-primary)] border-4 border-[var(--bg-elevated)] shadow-xl overflow-hidden relative">
-                    <img
+                    <Image
                         src={avatarUrl}
                         alt={employee.name}
+                        width={96}
+                        height={96}
                         className="w-full h-full object-cover z-10 relative"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${bgGradient} opacity-5`}></div>

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User, signOut as firebaseSignOut } from 'firebase/auth';
-import { auth, db } from './firebase';
+import { getFirebaseAuth, getFirebaseDb } from './firebase';
 import { doc, getDoc, onSnapshot, updateDoc, setDoc } from 'firebase/firestore';
 import { HydrationFix } from '@/components/HydrationFix';
 
@@ -129,8 +129,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!auth) {
-            console.warn("Firebase Auth not initialized. Skipping auth listener.");
+        let auth;
+        try {
+            auth = getFirebaseAuth();
+        } catch (error) {
+            console.warn("Firebase Auth not initialized. Skipping auth listener.", error);
             setLoading(false);
             return;
         }
@@ -147,6 +150,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(currentUser);
 
             if (currentUser) {
+                const db = getFirebaseDb();
                 const userRef = doc(db, 'users', currentUser.uid);
 
                 unsubscribeSnapshot = onSnapshot(userRef, (snapshot) => {
@@ -241,9 +245,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const logout = async () => {
-        if (!auth) return;
-        await firebaseSignOut(auth);
-        setUserData(null);
+        try {
+            const auth = getFirebaseAuth();
+            await firebaseSignOut(auth);
+            setUserData(null);
+        } catch (error) {
+            console.error("Logout error:", error);
+        }
     };
 
     const refreshUserData = async () => {

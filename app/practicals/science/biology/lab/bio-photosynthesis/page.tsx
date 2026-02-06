@@ -185,8 +185,15 @@ export default function PhotosynthesisLabV2Page() {
         useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } })
     );
 
+    const [isMounted, setIsMounted] = useState(false);
+    
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     const addLog = (entry: string) => {
-        setLabLog(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${entry}`]);
+        const timestamp = isMounted ? new Date().toLocaleTimeString() : '--:--';
+        setLabLog(prev => [...prev, `[${timestamp}] ${entry}`]);
     };
 
     const steps = [

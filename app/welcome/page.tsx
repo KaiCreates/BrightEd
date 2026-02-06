@@ -58,6 +58,29 @@ const PROFICIENCY_LEVELS = [
     { id: '4', label: "I'm advanced", desc: "I'm ready for exam-style challenges", icon: '🚀' },
 ]
 
+type NotificationStatus = 'default' | 'granted' | 'denied' | 'unsupported' | 'skipped'
+
+const NOTIFICATION_PERKS = [
+    {
+        id: 'streaks',
+        title: 'Streak reminders',
+        description: 'Quick nudges from Professor Bright to keep your momentum alive.',
+        pose: 'owl-wink'
+    },
+    {
+        id: 'missions',
+        title: 'New missions',
+        description: 'Get notified when fresh challenges and lessons drop.',
+        pose: 'owl-idea'
+    },
+    {
+        id: 'tips',
+        title: 'Exam tips',
+        description: 'Short bursts of prep help before big assessment days.',
+        pose: 'owl-smart'
+    }
+]
+
 // --- Sub-Components (Steps) ---
 
 const MascotOwl = ({ pose = 'owl-happy', size = 'sm' }: { pose?: string, size?: 'sm' | 'md' | 'lg' }) => {
@@ -166,6 +189,142 @@ const StepSubjectSelection = ({ selected, onToggle, onNext }: { selected: string
         </div>
     </div>
 )
+
+const StepNotifications = ({
+    status,
+    onEnable,
+    onContinue
+}: {
+    status: NotificationStatus
+    onEnable: () => void
+    onContinue: () => void
+}) => {
+    const statusCopy = {
+        default: {
+            label: 'Optional',
+            detail: 'We only send the good stuff: streaks, missions, and exam nudges.'
+        },
+        granted: {
+            label: 'Enabled',
+            detail: 'You&apos;re all set! Expect friendly reminders and mission updates.'
+        },
+        denied: {
+            label: 'Blocked',
+            detail: 'No worries - you can enable notifications in your browser settings later.'
+        },
+        unsupported: {
+            label: 'Unavailable',
+            detail: 'This browser doesn&apos;t support push notifications yet.'
+        },
+        skipped: {
+            label: 'Skipped',
+            detail: 'You can always turn notifications on from your profile settings.'
+        }
+    } as const
+
+    const statusStyles: Record<NotificationStatus, string> = {
+        default: 'bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)] border-[var(--brand-secondary)]/30',
+        granted: 'bg-emerald-50 text-emerald-600 border-emerald-200',
+        denied: 'bg-red-50 text-red-500 border-red-200',
+        unsupported: 'bg-slate-100 text-slate-500 border-slate-200',
+        skipped: 'bg-amber-50 text-amber-600 border-amber-200'
+    }
+
+    return (
+        <div className="max-w-5xl mx-auto pt-28 pb-32">
+            <div className="flex flex-col items-center gap-6 text-center mb-12 px-4">
+                <MascotOwl pose={status === 'granted' ? 'owl-magic' : 'owl-idea'} size="lg" />
+                <div>
+                    <h1 className="text-3xl font-extrabold text-[var(--text-primary)]">Turn on push notifications</h1>
+                    <p className="text-[var(--text-secondary)] font-bold mt-3 max-w-xl">
+                        Get streak reminders, exam alerts, and quick tips - just enough to keep you moving.
+                    </p>
+                </div>
+                <div className={`px-4 py-2 rounded-full border-2 text-xs font-black uppercase tracking-widest ${statusStyles[status]}`}>
+                    {statusCopy[status].label}
+                </div>
+                <p className="text-[var(--text-muted)] font-bold text-sm max-w-md">
+                    {statusCopy[status].detail}
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 px-4">
+                <div className="space-y-4">
+                    {NOTIFICATION_PERKS.map((perk) => (
+                        <div
+                            key={perk.id}
+                            className="flex items-start gap-4 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-5 shadow-sm"
+                        >
+                            <div className="bg-[var(--brand-secondary)]/10 rounded-2xl p-2">
+                                <MascotOwl pose={perk.pose} size="sm" />
+                            </div>
+                            <div>
+                                <p className="text-lg font-extrabold text-[var(--text-primary)]">{perk.title}</p>
+                                <p className="text-[var(--text-secondary)] font-bold">{perk.description}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="relative rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-6 shadow-sm overflow-hidden">
+                    <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
+                        <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                        </div>
+                        <span>Browser Prompt</span>
+                    </div>
+
+                    <div className="mt-6 flex items-start gap-4">
+                        <div className="w-14 h-14 rounded-2xl bg-[var(--brand-secondary)]/10 flex items-center justify-center">
+                            <MascotOwl pose="owl-thinking" size="sm" />
+                        </div>
+                        <div>
+                            <p className="text-base font-extrabold text-[var(--text-primary)]">BrightEd wants to send notifications</p>
+                            <p className="text-sm font-bold text-[var(--text-secondary)]">Click Allow to get streak nudges and mission drops.</p>
+                        </div>
+                    </div>
+
+                    <div className="mt-6 flex items-center justify-end gap-3">
+                        <button className="px-4 py-2 rounded-xl border-2 border-[var(--border-subtle)] text-[var(--text-secondary)] font-bold bg-[var(--bg-secondary)]">
+                            Block
+                        </button>
+                        <div className="relative">
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-widest text-[var(--brand-secondary)]">
+                                Click Allow
+                            </div>
+                            <span className="absolute -top-3 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[var(--brand-secondary)] animate-ping" />
+                            <button className="px-5 py-2 rounded-xl bg-[var(--brand-secondary)] text-white font-extrabold border-b-4 border-[#4338ca]">
+                                Allow
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="absolute -bottom-8 -right-6 opacity-70">
+                        <MascotOwl pose="owl-wink" size="sm" />
+                    </div>
+                </div>
+            </div>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center px-4">
+                <button
+                    onClick={onEnable}
+                    disabled={status === 'granted' || status === 'unsupported'}
+                    className="max-w-md w-full sm:w-auto bg-[var(--brand-secondary)] hover:bg-[#4f46e5] text-white font-extrabold py-4 px-8 rounded-2xl border-b-4 border-[#4338ca] active:border-b-0 active:translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed tracking-widest uppercase shadow-lg shadow-indigo-500/10"
+                >
+                    {status === 'granted' ? 'Notifications Enabled' : 'Enable Notifications'}
+                </button>
+                <button
+                    onClick={onContinue}
+                    className="max-w-md w-full sm:w-auto bg-[var(--bg-elevated)] text-[var(--text-secondary)] font-extrabold py-4 px-8 rounded-2xl border-2 border-[var(--border-subtle)] hover:border-[var(--brand-secondary)]/50 active:translate-y-1 transition-all tracking-widest uppercase"
+                >
+                    Continue
+                </button>
+            </div>
+        </div>
+    )
+}
 
 const StepSourceSelection = ({ onSelect }: { onSelect: (id: string) => void }) => (
     <div className="max-w-2xl mx-auto pt-28">
@@ -367,7 +526,7 @@ const StepProficiency = ({ subject, onSelect }: { subject: string, onSelect: (id
     </div>
 )
 
-const StepPlacement = ({ onChoice }: { onChoice: (type: 'scratch') => void }) => (
+const StepPlacement = ({ onChoice }: { onChoice: () => void }) => (
     <div className="max-w-2xl mx-auto pt-28 text-center px-4">
         <MascotOwl pose="owl-happy" size="md" />
         <h1 className="text-3xl font-extrabold text-[var(--text-primary)] mt-6 mb-4">Now let&apos;s find the best place to start!</h1>
@@ -375,7 +534,7 @@ const StepPlacement = ({ onChoice }: { onChoice: (type: 'scratch') => void }) =>
 
         <div className="flex flex-col gap-6 max-w-md mx-auto">
             <button
-                onClick={() => onChoice('scratch')}
+                onClick={onChoice}
                 className="group p-8 rounded-3xl border-2 border-[var(--border-subtle)] bg-[var(--bg-elevated)] hover:bg-[var(--bg-secondary)] flex items-center gap-8 transition-all active:translate-y-1 border-b-4 text-left"
             >
                 <div className="w-16 h-16 bg-[var(--brand-secondary)]/10 rounded-2xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">🚀</div>
@@ -394,31 +553,38 @@ function WelcomeContent() {
     const router = useRouter()
     const { user } = useAuth()
     const searchParams = useSearchParams()
-    const step = (searchParams && searchParams.get('step')) || 'selection'
-    const profIndex = parseInt((searchParams && searchParams.get('si')) || '0')
+    const [isMounted, setIsMounted] = useState(false)
+    
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
+    
+    const step = isMounted ? ((searchParams && searchParams.get('step')) || 'selection') : 'selection'
+    const profIndex = isMounted ? parseInt((searchParams && searchParams.get('si')) || '0') : 0
 
     const [selectedSubjects, setSelectedSubjects] = useState<string[]>(() => {
-        const subs = searchParams?.get('subjects')
+        const subs = isMounted ? searchParams?.get('subjects') : null
         return subs ? subs.split(',').filter(Boolean) : []
     })
     const [examType, setExamType] = useState<string | null>(() =>
-        searchParams?.get('exam') || null
+        isMounted ? searchParams?.get('exam') || null : null
     )
     const [selectedCountry, setSelectedCountry] = useState<string>(() =>
-        searchParams?.get('country') || ''
+        isMounted ? searchParams?.get('country') || '' : ''
     )
     const [selectedSchool, setSelectedSchool] = useState<string>(() =>
-        searchParams?.get('school') || ''
+        isMounted ? searchParams?.get('school') || '' : ''
     )
     const [source, setSource] = useState<string | null>(() =>
-        searchParams?.get('source') || null
+        isMounted ? searchParams?.get('source') || null : null
     )
     const [formLevel, setFormLevel] = useState<string | null>(() =>
-        searchParams?.get('form') || null
+        isMounted ? searchParams?.get('form') || null : null
     )
+    const [notificationStatus, setNotificationStatus] = useState<NotificationStatus>('default')
     const [proficiencies, setProficiencies] = useState<Record<string, string>>(() => {
         try {
-            const lvls = searchParams?.get('lvls')
+            const lvls = isMounted ? searchParams?.get('lvls') : null
             return lvls ? JSON.parse(lvls) : {}
         } catch (e) {
             return {}
@@ -444,6 +610,15 @@ function WelcomeContent() {
     }
 
     // Sync state from URL params on load/change
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        if (!('Notification' in window)) {
+            setNotificationStatus('unsupported')
+            return
+        }
+        setNotificationStatus(Notification.permission)
+    }, [])
+
     useEffect(() => {
         const subjectsParam = searchParams?.get('subjects')
         if (subjectsParam) {
@@ -493,7 +668,17 @@ function WelcomeContent() {
         }
     }
 
-    const onComplete = async (to: string) => {
+    const requestNotificationPermission = async () => {
+        if (typeof window === 'undefined') return
+        if (!('Notification' in window)) {
+            setNotificationStatus('unsupported')
+            return
+        }
+        const permission = await Notification.requestPermission()
+        setNotificationStatus(permission)
+    }
+
+    const onComplete = async (to: string, finalNotificationStatus: NotificationStatus = notificationStatus) => {
         await logMetadata()
 
         // If user is already logged in, update their profile
@@ -507,6 +692,7 @@ function WelcomeContent() {
                     formLevel: formLevel || '3',
                     source: source || 'other',
                     proficiencies: proficiencies,
+                    notificationPermission: finalNotificationStatus,
                     onboardingCompleted: true,
                     onboardingCompletedAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString()
@@ -524,6 +710,7 @@ function WelcomeContent() {
         if (formLevel) params.set('form', formLevel)
         if (source) params.set('source', source)
         params.set('lvls', JSON.stringify(proficiencies))
+        params.set('notify', finalNotificationStatus)
 
         if (user && to === '/welcome/diagnostic') {
             router.push(to)
@@ -534,7 +721,7 @@ function WelcomeContent() {
     }
 
     // Determine progress
-    const stepsOrder = ['selection', 'exam', 'school', 'form', 'source', 'proficiency', 'placement']
+    const stepsOrder = ['selection', 'exam', 'school', 'form', 'source', 'proficiency', 'placement', 'notifications']
     const currentIndex = stepsOrder.indexOf(step)
 
     // Calculate total mini-steps if in proficiency
@@ -621,7 +808,18 @@ function WelcomeContent() {
                         )}
                         {step === 'placement' && (
                             <StepPlacement
-                                onChoice={() => onComplete(user ? '/welcome/diagnostic' : '/signup')}
+                                onChoice={() => nextStep('notifications')}
+                            />
+                        )}
+                        {step === 'notifications' && (
+                            <StepNotifications
+                                status={notificationStatus}
+                                onEnable={requestNotificationPermission}
+                                onContinue={() => {
+                                    const finalStatus = notificationStatus === 'default' ? 'skipped' : notificationStatus
+                                    setNotificationStatus(finalStatus)
+                                    onComplete(user ? '/welcome/diagnostic' : '/signup', finalStatus)
+                                }}
                             />
                         )}
                     </motion.div>

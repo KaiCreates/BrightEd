@@ -171,7 +171,7 @@ export default function PulseRateLabPage() {
         }
 
         return () => clearInterval(interval);
-    }, [isExercising]);
+    }, [isExercising, showProfessorSuccess]);
 
     const selectActivity = (activity: ActivityState) => {
         // If we already did this activity, warn

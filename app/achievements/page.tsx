@@ -23,6 +23,7 @@ const RARITY_GLOW = {
     legendary: 'shadow-orange-500/80'
 };
 
+
 export default function AchievementsPage() {
     const { user, userData } = useAuth();
     const [achievements, setAchievements] = useState<Achievement[]>(ALL_ACHIEVEMENTS);

@@ -8,20 +8,44 @@ import * as admin from 'firebase-admin';
 import fs from 'fs';
 import path from 'path';
 
-// Initialize Firebase Admin
-const serviceAccountPath = path.join(process.cwd(), 'brighted-b36ba-firebase-adminsdk-fbsvc-d62f85ffd0.json');
+function loadServiceAccount() {
+    const json = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON;
+    const base64 = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64;
+    const serviceAccountPathEnv = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH || process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
+    if (typeof json === 'string' && json.trim()) {
+        return JSON.parse(json);
+    }
+
+    if (typeof base64 === 'string' && base64.trim()) {
+        const decoded = Buffer.from(base64, 'base64').toString('utf8');
+        return JSON.parse(decoded);
+    }
+
+    if (typeof serviceAccountPathEnv === 'string' && serviceAccountPathEnv.trim()) {
+        const resolvedPath = path.isAbsolute(serviceAccountPathEnv)
+            ? serviceAccountPathEnv
+            : path.join(process.cwd(), serviceAccountPathEnv);
+        if (fs.existsSync(resolvedPath)) {
+            return JSON.parse(fs.readFileSync(resolvedPath, 'utf8'));
+        }
+    }
+
+    return null;
+}
+
+// Initialize Firebase Admin
 if (!admin.apps.length) {
-    if (fs.existsSync(serviceAccountPath)) {
-        const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
-        });
-    } else {
-        console.error('❌ Service account file not found:', serviceAccountPath);
+    const serviceAccount = loadServiceAccount();
+    if (!serviceAccount) {
+        console.error('❌ Firebase Admin credentials missing. Set FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON, FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64, or FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH.');
         process.exit(1);
     }
+
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
+    });
 }
 
 const adminDb = admin.firestore();

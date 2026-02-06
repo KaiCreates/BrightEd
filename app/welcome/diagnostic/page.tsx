@@ -100,11 +100,16 @@ function DiagnosticContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const { user, userData } = useAuth()
+    const [isMounted, setIsMounted] = useState(false)
+    
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     // Params from Welcome Flow, fallback to user data
-    const subjects = userData?.subjects || searchParams?.get('subjects')?.split(',') || []
-    const source = userData?.source || searchParams?.get('source') || ''
-    const lvlsStr = searchParams?.get('lvls') || '{}'
+    const subjects = userData?.subjects || (isMounted ? searchParams?.get('subjects')?.split(',') : []) || []
+    const source = userData?.source || (isMounted ? searchParams?.get('source') : '') || ''
+    const lvlsStr = isMounted ? searchParams?.get('lvls') || '{}' : '{}'
     const lvls = userData?.proficiencies || JSON.parse(lvlsStr)
 
     // State

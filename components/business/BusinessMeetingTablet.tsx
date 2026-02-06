@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { BrightHeading } from '@/components/system';
 import { BusinessState, BusinessType } from '@/lib/economy';
 import { useCinematic } from '@/components/cinematic';
@@ -35,7 +36,11 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
     const [setupCode, setSetupCode] = useState<string | null>(null);
     const [inputCode, setInputCode] = useState('');
     const [lockError, setLockError] = useState<string | null>(null);
-    const [currentTime, setCurrentTime] = useState(() => new Date());
+    const [currentTime, setCurrentTime] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setCurrentTime(new Date());
+  }, []);
     const [speakerIndex, setSpeakerIndex] = useState(0);
     const [isAppOpen, setIsAppOpen] = useState(false);
     const [actionToast, setActionToast] = useState<string | null>(null);
@@ -177,11 +182,11 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
     const liveTranscript = selectedMeeting?.scene?.dialogue?.[0]?.text || selectedMeeting?.description || '';
 
     const timeLabel = useMemo(
-        () => currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        () => (currentTime ? currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'),
         [currentTime]
     );
     const dateLabel = useMemo(
-        () => currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' }),
+        () => (currentTime ? currentTime.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' }) : ''),
         [currentTime]
     );
     const lockPrompt = setupMode
@@ -211,7 +216,7 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
         : 'Always On';
 
     const nextMeetingTime = useMemo(
-        () => new Date(currentTime.getTime() + 1000 * 60 * 75),
+        () => (currentTime ? new Date(currentTime.getTime() + 1000 * 60 * 75) : new Date()),
         [currentTime]
     );
     const nextMeetingLabel = useMemo(
@@ -228,7 +233,7 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
 
         return timeZones.map((zone) => ({
             city: zone.city,
-            time: new Intl.DateTimeFormat([], { hour: '2-digit', minute: '2-digit', timeZone: zone.tz }).format(currentTime),
+            time: currentTime ? new Intl.DateTimeFormat([], { hour: '2-digit', minute: '2-digit', timeZone: zone.tz }).format(currentTime) : '--:--',
         }));
     }, [currentTime]);
     const homeApps = [
@@ -370,10 +375,12 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                                             className={`relative overflow-hidden rounded-2xl border ${isActive ? 'border-emerald-400/70 ring-2 ring-emerald-400/40' : 'border-white/10'} bg-gradient-to-br from-slate-800 to-slate-900 min-h-[150px]`}
                                         >
                                             {character.avatar ? (
-                                                <img
+                                                <Image
                                                     src={character.avatar}
                                                     alt={character.name}
-                                                    className="absolute inset-0 h-full w-full object-cover"
+                                                    fill
+                                                    sizes="200px"
+                                                    className="object-cover"
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center text-4xl text-white/80">
@@ -530,9 +537,11 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                                 <div className="flex -space-x-3">
                                     {staffPreview.map((employee) => (
                                         <div key={employee.id} className="h-10 w-10 rounded-full border border-white/20 bg-white/10 overflow-hidden">
-                                            <img
+                                            <Image
                                                 src={getDicebearAvatarUrl(employee.id)}
                                                 alt={employee.name}
+                                                width={40}
+                                                height={40}
                                                 className="h-full w-full object-cover"
                                             />
                                         </div>
@@ -552,7 +561,13 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                             <div className="mt-3 flex items-center gap-3">
                                 <div className="h-12 w-12 rounded-xl overflow-hidden border border-white/20 bg-white/10">
                                     {mentor.avatar ? (
-                                        <img src={mentor.avatar} alt={mentor.name} className="h-full w-full object-cover" />
+                                        <Image
+                                            src={mentor.avatar}
+                                            alt={mentor.name}
+                                            width={48}
+                                            height={48}
+                                            className="h-full w-full object-cover"
+                                        />
                                     ) : (
                                         <div className="h-full w-full flex items-center justify-center text-2xl">{mentor.emoji}</div>
                                     )}
@@ -691,7 +706,13 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                                 <div className="mt-3 flex items-center gap-3">
                                     <div className="h-12 w-12 rounded-xl overflow-hidden border border-white/20 bg-white/10">
                                         {mentor.avatar ? (
-                                            <img src={mentor.avatar} alt={mentor.name} className="h-full w-full object-cover" />
+                                            <Image
+                                                src={mentor.avatar}
+                                                alt={mentor.name}
+                                                width={48}
+                                                height={48}
+                                                className="h-full w-full object-cover"
+                                            />
                                         ) : (
                                             <div className="h-full w-full flex items-center justify-center text-2xl">{mentor.emoji}</div>
                                         )}
@@ -714,9 +735,11 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                                 <div className="mt-3 flex -space-x-3">
                                     {staffPreview.map((employee) => (
                                         <div key={employee.id} className="h-10 w-10 rounded-full border border-white/20 bg-white/10 overflow-hidden">
-                                            <img
+                                            <Image
                                                 src={getDicebearAvatarUrl(employee.id)}
                                                 alt={employee.name}
+                                                width={40}
+                                                height={40}
                                                 className="h-full w-full object-cover"
                                             />
                                         </div>
@@ -914,9 +937,11 @@ export default function BusinessMeetingTablet({ business, businessType }: Busine
                             <div className="mt-3 flex -space-x-3">
                                 {staffPreview.map((employee) => (
                                     <div key={employee.id} className="h-10 w-10 rounded-full border border-white/20 bg-white/10 overflow-hidden">
-                                        <img
+                                        <Image
                                             src={getDicebearAvatarUrl(employee.id)}
                                             alt={employee.name}
+                                            width={40}
+                                            height={40}
                                             className="h-full w-full object-cover"
                                         />
                                     </div>

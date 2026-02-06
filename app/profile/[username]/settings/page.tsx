@@ -1,20 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/lib/auth-context'
 import { BrightHeading, BrightButton, BrightLayer } from '@/components/system'
 import { doc, getDoc, updateDoc, collection, query, where, getDocs, arrayRemove } from 'firebase/firestore'
-import { db, auth } from '@/lib/firebase'
+import { getFirebaseDb, getFirebaseAuth } from '@/lib/firebase'
 import { updateProfile, updateEmail, sendPasswordResetEmail, signOut } from 'firebase/auth'
 import { toast } from 'react-hot-toast'
 
 export default function ProfileSettingsPage({ params }: { params: { username: string } }) {
     const router = useRouter()
     const { user, userData, loading } = useAuth()
-    const blockedUsers = userData?.blockedUsers || []
+    const blockedUsers = useMemo(() => userData?.blockedUsers || [], [userData?.blockedUsers]);
     const [blockedList, setBlockedList] = useState<any[]>([])
     const [loadingBlocked, setLoadingBlocked] = useState(false)
 
@@ -58,6 +58,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
 
             setLoadingBlocked(true)
             try {
+                const db = getFirebaseDb()
                 const details = await Promise.all(blockedUsers.map(async (id) => {
                     const d = await getDoc(doc(db, 'users', id))
                     return d.exists() ? { id: d.id, ...d.data() } : null
@@ -75,6 +76,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
     const handleUnblock = async (userId: string) => {
         try {
             if (!user) return
+            const db = getFirebaseDb()
             await updateDoc(doc(db, 'users', user.uid), {
                 blockedUsers: arrayRemove(userId)
             })
@@ -89,6 +91,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
         if (!user) return
         setSaving(true)
         try {
+            const db = getFirebaseDb()
             await updateDoc(doc(db, 'users', user.uid), {
                 firstName,
                 lastName,
@@ -119,7 +122,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
         setSaving(true)
         try {
             // Check Uniqueness
-            const usersRef = collection(db, 'users')
+            const usersRef = collection(getFirebaseDb(), 'users')
             const q = query(usersRef, where('username', '==', newUsername))
             const snapshot = await getDocs(q)
 
@@ -129,7 +132,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
                 return
             }
 
-            await updateDoc(doc(db, 'users', user.uid), {
+            await updateDoc(doc(getFirebaseDb(), 'users', user.uid), {
                 username: newUsername,
                 lastUsernameChange: now
             })
@@ -145,6 +148,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
     const handleChangePassword = async () => {
         if (!email) return
         try {
+            const auth = getFirebaseAuth()
             await sendPasswordResetEmail(auth, email)
             toast.success('Password reset email sent!')
         } catch (error) {
@@ -154,6 +158,7 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
 
     const handleSignOut = async () => {
         try {
+            const auth = getFirebaseAuth()
             await signOut(auth)
             router.push('/login')
         } catch (error) {

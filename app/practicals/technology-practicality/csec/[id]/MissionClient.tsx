@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react';
@@ -228,7 +229,7 @@ function PhoneMessageOutro({
                 <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="h-9 w-9 rounded-full border border-white/10 bg-white/5 overflow-hidden">
-                      <img src={npcAvatarUrl} alt={npcLabel} className="h-full w-full" />
+                      <Image src={npcAvatarUrl} alt={npcLabel} width={36} height={36} className="h-full w-full" />
                     </div>
                     <div>
                       <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Mission Wrap-up</div>
@@ -255,7 +256,7 @@ function PhoneMessageOutro({
                       <div key={idx} className={`flex items-end gap-2 ${mine ? 'justify-end' : 'justify-start'}`}>
                         {!mine ? (
                           <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
-                            <img src={avatar} alt={label} className="h-full w-full" />
+                            <Image src={avatar} alt={label} width={32} height={32} className="h-full w-full" />
                           </div>
                         ) : null}
                         <div
@@ -268,7 +269,7 @@ function PhoneMessageOutro({
                         </div>
                         {mine ? (
                           <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
-                            <img src={avatar} alt={label} className="h-full w-full" />
+                            <Image src={avatar} alt={label} width={32} height={32} className="h-full w-full" />
                           </div>
                         ) : null}
                       </div>
@@ -404,7 +405,7 @@ function PhoneMessageIntro({
                 <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="h-9 w-9 rounded-full border border-white/10 bg-white/5 overflow-hidden">
-                      <img src={npcAvatarUrl} alt={npcLabel} className="h-full w-full" />
+                      <Image src={npcAvatarUrl} alt={npcLabel} width={36} height={36} className="h-full w-full" />
                     </div>
                     <div>
                       <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Messages</div>
@@ -431,7 +432,7 @@ function PhoneMessageIntro({
                       <div key={idx} className={`flex items-end gap-2 ${mine ? 'justify-end' : 'justify-start'}`}>
                         {!mine ? (
                           <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
-                            <img src={avatar} alt={label} className="h-full w-full" />
+                            <Image src={avatar} alt={label} width={32} height={32} className="h-full w-full" />
                           </div>
                         ) : null}
                         <div
@@ -445,7 +446,7 @@ function PhoneMessageIntro({
                         </div>
                         {mine ? (
                           <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
-                            <img src={avatar} alt={label} className="h-full w-full" />
+                            <Image src={avatar} alt={label} width={32} height={32} className="h-full w-full" />
                           </div>
                         ) : null}
                       </div>
@@ -2026,6 +2027,12 @@ function Terminal({
   onState: (fn: (p: RuntimeState) => RuntimeState) => void;
 }) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [sessionId, setSessionId] = useState<number>(100);
+
+  useEffect(() => {
+    setSessionId(Math.floor(Math.random() * 1000));
+  }, []);
+
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [lines.length]);
@@ -2213,7 +2220,7 @@ function Terminal({
     <div className="h-full flex flex-col bg-[#0c0c0c]/90 text-[#cccccc] font-mono selection:bg-white/20">
       <div className="flex-1 flex flex-col p-6 overflow-hidden">
         <div ref={scrollRef} className="flex-1 overflow-auto mb-4 sleek-scrollbar text-[13px] leading-relaxed">
-          <div className="text-emerald-400 font-bold mb-4 opacity-60">Terminal Session #{Math.floor(Math.random() * 1000)} - Secure Shell</div>
+          <div className="text-emerald-400 font-bold mb-4 opacity-60">Terminal Session #{sessionId} - Secure Shell</div>
           {lines.map((l) => (
             <div
               key={l.id}
@@ -3073,7 +3080,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
     eventTimersRef.current = [];
     setInbox([]);
     setChatMessages([]);
-  }, [mission.id, mission.initial_state.file_system]);
+  }, [mission]);
 
   const company = useMemo(() => {
     const preset = mission.brightos_desktop.ui_preset;
@@ -3145,7 +3152,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
     }, 700);
 
     return () => window.clearInterval(id);
-  }, [state.power]);
+  }, [state.power, story]);
 
   useEffect(() => {
     if (state.power === 'shutting-down') {
@@ -3154,7 +3161,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
       }, 2500);
       return () => window.clearTimeout(id);
     }
-  }, [state.power]);
+  }, [state.power, mission]);
 
   useEffect(() => {
     if (state.power !== 'on') return;
@@ -3180,7 +3187,7 @@ export default function MissionClient({ mission }: { mission: BrightOSMission })
     }, 9000);
 
     return () => window.clearInterval(id);
-  }, [state.power]);
+  }, [state.power, mission]);
 
   useEffect(() => {
     const id = window.setInterval(() => setNow(new Date()), 1000);

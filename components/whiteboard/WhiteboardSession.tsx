@@ -751,6 +751,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
                 src="/BrightEdLogo.png"
                 alt="BrightEd Logo"
                 fill
+                sizes="(max-width: 768px) 32px, 44px"
                 className="object-contain"
               />
             </div>

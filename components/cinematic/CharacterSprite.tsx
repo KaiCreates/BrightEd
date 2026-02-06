@@ -6,6 +6,7 @@
  */
 
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Image from 'next/image';
 import {
     Character,
     CharacterEmotion,
@@ -34,6 +35,13 @@ const SIZE_CLASSES = {
     lg: 'w-32 h-32',
     xl: 'w-48 h-48',
 };
+
+const SIZE_PIXELS = {
+    sm: 64,
+    md: 96,
+    lg: 128,
+    xl: 192,
+} as const;
 
 const spriteVariants: Variants = {
     hidden: {
@@ -165,9 +173,11 @@ export function CharacterSprite({
                 >
                     {/* Character Image or Emoji Fallback */}
                     {character.avatar ? (
-                        <img
+                        <Image
                             src={character.avatar}
                             alt={character.name}
+                            width={SIZE_PIXELS[size]}
+                            height={SIZE_PIXELS[size]}
                             className="w-full h-full object-cover"
                         />
                     ) : (

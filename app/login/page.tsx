@@ -29,23 +29,22 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
 
-    const { isFirebaseReady } = await import('@/lib/firebase');
-    if (!isFirebaseReady) {
-      setError("System temporary unavailable: Firebase configuration missing.");
-      return;
-    }
-
     setLoading(true);
 
     try {
       const { signInWithEmailAndPassword } = await import('firebase/auth');
-      const { auth } = await import('@/lib/firebase');
+      const { getFirebaseAuth } = await import('@/lib/firebase');
+      const auth = getFirebaseAuth();
 
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       router.push('/home');
     } catch (err: any) {
       console.error('Login error:', err);
-      setError('Invalid email or password');
+      if (err.message.includes('Firebase configuration is missing')) {
+        setError('Authentication service is temporarily unavailable. Please try again later.');
+      } else {
+        setError('Invalid email or password');
+      }
     } finally {
       setLoading(false);
     }
@@ -158,13 +157,19 @@ export default function LoginPage() {
                   try {
                     setLoading(true);
                     const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
-                    const { auth } = await import('@/lib/firebase');
+                    const { getFirebaseAuth } = await import('@/lib/firebase');
+                    
+                    const auth = getFirebaseAuth();
                     const provider = new GoogleAuthProvider();
                     await signInWithPopup(auth, provider);
                     router.push('/home');
                   } catch (err: any) {
                     console.error('Google login error:', err);
-                    setError(err.message || 'Failed to sign in with Google');
+                    if (err.message.includes('Firebase configuration is missing')) {
+                      setError('Authentication service is temporarily unavailable. Please try again later.');
+                    } else {
+                      setError(err.message || 'Failed to sign in with Google');
+                    }
                   } finally {
                     setLoading(false);
                   }

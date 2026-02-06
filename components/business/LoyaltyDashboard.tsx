@@ -6,6 +6,7 @@
  */
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { BrightLayer, BrightHeading } from '@/components/system';
 import { LOYALTY_TIERS, getLoyaltyTier } from '@/lib/economy/loyalty-system';
 import { getDicebearAvatarUrl } from '@/lib/avatars';
@@ -129,9 +130,11 @@ export function LoyaltyDashboard({ customers }: LoyaltyDashboardProps) {
                                 >
                                     <div className="flex items-center gap-3 min-w-0">
                                         <div className="relative flex-shrink-0">
-                                            <img
+                                            <Image
                                                 src={avatarUrl}
                                                 alt={customer.name}
+                                                width={40}
+                                                height={40}
                                                 className="h-10 w-10 rounded-xl border border-[var(--border-subtle)] object-cover"
                                             />
                                             <span className="absolute -bottom-1 -right-1 text-xs">{tier.icon}</span>

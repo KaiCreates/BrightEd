@@ -31,6 +31,17 @@ export function PeoplePrivacy() {
         // that doesn't create nested listeners
     }, [user]);
 
+    const [isMounted, setIsMounted] = useState(false);
+    
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const formatTimestamp = (timestamp?: string) => {
+        if (!timestamp) return '';
+        return isMounted ? new Date(timestamp).toLocaleTimeString() : '--:--';
+    };
+
     const onlineUserList = Object.entries(onlineUsers)
         .sort((a, b) => b[1].lastSeen - a[1].lastSeen)
         .slice(0, 20);
@@ -104,7 +115,7 @@ export function PeoplePrivacy() {
                                         {dm.userName}
                                     </p>
                                     <span className="text-xs text-[var(--text-muted)]">
-                                        {dm.timestamp?.toDate().toLocaleTimeString()}
+                                        {formatTimestamp(dm.timestamp?.toDate().toISOString())}
                                     </span>
                                 </div>
                                 <p className="text-xs text-[var(--text-secondary)] line-clamp-2">

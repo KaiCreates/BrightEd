@@ -5,7 +5,9 @@
  * Displays active orders, pending payments, and financial summary.
  */
 
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { BrightLayer, BrightButton, BrightHeading } from '@/components/system';
 import { Order, OrderStatus, BusinessState, QualityTier } from '@/lib/economy/economy-types';
 import { BusinessType } from '@/lib/economy/economy-types';
@@ -56,6 +58,14 @@ export function OrderDashboard({
     onCompleteOrder,
     onFulfill,
 }: OrderDashboardProps) {
+    const [now, setNow] = useState(0);
+
+    useEffect(() => {
+        setNow(Date.now());
+        const interval = setInterval(() => setNow(Date.now()), 60000);
+        return () => clearInterval(interval);
+    }, []);
+
     // Group orders by status
     const pendingOrders = orders.filter(o => o.status === 'pending');
     const activeOrders = orders.filter(o => o.status === 'accepted' || o.status === 'in_progress');
@@ -70,8 +80,8 @@ export function OrderDashboard({
     const nextDeadline = activeWithDeadlines[0];
 
     const formatTimeRemaining = (deadline: Date): string => {
-        const now = new Date();
-        const diff = deadline.getTime() - now.getTime();
+        if (!now) return '...';
+        const diff = deadline.getTime() - now;
         if (diff < 0) return 'OVERDUE';
         const mins = Math.floor(diff / 60000);
         const hours = Math.floor(mins / 60);
@@ -115,6 +125,7 @@ export function OrderDashboard({
                                     onAccept={() => onAcceptOrder(order.id)}
                                     onReject={() => onRejectOrder(order.id)}
                                     showActions={true}
+                                    now={now}
                                 />
                             </motion.div>
                         ))}
@@ -157,6 +168,7 @@ export function OrderDashboard({
                                     onFulfill={() => onFulfill(order)}
                                     showActions={true}
                                     showDeadline={true}
+                                    now={now}
                                 />
                             </motion.div>
                         ))}
@@ -184,9 +196,11 @@ export function OrderDashboard({
                                     className="flex-none min-w-[140px] bg-[var(--bg-elevated)]/40 rounded-xl px-4 py-3 border border-[var(--border-subtle)] hover:border-[var(--brand-primary)]/40 transition-all cursor-default"
                                 >
                                     <div className="flex items-center gap-2 mb-1">
-                                        <img
+                                        <Image
                                             src={getDicebearAvatarUrl(getAvatarSeed(order))}
                                             alt={order.customerName}
+                                            width={24}
+                                            height={24}
                                             className="h-6 w-6 rounded-full border border-white/10 object-cover"
                                         />
                                         <p className="text-[10px] font-black text-[var(--text-secondary)] uppercase truncate">{order.customerName}</p>
@@ -216,6 +230,7 @@ interface OrderCardProps {
     onFulfill?: () => void;
     showActions?: boolean;
     showDeadline?: boolean;
+    now: number;
 }
 
 function OrderCard({
@@ -227,24 +242,29 @@ function OrderCard({
     onFulfill,
     showActions = false,
     showDeadline = false,
+    now,
 }: OrderCardProps) {
     const isPending = order.status === 'pending';
     const isActive = order.status === 'accepted' || order.status === 'in_progress';
 
     // Calculate time remaining
     const deadline = new Date(order.deadline);
-    const now = new Date();
-    const timeRemaining = deadline.getTime() - now.getTime();
-    const isOverdue = timeRemaining < 0;
-    const isUrgent = timeRemaining < 5 * 60 * 1000; // Less than 5 mins
+    const timeRemaining = now ? deadline.getTime() - now : null;
+    const isOverdue = timeRemaining !== null && timeRemaining < 0;
+    const isUrgent = timeRemaining !== null && timeRemaining < 5 * 60 * 1000; // Less than 5 mins
 
     const formatDeadline = () => {
+        if (timeRemaining === null) return '...';
         if (isOverdue) return 'OVERDUE';
         const mins = Math.floor(timeRemaining / 60000);
         if (mins < 60) return `${mins}m remaining`;
         const hours = Math.floor(mins / 60);
         return `${hours}h ${mins % 60}m remaining`;
     };
+
+    const expiresInMinutes = now
+        ? Math.max(0, Math.floor((new Date(order.expiresAt).getTime() - now) / 60000))
+        : null;
 
     const moodEmoji = {
         happy: '😊',
@@ -272,9 +292,11 @@ function OrderCard({
             <div className="flex justify-between items-start mb-4 gap-2">
                 <div className="flex items-center gap-3 min-w-0">
                     <div className="relative flex-shrink-0">
-                        <img
+                        <Image
                             src={avatarUrl}
                             alt={order.customerName}
+                            width={40}
+                            height={40}
                             className="h-10 w-10 rounded-2xl border border-white/10 object-cover"
                         />
                         <span className="absolute -bottom-1 -right-1 text-xs">{moodEmoji[order.customerMood]}</span>
@@ -358,7 +380,7 @@ function OrderCard({
                     )}
                     {isPending && (
                         <div className="text-[9px] font-black text-[var(--text-muted)] uppercase tracking-wider">
-                            Expires in {Math.max(0, Math.floor((new Date(order.expiresAt).getTime() - now.getTime()) / 60000))}m
+                            {expiresInMinutes === null ? 'Expires soon' : `Expires in ${expiresInMinutes}m`}
                         </div>
                     )}
                 </div>

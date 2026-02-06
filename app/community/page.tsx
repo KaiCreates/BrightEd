@@ -1133,11 +1133,11 @@ function CommunityHubInner() {
                     className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-white/[0.03] transition-all group"
                   >
                     <div className="relative">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-sm font-black text-[var(--text-primary)] shadow-sm overflow-hidden">
+                      <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-sm font-black text-[var(--text-primary)] shadow-sm overflow-hidden">
                         {data.avatarCustomization ? (
                           <AvatarRenderer customization={data.avatarCustomization} username={data.name} />
                         ) : data.avatarUrl ? (
-                          <img src={data.avatarUrl} alt={data.name} className="w-full h-full object-cover" />
+                          <Image src={data.avatarUrl} alt={data.name} fill sizes="40px" className="object-cover" />
                         ) : (
                           data.name?.charAt(0)?.toUpperCase() || 'U'
                         )}

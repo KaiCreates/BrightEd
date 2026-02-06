@@ -1,1 +1,87 @@
 aiohttp
+
+
+# =============================================================================
+# APPLICATION CONFIGURATION
+# =============================================================================
+NODE_ENV=development
+NEXT_PUBLIC_APP_URL=http://localhost:4000
+NEXT_PUBLIC_THEME_COLOR=#0EA5E9
+
+
+# =============================================================================
+# FIREBASE CONFIGURATION
+# =============================================================================
+# Client-side Firebase config (safe for public)
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCnYUAPzy1NQeQSZHaM2elFgcO_qLaHI_4
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=brighted-b36ba.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=brighted-b36ba
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=brighted-b36ba.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=374276438230
+NEXT_PUBLIC_FIREBASE_APP_ID=1:374276438230:web:c67ce5d516cb5d74b3f177
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-G64MM2T49N
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://brighted-b36ba-default-rtdb.firebaseio.com
+
+
+
+# Server-side Firebase Admin SDK (NEVER expose to client)
+# Prefer storing the service account JSON as base64 or raw JSON
+FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON={"type":"service_account"}
+FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64=base64-encoded-service-account
+# OR use path to service account file (absolute or relative to repo root)
+FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH=/BrightEd/service-account.json
+# Optional fallback path used by Google SDKs
+GOOGLE_APPLICATION_CREDENTIALS=/BrighEd/service-account.json
+
+# =============================================================================
+# AUTHENTICATION & SECURITY
+# =============================================================================
+# Generate strong random strings for these (min 32 characters)
+NEXTAUTH_SECRET=3StlYkMRqUeZNSzVHzhIb1XAYCQhcpBn
+NEXTAUTH_URL=http://localhost:4000
+
+# Session configuration
+SESSION_SECRET=	nFfRMGaKFxexp7QHJOpWUHJORhIoJFxm
+SESSION_COOKIE_NAME=brighted-session
+SESSION_MAX_AGE=1800
+
+# CSRF Protection
+CSRF_SECRET=uvriWtd39PkccyeVD2MNV84146nT4GD4
+CSRF_COOKIE_NAME=brighted-csrf
+
+# Rate Limiting
+RATE_LIMIT_SECRET=oGRKSRrF2vHkBTDYrNNVEfojgvn2aLai
+RATE_LIMIT_REQUESTS_PER_MINUTE=60
+RATE_LIMIT_AUTH_REQUESTS_PER_MINUTE=20
+
+# =============================================================================
+# ENCRYPTION KEYS
+# =============================================================================
+# For encrypting sensitive data at rest
+ENCRYPTION_KEY=8zt9hLczEWAEFm66604oNXdkLLAuiTWr
+ENCRYPTION_IV=2D94281D2A711419
+
+
+# =============================================================================
+# AUDIT LOGGING
+# =============================================================================
+AUDIT_LOG_ENABLED=true
+AUDIT_LOG_LEVEL=info
+AUDIT_LOG_RETENTION_DAYS=90
+
+# =============================================================================
+# FEATURE FLAGS & DEBUG (Keep disabled in production)
+# =============================================================================
+DEBUG_MODE=false
+ENABLE_VERBOSE_LOGGING=false
+SKIP_RATE_LIMITING=false
+
+
+# =============================================================================
+# SECURITY HEADERS & CSP
+# =============================================================================
+# Nonce generation secret for CSP
+CSP_NONCE_SECRET=f3DrMrSeRT7GdPQvLdoW9yfz7LCY5yVN
+
+# Allowed domains for CSP (comma-separated)
+CSP_ALLOWED_DOMAINS=res.cloudinary.com,firebasestorage.googleapis.com,api.dicebear.com

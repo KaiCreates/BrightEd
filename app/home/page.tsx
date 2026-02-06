@@ -291,8 +291,8 @@ export default function HomePage() {
 
                                     {/* Professor Bright Badge */}
                                     <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 px-4 py-2 rounded-xl shadow-xl border border-black/5 flex items-center gap-2 transform rotate-[-6deg] z-20">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-accent)] flex items-center justify-center text-white text-xs font-black">
-                                            PB
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-accent)] flex items-center justify-center">
+                                            <div className="owl-sprite owl-happy" style={{ width: '40px', height: '40px' }} />
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Mascot</span>

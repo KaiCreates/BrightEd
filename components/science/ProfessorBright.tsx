@@ -13,14 +13,14 @@ interface ProfessorBrightProps {
     onHintRequest?: () => void;
 }
 
-const moodEmojis: Record<ProfessorMood, string> = {
-    idle: '🧑‍🔬',
-    happy: '😊',
-    thinking: '🤔',
-    worried: '😰',
-    celebrating: '🎉',
-    shocked: '😱',
-    hint: '💡'
+const moodSprites: Record<ProfessorMood, string> = {
+    idle: 'owl-happy',
+    happy: 'owl-happy',
+    thinking: 'owl-thinking',
+    worried: 'owl-sad-cloud',
+    celebrating: 'owl-magic',
+    shocked: 'owl-shocked',
+    hint: 'owl-idea'
 };
 
 const moodColors: Record<ProfessorMood, string> = {
@@ -69,13 +69,14 @@ export default function ProfessorBright({ state, onHintRequest }: ProfessorBrigh
                     >
                         {/* Professor Avatar */}
                         <motion.div
-                            className="absolute -top-8 -left-4 w-20 h-20 rounded-full bg-[#58CC02] flex items-center justify-center text-4xl shadow-lg border-4 border-b-8 border-[#46A302]"
+                            className="absolute -top-8 -left-4 w-20 h-20 rounded-full bg-[#58CC02] flex items-center justify-center shadow-lg border-4 border-b-8 border-[#46A302]"
                             animate={state.mood === 'idle' ? { y: [0, -3, 0] } : {}}
                             transition={{ repeat: Infinity, duration: 2 }}
                         >
-                            <span className={blinking ? 'opacity-0' : ''}>
-                                {moodEmojis[state.mood]}
-                            </span>
+                            <div
+                                className={`owl-sprite ${moodSprites[state.mood]} scale-[0.55] ${blinking ? 'opacity-0' : ''}`}
+                                style={{ transformOrigin: 'center' }}
+                            />
                         </motion.div>
 
                         {/* Lab Coat Detail */}

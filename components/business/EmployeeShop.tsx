@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { BrightHeading, useDialog } from '@/components/system';
 import { BusinessState, Employee } from '@/lib/economy/economy-types';
 import EmployeeIDCard from '@/components/business/EmployeeIDCard';
@@ -93,9 +94,11 @@ export default function EmployeeShop({ business }: EmployeeShopProps) {
                 <div className="flex -space-x-3">
                     {candidates.slice(0, 3).map(c => (
                         <div key={c.id} className="w-12 h-12 rounded-2xl border-4 border-[var(--bg-primary)] bg-[var(--bg-elevated)] overflow-hidden shadow-lg transition-transform hover:translate-y-[-4px] hover:z-20">
-                            <img
+                            <Image
                                 src={getDicebearAvatarUrl(c.id)}
                                 alt="candidate"
+                                width={48}
+                                height={48}
                                 className="w-full h-full object-cover"
                             />
                         </div>

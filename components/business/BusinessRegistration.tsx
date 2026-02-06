@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BrightHeading } from '@/components/system';
 import { BusinessTypeSelector } from '@/components/business/BusinessTypeSelector';
 import { BusinessType } from '@/lib/economy/economy-types';
-import { auth } from '@/lib/firebase';
+import { getFirebaseAuth } from '@/lib/firebase';
 import { useAuth } from '@/lib/auth-context';
 import Link from 'next/link';
 import { BrightButton, BrightLayer } from '@/components/system';
@@ -36,8 +36,9 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
             setFetchingBusiness(true);
             let unsub: (() => void) | undefined;
 
-            import('@/lib/firebase').then(({ db }) => {
+            import('@/lib/firebase').then(({ getFirebaseDb }) => {
                 import('firebase/firestore').then(({ doc, onSnapshot }) => {
+                    const db = getFirebaseDb();
                     unsub = onSnapshot(doc(db, 'businesses', userData.businessID!), (snap) => {
                         if (snap.exists()) {
                             setBusinessData({ id: snap.id, ...snap.data() });
@@ -57,6 +58,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
     }, [userData?.hasBusiness, userData?.businessID]);
 
     const handleToggleStatus = async () => {
+        const auth = getFirebaseAuth();
         if (!auth.currentUser) return;
         setActionLoading(true);
         try {
@@ -77,6 +79,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
         showConfirm(
             'Are you sure you want to SHUT DOWN your business? This cannot be undone and you will lose all progress permanently.',
             async () => {
+                const auth = getFirebaseAuth();
                 if (!auth.currentUser) return;
                 setActionLoading(true);
                 try {
@@ -214,6 +217,7 @@ export default function BusinessRegistration({ onComplete }: BusinessRegistratio
         name: string,
         branding?: { themeColor?: string; logoUrl?: string; icon?: string }
     ) => {
+        const auth = getFirebaseAuth();
         const user = auth.currentUser;
         if (!user) {
             setError('Please log in again to register.');
