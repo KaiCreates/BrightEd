@@ -9,7 +9,7 @@ import re
 from typing import Optional, Dict
 
 OLLAMA_HOST = "http://localhost:11434"
-DEFAULT_MODEL = "llama3.2:latest"
+DEFAULT_MODEL = "gemma3:1b"
 
 
 def generate_mcq_from_topic(

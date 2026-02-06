@@ -1038,6 +1038,99 @@
             }
         }
 
+        // Generate complete MCQ question using AI
+        let lastGeneratedQuestion = "";
+        let currentTopic = "";
+        
+        async function generateAIQuestion(isRegenerate = false) {
+            const topic = isRegenerate ? currentTopic : aiTopicInput.value.trim();
+            const subjectId = subjectIdInput.value;
+            const examLevel = document.getElementById('examLevel').value;
+            const difficulty = document.getElementById('difficulty').value;
+            
+            if (!subjectId) {
+                showStatus('Please select a subject first', 'error');
+                return;
+            }
+            
+            if (!topic) {
+                showStatus('Please enter a topic', 'error');
+                return;
+            }
+            
+            // Store topic for regeneration
+            currentTopic = topic;
+            
+            const btn = isRegenerate ? btnRegenerateAI : btnGenerateAI;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Generating...';
+            
+            try {
+                const requestData = {
+                    topic: topic,
+                    subjectId: subjectId,
+                    examLevel: examLevel,
+                    difficulty: difficulty
+                };
+                
+                // If regenerating, include previous question to avoid duplicates
+                if (isRegenerate && lastGeneratedQuestion) {
+                    requestData.previousQuestion = lastGeneratedQuestion;
+                }
+                
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.question) {
+                    const q = result.question;
+                    
+                    // Fill in the form fields
+                    document.getElementById('question').value = q.question;
+                    document.querySelector('[name="choiceA"]').value = q.choices.A;
+                    document.querySelector('[name="choiceB"]').value = q.choices.B;
+                    document.querySelector('[name="choiceC"]').value = q.choices.C;
+                    document.querySelector('[name="choiceD"]').value = q.choices.D;
+                    document.getElementById('explanation').value = q.explanation || '';
+                    document.getElementById('topicId').value = q.topic || topic;
+                    
+                    // Select correct answer
+                    const correct = q.correctAnswer || 'A';
+                    const radio = document.getElementById(`radio${correct}`);
+                    if (radio) {
+                        radio.checked = true;
+                        document.querySelectorAll('.choice-label').forEach(l => l.classList.remove('selected'));
+                        document.querySelector(`.choice-label[data-choice="${correct}"]`).classList.add('selected');
+                    }
+                    
+                    // Store for potential regeneration
+                    lastGeneratedQuestion = q.question;
+                    
+                    // Show regenerate button
+                    btnRegenerateAI.style.display = 'inline-flex';
+                    
+                    showStatus('Question generated! Review and edit if needed, then save.', 'success');
+                    checkFormValidity();
+                } else {
+                    showStatus(result.error || 'Failed to generate question', 'error');
+                }
+            } catch (error) {
+                console.error('AI generation error:', error);
+                showStatus('Failed to generate question. Is Ollama running?', 'error');
+            } finally {
+                btn.disabled = false;
+                if (isRegenerate) {
+                    btn.innerHTML = '🔄 Regenerate Same Topic';
+                } else {
+                    btn.innerHTML = '🤖 Generate';
+                }
+            }
+        }
+
         // Submit question
         async function submitQuestion(e) {
             e.preventDefault();
