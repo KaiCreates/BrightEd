@@ -20,6 +20,11 @@ from explanation_generator import (
     get_fallback_explanation,
     DEFAULT_MODEL
 )
+from mcq_generator import (
+    generate_mcq_from_topic,
+    regenerate_mcq,
+    DEFAULT_MODEL as GEN_MODEL
+)
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
