@@ -386,6 +386,64 @@ def api_get_explanation(question_id):
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/api/generate", methods=["POST"])
+def api_generate_mcq():
+    """API endpoint to generate a complete MCQ question from a topic"""
+    data = request.json
+    
+    topic = data.get("topic", "")
+    subject = data.get("subjectId", "")
+    exam_level = data.get("examLevel", "csec")
+    difficulty = data.get("difficulty", "medium")
+    previous_question = data.get("previousQuestion", "")
+    
+    if not topic:
+        return jsonify({"error": "Topic is required"}), 400
+    
+    if not subject:
+        return jsonify({"error": "Subject must be selected"}), 400
+    
+    if not OLLAMA_AVAILABLE:
+        return jsonify({
+            "error": "Ollama is not available. Start it with: ollama serve"
+        }), 503
+    
+    try:
+        # If previous_question provided, regenerate to avoid duplicates
+        if previous_question:
+            result = regenerate_mcq(
+                topic=topic,
+                subject=subject,
+                previous_question=previous_question,
+                exam_level=exam_level,
+                difficulty=difficulty,
+                model=GEN_MODEL
+            )
+        else:
+            result = generate_mcq_from_topic(
+                topic=topic,
+                subject=subject,
+                exam_level=exam_level,
+                difficulty=difficulty,
+                model=GEN_MODEL
+            )
+        
+        if result:
+            result["topic"] = topic
+            return jsonify({
+                "status": "success",
+                "question": result,
+                "source": "ollama"
+            })
+        else:
+            return jsonify({
+                "error": "Failed to generate question. Please try again."
+            }), 500
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/api/submit", methods=["POST"])
 def api_submit():
     """API endpoint to submit a question"""

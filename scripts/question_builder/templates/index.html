@@ -591,6 +591,29 @@
 
                 <div class="form-section">
                     <label class="form-label">
+                        AI Question Generation
+                        <small style="font-weight: normal; color: var(--gray-600);">— Enter a topic and let AI create the question</small>
+                    </label>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <input type="text" id="aiTopic" class="form-input" 
+                               placeholder="e.g., Photosynthesis, Supply and Demand, Linear Equations"
+                               style="flex: 1;">
+                        <button type="button" id="btnGenerateAI" class="btn btn-success">
+                            🤖 Generate
+                        </button>
+                    </div>
+                    <button type="button" id="btnRegenerateAI" class="btn btn-secondary" style="display: none;">
+                        🔄 Regenerate Same Topic
+                    </button>
+                    <small style="color: var(--gray-600); font-size: 0.875rem; display: block; margin-top: 0.5rem;">
+                        Generates a complete MCQ with question, 4 options, correct answer, and explanation.
+                    </small>
+                </div>
+
+                <hr style="border: none; border-top: 2px solid var(--gray-200); margin: 1.5rem 0;">
+
+                <div class="form-section">
+                    <label class="form-label">
                         Question Stem <span class="required">*</span>
                     </label>
                     <textarea id="question" name="question" class="form-textarea" rows="3"
@@ -644,8 +667,12 @@
                     </div>
                     <div class="form-section">
                         <label class="form-label">Created By</label>
-                        <input type="text" id="createdBy" name="createdBy" class="form-input" 
-                               placeholder="Teacher ID or Name">
+                        <select id="createdBy" name="createdBy" class="form-select">
+                            <option value="Kylon Thomas" selected>Kylon Thomas</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                 </div>
 
@@ -709,6 +736,9 @@
         const subjectStats = document.getElementById('subjectStats');
         const btnGenerateExplanation = document.getElementById('btnGenerateExplanation');
         const explanationInput = document.getElementById('explanation');
+        const aiTopicInput = document.getElementById('aiTopic');
+        const btnGenerateAI = document.getElementById('btnGenerateAI');
+        const btnRegenerateAI = document.getElementById('btnRegenerateAI');
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -833,6 +863,10 @@
 
             // Generate explanation button
             btnGenerateExplanation.addEventListener('click', generateExplanation);
+
+            // AI generation buttons
+            btnGenerateAI.addEventListener('click', () => generateAIQuestion(false));
+            btnRegenerateAI.addEventListener('click', () => generateAIQuestion(true));
 
             // Submit form
             questionForm.addEventListener('submit', submitQuestion);
