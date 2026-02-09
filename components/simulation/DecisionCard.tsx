@@ -12,6 +12,8 @@ interface DecisionCardProps {
     disabled: boolean
 }
 
+const OPTION_LABELS = ['A', 'B', 'C', 'D', 'E', 'F']
+
 export default function DecisionCard({
     option,
     index,
@@ -21,73 +23,74 @@ export default function DecisionCard({
     onSelect,
     disabled
 }: DecisionCardProps) {
-    // Determine state colors (Duolingo Style)
-    let borderColor = 'border-[var(--border-subtle)]'
-    let bottomBorderColor = 'border-b-[#e5e5e5]'
-    let bgColor = 'bg-[var(--bg-elevated)]'
-    let textColor = 'text-[var(--text-primary)]'
-    let numberBg = 'bg-white border-2 border-[var(--border-subtle)]'
-    let numberText = 'text-[var(--text-muted)]'
+    // Determine visual state
+    let cardClass = 'question-card'
+    let labelBg = 'bg-[var(--bg-secondary)]'
+    let labelText = 'text-[var(--text-secondary)]'
+    let iconContent: React.ReactNode = OPTION_LABELS[index] || (index + 1)
 
-    // State logic
     if (showResult) {
         if (isCorrect) {
-            borderColor = 'border-[#58CC02]'
-            bottomBorderColor = 'border-b-[#46A302]'
-            bgColor = 'bg-[#D7FFB8]'
-            textColor = 'text-[#46A302]'
-            numberBg = 'bg-[#58CC02] border-[#58CC02]'
-            numberText = 'text-white'
+            cardClass = 'question-card question-card-correct'
+            labelBg = 'bg-[#58CC02]'
+            labelText = 'text-white'
+            iconContent = '✓'
         } else if (isSelected) {
-            borderColor = 'border-[#FF4B4B]'
-            bottomBorderColor = 'border-b-[#D33131]'
-            bgColor = 'bg-[#FFDFE0]'
-            textColor = 'text-[#D33131]'
-            numberBg = 'bg-[#FF4B4B] border-[#FF4B4B]'
-            numberText = 'text-white'
+            cardClass = 'question-card question-card-wrong'
+            labelBg = 'bg-[#FF4B4B]'
+            labelText = 'text-white'
+            iconContent = '✗'
         } else {
-            bgColor = 'opacity-40 grayscale-[0.5]'
+            cardClass = 'question-card opacity-50'
         }
     } else if (isSelected) {
-        borderColor = 'border-[#84D8FF]'
-        bottomBorderColor = 'border-b-[#1CB0F6]'
-        bgColor = 'bg-[#DDF4FF]'
-        textColor = 'text-[#1899D6]'
-        numberBg = 'bg-white border-[#84D8FF]'
-        numberText = 'text-[#1899D6]'
+        cardClass = 'question-card question-card-selected'
+        labelBg = 'bg-[#1CB0F6]'
+        labelText = 'text-white'
     }
 
     return (
         <motion.button
             onClick={onSelect}
             disabled={disabled}
-            whileTap={!disabled && !showResult ? { scale: 0.96 } : {}}
-            className={`
-                relative w-full text-left group
-                p-4 md:p-5 rounded-2xl border-2 border-b-4 transition-all duration-200
-                ${borderColor} ${bottomBorderColor} ${bgColor} ${textColor}
-                ${!disabled && !showResult ? 'hover:bg-black/5 active:border-b-2 active:translate-y-[2px]' : ''}
-                ${isSelected && !showResult ? 'translate-y-[2px] border-b-2' : ''}
-                ${showResult ? 'cursor-default' : 'cursor-pointer'}
-            `}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05 }}
+            whileTap={!disabled && !showResult ? { scale: 0.98 } : {}}
+            className={`${cardClass} w-full text-left ${disabled ? 'cursor-not-allowed' : ''}`}
         >
             <div className="flex items-center gap-4">
-                {/* Option Number/Letter */}
-                <div className={`
-                    w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center font-black text-lg
-                    transition-colors duration-200 shrink-0
-                    ${numberBg} ${numberText}
-                    ${!showResult && !isSelected ? 'group-hover:bg-[var(--border-subtle)] shadow-[0_2px_0_rgba(0,0,0,0.1)]' : ''}
-                `}>
-                    {index + 1}
-                </div>
+                {/* Option Label */}
+                <motion.div
+                    animate={showResult && (isCorrect || isSelected) ? { scale: [1, 1.2, 1] } : {}}
+                    transition={{ duration: 0.3 }}
+                    className={`
+                        w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center 
+                        font-black text-lg transition-all shrink-0
+                        ${labelBg} ${labelText}
+                    `}
+                >
+                    {iconContent}
+                </motion.div>
 
                 {/* Option Text */}
-                <div className="flex-1">
-                    <span className="text-base md:text-lg font-bold leading-snug">
+                <div className="flex-1 min-w-0">
+                    <span className="text-base md:text-lg font-bold leading-snug block">
                         {option}
                     </span>
                 </div>
+
+                {/* Result indicator */}
+                {showResult && isCorrect && (
+                    <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                        className="text-2xl"
+                    >
+                        🎉
+                    </motion.div>
+                )}
             </div>
         </motion.button>
     )

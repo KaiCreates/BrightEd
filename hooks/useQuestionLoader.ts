@@ -37,6 +37,8 @@ export function useQuestionLoader({
     // Prevent duplicate fetches from unstable dependencies
     const hasFetched = useRef(false)
     const fetchKey = useRef<string | null>(null)
+    const retryCount = useRef(0)
+    const maxRetries = 2
 
     useEffect(() => {
         // Create a unique key for this fetch based on stable params
@@ -63,6 +65,13 @@ export function useQuestionLoader({
                 return
             }
 
+            // Prevent rapid retries
+            if (retryCount.current >= maxRetries) {
+                setError('Failed to load after multiple attempts. Please refresh the page.')
+                setLoading(false)
+                return
+            }
+
             try {
                 setLoading(true)
                 setError(null)
@@ -75,6 +84,22 @@ export function useQuestionLoader({
                 ]);
 
                 if (cancelled) return;
+
+                // Handle auth errors - don't retry on 401
+                if (nableStatusRes.status === 401 || progressRes.status === 401) {
+                    retryCount.current = maxRetries; // Stop retrying
+                    throw new Error('Authentication failed. Please log in again.')
+                }
+
+                // Handle rate limit - wait and retry once
+                if (nableStatusRes.status === 429 || progressRes.status === 429) {
+                    if (retryCount.current < maxRetries) {
+                        retryCount.current++
+                        await new Promise(r => setTimeout(r, 2000))
+                        if (!cancelled) loadQuestion()
+                        return
+                    }
+                }
 
                 // Process NABLE Status
                 if (!nableStatusRes.ok) throw new Error('Failed to load NABLE status');
@@ -143,13 +168,23 @@ export function useQuestionLoader({
                     // Mark as fetched to prevent duplicate requests
                     hasFetched.current = true
                     fetchKey.current = currentFetchKey
+                    retryCount.current = 0 // Reset retry count on success
                 } else {
                     throw new Error('No steps returned')
                 }
-            } catch (err) {
+            } catch (err: any) {
                 if (cancelled) return;
                 console.error(err)
-                setError('Failed to load question.')
+                setError(err.message || 'Failed to load question.')
+                if (err.message?.includes('Authentication') || err.message?.includes('Unauthorized')) {
+                    retryCount.current = maxRetries // Prevent further retries
+                    // Redirect to login after a short delay to show the error
+                    setTimeout(() => {
+                        if (typeof window !== 'undefined') {
+                            window.location.href = '/login'
+                        }
+                    }, 2000)
+                }
             } finally {
                 if (!cancelled) {
                     setLoading(false)

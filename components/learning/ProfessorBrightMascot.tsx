@@ -7,10 +7,11 @@ import { FeedbackResponse } from '@/lib/professor-bright'
 interface ProfessorBrightMascotProps {
     feedback: FeedbackResponse | null
     webMode?: boolean
-    mini?: boolean // NEW: show only the mascot without bubble
+    mini?: boolean
+    className?: string
 }
 
-export function ProfessorBrightMascot({ feedback, webMode = false, mini = false }: ProfessorBrightMascotProps) {
+export default function ProfessorBrightMascot({ feedback, webMode = false, mini = false, className = '' }: ProfessorBrightMascotProps) {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export function ProfessorBrightMascot({ feedback, webMode = false, mini = false 
 
     if (mini) {
         return (
-            <div className="relative filter drop-shadow-xl">
+            <div className={`relative filter drop-shadow-xl ${className}`}>
                 <div
                     className={`owl-sprite ${feedback.spriteClass} scale-75 md:scale-100`}
                     style={{
@@ -48,7 +49,7 @@ export function ProfessorBrightMascot({ feedback, webMode = false, mini = false 
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: 300, opacity: 0 }}
                     transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-                    className="fixed bottom-0 right-0 z-50 flex items-end p-4 md:p-8 pointer-events-none"
+                    className={`fixed bottom-0 right-0 z-50 flex items-end p-4 md:p-8 pointer-events-none ${className}`}
                 >
                     {/* Speech Bubble */}
                     <div className="relative mr-4 mb-20 md:mb-24 w-64 md:w-80 pointer-events-auto">

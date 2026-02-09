@@ -237,7 +237,17 @@ export async function GET(request: NextRequest) {
     }
 
     if (!candidates || candidates.length === 0) {
-      // This only happens if the DB is truly empty for this objective
+      // Try AI generation as fallback when DB is empty
+      const useAI = searchParams.get('useAI') === 'true';
+      if (useAI) {
+        console.log('[questions/generate] No DB questions found, attempting AI generation for:', objectiveId);
+        const aiQuestion = await generateAIQuestion(objectiveId, subjectId, targetDifficulty);
+        if (aiQuestion) {
+          console.log('[questions/generate] AI question generated successfully');
+          return NextResponse.json(formatResponse(aiQuestion, objectiveId, subjectId));
+        }
+      }
+      console.warn('[questions/generate] No questions available for objective:', { objectiveId, subjectId, useAI });
       return NextResponse.json(createFallbackResponse(objectiveId, subjectId), { status: 200 });
     }
 
@@ -456,4 +466,107 @@ function createFallbackResponse(objectiveId: string, subjectId: string | null) {
     ],
     objective: { id: objectiveId, subject: subjectId || 'General', difficulty: 1, title: 'Objective Complete' }
   };
+}
+
+/**
+ * Generate a question using AI when no questions exist in the database
+ */
+async function generateAIQuestion(objectiveId: string, subjectId: string | null, difficulty: number): Promise<any | null> {
+  try {
+    // Check if Ollama is available
+    const ollamaCheck = await fetch('http://localhost:11434/api/tags', { 
+      method: 'GET',
+      signal: AbortSignal.timeout(2000)
+    }).catch(() => null);
+    
+    if (!ollamaCheck?.ok) {
+      console.log('[questions/generate] Ollama not available, skipping AI generation');
+      return null;
+    }
+
+    const prompt = `Generate a multiple choice question for a Caribbean secondary school student.
+
+Subject: ${subjectId || 'General'}
+Topic/Objective: ${objectiveId}
+Difficulty Level: ${difficulty}/10 (1=easy, 10=hard)
+
+Generate a JSON object with this exact structure:
+{
+  "question": "The question text (clear, concise, one sentence)",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correctAnswer": 0,
+  "explanation": "Brief explanation of why the answer is correct"
+}
+
+Rules:
+- Only output valid JSON, no markdown formatting
+- Options should be plausible but only one is correct
+- Question should test understanding of the topic
+- Keep it appropriate for CSEC/Caribbean high school level`;
+
+    const response = await fetch('http://localhost:11434/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'llama3.2:latest',
+        prompt: prompt,
+        stream: false,
+        options: {
+          temperature: 0.7,
+          num_predict: 500
+        }
+      }),
+      signal: AbortSignal.timeout(15000)
+    });
+
+    if (!response.ok) {
+      console.error('[questions/generate] Ollama API error:', response.status);
+      return null;
+    }
+
+    const result = await response.json();
+    const responseText = result.response || '';
+    
+    // Extract JSON from response
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      console.error('[questions/generate] No JSON found in AI response');
+      return null;
+    }
+
+    const parsed = JSON.parse(jsonMatch[0]);
+    
+    // Validate the response structure
+    if (!parsed.question || !Array.isArray(parsed.options) || parsed.options.length < 2) {
+      console.error('[questions/generate] Invalid AI response structure');
+      return null;
+    }
+
+    // Ensure exactly 4 options
+    while (parsed.options.length < 4) {
+      parsed.options.push(`Option ${String.fromCharCode(65 + parsed.options.length)}`);
+    }
+    parsed.options = parsed.options.slice(0, 4);
+
+    return {
+      question: parsed.question,
+      questionText: parsed.question,
+      options: parsed.options,
+      correctAnswer: typeof parsed.correctAnswer === 'number' ? parsed.correctAnswer : 0,
+      explanation: parsed.explanation || 'Great job! You understood the concept correctly.',
+      difficulty: difficulty,
+      difficultyWeight: difficulty,
+      questionId: `ai-${objectiveId}-${Date.now()}`,
+      objectiveId: objectiveId,
+      subjectId: subjectId,
+      contentType: 'ai-generated',
+      distractorSimilarity: 0.5,
+      expectedTime: 45,
+      subSkills: [objectiveId],
+      storyElement: 'AI Challenge'
+    };
+  } catch (error) {
+    console.error('[questions/generate] AI generation error:', error);
+    return null;
+  }
 }

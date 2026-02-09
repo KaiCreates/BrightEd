@@ -1,39 +1,61 @@
-# Stage 1: Dependencies
-FROM node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+# =====================
+# Build Stage
+# =====================
+FROM golang:1.22-alpine AS builder
 
-# Stage 2: Builder
-FROM node:20-alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+
+# Install git for fetching dependencies
+RUN apk add --no-cache git ca-certificates
+
+# Copy go module files
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy source code
 COPY . .
-RUN npm run build
 
-# Stage 3: Runner
-FROM node:20-alpine AS runner
+# Build the binary
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /brighted .
+
+# =====================
+# Production Stage
+# =====================
+FROM alpine:3.19
+
 WORKDIR /app
 
-ENV NODE_ENV production
+# Install ca-certificates for HTTPS
+RUN apk add --no-cache ca-certificates tzdata
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create non-root user
+RUN adduser -D -g '' appuser
 
-# The standalone build only includes the files needed to run the app
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Copy binary from builder
+COPY --from=builder /brighted /app/brighted
 
-# Create the data directory for the volume mount (safe to keep, but optional)
-RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+# Copy static files and templates
+COPY templates/ /app/templates/
+COPY public/ /app/public/
+COPY syllabuses/ /app/syllabuses/
 
-USER nextjs
+# Copy logo
+COPY BrightEdLogo.png /app/BrightEdLogo.png
 
-EXPOSE 3000
+# Set ownership
+RUN chown -R appuser:appuser /app
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+# Switch to non-root user
+USER appuser
 
-CMD ["node", "server.js"]
+# Expose port
+EXPOSE 4000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:4000/ || exit 1
+
+# Run the binary
+CMD ["/app/brighted"]

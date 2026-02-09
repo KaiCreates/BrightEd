@@ -1,18 +1,17 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
-import DragDropQuestion from '@/components/lesson/DragDropQuestion'
-import FormulaBuilder from '@/components/lesson/FormulaBuilder'
-import MathDiagram from '@/components/lesson/MathDiagram'
-import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
 import { useQuestionLoader } from '@/hooks/useQuestionLoader'
-import { ScenarioBrief, DecisionCard, DuoSessionLayout, DuoActionBar, DuoMascotBubble } from '@/components/simulation'
-import { StreakCelebration } from '@/components/learning'
+import { DuoSessionLayout, DuoProgressBar } from '@/components/simulation/DuoSessionLayout'
+import DecisionCard from '@/components/simulation/DecisionCard'
+import { DuoActionBar } from '@/components/simulation/DuoActionBar'
+import { DuoMascotBubble } from '@/components/simulation/DuoMascotBubble'
+import ExplanationPanel from '@/components/learning/ExplanationPanel'
+import { LevelCompletionScreen, StreakCelebration } from '@/components/learning'
 import { getProfessorBrightFeedback, FeedbackResponse } from '@/lib/professor-bright'
 
 interface SimulationStep {
@@ -23,44 +22,42 @@ interface SimulationStep {
   correctAnswer?: number
   subSkills?: string[]
   questionDifficulty?: number
-  storyElement?: string
-  questionType?: 'multiple-choice' | 'drag-drop' | 'formula-builder'
-  interactiveData?: {
-    items?: string[]
-    correctOrder?: number[]
-    formulaParts?: string[]
-    correctFormula?: string[]
-    diagramType?: 'geometry' | 'graph' | 'equation'
-    diagramData?: any
-  }
+  explanation?: string
+  relatedConcepts?: string[]
 }
 
-export default function SimulatePage() {
+interface SessionStats {
+  questionsAnswered: number
+  correctAnswers: number
+  streak: number
+  xpGained: number
+}
+
+export default function LessonPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const objectiveId = searchParams?.get('objective') || searchParams?.get('objectiveId') || null
   const subjectId = searchParams?.get('subject') || searchParams?.get('subjectId') || null
   const { user, userData, loading: authLoading } = useAuth()
 
+  // Token Cache for authenticated requests
+  const tokenCache = useRef<{ token: string | null; expiry: number }>({ token: null, expiry: 0 })
 
-  // TOKEN CACHE & AUTHENTICATED FETCH
-  // Token Cache primarily for preventing rapid refreshes
-  const tokenCache = useRef<{ token: string | null; expiry: number }>({ token: null, expiry: 0 });
+  const authenticatedFetch = useCallback(async (url: string, options: RequestInit = {}) => {
+    if (!user) throw new Error("No user found")
 
-  // Helper for authenticated requests
-  const authenticatedFetch = async (url: string, options: RequestInit = {}) => {
-    if (!user) throw new Error("No user found");
+    let token = tokenCache.current.token
+    const now = Date.now()
 
-    let token = tokenCache.current.token;
-    const now = Date.now();
-
-    // Use cache if valid (5 min window), otherwise refresh
     if (!token || now > tokenCache.current.expiry) {
-      token = await user.getIdToken(true); // Force refresh from Firebase
-      tokenCache.current = {
-        token,
-        expiry: now + 5 * 60 * 1000 // Cache for 5 mins
-      };
+      try {
+        token = await user.getIdToken(true)
+        tokenCache.current = { token, expiry: now + 5 * 60 * 1000 }
+      } catch (tokenError) {
+        console.error("Failed to refresh Firebase token:", tokenError)
+        tokenCache.current = { token: null, expiry: 0 }
+        throw new Error("Authentication expired. Please log in again.")
+      }
     }
 
     return fetch(url, {
@@ -70,10 +67,10 @@ export default function SimulatePage() {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-    });
-  };
+    })
+  }, [user])
 
-  // EXTRACTED HOOK LOGIC (Validation, Auth, Caching, Race Condition Fixes)
+  // Question loader hook
   const {
     loading,
     error,
@@ -91,7 +88,6 @@ export default function SimulatePage() {
     setStarJustEarned,
     setLoading,
     setError,
-    nableState // NEW: NABLE State
   } = useQuestionLoader({
     objectiveId,
     subjectId,
@@ -99,51 +95,71 @@ export default function SimulatePage() {
     userData,
     authLoading,
     authenticatedFetch
-  });
+  })
 
-  // NABLE Engine state
-  const [nableResponse, setNableResponse] = useState<{
-    recommendedUIMood: 'Encouraging' | 'Challenging' | 'Supportive' | 'Celebratory';
-    errorClassification: 'conceptual' | 'careless' | null;
-    microLessonRequired: boolean;
-    microLesson: { title: string; content: string; examples: string[] } | null;
-    confidence: number;
-    blockedProgression: boolean;
-    currentStreak: number;
-    masteryDelta: Record<string, number>;
-    lastDifficulty?: number; // Added for UI difficulty indicator
-  } | null>(null)
-  const [showMicroLesson, setShowMicroLesson] = useState(false)
-  const [answerStartTime, setAnswerStartTime] = useState<number>(Date.now())
-
-  // Local UI State (Not covered by hook)
+  // UI State
   const [currentStep, setCurrentStep] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [questionBuffer, setQuestionBuffer] = useState<SimulationStep[][]>([])
-  const [showHint, setShowHint] = useState(false)
-  const [hintContent, setHintContent] = useState<string>('')
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null)
+  const [answerStartTime, setAnswerStartTime] = useState<number>(Date.now())
+
+  // Enhanced State
+  const [showExplanation, setShowExplanation] = useState(false)
+  const [sessionStats, setSessionStats] = useState<SessionStats>({
+    questionsAnswered: 0,
+    correctAnswers: 0,
+    streak: 0,
+    xpGained: 0
+  })
+
+  // NABLE State
+  const [nableResponse, setNableResponse] = useState<{
+    recommendedUIMood: string
+    currentStreak: number
+    confidence: number
+  } | null>(null)
 
   // Professor Bright feedback and streak celebration
   const [showStreakCelebration, setShowStreakCelebration] = useState(false)
   const [professorFeedback, setProfessorFeedback] = useState<FeedbackResponse | null>(null)
   const previousStreakRef = useRef<number>(0)
 
-  // Generate variation based on timestamp and objective to ensure different questions
-  // Used for ID generation
-  const variation = (parseInt(objectiveId?.replace(/\D/g, '') || '0') || 0) % 10;
+  const step = simulationSteps[currentStep]
 
-  const generateNewQuestion = async () => {
-    // CRITICAL: Always use subjectId when generating new questions
+  // Generate variation based on timestamp and objective
+  const variation = (parseInt(objectiveId?.replace(/\D/g, '') || '0') || 0) % 10
+
+  // Prefetch next question
+  const prefetchNextQuestion = useCallback(async () => {
+    if (!objectiveId || !subjectId) return
+
+    const subjectParam = `&subjectId=${encodeURIComponent(subjectId)}`
+    const nextVariation = variation + questionBuffer.length + 1
+
+    try {
+      const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
+      const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${nextVariation}&useAI=false${subjectParam}${masteryParam}`)
+      if (res.ok) {
+        const data = await res.json()
+        if (data.simulationSteps && (data.objective?.subject === subjectId || !data.objective?.subject)) {
+          setQuestionBuffer(prev => [...prev, data.simulationSteps])
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to prefetch next question:', err)
+    }
+  }, [objectiveId, subjectId, userData?.mastery, questionBuffer.length, variation, authenticatedFetch])
+
+  // Generate new question
+  const generateNewQuestion = useCallback(async () => {
     if (!subjectId) {
-      console.error('Cannot generate new question: subjectId is missing!')
       setError('Subject information is missing. Please go back and select a subject.')
       return
     }
 
-    // Use prefetched question if available (they should all have correct subjectId)
     if (questionBuffer.length > 0) {
       const nextQuestion = questionBuffer[0]
       setQuestionBuffer(prev => prev.slice(1))
@@ -151,22 +167,23 @@ export default function SimulatePage() {
       setCurrentStep(0)
       setSelectedAnswer(null)
       setShowFeedback(false)
-      setShowHint(false)
+      setShowExplanation(false)
+      setIsAnswerCorrect(null)
+      setAnswerStartTime(Date.now())
 
-      // Prefetch next question in background
       if (questionBuffer.length <= 2) {
         prefetchNextQuestion()
       }
     } else {
-      // Generate new question with subjectId - force reload
       setQuestionVariation(prev => prev + 1)
       setCurrentStep(0)
       setSelectedAnswer(null)
       setShowFeedback(false)
-      setShowHint(false)
+      setShowExplanation(false)
+      setIsAnswerCorrect(null)
+      setAnswerStartTime(Date.now())
       setLoading(true)
 
-      // Manually fetch new question to ensure subjectId is used
       try {
         const subjectParam = `&subjectId=${encodeURIComponent(subjectId)}`
         const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
@@ -175,19 +192,11 @@ export default function SimulatePage() {
 
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({}))
-          if (res.status === 400 && errorData.error && errorData.error.includes('Subject mismatch')) {
-            setError(`Subject mismatch: This objective doesn't belong to ${subjectId}.`)
-            setTimeout(() => {
-              router.push('/learn')
-            }, 3000)
-            return
-          }
           throw new Error(errorData.error || 'Failed to generate question')
         }
 
         const data = await res.json()
 
-        // Validate subject matches
         if (data.objective?.subject && data.objective.subject !== subjectId) {
           setError(`Subject mismatch: Got ${data.objective.subject} but expected ${subjectId}`)
           return
@@ -206,47 +215,30 @@ export default function SimulatePage() {
         setLoading(false)
       }
     }
-  }
+  }, [subjectId, questionBuffer, questionVariation, objectiveId, userData?.mastery, setSimulationSteps, setObjectiveInfo, setLoading, setError, prefetchNextQuestion, authenticatedFetch, setQuestionVariation])
 
-  const prefetchNextQuestion = async () => {
-    if (!objectiveId || !subjectId) return // CRITICAL: Must have both
-
-    const subjectParam = `&subjectId=${encodeURIComponent(subjectId)}`
-    const nextVariation = variation + questionBuffer.length + 1
-
-    try {
-      const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
-      const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${nextVariation}&useAI=false${subjectParam}${masteryParam}`)
-      if (res.ok) {
-        const data = await res.json()
-        // Validate subject matches before adding to buffer
-        if (data.simulationSteps && (data.objective?.subject === subjectId || !data.objective?.subject)) {
-          setQuestionBuffer(prev => [...prev, data.simulationSteps])
-        } else {
-          console.warn(`Prefetched question subject mismatch: expected ${subjectId}, got ${data.objective?.subject}`)
-        }
-      }
-    } catch (err) {
-      console.warn('Failed to prefetch next question:', err)
-    }
-  }
-
-  const step = simulationSteps[currentStep]
-
+  // Handle answer submission
   const handleAnswer = async (answerIndex: number) => {
-    if (!user) return
+    if (!user || !step) return
 
     setSelectedAnswer(answerIndex)
     setShowFeedback(true)
     setIsTransitioning(true)
 
     const isCorrect = answerIndex === step.correctAnswer
-    setIsAnswerCorrect(isCorrect) // Store correctness for outcome step
+    setIsAnswerCorrect(isCorrect)
 
-    // Calculate time to answer
     const timeToAnswer = Math.round((Date.now() - answerStartTime) / 1000)
 
-    // Call NABLE Engine for adaptive learning
+    // Update session stats
+    setSessionStats(prev => ({
+      questionsAnswered: prev.questionsAnswered + 1,
+      correctAnswers: isCorrect ? prev.correctAnswers + 1 : prev.correctAnswers,
+      streak: isCorrect ? prev.streak + 1 : 0,
+      xpGained: prev.xpGained + (isCorrect ? 50 : 10)
+    }))
+
+    // Call NABLE Engine
     try {
       const resolvedQuestionId = (step as any)?.questionId || `${objectiveId}-${questionVariation}`
       const nableRes = await authenticatedFetch('/api/nable/evaluate', {
@@ -281,13 +273,8 @@ export default function SimulatePage() {
 
         setNableResponse({
           recommendedUIMood: nableData.recommendedUIMood || 'Encouraging',
-          errorClassification: nableData.errorClassification,
-          microLessonRequired: nableData.microLessonRequired,
-          microLesson: nableData.microLesson,
-          confidence: nableData.confidence,
-          blockedProgression: nableData.blockedProgression,
           currentStreak: nableData.currentStreak || 0,
-          masteryDelta: nableData.masteryDelta || {}
+          confidence: nableData.confidence,
         })
 
         // Generate Professor Bright feedback
@@ -302,7 +289,7 @@ export default function SimulatePage() {
         )
         setProfessorFeedback(feedback)
 
-        // Trigger streak celebration on milestones (5, 10, 15, 20)
+        // Trigger streak celebration on milestones
         const isMilestone = [5, 10, 15, 20].includes(currentStreak)
         const wasNotAtMilestone = ![5, 10, 15, 20].includes(previousStreakRef.current)
         if (isCorrect && isMilestone && wasNotAtMilestone) {
@@ -310,294 +297,212 @@ export default function SimulatePage() {
         }
         previousStreakRef.current = currentStreak
 
-        // Show micro-lesson if needed (conceptual error)
-        if (nableData.microLessonRequired && nableData.microLesson) {
-          setShowMicroLesson(true)
-        }
+        setTimeout(() => {
+          setShowExplanation(true)
+          setIsTransitioning(false)
+        }, 800)
       }
     } catch (err) {
-      // Fallback: Generate feedback without NABLE data
       const feedback = getProfessorBrightFeedback(isCorrect, null, 0, 0.5, timeToAnswer)
       setProfessorFeedback(feedback)
       console.warn('NABLE evaluation failed:', err)
+
+      setTimeout(() => {
+        setShowExplanation(true)
+        setIsTransitioning(false)
+      }, 800)
     }
 
-    // Update outcome step based on correctness
-    if (simulationSteps.length > 1 && simulationSteps[1].type === 'outcome') {
-      const updatedSteps = [...simulationSteps]
-      if (isCorrect) {
-        updatedSteps[1] = {
-          ...updatedSteps[1],
-          content: `You selected "${step.options?.[answerIndex]}". This is correct! You demonstrate good understanding of the concept.`,
-          storyElement: '🎉 Great decision!'
-        }
-      } else {
-        updatedSteps[1] = {
-          ...updatedSteps[1],
-          content: `You selected "${step.options?.[answerIndex]}". That's not quite right. The correct answer is "${step.options?.[step.correctAnswer || 0]}". Let's learn why.`,
-          storyElement: '📚 Learning opportunity!'
-        }
-      }
-      setSimulationSteps(updatedSteps)
-    }
-
-    // If wrong answer, show hint option
-    if (!isCorrect && step.type === 'decision') {
-      // Try to get hint from objective content
-      const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
-      authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${variation}&useAI=false${subjectId ? `&subjectId=${encodeURIComponent(subjectId)}` : ''}${masteryParam}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.objective?.content) {
-            setHintContent(data.objective.content.substring(0, 200))
-          }
-        })
-        .catch(() => { })
-    }
-
-    // Prefetch next question when user answers (for seamless transition) - only if subjectId exists
-    if (currentStep === 0 && questionBuffer.length <= 2 && subjectId) {
+    if (questionBuffer.length <= 2 && subjectId) {
       prefetchNextQuestion()
     }
-
-    // Reset answer timer for next question
-    setAnswerStartTime(Date.now())
-
-    // Auto-advance removed to allow user to read feedback
-    // setTimeout(() => {
-    //   if (currentStep < simulationSteps.length - 1) {
-    //     setCurrentStep(currentStep + 1)
-    //     setSelectedAnswer(null)
-    //     setShowFeedback(false)
-    //     setIsTransitioning(false)
-    //     setShowHint(false)
-    //     setShowMicroLesson(false)
-    //   }
-    // }, 2500)
-
   }
 
-  const nextStep = () => {
+  const handleContinue = () => {
+    if (isComplete) {
+      return
+    }
+
+    if (earnedStars >= 3) {
+      setIsComplete(true)
+      return
+    }
+
     setIsTransitioning(true)
+    setShowExplanation(false)
+    setShowFeedback(false)
+    setSelectedAnswer(null)
+    setIsAnswerCorrect(null)
+
     setTimeout(() => {
-      if (currentStep < simulationSteps.length - 1) {
-        setCurrentStep(currentStep + 1)
-        setSelectedAnswer(null)
-        setShowFeedback(false)
-        setIsTransitioning(false)
-      }
+      generateNewQuestion()
+      setIsTransitioning(false)
     }, 300)
   }
 
-  const handleComplete = async () => {
-    if (!user) return
-
-    // Stars/progress are persisted by the server during answer evaluation.
-    // We only advance the flow here.
-    if (earnedStars >= 3) {
-      // Celebration! Node completed
-      setIsComplete(true);
-      setLoading(false);
-      return;
-    }
-
-    // Not yet complete - load next question
-    setLoading(true);
-    setIsTransitioning(true);
-
-    // Small delay for UX, then fetch next question
-    setTimeout(async () => {
-      try {
-        // Fetch next question with new variation
-        const nextVariation = earnedStars + 1;
-        const subjectParam = subjectId ? `&subjectId=${encodeURIComponent(subjectId)}` : '';
-        const masteryParam = userData?.mastery ? `&mastery=${userData.mastery}` : ''
-        const res = await authenticatedFetch(`/api/questions/generate?objectiveId=${objectiveId}&variation=${nextVariation}&useAI=false${subjectParam}${masteryParam}`);
-
-        if (res.ok) {
-          const data = await res.json();
-          if (data.simulationSteps) {
-            setSimulationSteps(data.simulationSteps);
-            setObjectiveInfo(data.objective);
-          }
-        }
-      } catch (err) {
-        console.error('Error loading next question:', err);
-      }
-
-      // Reset UI state for new question
-      setSelectedAnswer(null);
-      setShowFeedback(false);
-      setIsAnswerCorrect(null);
-      setCurrentStep(0);
-      setIsTransitioning(false);
-      setLoading(false);
-    }, 300);
+  const handleLevelComplete = () => {
+    router.push('/learn?animation=unlock')
   }
 
+  const handleRetry = () => {
+    setIsComplete(false)
+    setEarnedStars(0)
+    setSessionStats({
+      questionsAnswered: 0,
+      correctAnswers: 0,
+      streak: 0,
+      xpGained: 0
+    })
+    generateNewQuestion()
+  }
+
+  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
-        <div className="text-center text-[var(--text-secondary)]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)] mx-auto mb-4"></div>
-          <p className="text-xl font-bold">Retrieving question...</p>
-          <p className="text-sm opacity-80 mt-2">
-            Accessing local learning database
-          </p>
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full border-4 border-t-[var(--brand-primary)] border-r-transparent border-b-[var(--brand-primary)] border-l-transparent animate-spin mx-auto mb-6" />
+          <h2 className="text-2xl font-black text-[var(--text-primary)] mb-2">Loading Lesson</h2>
+          <p className="text-[var(--text-muted)] animate-pulse">Professor Bright is finding the perfect question...</p>
         </div>
       </div>
     )
   }
 
+  // Error state
   if (error && simulationSteps.length === 0) {
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
-        <BrightLayer variant="elevated" className="text-center max-w-md">
-          <BrightHeading level={2} className="mb-4 text-red-500">
-            {error}
-          </BrightHeading>
-          <Link href="/learn" className="block w-full">
-            <BrightButton variant="primary" className="w-full">
-              Go to Learning Path
-            </BrightButton>
+        <div className="text-center max-w-md p-8 rounded-3xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]">
+          <div className="text-6xl mb-4">😅</div>
+          <h2 className="text-2xl font-black mb-2 text-[var(--text-primary)]">Oops!</h2>
+          <p className="text-[var(--text-secondary)] mb-6">{error}</p>
+          <Link
+            href="/learn"
+            className="inline-block w-full py-4 rounded-2xl font-black text-white bg-[var(--brand-primary)] border-b-[6px] border-[#0284c7] hover:bg-[#0ea5e9] active:border-b-0 active:translate-y-[4px] transition-all uppercase tracking-widest"
+          >
+            Go Back
           </Link>
-        </BrightLayer>
+        </div>
       </div>
     )
   }
 
+  // Level Complete state
   if (isComplete) {
+    const accuracy = sessionStats.questionsAnswered > 0
+      ? Math.round((sessionStats.correctAnswers / sessionStats.questionsAnswered) * 100)
+      : 0
+
     return (
-      <div className="min-h-screen bg-[var(--bg-primary)] flex flex-col items-center justify-center p-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md text-center"
-        >
-          <h1 className="text-4xl font-black text-[#ffc800] mb-8 uppercase tracking-wider drop-shadow-sm">
-            Perfect Lesson!
-          </h1>
-
-          <div className="grid grid-cols-2 gap-4 mb-12">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="bg-[#ffc800] rounded-2xl p-6 border-b-4 border-[#e5a000]"
-            >
-              <div className="text-white font-black text-xs uppercase tracking-widest mb-1">Total XP</div>
-              <div className="text-white font-black text-3xl">+100</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="bg-[#1cb0f6] rounded-2xl p-6 border-b-4 border-[#1899d6]"
-            >
-              <div className="text-white font-black text-xs uppercase tracking-widest mb-1">Accuracy</div>
-              <div className="text-white font-black text-3xl">100%</div>
-            </motion.div>
-          </div>
-
-          <div className="mb-12">
-            <div className="w-48 h-48 mx-auto relative mb-4">
-              <div className="owl-sprite owl-happy" style={{ transform: 'scale(1.5)', transformOrigin: 'center' }} />
-            </div>
-            <p className="text-xl font-bold text-[var(--text-secondary)]">
-              &quot;Hoo-ray! You&apos;ve mastered this objective with flying colors!&quot;
-            </p>
-          </div>
-
-          <Link href="/learn?animation=unlock" className="block w-full">
-            <button className="w-full py-4 rounded-2xl bg-[#6366f1] border-b-4 border-[#4f46e5] text-white font-black text-xl uppercase tracking-widest hover:bg-[#4f46e5] transition-colors">
-              Continue
-            </button>
-          </Link>
-        </motion.div>
-      </div>
+      <LevelCompletionScreen
+        levelName={objectiveInfo?.title || 'Learning Objective'}
+        subject={subjectId || 'General'}
+        starsEarned={earnedStars}
+        totalStars={3}
+        streak={nableResponse?.currentStreak || sessionStats.streak}
+        masteryPercentage={Math.round((nableResponse?.confidence || 0.5) * 100)}
+        consistencyPercentage={userData?.consistency || 0}
+        xpGained={sessionStats.xpGained}
+        questionsAnswered={sessionStats.questionsAnswered}
+        accuracy={accuracy}
+        onContinue={handleLevelComplete}
+        onRetry={handleRetry}
+      />
     )
   }
 
   if (!step) {
     return (
       <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
-        <BrightLayer variant="glass" className="text-center">
-          <p className="text-[var(--text-secondary)] mb-4">No question available. Please select an objective from your learning path.</p>
-          <Link href="/learn">
-            <BrightButton variant="outline">Go to Learning Path</BrightButton>
+        <div className="text-center max-w-md p-8 rounded-3xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]">
+          <p className="text-[var(--text-secondary)] mb-6">No question available for this objective.</p>
+          <Link
+            href="/learn"
+            className="inline-block w-full py-4 rounded-2xl font-black text-white bg-[var(--brand-primary)] border-b-[6px] border-[#0284c7] hover:bg-[#0ea5e9] active:border-b-0 active:translate-y-[4px] transition-all uppercase tracking-widest"
+          >
+            Back to Path
           </Link>
-        </BrightLayer>
+        </div>
       </div>
     )
   }
-
-  const isFallbackState = step?.type === 'explanation' && step?.content.includes('end of the available questions')
 
   return (
     <DuoSessionLayout
       currentStep={currentStep}
       totalSteps={simulationSteps.length}
+      hearts={5} // Placeholder for lives system
+      streak={sessionStats.streak}
       onClose={() => router.push('/learn')}
-      footer={
+    >
+      <div className="w-full py-4 md:py-8 max-w-2xl mx-auto">
+        <AnimatePresence mode="wait">
+          {showExplanation ? (
+            <ExplanationPanel
+              key="explanation"
+              question={step.content}
+              selectedAnswer={step.options?.[selectedAnswer || 0] || 'No answer'}
+              correctAnswer={step.options?.[step.correctAnswer || 0] || 'Unknown'}
+              explanation={step.explanation || `The correct answer is "${step.options?.[step.correctAnswer || 0]}".`}
+              isCorrect={isAnswerCorrect || false}
+              relatedConcepts={step.relatedConcepts || []}
+              onContinue={handleContinue}
+              onTryAgain={!isAnswerCorrect ? handleRetry : undefined}
+            />
+          ) : (
+            <motion.div
+              key="question"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              <DuoMascotBubble
+                content={step.content}
+                emotion={professorFeedback?.spriteClass || 'owl-happy'}
+              />
+
+              <div className="grid gap-4 mt-8">
+                {step.options?.map((option: string, index: number) => (
+                  <DecisionCard
+                    key={index}
+                    option={option}
+                    index={index}
+                    isSelected={selectedAnswer === index}
+                    isCorrect={index === step.correctAnswer}
+                    showResult={showFeedback}
+                    disabled={showFeedback}
+                    onSelect={() => !showFeedback && setSelectedAnswer(index)}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {!showExplanation && (
         <DuoActionBar
-          status={showFeedback ? (isAnswerCorrect ? 'correct' : 'wrong') : (step.type !== 'decision' ? 'continue' : (selectedAnswer !== null ? 'selected' : 'idle'))}
-          onCheck={() => handleAnswer(selectedAnswer!)}
-          onContinue={currentStep < simulationSteps.length - 1 ? nextStep : (isFallbackState ? () => router.push('/learn') : handleComplete)}
+          status={
+            showFeedback
+              ? (isAnswerCorrect ? 'correct' : 'wrong')
+              : (selectedAnswer !== null ? 'selected' : 'idle')
+          }
+          onCheck={() => selectedAnswer !== null && handleAnswer(selectedAnswer)}
+          onContinue={handleContinue}
           feedbackTitle={isAnswerCorrect ? 'Excellent!' : 'Correct solution:'}
           feedbackMessage={isAnswerCorrect ? professorFeedback?.message : step.options?.[step.correctAnswer || 0]}
         />
-      }
-    >
-      <div className="w-full py-8 md:py-12">
-        {!isFallbackState && (
-          <h1 className="text-2xl md:text-4xl font-black text-[var(--text-primary)] mb-10 text-center md:text-left transition-all duration-300">
-            {step.type === 'decision' ? 'Select the correct answer' : 'Learning Moment'}
-          </h1>
-        )}
+      )}
 
-        <div className="flex flex-col items-center">
-          <DuoMascotBubble
-            content={step.content}
-            emotion={isFallbackState ? 'owl-magic' : (professorFeedback?.spriteClass || 'owl-happy')}
-          />
-
-          {!isFallbackState ? (
-            <div className="w-full max-w-2xl grid gap-4 mt-4">
-              {step.options?.map((option: string, index: number) => (
-                <DecisionCard
-                  key={index}
-                  option={option}
-                  index={index}
-                  isSelected={selectedAnswer === index}
-                  isCorrect={index === step.correctAnswer}
-                  showResult={showFeedback}
-                  disabled={showFeedback}
-                  onSelect={() => !showFeedback && setSelectedAnswer(index)}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="w-full max-w-sm mt-8">
-              <motion.button
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                whileTap={{ y: 2 }}
-                onClick={() => router.push('/learn')}
-                className="w-full py-5 rounded-2xl bg-[#6366f1] border-b-[6px] border-[#4f46e5] text-white font-black text-xl uppercase tracking-widest hover:bg-[#4f46e5] active:border-b-0 active:translate-y-[4px] shadow-lg shadow-indigo-500/20 transition-all font-black"
-              >
-                Back to Map
-              </motion.button>
-            </div>
-          )}
-        </div>
+      <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
+        <StreakCelebration
+          streak={sessionStats.streak}
+          show={showStreakCelebration}
+          onClose={() => setShowStreakCelebration(false)}
+        />
       </div>
-
-      <StreakCelebration
-        streak={nableResponse?.currentStreak || 0}
-        show={showStreakCelebration}
-        onClose={() => setShowStreakCelebration(false)}
-      />
     </DuoSessionLayout>
   )
 }

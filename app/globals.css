@@ -78,6 +78,223 @@
   .overlay.active {
     pointer-events: auto;
   }
+
+  /* ============================================================================
+     LEARN/LESSON PAGE REVAMP UTILITIES
+     ============================================================================ */
+
+  /* Glowing node effects */
+  .node-glow {
+    position: relative;
+  }
+
+  .node-glow::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: inherit;
+    filter: blur(20px);
+    opacity: 0.4;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+
+  .node-glow:hover::before {
+    opacity: 0.6;
+  }
+
+  .node-glow-active::before {
+    opacity: 0.7;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Skeleton loading animations */
+  .skeleton {
+    background: linear-gradient(90deg,
+        var(--bg-secondary) 25%,
+        var(--bg-elevated) 50%,
+        var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    border-radius: 12px;
+  }
+
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Path connector animations */
+  .path-line {
+    stroke-dasharray: 10 5;
+    stroke-dashoffset: 0;
+  }
+
+  .path-line-animated {
+    animation: dash-flow 1s linear infinite;
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -15;
+    }
+  }
+
+  /* Subject filter pills */
+  .filter-pill {
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .filter-pill-inactive {
+    background: var(--bg-elevated);
+    border-color: var(--border-subtle);
+    color: var(--text-secondary);
+  }
+
+  .filter-pill-inactive:hover {
+    background: var(--bg-secondary);
+    border-color: var(--brand-primary);
+    color: var(--text-primary);
+  }
+
+  .filter-pill-active {
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
+    color: white;
+    box-shadow: 0 4px 15px -3px rgba(14, 165, 233, 0.4);
+  }
+
+  /* Question card improvements */
+  .question-card {
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    border-bottom-width: 5px;
+    border-radius: 20px;
+    padding: 20px 24px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .question-card:hover:not(:disabled) {
+    border-color: var(--brand-primary);
+    transform: translateY(-2px);
+  }
+
+  .question-card:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+  }
+
+  .question-card-selected {
+    border-color: #1CB0F6;
+    background: #DDF4FF;
+  }
+
+  [data-theme='dark'] .question-card-selected {
+    background: rgba(28, 176, 246, 0.15);
+  }
+
+  .question-card-correct {
+    border-color: #58CC02;
+    background: #D7FFB8;
+  }
+
+  [data-theme='dark'] .question-card-correct {
+    background: rgba(88, 204, 2, 0.15);
+  }
+
+  .question-card-wrong {
+    border-color: #FF4B4B;
+    background: #FFDFE0;
+  }
+
+  [data-theme='dark'] .question-card-wrong {
+    background: rgba(255, 75, 75, 0.15);
+  }
+
+  /* Star rating display */
+  .star-display {
+    display: flex;
+    gap: 4px;
+  }
+
+  .star {
+    font-size: 24px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .star-empty {
+    opacity: 0.3;
+    filter: grayscale(1);
+  }
+
+  .star-filled {
+    animation: star-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* XP/Streak badge */
+  .badge-glow {
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .badge-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    filter: blur(10px);
+    opacity: 0.4;
+    z-index: -1;
+  }
 }
 
 /* Operations page blur tuning */
@@ -112,10 +329,12 @@
     transform: scaleY(0.6);
     opacity: 0.6;
   }
+
   50% {
     transform: scaleY(1.4);
     opacity: 1;
   }
+
   100% {
     transform: scaleY(0.7);
     opacity: 0.7;
@@ -128,11 +347,13 @@
 }
 
 @keyframes brightos-boot {
+
   0%,
   100% {
     opacity: 0.4;
     transform: scale(0.9);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.1);
@@ -233,10 +454,11 @@ body {
   overflow-x: hidden;
   font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--bg-primary);
-  background-image: 
+  background-image:
     radial-gradient(800px 600px at 15% 10%, rgba(99, 102, 241, 0.06), transparent 70%),
     radial-gradient(800px 600px at 85% 90%, rgba(45, 212, 191, 0.06), transparent 70%);
-  background-attachment: scroll; /* Changed from fixed for mobile performance */
+  background-attachment: scroll;
+  /* Changed from fixed for mobile performance */
   color: var(--text-primary);
   min-height: 100vh;
   /* Smooth theme transition */
@@ -470,7 +692,8 @@ html {
   border-radius: 20px;
   padding: 24px;
   border: 2px solid var(--border-subtle);
-  border-bottom-width: 5px; /* The 3D effect */
+  border-bottom-width: 5px;
+  /* The 3D effect */
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   display: flex;
@@ -509,7 +732,8 @@ html {
   background: var(--brand-primary);
   color: white;
   border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 5px 0 0 #0284c7; /* Darker blue shade */
+  box-shadow: 0 5px 0 0 #0284c7;
+  /* Darker blue shade */
 }
 
 .duo-btn-primary:hover {
@@ -638,7 +862,9 @@ html {
 }
 
 @keyframes breath {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.82;
   }
@@ -650,7 +876,9 @@ html {
 }
 
 @keyframes aura {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
 
@@ -749,32 +977,78 @@ html {
   width: 150px;
   height: 150px;
   background-image: url('/professor-bright-sprite.png');
-  background-size: 400% 400%; /* 4x4 grid */
+  background-size: 400% 400%;
+  /* 4x4 grid */
   background-repeat: no-repeat;
   display: inline-block;
-  image-rendering: pixelated; /* Optional: keeps it crisp if pixel art */
+  image-rendering: pixelated;
+  /* Optional: keeps it crisp if pixel art */
 }
 
 /* ROW 1 */
-.owl-happy      { background-position: 0% 0%; }
-.owl-relieved   { background-position: 33.3% 0%; }
-.owl-shocked    { background-position: 66.6% 0%; }
-.owl-sad-rain   { background-position: 100% 0%; }
+.owl-happy {
+  background-position: 0% 0%;
+}
+
+.owl-relieved {
+  background-position: 33.3% 0%;
+}
+
+.owl-shocked {
+  background-position: 66.6% 0%;
+}
+
+.owl-sad-rain {
+  background-position: 100% 0%;
+}
 
 /* ROW 2 */
-.owl-thinking   { background-position: 0% 33.3%; }
-.owl-sad-cloud  { background-position: 33.3% 33.3%; }
-.owl-idea       { background-position: 66.6% 33.3%; }
-.owl-smart      { background-position: 100% 33.3%; }
+.owl-thinking {
+  background-position: 0% 33.3%;
+}
+
+.owl-sad-cloud {
+  background-position: 33.3% 33.3%;
+}
+
+.owl-idea {
+  background-position: 66.6% 33.3%;
+}
+
+.owl-smart {
+  background-position: 100% 33.3%;
+}
 
 /* ROW 3 */
-.owl-wink       { background-position: 0% 66.6%; }
-.owl-confused   { background-position: 33.3% 66.6%; }
-.owl-reading    { background-position: 66.6% 66.6%; }
-.owl-studying   { background-position: 100% 66.6%; }
+.owl-wink {
+  background-position: 0% 66.6%;
+}
+
+.owl-confused {
+  background-position: 33.3% 66.6%;
+}
+
+.owl-reading {
+  background-position: 66.6% 66.6%;
+}
+
+.owl-studying {
+  background-position: 100% 66.6%;
+}
 
 /* ROW 4 */
-.owl-sleeping   { background-position: 0% 100%; }
-.owl-magic      { background-position: 33.3% 100%; }
-.owl-zzz        { background-position: 66.6% 100%; }
-.owl-bored      { background-position: 100% 100%; }
+.owl-sleeping {
+  background-position: 0% 100%;
+}
+
+.owl-magic {
+  background-position: 33.3% 100%;
+}
+
+.owl-zzz {
+  background-position: 66.6% 100%;
+}
+
+.owl-bored {
+  background-position: 100% 100%;
+}

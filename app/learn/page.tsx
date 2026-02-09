@@ -3,13 +3,10 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
-import { BrightLayer, BrightHeading, BrightButton } from '@/components/system'
 import { useAuth } from '@/lib/auth-context'
-import { LearningPathNode, SectionHeader, PathConnector, type NodeType, ProfessorBrightMascot, GuidebookModal, type GuidebookObjective } from '@/components/learning'
-import { FeedbackResponse } from '@/lib/professor-bright'
+import { LearningPathNode, PathConnector, DailyTip, type NodeType, GuidebookModal, type GuidebookObjective } from '@/components/learning'
 
 interface SyllabusObjective {
   id: string
@@ -31,28 +28,154 @@ interface LearningModule {
   icon: string
   color: string
   borderColor: string
-  nodeType: NodeType // NEW: Node variant type
-  lastVisited?: string // For maintenance detection
-  mastery?: number // NEW: Mastery score
+  nodeType: NodeType
+  lastVisited?: string
+  mastery?: number
 }
 
-import { Suspense } from 'react'
+// =============================================================================
+// SKELETON LOADER COMPONENT
+// =============================================================================
 
-// Helper to get horizontal offset in pixels for a node index
+function SkeletonNode({ index }: { index: number }) {
+  const offsets = [0, -80, 0, 80]
+  const offset = offsets[index % 4]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: index * 0.05 }}
+      className="flex flex-col items-center my-4"
+      style={{ marginLeft: offset }}
+    >
+      <div className="w-20 h-20 rounded-full skeleton" />
+      <div className="w-16 h-4 rounded-full skeleton mt-3" />
+    </motion.div>
+  )
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="max-w-2xl mx-auto px-6 py-8">
+      {/* Header skeleton */}
+      <div className="text-center mb-12">
+        <div className="w-48 h-10 skeleton mx-auto mb-4" />
+        <div className="w-64 h-5 skeleton mx-auto" />
+      </div>
+
+      {/* Subject filter skeleton */}
+      <div className="flex gap-3 mb-8 overflow-hidden">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="w-28 h-12 skeleton rounded-full flex-shrink-0" />
+        ))}
+      </div>
+
+      {/* Nodes skeleton */}
+      <div className="relative">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <SkeletonNode key={i} index={i} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// =============================================================================
+// STATS BAR COMPONENT
+// =============================================================================
+
+function StatsBar({ userData }: { userData: any }) {
+  const streak = userData?.streak || 0
+  const totalXp = userData?.totalXp || 0
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex justify-center gap-6 mb-8"
+    >
+      {/* Streak */}
+      <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]">
+        <span className="text-2xl">🔥</span>
+        <div>
+          <div className="font-black text-lg text-orange-500">{streak}</div>
+          <div className="text-xs font-bold text-[var(--text-muted)] uppercase">Streak</div>
+        </div>
+      </div>
+
+      {/* XP */}
+      <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]">
+        <span className="text-2xl">⚡</span>
+        <div>
+          <div className="font-black text-lg text-[var(--brand-primary)]">{totalXp.toLocaleString()}</div>
+          <div className="text-xs font-bold text-[var(--text-muted)] uppercase">XP</div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+// =============================================================================
+// SUBJECT FILTER COMPONENT
+// =============================================================================
+
+function SubjectFilter({
+  subjects,
+  selected,
+  onSelect
+}: {
+  subjects: string[]
+  selected: string | null
+  onSelect: (subject: string | null) => void
+}) {
+  if (subjects.length <= 1) return null
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 }}
+      className="relative px-6 mb-8"
+    >
+      <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+        <button
+          onClick={() => onSelect(null)}
+          className={`filter-pill ${selected === null ? 'filter-pill-active' : 'filter-pill-inactive'}`}
+        >
+          All Subjects
+        </button>
+        {subjects.map((subject) => (
+          <button
+            key={subject}
+            onClick={() => onSelect(subject)}
+            className={`filter-pill ${selected === subject ? 'filter-pill-active' : 'filter-pill-inactive'}`}
+          >
+            {subject}
+          </button>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
+// =============================================================================
+// HELPER FUNCTION
+// =============================================================================
+
 const getHorizontalOffset = (index: number, nodeType: NodeType) => {
   if (nodeType === 'boss') return 0
-  if (index % 4 === 1) return -120 // Shifted left
-  if (index % 4 === 3) return 120  // Shifted right
-  return 0 // Centered
+  const pattern = [0, -100, 0, 100]
+  return pattern[index % 4]
 }
+
+// =============================================================================
+// MAIN PAGE COMPONENTS
+// =============================================================================
 
 export default function LearnPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)]"></div>
-      </div>
-    }>
+    <Suspense fallback={<LoadingSkeleton />}>
       <LearnContent />
     </Suspense>
   )
@@ -62,28 +185,26 @@ function LearnContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isMounted, setIsMounted] = useState(false)
-  
+
   useEffect(() => {
     setIsMounted(true)
   }, [])
-  
+
   const shouldAnimateUnlock = isMounted && searchParams?.get('animation') === 'unlock'
   const { user, userData, loading: authLoading } = useAuth()
-
   const onboardingCompleted = userData?.onboardingCompleted === true
 
   const [learningModules, setLearningModules] = useState<LearningModule[]>([])
-  const [mascotFeedback, setMascotFeedback] = useState<FeedbackResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [subjects, setSubjects] = useState<string[]>([])
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
   const [guidebookState, setGuidebookState] = useState<{
-    isOpen: boolean;
-    moduleNumber: number;
-    title: string;
-    objectives: GuidebookObjective[];
-    theme: 'startup' | 'growth' | 'mastery' | 'default';
+    isOpen: boolean
+    moduleNumber: number
+    title: string
+    objectives: GuidebookObjective[]
+    theme: 'startup' | 'growth' | 'mastery' | 'default'
   }>({
     isOpen: false,
     moduleNumber: 1,
@@ -95,7 +216,6 @@ function LearnContent() {
   useEffect(() => {
     if (authLoading) return
     if (!user) {
-      // Redirect if not logged in
       router.push('/')
       return
     }
@@ -105,29 +225,26 @@ function LearnContent() {
     async function fetchLearningPath() {
       try {
         setLoading(true)
-        // Get user's selected subjects from onboarding (prefer Firestore userData; fallback to localStorage)
-        const onboardingData = localStorage.getItem('brighted_onboarding')
 
-        // Fetch progress from server canonical source.
-        // Note: gameplay writes progress into users/{uid}.progress.{objectiveId} (NOT a subcollection).
+        const onboardingData = localStorage.getItem('brighted_onboarding')
         const uid = currentUser.uid
-        const token = await currentUser.getIdToken();
+        const token = await currentUser.getIdToken()
+
         let userProgress: Record<string, any> = {}
         try {
           const progressRes = await fetch(`/api/progress?userId=${uid}`, {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            },
+            headers: { 'Authorization': `Bearer ${token}` },
             cache: 'no-store'
           })
           if (progressRes.ok) {
             const progressJson = await progressRes.json()
-            userProgress = progressJson?.progress && typeof progressJson.progress === 'object' ? progressJson.progress : {}
+            userProgress = progressJson?.progress && typeof progressJson.progress === 'object'
+              ? progressJson.progress
+              : {}
           }
         } catch {
           userProgress = {}
         }
-
 
         let userSubjects: string[] = []
         const firestoreSubjects = userData?.subjects
@@ -138,34 +255,26 @@ function LearnContent() {
           userSubjects = data.subjects || []
         }
 
-        // Fetch learning path with subject separation
-        const params = new URLSearchParams({})
+        const params = new URLSearchParams()
         if (userSubjects.length > 0) params.set('subjects', userSubjects.join(','))
 
         const res = await fetch('/api/learning-path?' + params, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+          headers: { 'Authorization': `Bearer ${token}` }
         })
-
         if (!res.ok) throw new Error('Failed to fetch learning path')
 
         const pathData = await res.json()
-        // ... (rest of logic remains similar)
         const pathsBySubject: { [subject: string]: SyllabusObjective[] } = pathData.paths || {}
 
-        // Get all available subjects
         const availableSubjects = Object.keys(pathsBySubject)
         setSubjects(availableSubjects)
 
-        // If no subject selected, use first available or all
         let currentSubject = selectedSubject
         if (!currentSubject && availableSubjects.length > 0) {
           currentSubject = availableSubjects[0]
           setSelectedSubject(currentSubject)
         }
 
-        // Get objectives for selected subject (or combine all if none selected)
         let objectives: SyllabusObjective[] = []
         if (currentSubject && pathsBySubject[currentSubject]) {
           objectives = pathsBySubject[currentSubject]
@@ -173,105 +282,69 @@ function LearnContent() {
           objectives = Object.values(pathsBySubject).flat()
         }
 
-        if (objectives.length === 0) {
-          // Fallback or empty state
-          console.log("No specific objectives found");
-        }
+        const mappedModules: LearningModule[] = objectives.map((obj, index) => {
+          const style = getSubjectStyle(getSubjectFromSourceFile(obj.source_file))
+          const progress = userProgress[obj.id]
+          const prevObj = index > 0 ? objectives[index - 1] : null
+          const prevProgress = prevObj ? userProgress[prevObj.id] : null
+          const stars = progress?.stars ?? 0
+          const prevStars = prevProgress?.stars ?? 0
 
-        // Transform to UI format
-        const mappedModules: LearningModule[] = objectives
-          .map((obj, index) => {
-            const style = getSubjectStyle(getSubjectFromSourceFile(obj.source_file))
-            const progress = userProgress[obj.id]
-            const prevObj = index > 0 ? objectives[index - 1] : null
-            const prevProgress = prevObj ? userProgress[prevObj.id] : null
+          const subjectName = getSubjectFromSourceFile(obj.source_file)
+          const isProgressEmpty = Object.keys(userProgress).length === 0
 
-            const stars = progress?.stars ?? 0
-            const prevStars = prevProgress?.stars ?? 0
+          let title = obj.objective || 'Untitled Objective'
+          title = title.replace(/\(.*?mark.*?\)/gi, '').trim()
+          title = title.replace(/^[•\-\*]\s*/, '').trim()
 
-            // Calculate progress from mastery (0.1-10.0 scale -> 0-100%)
-            const subjectName = getSubjectFromSourceFile(obj.source_file)
-            const masteryProgress = userData?.subjectProgress?.[subjectName] || 0
-            const progressPercentage = Math.min(100, Math.round((masteryProgress / 10.0) * 100))
+          if (isProgressEmpty && index === 0) {
+            title = "Module 1: Orientation"
+          }
+          if (title.length > 50) title = title.substring(0, 47) + '...'
+          if (title.length === 0) title = `Objective ${obj.id}`
 
-            const isProgressEmpty = Object.keys(userProgress).length === 0;
-            let title = obj.objective || 'Untitled Objective'
-            title = title.replace(/\(.*?mark.*?\)/gi, '').trim()
-            title = title.replace(/^[•\-\*]\s*/, '').trim()
+          let status: LearningModule['status'] = 'locked'
+          if (index === 0) {
+            status = stars >= 3 ? 'completed' : 'current'
+          } else if (prevStars >= 3) {
+            status = stars >= 3 ? 'completed' : 'current'
+          }
 
-            if (isProgressEmpty && index === 0) {
-              title = "Module 1: Orientation";
+          let nodeType: NodeType = 'standard'
+          if ((index + 1) % 5 === 0) {
+            nodeType = 'boss'
+          } else if (obj.difficulty >= 3 && Math.random() < 0.15) {
+            nodeType = 'crisis'
+          } else if (
+            obj.content?.toLowerCase().includes('rapid') ||
+            obj.content?.toLowerCase().includes('speed') ||
+            Math.random() < 0.1
+          ) {
+            nodeType = 'crunch'
+          } else if (status === 'completed' && progress?.lastVisited) {
+            const daysSinceVisit = Math.floor(
+              (Date.now() - new Date(progress.lastVisited).getTime()) / (1000 * 60 * 60 * 24)
+            )
+            if (daysSinceVisit >= 3) {
+              nodeType = 'maintenance'
             }
+          }
 
-            if (title.length > 50) title = title.substring(0, 47) + '...'
-            if (title.length === 0) title = `Objective ${obj.id}`
-
-            let status: LearningModule['status'] = 'locked'
-
-            if (index === 0) {
-              status = stars >= 3 ? 'completed' : 'current'
-            } else if (prevStars >= 3) {
-              status = stars >= 3 ? 'completed' : 'current'
-            }
-
-            // Determine node type for Career Roadmap visualization
-            let nodeType: NodeType = 'standard'
-
-            // Boss node every 5th position (indices 4, 9, 14, etc.)
-            if ((index + 1) % 5 === 0) {
-              nodeType = 'boss'
-            }
-            // Crisis node for high difficulty objectives (randomly 15% chance)
-            else if (obj.difficulty >= 3 && Math.random() < 0.15) {
-              nodeType = 'crisis'
-            }
-            // Crunch node based on keywords or random 10% chance
-            else if (
-              obj.content?.toLowerCase().includes('rapid') ||
-              obj.content?.toLowerCase().includes('speed') ||
-              Math.random() < 0.1
-            ) {
-              nodeType = 'crunch'
-            }
-            // Maintenance node for completed nodes not visited in 3+ days
-            else if (status === 'completed' && progress?.lastVisited) {
-              const daysSinceVisit = Math.floor(
-                (Date.now() - new Date(progress.lastVisited).getTime()) / (1000 * 60 * 60 * 24)
-              )
-              if (daysSinceVisit >= 3) {
-                nodeType = 'maintenance'
-              }
-            }
-
-            return {
-              id: obj.id,
-              title,
-              subject: getSubjectFromSourceFile(obj.source_file),
-              level: obj.difficulty || 1,
-              status,
-              stars,
-              mastery: progress?.mastery || 0, // Pass mastery (default to 0 if missing)
-              nodeType,
-              lastVisited: progress?.lastVisited,
-              ...style
-            }
-          })
-
+          return {
+            id: obj.id,
+            title,
+            subject: getSubjectFromSourceFile(obj.source_file),
+            level: obj.difficulty || 1,
+            status,
+            stars,
+            mastery: progress?.mastery || 0,
+            nodeType,
+            lastVisited: progress?.lastVisited,
+            ...style
+          }
+        })
 
         setLearningModules(mappedModules)
-
-        // Mascot Greeting Logic
-        const completedCount = mappedModules.filter(m => m.status === 'completed').length
-        setTimeout(() => {
-          setMascotFeedback({
-            tone: completedCount > 5 ? 'celebratory' : 'encouraging',
-            message: completedCount > 0
-              ? `You've conquered ${completedCount} missions! Use that knowledge wisely.`
-              : "Every master was once a beginner. Start your first mission!",
-            emoji: completedCount > 0 ? '🦉' : '🗺️',
-            spriteClass: completedCount > 5 ? 'owl-happy' : 'owl-neutral'
-          })
-        }, 800)
       } catch (err) {
         console.error("Error fetching learning path:", err)
         setError(err instanceof Error ? err.message : 'Failed to load learning path.')
@@ -283,247 +356,184 @@ function LearnContent() {
     fetchLearningPath()
   }, [selectedSubject, user, userData, authLoading, router])
 
+  const handleResetProgress = async () => {
+    if (!confirm('Are you sure you want to reset your learning progress? This cannot be undone.')) {
+      return
+    }
+
+    try {
+      if (!user) throw new Error('Not authenticated')
+      const token = await user.getIdToken()
+      await fetch(`/api/progress?userId=${user.uid}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      window.location.reload()
+    } catch (e) {
+      alert('Failed to reset progress')
+      console.error(e)
+    }
+  }
+
+  // Loading state
+  if (loading) {
+    return <LoadingSkeleton />
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center max-w-md p-8 rounded-3xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]"
+        >
+          <div className="text-6xl mb-4">😅</div>
+          <h2 className="text-2xl font-black mb-2 text-[var(--text-primary)]">Oops!</h2>
+          <p className="text-[var(--text-secondary)] mb-6">{error}</p>
+          {!onboardingCompleted ? (
+            <Link href="/welcome" className="duo-btn duo-btn-primary">
+              Complete Onboarding
+            </Link>
+          ) : (
+            <button
+              onClick={() => window.location.reload()}
+              className="duo-btn duo-btn-primary"
+            >
+              Try Again
+            </button>
+          )}
+        </motion.div>
+      </div>
+    )
+  }
+
+  // Empty state
+  if (learningModules.length === 0) {
+    return (
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center max-w-md p-8 rounded-3xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)]"
+        >
+          <div className="text-6xl mb-4">📚</div>
+          <h2 className="text-2xl font-black mb-2 text-[var(--text-primary)]">No Lessons Yet</h2>
+          <p className="text-[var(--text-secondary)] mb-6">Complete your onboarding to start learning!</p>
+          <Link href="/welcome" className="duo-btn duo-btn-primary">
+            Get Started
+          </Link>
+        </motion.div>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen min-h-[100dvh] bg-[var(--bg-primary)] pb-24 md:pb-24 relative overflow-hidden safe-padding">
-      {/* Background Decor */}
-      <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-[var(--brand-primary)]/5 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-[var(--brand-secondary)]/5 rounded-full blur-[80px] pointer-events-none" />
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden">
+      {/* Gradient Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-primary)]/5 via-transparent to-transparent" />
+      </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6 md:py-8 relative z-10">
-
-        {/* Header Area */}
-        <div className="text-center mb-10">
-          <BrightHeading level={1} className="mb-2">
-            Learning Path
-          </BrightHeading>
-          <p className="text-[var(--text-secondary)] font-medium">Your personalized journey to CXC success</p>
-        </div>
-
-        {/* Subject Filter - Improved Horizontal Scroll */}
-        {subjects.length > 1 && (
-          <div className="mb-8 -mx-4 overflow-hidden">
-            <div className="overflow-x-auto no-scrollbar touch-pan-x px-4 pb-6">
-              <div className="flex gap-4 items-center min-w-max pr-12">
-                <button
-                  onClick={(e) => {
-                    setSelectedSubject(null);
-                    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }}
-                  className={`
-                    whitespace-nowrap px-6 py-4 rounded-2xl font-black tracking-wide transition-all border-b-4 
-                    active:border-b-0 active:translate-y-[4px] flex-shrink-0
-                    ${selectedSubject === null
-                      ? 'bg-[#1cb0f6] border-[#1899d6] text-white shadow-lg'
-                      : 'bg-[#1a1c1e] border-[#2f3336] text-[#afafaf] hover:bg-[#25282b]'
-                    }
-                  `}
-                >
-                  All Subjects
-                </button>
-                {subjects.map((subject) => (
-                  <button
-                    key={subject}
-                    onClick={(e) => {
-                      setSelectedSubject(subject);
-                      e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }}
-                    className={`
-                      whitespace-nowrap px-6 py-4 rounded-2xl font-black tracking-wide transition-all border-b-4 
-                      active:border-b-0 active:translate-y-[4px] flex-shrink-0
-                      ${selectedSubject === subject
-                        ? 'bg-[#1cb0f6] border-[#1899d6] text-white shadow-lg'
-                        : 'bg-[#1a1c1e] border-[#2f3336] text-[#afafaf] hover:bg-[#25282b]'
-                      }
-                    `}
-                  >
-                    {subject}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Path Container */}
-        <div className="relative flex flex-col items-center">
-
-          {loading && (
-            <div className="text-center py-10">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-primary)] mx-auto"></div>
-              <p className="mt-4 text-[var(--text-secondary)]">Loading your personalized path...</p>
-            </div>
-          )}
-
-          {error && (
-            <BrightLayer variant="elevated" className="border-l-4 border-l-red-500 text-center max-w-md">
-              <p className="text-red-500 font-bold mb-4">{error}</p>
-              {!onboardingCompleted ? (
-                <Link href="/welcome" className="block w-full">
-                  <BrightButton size="md" variant="primary" className="w-full">
-                    Complete Onboarding
-                  </BrightButton>
-                </Link>
-              ) : (
-                <BrightButton
-                  size="md"
-                  variant="primary"
-                  className="w-full"
-                  onClick={() => window.location.reload()}
-                >
-                  Retry
-                </BrightButton>
-              )}
-            </BrightLayer>
-          )}
-
-          {!loading && !error && learningModules.length === 0 && (
-            <div className="text-center py-10">
-              <p className="text-[var(--text-secondary)] mb-4">No learning objectives available.</p>
-              {subjects.length === 0 && !onboardingCompleted ? (
-                <Link href="/welcome" className="text-[var(--brand-primary)] hover:underline font-black">
-                  Complete onboarding to get started
-                </Link>
-              ) : (
-                <div className="flex flex-col gap-4 items-center">
-                  <p className="text-sm text-[var(--text-muted)]">Check another subject above or try resetting.</p>
-                  <BrightButton
-                    size="sm"
-                    variant="outline"
-                    onClick={() => window.location.reload()}
-                  >
-                    Refresh
-                  </BrightButton>
-                </div>
-              )}
-            </div>
-          )}
-
-          {!loading && !error && learningModules.map((module, index) => {
-            // Check if this is the module to animate unlocking
-            const isUnlocking = shouldAnimateUnlock && module.status === 'current' && index > 0;
-            const isNext = module.status === 'current' || (module.status === 'locked' && index > 0 && learningModules[index - 1].status === 'completed');
-
-            // Find offsets for pathing
-            const currentOffset = getHorizontalOffset(index, module.nodeType);
-            const nextModule = index < learningModules.length - 1 ? learningModules[index + 1] : null;
-            const nextOffset = nextModule ? getHorizontalOffset(index + 1, nextModule.nodeType) : 0;
-
-            // Section Header every 5 modules
-            const showHeader = index % 5 === 0;
-            const moduleNum = Math.floor(index / 5) + 1;
-            const headerTheme = moduleNum === 1 ? 'startup' : moduleNum === 2 ? 'growth' : moduleNum === 3 ? 'mastery' : 'default';
-
-            return (
-              <div key={module.id} className="w-full flex flex-col items-center">
-                {/* Section Header */}
-                {showHeader && (
-                  <SectionHeader
-                    moduleNumber={moduleNum}
-                    title={moduleNum === 1 ? "The Startup Phase" : moduleNum === 2 ? "Growth & Scaling" : "Market Dominance"}
-                    theme={headerTheme}
-                    onOpenGuidebook={() => {
-                      // Get all objectives for this section (current index to next 5)
-                      const sectionModules = learningModules.slice(index, index + 5);
-                      const sectionObjectives: GuidebookObjective[] = sectionModules.map(m => ({
-                        id: String(m.id),
-                        objective: m.title,
-                        content: m.subject // Using subject or some other field as content for now
-                      }));
-
-                      setGuidebookState({
-                        isOpen: true,
-                        moduleNumber: moduleNum,
-                        title: moduleNum === 1 ? "The Startup Phase" : moduleNum === 2 ? "Growth & Scaling" : "Market Dominance",
-                        objectives: sectionObjectives,
-                        theme: headerTheme
-                      });
-                    }}
-                  />
-                )}
-
-                {/* Node Component with Floating Mascot for Current Node */}
-                <div className="relative">
-                  <LearningPathNode
-                    {...module}
-                    id={String(module.id)}
-                    index={index}
-                    isUnlocking={isUnlocking}
-                  />
-
-                  {/* Floating Mascot (Professor Bright) on current node */}
-                  {module.status === 'current' && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 0 }}
-                      animate={{ opacity: 1, x: 120 }}
-                      className="absolute top-[-20%] right-[-40%] z-20 pointer-events-none hidden md:block"
-                    >
-                      <motion.div
-                        animate={{ y: [0, -10, 0], rotate: [0, -2, 2, 0] }}
-                        transition={{
-                          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                          rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                        }}
-                      >
-                        <ProfessorBrightMascot
-                          feedback={{
-                            tone: 'encouraging',
-                            message: "Keep going!",
-                            emoji: '🦉',
-                            spriteClass: 'owl-happy'
-                          }}
-                          mini
-                        />
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </div>
-
-                {/* Connector Path (if not last) */}
-                {index < learningModules.length - 1 && (
-                  <PathConnector
-                    fromIndex={index}
-                    isCompleted={module.status === 'completed'}
-                    isNext={isNext}
-                    fromOffset={currentOffset}
-                    toOffset={nextOffset}
-                  />
-                )}
-              </div>
-            )
-          })}
-        </div>
-
-
-        {/* Development Tools */}
-        <div className="mt-20 border-t border-[var(--border-subtle)] pt-10 text-center">
-          <p className="text-[var(--text-muted)] text-xs uppercase tracking-widest mb-4">Reset Learning Map?</p>
-          <BrightButton
-            variant="danger"
-            size="sm"
-            onClick={async () => {
-              if (confirm('Are you sure you want to reset your learning progress? This cannot be undone.')) {
-                try {
-                  const token = await user?.getIdToken();
-                  await fetch(`/api/progress?userId=${user?.uid}`, {
-                    method: 'DELETE',
-                    headers: {
-                      'Authorization': `Bearer ${token}`
-                    }
-                  });
-                  window.location.reload();
-                } catch (e) {
-                  alert('Failed to reset progress');
-                }
-              }
-            }}
+      {/* Header */}
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative pt-8 pb-4 px-6"
+      >
+        <div className="max-w-2xl mx-auto text-center">
+          <motion.h1
+            className="text-4xl md:text-5xl font-black mb-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
           >
-            Reset Learning Map
-          </BrightButton>
+            <span className="text-gradient">Learning Path</span>
+          </motion.h1>
+          <motion.p
+            className="text-[var(--text-secondary)] text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Your personalized journey to CXC success
+          </motion.p>
+        </div>
+      </motion.header>
+
+      {/* Stats Bar */}
+      <StatsBar userData={userData} />
+
+      {/* Subject Filter */}
+      <SubjectFilter
+        subjects={subjects}
+        selected={selectedSubject}
+        onSelect={setSelectedSubject}
+      />
+
+      {/* Daily Tip */}
+      <div className="relative px-6 mb-8">
+        <div className="max-w-2xl mx-auto">
+          <DailyTip />
         </div>
       </div>
 
-      {/* Professor Bright Mascot */}
-      <ProfessorBrightMascot feedback={mascotFeedback} webMode={true} />
+      {/* Learning Path */}
+      <div className="relative max-w-2xl mx-auto px-6 pb-32 flex flex-col items-center w-full">
+        {learningModules.map((module, index) => {
+          const isUnlocking = shouldAnimateUnlock && module.status === 'current' && index > 0
+          const isNext = module.status === 'current' ||
+            (module.status === 'locked' && index > 0 && learningModules[index - 1].status === 'completed')
+
+          const currentOffset = getHorizontalOffset(index, module.nodeType)
+          const nextModule = index < learningModules.length - 1 ? learningModules[index + 1] : null
+          const nextOffset = nextModule ? getHorizontalOffset(index + 1, nextModule.nodeType) : 0
+
+          return (
+            <div
+              key={module.id}
+              className="relative flex flex-col items-center z-10 w-full min-h-[160px]"
+              style={{ transform: `translateX(${currentOffset}px)` }}
+            >
+              <LearningPathNode
+                {...module}
+                id={String(module.id)}
+                index={index}
+                isUnlocking={isUnlocking}
+              />
+
+              {/* Path Connector */}
+              {index < learningModules.length - 1 && (
+                <PathConnector
+                  fromIndex={index}
+                  fromOffset={currentOffset}
+                  toOffset={nextOffset}
+                  isCompleted={module.status === 'completed'}
+                  isNext={isNext}
+                />
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Reset Progress Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <details className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl">
+          <summary className="px-4 py-2 cursor-pointer text-sm font-bold text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+            ⚙️ Options
+          </summary>
+          <div className="p-4 border-t border-[var(--border-subtle)]">
+            <button
+              onClick={handleResetProgress}
+              className="text-sm font-bold text-red-500 hover:text-red-400"
+            >
+              Reset Progress
+            </button>
+          </div>
+        </details>
+      </div>
 
       {/* Guidebook Modal */}
       <GuidebookModal

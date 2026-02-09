@@ -26,7 +26,7 @@ const THEME_COLORS = {
     default: '#1cb0f6'
 }
 
-export function GuidebookModal({
+export default function GuidebookModal({
     isOpen,
     onClose,
     moduleNumber,
