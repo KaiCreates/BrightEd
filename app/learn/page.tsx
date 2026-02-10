@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useEffect, useState, Suspense } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
 import { useAuth } from '@/lib/auth-context'
-import { LearningPathNode, PathConnector, DailyTip, type NodeType, GuidebookModal, type GuidebookObjective } from '@/components/learning'
+import { LearningPathNode, DailyTip, type NodeType, GuidebookModal, type GuidebookObjective } from '@/components/learning'
 import MascotIllustration, { type MascotEmotion } from '@/components/learning/MascotIllustration'
 
 interface SyllabusObjective {
@@ -179,9 +179,9 @@ const seededRandom = (id: string, salt: number): number => {
 const getHorizontalOffset = (index: number, nodeType: NodeType) => {
   if (nodeType === 'boss') return 0
   // Sine wave distribution for a smoother "winding" road
-  // Reduced amplitude from 120 to 90 to prevent overflow on small screens
-  const amplitude = 90
-  const phase = (index * Math.PI) / 2
+  // Using 100 amplitude for better visual flow while staying within bounds
+  const amplitude = 100
+  const phase = (index * Math.PI) / 2.5 // Slightly offset phase for natural winding
   return Math.sin(phase) * amplitude
 }
 
@@ -501,15 +501,11 @@ function LearnContent() {
       </div>
 
       {/* Learning Path */}
-      <div className="relative max-w-2xl mx-auto px-6 pb-32 flex flex-col items-center w-full">
+      <div className="relative max-w-3xl mx-auto px-6 pb-32 flex flex-col items-center w-full">
         {learningModules.map((module, index) => {
           const isUnlocking = shouldAnimateUnlock && module.status === 'current' && index > 0
-          const isNext = module.status === 'current' ||
-            (module.status === 'locked' && index > 0 && learningModules[index - 1].status === 'completed')
 
           const currentOffset = getHorizontalOffset(index, module.nodeType)
-          const nextModule = index < learningModules.length - 1 ? learningModules[index + 1] : null
-          const nextOffset = nextModule ? getHorizontalOffset(index + 1, nextModule.nodeType) : 0
 
           // Determine if we should show a mascot near this node
           // Show every 4 nodes, alternating sides
@@ -520,7 +516,7 @@ function LearnContent() {
           return (
             <div
               key={module.id}
-              className="relative flex flex-col items-center z-10 w-full min-h-[160px]"
+              className="relative flex flex-col items-center z-10 w-full min-h-[180px]"
             >
               {/* Mascot Decoration */}
               {showMascot && (
@@ -545,16 +541,7 @@ function LearnContent() {
                 />
               </div>
 
-              {/* Path Connector */}
-              {index < learningModules.length - 1 && (
-                <PathConnector
-                  fromIndex={index}
-                  fromOffset={currentOffset}
-                  toOffset={nextOffset}
-                  isCompleted={module.status === 'completed'}
-                  isNext={isNext}
-                />
-              )}
+
             </div>
           )
         })}

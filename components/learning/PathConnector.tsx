@@ -19,9 +19,9 @@ export default function PathConnector({
     toOffset
 }: PathConnectorProps) {
     // Fixed constants for alignment
-    const width = 300;
-    const center = width / 2; // 150
-    const height = 160; // Fixed height to match container spacing
+    const width = 400;
+    const center = width / 2; // 200
+    const height = 140; // Increased height for better connection
 
     // Calculate start and end X coordinates relative to the svg center
     // The SVG is centered on the current node (offset handled by parent)
@@ -29,10 +29,10 @@ export default function PathConnector({
     const startX = center;
     const endX = center + diff;
 
-    // Bezier curve control points
+    // Bezier curve control points - adjusted for smoother S-curve
     // We want a smooth S-curve that starts vertical and ends vertical
-    const cp1y = height * 0.5;
-    const cp2y = height * 0.5;
+    const cp1y = height * 0.3;
+    const cp2y = height * 0.7;
 
     const pathData = `M ${startX} 0 
                       C ${startX} ${cp1y}, 
@@ -46,7 +46,7 @@ export default function PathConnector({
 
     return (
         <div
-            className="absolute top-[48px] left-1/2 -ml-[150px] w-[300px] -z-10 pointer-events-none"
+            className="absolute top-[60px] left-1/2 -translate-x-1/2 w-[400px] -z-10 pointer-events-none"
             style={{ height: `${height}px` }}
         >
             <svg
@@ -59,42 +59,66 @@ export default function PathConnector({
             >
                 <defs>
                     <linearGradient id={`roadGradientDefault-${fromIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#e2e8f0" />
-                        <stop offset="100%" stopColor="#cbd5e1" />
+                        <stop offset="0%" stopColor="#94a3b8" />
+                        <stop offset="50%" stopColor="#cbd5e1" />
+                        <stop offset="100%" stopColor="#e2e8f0" />
                     </linearGradient>
                     <linearGradient id={`roadGradientCompleted-${fromIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stopColor="#58cc02" />
-                        <stop offset="100%" stopColor="#46a302" />
+                        <stop offset="50%" stopColor="#46a302" />
+                        <stop offset="100%" stopColor="#2d6a01" />
                     </linearGradient>
                 </defs>
+
+                {/* Glow effect for completed paths */}
+                {isCompleted && (
+                    <path
+                        d={pathData}
+                        stroke="rgba(88, 204, 2, 0.3)"
+                        strokeWidth="24"
+                        strokeLinecap="round"
+                        fill="none"
+                        filter="blur(4px)"
+                    />
+                )}
 
                 {/* Outer Shadow/Path Border */}
                 <path
                     d={pathData}
-                    stroke={isCompleted ? "#2d6a01" : "#cbd5e1"}
-                    strokeWidth="20"
+                    stroke={isCompleted ? "#1a4d00" : "#64748b"}
+                    strokeWidth="18"
                     strokeLinecap="round"
                     fill="none"
-                    opacity="0.3"
+                    opacity="0.4"
                 />
 
                 {/* Main Surface */}
                 <path
                     d={pathData}
                     stroke={roadGradient}
-                    strokeWidth="16"
+                    strokeWidth="14"
                     strokeLinecap="round"
                     fill="none"
                 />
 
-                {/* Inner Border/Highlight */}
+                {/* Inner Highlight line */}
                 <path
                     d={pathData}
-                    stroke="rgba(255,255,255,0.3)"
-                    strokeWidth="4"
+                    stroke="rgba(255,255,255,0.5)"
+                    strokeWidth="3"
                     strokeLinecap="round"
                     fill="none"
-                    transform="translate(0, -2)"
+                    transform="translate(0, -3)"
+                />
+
+                {/* Bottom shadow line */}
+                <path
+                    d={pathData}
+                    stroke="rgba(0,0,0,0.1)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                    transform="translate(0, 3)"
                 />
 
                 {/* Animation for next path */}
@@ -102,14 +126,14 @@ export default function PathConnector({
                     <motion.path
                         d={pathData}
                         stroke="#ffffff"
-                        strokeWidth="4"
+                        strokeWidth="5"
                         strokeLinecap="round"
-                        strokeDasharray="1 12"
+                        strokeDasharray="8 12"
                         fill="none"
                         initial={{ strokeDashoffset: 0 }}
-                        animate={{ strokeDashoffset: -24 }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                        filter="drop-shadow(0 0 4px white)"
+                        animate={{ strokeDashoffset: -40 }}
+                        transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                        filter="drop-shadow(0 0 6px rgba(255,255,255,0.8))"
                     />
                 )}
             </svg>

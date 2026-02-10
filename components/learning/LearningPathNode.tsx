@@ -151,11 +151,11 @@ export default function LearningPathNode({
                         className={`
                             relative p-6 rounded-3xl border-2 transition-all
                             ${isLocked
-                                ? 'bg-[var(--bg-secondary)] border-[var(--border-subtle)] opacity-50'
+                                ? 'bg-slate-700/80 border-slate-500 shadow-[0_4px_0_#475569]'
                                 : `bg-gradient-to-br ${config.gradient} border-transparent shadow-[0_8px_0_${config.shadowColor}]`
                             }
                         `}
-                        style={{ boxShadow: !isLocked ? `0 8px 0 ${config.shadowColor}` : undefined }}
+                        style={{ boxShadow: !isLocked ? `0 8px 0 ${config.shadowColor}` : '0 4px 0 #475569' }}
                     >
                         <div className="flex items-center gap-4">
                             {/* Trophy Icon */}
@@ -175,7 +175,7 @@ export default function LearningPathNode({
                                         </span>
                                     )}
                                 </div>
-                                <h3 className={`font-black text-lg ${isLocked ? 'text-[var(--text-muted)]' : 'text-white'}`}>
+                                <h3 className={`font-black text-lg ${isLocked ? 'text-slate-300' : 'text-white'}`}>
                                     {title}
                                 </h3>
                                 {!isLocked && <StarDisplay earned={stars} />}
@@ -244,7 +244,7 @@ export default function LearningPathNode({
                     className={`
                         relative w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all
                         ${isLocked
-                            ? 'bg-[var(--bg-secondary)] border-4 border-[var(--border-subtle)]'
+                            ? 'bg-slate-700/80 border-4 border-slate-500 shadow-[0_4px_0_#475569,inset_0_2px_0_rgba(255,255,255,0.1)]'
                             : `bg-gradient-to-b ${config.gradient} border-t-2 border-white/40 shadow-inner`
                         }
                         ${isCurrent ? 'ring-4 ring-white/30 ring-offset-2 ring-offset-[var(--bg-primary)]' : ''}
@@ -252,7 +252,7 @@ export default function LearningPathNode({
                     style={{
                         boxShadow: !isLocked
                             ? `0 8px 0 ${config.shadowColor}, inset 0 -4px 0 rgba(0,0,0,0.2)`
-                            : undefined
+                            : '0 4px 0 #475569, inset 0 2px 0 rgba(255,255,255,0.1)'
                     }}
                 >
                     {/* Gloss Reflection */}
@@ -260,8 +260,13 @@ export default function LearningPathNode({
                         <div className="absolute top-2 left-3 right-3 h-4 bg-white/20 rounded-full blur-[2px]" />
                     )}
 
+                    {/* Subtle shine for locked nodes */}
+                    {isLocked && (
+                        <div className="absolute top-2 left-4 right-4 h-3 bg-white/10 rounded-full blur-[1px]" />
+                    )}
+
                     {/* Icon */}
-                    <span className={`drop-shadow-lg ${isLocked ? 'grayscale opacity-50' : ''}`}>
+                    <span className={`drop-shadow-lg transition-all duration-300 ${isLocked ? 'opacity-70 grayscale-[0.3]' : ''}`}>
                         {isCompleted ? '✓' : isLocked ? '🔒' : icon || config.icon}
                     </span>
 
