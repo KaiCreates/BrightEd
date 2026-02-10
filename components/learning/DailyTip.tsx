@@ -68,7 +68,7 @@ export default function DailyTip({ className = "" }: DailyTipProps) {
         const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000)
         const tipIndex = dayOfYear % DAILY_TIPS.length
         setCurrentTip(DAILY_TIPS[tipIndex])
-        
+
         // Animate in after a short delay
         const timer = setTimeout(() => setIsVisible(true), 500)
         return () => clearTimeout(timer)
@@ -85,32 +85,32 @@ export default function DailyTip({ className = "" }: DailyTipProps) {
         >
             {/* Gradient Background */}
             <div className={`absolute inset-0 bg-gradient-to-br ${currentTip.color} opacity-10`} />
-            
+
             {/* Content */}
-            <div className="relative p-6 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-white/20 dark:border-slate-700/20">
+            <div className="relative p-6 bg-[var(--bg-elevated)] backdrop-blur-sm border border-[var(--border-subtle)]">
                 {/* Header */}
                 <div className="flex items-center gap-3 mb-3">
                     <span className="text-3xl">{currentTip.emoji}</span>
                     <div>
-                        <h3 className="font-bold text-sm uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                        <h3 className="font-bold text-sm uppercase tracking-wider text-[var(--text-secondary)]">
                             Daily Tip
                         </h3>
-                        <p className="text-xs font-medium text-slate-500 dark:text-slate-500">
+                        <p className="text-xs font-medium text-[var(--text-muted)]">
                             {currentTip.category}
                         </p>
                     </div>
                 </div>
-                
+
                 {/* Tip Content */}
-                <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+                <p className="text-[var(--text-primary)] font-medium leading-relaxed">
                     {currentTip.tip}
                 </p>
-                
+
                 {/* Decorative Elements */}
                 <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${currentTip.color} opacity-20 rounded-full blur-2xl transform translate-x-10 -translate-y-10`} />
                 <div className={`absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr ${currentTip.color} opacity-15 rounded-full blur-xl transform -translate-x-8 translate-y-8`} />
             </div>
-            
+
             {/* Hover Effect */}
             <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"

@@ -1,61 +1,47 @@
+
 # =====================
 # Build Stage
 # =====================
-FROM golang:1.22-alpine AS builder
-
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Install git for fetching dependencies
-RUN apk add --no-cache git ca-certificates
-
-# Copy go module files
-COPY go.mod go.sum ./
-
-# Download dependencies
-RUN go mod download
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Copy source code
 COPY . .
 
-# Build the binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /brighted .
+# Build the application
+# This will generate the .next/standalone folder because output: 'standalone' is in next.config.js
+RUN npm run build
 
 # =====================
 # Production Stage
 # =====================
-FROM alpine:3.19
-
+FROM node:18-alpine AS runner
 WORKDIR /app
 
-# Install ca-certificates for HTTPS
-RUN apk add --no-cache ca-certificates tzdata
+ENV NODE_ENV=production
+ENV PORT=4000
+ENV HOSTNAME="0.0.0.0"
 
-# Create non-root user
-RUN adduser -D -g '' appuser
+# Don't run as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Copy binary from builder
-COPY --from=builder /brighted /app/brighted
+# Copy the standalone build
+# This includes the server and the necessary dependencies
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 
-# Copy static files and templates
-COPY templates/ /app/templates/
-COPY public/ /app/public/
-COPY syllabuses/ /app/syllabuses/
+# CRITICAL: Copy static assets
+# standalone build does NOT include public or .next/static folders by default
+# verification: these COPY commands fix the MIME type/404 errors
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy logo
-COPY BrightEdLogo.png /app/BrightEdLogo.png
+USER nextjs
 
-# Set ownership
-RUN chown -R appuser:appuser /app
-
-# Switch to non-root user
-USER appuser
-
-# Expose port
 EXPOSE 4000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:4000/ || exit 1
-
-# Run the binary
-CMD ["/app/brighted"]
+CMD ["node", "server.js"]

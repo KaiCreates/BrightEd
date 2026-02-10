@@ -3,8 +3,8 @@
 import { useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter } from 'next/navigation';
-import Duolingo from '@/components//Duolingo';
+import LandingDuolingo from '@/components/landing/LandingDuolingo';
 
 export default function RootPage() {
-  return <Duolingo />;
+  return <LandingDuolingo />;
 }

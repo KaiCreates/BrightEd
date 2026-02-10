@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
     }
 
     const msg = e?.message || 'Failed to update profile'
-    const status = msg.startsWith('Unauthorized') ? 401 : 500
+    const status = (e?.name === 'AuthError' || msg.startsWith('Unauthorized')) ? 401 : 500
     return NextResponse.json({ error: msg }, { status })
   }
 }

@@ -28,7 +28,7 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 function checkRateLimit(identifier: string): { allowed: boolean; remaining: number; resetTime: number } {
   const now = Date.now();
   const record = rateLimitStore.get(identifier);
-  
+
   if (!record || now > record.resetTime) {
     // Create new record
     rateLimitStore.set(identifier, {
@@ -37,11 +37,11 @@ function checkRateLimit(identifier: string): { allowed: boolean; remaining: numb
     });
     return { allowed: true, remaining: rateLimitConfig.maxRequests - 1, resetTime: now + rateLimitConfig.windowMs };
   }
-  
+
   if (record.count >= rateLimitConfig.maxRequests) {
     return { allowed: false, remaining: 0, resetTime: record.resetTime };
   }
-  
+
   record.count++;
   rateLimitStore.set(identifier, record);
   return { allowed: true, remaining: rateLimitConfig.maxRequests - record.count, resetTime: record.resetTime };
@@ -67,44 +67,44 @@ function getCspHeaderValue(isDevelopment: boolean): string {
     'default-src': ["'self'"],
     'script-src': isDevelopment
       ? [
-          "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          'https://*.firebaseio.com',
-          'https://www.googletagmanager.com',
-          'https://apis.google.com',
-          'https://accounts.google.com',
-          'https://www.gstatic.com',
-        ]
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        'https://*.firebaseio.com',
+        'https://www.googletagmanager.com',
+        'https://apis.google.com',
+        'https://accounts.google.com',
+        'https://www.gstatic.com',
+      ]
       : [
-          "'self'",
-          "'unsafe-inline'",
-          'https://*.firebaseio.com',
-          'https://www.googletagmanager.com',
-          'https://apis.google.com',
-          'https://accounts.google.com',
-          'https://www.gstatic.com',
-        ],
+        "'self'",
+        "'unsafe-inline'",
+        'https://*.firebaseio.com',
+        'https://www.googletagmanager.com',
+        'https://apis.google.com',
+        'https://accounts.google.com',
+        'https://www.gstatic.com',
+      ],
     'script-src-elem': isDevelopment
       ? [
-          "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          'https://*.firebaseio.com',
-          'https://www.googletagmanager.com',
-          'https://apis.google.com',
-          'https://accounts.google.com',
-          'https://www.gstatic.com',
-        ]
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        'https://*.firebaseio.com',
+        'https://www.googletagmanager.com',
+        'https://apis.google.com',
+        'https://accounts.google.com',
+        'https://www.gstatic.com',
+      ]
       : [
-          "'self'",
-          "'unsafe-inline'",
-          'https://*.firebaseio.com',
-          'https://www.googletagmanager.com',
-          'https://apis.google.com',
-          'https://accounts.google.com',
-          'https://www.gstatic.com',
-        ],
+        "'self'",
+        "'unsafe-inline'",
+        'https://*.firebaseio.com',
+        'https://www.googletagmanager.com',
+        'https://apis.google.com',
+        'https://accounts.google.com',
+        'https://www.gstatic.com',
+      ],
     'style-src': ["'self'", "'unsafe-inline'"],
     'img-src': ["'self'", 'data:', 'https:', 'blob:'],
     'font-src': ["'self'", 'https://fonts.gstatic.com'],
@@ -152,20 +152,20 @@ function applySecurityHeaders(response: NextResponse): NextResponse {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ip = request.ip ?? request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
-  
+
   // Create initial response
   const response = NextResponse.next();
-  
+
   // Apply security headers to all responses (Security.md Section 9)
   applySecurityHeaders(response);
   response.headers.set('Content-Security-Policy', getCspHeaderValue(process.env.NODE_ENV === 'development'));
 
   // Rate limiting for auth endpoints (Security.md Section 14)
-  // Must run before the public-route early return so it applies to /login, /signup, /api/auth/*
-  if (pathname.startsWith('/api/auth/') || pathname === '/login' || pathname === '/signup') {
+  // Must run before the public-route early return so it applies to /login, /signup
+  if (pathname === '/login' || pathname === '/signup') {
     const rateLimitKey = `${ip}:${pathname}`;
     const rateLimit = checkRateLimit(rateLimitKey);
-    
+
     if (!rateLimit.allowed) {
       SecurityAudit.log({
         event: 'RATE_LIMIT_EXCEEDED',
@@ -174,10 +174,10 @@ export async function middleware(request: NextRequest) {
         path: pathname,
         details: { resetTime: rateLimit.resetTime },
       });
-      
+
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { 
+        {
           status: 429,
           headers: {
             'X-RateLimit-Limit': String(rateLimitConfig.maxRequests),
@@ -188,13 +188,13 @@ export async function middleware(request: NextRequest) {
         }
       );
     }
-    
+
     // Add rate limit headers
     response.headers.set('X-RateLimit-Limit', String(rateLimitConfig.maxRequests));
     response.headers.set('X-RateLimit-Remaining', String(rateLimit.remaining));
     response.headers.set('X-RateLimit-Reset', String(Math.ceil(rateLimit.resetTime / 1000)));
   }
-  
+
   return response;
 }
 

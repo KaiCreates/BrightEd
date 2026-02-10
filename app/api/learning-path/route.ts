@@ -438,7 +438,9 @@ export async function POST(request: NextRequest) {
     try {
       const decoded = await verifyAuth(request);
       userId = decoded.uid;
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+      // Optional auth: User ID is null if not authenticated
+    }
 
     if (userId) {
       try {
@@ -506,7 +508,7 @@ export async function POST(request: NextRequest) {
       name: error.name
     });
 
-    if (error.message?.includes('Unauthorized')) {
+    if (error instanceof Error && (error.message.includes('Unauthorized') || error.name === 'AuthError')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     const isNotFound = error instanceof Error && error.message === 'Syllabus data not found';
@@ -553,7 +555,9 @@ export async function GET(request: NextRequest) {
     try {
       const decoded = await verifyAuth(request);
       userId = decoded.uid;
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+      // Optional auth
+    }
 
     if (userId) {
       try {
@@ -607,7 +611,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error('Learning Path GET Error:', error);
-    if (error.message?.includes('Unauthorized')) {
+    if (error.message?.includes('Unauthorized') || (error as any).name === 'AuthError') {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     const isNotFound = error instanceof Error && error.message === 'Syllabus data not found';

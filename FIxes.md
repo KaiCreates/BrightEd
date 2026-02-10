@@ -1,0 +1,1 @@
+There is alot of issues that need to be assessed with the /learn and /lesson pages and there is another where when i build the app but it has mismatch errors in the chrome dev tools console. There are some ui issues as well that need to be addressed elements are no properly displayed and aligned there are also duplicates of elements on the page.

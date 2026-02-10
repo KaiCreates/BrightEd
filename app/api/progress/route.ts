@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
       }
     );
   } catch (error: any) {
-    if (error.message?.includes('Unauthorized')) {
+    if ((error as any).name === 'AuthError' || error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     return NextResponse.json({ error: 'Failed to load progress' }, { status: 500 });
@@ -70,7 +70,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    if (error.message?.includes('Unauthorized')) {
+    if ((error as any).name === 'AuthError' || error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     return NextResponse.json({ error: 'Failed to reset progress' }, { status: 500 });

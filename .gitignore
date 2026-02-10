@@ -51,3 +51,5 @@ ts_errors*.txt
 syllabus_parser.log
 test.txt
 generated_questions.json
+scripts/question_builder/firebase_key.json
+

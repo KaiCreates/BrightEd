@@ -245,16 +245,23 @@ export default function LearningPathNode({
                         relative w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all
                         ${isLocked
                             ? 'bg-[var(--bg-secondary)] border-4 border-[var(--border-subtle)]'
-                            : `bg-gradient-to-br ${config.gradient} border-4 border-white/20`
+                            : `bg-gradient-to-b ${config.gradient} border-t-2 border-white/40 shadow-inner`
                         }
                         ${isCurrent ? 'ring-4 ring-white/30 ring-offset-2 ring-offset-[var(--bg-primary)]' : ''}
                     `}
                     style={{
-                        boxShadow: !isLocked ? `0 6px 0 ${config.shadowColor}` : undefined
+                        boxShadow: !isLocked
+                            ? `0 8px 0 ${config.shadowColor}, inset 0 -4px 0 rgba(0,0,0,0.2)`
+                            : undefined
                     }}
                 >
+                    {/* Gloss Reflection */}
+                    {!isLocked && (
+                        <div className="absolute top-2 left-3 right-3 h-4 bg-white/20 rounded-full blur-[2px]" />
+                    )}
+
                     {/* Icon */}
-                    <span className={`drop-shadow-md ${isLocked ? 'grayscale opacity-50' : ''}`}>
+                    <span className={`drop-shadow-lg ${isLocked ? 'grayscale opacity-50' : ''}`}>
                         {isCompleted ? '✓' : isLocked ? '🔒' : icon || config.icon}
                     </span>
 

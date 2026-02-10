@@ -7,6 +7,7 @@ import { useEffect, useState, Suspense } from 'react'
 import { getSubjectFromSourceFile, getSubjectStyle } from '@/lib/subject-utils'
 import { useAuth } from '@/lib/auth-context'
 import { LearningPathNode, PathConnector, DailyTip, type NodeType, GuidebookModal, type GuidebookObjective } from '@/components/learning'
+import MascotIllustration, { type MascotEmotion } from '@/components/learning/MascotIllustration'
 
 interface SyllabusObjective {
   id: string
@@ -160,13 +161,33 @@ function SubjectFilter({
 }
 
 // =============================================================================
-// HELPER FUNCTION
+// HELPER FUNCTIONS
 // =============================================================================
+
+// Deterministic seeded random to prevent SSR/CSR hydration mismatches
+const seededRandom = (id: string, salt: number): number => {
+  let hash = 0
+  const str = `${id}-${salt}`
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i)
+    hash = ((hash << 5) - hash) + char
+    hash |= 0 // Convert to 32-bit integer
+  }
+  return Math.abs(hash % 1000) / 1000
+}
 
 const getHorizontalOffset = (index: number, nodeType: NodeType) => {
   if (nodeType === 'boss') return 0
-  const pattern = [0, -100, 0, 100]
-  return pattern[index % 4]
+  // Sine wave distribution for a smoother "winding" road
+  // Reduced amplitude from 120 to 90 to prevent overflow on small screens
+  const amplitude = 90
+  const phase = (index * Math.PI) / 2
+  return Math.sin(phase) * amplitude
+}
+
+const getMascotEmotion = (index: number): MascotEmotion => {
+  const emotions: MascotEmotion[] = ['happy', 'thinking', 'idea', 'wink', 'smart', 'studying', 'reading', 'magic']
+  return emotions[index % emotions.length]
 }
 
 // =============================================================================
@@ -313,12 +334,12 @@ function LearnContent() {
           let nodeType: NodeType = 'standard'
           if ((index + 1) % 5 === 0) {
             nodeType = 'boss'
-          } else if (obj.difficulty >= 3 && Math.random() < 0.15) {
+          } else if (obj.difficulty >= 3 && seededRandom(obj.id, index) < 0.15) {
             nodeType = 'crisis'
           } else if (
             obj.content?.toLowerCase().includes('rapid') ||
             obj.content?.toLowerCase().includes('speed') ||
-            Math.random() < 0.1
+            seededRandom(obj.id, index + 1000) < 0.1
           ) {
             nodeType = 'crunch'
           } else if (status === 'completed' && progress?.lastVisited) {
@@ -490,18 +511,39 @@ function LearnContent() {
           const nextModule = index < learningModules.length - 1 ? learningModules[index + 1] : null
           const nextOffset = nextModule ? getHorizontalOffset(index + 1, nextModule.nodeType) : 0
 
+          // Determine if we should show a mascot near this node
+          // Show every 4 nodes, alternating sides
+          const showMascot = index > 0 && index % 4 === 0
+          const mascotSide = (index / 4) % 2 === 0 ? 'right' : 'left'
+          const mascotOffset = mascotSide === 'right' ? currentOffset + 180 : currentOffset - 180
+
           return (
             <div
               key={module.id}
               className="relative flex flex-col items-center z-10 w-full min-h-[160px]"
-              style={{ transform: `translateX(${currentOffset}px)` }}
             >
-              <LearningPathNode
-                {...module}
-                id={String(module.id)}
-                index={index}
-                isUnlocking={isUnlocking}
-              />
+              {/* Mascot Decoration */}
+              {showMascot && (
+                <div
+                  className="absolute top-0 pointer-events-none z-0"
+                  style={{ left: `calc(50% + ${mascotOffset}px)`, transform: 'translateX(-50%)' }}
+                >
+                  <MascotIllustration
+                    emotion={getMascotEmotion(index)}
+                    scale={0.8}
+                  />
+                </div>
+              )}
+
+              {/* Node itself */}
+              <div style={{ transform: `translateX(${currentOffset}px)` }}>
+                <LearningPathNode
+                  {...module}
+                  id={String(module.id)}
+                  index={index}
+                  isUnlocking={isUnlocking}
+                />
+              </div>
 
               {/* Path Connector */}
               {index < learningModules.length - 1 && (

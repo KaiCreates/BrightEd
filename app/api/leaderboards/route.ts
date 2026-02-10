@@ -227,7 +227,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ type, entries, cached: false })
   } catch (error: any) {
-    if (error.message?.includes('Unauthorized')) {
+    if ((error as any).name === 'AuthError' || error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
     console.error('Leaderboards error:', error)

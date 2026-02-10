@@ -290,7 +290,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(formatResponse(selectedQuestion, objectiveId, subjectId));
   } catch (error: any) {
-    if (error.message?.includes('Unauthorized')) {
+    if ((error as any).name === 'AuthError' || error.message?.includes('Unauthorized')) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
     if (process.env.NODE_ENV === 'development') console.error('Generation API Error');
@@ -474,11 +474,11 @@ function createFallbackResponse(objectiveId: string, subjectId: string | null) {
 async function generateAIQuestion(objectiveId: string, subjectId: string | null, difficulty: number): Promise<any | null> {
   try {
     // Check if Ollama is available
-    const ollamaCheck = await fetch('http://localhost:11434/api/tags', { 
+    const ollamaCheck = await fetch('http://localhost:11434/api/tags', {
       method: 'GET',
       signal: AbortSignal.timeout(2000)
     }).catch(() => null);
-    
+
     if (!ollamaCheck?.ok) {
       console.log('[questions/generate] Ollama not available, skipping AI generation');
       return null;
@@ -526,7 +526,7 @@ Rules:
 
     const result = await response.json();
     const responseText = result.response || '';
-    
+
     // Extract JSON from response
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
@@ -535,7 +535,7 @@ Rules:
     }
 
     const parsed = JSON.parse(jsonMatch[0]);
-    
+
     // Validate the response structure
     if (!parsed.question || !Array.isArray(parsed.options) || parsed.options.length < 2) {
       console.error('[questions/generate] Invalid AI response structure');

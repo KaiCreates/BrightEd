@@ -248,14 +248,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
             const auth = getFirebaseAuth();
             await firebaseSignOut(auth);
-            setUserData(null);
         } catch (error) {
             console.error("Logout error:", error);
+        } finally {
+            // Always clear local state even if network request fails
+            setUserData(null);
+            setUser(null);
         }
     };
 
     const refreshUserData = async () => {
-        // Handled by onSnapshot
+        if (!user) return;
+
+        try {
+            const db = getFirebaseDb();
+            const userRef = doc(db, 'users', user.uid);
+            const snapshot = await getDoc(userRef);
+
+            if (snapshot.exists()) {
+                const data = snapshot.data() as UserData;
+                const names = resolveUserNames(user, data);
+                setUserData({ ...data, ...names });
+            }
+        } catch (error) {
+            console.error("Failed to refresh user data:", error);
+        }
     };
 
     return (

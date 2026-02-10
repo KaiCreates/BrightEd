@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
@@ -33,7 +33,27 @@ interface SessionStats {
   xpGained: number
 }
 
-export default function LessonPage() {
+function LessonLoadingFallback() {
+  return (
+    <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center p-4">
+      <div className="text-center">
+        <div className="w-16 h-16 rounded-full border-4 border-t-[var(--brand-primary)] border-r-transparent border-b-[var(--brand-primary)] border-l-transparent animate-spin mx-auto mb-6" />
+        <h2 className="text-2xl font-black text-[var(--text-primary)] mb-2">Loading Lesson</h2>
+        <p className="text-[var(--text-muted)] animate-pulse">Professor Bright is finding the perfect question...</p>
+      </div>
+    </div>
+  )
+}
+
+export default function LessonPageWrapper() {
+  return (
+    <Suspense fallback={<LessonLoadingFallback />}>
+      <LessonPage />
+    </Suspense>
+  )
+}
+
+function LessonPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const objectiveId = searchParams?.get('objective') || searchParams?.get('objectiveId') || null

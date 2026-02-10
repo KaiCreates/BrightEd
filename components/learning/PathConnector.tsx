@@ -39,10 +39,10 @@ export default function PathConnector({
                         ${endX} ${cp2y}, 
                         ${endX} ${height}`;
 
-    // Road surface gradient
+    // Road surface gradient - use fromIndex for unique IDs to prevent duplicate SVG ID conflicts
     const roadGradient = isCompleted
-        ? "url(#roadGradientCompleted)"
-        : "url(#roadGradientDefault)";
+        ? `url(#roadGradientCompleted-${fromIndex})`
+        : `url(#roadGradientDefault-${fromIndex})`;
 
     return (
         <div
@@ -58,59 +58,58 @@ export default function PathConnector({
                 className="overflow-visible"
             >
                 <defs>
-                    <linearGradient id="roadGradientDefault" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#d1d5db" />
-                        <stop offset="100%" stopColor="#9ca3af" />
+                    <linearGradient id={`roadGradientDefault-${fromIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#e2e8f0" />
+                        <stop offset="100%" stopColor="#cbd5e1" />
                     </linearGradient>
-                    <linearGradient id="roadGradientCompleted" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#86efac" />
-                        <stop offset="100%" stopColor="#22c55e" />
+                    <linearGradient id={`roadGradientCompleted-${fromIndex}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#58cc02" />
+                        <stop offset="100%" stopColor="#46a302" />
                     </linearGradient>
                 </defs>
 
-                {/* Shadow */}
+                {/* Outer Shadow/Path Border */}
                 <path
                     d={pathData}
-                    stroke={isCompleted ? "#166534" : "#4b5563"}
-                    strokeWidth="16"
+                    stroke={isCompleted ? "#2d6a01" : "#cbd5e1"}
+                    strokeWidth="20"
                     strokeLinecap="round"
                     fill="none"
-                    transform="translate(0, 4)"
-                    opacity="0.2"
+                    opacity="0.3"
                 />
 
                 {/* Main Surface */}
                 <path
                     d={pathData}
                     stroke={roadGradient}
-                    strokeWidth="12"
+                    strokeWidth="16"
                     strokeLinecap="round"
                     fill="none"
                 />
 
-                {/* Markings */}
+                {/* Inner Border/Highlight */}
                 <path
                     d={pathData}
-                    stroke="rgba(255,255,255,0.5)"
-                    strokeWidth="2"
+                    stroke="rgba(255,255,255,0.3)"
+                    strokeWidth="4"
                     strokeLinecap="round"
-                    strokeDasharray="6 8"
                     fill="none"
+                    transform="translate(0, -2)"
                 />
 
-                {/* Animation */}
+                {/* Animation for next path */}
                 {isNext && !isCompleted && (
                     <motion.path
                         d={pathData}
                         stroke="#ffffff"
-                        strokeWidth="2"
+                        strokeWidth="4"
                         strokeLinecap="round"
-                        strokeDasharray="4 8"
+                        strokeDasharray="1 12"
                         fill="none"
                         initial={{ strokeDashoffset: 0 }}
-                        animate={{ strokeDashoffset: -12 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        filter="drop-shadow(0 0 2px white)"
+                        animate={{ strokeDashoffset: -24 }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                        filter="drop-shadow(0 0 4px white)"
                     />
                 )}
             </svg>
