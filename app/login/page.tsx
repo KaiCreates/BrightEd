@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/auth-context';
+
 import { getFirebaseDiagnosticInfo } from '@/lib/firebase';
+
+// Force dynamic rendering to avoid static generation issues
+export const dynamic = 'force-dynamic';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,34 +28,58 @@ export default function LoginPage() {
 
   // Check Firebase configuration on mount
   useEffect(() => {
-    try {
-      const diag = getFirebaseDiagnosticInfo();
-      const configured = diag.isConfigured && diag.hasApiKey && diag.hasAppId;
-      
-      setFirebaseStatus({
-        configured,
-        message: configured 
-          ? 'Authentication service ready'
-          : 'Authentication service not configured',
-        details: {
-          apiKey: diag.hasApiKey,
-          appId: diag.hasAppId,
-          authDomain: !!diag.authDomain,
-          projectId: !!diag.projectId,
+    const checkFirebaseConfig = async () => {
+      try {
+        // First try to fetch from server API (more reliable)
+        const response = await fetch('/api/health');
+        const health = await response.json();
+        
+        if (health.firebase?.configured) {
+          setFirebaseStatus({
+            configured: true,
+            message: 'Authentication service ready',
+            details: {
+              apiKey: true,
+              appId: true,
+              authDomain: true,
+              projectId: true,
+            }
+          });
+          return;
         }
-      });
+        
+        // Fallback to client-side check
+        const diag = getFirebaseDiagnosticInfo();
+        const configured = diag.isConfigured && diag.hasApiKey && diag.hasAppId;
+        
+        setFirebaseStatus({
+          configured,
+          message: configured 
+            ? 'Authentication service ready'
+            : 'Authentication service not configured. Please redeploy the application.',
+          details: {
+            apiKey: diag.hasApiKey,
+            appId: diag.hasAppId,
+            authDomain: !!diag.authDomain,
+            projectId: !!diag.projectId,
+          }
+        });
 
-      if (!configured) {
-        console.error('[Login] Firebase not configured:', diag);
+        if (!configured) {
+          console.error('[Login] Firebase not configured:', diag);
+          console.error('[Login] Server health:', health);
+        }
+      } catch (err) {
+        console.error('[Login] Error checking Firebase config:', err);
+        setFirebaseStatus({
+          configured: false,
+          message: 'Unable to verify authentication configuration',
+          details: {}
+        });
       }
-    } catch (err) {
-      console.error('[Login] Error checking Firebase config:', err);
-      setFirebaseStatus({
-        configured: false,
-        message: 'Error checking authentication configuration',
-        details: {}
-      });
-    }
+    };
+    
+    checkFirebaseConfig();
   }, []);
 
   // Redirect handled by AuthGate

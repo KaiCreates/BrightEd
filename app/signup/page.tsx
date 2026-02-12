@@ -7,6 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { z } from 'zod'
 import { useAuth } from '@/lib/auth-context'
 
+// Force dynamic rendering to avoid static generation issues
+export const dynamic = 'force-dynamic'
+
 // --- Types & Constants ---
 
 const SignUpSchema = z.object({
