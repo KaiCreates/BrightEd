@@ -185,7 +185,7 @@ export default function ProgressPage() {
                 )}
             </div>
             {/* Professor Bright Mascot */}
-            <ProfessorBrightMascot feedback={mascotFeedback} webMode={true} />
+            <ProfessorBrightMascot feedback={mascotFeedback} />
         </div>
     )
 }

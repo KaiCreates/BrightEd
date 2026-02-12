@@ -112,7 +112,7 @@ export function analyzeStoryText(
                     skillId,
                     storyMoment: matchingSentence?.trim() || `Found "${keyword}" in story`,
                     character,
-                    applicationContext: patterns.contexts[0]
+                    applicationContext: patterns.contexts[0] ?? 'General'
                 });
 
                 break; // One detection per skill
@@ -163,11 +163,15 @@ export function generatePostStoryQuestion(
     skillId: string,
     storyContext: string
 ): PostStoryQuestion {
-    const charInfo = STORY_CHARACTERS[character];
 
     // Generate contextual question based on skill and character
     const questionTemplates = getQuestionTemplates(skillId, character);
-    const template = questionTemplates[Math.floor(Math.random() * questionTemplates.length)];
+    const templateIndex = Math.floor(Math.random() * questionTemplates.length);
+    const template = questionTemplates[templateIndex];
+
+    if (!template) {
+        throw new Error(`No question template found for skill ${skillId}`);
+    }
 
     return {
         questionId: `post-story-${storyId}-${skillId}-${Date.now()}`,

@@ -442,7 +442,7 @@ function PhoneMessageIntro({
                             }`}
                         >
                           {m.text}
-                          {idx === visibleMessages.length - 1 && msgIndex === script.length - 1 && charIndex >= script[msgIndex]?.text.length ? null : null}
+                          {idx === visibleMessages.length - 1 && msgIndex === script.length - 1 && charIndex >= (script[msgIndex]?.text?.length ?? 0) ? null : null}
                         </div>
                         {mine ? (
                           <div className="h-8 w-8 rounded-full border border-white/10 bg-white/5 overflow-hidden shrink-0">
@@ -483,7 +483,7 @@ function DeviceManagerWindow({
   onState: (fn: (p: RuntimeState) => RuntimeState) => void;
   onNotify: (kind: 'alert' | 'info', title: string, body: string) => void;
 }) {
-  const driver = state.device.audio.driver_status;
+  const driver = state.device?.audio?.driver_status;
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400">Device Manager (Drivers)</div>
@@ -2718,7 +2718,7 @@ function FileExplorer({
     const roots = new Set<string>();
     normalized.forEach((entry) => {
       const match = entry.match(/^([A-Z]:\/|[A-Z]:\/?)/i);
-      if (match) roots.add(match[1].replace(/\\/g, '/').replace(/\/?$/, '/'));
+      if (match) roots.add(match[1]!.replace(/\\/g, '/').replace(/\/?$/, '/'));
     });
     return Array.from(roots).sort();
   }, [normalized]);
@@ -2739,7 +2739,7 @@ function FileExplorer({
       if (!entry.startsWith(prefix)) return;
       const rest = entry.slice(prefix.length);
       if (!rest) return;
-      const [first] = rest.split('/');
+      const first = rest.split('/')[0]!;
       const isFolder = rest.includes('/');
       const childPath = `${prefix}${first}${isFolder ? '/' : ''}`;
       children.set(childPath, { path: childPath, name: first, type: isFolder ? 'folder' : 'file' });
@@ -2754,7 +2754,7 @@ function FileExplorer({
     const out: string[] = [];
     for (let i = 0; i < parts.length; i += 1) {
       if (!parts[i]) continue;
-      const val = parts[i];
+      const val = parts[i]!;
       out.push(i === 0 ? `${val}/` : val);
     }
     return out.length ? out : ['This PC'];

@@ -6,9 +6,9 @@ export class DataManager {
      * Save user progress safely to Firestore.
      * logs error but doesn't throw to avoid crashing UI (unless critical).
      */
-    static async saveUserProgress(userId: string, progress: any): Promise<boolean> {
+    static async saveUserProgress(userId: string, progress: Record<string, unknown>): Promise<boolean> {
         try {
-            if (!userId) throw new Error('No userId provided');
+            if (!userId || !db) throw new Error('No userId or DB not initialized');
             await updateDoc(doc(db, 'users', userId, 'progress'), progress);
             return true;
         } catch (error) {
@@ -21,9 +21,9 @@ export class DataManager {
     /**
      * Load a user document or a specific sub-path.
      */
-    static async loadUserDoc(userId: string, subPath?: string): Promise<any | null> {
+    static async loadUserDoc(userId: string, subPath?: string): Promise<Record<string, unknown> | null> {
         try {
-            if (!userId) return null;
+            if (!userId || !db) return null;
             const path = subPath ? `users/${userId}/${subPath}` : `users/${userId}`;
             const docSnap = await getDoc(doc(db, path));
             return docSnap.exists() ? docSnap.data() : null;
@@ -36,9 +36,9 @@ export class DataManager {
     /**
      * Update generic user data fields.
      */
-    static async updateUserData(userId: string, data: Record<string, any>): Promise<boolean> {
+    static async updateUserData(userId: string, data: Record<string, unknown>): Promise<boolean> {
         try {
-            if (!userId) return false;
+            if (!userId || !db) return false;
             const ref = doc(db, 'users', userId);
             await updateDoc(ref, {
                 ...data,
@@ -50,6 +50,7 @@ export class DataManager {
             const code = (error as FirestoreError).code;
             if (code === 'not-found') {
                 try {
+                    if (!db) return false;
                     await setDoc(doc(db, 'users', userId), {
                         ...data,
                         createdAt: new Date().toISOString(),

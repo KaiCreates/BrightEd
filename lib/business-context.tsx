@@ -17,7 +17,9 @@ import {
     getBusinessType,
     saveNewOrders,
     updateBusinessFinancials,
-    updateOrderStatus
+    updateOrderStatus,
+    StockMarketState,
+    StockPortfolio,
 } from '@/lib/economy';
 import { getNetWorthSnapshot } from '@/lib/economy/valuation';
 import { initStockMarketState, initStockPortfolio, tickStockMarket } from '@/lib/economy/stock-market';
@@ -29,7 +31,7 @@ interface BusinessData {
     valuation: number;
     balance: number;
     cashflow: number;
-    employees: any; // Can be number or array
+    employees: number | unknown[]; // Can be number or array
     staffCount?: number;
     category: string;
     phase: string;
@@ -91,46 +93,50 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
             (snapshot) => {
                 FirebaseMonitor.trackRead('businesses', snapshot.metadata?.hasPendingWrites ? 0 : 1);
                 if (snapshot.exists()) {
-                    const data: any = snapshot.data();
-                    setBusiness({ id: snapshot.id, ...data } as BusinessData);
+                    const data = snapshot.data();
+                    if (!data) return;
+
+                    setBusiness({ id: snapshot.id, ...data } as unknown as BusinessData);
                     isPausedRef.current = data.status === 'paused';
 
+                    /* eslint-disable @typescript-eslint/no-explicit-any */
                     const econ: BusinessState = {
                         id: snapshot.id,
-                        playerId: data.ownerId,
-                        businessTypeId: data.businessTypeId,
-                        businessName: data.name,
-                        branding: data.branding ?? {},
-                        cashBalance: data.balance !== undefined ? data.balance : (data.cashBalance ?? 0),
-                        totalRevenue: data.totalRevenue ?? 0,
-                        totalExpenses: data.totalExpenses ?? 0,
-                        reputation: data.reputation ?? 50,
-                        customerSatisfaction: data.customerSatisfaction ?? 70,
-                        reviewCount: data.reviewCount ?? 0,
-                        operatingHours: data.operatingHours ?? { open: 8, close: 20 },
-                        staffCount: data.staffCount ?? 1,
-                        maxConcurrentOrders: data.maxConcurrentOrders ?? 3,
-                        inventory: data.inventory ?? {},
-                        employees: data.employees ?? [],
-                        marketState: data.marketState ?? { lastRestock: '', nextRestock: '', items: [] },
-                        ownedTools: data.ownedTools ?? [],
-                        stockMarket: data.stockMarket ?? initStockMarketState(),
-                        stockPortfolio: data.stockPortfolio ?? initStockPortfolio(),
-                        netWorth: data.netWorth ?? data.valuation ?? 0,
-                        valuation: data.valuation ?? 0,
-                        recruitmentPool: data.recruitmentPool ?? [],
-                        lastRecruitmentTime: data.lastRecruitmentTime ?? '',
-                        lastPayrollTime: data.lastPayrollTime ?? '',
-                        reviews: data.reviews ?? [],
-                        activeOrders: data.activeOrders ?? [],
-                        ordersCompleted: data.ordersCompleted ?? 0,
-                        ordersFailed: data.ordersFailed ?? 0,
-                        createdAt: data.createdAt?.toDate?.()?.toISOString?.() || data.createdAt || new Date().toISOString(),
-                        lastActiveAt: data.lastActiveAt?.toDate?.()?.toISOString?.() || data.lastActiveAt || new Date().toISOString(),
+                        playerId: (data.ownerId as string) || '',
+                        businessTypeId: (data.businessTypeId as string) || '',
+                        businessName: (data.name as string) || '',
+                        branding: (data.branding as Record<string, unknown>) ?? {},
+                        cashBalance: typeof data.balance === 'number' ? data.balance : (typeof data.cashBalance === 'number' ? data.cashBalance : 0),
+                        totalRevenue: (data.totalRevenue as number) ?? 0,
+                        totalExpenses: (data.totalExpenses as number) ?? 0,
+                        reputation: (data.reputation as number) ?? 50,
+                        customerSatisfaction: (data.customerSatisfaction as number) ?? 70,
+                        reviewCount: (data.reviewCount as number) ?? 0,
+                        operatingHours: (data.operatingHours as { open: number; close: number }) ?? { open: 8, close: 20 },
+                        staffCount: (data.staffCount as number) ?? 1,
+                        maxConcurrentOrders: (data.maxConcurrentOrders as number) ?? 3,
+                        inventory: (data.inventory as Record<string, number>) ?? {},
+                        employees: (data.employees as any[]) ?? [],
+                        marketState: (data.marketState as any) ?? { lastRestock: '', nextRestock: '', items: [] },
+                        ownedTools: (data.ownedTools as string[]) ?? [],
+                        stockMarket: (data.stockMarket as any) ?? initStockMarketState(),
+                        stockPortfolio: (data.stockPortfolio as any) ?? initStockPortfolio(),
+                        netWorth: (data.netWorth as number) ?? (data.valuation as number) ?? 0,
+                        valuation: (data.valuation as number) ?? 0,
+                        recruitmentPool: (data.recruitmentPool as any[]) ?? [],
+                        lastRecruitmentTime: (data.lastRecruitmentTime as string) ?? '',
+                        lastPayrollTime: (data.lastPayrollTime as string) ?? '',
+                        reviews: (data.reviews as any[]) ?? [],
+                        activeOrders: (data.activeOrders as string[]) ?? [],
+                        ordersCompleted: (data.ordersCompleted as number) ?? 0,
+                        ordersFailed: (data.ordersFailed as number) ?? 0,
+                        createdAt: (data.createdAt as any)?.toDate?.()?.toISOString?.() || (data.createdAt as string) || new Date().toISOString(),
+                        lastActiveAt: (data.lastActiveAt as any)?.toDate?.()?.toISOString?.() || (data.lastActiveAt as string) || new Date().toISOString(),
                     };
+                    /* eslint-enable @typescript-eslint/no-explicit-any */
 
                     economyBusinessRef.current = econ;
-                    const econType = data.businessTypeId ? (getBusinessType(data.businessTypeId) || null) : null;
+                    const econType = data.businessTypeId ? (getBusinessType(data.businessTypeId as string) || null) : null;
                     economyTypeRef.current = econType;
                     setEconomyBusiness(econ);
                     setEconomyBusinessType(econType);
@@ -174,8 +180,8 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
         const unsub = onSnapshot(ordersQuery, (snap) => {
             FirebaseMonitor.trackRead('business_orders', snap.docChanges().length || snap.size);
             const activeOrders = snap.docs
-                .map((d) => ({ id: d.id, ...d.data() } as any))
-                .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                .map((d) => ({ id: d.id, ...d.data() } as unknown as Order))
+                .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
             ordersRef.current = activeOrders as Order[];
             setEconomyOrders(activeOrders as Order[]);
@@ -192,7 +198,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
         const interval = setInterval(async () => {
             try {
-                const result: any = await ensureMarketRestock(businessId);
+                const result = await ensureMarketRestock(businessId) as { restocked?: boolean; nextRestock?: string };
                 if (!mounted) return;
 
                 if (result?.restocked && result?.nextRestock) {
@@ -233,7 +239,16 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 const orders = ordersRef.current;
 
                 // TRACK AGGREGATED UPDATES FOR THE ENTIRE CYCLE
-                const bizUpdates: any = {
+                const bizUpdates: Record<string, unknown> & {
+                    cashDelta: number;
+                    totalRevenueDelta: number;
+                    ordersCompletedDelta: number;
+                    ordersFailedDelta: number;
+                    reputationDelta: number;
+                    customerSatisfactionDelta: number;
+                    inventoryDeltas: Record<string, number>;
+                    newReviews: unknown[];
+                } = {
                     cashDelta: 0,
                     totalRevenueDelta: 0,
                     ordersCompletedDelta: 0,
@@ -260,10 +275,10 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 // Recruitment refresh (every 2 minutes)
                 const lastRecruit = businessState.lastRecruitmentTime ? new Date(businessState.lastRecruitmentTime).getTime() : 0;
                 if (now - lastRecruit >= 120000) {
-                    const currentPool = (businessState.recruitmentPool || []) as any[];
+                    const currentPool = (businessState.recruitmentPool || []) as unknown[];
                     if (currentPool.length < 10) {
                         const numNew = Math.floor(Math.random() * 2) + 2;
-                        const newCandidates: any[] = [];
+                        const newCandidates: unknown[] = [];
 
                         for (let i = 0; i < numNew; i++) {
                             const roles = ['trainee', 'speedster', 'specialist', 'manager'];
@@ -288,6 +303,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                             });
                         }
 
+                        if (!db) return;
                         const bizRef = doc(db, 'businesses', businessId);
                         const updatedPool = [...currentPool, ...newCandidates].slice(0, 10);
 
@@ -306,13 +322,13 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                         .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
                     if (acceptedOrders.length > 0) {
-                        const employees = businessState.employees || [];
-                        const hasManager = employees.some((e: any) => e.role === 'manager');
+                        const employees = (businessState.employees || []) as Array<{ role: string; stats?: { quality: number } }>;
+                        const hasManager = employees.some((e) => e.role === 'manager');
 
                         // Manager auto-accept
                         if (hasManager) {
                             const roleCaps: Record<string, number> = { trainee: 2, speedster: 2, specialist: 3, manager: 4 };
-                            const totalCapacity = employees.reduce((acc: number, e: any) => acc + (roleCaps[e.role] || 2), 0);
+                            const totalCapacity = employees.reduce((acc: number, e) => acc + (roleCaps[e.role] || 2), 0);
 
                             // FIX: Consider BOTH pending and active orders for capacity check
                             // This prevents over-generation and ensures the manager doesn't accept more than they can handle
@@ -327,8 +343,12 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
                                 if (toAccept.length > 0) {
                                     toAccept.forEach((order) => {
-                                        const accepted = { ...order, status: 'accepted', acceptedAt: new Date().toISOString() };
-                                        updateOrderStatus(businessId, order.id, accepted as any);
+                                        const accepted: Partial<Order> = {
+                                            ...order,
+                                            status: 'accepted' as const,
+                                            acceptedAt: new Date().toISOString()
+                                        };
+                                        updateOrderStatus(businessId, order.id, accepted);
                                     });
                                 }
                             }
@@ -347,7 +367,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                             let totalReputationDelta = 0;
                             let totalSatisfactionDelta = 0;
                             const allInventoryDeltas: Record<string, number> = {};
-                            const allNewReviews: any[] = [];
+                            const allNewReviews: unknown[] = [];
 
                             ordersToComplete.forEach((orderToProcess) => {
                                 const reqInventory: Record<string, number> = {};
@@ -380,8 +400,8 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                                 }
 
                                 const avgQuality =
-                                    (businessState.employees || []).reduce((acc: number, e: any) => acc + (e.stats?.quality || 50), 0) /
-                                    Math.max(1, (businessState.employees || []).length);
+                                    employees.reduce((acc: number, e) => acc + (e.stats?.quality || 50), 0) /
+                                    Math.max(1, employees.length);
                                 const qualityScore = Math.min(100, Math.floor(avgQuality + (Math.random() * 20 - 10)));
 
                                 const { order: completed, payment, tip, inventoryDeductions, review } = completeOrder(
@@ -400,7 +420,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                                 totalSatisfactionDelta += (review.rating - 3) * 5;
 
                                 Object.entries(inventoryDeductions).forEach(([itemId, qty]) => {
-                                    allInventoryDeltas[itemId] = (allInventoryDeltas[itemId] || 0) - qty;
+                                    allInventoryDeltas[itemId] = (Number(allInventoryDeltas[itemId]) || 0) - Number(qty);
                                 });
 
                                 updateOrderStatus(businessId, orderToProcess.id, completed).catch(console.error);
@@ -437,8 +457,9 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 // Wage accrual (every 30 seconds)
                 if (businessState.employees && businessState.employees.length > 0 && now - lastWageAccrualRef.current >= 30000) {
                     lastWageAccrualRef.current = now;
+                    if (!db) return;
                     const bizRef = doc(db, 'businesses', businessId);
-                    const updatedEmployees = businessState.employees.map((emp: any) => {
+                    const updatedEmployees = businessState.employees.map((emp: { salaryPerDay: number; unpaidWages?: number; stats?: { morale: number } }) => {
                         const hourlyWage = Math.floor(emp.salaryPerDay / 8);
                         const newUnpaid = (emp.unpaidWages || 0) + hourlyWage;
 
@@ -465,7 +486,6 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
                     // 1. ORDER LIFECYCLE MANAGEMENT (Expiration & Overdue)
                     orders.forEach(order => {
-                        const orderDate = new Date(order.createdAt).getTime();
 
                         // Expire pending orders (cleanup stale data)
                         if (order.status === 'pending' && order.expiresAt) {
@@ -511,7 +531,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                 const shouldSyncToFirebase = (now - lastFirebaseSyncRef.current) >= FIREBASE_SYNC_INTERVAL;
 
                 if (shouldSyncToFirebase) {
-                    const derivedInventory = { ...(workingState.inventory || {}) };
+                    const derivedInventory: Record<string, number> = { ...(workingState.inventory || {}) };
                     Object.entries(bizUpdates.inventoryDeltas || {}).forEach(([itemId, delta]) => {
                         const currentQty = derivedInventory[itemId] || 0;
                         const nextQty = currentQty + (delta as number);
@@ -526,9 +546,9 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
                         ...workingState,
                         cashBalance: workingState.cashBalance + (bizUpdates.cashDelta || 0),
                         inventory: derivedInventory,
-                        stockMarket: bizUpdates.stockMarket || workingState.stockMarket,
-                        stockPortfolio: bizUpdates.stockPortfolio || workingState.stockPortfolio,
-                        ownedTools: bizUpdates.ownedTools || workingState.ownedTools,
+                        stockMarket: (bizUpdates.stockMarket as unknown) as StockMarketState || workingState.stockMarket,
+                        stockPortfolio: (bizUpdates.stockPortfolio as unknown) as StockPortfolio || workingState.stockPortfolio,
+                        ownedTools: (bizUpdates.ownedTools as string[]) || workingState.ownedTools,
                     };
 
                     const netWorthSnapshot = getNetWorthSnapshot(derivedState);
@@ -541,7 +561,8 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
                 if (hasBizUpdates && shouldSyncToFirebase) {
                     lastFirebaseSyncRef.current = now;
-                    updateBusinessFinancials(businessId, bizUpdates).catch(console.error);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    updateBusinessFinancials(businessId, bizUpdates as any).catch(console.error);
                 }
             } catch (err) {
                 console.error("Economy Simulation Tick Error:", err);
@@ -559,6 +580,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
 
         try {
             // ATOMIC BATCH OPERATION - Prevent data inconsistency
+            if (!db) return;
             const batch = writeBatch(db);
             const businessRef = doc(db, 'businesses', userData.businessID);
             const userRef = doc(db, 'users', user.uid);
@@ -586,7 +608,7 @@ export function BusinessProvider({ children }: { children: React.ReactNode }) {
     };
 
     const pauseBusiness = async (isPaused: boolean) => {
-        if (!userData?.businessID) return;
+        if (!db || !userData?.businessID) return;
         const businessRef = doc(db, 'businesses', userData.businessID);
         await updateDoc(businessRef, {
             status: isPaused ? 'paused' : 'active'

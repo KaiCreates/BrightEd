@@ -30,7 +30,7 @@ function readState(): { daily: DailyCount; cooldown: CooldownWindow | null } {
     const today = dayKey(new Date());
     const daily =
       parsed.daily && parsed.daily.dayKey === today
-        ? { dayKey: today, completed: Array.isArray((parsed.daily as any).completed) ? (parsed.daily as any).completed : [] }
+        ? { dayKey: today, completed: Array.isArray(parsed.daily.completed) ? parsed.daily.completed : [] }
         : { dayKey: today, completed: [] };
     let cooldown = parsed.cooldown && typeof parsed.cooldown.until === 'number' ? parsed.cooldown : null;
 

@@ -49,6 +49,7 @@ export default function AchievementsPage() {
                 console.error('Failed to check rank', err);
             }
 
+            if (!db) return;
             const userRef = doc(db, 'users', user.uid);
             const userSnap = await getDoc(userRef);
             const userDoc = userSnap.data() || {};
@@ -143,7 +144,7 @@ export default function AchievementsPage() {
     }, [user, userData]);
 
     const togglePin = async (achievementId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         const isPinned = pinnedAchievements.includes(achievementId);

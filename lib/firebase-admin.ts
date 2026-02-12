@@ -12,7 +12,7 @@ export function getFirebaseAdmin() {
     const base64 = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_BASE64;
     const serviceAccountPathEnv = process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_PATH || process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-    let serviceAccount: any | null = null;
+    let serviceAccount: Record<string, unknown> | null = null;
 
     try {
         if (typeof json === 'string' && json.trim()) {
@@ -52,9 +52,10 @@ export function getFirebaseAdmin() {
             // Add databaseURL if needed, usually https://<PROJECT_ID>.firebaseio.com
             databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const err = error as { code: string };
         // Handle "already exists" error race condition
-        if (error.code === 'app/already-exists') {
+        if (err.code === 'app/already-exists') {
             return admin.app();
         }
         console.error('Firebase Admin initialization failed:', error);
@@ -74,19 +75,19 @@ function getAdminAuth() {
 
 export const adminDb = new Proxy({} as FirebaseFirestore.Firestore, {
     get(_target, prop) {
-        const db = getAdminDb() as any;
+        const db = getAdminDb();
         if (!db) {
             // console.warn(`Attemped to access adminDb.${String(prop)} but DB is not initialized.`);
             return undefined; // Or throw? better to let it fail safely/loudly depending on usage
         }
-        return db[prop];
+        return (db as unknown as Record<string, unknown>)[prop as string];
     },
 });
 
 export const adminAuth = new Proxy({} as admin.auth.Auth, {
     get(_target, prop) {
-        const authInstance = getAdminAuth() as any;
+        const authInstance = getAdminAuth();
         if (!authInstance) return undefined;
-        return authInstance[prop];
+        return (authInstance as unknown as Record<string, unknown>)[prop as string];
     },
 });

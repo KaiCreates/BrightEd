@@ -5,6 +5,7 @@ import { BIOLOGY_LABS } from '@/lib/science/biology-labs';
 import { BrightHeading, BrightLayer } from '@/components/system';
 
 interface LabProgressProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     userData: any;
 }
 

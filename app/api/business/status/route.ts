@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const business = bizSnap.docs[0].data();
+    const business = bizSnap.docs[0]!.data();
 
     return NextResponse.json({
       business: {

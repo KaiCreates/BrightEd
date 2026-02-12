@@ -9,15 +9,13 @@ interface PendingWrite {
     id: string;
     endpoint: string;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-    data: any;
+    data: unknown;
     timestamp: number;
     retries: number;
     maxRetries: number;
 }
 
-interface OfflineQueueDB {
-    pendingWrites: PendingWrite[];
-}
+// Removed unused OfflineQueueDB interface
 
 const DB_NAME = 'brighted-offline';
 const DB_VERSION = 1;
@@ -73,7 +71,7 @@ class OfflineQueueClass {
      */
     async enqueue(
         endpoint: string,
-        data: any,
+        data: unknown,
         method: 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'POST',
         maxRetries: number = 5
     ): Promise<string> {
@@ -141,7 +139,7 @@ class OfflineQueueClass {
                     await this.incrementRetry(item);
                     failed++;
                 }
-            } catch (error) {
+            } catch (_error) {
                 await this.incrementRetry(item);
                 failed++;
             }
@@ -263,11 +261,10 @@ if (typeof window !== 'undefined') {
 
     // Sync when coming back online
     window.addEventListener('online', () => {
-        console.log('🌐 Back online - syncing pending writes...');
         OfflineQueue.sync()
             .then(({ success, failed }) => {
                 if (success > 0) {
-                    console.log(`✅ Synced ${success} pending writes`);
+                    // console.log(`✅ Synced ${success} pending writes`);
                 }
                 if (failed > 0) {
                     console.warn(`⚠️ ${failed} writes still pending`);
@@ -278,6 +275,6 @@ if (typeof window !== 'undefined') {
 
     // Log when going offline
     window.addEventListener('offline', () => {
-        console.log('📴 Went offline - writes will be queued');
+        // console.log('📴 Went offline - writes will be queued');
     });
 }

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import { BrightLayer, BrightHeading } from '@/components/system';
+
 
 interface ScienceLabLayoutProps {
     children: React.ReactNode;
@@ -26,7 +26,6 @@ export default function ScienceLabLayout({
     totalSteps,
     onExit
 }: ScienceLabLayoutProps) {
-    const [showInventory, setShowInventory] = useState(false);
     const [showReport, setShowReport] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 

@@ -14,10 +14,7 @@
 import { ErrorType } from './types';
 import {
     normalizeQuestion,
-    getQuestionTypeModifier,
-    isAllOfAbove,
-    isNoneOfAbove,
-    NormalizedQuestion
+    getQuestionTypeModifier
 } from './question-normalizer';
 
 /**
@@ -178,8 +175,8 @@ export function classifyError(
         return 'careless'; // Data error, treat as careless
     }
 
-    const selectedText = options[selectedAnswer];
-    const correctText = options[correctAnswer];
+    const selectedText = options[selectedAnswer] ?? '';
+    const correctText = options[correctAnswer] ?? '';
 
     // Check for conceptual relationship
     if (isConceptuallyRelated(selectedText, correctText, options)) {
@@ -369,8 +366,8 @@ export function classifyErrorEnhanced(
     }
 
     // Use original logic for standard questions
-    const selectedText = normalized.normalizedOptions[selectedAnswer];
-    const correctText = normalized.normalizedOptions[correctAnswer];
+    const selectedText = normalized.normalizedOptions[selectedAnswer] ?? '';
+    const correctText = normalized.normalizedOptions[correctAnswer] ?? '';
 
     // Check for conceptual relationship using original logic
     if (isConceptuallyRelated(selectedText, correctText, normalized.normalizedOptions)) {

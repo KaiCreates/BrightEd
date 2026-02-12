@@ -1,5 +1,5 @@
 import { db } from '@/lib/firebase';
-import { doc, getDoc, setDoc, updateDoc, collection, addDoc, increment } from 'firebase/firestore';
+import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
 import { GlobalLearningStats, LearningEvent, SubSkillGlobalStats } from './types';
 
 // Cache for global stats to avoid hitting DB on every request
@@ -31,6 +31,15 @@ export const GlobalIntelligence = {
         const now = Date.now();
         if (globalStatsCache && (now - lastFetchTime < CACHE_TTL)) {
             return globalStatsCache;
+        }
+
+        if (!db) {
+            console.warn("DB not initialized, using default stats");
+            return {
+                subSkills: {},
+                difficultyStats: {},
+                interventions: {}
+            };
         }
 
         try {
@@ -79,25 +88,17 @@ export const GlobalIntelligence = {
      * This pushes data to 'learning-events' collection and aggregates it
      */
     async emitLearningEvent(event: LearningEvent): Promise<void> {
+        if (!db) {
+            console.warn("DB not initialized, skipping event emission");
+            return;
+        }
         try {
             // 1. Log raw event for data warehouse/BigQuery later
             await addDoc(collection(db, 'learning-events'), event);
 
             // 2. Aggregate into global stats (Simplified for real-time)
-            // In a massive scale app, this would be a background job/cloud function.
-            // For now, we update specific counters carefully.
-
-            const statsRef = doc(db, 'global-learning', 'main');
-            // Note: We don't await this strictly to avoid blocking the user
-            // But we ideally want to update average mastery
-            // Doing a true average update in Firestore is hard without transaction.
-            // We will just increment a 'totalLearners' counter or 'totalEvents' for now
-            // and separate the heavy math to a scheduled job.
-
-            // Example: Just tracking difficulty success rates
-            const difficultyKey = `difficultyStats.${event.difficulty}`;
-            // We can't easily upsert deeply nested fields without Dot notation and known existence.
-            // So we might skip real-time aggregation here and rely on the background job "Super Boot".
+            // aggregate into global stats skipped real-time aggregation here 
+            // and rely on the background job "Super Boot".
 
         } catch (error) {
             console.error("Failed to emit learning event:", error);

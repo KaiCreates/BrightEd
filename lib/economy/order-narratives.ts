@@ -3,15 +3,7 @@
  * Creates contextual stories and consequences for orders
  */
 
-import { Order, CustomerType } from './economy-types';
-
-export interface OrderNarrative {
-    context: string;
-    urgencyReason?: string;
-    customerBackground?: string;
-    successConsequence: string;
-    failureConsequence: string;
-}
+import { Order, CustomerType, OrderNarrative } from './economy-types';
 
 /**
  * Generate narrative context for an order
@@ -22,6 +14,14 @@ export function generateOrderNarrative(
 ): OrderNarrative {
     const narratives = getNarrativeTemplates(businessCategory, order.customerType);
     const template = narratives[Math.floor(Math.random() * narratives.length)];
+
+    if (!template) {
+        return {
+            context: `Order from ${order.customerName}`,
+            successConsequence: 'Customer was satisfied.',
+            failureConsequence: 'Customer was disappointed.'
+        };
+    }
 
     return {
         context: template.context.replace('{customer}', order.customerName),
@@ -38,14 +38,8 @@ export function generateOrderNarrative(
 function getNarrativeTemplates(
     businessCategory: string,
     customerType: CustomerType
-): Array<{
-    context: string;
-    urgencyReason?: string;
-    customerBackground?: string;
-    successConsequence: string;
-    failureConsequence: string;
-}> {
-    const templates: Record<string, any[]> = {
+): OrderNarrative[] {
+    const templates: Record<string, OrderNarrative[]> = {
         service: [
             {
                 context: '{customer} needs a fresh look for an important event this weekend.',
@@ -158,7 +152,7 @@ function getNarrativeTemplates(
         ];
     }
 
-    return templates[businessCategory] || templates.retail;
+    return templates[businessCategory] || templates.retail || [];
 }
 
 /**

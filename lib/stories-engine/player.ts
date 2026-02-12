@@ -11,7 +11,6 @@ import type {
   ReputationMap,
   InventoryMap,
   ActiveConsequence,
-  PlayerResources,
 } from './types';
 
 const DEFAULT_SKILLS: Skills = {
@@ -20,7 +19,7 @@ const DEFAULT_SKILLS: Skills = {
   communication: 50,
 };
 
-function parseJson<T>(raw: string | null | any, fallback: T): T {
+function parseJson<T>(raw: unknown, fallback: T): T {
   if (!raw) return fallback;
   if (typeof raw !== 'string') return raw as T;
   try {
@@ -34,7 +33,7 @@ export async function getOrCreateProfile(userId: string) {
   return getPlayerProfile(userId);
 }
 
-export function parseProfile(profile: any) {
+export function parseProfile(profile: Record<string, unknown>) {
   return {
     ageBracket: profile.ageBracket as AgeBracket,
     skills: parseJson<Skills>(profile.skills, DEFAULT_SKILLS),
@@ -72,7 +71,7 @@ export async function updateProfile(
   if (updates.reputation) Object.assign(reputation, updates.reputation);
   if (updates.inventory) Object.assign(inventory, updates.inventory);
 
-  const data: any = {
+  const data: Record<string, unknown> = {
     ...(updates.ageBracket && { ageBracket: updates.ageBracket }),
     ...(updates.skills && { skills: JSON.stringify(skills) }),
     ...(updates.reputation && { reputation: JSON.stringify(reputation) }),

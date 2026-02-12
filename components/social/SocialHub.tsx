@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { GuildNavigator } from './GuildNavigator';
 import { CampusSquare } from './CampusSquare';
 import { PeoplePrivacy } from './PeoplePrivacy';

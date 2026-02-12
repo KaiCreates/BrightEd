@@ -199,7 +199,7 @@ export default function FoodTestsLabPage() {
         const { food: foodId, reagent, heated } = tube.contents;
         if (!foodId || !reagent) return tube;
 
-        const food = FOODS.find(f => f.id === foodId);
+        const food = FOODS.find(f => f.id === foodId)!;
         if (!food) return tube;
 
         let newColor = tube.color;
@@ -273,7 +273,7 @@ export default function FoodTestsLabPage() {
 
         // Track completion
         if (newResult === 'positive' || newResult === 'cloudy') {
-            setCompletedTests(prev => Array.from(new Set([...prev, food.nutrients[0]])));
+            setCompletedTests(prev => Array.from(new Set([...prev, food.nutrients[0]!])));
         }
 
         return { ...tube, color: newColor, result: newResult };
@@ -290,7 +290,7 @@ export default function FoodTestsLabPage() {
         const tubeIndex = tubes.findIndex(t => t.id === targetTubeId);
         if (tubeIndex === -1) return;
 
-        const tube = tubes[tubeIndex];
+        const tube = tubes[tubeIndex]!;
         const draggedId = active.id as string;
 
         const draggedFood = FOODS.find(f => f.id === draggedId);

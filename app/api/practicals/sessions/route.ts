@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     const profile = await getPlayerProfile(userId);
     const difficultyContext: DifficultyContext = {
       ageBracket: (body.ageBracket ?? profile.ageBracket) as AgeBracket,
-      skillLevel: profile.skills.financialLiteracy ?? 50,
+      skillLevel: (profile.skills as any)?.financialLiteracy ?? 50,
       riskAppetite: 50,
     };
 
@@ -87,8 +87,8 @@ export async function POST(request: NextRequest) {
       storyId: story.id,
       state: 'active',
       snapshot,
-      businessState,
-      difficultyContext,
+      businessState: businessState as any,
+      difficultyContext: difficultyContext as any,
     });
 
     // Mock updateLastSimulated

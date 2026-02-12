@@ -1,0 +1,265 @@
+1 — Core negatives (what actually breaks)
+
+No ownership / missing mental model — code “works” but no one understands invariants or trade-offs.
+
+Performance anti-patterns — unthrottled queries (search on every keystroke), heavy sync loops, memory leaks.
+
+Weak async/error handling — unhandled promise rejections, fire-and-forget DB calls, inconsistent error format.
+
+Security holes — hardcoded secrets, unsafe serialization, missing input sanitization, XSS/CSRF holes.
+
+Type erosion — liberal any, mismatched DTOs, no compile-time guarantees.
+
+Architecture and coupling — one file does controllers + DB + validation; AI refactors that split code into confusing, unnecessary dependencies.
+
+Poor testing & no CI gates — green tests but no integration / load tests; no static analysis.
+
+UX & accessibility misses — div-soup, missing ARIA, missing keyboard/alt handling.
+
+Bad refactors from agents — cosmetic splitting, extra hooks that introduce circular deps or hidden state.
+
+Observability gaps — sparse logs, no structured tracing/metrics, no alerts for key failure modes.
+
+2 — Prioritized fixes (what to do first)
+
+Order these by impact/cost — do the top four immediately.
+
+Critical (do now)
+
+Add CI gate that enforces: npm run build && tsc --noEmit && eslint . && npm test && semgrep scan. Block merges without passing.
+
+Type safety: strict TS
+
+tsconfig.json: "strict": true, "noImplicitAny": true, "strictNullChecks": true.
+
+Ban any with ESLint rule "@typescript-eslint/no-explicit-any": "error".
+
+Error and async hygiene
+
+Centralized AppError class + express error middleware. Wrap all async route handlers with an asyncHandler that catches rejections.
+
+Rate-limiting + debounce + caching for search/UIs
+
+Client: debounce keystrokes (200–400ms), require min length 2–3 chars, cache previous query results.
+
+Server: rate-limit endpoint per IP & per user, add server-side cache (Redis/LRU) and query throttles.
+
+High priority (do in days)
+
+Static security scanning (Semgrep / Snyk / npm audit) integrated into CI.
+
+Input validation layer using Zod/Joi for all API boundaries; never trust req.body directly.
+
+Logging & tracing: structured logger (pino/winston), add request ID and error telemetry, set alerts on error rate/cpu.
+
+Tests: add unit tests for pure logic and integration tests for critical flows (login, payments, search). Add a load test (k6) for endpoints that will be hit frequently.
+
+Medium
+
+Code ownership & architecture rules (folder conventions, service vs controller, no DB in route).
+
+Automated review rules for generated code: require human sign-off on any AI-generated PR touching payments, auth, or data-serialization.
+
+Refactor the large hook into: (1) pure vector math util functions (unit-tested), (2) a lightweight controller hook that uses those utils and manages side-effects, (3) RT-Fiber render-only hook. Avoid cross-hook circular dependencies.
+
+3 — Concrete technical patterns & examples
+TypeScript strict snippet (tsconfig)
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}
+
+Async wrapper for Express controllers (ts)
+// utils/asyncHandler.ts
+export const asyncHandler = (fn: (...args: any[]) => Promise<any>) =>
+  (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+
+Central AppError + middleware
+// errors/AppError.ts
+export class AppError extends Error {
+  public statusCode: number;
+  public code?: string;
+  constructor(message: string, statusCode = 500, code?: string) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+  }
+}
+
+// middleware/errorHandler.ts
+export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({ success: false, message: err.message, code: err.code });
+  }
+  console.error(err);
+  return res.status(500).json({ success: false, message: "Internal Server Error" });
+}
+
+Debounce (client) — TypeScript
+export function debounce<T extends (...args: any[]) => void>(fn: T, wait = 300) {
+  let timer: number | null = null;
+  return (...args: Parameters<T>) => {
+    if (timer !== null) window.clearTimeout(timer);
+    timer = window.setTimeout(() => fn(...args), wait);
+  };
+}
+
+Server-side rate limiter & caching (Express example)
+import rateLimit from 'express-rate-limit';
+import LRU from 'lru-cache';
+
+// rate limit
+app.use('/api/search', rateLimit({ windowMs: 1000, max: 10 })); // 10 req/sec per IP
+
+// simple in-process cache (replace with Redis in prod)
+const searchCache = new LRU<string, any>({ max: 1000, ttl: 1000 * 60 }); // 60s
+app.get('/api/search', async (req, res) => {
+  const q = String(req.query.q || '');
+  if (q.length < 2) return res.json([]);
+  const key = `search:${q}`;
+  const cached = searchCache.get(key);
+  if (cached) return res.json(cached);
+  const result = await searchService.query(q);
+  searchCache.set(key, result);
+  res.json(result);
+});
+
+Input validation with Zod (example)
+const searchSchema = z.object({ q: z.string().min(2) });
+app.get('/api/search', asyncHandler(async (req, res) => {
+  const parsed = searchSchema.safeParse(req.query);
+  if (!parsed.success) throw new AppError("Invalid query", 400, "VALIDATION_ERROR");
+  const q = parsed.data.q;
+  // ...
+}));
+
+Hook decomposition pattern (React + r3f)
+
+useVectorMath.ts — pure, tested vector math functions (use three’s Vector3 types).
+
+useLightingController.ts — manages parameters (rotation speed, mode) and exposes setters/events.
+
+useModelRotation.ts — subscribes to controller events, updates refs, uses throttled requestAnimationFrame updates.
+
+useThreeSceneBinding.ts — minimal glue for react-three-fiber (no math here).
+
+Make each unit small and testable. Provide good JSDoc explaining invariants.
+
+4 — Rules & static checks your AI should enforce automatically
+
+Turn these into CI checks or agent rules:
+
+No any (ESLint rule)
+
+No DB calls in route handlers (detect db.* inside routes/ files)
+
+All inputs must be validated (Zod/Joi schema present in same folder)
+
+No hardcoded secrets (/apiKey=|password=|secret=|AWS_ACCESS_KEY_ID/ regex)
+
+No unsafe deserialization (e.g., eval, Function, pickle analogs)
+
+No unthrottled event → DB calls (create rule: any function that triggers DB query from UI event must either debounce or go through queue)
+
+No console.log in production builds (ESLint rule)
+
+Critical files require human review (payments, auth, encryption, serialization) — require explicit approval label.
+
+5 — Semgrep / security patterns (examples to add to CI)
+
+SQL injection patterns — flag raw string concatenation for SQL.
+
+Dangerous serialization — JSON.parse of user-supplied raw strings without schema validation.
+
+Hardcoded secrets regex.
+(You can reuse existing OWASP / Semgrep rulesets and extend them with project-specific patterns.)
+
+6 — Prompts & agent workflow to reduce vibe risks
+
+Use these in your AI agent as guardrails for generation and post-review.
+
+System prompt for secure-by-default generation
+Write TypeScript/Node/React code with secure-by-default practices:
+- Validate all external input with Zod/Joi.
+- Do NOT produce hardcoded secrets.
+- Avoid any `any` type; prefer strict types, return types, and DTOs.
+- For networked code, prefer safe formats (JSON with schema); do not use unsafe deserialization patterns.
+- When generating UI features that trigger server requests, add debounce on client and rate-limit/cache on server.
+- Add unit tests for pure functions and at least one integration test for critical flows.
+- Keep functions small and comment invariants. If asked to refactor, produce a migration plan and tests.
+
+Self-reflection prompt to paste after generation
+Perform a security & correctness review of the code below. For each issue you find, produce a minimal patch and a short justification. Focus on:
+- Input validation
+- Error handling and edge cases
+- Async handling and potential race conditions
+- Performance hotspots and unbounded work
+- Sensitive data (secrets/logging)
+Return only the diff that fixes issues and a 2-line explanation per change.
+
+Prompt to force architectural clarity
+Given this feature description and repo structure, produce:
+1) a one-paragraph design describing data flow and failure modes,
+2) a list of invariants and preconditions,
+3) an API contract (inputs/outputs/errors),
+4) minimal unit tests to assert invariants.
+
+7 — Monitoring & on-call playbook (ops)
+
+SLOs / Alerts: error rate > X, latency P95 > Y, CPU > 80% for DB -> immediate page.
+
+Runbooks: for search meltdown: toggle search feature, roll forward/rollback, throttle ingress.
+
+Feature flags: always ship behind a toggle so you can disable quickly.
+
+8 — Specific advice for your r3f hook (practical)
+
+Factor out vector math to pure functions and unit-test them (floating precision checks).
+
+Use useRef for mutable vectors — do not re-create Vector3 each frame.
+
+Use useFrame (from r3f) with a throttled update (check delta) instead of frequent state updates.
+
+If agent splits hook into many pieces, refuse any split that creates circular dependencies — prefer composition over chained hooks.
+
+Add deterministic seeds for animation for reproducible debugging.
+
+Add runtime assertions that check invariants: e.g., assert(!isNaN(angle)) and log with stack + state snapshot.
+
+9 — Example PR policy for AI-generated code
+
+Any PR with AI_GENERATED: true must include:
+
+A short architecture note (“why this approach”).
+
+Unit tests covering algorithmic details (especially math-heavy code).
+
+A security checklist (Zod schemas present, secrets absent).
+
+A human reviewer from a small pool: one senior dev (or you) must approve.
+
+10 — Immediate action list for this week (concrete)
+
+Add tsconfig.strict + ESLint rules + Prettier.
+
+Add CI pipeline that runs tsc, eslint, npm test, semgrep (block merges).
+
+Add asyncHandler, AppError, error middleware. Convert all controllers to use them.
+
+Add Zod validation for all public endpoints.
+
+Add debounce + caching for search and server-side rate limiting.
+
+Pick the AI-generated hook: extract vector math functions → write unit tests → replace hook with test-backed version.
+
+Configure semgrep with project rules; run on whole repo and triage findings.

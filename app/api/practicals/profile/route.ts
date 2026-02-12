@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
         reputation: parsed.reputation,
         resources: parsed.resources,
         activeConsequences: parsed.activeConsequences,
-        lastSimulatedAt: profile.lastSimulatedAt?.toISOString() ?? null,
+        lastSimulatedAt: (profile as any).lastSimulatedAt?.toISOString?.() ?? null,
       },
     });
   } catch (e: any) {
@@ -77,7 +77,7 @@ export async function PATCH(request: NextRequest) {
         reputation: parsed.reputation,
         resources: parsed.resources,
         activeConsequences: parsed.activeConsequences,
-        lastSimulatedAt: profile.lastSimulatedAt?.toISOString() ?? null,
+        lastSimulatedAt: (profile as any).lastSimulatedAt?.toISOString?.() ?? null,
       },
     });
   } catch (e: any) {

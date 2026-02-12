@@ -1,0 +1,254 @@
+app/api/business/status/route.ts(29,22): error TS2532: Object is possibly 'undefined'.
+app/api/learning-path/route.ts(134,18): error TS2532: Object is possibly 'undefined'.
+app/api/learning-path/route.ts(183,7): error TS2532: Object is possibly 'undefined'.
+app/api/learning-path/route.ts(305,23): error TS18048: 'subjectObjectives' is possibly 'undefined'.
+app/api/learning-path/route.ts(327,53): error TS2345: Argument of type 'SyllabusObjective[] | undefined' is not assignable to parameter of type 'SyllabusObjective[]'.
+  Type 'undefined' is not assignable to type 'SyllabusObjective[]'.
+app/api/practicals/profile/route.ts(30,51): error TS2339: Property 'toISOString' does not exist on type '{}'.
+app/api/practicals/profile/route.ts(80,51): error TS2339: Property 'toISOString' does not exist on type '{}'.
+app/api/practicals/sessions/[id]/decision/route.ts(44,29): error TS2339: Property 'userId' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/decision/route.ts(47,17): error TS2339: Property 'state' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/decision/route.ts(57,9): error TS2322: Type 'unknown' is not assignable to type 'Record<string, number>'.
+app/api/practicals/sessions/[id]/decision/route.ts(58,9): error TS2322: Type 'unknown' is not assignable to type 'Record<string, number>'.
+app/api/practicals/sessions/[id]/decision/route.ts(62,30): error TS2339: Property 'snapshot' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/decision/route.ts(71,33): error TS2339: Property 'businessState' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(27,29): error TS2339: Property 'userId' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(32,33): error TS2339: Property 'businessState' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(36,55): error TS2345: Argument of type '{}' is not assignable to parameter of type 'StoryConfig'.
+  Type '{}' is missing the following properties from type 'StoryConfig': timeMultiplier, registrationDelayMinutes, loanApprovalDelayMinutes
+app/api/practicals/sessions/[id]/route.ts(38,19): error TS2339: Property 'state' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(58,37): error TS2339: Property 'startedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(59,40): error TS2339: Property 'lastPlayedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(60,30): error TS2339: Property 'completedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(60,61): error TS2339: Property 'completedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(63,59): error TS2345: Argument of type '{}' is not assignable to parameter of type 'StoryConfig'.
+  Type '{}' is missing the following properties from type 'StoryConfig': timeMultiplier, registrationDelayMinutes, loanApprovalDelayMinutes
+app/api/practicals/sessions/[id]/route.ts(94,29): error TS2339: Property 'userId' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(132,13): error TS18047: 'updated' is possibly 'null'.
+app/api/practicals/sessions/[id]/route.ts(133,16): error TS18047: 'updated' is possibly 'null'.
+app/api/practicals/sessions/[id]/route.ts(133,24): error TS2339: Property 'state' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(134,24): error TS18047: 'updated' is possibly 'null'.
+app/api/practicals/sessions/[id]/route.ts(134,32): error TS2339: Property 'businessState' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(135,22): error TS18047: 'updated' is possibly 'null'.
+app/api/practicals/sessions/[id]/route.ts(135,30): error TS2339: Property 'completedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/route.ts(135,53): error TS18047: 'updated' is possibly 'null'.
+app/api/practicals/sessions/[id]/route.ts(135,61): error TS2339: Property 'completedAt' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/tick/route.ts(34,29): error TS2339: Property 'userId' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/[id]/tick/route.ts(42,30): error TS2339: Property 'snapshot' does not exist on type '{ story: { id: string; name: unknown; slug: unknown; config: {}; } | null; id: string; }'.
+app/api/practicals/sessions/route.ts(69,19): error TS18046: 'profile.skills' is of type 'unknown'.
+app/api/practicals/sessions/route.ts(90,7): error TS2322: Type 'BusinessSimState | undefined' is not assignable to type 'Record<string, unknown> | undefined'.
+  Type 'BusinessSimState' is not assignable to type 'Record<string, unknown>'.
+    Index signature for type 'string' is missing in type 'BusinessSimState'.
+app/api/practicals/sessions/route.ts(91,7): error TS2322: Type 'DifficultyContext' is not assignable to type 'Record<string, unknown>'.
+  Index signature for type 'string' is missing in type 'DifficultyContext'.
+app/api/questions/generate/route.ts(102,28): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/api/training/update/route.ts(43,25): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/api/training/update/route.ts(44,29): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/community/page.tsx(166,66): error TS2532: Object is possibly 'undefined'.
+app/community/page.tsx(239,20): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(312,30): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(319,16): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(323,7): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(323,26): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(373,27): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(storage: FirebaseStorage, url?: string | undefined): StorageReference', gave the following error.
+    Argument of type 'FirebaseStorage | null' is not assignable to parameter of type 'FirebaseStorage'.
+      Type 'null' is not assignable to type 'FirebaseStorage'.
+  Overload 2 of 2, '(storageOrRef: FirebaseStorage | StorageReference, path?: string | undefined): StorageReference', gave the following error.
+    Argument of type 'FirebaseStorage | null' is not assignable to parameter of type 'FirebaseStorage | StorageReference'.
+      Type 'null' is not assignable to type 'FirebaseStorage | StorageReference'.
+app/community/page.tsx(557,95): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/community/page.tsx(625,115): error TS18048: 'activeDistrict' is possibly 'undefined'.
+app/home/page.tsx(42,41): error TS2345: Argument of type 'UserData | null' is not assignable to parameter of type 'Record<string, unknown>'.
+  Type 'null' is not assignable to type 'Record<string, unknown>'.
+app/learn/page.tsx(190,3): error TS2322: Type 'MascotEmotion | undefined' is not assignable to type 'MascotEmotion'.
+  Type 'undefined' is not assignable to type 'MascotEmotion'.
+app/learn/page.tsx(295,11): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+app/learn/page.tsx(301,11): error TS2322: Type 'SyllabusObjective[] | undefined' is not assignable to type 'SyllabusObjective[]'.
+  Type 'undefined' is not assignable to type 'SyllabusObjective[]'.
+app/lesson/page.tsx(186,26): error TS2345: Argument of type 'SimulationStep[] | undefined' is not assignable to parameter of type 'SetStateAction<any[]>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<any[]>'.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(128,30): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(370,53): error TS2532: Object is possibly 'undefined'.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(512,54): error TS18048: 'loyaltyUpdate' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(140,84): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(141,22): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(220,25): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(220,52): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(221,69): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(222,25): error TS2322: Type '{ timeElapsed: number; starchBroken: boolean; id?: string | undefined; bathId?: string | undefined; hasAmylase?: boolean | undefined; hasStarch?: boolean | undefined; }' is not assignable to type 'TestTube'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(224,42): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-enzymes-temp/page.tsx(226,79): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(276,31): error TS2345: Argument of type '(prev: string[]) => (string | undefined)[]' is not assignable to parameter of type 'SetStateAction<string[]>'.
+  Type '(prev: string[]) => (string | undefined)[]' is not assignable to type '(prevState: string[]) => string[]'.
+    Type '(string | undefined)[]' is not assignable to type 'string[]'.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(303,17): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(307,41): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(310,71): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(313,18): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(317,17): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(321,41): error TS18048: 'tube' is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(324,43): error TS2345: Argument of type '{ id?: string | undefined; contents?: { food: string | null; reagent: ReagentType | null; heated: boolean; } | undefined; color?: string | undefined; result?: "none" | "positive" | "negative" | "cloudy" | undefined; }' is not assignable to parameter of type 'TestTube'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(327,56): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/practicals/science/biology/lab/bio-food-tests/page.tsx(331,9): error TS2322: Type '{ id?: string | undefined; contents?: { food: string | null; reagent: ReagentType | null; heated: boolean; } | undefined; color?: string | undefined; result?: "none" | "positive" | "negative" | "cloudy" | undefined; }' is not assignable to type 'TestTube'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+app/practicals/science/biology/lab/bio-pulse-rate/page.tsx(97,36): error TS2532: Object is possibly 'undefined'.
+app/practicals/science/biology/lab/bio-pulse-rate/page.tsx(97,49): error TS2532: Object is possibly 'undefined'.
+app/practicals/technology-practicality/csec/[id]/MissionClient.tsx(445,113): error TS2532: Object is possibly 'undefined'.
+app/practicals/technology-practicality/csec/[id]/MissionClient.tsx(2721,28): error TS2532: Object is possibly 'undefined'.
+app/practicals/technology-practicality/csec/[id]/MissionClient.tsx(2745,50): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/practicals/technology-practicality/csec/[id]/MissionClient.tsx(2758,16): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/practicals/technology-practicality/malware-incident/page.tsx(301,19): error TS2532: Object is possibly 'undefined'.
+app/practicals/technology-practicality/malware-incident/page.tsx(302,19): error TS2532: Object is possibly 'undefined'.
+app/profile/[username]/avatar/page.tsx(170,33): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/profile/[username]/page.tsx(59,30): error TS2532: Object is possibly 'undefined'.
+app/profile/[username]/page.tsx(60,47): error TS2532: Object is possibly 'undefined'.
+app/profile/[username]/page.tsx(61,42): error TS2532: Object is possibly 'undefined'.
+app/signup/page.tsx(119,25): error TS2532: Object is possibly 'undefined'.
+app/welcome/diagnostic/page.tsx(138,54): error TS18048: 'q' is possibly 'undefined'.
+app/welcome/diagnostic/page.tsx(148,39): error TS18048: 'prev' is possibly 'undefined'.
+app/welcome/diagnostic/page.tsx(149,39): error TS18048: 'curr' is possibly 'undefined'.
+app/welcome/diagnostic/page.tsx(153,28): error TS2345: Argument of type 'DiagnosticQuestion | undefined' is not assignable to parameter of type 'SetStateAction<DiagnosticQuestion | null>'.
+  Type 'undefined' is not assignable to type 'SetStateAction<DiagnosticQuestion | null>'.
+app/welcome/diagnostic/page.tsx(154,46): error TS18048: 'bestMatch' is possibly 'undefined'.
+app/welcome/diagnostic/page.tsx(189,37): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/welcome/page.tsx(687,37): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+app/welcome/page.tsx(793,83): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+components/business/BusinessMeetingTablet.tsx(341,95): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessMeetingTablet.tsx(343,38): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessMeetingTablet.tsx(361,70): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessMeetingTablet.tsx(488,142): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessMeetingTablet.tsx(489,34): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessMeetingTablet.tsx(787,69): error TS18048: 'selectedMeeting' is possibly 'undefined'.
+components/business/BusinessTypeSelector.tsx(77,22): error TS18047: 'auth' is possibly 'null'.
+components/business/BusinessTypeSelector.tsx(88,32): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(storage: FirebaseStorage, url?: string | undefined): StorageReference', gave the following error.
+    Argument of type 'FirebaseStorage | null' is not assignable to parameter of type 'FirebaseStorage'.
+      Type 'null' is not assignable to type 'FirebaseStorage'.
+  Overload 2 of 2, '(storageOrRef: FirebaseStorage | StorageReference, path?: string | undefined): StorageReference', gave the following error.
+    Argument of type 'FirebaseStorage | null' is not assignable to parameter of type 'FirebaseStorage | StorageReference'.
+      Type 'null' is not assignable to type 'FirebaseStorage | StorageReference'.
+components/business/BusinessTypeSelector.tsx(183,29): error TS2532: Object is possibly 'undefined'.
+components/business/BusinessWorkspace.tsx(84,24): error TS2532: Object is possibly 'undefined'.
+components/business/BusinessWorkspace.tsx(154,38): error TS18048: 'currentStep' is possibly 'undefined'.
+components/business/BusinessWorkspace.tsx(162,69): error TS18048: 'currentStep' is possibly 'undefined'.
+components/business/BusinessWorkspace.tsx(164,63): error TS18048: 'currentStep' is possibly 'undefined'.
+components/business/BusinessWorkspace.tsx(168,38): error TS18048: 'currentStep' is possibly 'undefined'.
+components/business/Marketplace.tsx(143,28): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'Firestore'.
+      Type 'null' is not assignable to type 'Firestore'.
+  Overload 2 of 3, '(reference: CollectionReference<unknown, DocumentData>, path?: string | undefined, ...pathSegments: string[]): DocumentReference<unknown, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'CollectionReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'CollectionReference<unknown, DocumentData>'.
+  Overload 3 of 3, '(reference: DocumentReference<unknown, DocumentData>, path: string, ...pathSegments: string[]): DocumentReference<DocumentData, DocumentData>', gave the following error.
+    Argument of type 'Firestore | null' is not assignable to parameter of type 'DocumentReference<unknown, DocumentData>'.
+      Type 'null' is not assignable to type 'DocumentReference<unknown, DocumentData>'.
+components/business/StockExchangePanel.tsx(88,17): error TS2322: Type 'StockPortfolio' is not assignable to type 'Record<string, unknown>'.
+  Index signature for type 'string' is missing in type 'StockPortfolio'.
+components/cinematic/SceneRenderer.tsx(72,17): error TS2322: Type '{ isSpeaking: false; emotion?: CharacterEmotion | undefined; position?: "center" | "left" | "right" | "offscreen" | undefined; }' is not assignable to type '{ emotion: CharacterEmotion; position: "center" | "left" | "right" | "offscreen"; isSpeaking: boolean; }'.
+  Types of property 'emotion' are incompatible.
+    Type 'CharacterEmotion | undefined' is not assignable to type 'CharacterEmotion'.
+      Type 'undefined' is not assignable to type 'CharacterEmotion'.
+components/cinematic/SceneRenderer.tsx(77,17): error TS2322: Type '{ isSpeaking: true; emotion: CharacterEmotion; position?: "center" | "left" | "right" | "offscreen" | undefined; }' is not assignable to type '{ emotion: CharacterEmotion; position: "center" | "left" | "right" | "offscreen"; isSpeaking: boolean; }'.
+  Types of property 'position' are incompatible.
+    Type '"center" | "left" | "right" | "offscreen" | undefined' is not assignable to type '"center" | "left" | "right" | "offscreen"'.
+      Type 'undefined' is not assignable to type '"center" | "left" | "right" | "offscreen"'.
+components/cinematic/SceneRenderer.tsx(80,53): error TS2532: Object is possibly 'undefined'.
+components/cinematic/SceneRenderer.tsx(92,12): error TS18048: 'DEFAULT_TRANSITIONS.exit' is possibly 'undefined'.
+components/cinematic/SceneRenderer.tsx(147,41): error TS18048: 'DEFAULT_TRANSITIONS.enter' is possibly 'undefined'.
+components/learning/DailyTip.tsx(87,67): error TS18048: 'currentTip' is possibly 'undefined'.
+components/learning/DailyTip.tsx(93,49): error TS18048: 'currentTip' is possibly 'undefined'.
+components/learning/DailyTip.tsx(99,30): error TS18048: 'currentTip' is possibly 'undefined'.
+components/learning/DailyTip.tsx(106,22): error TS18048: 'currentTip' is possibly 'undefined'.
+components/learning/DailyTip.tsx(110,87): error TS18048: 'currentTip' is possibly 'undefined'.
+components/learning/DailyTip.tsx(111,89): error TS18048: 'currentTip' is possibly 'undefined'.
+components/lesson/DragDropQuestion.tsx(43,10): error TS2322: Type 'DroppedItem | undefined' is not assignable to type 'DroppedItem'.
+  Type 'undefined' is not assignable to type 'DroppedItem'.
+components/lesson/DragDropQuestion.tsx(43,23): error TS2322: Type 'DroppedItem | undefined' is not assignable to type 'DroppedItem'.
+  Type 'undefined' is not assignable to type 'DroppedItem'.
+components/lesson/DragDropQuestion.tsx(133,47): error TS18048: 'touch' is possibly 'undefined'.
+components/lesson/DragDropQuestion.tsx(133,62): error TS18048: 'touch' is possibly 'undefined'.
+components/lesson/FormulaBuilder.tsx(31,23): error TS2345: Argument of type '(prev: string[]) => (string | undefined)[]' is not assignable to parameter of type 'SetStateAction<string[]>'.
+  Type '(prev: string[]) => (string | undefined)[]' is not assignable to type '(prevState: string[]) => string[]'.
+    Type '(string | undefined)[]' is not assignable to type 'string[]'.
+      Type 'string | undefined' is not assignable to type 'string'.
+        Type 'undefined' is not assignable to type 'string'.
+components/science/LabWorkbench.tsx(253,22): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+lib/brightos/wallpapers.ts(19,3): error TS2322: Type '"BrightOS Cyan.jpg" | "BrightOS Green.jpg" | "BrightOS Orange.jpg" | "BrightOS Purple.jpg" | "BrightOS Violet.jpg" | undefined' is not assignable to type '"BrightOS Cyan.jpg" | "BrightOS Green.jpg" | "BrightOS Orange.jpg" | "BrightOS Purple.jpg" | "BrightOS Violet.jpg"'.
+  Type 'undefined' is not assignable to type '"BrightOS Cyan.jpg" | "BrightOS Green.jpg" | "BrightOS Orange.jpg" | "BrightOS Purple.jpg" | "BrightOS Violet.jpg"'.
+lib/cinematic/character-registry.ts(129,5): error TS2322: Type 'Character | undefined' is not assignable to type 'Character'.
+  Type 'undefined' is not assignable to type 'Character'.
+lib/errors/errorHandler.ts(14,25): error TS2352: Conversion of type 'object & Record<"name", unknown>' to type '{ message: string; code?: string | undefined; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'message' is missing in type 'object & Record<"name", unknown>' but required in type '{ message: string; code?: string | undefined; }'.
+lib/nable/spaced-repetition.ts(150,27): error TS2532: Object is possibly 'undefined'.

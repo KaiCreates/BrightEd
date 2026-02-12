@@ -1,0 +1,7 @@
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(377,5): error TS1128: Declaration or statement expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(377,6): error TS1128: Declaration or statement expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(377,12): error TS1005: ';' expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(380,3): error TS1128: Declaration or statement expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(380,4): error TS1128: Declaration or statement expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(380,84): error TS1005: ';' expected.
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(778,1): error TS1128: Declaration or statement expected.

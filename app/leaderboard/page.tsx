@@ -41,6 +41,10 @@ export default function LeaderboardPage() {
             try {
                 if (activeTab === 'business') {
                     // Business Leaderboard
+                    if (!db) {
+                        setLoading(false);
+                        return;
+                    }
                     const bizRef = collection(db, 'businesses');
                     const q = query(bizRef, orderBy('valuation', 'desc'), limit(20));
                     const snapshot = await getDocs(q);

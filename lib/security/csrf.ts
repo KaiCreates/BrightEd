@@ -46,12 +46,12 @@ interface CsrfToken {
 export function generateToken(): CsrfToken {
   const secret = randomBytes(defaultConfig.tokenLength).toString('base64url');
   const salt = randomBytes(defaultConfig.saltLength).toString('base64url');
-  
+
   // Create public token by hashing secret with salt
   const token = createHash('sha256')
     .update(secret + salt)
     .digest('base64url');
-  
+
   return {
     token,
     secret,
@@ -76,11 +76,11 @@ export function validateToken(
   if (Date.now() > expiresAt) {
     return false;
   }
-  
+
   // Reconstruct expected token
   // Note: We need to extract salt from the secret or store it separately
   // For simplicity, we'll use a different approach with double-submit cookie pattern
-  
+
   return true;
 }
 
@@ -106,11 +106,11 @@ export function generateDoubleSubmitToken(): string {
  */
 export function setCsrfCookie(): { token: string; cookieValue: string } {
   const token = generateDoubleSubmitToken();
-  
+
   // Cookie value is the same as token (double-submit pattern)
   // In production, you might want to sign this cookie
   const cookieValue = token;
-  
+
   return { token, cookieValue };
 }
 
@@ -128,16 +128,16 @@ export function verifyDoubleSubmitToken(
   if (!cookieToken || !headerToken) {
     return false;
   }
-  
+
   try {
     // Use timing-safe comparison to prevent timing attacks
     const cookieBuf = Buffer.from(cookieToken);
     const headerBuf = Buffer.from(headerToken);
-    
+
     if (cookieBuf.length !== headerBuf.length) {
       return false;
     }
-    
+
     return timingSafeEqual(cookieBuf, headerBuf);
   } catch {
     return false;
@@ -165,12 +165,12 @@ export function validateCsrfRequest(request: Request): CsrfValidationResult {
   if (safeMethods.includes(request.method)) {
     return { valid: true };
   }
-  
+
   // Get tokens from cookie and header
   const cookieHeader = request.headers.get('cookie');
   const cookieToken = extractCookieValue(cookieHeader, defaultConfig.cookieName);
   const headerToken = request.headers.get(defaultConfig.headerName.toLowerCase());
-  
+
   // If no cookie token, generate one and fail validation
   if (!cookieToken) {
     return {
@@ -178,23 +178,23 @@ export function validateCsrfRequest(request: Request): CsrfValidationResult {
       error: 'CSRF cookie not found',
     };
   }
-  
+
   // If no header token, check body (for form submissions)
-  let requestToken = headerToken;
-  
+  const requestToken = headerToken;
+
   if (!requestToken && request.method === 'POST') {
     // Check form data or JSON body
     // This would need to be handled based on content type
     // For now, we require the header
   }
-  
+
   if (!requestToken) {
     return {
       valid: false,
       error: 'CSRF token not provided in request',
     };
   }
-  
+
   // Validate tokens match
   if (!verifyDoubleSubmitToken(cookieToken, requestToken)) {
     return {
@@ -202,7 +202,7 @@ export function validateCsrfRequest(request: Request): CsrfValidationResult {
       error: 'CSRF token mismatch',
     };
   }
-  
+
   return { valid: true };
 }
 
@@ -214,15 +214,15 @@ function extractCookieValue(
   cookieName: string
 ): string | null {
   if (!cookieHeader) return null;
-  
+
   const cookies = cookieHeader.split(';');
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split('=');
     if (name === cookieName) {
-      return decodeURIComponent(value);
+      return decodeURIComponent(value ?? '');
     }
   }
-  
+
   return null;
 }
 
@@ -256,20 +256,20 @@ export function getCsrfCookieOptions(): CsrfCookieOptions {
  */
 export function createCsrfCookie(token: string): string {
   const options = getCsrfCookieOptions();
-  
+
   let cookie = `${defaultConfig.cookieName}=${encodeURIComponent(token)}`;
   cookie += `; Path=${options.path}`;
   cookie += `; SameSite=${options.sameSite}`;
   cookie += `; HttpOnly`;
-  
+
   if (options.secure) {
     cookie += `; Secure`;
   }
-  
+
   if (options.maxAge) {
     cookie += `; Max-Age=${options.maxAge}`;
   }
-  
+
   return cookie;
 }
 
@@ -290,7 +290,7 @@ export async function withCsrfProtection(
 ): Promise<Response> {
   // Validate CSRF
   const validation = validateCsrfRequest(request);
-  
+
   if (!validation.valid) {
     return new Response(
       JSON.stringify({
@@ -305,7 +305,7 @@ export async function withCsrfProtection(
       }
     );
   }
-  
+
   // Execute handler
   return handler();
 }
@@ -347,8 +347,8 @@ export function csrfMiddleware(request: Request): {
   error?: string;
 } {
   const cookieHeader = request.headers.get('cookie');
-  let cookieToken = extractCookieValue(cookieHeader, defaultConfig.cookieName);
-  
+  const cookieToken = extractCookieValue(cookieHeader, defaultConfig.cookieName);
+
   // If no CSRF cookie exists, we need to generate one
   if (!cookieToken) {
     // For safe methods, generate new token
@@ -356,7 +356,7 @@ export function csrfMiddleware(request: Request): {
       const { token } = setCsrfCookie();
       return { token, valid: true };
     }
-    
+
     // For unsafe methods without cookie, reject
     return {
       token: null,
@@ -364,11 +364,11 @@ export function csrfMiddleware(request: Request): {
       error: 'CSRF cookie not established',
     };
   }
-  
+
   // Validate request for unsafe methods
   if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method)) {
     const validation = validateCsrfRequest(request);
-    
+
     if (!validation.valid) {
       return {
         token: cookieToken,
@@ -377,7 +377,7 @@ export function csrfMiddleware(request: Request): {
       };
     }
   }
-  
+
   return { token: cookieToken, valid: true };
 }
 
@@ -395,22 +395,22 @@ export function getCsrfToken(): string | null {
   if (typeof document === 'undefined') {
     return null;
   }
-  
+
   // Try to get from meta tag first
   const metaTag = document.querySelector('meta[name="csrf-token"]');
   if (metaTag) {
     return metaTag.getAttribute('content');
   }
-  
+
   // Fallback to cookie
   const cookies = document.cookie.split(';');
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split('=');
     if (name === defaultConfig.cookieName) {
-      return decodeURIComponent(value);
+      return decodeURIComponent(value ?? '');
     }
   }
-  
+
   return null;
 }
 
@@ -427,16 +427,16 @@ export async function fetchWithCsrf(
   init?: RequestInit
 ): Promise<Response> {
   const token = getCsrfToken();
-  
+
   if (!token) {
     console.warn('CSRF token not found');
     return fetch(input, init);
   }
-  
+
   // Add CSRF header
   const headers = new Headers(init?.headers);
   headers.set(defaultConfig.headerName, token);
-  
+
   return fetch(input, {
     ...init,
     headers,

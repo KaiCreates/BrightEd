@@ -32,27 +32,27 @@ interface CacheItem<T> {
 
 export class CacheManager {
   private static readonly VERSION = '1.0.0';
-  
+
   /**
    * Set a cache item with optional TTL
    */
   static set<T>(key: string, data: T, ttl?: number): void {
     if (typeof window === 'undefined') return;
-    
+
     const item: CacheItem<T> = {
       data,
       timestamp: Date.now(),
       ttl: ttl || CACHE_TTL[key as keyof typeof CACHE_TTL] || 5 * 60 * 1000,
       version: this.VERSION
     };
-    
+
     try {
       localStorage.setItem(key, JSON.stringify(item));
     } catch (error) {
       // Handle quota exceeded
       console.warn('Cache storage full, clearing old items:', error);
       this.clearExpired();
-      
+
       try {
         localStorage.setItem(key, JSON.stringify(item));
       } catch {
@@ -60,32 +60,32 @@ export class CacheManager {
       }
     }
   }
-  
+
   /**
    * Get a cache item if it exists and hasn't expired
    */
   static get<T>(key: string): T | null {
     if (typeof window === 'undefined') return null;
-    
+
     const item = localStorage.getItem(key);
     if (!item) return null;
-    
+
     try {
       const parsed: CacheItem<T> = JSON.parse(item);
-      
+
       // Check version compatibility
       if (parsed.version !== this.VERSION) {
         localStorage.removeItem(key);
         return null;
       }
-      
+
       // Check expiration
       const age = Date.now() - parsed.timestamp;
       if (age > parsed.ttl) {
         localStorage.removeItem(key);
         return null;
       }
-      
+
       return parsed.data;
     } catch (error) {
       console.warn('Failed to parse cache item:', error);
@@ -93,7 +93,7 @@ export class CacheManager {
       return null;
     }
   }
-  
+
   /**
    * Invalidate a specific cache key
    */
@@ -101,7 +101,7 @@ export class CacheManager {
     if (typeof window === 'undefined') return;
     localStorage.removeItem(key);
   }
-  
+
   /**
    * Invalidate multiple cache keys
    */
@@ -109,52 +109,44 @@ export class CacheManager {
     if (typeof window === 'undefined') return;
     keys.forEach(key => localStorage.removeItem(key));
   }
-  
+
   /**
    * Clear all expired cache items
    */
   static clearExpired(): void {
     if (typeof window === 'undefined') return;
-    
+
     const keys = Object.keys(localStorage);
-    let cleared = 0;
-    
     keys.forEach(key => {
       try {
         const item = localStorage.getItem(key);
         if (!item) return;
-        
-        const parsed: CacheItem<any> = JSON.parse(item);
+
+        const parsed: CacheItem<unknown> = JSON.parse(item);
         const age = Date.now() - parsed.timestamp;
-        
+
         if (age > parsed.ttl) {
           localStorage.removeItem(key);
-          cleared++;
         }
       } catch {
         // Invalid item, remove it
         localStorage.removeItem(key);
-        cleared++;
       }
     });
-    
-    if (cleared > 0) {
-      console.log(`🧹 Cleared ${cleared} expired cache items`);
-    }
+
   }
-  
+
   /**
    * Clear all cache items
    */
   static clearAll(): void {
     if (typeof window === 'undefined') return;
-    
+
     const keys = Object.values(CACHE_KEYS);
     keys.forEach(key => localStorage.removeItem(key));
-    
-    console.log('🧹 Cleared all cache items');
+
   }
-  
+
   /**
    * Get cache statistics
    */
@@ -166,42 +158,42 @@ export class CacheManager {
     if (typeof window === 'undefined') {
       return { totalItems: 0, totalSize: 0, items: [] };
     }
-    
+
     const keys = Object.keys(localStorage);
     let totalSize = 0;
     const items: Array<{ key: string; size: number; age: number; expired: boolean }> = [];
-    
+
     keys.forEach(key => {
       const item = localStorage.getItem(key);
       if (!item) return;
-      
+
       const size = new Blob([item]).size;
       totalSize += size;
-      
+
       try {
-        const parsed: CacheItem<any> = JSON.parse(item);
+        const parsed: CacheItem<unknown> = JSON.parse(item);
         const age = Date.now() - parsed.timestamp;
         const expired = age > parsed.ttl;
-        
+
         items.push({ key, size, age, expired });
       } catch {
         items.push({ key, size, age: 0, expired: true });
       }
     });
-    
+
     return {
       totalItems: items.length,
       totalSize,
       items: items.sort((a, b) => b.size - a.size)
     };
   }
-  
+
   /**
    * Check if cache is available
    */
   static isAvailable(): boolean {
     if (typeof window === 'undefined') return false;
-    
+
     try {
       const test = '__cache_test__';
       localStorage.setItem(test, test);
@@ -219,7 +211,7 @@ if (typeof window !== 'undefined') {
   setTimeout(() => {
     CacheManager.clearExpired();
   }, 2000);
-  
+
   // Run cleanup every 5 minutes
   setInterval(() => {
     CacheManager.clearExpired();

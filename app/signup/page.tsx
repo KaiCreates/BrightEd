@@ -116,7 +116,8 @@ export default function SignUpPage() {
       })
 
       if (!validationResult.success) {
-        throw new Error(validationResult.error.errors[0].message)
+        const msg = (validationResult as any).error?.errors[0]?.message || "Validation failed";
+        throw new Error(msg)
       }
 
       const validatedData = validationResult.data
@@ -124,6 +125,7 @@ export default function SignUpPage() {
       // 1. Create User
       const { createUserWithEmailAndPassword, updateProfile } = await import('firebase/auth')
       const { auth, db } = await import('@/lib/firebase')
+      if (!auth || !db) throw new Error("Firebase services not initialized");
       const { doc, setDoc, collection, writeBatch } = await import('firebase/firestore')
 
       const userCredential = await createUserWithEmailAndPassword(auth, validatedData.email, validatedData.password)

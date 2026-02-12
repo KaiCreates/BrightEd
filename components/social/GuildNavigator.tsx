@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSocialHub } from '@/lib/social-hub-context';
+import { useSocialHub, Room } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
-import { BrightLayer, BrightButton } from '@/components/system';
+import { BrightButton } from '@/components/system';
 import Fuse from 'fuse.js';
+import { debounce } from '@/lib/utils/debounce';
 
 const SUBJECT_LOUNGES = [
     { name: 'Principles of Business', subject: 'Principles of Business', icon: '💼' },
@@ -18,12 +19,29 @@ const SUBJECT_LOUNGES = [
 export function GuildNavigator() {
     const { rooms, activeRoom, setActiveRoom, createPrivateRoom, joinRoom, leaveRoom, deleteRoom } = useSocialHub();
     const { user } = useAuth();
+
+    // Search State
     const [searchQuery, setSearchQuery] = useState('');
+    const [debouncedQuery, setDebouncedQuery] = useState('');
+    const searchCacheRef = useRef<Record<string, Room[]>>({});
+
+    // Modal & Action State
     const [showJoinModal, setShowJoinModal] = useState(false);
     const [joinCode, setJoinCode] = useState('');
     const [isJoining, setIsJoining] = useState(false);
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [isCreating, setIsCreating] = useState(false);
+
+    const debouncedSetQuery = useMemo(
+        () => debounce((val: unknown) => setDebouncedQuery(val as string), 300),
+        []
+    );
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        setSearchQuery(val);
+        debouncedSetQuery(val);
+    };
 
     // Combine subject lounges with private rooms
     const allRooms = useMemo(() => {
@@ -52,10 +70,23 @@ export function GuildNavigator() {
     }, [allRooms]);
 
     const filteredRooms = useMemo(() => {
-        if (!searchQuery.trim()) return allRooms;
-        const results = fuse.search(searchQuery);
-        return results.map(result => result.item);
-    }, [searchQuery, fuse, allRooms]);
+        const query = debouncedQuery.trim().toLowerCase();
+
+        // Min length check
+        if (query.length < 2) return allRooms;
+
+        // Check local cache
+        if (searchCacheRef.current[query]) {
+            return searchCacheRef.current[query];
+        }
+
+        const results = fuse.search(query);
+        const matched = results.map(result => result.item);
+
+        // Save to cache
+        searchCacheRef.current[query] = matched;
+        return matched;
+    }, [debouncedQuery, fuse, allRooms]);
 
     const handleJoinRoom = async () => {
         if (!joinCode.trim() || joinCode.length !== 6) return;
@@ -99,7 +130,7 @@ export function GuildNavigator() {
                     type="text"
                     placeholder="Search rooms..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={handleSearchChange}
                     className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--brand-primary)] transition-colors"
                 />
             </div>
@@ -133,7 +164,7 @@ export function GuildNavigator() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            onClick={() => setActiveRoom(room as any)}
+                            onClick={() => setActiveRoom(room as Room)}
                             className={`
                                 p-3 rounded-xl cursor-pointer transition-all
                                 ${activeRoom?.id === room.id
@@ -293,3 +324,5 @@ export function GuildNavigator() {
         </div>
     );
 }
+
+export default GuildNavigator;

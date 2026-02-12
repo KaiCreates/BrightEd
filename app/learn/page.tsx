@@ -187,7 +187,7 @@ const getHorizontalOffset = (index: number, nodeType: NodeType) => {
 
 const getMascotEmotion = (index: number): MascotEmotion => {
   const emotions: MascotEmotion[] = ['happy', 'thinking', 'idea', 'wink', 'smart', 'studying', 'reading', 'magic']
-  return emotions[index % emotions.length]
+  return emotions[index % emotions.length]!
 }
 
 // =============================================================================
@@ -292,13 +292,13 @@ function LearnContent() {
 
         let currentSubject = selectedSubject
         if (!currentSubject && availableSubjects.length > 0) {
-          currentSubject = availableSubjects[0]
+          currentSubject = availableSubjects[0] ?? null
           setSelectedSubject(currentSubject)
         }
 
         let objectives: SyllabusObjective[] = []
         if (currentSubject && pathsBySubject[currentSubject]) {
-          objectives = pathsBySubject[currentSubject]
+          objectives = pathsBySubject[currentSubject] ?? []
         } else {
           objectives = Object.values(pathsBySubject).flat()
         }

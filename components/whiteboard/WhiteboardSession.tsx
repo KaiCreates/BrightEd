@@ -1,16 +1,10 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import NextImage from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { db, isFirebaseReady } from '@/lib/firebase'
-import {
-  doc,
-  getDoc,
-  serverTimestamp,
-  setDoc,
-} from 'firebase/firestore'
 import { useTheme } from '@/lib/theme-context'
 // --- Types ---
 type Tool = 'select' | 'hand' | 'pen' | 'rect' | 'circle' | 'arrow' | 'text' | 'image' | 'laser' | 'comment' | 'sticky' | 'frame'
@@ -101,7 +95,8 @@ function worldFromClient(opts: { clientX: number; clientY: number; rect: DOMRect
 function hitTest(x: number, y: number, el: WhiteboardElement): boolean {
   const buffer = 10;
   if (el.type === 'rect' || el.type === 'image' || el.type === 'sticky') {
-    return x >= el.x && x <= el.x + (el as any).w && y >= el.y && y <= el.y + (el as any).h;
+    const rectEl = el as { w: number; h: number; x: number; y: number };
+    return x >= el.x && x <= el.x + rectEl.w && y >= el.y && y <= el.y + rectEl.h;
   }
   if (el.type === 'circle') {
     const dx = x - el.x;
@@ -128,7 +123,7 @@ function hitTest(x: number, y: number, el: WhiteboardElement): boolean {
 
 // --- Main Component ---
 export function WhiteboardSession(props: WhiteboardSessionProps) {
-  const { isOpen, uid, initialBoardId, initialBoardName, roomId, activeRoomIdForPosting, onPostToHub, onClose } = props
+  const { isOpen, initialBoardId, initialBoardName, onClose } = props
   const { theme, toggleTheme } = useTheme()
   const [isMobile, setIsMobile] = useState(false)
 
@@ -156,19 +151,13 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
 
   // UI State
   const [isExitModalOpen, setIsExitModalOpen] = useState(false)
-  const [isResourceSidebarOpen, setIsResourceSidebarOpen] = useState(true)
-  const [isSaving, setIsSaving] = useState(false)
-  const [saveError, setSaveError] = useState<string | null>(null)
 
   const selectTool = (t: Tool) => {
     setTool(t)
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
-      try { navigator.vibrate(10) } catch (e) { }
+      try { navigator.vibrate(10) } catch (_e) { }
     }
   }
-
-  // Resources
-  const [pdfPages, setPdfPages] = useState<Array<{ pageNumber: number; dataUrl: string; width: number; height: number }> | null>(null)
 
   // Refs
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -198,7 +187,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   const [textEditPos, setTextEditPos] = useState({ x: 0, y: 0 })
 
   const fileInputImageRef = useRef<HTMLInputElement | null>(null)
-  const fileInputPdfRef = useRef<HTMLInputElement | null>(null)
 
   // Multi-touch Zoom
   const activePointersRef = useRef<Map<number, { x: number; y: number }>>(new Map())
@@ -300,8 +288,8 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         ctx.lineCap = 'round'
         ctx.lineJoin = 'round'
         ctx.beginPath()
-        ctx.moveTo(el.points[0].x, el.points[0].y)
-        for (let i = 1; i < el.points.length; i++) ctx.lineTo(el.points[i].x, el.points[i].y);
+        ctx.moveTo(el.points[0]!.x, el.points[0]!.y)
+        for (let i = 1; i < el.points.length; i++) ctx.lineTo(el.points[i]!.x, el.points[i]!.y);
         ctx.stroke()
       } else if (el.type === 'text') {
         if (el.id !== textEditId) {
@@ -335,9 +323,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           ctx.font = `bold ${Math.max(12, 16)}px sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          const words = el.text.split(' ');
-          let line = '';
-          let translateY = 0;
           ctx.fillText(el.text, el.x + el.w / 2, el.y + el.h / 2);
           ctx.textAlign = 'start';
           ctx.textBaseline = 'alphabetic';
@@ -385,7 +370,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   }, [elements, panX, panY, zoom, selection, tool, textEditId, theme])
 
   useEffect(() => {
-    let anim = requestAnimationFrame(render)
+    const anim = requestAnimationFrame(render)
     return () => cancelAnimationFrame(anim)
   }) // render loop
 
@@ -452,7 +437,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
           startWorldX: x,
           startWorldY: y,
           activeElementId: hit.id,
-          initialElPos: { x: (hit as any).x ?? 0, y: (hit as any).y ?? 0 }
+          initialElPos: { x: (hit as { x?: number }).x ?? 0, y: (hit as { y?: number }).y ?? 0 }
         }
       } else {
         setSelection(null)
@@ -491,7 +476,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
 
     if (activePointersRef.current.size === 2) {
       const pts = Array.from(activePointersRef.current.values())
-      const dist = Math.sqrt(Math.pow(pts[0].x - pts[1].x, 2) + Math.pow(pts[0].y - pts[1].y, 2))
+      const dist = Math.sqrt(Math.pow(pts[0]!.x - pts[1]!.x, 2) + Math.pow(pts[0]!.y - pts[1]!.y, 2))
       if (lastPinchDistRef.current !== null) {
         const delta = dist / lastPinchDistRef.current
         setZoom(prev => Math.min(3, Math.max(0.1, prev * delta)))
@@ -582,7 +567,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     const hit = elements.slice().reverse().find(el => hitTest(x, y, el))
     if (hit && (hit.type === 'text' || hit.type === 'sticky')) {
       setTextEditId(hit.id)
-      setTextEditValue((hit as any).text)
+      setTextEditValue((hit as { text: string }).text)
       setTextEditPos({ x: hit.x, y: hit.y })
     }
   }
@@ -595,10 +580,6 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     setElements(prev => [...prev, { id: safeUuid(), type: 'text', x, y, text: payload, color: 'black', fontSize: 18, createdAt: Date.now(), width: 0 }])
   }, [panX, panY, zoom])
 
-  const addImageElementFromDataUrl = useCallback((dataUrl: string, w: number, h: number) => {
-    const scale = Math.min(1, 520 / w)
-    setElements(prev => [...prev, { id: safeUuid(), type: 'image', x: 100, y: 100, w: w * scale, h: h * scale, url: dataUrl, createdAt: Date.now(), color: 'black', width: 0 }])
-  }, [])
 
 
 
@@ -652,6 +633,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         canvas.height = viewport.height
         canvas.width = viewport.width
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await page.render({ canvasContext: context, viewport } as any).promise
 
         const imgDataUrl = canvas.toDataURL('image/png')
@@ -710,16 +692,16 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
 
       // 1. Handle Files (Images/PDFs)
       for (let i = 0; i < items.length; i++) {
-        if (items[i].kind === 'file') {
-          const file = items[i].getAsFile()
+        if (items[i]!.kind === 'file') {
+          const file = items[i]!.getAsFile()
           if (file) {
             await processFile(file, pasteX, pasteY)
             pasteX += 20 // Stagger multiple pastes
             pasteY += 20
           }
-        } else if (items[i].kind === 'string' && items[i].type === 'text/plain') {
+        } else if (items[i]!.kind === 'string' && items[i]!.type === 'text/plain') {
           // 2. Handle Text / Internal Elements
-          items[i].getAsString((s) => {
+          items[i]!.getAsString((s) => {
             try {
               const parsed = JSON.parse(s)
               if (Array.isArray(parsed) && parsed[0]?.id && parsed[0]?.type) {
@@ -737,14 +719,14 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
                   return {
                     ...el,
                     id: safeUuid(),
-                    x: (el as any).x + offset,
-                    y: (el as any).y + offset,
+                    x: ((el as unknown) as { x: number }).x + offset,
+                    y: ((el as unknown) as { y: number }).y + offset,
                     createdAt: Date.now()
                   }
                 })
                 setElements(prev => [...prev, ...newElements])
                 // Select the new elements
-                if (newElements.length === 1) setSelection(newElements[0].id)
+                if (newElements.length === 1) setSelection(newElements[0]!.id)
               } else {
                 // Plain text paste -> create sticky note?
                 // Or maybe just text tool?
@@ -981,8 +963,7 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
         onPointerLeave={handlePointerUp}
         onDoubleClick={handleDoubleClick}
         onWheel={(e) => {
-          const rect = containerRef.current!.getBoundingClientRect()
-          const { x, y } = worldFromClient({ clientX: e.clientX, clientY: e.clientY, rect, panX, panY, zoom })
+          // const { x, y } = worldFromClient({ clientX: e.clientX, clientY: e.clientY, rect, panX, panY, zoom })
           const factor = e.deltaY > 0 ? 0.9 : 1.1
           const nextZoom = Math.min(3, Math.max(0.1, zoom * factor))
           setZoom(nextZoom)
@@ -1107,7 +1088,16 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
   )
 }
 
-function ToolButtonPro({ active, icon, label, onClick, theme, isMobile }: any) {
+interface ToolButtonProProps {
+  active?: boolean;
+  icon?: React.ReactNode;
+  label?: string;
+  onClick?: () => void;
+  theme?: string;
+  isMobile?: boolean;
+}
+
+function ToolButtonPro({ active, icon, label, onClick, theme, isMobile }: ToolButtonProProps) {
   return (
     <button
       onClick={onClick}

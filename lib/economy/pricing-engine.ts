@@ -3,8 +3,6 @@
  * Implements supply/demand curves and dynamic market pricing
  */
 
-import { MarketItem } from './economy-types';
-
 export interface SupplyDemandCurve {
     productId: string;
     basePrice: number;

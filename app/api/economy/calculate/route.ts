@@ -3,18 +3,18 @@ import { verifyAuth } from '@/lib/auth-server';
 import { adminDb } from '@/lib/firebase-admin';
 import { z } from 'zod';
 import { rateLimit, handleRateLimit } from '@/lib/rate-limit';
-import { 
-  generateOrdersForTick, 
-  acceptOrder, 
-  rejectOrder, 
-  startOrder, 
-  completeOrder, 
+import {
+  generateOrdersForTick,
+  acceptOrder,
+  rejectOrder,
+  startOrder,
+  completeOrder,
   failOrder,
   checkExpiredOrders
 } from '@/lib/economy/order-engine';
-import { 
+import {
   BusinessState,
-  Order 
+  Order
 } from '@/lib/economy/economy-types';
 import { getBusinessType } from '@/lib/economy/business-templates';
 
@@ -38,7 +38,7 @@ async function getBusinessState(businessId: string): Promise<BusinessState | nul
   try {
     const businessDoc = await adminDb.collection('businesses').doc(businessId).get();
     if (!businessDoc.exists) return null;
-    
+
     const data = businessDoc.data();
     if (!data) return null;
 
@@ -117,12 +117,12 @@ export async function POST(request: NextRequest) {
 
     const decodedToken = await verifyAuth(request);
     const body = await request.json();
-    
+
     const result = CalculateOrdersSchema.safeParse(body);
     if (!result.success) {
-      return NextResponse.json({ 
-        error: 'Invalid request data', 
-        details: result.error.format() 
+      return NextResponse.json({
+        error: 'Invalid request data',
+        details: result.error.format()
       }, { status: 400 });
     }
 
@@ -161,7 +161,7 @@ export async function POST(request: NextRequest) {
     if (newOrders.length > 0) {
       const batch = adminDb.batch();
       const ordersRef = adminDb.collection('businesses').doc(businessId).collection('orders');
-      
+
       newOrders.forEach(order => {
         const orderRef = ordersRef.doc();
         batch.set(orderRef, {
@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
     const allOrdersSnapshot = await allOrdersRef
       .where('status', 'in', ['pending', 'accepted', 'in_progress'])
       .get();
-    
+
     const allOrders = allOrdersSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
@@ -221,12 +221,12 @@ export async function PUT(request: NextRequest) {
 
     const decodedToken = await verifyAuth(request);
     const body = await request.json();
-    
+
     const result = OrderActionSchema.safeParse(body);
     if (!result.success) {
-      return NextResponse.json({ 
-        error: 'Invalid request data', 
-        details: result.error.format() 
+      return NextResponse.json({
+        error: 'Invalid request data',
+        details: result.error.format()
       }, { status: 400 });
     }
 
@@ -246,7 +246,7 @@ export async function PUT(request: NextRequest) {
     // Get the order
     const orderRef = adminDb.collection('businesses').doc(businessId).collection('orders').doc(orderId);
     const orderDoc = await orderRef.get();
-    
+
     if (!orderDoc.exists) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
@@ -254,24 +254,24 @@ export async function PUT(request: NextRequest) {
     const order = { id: orderId, ...orderDoc.data() } as Order;
 
     let updatedOrder: Order;
-    let businessUpdate: Partial<BusinessState> = {};
+    const businessUpdate: Record<string, any> = {};
 
     // Process the action
     switch (action) {
       case 'accept':
         updatedOrder = acceptOrder(order);
         break;
-        
+
       case 'reject':
         const rejectResult = rejectOrder(order);
         updatedOrder = rejectResult.order;
         businessUpdate.reputation = Math.max(0, businessState.reputation - rejectResult.reputationPenalty);
         break;
-        
+
       case 'start':
         updatedOrder = startOrder(order);
         break;
-        
+
       case 'complete':
         if (qualityScore === undefined) {
           return NextResponse.json({ error: 'Quality score is required for completion' }, { status: 400 });
@@ -281,7 +281,7 @@ export async function PUT(request: NextRequest) {
         businessUpdate.cashBalance = businessState.cashBalance + completeResult.payment;
         businessUpdate.ordersCompleted = businessState.ordersCompleted + 1;
         break;
-        
+
       case 'fail':
         const failReason = (reason as 'deadline_missed' | 'stockout' | 'cancelled_by_business') || 'cancelled_by_business';
         const failResult = failOrder(order, failReason);
@@ -290,7 +290,7 @@ export async function PUT(request: NextRequest) {
         businessUpdate.reputation = Math.max(0, businessState.reputation - failResult.reputationPenalty);
         businessUpdate.ordersFailed = businessState.ordersFailed + 1;
         break;
-        
+
       default:
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }

@@ -7,19 +7,20 @@ import { adminDb } from '@/lib/firebase-admin';
 import * as admin from 'firebase-admin';
 
 // Helper for Firestore timestamp conversion
-function convertTimestamp(data: any): any {
-  if (!data) return data;
-  
-  const converted = { ...data };
-  
-  // Convert Firestore Timestamps to ISO strings
-  Object.keys(converted).forEach(key => {
-    if (converted[key] && typeof converted[key] === 'object' && 'toDate' in converted[key]) {
-      converted[key] = converted[key].toDate().toISOString();
-    }
-  });
-  
-  return converted;
+function convertTimestamp(data: Record<string, unknown> | undefined): Record<string, unknown> {
+    if (!data) return {};
+
+    const converted = { ...data };
+
+    // Convert Firestore Timestamps to ISO strings
+    Object.keys(converted).forEach(key => {
+        const val = converted[key];
+        if (val && typeof val === 'object' && 'toDate' in val && typeof (val as { toDate: unknown }).toDate === 'function') {
+            converted[key] = (val as { toDate: () => { toISOString: () => string } }).toDate().toISOString();
+        }
+    });
+
+    return converted;
 }
 
 // ----- Types -----
@@ -29,9 +30,29 @@ export interface Story {
     slug: string;
     name: string;
     subject: string;
-    config: Record<string, any>;
+    config: Record<string, unknown>;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface StorySession {
+    id: string;
+    userId: string;
+    storyId?: string;
+    state: string;
+    snapshot: Record<string, unknown>;
+    businessState: Record<string, unknown>;
+    startedAt: string;
+    lastPlayedAt: string;
+    completedAt?: string | null;
+    difficultyContext?: Record<string, unknown>;
+    story: {
+        id: string;
+        name: unknown;
+        slug: unknown;
+        config: Record<string, unknown>;
+    } | null;
+    [key: string]: unknown;
 }
 
 export async function getAllStories(): Promise<Story[]> {
@@ -39,13 +60,13 @@ export async function getAllStories(): Promise<Story[]> {
         const storiesRef = adminDb.collection('stories');
         const q = storiesRef.orderBy('name', 'asc');
         const snapshot = await q.get();
-        
-        return snapshot.docs.map((doc) => {
-            const data = convertTimestamp(doc.data());
+
+        return snapshot.docs.map((docSnap) => {
+            const data = convertTimestamp(docSnap.data() as Record<string, unknown>);
             return {
-                id: doc.id,
+                id: docSnap.id,
                 ...data,
-                config: data.config || {}
+                config: (data['config'] as Record<string, unknown>) || {}
             } as Story;
         });
     } catch (error) {
@@ -59,16 +80,17 @@ export async function getStoryBySlug(slug: string): Promise<Story | null> {
         const storiesRef = adminDb.collection('stories');
         const q = storiesRef.where('slug', '==', slug);
         const snapshot = await q.get();
-        
+
         if (snapshot.empty) return null;
-        
-        const doc = snapshot.docs[0];
-        const data = convertTimestamp(doc.data());
-        
+
+        const docSnap = snapshot.docs[0];
+        if (!docSnap) return null;
+        const data = convertTimestamp(docSnap.data() as Record<string, unknown>);
+
         return {
-            id: doc.id,
+            id: docSnap.id,
             ...data,
-            config: data.config || {}
+            config: (data['config'] as Record<string, unknown>) || {}
         } as Story;
     } catch (error) {
         console.error('Error fetching story by slug:', error);
@@ -107,10 +129,10 @@ export async function getPlayerProfile(userId: string) {
     try {
         const profileRef = adminDb.collection('storiesPlayerProfiles').doc(userId);
         const profileDoc = await profileRef.get();
-        
+
         if (!profileDoc.exists) {
             // Create default profile
-            const defaultProfile = {
+            const defaultProfile: Record<string, unknown> = {
                 userId,
                 skills: {
                     financialLiteracy: 50,
@@ -135,19 +157,19 @@ export async function getPlayerProfile(userId: string) {
                 createdAt: admin.firestore.Timestamp.now(),
                 updatedAt: admin.firestore.Timestamp.now()
             };
-            
+
             await profileRef.set(defaultProfile);
             return defaultProfile;
         }
-        
-        return convertTimestamp(profileDoc.data());
+
+        return convertTimestamp(profileDoc.data() as Record<string, unknown>);
     } catch (error) {
         console.error('Error getting player profile:', error);
         throw error;
     }
 }
 
-export async function updatePlayerProfile(userId: string, data: Record<string, any>) {
+export async function updatePlayerProfile(userId: string, data: Record<string, unknown>) {
     try {
         const profileRef = adminDb.collection('storiesPlayerProfiles').doc(userId);
         await profileRef.set(
@@ -165,7 +187,7 @@ export async function updatePlayerProfile(userId: string, data: Record<string, a
 
 // ----- Sessions -----
 
-export async function getSessions(userId: string, filters: { storyId?: string; state?: string } = {}): Promise<any[]> {
+export async function getSessions(userId: string, filters: { storyId?: string; state?: string } = {}): Promise<Record<string, unknown>[]> {
     try {
         // NOTE: Firestore requires a composite index for (where userId == X) + (orderBy lastPlayedAt)
         // and even more for additional where clauses. To keep local/dev environments working without
@@ -194,23 +216,24 @@ export async function getSessions(userId: string, filters: { storyId?: string; s
         });
 
         return Promise.all(sessionDocs.map(async (snap) => {
-            const data = convertTimestamp(snap.data());
-            
+            const data = convertTimestamp(snap.data() as Record<string, unknown>);
+
             // Get story details
             let story = null;
-            if (data.storyId) {
-                const storyDoc = await adminDb.collection('stories').doc(data.storyId).get();
+            const storyId = data['storyId'];
+            if (typeof storyId === 'string') {
+                const storyDoc = await adminDb.collection('stories').doc(storyId).get();
                 if (storyDoc.exists) {
                     const storyData = convertTimestamp(storyDoc.data());
                     story = {
                         id: storyDoc.id,
-                        name: storyData.name,
-                        slug: storyData.slug,
-                        config: storyData.config || {}
+                        name: storyData['name'],
+                        slug: storyData['slug'],
+                        config: storyData['config'] || {}
                     };
                 }
             }
-            
+
             return {
                 id: snap.id,
                 ...data,
@@ -227,9 +250,9 @@ export async function createSession(data: {
     userId: string;
     storyId: string;
     state: string;
-    snapshot: any;
-    businessState?: any;
-    difficultyContext: any;
+    snapshot: Record<string, unknown>;
+    businessState?: Record<string, unknown>;
+    difficultyContext: Record<string, unknown>;
 }) {
     try {
         const sessionData = {
@@ -246,7 +269,7 @@ export async function createSession(data: {
     }
 }
 
-export async function updateSession(id: string, data: Record<string, any>) {
+export async function updateSession(id: string, data: Record<string, unknown>) {
     try {
         const sessionRef = adminDb.collection('storySessions').doc(id);
         await sessionRef.set(
@@ -262,34 +285,35 @@ export async function updateSession(id: string, data: Record<string, any>) {
     }
 }
 
-export async function getSessionById(id: string) {
+export async function getSessionById(id: string): Promise<StorySession | null> {
     try {
         const sessionDoc = await adminDb.collection('storySessions').doc(id).get();
 
         if (!sessionDoc.exists) return null;
 
-        const data = convertTimestamp(sessionDoc.data());
-        
+        const data = convertTimestamp(sessionDoc.data() as Record<string, unknown>);
+
         // Get story details
         let story = null;
-        if (data.storyId) {
-            const storyDoc = await adminDb.collection('stories').doc(data.storyId).get();
+        const storyId = data['storyId'];
+        if (typeof storyId === 'string') {
+            const storyDoc = await adminDb.collection('stories').doc(storyId).get();
             if (storyDoc.exists) {
                 const storyData = convertTimestamp(storyDoc.data());
                 story = {
                     id: storyDoc.id,
-                    name: storyData.name,
-                    slug: storyData.slug,
-                    config: storyData.config || {}
+                    name: storyData['name'],
+                    slug: storyData['slug'],
+                    config: storyData['config'] || {}
                 };
             }
         }
-        
+
         return {
             id: sessionDoc.id,
             ...data,
             story
-        };
+        } as StorySession;
     } catch (error) {
         console.error('Error getting session by ID:', error);
         return null;
@@ -304,7 +328,7 @@ export async function createConsequence(data: {
     type: string;
     scheduledAt?: string | null;
     ruleId: string;
-    effects: any[];
+    effects: Record<string, unknown>[];
 }) {
     try {
         const consequenceData = {
@@ -331,7 +355,7 @@ export async function getDueConsequences(sessionId: string) {
             .get();
 
         return snapshot.docs.map((snap) => {
-            const data = convertTimestamp(snap.data());
+            const data = convertTimestamp(snap.data() as Record<string, unknown>);
             return {
                 id: snap.id,
                 ...data,
@@ -344,7 +368,7 @@ export async function getDueConsequences(sessionId: string) {
     }
 }
 
-export async function updateConsequence(id: string, data: Record<string, any>) {
+export async function updateConsequence(id: string, data: Record<string, unknown>) {
     try {
         await adminDb.collection('consequences').doc(id).set(data, { merge: true });
     } catch (error) {
@@ -358,7 +382,7 @@ export async function updateConsequence(id: string, data: Record<string, any>) {
 export async function createDecisionLog(data: {
     sessionId: string;
     choiceId: string;
-    payload: any;
+    payload: Record<string, unknown>;
     resolved: boolean;
 }) {
     try {
@@ -383,8 +407,8 @@ export async function getNPCMemory(userId: string, npcId: string) {
 
         if (!memoryDoc.exists) return null;
 
-        const data = convertTimestamp(memoryDoc.data());
-        
+        const data = convertTimestamp(memoryDoc.data() as Record<string, unknown>);
+
         // Get NPC details
         let npc = null;
         const npcDoc = await adminDb.collection('npcs').doc(npcId).get();
@@ -392,12 +416,12 @@ export async function getNPCMemory(userId: string, npcId: string) {
             const npcData = convertTimestamp(npcDoc.data());
             npc = {
                 id: npcDoc.id,
-                name: npcData.name,
-                role: npcData.role,
-                config: npcData.config || {}
+                name: npcData['name'],
+                role: npcData['role'],
+                config: npcData['config'] || {}
             };
         }
-        
+
         return {
             ...data,
             npc,
@@ -409,7 +433,7 @@ export async function getNPCMemory(userId: string, npcId: string) {
     }
 }
 
-export async function recordNPCInteraction(userId: string, npcId: string, interactions: any, sentiment: number) {
+export async function recordNPCInteraction(userId: string, npcId: string, interactions: Record<string, unknown>[], sentiment: number) {
     try {
         const interactionData = {
             userId,

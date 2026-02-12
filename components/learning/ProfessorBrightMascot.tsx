@@ -6,12 +6,11 @@ import { FeedbackResponse } from '@/lib/professor-bright'
 
 interface ProfessorBrightMascotProps {
     feedback: FeedbackResponse | null
-    webMode?: boolean
     mini?: boolean
     className?: string
 }
 
-export default function ProfessorBrightMascot({ feedback, webMode = false, mini = false, className = '' }: ProfessorBrightMascotProps) {
+export default function ProfessorBrightMascot({ feedback, mini = false, className = '' }: ProfessorBrightMascotProps) {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {

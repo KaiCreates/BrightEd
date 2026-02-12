@@ -36,17 +36,18 @@ export function UserSocialBadge({
         const fetchBusinessCard = async () => {
             try {
                 // Get user data
+                if (!db) return;
                 const userRef = doc(db, 'users', userId);
                 const userSnap = await getDoc(userRef);
-                
+
                 if (!userSnap.exists()) return;
 
                 const userData = userSnap.data();
                 let valuation = businessPrestige || 0;
-                let bCoins = userData.bCoins || 0;
+                const bCoins = userData.bCoins || 0;
 
                 // If user has a business, get its valuation
-                if (userData.businessID) {
+                if (userData.businessID && db) {
                     const bizRef = doc(db, 'businesses', userData.businessID);
                     const bizSnap = await getDoc(bizRef);
                     if (bizSnap.exists()) {
@@ -59,9 +60,10 @@ export function UserSocialBadge({
                 let topSubject = 'None';
                 let mastery = 0;
 
-                Object.entries(subjectProgress).forEach(([subject, progress]: [string, any]) => {
-                    if (progress > mastery) {
-                        mastery = progress;
+                Object.entries(subjectProgress).forEach(([subject, progress]) => {
+                    const masteryValue = progress as number;
+                    if (masteryValue > mastery) {
+                        mastery = masteryValue;
                         topSubject = subject;
                     }
                 });

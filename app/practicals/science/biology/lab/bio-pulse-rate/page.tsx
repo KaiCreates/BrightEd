@@ -94,7 +94,7 @@ function TapCounter({ onComplete }: { onComplete: (bpm: number) => void }) {
                 // Calculate BPM based on intervals
                 const intervals = [];
                 for (let i = 1; i < newTaps.length; i++) {
-                    intervals.push(newTaps[i] - newTaps[i - 1]);
+                    intervals.push(newTaps[i]! - newTaps[i - 1]!);
                 }
                 const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
                 const bpm = Math.round(60000 / avgInterval);

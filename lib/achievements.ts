@@ -123,24 +123,24 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
     }
 ];
 
-export function checkAchievement(achievement: Achievement, userData: any, businessValuation: number = 0): boolean {
+export function checkAchievement(achievement: Achievement, userData: Record<string, unknown>, businessValuation: number = 0): boolean {
     if (!userData) return false;
 
     try {
-        if (achievement.id === 'streak-king') return (userData.streak || 0) >= 30;
-        if (achievement.id === 'week-warrior') return (userData.streak || 0) >= 7;
+        if (achievement.id === 'streak-king') return Number(userData.streak || 0) >= 30;
+        if (achievement.id === 'week-warrior') return Number(userData.streak || 0) >= 7;
         if (achievement.id === 'first-million') return businessValuation >= 1000000;
         if (achievement.id === 'polymath') {
-            const progress = userData.subjectProgress || {};
-            const highMasteryCount = Object.values(progress).filter((v: any) => (Number(v) || 0) >= 9).length;
+            const progress = (userData.subjectProgress as Record<string, unknown>) || {};
+            const highMasteryCount = Object.values(progress).filter((v: unknown) => (Number(v) || 0) >= 9).length;
             return highMasteryCount >= 3;
         }
-        if (achievement.id === 'master-pob') return (userData.subjectProgress?.['Principles of Business'] || 0) >= 9.0;
-        if (achievement.id === 'math-master') return (userData.subjectProgress?.['Mathematics'] || 0) >= 9.0;
-        if (achievement.id === 'centurion') return (userData.questionsCorrect || 0) >= 100;
-        if (achievement.id === 'community-leader') return (userData.helpCount || 0) >= 50;
+        if (achievement.id === 'master-pob') return Number((userData.subjectProgress as Record<string, unknown>)?.['Principles of Business'] || 0) >= 9.0;
+        if (achievement.id === 'math-master') return Number((userData.subjectProgress as Record<string, unknown>)?.['Mathematics'] || 0) >= 9.0;
+        if (achievement.id === 'centurion') return Number(userData.questionsCorrect || 0) >= 100;
+        if (achievement.id === 'community-leader') return Number(userData.helpCount || 0) >= 50;
         if (achievement.id === 'seed-founder') return userData.hasBusiness === true;
-        if (achievement.id === 'profit-first') return (userData.bCoins || 0) >= 1000;
+        if (achievement.id === 'profit-first') return Number(userData.bCoins || 0) >= 1000;
         if (achievement.id === 'market-entry') return businessValuation >= 10000;
     } catch (e) {
         console.error(`Error checking achievement ${achievement.id}:`, e);

@@ -6,7 +6,7 @@
 
 import { registerRule } from '../consequence-engine';
 import { delaySatisfied, delayRemainingMinutes, DEFAULT_TIME_CONFIG } from '../time';
-import type { BusinessSimState, ConsequenceEffect, StoryConfig } from '../types';
+import type { BusinessSimState, StoryConfig } from '../types';
 
 export const BUSINESS_STORY_SLUG = 'business-financial-literacy';
 
@@ -66,7 +66,7 @@ registerRule('business_ignore_taxes', () => ({
 
 registerRule('business_take_loan', (ctx) => {
   const principal = (ctx.payload.principal as number) ?? 200;
-  const rate = 0.05;
+  const _rate = 0.05;
   return {
     immediate: [{ system: 'resources', key: 'bCoins', delta: principal }],
     delayed: [],

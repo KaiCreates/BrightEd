@@ -42,6 +42,10 @@ export default function UserProfilePage() {
                 }
 
                 // Otherwise search Firestore by username
+                if (!db) {
+                    setLoading(false);
+                    return;
+                }
                 const usersRef = collection(db, 'users');
                 const q = query(usersRef, where('username', '==', username));
                 const snapshot = await getDocs(q);
@@ -77,6 +81,7 @@ export default function UserProfilePage() {
             // Fetch business if exists
             if (profileData.businessID) {
                 try {
+                    if (!db) return;
                     const bizSnap = await getDoc(doc(db, 'businesses', profileData.businessID));
                     if (bizSnap.exists()) {
                         setBizValuation(bizSnap.data().valuation || 0);
@@ -96,6 +101,7 @@ export default function UserProfilePage() {
             setSocialLoading(true);
             try {
                 const details = await Promise.all(ids.slice(0, 5).map(async (id: string) => {
+                    if (!db) return null;
                     const d = await getDoc(doc(db, 'users', id));
                     return d.exists() ? { id: d.id, ...d.data() } : null;
                 }));
@@ -112,7 +118,7 @@ export default function UserProfilePage() {
     const isFollowing = currentUserData?.following?.includes(profileData?.id);
 
     const handleFollowToggle = async () => {
-        if (!user || !profileData || !currentUserData) return;
+        if (!user || !profileData || !currentUserData || !db) return;
 
         const currentUserId = user.uid;
         const profileUserId = profileData.id;
@@ -528,6 +534,10 @@ function UserSearchModal({ isOpen, onClose, currentUser, onFollow }: { isOpen: b
         const searchUsers = async () => {
             setLoading(true);
             try {
+                if (!db) {
+                    setLoading(false);
+                    return;
+                }
                 const usersRef = collection(db, 'users');
                 let q;
 
@@ -656,6 +666,7 @@ function SocialListModal({ isOpen, onClose, initialTab, profileData, onFollow }:
             try {
                 // Fetch in chunks of 10 for performance if list is huge, but here we do simple all
                 const details = await Promise.all(ids.map(async (id: string) => {
+                    if (!db) return null;
                     const d = await getDoc(doc(db, 'users', id));
                     return d.exists() ? { id: d.id, ...d.data() } : null;
                 }));

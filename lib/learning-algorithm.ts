@@ -146,20 +146,21 @@ export function updateDailyProgress(
   currentState: LearningState['dailyProgress'],
   increment: number = 1
 ): LearningState['dailyProgress'] {
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0] ?? '';
   const isNewDay = currentState.date !== today;
 
-  let newState = isNewDay
-    ? { date: today, count: 0, goal: 5, completed: false } // Reset for new day (default goal 5)
+  const baseState: LearningState['dailyProgress'] = isNewDay
+    ? { date: today, count: 0, goal: 5, completed: false }
     : { ...currentState };
 
-  newState.count += increment;
+  const newCount = baseState.count + increment;
+  const isCompleted = newCount >= baseState.goal || baseState.completed;
 
-  if (newState.count >= newState.goal && !newState.completed) {
-    newState.completed = true;
-  }
-
-  return newState;
+  return {
+    ...baseState,
+    count: newCount,
+    completed: isCompleted,
+  };
 }
 
 /**
@@ -172,14 +173,14 @@ export function updateStreak(
 ): LearningState['streak'] {
   if (!dailyCompleted) return currentStreak;
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0] ?? '';
 
   // If already marked for today, don't double count
   if (currentStreak.lastCompletedDate === today) {
     return currentStreak;
   }
 
-  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0] ?? '';
   const lastDate = currentStreak.lastCompletedDate;
 
   let newCurrent = currentStreak.current;
@@ -194,7 +195,7 @@ export function updateStreak(
 
   return {
     current: newCurrent,
-    lastCompletedDate: today,
+    lastCompletedDate: today || null,
     longest: Math.max(currentStreak.longest, newCurrent),
   };
 }
@@ -217,18 +218,20 @@ export function getNextRecommendedObjective(
   // 1. Look for unseen IDs
   const unseen = allObjectiveIds.filter(id => !masteryMap[id]);
   if (unseen.length > 0) {
-    return unseen[Math.floor(Math.random() * unseen.length)];
+    const randomIdx = Math.floor(Math.random() * unseen.length);
+    return unseen[randomIdx] ?? null;
   }
 
   // 2. Look for "Growth Zone" (0.1 - 0.7)
   const growth = allObjectiveIds.filter(id => {
     const m = masteryMap[id];
-    return m > 0.1 && m < 0.8;
+    return m !== undefined && m > 0.1 && m < 0.8;
   });
   if (growth.length > 0) {
-    return growth[Math.floor(Math.random() * growth.length)];
+    const randomIdx = Math.floor(Math.random() * growth.length);
+    return growth[randomIdx] ?? null;
   }
 
   // 3. Fallback: Review lowest mastery
-  return allObjectiveIds.sort((a, b) => (masteryMap[a] || 0) - (masteryMap[b] || 0))[0] || null;
+  return [...allObjectiveIds].sort((a, b) => (masteryMap[a] ?? 0) - (masteryMap[b] ?? 0))[0] ?? null;
 }

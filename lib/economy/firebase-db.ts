@@ -7,19 +7,14 @@ import { db } from '@/lib/firebase';
 import {
     collection,
     doc,
-    setDoc,
     updateDoc,
     getDoc,
     getDocs,
     query,
     where,
-    addDoc,
-    orderBy,
-    limit,
     serverTimestamp,
     increment,
     writeBatch,
-    runTransaction,
     arrayUnion
 } from 'firebase/firestore';
 import {
@@ -58,53 +53,58 @@ function getDefaultMarketItems() {
 }
 
 export async function ensureMarketRestock(businessId: string) {
+    if (!db) return { restocked: false };
     const bizRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
 
     try {
         const snap = await getDoc(bizRef);
         if (!snap.exists()) return { restocked: false };
 
-        const data: any = snap.data();
-        const marketState = data.marketState ?? { lastRestock: '', nextRestock: '', items: [] };
+        const data = snap.data() as Record<string, unknown>;
+        const marketState = (data['marketState'] as Record<string, unknown>) ?? { lastRestock: '', nextRestock: '', items: [] };
 
         const now = Date.now();
-        const nextRestockMs = marketState?.nextRestock ? new Date(marketState.nextRestock).getTime() : 0;
+        const nextRestock = marketState['nextRestock'];
+        const nextRestockMs = typeof nextRestock === 'string' ? new Date(nextRestock).getTime() : 0;
 
         if (nextRestockMs && now < nextRestockMs) {
-            return { restocked: false, nextRestock: marketState.nextRestock };
+            return { restocked: false, nextRestock: nextRestock as string };
         }
 
         const defaults = getDefaultMarketItems();
-        const items = marketState?.items && marketState.items.length > 0 ? marketState.items : defaults;
+        const marketItems = (marketState['items'] as Record<string, unknown>[]) || [];
+        const items = marketItems.length > 0 ? marketItems : defaults;
 
-        const mergedItems = items.map((item: any) => {
-            const def = defaults.find((d) => d.id === item.id);
-            const mergedMax = Math.max(item.maxStock ?? 0, def?.maxStock ?? 0);
+        const mergedItems = items.map((item) => {
+            const def = defaults.find((d) => d.id === item['id']);
+            const itemMaxStock = (item['maxStock'] as number) || 0;
+            const mergedMax = Math.max(itemMaxStock, def?.maxStock ?? 0);
             return {
                 ...def,
                 ...item,
-                image: item.image ?? def?.image,
-                icon: item.icon ?? def?.icon,
+                image: (item['image'] as string) ?? def?.image,
+                icon: (item['icon'] as string) ?? def?.icon,
                 maxStock: mergedMax,
                 stock: mergedMax,
             };
         });
 
-        const missingDefaults = defaults.filter((d) => !mergedItems.some((i: any) => i.id === d.id));
+        const mergedItemsArray = mergedItems as Record<string, unknown>[];
+        const missingDefaults = defaults.filter((d) => !mergedItemsArray.some((i) => i['id'] === d.id));
         const newItems = [...mergedItems, ...missingDefaults];
 
-        const nextRestock = new Date(now + 5 * 60 * 1000).toISOString();
+        const nextRestockVal = new Date(now + 5 * 60 * 1000).toISOString();
 
         await updateDoc(bizRef, {
             marketState: {
                 lastRestock: new Date(now).toISOString(),
-                nextRestock,
+                nextRestock: nextRestockVal,
                 items: newItems,
             },
             updatedAt: serverTimestamp(),
         });
 
-        return { restocked: true, nextRestock };
+        return { restocked: true, nextRestock: nextRestockVal };
     } catch (e) {
         console.error("Market restock failed:", e);
         return { restocked: false };
@@ -128,12 +128,13 @@ export async function createEconomyBusiness(
         icon?: string;
     }
 ): Promise<string> {
+    if (!db) throw new Error("Database not initialized");
     const businessRef = doc(collection(db, COLLECTIONS.BUSINESSES));
     const businessId = businessRef.id;
 
     // Sanitize branding to remove undefined values (Firestore doesn't like them)
     const cleanBranding = branding ? Object.fromEntries(
-        Object.entries(branding).filter(([_, v]) => v !== undefined)
+        Object.entries(branding).filter(([__, v]) => v !== undefined)
     ) : {};
 
     const stockMarket = initStockMarketState();
@@ -208,6 +209,7 @@ export async function createEconomyBusiness(
 
     // Create document in Firestore
     // We use a batch to ensure the business is created AND the user record is updated atomically
+    if (!db) throw new Error("Database not initialized");
     const batch = writeBatch(db);
     const userRef = doc(db, 'users', userId);
 
@@ -258,6 +260,7 @@ export async function createEconomyBusiness(
  * Fetch business state
  */
 export async function fetchBusinessState(businessId: string): Promise<BusinessState | null> {
+    if (!db) return null;
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
     const snap = await getDoc(docRef);
 
@@ -320,25 +323,26 @@ export async function updateBusinessFinancials(
         inventory?: Record<string, number>;
         inventoryDeltas?: Record<string, number>;
         lastPayrollTime?: string;
-        reviews?: any[];
+        reviews?: Review[];
         newReview?: Review;
         newReviews?: Review[];
         totalRevenue?: number;
         totalRevenueDelta?: number;
         totalExpenses?: number;
         totalExpensesDelta?: number;
-        customerProfiles?: Record<string, any>;
-        customerProfileUpdate?: { customerId: string; profile: any };
+        customerProfiles?: Record<string, unknown>;
+        customerProfileUpdate?: { customerId: string; profile: Record<string, unknown> };
         ownedTools?: string[];
-        stockMarket?: any;
-        stockPortfolio?: any;
+        stockMarket?: Record<string, unknown>;
+        stockPortfolio?: Record<string, unknown>;
         netWorth?: number;
         valuation?: number;
     }
 ) {
+    if (!db) return;
     const docRef = doc(db, COLLECTIONS.BUSINESSES, businessId);
 
-    const firestoreUpdates: any = {
+    const firestoreUpdates: Record<string, unknown> = {
         updatedAt: serverTimestamp(),
     };
 
@@ -430,6 +434,7 @@ export async function updateBusinessFinancials(
  * Save new orders (batch)
  */
 export async function saveNewOrders(businessId: string, orders: Order[]) {
+    if (!db) return;
     const batch = writeBatch(db);
 
     for (const order of orders) {
@@ -451,6 +456,7 @@ export async function updateOrderStatus(
     orderId: string,
     updates: Partial<Order>
 ) {
+    if (!db) return;
     const orderRef = doc(db, COLLECTIONS.BUSINESSES, businessId, COLLECTIONS.ORDERS, orderId);
     await updateDoc(orderRef, {
         ...updates,
@@ -462,6 +468,7 @@ export async function updateOrderStatus(
  * Fetch active orders
  */
 export async function fetchActiveOrders(businessId: string): Promise<Order[]> {
+    if (!db) return [];
     const ordersRef = collection(db, COLLECTIONS.BUSINESSES, businessId, COLLECTIONS.ORDERS);
 
     // FIX: Removed orderBy to prevent "Missing Index" errors on multiple fields
@@ -486,6 +493,7 @@ export async function fetchActiveOrders(businessId: string): Promise<Order[]> {
  * Save expenses
  */
 export async function saveExpenses(businessId: string, expenses: Expense[]) {
+    if (!db) return;
     const batch = writeBatch(db);
 
     for (const expense of expenses) {
@@ -503,6 +511,7 @@ export async function saveExpenses(businessId: string, expenses: Expense[]) {
  * Mark expense paid
  */
 export async function payExpense(businessId: string, expenseId: string) {
+    if (!db) return;
     const expRef = doc(db, COLLECTIONS.BUSINESSES, businessId, COLLECTIONS.EXPENSES, expenseId);
     await updateDoc(expRef, {
         paidAt: new Date().toISOString(),

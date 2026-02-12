@@ -14,7 +14,6 @@ import {
     DiagnosticState,
     DiagnosticResult,
     SubSkillScore,
-    NABLE_CONSTANTS
 } from './types';
 import { createInitialSubSkillScore } from './mastery-tracker';
 
@@ -191,6 +190,16 @@ export function diagnosticResultToSubSkillScore(
     return createInitialSubSkillScore(result.initialMastery, result.confidence);
 }
 
+interface DiagnosticYield {
+    question: DiagnosticQuestion;
+    state: DiagnosticState;
+}
+
+interface DiagnosticInput {
+    correct: boolean;
+    timeToAnswer: number;
+}
+
 /**
  * Run full diagnostic for a sub-skill
  * Returns a generator that yields questions and accepts answers
@@ -198,11 +207,7 @@ export function diagnosticResultToSubSkillScore(
 export function* runDiagnostic(
     subSkillId: string,
     getQuestionForLevel: (level: number) => DiagnosticQuestion | null
-): Generator<
-    { question: DiagnosticQuestion; state: DiagnosticState },
-    DiagnosticResult,
-    { correct: boolean; timeToAnswer: number }
-> {
+): Generator<DiagnosticYield, DiagnosticResult, DiagnosticInput> {
     let state = initializeDiagnostic(5);
 
     while (!isDiagnosticComplete(state)) {
@@ -290,7 +295,7 @@ export function getDiagnosticQuestion(level: number): DiagnosticQuestion | null 
     const availableLevels = Object.keys(SAMPLE_DIAGNOSTIC_QUESTIONS).map(Number);
 
     // Find closest level
-    let closestLevel = availableLevels[0];
+    let closestLevel = availableLevels[0] ?? 5;
     let closestDiff = Math.abs(level - closestLevel);
 
     for (const availableLevel of availableLevels) {
@@ -307,5 +312,6 @@ export function getDiagnosticQuestion(level: number): DiagnosticQuestion | null 
     }
 
     // Return random question from pool
-    return questions[Math.floor(Math.random() * questions.length)];
+    const q = questions[Math.floor(Math.random() * questions.length)];
+    return q ?? null;
 }

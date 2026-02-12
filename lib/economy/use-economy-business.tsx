@@ -35,13 +35,15 @@ export function useEconomyBusiness() {
           return;
         }
 
-        const data: any = snap.data();
+        const rawData = snap.data() || {};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data = rawData as Record<string, any>;
 
         const bizState: BusinessState = {
           id: snap.id,
-          playerId: data.ownerId,
-          businessTypeId: data.businessTypeId,
-          businessName: data.name,
+          playerId: data.ownerId || '',
+          businessTypeId: data.businessTypeId || '',
+          businessName: data.name || 'Unnamed Business',
           branding: data.branding ?? {},
           cashBalance: data.balance !== undefined ? data.balance : (data.cashBalance ?? 0),
           totalRevenue: data.totalRevenue ?? 0,

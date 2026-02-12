@@ -9,6 +9,14 @@
 
 export type BusinessCategory = 'service' | 'retail' | 'food' | 'digital';
 
+export interface OrderNarrative {
+    context: string;
+    urgencyReason?: string;
+    customerBackground?: string;
+    successConsequence: string;
+    failureConsequence: string;
+}
+
 export interface BusinessType {
     id: string;
     category: BusinessCategory;
@@ -131,6 +139,11 @@ export interface Order {
     sceneOnAccept?: string;
     sceneOnComplete?: string;
     sceneOnFail?: string;
+
+    // Narrative context
+    narrative?: string;
+    narrativeData?: OrderNarrative; // Structured narrative container
+    consequenceMessage?: string;
 }
 
 export interface OrderItem {
@@ -315,7 +328,7 @@ export interface SkillProgress {
     totalExperience?: number; // Lifetime XP in this skill
 }
 
-export type Specialization = 
+export type Specialization =
     | 'speed_specialist'     // 25% faster fulfillment
     | 'quality_master'       // 25% quality boost
     | 'customer_relations'   // Better loyalty impact

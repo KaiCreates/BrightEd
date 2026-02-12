@@ -126,7 +126,7 @@ export function calculateDifficultyAdjustment(
 export function selectContentType(
     consecutiveErrors: number,
     errorType: 'conceptual' | 'careless' | null,
-    currentType: ContentType
+    _currentType: ContentType
 ): ContentType {
     // Conceptual error after correct type → inject micro-lesson
     if (errorType === 'conceptual') {
@@ -177,7 +177,7 @@ export function rankQuestionsByFit(
 
             return { ...q, _fitScore: fitScore };
         })
-        .sort((a, b) => (a as any)._fitScore - (b as any)._fitScore);
+        .sort((a, b) => ((a as ContentItem & { _fitScore: number })._fitScore) - ((b as ContentItem & { _fitScore: number })._fitScore));
 }
 
 /**
@@ -213,7 +213,7 @@ export function determineUIMood(
  */
 export function shouldBlockProgression(
     confidence: number,
-    subSkillMastery: number
+    _subSkillMastery: number
 ): boolean {
     return confidence < NABLE_CONSTANTS.CONFIDENCE_THRESHOLD_BLOCK;
 }
@@ -281,7 +281,7 @@ export function calculateDifficultyScaling(
     );
 
     // Mastery trend
-    const recentMastery = mastery;
+    const _recentMastery = mastery;
     const masteryTrend = correct ? 'up' : 'down' as const;
 
     // UI mood

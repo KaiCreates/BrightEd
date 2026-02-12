@@ -31,8 +31,9 @@ export async function verifyAuth(request: NextRequest) {
     try {
         const decodedToken = await adminAuth.verifyIdToken(token);
         return decodedToken;
-    } catch (error: any) {
-        console.error("[Auth] Token verification failed:", error.code || error.message);
+    } catch (error: unknown) {
+        const err = error as { code?: string; message?: string };
+        console.error("[Auth] Token verification failed:", err.code || err.message);
         throw new AuthError('Unauthorized: Invalid token', 'INVALID_TOKEN');
     }
 }
@@ -45,7 +46,7 @@ export async function verifyAuth(request: NextRequest) {
 export async function getUser(request: NextRequest) {
     try {
         return await verifyAuth(request);
-    } catch (error) {
+    } catch (_error) {
         return null; // Return null instead of throwing
     }
 }

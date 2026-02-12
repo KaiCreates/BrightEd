@@ -56,14 +56,20 @@ export function awardSkillExperience(
     let leveledUp = false;
 
     // Check for level up
-    while (currentLevel < 5 && newExperience >= XP_THRESHOLDS[currentLevel]) {
-        currentLevel++;
-        leveledUp = true;
+    while (currentLevel < 5) {
+        const threshold = XP_THRESHOLDS[currentLevel];
+        if (threshold !== undefined && newExperience >= threshold) {
+            currentLevel++;
+            leveledUp = true;
+        } else {
+            break;
+        }
     }
 
     // Calculate XP to next level
-    const experienceToNext = currentLevel < 5
-        ? XP_THRESHOLDS[currentLevel] - newExperience
+    const nextThreshold = XP_THRESHOLDS[currentLevel];
+    const experienceToNext = (currentLevel < 5 && nextThreshold !== undefined)
+        ? nextThreshold - newExperience
         : 0;
 
     return {
@@ -222,11 +228,17 @@ export function initializeEmployeeSkills(role: string): Record<string, SkillProg
 
     // Role-specific starting bonuses
     if (role === 'specialist') {
-        baseSkills.quality.level = 2;
-        baseSkills.quality.experience = 100;
+        const quality = baseSkills['quality'];
+        if (quality) {
+            quality.level = 2;
+            quality.experience = 100;
+        }
     } else if (role === 'speedster') {
-        baseSkills.speed.level = 2;
-        baseSkills.speed.experience = 100;
+        const speed = baseSkills['speed'];
+        if (speed) {
+            speed.level = 2;
+            speed.experience = 100;
+        }
     }
 
     return baseSkills;

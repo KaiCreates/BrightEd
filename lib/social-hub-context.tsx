@@ -33,7 +33,7 @@ const SUBJECT_LOUNGES = [
     { name: 'Chemistry', subject: 'Chemistry', icon: '🔬' }
 ];
 
-interface Room {
+export interface Room {
     id: string;
     name: string;
     type: 'public' | 'private';
@@ -41,7 +41,8 @@ interface Room {
     subject?: string;
     members: string[];
     ownerId?: string;
-    createdAt: Timestamp | null;
+    icon?: string;
+    createdAt?: Timestamp | null;
 }
 
 interface Message {
@@ -50,7 +51,7 @@ interface Message {
     senderId: string;
     senderName?: string;
     senderAvatarUrl?: string;
-    senderAvatarCustomization?: any;
+    senderAvatarCustomization?: Record<string, unknown>;
     businessPrestige?: number;
     timestamp: Timestamp | null;
     fileUrl?: string;
@@ -76,7 +77,7 @@ interface SocialHubContextType {
     activeRoom: Room | null;
     rooms: Room[];
     messages: Message[];
-    onlineUsers: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } };
+    onlineUsers: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: Record<string, unknown> | null; lastSeen: number } };
     typingUsers: Array<{ uid: string; name: string }>;
     dmWindows: DMWindow[];
     blockedUsers: string[];
@@ -112,7 +113,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     const [activeRoom, setActiveRoomState] = useState<Room | null>(null);
     const [rooms, setRooms] = useState<Room[]>([]);
     const [messages, setMessages] = useState<Message[]>([]);
-    const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } }>({});
+    const [onlineUsers, setOnlineUsers] = useState<{ [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: Record<string, unknown> | null; lastSeen: number } }>({});
     const [typingUsers, setTypingUsers] = useState<Array<{ uid: string; name: string }>>([]);
     const [dmWindows, setDmWindows] = useState<DMWindow[]>([]);
     const [blockedUsers, setBlockedUsers] = useState<string[]>([]);
@@ -328,7 +329,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         const unsubscribeOnline = onValue(onlineQuery, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                const online: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: any | null; lastSeen: number } } = {};
+                const online: { [uid: string]: { name: string; avatarUrl: string | null; avatarCustomization: Record<string, unknown> | null; lastSeen: number } } = {};
                 Object.keys(data).forEach((uid) => {
                     if (data[uid]?.online === true) {
                         online[uid] = {
@@ -366,8 +367,22 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             try {
                 const parsed = JSON.parse(savedRoom);
                 setActiveRoomState(parsed);
-            } catch (e) {
+            } catch {
                 const defaultLounge = SUBJECT_LOUNGES[0];
+                if (defaultLounge) {
+                    setActiveRoomState({
+                        id: defaultLounge.name,
+                        name: defaultLounge.name,
+                        type: 'public',
+                        subject: defaultLounge.subject,
+                        members: [],
+                        createdAt: null
+                    });
+                }
+            }
+        } else {
+            const defaultLounge = SUBJECT_LOUNGES[0];
+            if (defaultLounge) {
                 setActiveRoomState({
                     id: defaultLounge.name,
                     name: defaultLounge.name,
@@ -377,16 +392,6 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
                     createdAt: null
                 });
             }
-        } else {
-            const defaultLounge = SUBJECT_LOUNGES[0];
-            setActiveRoomState({
-                id: defaultLounge.name,
-                name: defaultLounge.name,
-                type: 'public',
-                subject: defaultLounge.subject,
-                members: [],
-                createdAt: null
-            });
         }
     }, []);
 
@@ -402,6 +407,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         if (room.type === 'public') {
             if (!ensuredRoomIdsRef.current.has(room.id)) {
                 ensuredRoomIdsRef.current.add(room.id);
+                if (!db) return;
                 const roomRef = doc(db, 'rooms', room.id);
                 const roomSnap = await getDoc(roomRef);
                 FirebaseMonitor.trackRead('rooms', 1);
@@ -428,6 +434,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         if (!user) throw new Error('Not authenticated');
 
         const code = Math.floor(100000 + Math.random() * 900000).toString();
+        if (!db) throw new Error('Database not initialized');
         const roomRef = doc(collection(db, 'rooms'));
 
         await setDoc(roomRef, {
@@ -443,7 +450,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user]);
 
     const joinRoom = useCallback(async (code: string): Promise<boolean> => {
-        if (!user) return false;
+        if (!user || !db) return false;
 
         const q = query(collection(db, 'rooms'), where('code', '==', code));
         const snapshot = await getDocs(q);
@@ -452,6 +459,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         if (snapshot.empty) return false;
 
         const roomDoc = snapshot.docs[0];
+        if (!roomDoc) return false;
         const roomData = roomDoc.data();
 
         if (!roomData.members.includes(user.uid)) {
@@ -480,6 +488,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
         }
         lastMessageTimeRef.current = now;
 
+        if (!db) return;
         const businessPrestige = businessPrestigeRef.current || 0;
 
         await addDoc(collection(db, 'rooms', activeRoom.id, 'messages'), {
@@ -502,7 +511,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom, userData]);
 
     const sendDM = useCallback(async (userId: string, text: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const roomId = [user.uid, userId].sort().join('_');
         const dmRef = doc(db, 'dms', roomId);
@@ -530,7 +539,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, userData?.firstName, userData?.avatarUrl, userData?.avatarCustomization]);
 
     const addReaction = useCallback(async (messageId: string, emoji: string) => {
-        if (!user || !activeRoom) return;
+        if (!user || !activeRoom || !db) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
         const msg = messages.find((m) => m.id === messageId);
@@ -544,7 +553,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom, messages]);
 
     const editMessage = useCallback(async (messageId: string, newText: string) => {
-        if (!user || !activeRoom || !newText.trim()) return;
+        if (!user || !activeRoom || !newText.trim() || !db) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
         const msg = messages.find((m) => m.id === messageId);
@@ -558,7 +567,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom, messages]);
 
     const deleteMessage = useCallback(async (messageId: string) => {
-        if (!user || !activeRoom) return;
+        if (!user || !activeRoom || !db) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
         const msg = messages.find((m) => m.id === messageId);
@@ -595,7 +604,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const blockUser = useCallback(async (userId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         await updateDoc(userRef, {
@@ -605,7 +614,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user]);
 
     const unblockUser = useCallback(async (userId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         await updateDoc(userRef, {
@@ -615,7 +624,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user]);
 
     const muteUser = useCallback(async (userId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         await updateDoc(userRef, {
@@ -625,7 +634,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user]);
 
     const unmuteUser = useCallback(async (userId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         const userRef = doc(db, 'users', user.uid);
         await updateDoc(userRef, {
@@ -635,7 +644,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user]);
 
     const reportMessage = useCallback(async (messageId: string, reason: string) => {
-        if (!user || !activeRoom) return;
+        if (!user || !activeRoom || !db) return;
 
         const messageRef = doc(db, 'rooms', activeRoom.id, 'messages', messageId);
         const messageSnap = await getDoc(messageRef);
@@ -657,7 +666,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom]);
 
     const reportUser = useCallback(async (userId: string, reason: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         await addDoc(collection(db, 'moderation_queue'), {
             type: 'user_report',
@@ -666,12 +675,12 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
             reason,
             timestamp: serverTimestamp(),
             status: 'pending'
-        });
+        } as unknown as Record<string, unknown>);
         FirebaseMonitor.trackWrite('moderation_queue', 1);
     }, [user]);
 
     const leaveRoom = useCallback(async (roomId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
         const roomRef = doc(db, 'rooms', roomId);
 
         await updateDoc(roomRef, {
@@ -685,7 +694,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom, setActiveRoom]);
 
     const deleteRoom = useCallback(async (roomId: string) => {
-        if (!user) return;
+        if (!user || !db) return;
         const roomRef = doc(db, 'rooms', roomId);
         const roomSnap = await getDoc(roomRef);
         FirebaseMonitor.trackRead('rooms', 1);
@@ -705,7 +714,7 @@ export function SocialHubProvider({ children }: { children: React.ReactNode }) {
     }, [user, activeRoom, setActiveRoom]);
 
     const reportRoom = useCallback(async (roomId: string, reason: string) => {
-        if (!user) return;
+        if (!user || !db) return;
 
         await addDoc(collection(db, 'moderation_queue'), {
             type: 'room_report',

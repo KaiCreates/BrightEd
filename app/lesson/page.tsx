@@ -150,7 +150,7 @@ function LessonPage() {
   const step = simulationSteps[currentStep]
 
   // Generate variation based on timestamp and objective
-  const variation = (parseInt(objectiveId?.replace(/\D/g, '') || '0') || 0) % 10
+  const variation = (parseInt((objectiveId || '').replace(/\D/g, '') || '0') || 0) % 10
 
   // Prefetch next question
   const prefetchNextQuestion = useCallback(async () => {
@@ -183,7 +183,7 @@ function LessonPage() {
     if (questionBuffer.length > 0) {
       const nextQuestion = questionBuffer[0]
       setQuestionBuffer(prev => prev.slice(1))
-      setSimulationSteps(nextQuestion)
+      setSimulationSteps(nextQuestion!)
       setCurrentStep(0)
       setSelectedAnswer(null)
       setShowFeedback(false)

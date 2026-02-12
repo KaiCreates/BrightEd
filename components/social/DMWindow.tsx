@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useSocialHub } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
 import { UserSocialBadge } from './UserSocialBadge';
-import { BrightButton } from '@/components/system';
 import { getFirebaseDb } from '@/lib/firebase';
 import { collection, query, orderBy, onSnapshot, Timestamp, limit } from 'firebase/firestore';
 import ReactMarkdown from 'react-markdown';

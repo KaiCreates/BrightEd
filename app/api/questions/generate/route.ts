@@ -17,9 +17,22 @@ import {
   isMarksOnly,
   isLetterOnly
 } from '@/lib/nable';
+import { z } from 'zod';
+import { asyncHandler } from '@/lib/utils/asyncHandler';
+import { AppError } from '@/lib/errors/AppError';
 
 // Timeouts for database operations
 const DB_TIMEOUT = 5000;
+
+const searchSchema = z.object({
+  objectiveId: z.string().min(1, 'Missing objectiveId'),
+  subjectId: z.string().nullable().optional(),
+  variation: z.coerce.number().int().min(1).max(3).default(1),
+  mastery: z.coerce.number().min(0).max(1).default(0.5),
+  streak: z.coerce.number().int().min(0).default(0),
+  errors: z.coerce.number().int().min(0).default(0),
+  useAI: z.coerce.boolean().default(false),
+});
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
   return Promise.race([
@@ -86,18 +99,42 @@ function coerceCorrectAnswerFromText(raw: unknown, options: string[]): number | 
   if (!needle) return null;
 
   for (let i = 0; i < options.length; i++) {
-    if (normalizeOptionKey(options[i]) === needle) return i;
+    if (normalizeOptionKey(options[i] ?? '') === needle) return i;
   }
   return null;
 }
 
-function sanitizeQuestionCandidate(row: any, objectiveId: string) {
+interface RawCandidate {
+  id?: string;
+  questionId?: string;
+  options?: string[];
+  correctAnswer?: number | string;
+  difficulty?: number;
+  difficultyWeight?: number;
+  contentType?: string;
+  distractorSimilarity?: number;
+  expectedTime?: number;
+  subSkills?: string[];
+  question?: string;
+  questionText?: string;
+  explanation?: string;
+  storyElement?: string;
+  questionType?: string;
+  interactiveData?: Record<string, unknown>;
+  topic?: string;
+  subjectId?: string;
+  subjectName?: string;
+  objectiveId?: string;
+  [key: string]: unknown;
+}
+
+function sanitizeQuestionCandidate(row: RawCandidate, objectiveId: string) {
   const rawOptions = Array.isArray(row?.options)
     ? row.options
     : typeof row?.options === 'string'
       ? (() => {
         try {
-          return JSON.parse(row.options);
+          return JSON.parse(row.options) as string[];
         } catch {
           return [];
         }
@@ -153,152 +190,140 @@ function sanitizeQuestionCandidate(row: any, objectiveId: string) {
   };
 }
 
-export async function GET(request: NextRequest) {
-  try {
-    const limiter = rateLimit(request, 60, 60000, 'questions:generate');
-    if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
+export const GET = asyncHandler(async (request: NextRequest) => {
+  const limiter = rateLimit(request, 60, 60000, 'questions:generate');
+  if (!limiter.success) return handleRateLimit(limiter.retryAfter!);
 
-    const { searchParams } = new URL(request.url);
-    const objectiveId = searchParams.get('objectiveId');
-    const subjectId = searchParams.get('subjectId');
-    const variation = parseInt(searchParams.get('variation') || '1');
-    const masteryParam = parseFloat(searchParams.get('mastery') || '0.5');
-    const streak = parseInt(searchParams.get('streak') || '0');
-    const errors = parseInt(searchParams.get('errors') || '0');
+  const { searchParams } = new URL(request.url);
+  const queryParams = Object.fromEntries(searchParams.entries());
 
-    if (!objectiveId) {
-      return NextResponse.json({ error: 'Missing objectiveId' }, { status: 400 });
-    }
-
-    // 1. Authenticate & Load NABLE State
-    const decodedToken = await verifyAuth(request);
-    const userId = decodedToken.uid;
-
-    const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
-    const nableDoc = await nableRef.get();
-
-    const nableState: NABLEState = nableDoc.exists
-      ? loadState(userId, nableDoc.data() as Partial<NABLEState>)
-      : createInitialState(userId);
-
-    // 2. Fetch Candidates with Target Difficulty
-    // Variation 1 = Easy, 2 = Medium, 3 = Hard
-    let targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
-
-    // Apply real-time adaptation
-    if (streak >= 3) targetDifficulty = Math.min(10, targetDifficulty + 2);
-    if (errors >= 2) targetDifficulty = Math.max(1, targetDifficulty - 2);
-
-    let candidates: any[] = await withTimeout<any[]>(
-      fetchCandidatesFromDB(objectiveId, targetDifficulty, subjectId),
-      DB_TIMEOUT
-    );
-
-    const sanitizedCandidates = (candidates || [])
-      .map((q: any) => sanitizeQuestionCandidate(q, objectiveId))
-      .filter(Boolean);
-
-    if ((candidates || []).length > 0 && sanitizedCandidates.length === 0) {
-      console.warn('[questions/generate] All candidates rejected by sanitization', {
-        objectiveId,
-        subjectId,
-        fetched: (candidates || []).length,
-      });
-    }
-
-    candidates = sanitizedCandidates;
-
-    // Exclude already-correct questions using state-based tracking (no DB reads needed!)
-    // This replaces the 500+ subcollection reads with a simple array check
-    let isReviewMode = false;
-
-    if (userId && candidates && candidates.length > 0 && nableState.completedQuestionIds) {
-      const completedSet = new Set(nableState.completedQuestionIds);
-
-      // Priority 1: Questions never answered correctly
-      const withoutCorrect = candidates.filter((q: any) => {
-        const qid = q?.questionId || q?.id;
-        return !(typeof qid === 'string' && completedSet.has(qid));
-      });
-
-      if (withoutCorrect.length > 0) {
-        candidates = withoutCorrect;
-      } else {
-        // All questions completed - enter review mode
-        isReviewMode = true;
-
-        // Filter out the most recently completed question to avoid immediate repeats
-        if (nableState.completedQuestionIds.length > 0) {
-          const lastQid = nableState.completedQuestionIds[nableState.completedQuestionIds.length - 1];
-          const notLast = candidates.filter((q: any) => (q.questionId || q.id) !== lastQid);
-          if (notLast.length > 0) candidates = notLast;
-        }
-      }
-    }
-
-    if (!candidates || candidates.length === 0) {
-      // Try AI generation as fallback when DB is empty
-      const useAI = searchParams.get('useAI') === 'true';
-      if (useAI) {
-        console.log('[questions/generate] No DB questions found, attempting AI generation for:', objectiveId);
-        const aiQuestion = await generateAIQuestion(objectiveId, subjectId, targetDifficulty);
-        if (aiQuestion) {
-          console.log('[questions/generate] AI question generated successfully');
-          return NextResponse.json(formatResponse(aiQuestion, objectiveId, subjectId));
-        }
-      }
-      console.warn('[questions/generate] No questions available for objective:', { objectiveId, subjectId, useAI });
-      return NextResponse.json(createFallbackResponse(objectiveId, subjectId), { status: 200 });
-    }
-
-    // 3. Recommendation Logic
-    let selectedQuestion: any = null;
-
-    if (nableState && userId) {
-      const exclude: string[] = [];
-      for (let i = 0; i < Math.min(5, candidates.length); i++) {
-        const result = recommend(
-          nableState,
-          {
-            userId,
-            subject: subjectId || 'General',
-            excludeQuestionIds: exclude
-          },
-          candidates as ContentItem[]
-        );
-        const qid = (result.question as any)?.questionId;
-        const match = qid ? candidates.find((c: any) => (c.questionId || c.id) === qid) : null;
-        if (match) {
-          selectedQuestion = match;
-          break;
-        }
-        if (qid) exclude.push(qid);
-        else break;
-      }
-    }
-
-    // 4. Fallback: Closest Difficulty Match
-    if (!selectedQuestion) {
-      const idealDifficulty = nableState
-        ? (nableState.lastDifficulty || targetDifficulty)
-        : targetDifficulty;
-
-      selectedQuestion = candidates.sort((a: any, b: any) =>
-        Math.abs((a.difficultyWeight || a.difficulty || 5) - idealDifficulty) - Math.abs((b.difficultyWeight || b.difficulty || 5) - idealDifficulty)
-      )[0];
-    }
-
-    return NextResponse.json(formatResponse(selectedQuestion, objectiveId, subjectId));
-  } catch (error: any) {
-    if ((error as any).name === 'AuthError' || error.message?.includes('Unauthorized')) {
-      return NextResponse.json({ error: error.message }, { status: 401 });
-    }
-    if (process.env.NODE_ENV === 'development') console.error('Generation API Error');
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  const result = searchSchema.safeParse(queryParams);
+  if (!result.success) {
+    throw new AppError(result.error.errors[0]?.message || 'Invalid parameters', 400, 'VALIDATION_ERROR');
   }
-}
 
-async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number, subjectId: string | null) {
+  const { objectiveId, variation, streak, errors, useAI } = result.data;
+  const subjectId = result.data.subjectId ?? null;
+
+  // 1. Authenticate & Load NABLE State
+  const decodedToken = await verifyAuth(request);
+  const userId = decodedToken.uid;
+
+  const nableRef = adminDb.collection('users').doc(userId).collection('nable').doc('state');
+  const nableDoc = await nableRef.get();
+
+  const nableState: NABLEState = nableDoc.exists
+    ? loadState(userId, nableDoc.data() as Partial<NABLEState>)
+    : createInitialState(userId);
+
+  // 2. Fetch Candidates with Target Difficulty
+  // Variation 1 = Easy, 2 = Medium, 3 = Hard
+  let targetDifficulty = variation === 1 ? 3 : variation === 2 ? 6 : 9;
+
+  // Apply real-time adaptation
+  if (streak >= 3) targetDifficulty = Math.min(10, targetDifficulty + 2);
+  if (errors >= 2) targetDifficulty = Math.max(1, targetDifficulty - 2);
+
+  let candidates: RawCandidate[] = await withTimeout<RawCandidate[]>(
+    fetchCandidatesFromDB(objectiveId, targetDifficulty, subjectId || null),
+    DB_TIMEOUT
+  );
+
+  const sanitizedCandidates = (candidates || [])
+    .map((q: RawCandidate) => sanitizeQuestionCandidate(q, objectiveId))
+    .filter((q): q is NonNullable<ReturnType<typeof sanitizeQuestionCandidate>> => q !== null);
+
+  if ((candidates || []).length > 0 && sanitizedCandidates.length === 0) {
+    console.warn('[questions/generate] All candidates rejected by sanitization', {
+      objectiveId,
+      subjectId,
+      fetched: (candidates || []).length,
+    });
+  }
+
+  candidates = sanitizedCandidates;
+
+  // Exclude already-correct questions using state-based tracking
+  if (userId && candidates && candidates.length > 0 && nableState.completedQuestionIds) {
+    const completedSet = new Set(nableState.completedQuestionIds);
+
+    // Priority 1: Questions never answered correctly
+    const withoutCorrect = candidates.filter((q: RawCandidate) => {
+      const qid = q?.questionId || q?.id;
+      return !(typeof qid === 'string' && completedSet.has(qid));
+    });
+
+    if (withoutCorrect.length > 0) {
+      candidates = withoutCorrect;
+    } else {
+      // Filter out the most recently completed question to avoid immediate repeats
+      if (nableState.completedQuestionIds.length > 0) {
+        const lastQid = nableState.completedQuestionIds[nableState.completedQuestionIds.length - 1];
+        const notLast = candidates.filter((q: RawCandidate) => (q.questionId || q.id) !== lastQid);
+        if (notLast.length > 0) candidates = notLast;
+      }
+    }
+  }
+
+  if (!candidates || candidates.length === 0) {
+    // Try AI generation as fallback when DB is empty
+    if (useAI) {
+      console.warn('[questions/generate] No DB questions found, attempting AI generation for:', objectiveId);
+      const aiQuestion = await generateAIQuestion(objectiveId, subjectId || null, targetDifficulty);
+      if (aiQuestion) {
+        console.warn('[questions/generate] AI question generated successfully');
+        return NextResponse.json(formatResponse(aiQuestion, objectiveId, subjectId || null));
+      }
+    }
+    console.warn('[questions/generate] No questions available for objective:', { objectiveId, subjectId, useAI });
+    return NextResponse.json(createFallbackResponse(objectiveId, subjectId || null), { status: 200 });
+  }
+
+  // 3. Recommendation Logic
+  let selectedQuestion: RawCandidate | null = null;
+
+  if (nableState && userId) {
+    const exclude: string[] = [];
+    for (let i = 0; i < Math.min(5, candidates.length); i++) {
+      const recResult = recommend(
+        nableState,
+        {
+          userId,
+          subject: subjectId || 'General',
+          excludeQuestionIds: exclude
+        },
+        candidates as unknown as ContentItem[]
+      );
+      const qid = (recResult.question as unknown as RawCandidate)?.questionId;
+      const match = qid ? candidates.find((c: RawCandidate) => (c.questionId || c.id) === qid) : null;
+      if (match) {
+        selectedQuestion = match;
+        break;
+      }
+      if (qid) exclude.push(qid);
+      else break;
+    }
+  }
+
+  // 4. Fallback: Closest Difficulty Match
+  if (!selectedQuestion) {
+    const idealDifficulty = nableState
+      ? (nableState.lastDifficulty || targetDifficulty)
+      : targetDifficulty;
+
+    selectedQuestion = candidates.sort((a: RawCandidate, b: RawCandidate) =>
+      Math.abs((a.difficultyWeight || a.difficulty || 5) - idealDifficulty) - Math.abs((b.difficultyWeight || b.difficulty || 5) - idealDifficulty)
+    )[0] || null;
+  }
+
+  if (!selectedQuestion) {
+    return NextResponse.json(createFallbackResponse(objectiveId, subjectId || null), { status: 200 });
+  }
+
+  return NextResponse.json(formatResponse(selectedQuestion, objectiveId, subjectId || null));
+});
+
+async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: number, subjectId: string | null): Promise<RawCandidate[]> {
   try {
     const questionsRef = adminDb.collection('questions');
     let usedSubjectFallback = false;
@@ -322,7 +347,7 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
         .get();
     }
 
-    // 3. Fallback: Query by Subject ID (we will NOT serve cross-objective questions)
+    // 3. Fallback: Query by Subject ID
     if (snapshot.empty && (subjectId || subjectKey)) {
       usedSubjectFallback = true;
       if (subjectKey) {
@@ -332,7 +357,6 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
           .get();
       }
 
-      // Secondary fallback for older data where subjectName is used but subjectId differs
       if (snapshot.empty && subjectId) {
         snapshot = await questionsRef
           .where('subjectName', '==', subjectId)
@@ -343,12 +367,10 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
 
     if (snapshot.empty) return [];
 
-    const rows = snapshot.docs.map((doc): any => ({ id: doc.id, ...doc.data() }));
+    const rows = snapshot.docs.map((doc): RawCandidate => ({ id: doc.id, ...doc.data() as RawCandidate }));
 
-    // If we used a subject fallback query, filter back down to the requested objective.
-    // This prevents cross-objective questions while still allowing retrieval when schema/indexing is inconsistent.
     if (usedSubjectFallback) {
-      const objectiveFiltered = rows.filter((q: any) => {
+      const objectiveFiltered = rows.filter((q: RawCandidate) => {
         const qObj = String(q?.objectiveId || '');
         const docId = String(q?.id || '');
         return qObj === objectiveId || docId.startsWith(`${objectiveId}_`) || docId.startsWith(objectiveId);
@@ -361,16 +383,13 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     let subjectFiltered = rows;
 
     if (subjectKey) {
-      const filteredBySubject = rows.filter((q: any) => {
+      const filteredBySubject = rows.filter((q: RawCandidate) => {
         if (!q?.subjectId && !q?.subjectName) return true;
         const qSubjectIdKey = q?.subjectId ? normalizeSubjectKey(String(q.subjectId)) : '';
         const qSubjectNameKey = q?.subjectName ? normalizeSubjectKey(String(q.subjectName)) : '';
         return qSubjectIdKey === subjectKey || qSubjectNameKey === subjectKey;
       });
 
-      // If objectiveId matched but subject key didn't, do NOT wipe the pool.
-      // This happens when the client sends subject display-name (e.g. "Principles of Business")
-      // but Firestore stores a slug (e.g. "principles_of_business").
       if (filteredBySubject.length > 0) {
         subjectFiltered = filteredBySubject;
       }
@@ -380,8 +399,8 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
     const minDiff = Math.max(1, base - 5);
     const maxDiff = Math.min(10, base + 5);
 
-    const filtered = subjectFiltered.filter((q: any) => {
-      const d = q?.difficultyWeight ?? q?.difficulty ?? 5;
+    const filtered = subjectFiltered.filter((q: RawCandidate) => {
+      const d = (q?.difficultyWeight as number | undefined) ?? (q?.difficulty as number | undefined) ?? 5;
       return d >= minDiff && d <= maxDiff;
     });
 
@@ -396,29 +415,29 @@ async function fetchCandidatesFromDB(objectiveId: string, targetDifficulty: numb
   }
 }
 
-function processRows(rows: any[], objectiveId: string) {
+function processRows(rows: RawCandidate[], objectiveId: string): RawCandidate[] {
   return rows.map((row) => {
     try {
       return {
         ...row,
         questionId: row.id || row.questionId || `${objectiveId}_${Math.random()}`,
         objectiveId: row.objectiveId || objectiveId,
-        difficulty: row.difficulty || row.difficultyWeight || 5,
-        difficultyWeight: row.difficultyWeight || row.difficulty || 5,
+        difficulty: (row.difficulty as number | undefined) || (row.difficultyWeight as number | undefined) || 5,
+        difficultyWeight: (row.difficultyWeight as number | undefined) || (row.difficulty as number | undefined) || 5,
         contentType: row.contentType || 'standard',
-        distractorSimilarity: row.distractorSimilarity ?? 0.5,
-        expectedTime: row.expectedTime ?? 45,
+        distractorSimilarity: (row.distractorSimilarity as number | undefined) ?? 0.5,
+        expectedTime: (row.expectedTime as number | undefined) ?? 45,
         subSkills: row.subSkills || [objectiveId],
-        options: typeof row.options === 'string' ? JSON.parse(row.options) : (row.options || []),
-      };
+        options: Array.isArray(row.options) ? row.options : typeof row.options === 'string' ? JSON.parse(row.options) : [],
+      } as RawCandidate;
     } catch (e) {
       console.warn('Failed to parse question row:', e);
       return null;
     }
-  }).filter(Boolean);
+  }).filter((r): r is RawCandidate => r !== null);
 }
 
-function formatResponse(question: any, objectiveId: string, subjectId: string | null) {
+function formatResponse(question: RawCandidate, objectiveId: string, subjectId: string | null) {
   return {
     simulationSteps: [
       {
@@ -435,7 +454,7 @@ function formatResponse(question: any, objectiveId: string, subjectId: string | 
         interactiveData: question.interactiveData || {}
       },
       {
-        id: 2, // The Outcome step expected by your Frontend
+        id: 2,
         type: 'outcome',
         content: question.explanation || 'Excellent work! You understood the core concept.',
         storyElement: 'Analysis'
@@ -445,13 +464,12 @@ function formatResponse(question: any, objectiveId: string, subjectId: string | 
       id: objectiveId,
       subject: subjectId || question.subjectId || 'Subject',
       difficulty: question.difficultyWeight || question.difficulty || 5,
-      title: question.topic || objectiveId
+      title: (question.topic as string | undefined) || objectiveId
     }
   };
 }
 
 function createFallbackResponse(objectiveId: string, subjectId: string | null) {
-  // Exactly matches the frontend's expected structure even on failure
   return {
     simulationSteps: [
       {
@@ -468,19 +486,22 @@ function createFallbackResponse(objectiveId: string, subjectId: string | null) {
   };
 }
 
-/**
- * Generate a question using AI when no questions exist in the database
- */
-async function generateAIQuestion(objectiveId: string, subjectId: string | null, difficulty: number): Promise<any | null> {
+interface AIResponse {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+async function generateAIQuestion(objectiveId: string, subjectId: string | null, difficulty: number): Promise<RawCandidate | null> {
   try {
-    // Check if Ollama is available
     const ollamaCheck = await fetch('http://localhost:11434/api/tags', {
       method: 'GET',
       signal: AbortSignal.timeout(2000)
     }).catch(() => null);
 
     if (!ollamaCheck?.ok) {
-      console.log('[questions/generate] Ollama not available, skipping AI generation');
+      console.warn('[questions/generate] Ollama not available, skipping AI generation');
       return null;
     }
 
@@ -524,41 +545,38 @@ Rules:
       return null;
     }
 
-    const result = await response.json();
+    const result = await response.json() as { response: string };
     const responseText = result.response || '';
 
-    // Extract JSON from response
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       console.error('[questions/generate] No JSON found in AI response');
       return null;
     }
 
-    const parsed = JSON.parse(jsonMatch[0]);
+    const parsed = JSON.parse(jsonMatch[0]) as AIResponse;
 
-    // Validate the response structure
     if (!parsed.question || !Array.isArray(parsed.options) || parsed.options.length < 2) {
       console.error('[questions/generate] Invalid AI response structure');
       return null;
     }
 
-    // Ensure exactly 4 options
     while (parsed.options.length < 4) {
       parsed.options.push(`Option ${String.fromCharCode(65 + parsed.options.length)}`);
     }
-    parsed.options = parsed.options.slice(0, 4);
+    const finalOptions = parsed.options.slice(0, 4);
 
     return {
       question: parsed.question,
       questionText: parsed.question,
-      options: parsed.options,
+      options: finalOptions,
       correctAnswer: typeof parsed.correctAnswer === 'number' ? parsed.correctAnswer : 0,
       explanation: parsed.explanation || 'Great job! You understood the concept correctly.',
       difficulty: difficulty,
       difficultyWeight: difficulty,
       questionId: `ai-${objectiveId}-${Date.now()}`,
       objectiveId: objectiveId,
-      subjectId: subjectId,
+      subjectId: subjectId || undefined,
       contentType: 'ai-generated',
       distractorSimilarity: 0.5,
       expectedTime: 45,

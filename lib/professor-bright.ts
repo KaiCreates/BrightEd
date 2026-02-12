@@ -92,7 +92,7 @@ export const getProfessorBrightFeedback = (
     ]
 
     return {
-      message: correctMessages[Math.floor(Math.random() * correctMessages.length)],
+      message: correctMessages[Math.floor(Math.random() * correctMessages.length)]!,
       emoji: "✨",
       spriteClass: "owl-happy",
       tone: 'encouraging'

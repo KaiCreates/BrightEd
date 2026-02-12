@@ -125,6 +125,7 @@ function CommandCenterContent() {
             });
           }
 
+          if (!db) return;
           const bizRef = doc(db, 'businesses', business.id);
           const updatedPool = [...currentPool, ...newCandidates].slice(0, 10);
 
@@ -292,6 +293,7 @@ function CommandCenterContent() {
                 return result.updatedEmployee;
               });
 
+              if (!db) return;
               const bizRef = doc(db, 'businesses', business.id);
               updateDoc(bizRef, {
                 ...profileUpdates,
@@ -313,7 +315,6 @@ function CommandCenterContent() {
           }
         }
       }
-
       if (now - lastTickRef.current >= 5000) {
         lastTickRef.current = now;
 
@@ -324,6 +325,7 @@ function CommandCenterContent() {
 
         if (business.employees && business.employees.length > 0 && now - lastWageAccrualRef.current >= 360000) {
           lastWageAccrualRef.current = now;
+          if (!db) return;
           const bizRef = doc(db, 'businesses', business.id);
           const updatedEmployees = business.employees.map((emp: any) => {
             // Wage accumulates every 6 minutes (representing 1 sim hour)
@@ -365,7 +367,7 @@ function CommandCenterContent() {
 
         if (newOrders.length > 0) {
           saveNewOrders(business.id, newOrders);
-          if (Math.random() > 0.7) {
+          if (Math.random() > 0.7 && newOrders[0]) {
             showInterrupt('luka', `New order from ${newOrders[0].customerName}!`, 'happy');
           }
         }
@@ -508,20 +510,21 @@ function CommandCenterContent() {
         return result.updatedEmployee;
       });
 
-      const bizRef = doc(db, 'businesses', business.id);
-      updateDoc(bizRef, { employees: updatedEmployees });
-    }
+      if (loyaltyUpdate && loyaltyUpdate.tierChanged) {
+        showInterrupt('luka', `${order.customerName} ${loyaltyUpdate.message}`, 'happy');
+      } else if (stars === 6) {
+        showInterrupt('luka', `WOAH! A 6-Star Legendary Review from ${order.customerName}!`, 'happy');
+      } else if (stars <= 2) {
+        showInterrupt('keisha', `Ouch. ${order.customerName} left a ${stars}-star review.`, 'concerned');
+      } else if (tip > 0) {
+        showInterrupt('mendy', `Awesome! Received ฿${payment} plus a ฿${tip} tip!`, 'happy');
+      }
 
-    await updateBusinessFinancials(business.id, updates);
-
-    if (loyaltyUpdate && loyaltyUpdate.tierChanged) {
-      showInterrupt('luka', `${order.customerName} ${loyaltyUpdate.message}`, 'happy');
-    } else if (stars === 6) {
-      showInterrupt('luka', `WOAH! A 6-Star Legendary Review from ${order.customerName}!`, 'happy');
-    } else if (stars <= 2) {
-      showInterrupt('keisha', `Ouch. ${order.customerName} left a ${stars}-star review.`, 'concerned');
-    } else if (tip > 0) {
-      showInterrupt('mendy', `Awesome! Received ฿${payment} plus a ฿${tip} tip!`, 'happy');
+      // Save updated employee skills
+      if (db) {
+        const bizRef = doc(db, 'businesses', business.id);
+        updateDoc(bizRef, { employees: updatedEmployees });
+      }
     }
 
     setActiveFulfillmentOrder(null);
@@ -680,6 +683,7 @@ function CommandCenterContent() {
                       showConfirm(
                         'ARE YOU SURE? This will liquidate your business and delete all progress permanently.',
                         async () => {
+                          if (!db) return;
                           await deleteDoc(doc(db, 'businesses', business.id));
                         },
                         { title: 'SHUTDOWN ENTITY', type: 'danger', confirmLabel: 'LIQUIDATE' }

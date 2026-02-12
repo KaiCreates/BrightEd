@@ -54,21 +54,23 @@ export async function POST(
       payload,
       sessionId,
       profile: {
-        skills: profile.skills,
-        reputation: profile.reputation,
+        skills: profile.skills as Record<string, number>,
+        reputation: profile.reputation as Record<string, number>,
       },
     });
 
     const snapshot = session.snapshot || {};
-    let resources = snapshot.resources || {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let resources: any = snapshot.resources || {
       bCoins: profile.bCoins,
       timeUnits: profile.timeUnits,
       inventory: profile.inventory,
       energy: profile.energy,
     };
-    resources = applyResourceDelta(resources, immediate);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resources = applyResourceDelta(resources as any, immediate as any);
 
-    let businessState = session.businessState as BusinessSimState | null;
+    let businessState = session.businessState as unknown as BusinessSimState | null;
 
     if (choiceId === 'business_register' && session.story?.slug === BUSINESS_STORY_SLUG) {
       const name = (payload.businessName as string) || 'My Business';

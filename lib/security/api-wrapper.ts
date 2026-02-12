@@ -13,8 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ZodSchema } from 'zod';
 import { SecurityAudit } from './audit-log';
-import { checkRateLimit, createRateLimitResponse, type RateLimitResult } from './rate-limit';
-import { validateInput, ValidationResult } from './validation';
+import { checkRateLimit, createRateLimitResponse } from './rate-limit';
+import { validateInput } from './validation';
 import { validateCsrfRequest } from './csrf';
 import { verifyAuth } from '@/lib/auth-server';
 
@@ -76,10 +76,10 @@ export function createErrorResponse(
     },
     { status }
   );
-  
+
   // Add cache control for error responses
   response.headers.set('Cache-Control', 'no-store, private');
-  
+
   return response;
 }
 
@@ -102,10 +102,10 @@ export function createSuccessResponse<T>(
     },
     { status }
   );
-  
+
   // Add cache control headers
   response.headers.set('Cache-Control', 'private, max-age=0, no-cache');
-  
+
   return response;
 }
 
@@ -152,7 +152,7 @@ function checkRoleAccess(userRole: string, requiredRole: string): boolean {
     user: ['user', 'guest'],
     guest: ['guest'],
   };
-  
+
   return roleHierarchy[userRole]?.includes(requiredRole) ?? false;
 }
 
@@ -176,15 +176,15 @@ export function withSecurity(
     const startTime = Date.now();
     const pathname = request.nextUrl.pathname;
     const ip = request.ip || request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
-    
+
     try {
       // ============================================================================
       // 1. Rate Limiting (Security.md Section 14)
       // ============================================================================
-      
+
       if (config.rateLimit) {
         const rateLimitResult = checkRateLimit(request, config.rateLimit);
-        
+
         if (!rateLimitResult.allowed) {
           SecurityAudit.logRateLimit({
             ip,
@@ -192,18 +192,18 @@ export function withSecurity(
             limit: rateLimitResult.limit,
             windowMs: 0, // Would need to extract from config
           });
-          
+
           return createRateLimitResponse(rateLimitResult)!;
         }
       }
-      
+
       // ============================================================================
       // 2. CSRF Validation (Security.md Section 6)
       // ============================================================================
-      
+
       if (config.csrf && !['GET', 'HEAD', 'OPTIONS'].includes(request.method)) {
         const csrfValidation = validateCsrfRequest(request);
-        
+
         if (!csrfValidation.valid) {
           SecurityAudit.log({
             event: 'CSRF_VALIDATION_FAILED',
@@ -212,7 +212,7 @@ export function withSecurity(
             path: pathname,
             details: { error: csrfValidation.error },
           });
-          
+
           return createErrorResponse(
             403,
             'CSRF_ERROR',
@@ -220,16 +220,16 @@ export function withSecurity(
           );
         }
       }
-      
+
       // ============================================================================
       // 3. Authentication (Security.md Section 1 & 2)
       // ============================================================================
-      
+
       let auth: AuthContext | undefined;
-      
+
       if (config.requireAuth) {
         auth = (await extractAuthContext(request)) ?? undefined;
-        
+
         if (!auth) {
           SecurityAudit.log({
             event: 'UNAUTHORIZED_API_ACCESS',
@@ -238,14 +238,14 @@ export function withSecurity(
             path: pathname,
             details: { reason: 'No valid session' },
           });
-          
+
           return createErrorResponse(
             401,
             'UNAUTHORIZED',
             'Authentication required'
           );
         }
-        
+
         // Role-based access control
         if (config.requiredRole && !checkRoleAccess(auth.userRole, config.requiredRole)) {
           SecurityAudit.log({
@@ -256,7 +256,7 @@ export function withSecurity(
             userId: auth.userId,
             details: { userRole: auth.userRole, requiredRole: config.requiredRole },
           });
-          
+
           return createErrorResponse(
             403,
             'FORBIDDEN',
@@ -264,16 +264,16 @@ export function withSecurity(
           );
         }
       }
-      
+
       // ============================================================================
       // 4. Input Validation (Security.md Section 6)
       // ============================================================================
-      
+
       // Validate query parameters
       if (config.validateQuery) {
         const queryParams = Object.fromEntries(request.nextUrl.searchParams.entries());
         const validation = validateInput(queryParams, config.validateQuery, { sanitize: true });
-        
+
         if (!validation.success) {
           SecurityAudit.log({
             event: 'INPUT_VALIDATION_FAILED',
@@ -283,7 +283,7 @@ export function withSecurity(
             userId: auth?.userId,
             details: { errors: validation.errors },
           });
-          
+
           return createErrorResponse(
             400,
             'VALIDATION_ERROR',
@@ -292,15 +292,15 @@ export function withSecurity(
           );
         }
       }
-      
+
       // Validate request body
       let validatedBody: unknown;
-      
+
       if (config.validateBody && ['POST', 'PUT', 'PATCH'].includes(request.method)) {
         try {
           const body = await request.json();
           const validation = validateInput(body, config.validateBody, { sanitize: true });
-          
+
           if (!validation.success) {
             SecurityAudit.log({
               event: 'INPUT_VALIDATION_FAILED',
@@ -310,7 +310,7 @@ export function withSecurity(
               userId: auth?.userId,
               details: { errors: validation.errors },
             });
-            
+
             return createErrorResponse(
               400,
               'VALIDATION_ERROR',
@@ -318,7 +318,7 @@ export function withSecurity(
               { errors: validation.errors }
             );
           }
-          
+
           validatedBody = validation.data;
         } catch {
           return createErrorResponse(
@@ -328,31 +328,31 @@ export function withSecurity(
           );
         }
       }
-      
+
       // ============================================================================
       // 5. Execute Handler
       // ============================================================================
-      
+
       const context: ApiHandlerContext = {
         request,
         auth,
         params,
       };
-      
+
       // Add validated body to request for handler to access
       if (validatedBody !== undefined) {
         (request as unknown as { validatedBody: unknown }).validatedBody = validatedBody;
       }
-      
+
       const response = await handler(context);
-      
+
       // ============================================================================
       // 6. Post-Processing
       // ============================================================================
-      
+
       // Log successful request
       const duration = Date.now() - startTime;
-      
+
       SecurityAudit.log({
         event: 'API_REQUEST_SUCCESS',
         severity: 'INFO',
@@ -365,16 +365,16 @@ export function withSecurity(
           duration,
         },
       });
-      
+
       return response;
-      
+
     } catch (error) {
       // ============================================================================
       // 7. Error Handling (Security.md Section 5)
       // ============================================================================
-      
+
       const duration = Date.now() - startTime;
-      
+
       // Log error (with sanitized details)
       SecurityAudit.log({
         event: 'API_REQUEST_ERROR',
@@ -387,17 +387,17 @@ export function withSecurity(
           error: error instanceof Error ? error.message : 'Unknown error',
         },
       });
-      
+
       // Determine error response based on environment
       const isDevelopment = process.env.NODE_ENV === 'development';
-      
+
       // Log detailed error on server only
       console.error('API Error:', error);
-      
+
       return createErrorResponse(
         500,
         'INTERNAL_ERROR',
-        isDevelopment 
+        isDevelopment
           ? error instanceof Error ? error.message : 'Internal server error'
           : 'Internal server error'
       );

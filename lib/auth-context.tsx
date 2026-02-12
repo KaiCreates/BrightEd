@@ -14,7 +14,7 @@ export interface UserData {
     lastUsernameChange?: number;
     lastStreakDay?: string;
     lastLearningDay?: string;
-    lastLearningAt?: any;
+    lastLearningAt?: string | number | null;
     activeDays30?: string[];
     consistency?: number;
     questionsCorrect: number;
@@ -45,7 +45,8 @@ export interface UserData {
     onboardingCompleted?: boolean;
     diagnosticCompleted?: boolean;
     diagnosticCompletedAt?: string;
-    diagnosticStats?: any;
+    diagnosticStats?: Record<string, unknown>;
+    diagnosticStatsArr?: unknown[]; // Keep some flexibility if needed for legacy
     createdAt?: string;
     updatedAt?: string;
     skills?: {
@@ -85,6 +86,30 @@ export interface UserData {
     };
     blockedUsers?: string[];
     mutedUsers?: string[];
+    
+    // Password Security
+    passwordHistory?: {
+        hash: string;
+        salt: string;
+        changedAt: string;
+        expiresAt: string;
+    }[];
+    passwordLastChanged?: string;
+    passwordResetCount?: number;
+    
+    // Session Management
+    activeSessions?: {
+        sessionId: string;
+        deviceInfo: {
+            browser: string;
+            os: string;
+            device: string;
+            isMobile: boolean;
+        };
+        lastActive: string;
+        createdAt: string;
+        ipAddress?: string;
+    }[];
 }
 
 interface AuthContextType {
@@ -98,7 +123,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Helper for consistent name resolution
-export function resolveUserNames(user: User, firestoreData?: Partial<UserData>): { firstName: string, lastName: string, fullName: string, displayName: string } {
+export function resolveUserNames(user: User, firestoreData?: Partial<UserData>): { firstName: string; lastName: string; fullName: string; displayName: string } {
     const firstName = firestoreData?.firstName ||
         user.displayName?.split(' ')[0] ||
         user.email?.split('@')[0] ||
@@ -166,7 +191,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
                         // Update lastActive if > 1 hour or if it's a new day (to trigger resets)
                         if ((now.getTime() - lastActive.getTime()) > 3600000 || isNewDay) {
-                            const updates: any = { lastActive: now.toISOString() };
+                            const updates: Partial<UserData> = { lastActive: now.toISOString() };
 
                             // Reset daily XP if it's a new day
                             if (isNewDay) {

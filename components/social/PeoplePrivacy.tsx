@@ -4,13 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSocialHub } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
-import { UserSocialBadge } from './UserSocialBadge';
 import { BrightLayer } from '@/components/system';
-import { db } from '@/lib/firebase';
-import { collection, query, where, onSnapshot, orderBy, limit, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 export function PeoplePrivacy() {
-    const { onlineUsers, openDM, dmWindows } = useSocialHub();
+    const { onlineUsers, openDM } = useSocialHub();
     const { user } = useAuth();
     const [recentDMs, setRecentDMs] = useState<Array<{
         userId: string;
@@ -32,7 +30,7 @@ export function PeoplePrivacy() {
     }, [user]);
 
     const [isMounted, setIsMounted] = useState(false);
-    
+
     useEffect(() => {
         setIsMounted(true);
     }, []);

@@ -5,16 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSocialHub } from '@/lib/social-hub-context';
 import { useAuth } from '@/lib/auth-context';
 import { UserSocialBadge } from './UserSocialBadge';
-import { BrightLayer, BrightButton } from '@/components/system';
+import { BrightButton } from '@/components/system';
 import ReactMarkdown from 'react-markdown';
 import { storage } from '@/lib/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const REACTIONS = ['🔥', '💯', '👏', '💡'];
 
 export function CampusSquare() {
     const { activeRoom, messages, sendMessage, addReaction, openDM, reportMessage, reportRoom, typingUsers, setTyping } = useSocialHub();
-    const { user, userData } = useAuth();
+    const { user } = useAuth();
     const [messageText, setMessageText] = useState('');
     const [showReactions, setShowReactions] = useState<string | null>(null);
     const [expandedThreads, setExpandedThreads] = useState<Set<string>>(new Set());
@@ -36,8 +36,9 @@ export function CampusSquare() {
         try {
             await sendMessage(messageText);
             setMessageText('');
-        } catch (error: any) {
-            alert(error.message || 'Failed to send message');
+        } catch (error: unknown) {
+            const err = error as { message?: string };
+            alert(err.message || 'Failed to send message');
         }
     };
 
@@ -82,6 +83,7 @@ export function CampusSquare() {
         setFileUploading(true);
         setUploadProgress(0);
         try {
+            if (!storage) throw new Error('Storage not initialized');
             const fileRef = ref(storage, `messages/${Date.now()}_${file.name}`);
 
             // Use uploadBytesResumable for progress tracking
@@ -186,10 +188,10 @@ export function CampusSquare() {
                     <div className="prose prose-invert max-w-none mb-3">
                         <ReactMarkdown
                             components={{
-                                code: ({ node, ...props }) => (
+                                code: ({ node: _node, ...props }) => (
                                     <code className="bg-black/30 px-2 py-1 rounded text-sm" {...props} />
                                 ),
-                                pre: ({ node, ...props }) => (
+                                pre: ({ node: _node, ...props }) => (
                                     <pre className="bg-black/30 p-3 rounded overflow-x-auto" {...props} />
                                 )
                             }}
@@ -350,10 +352,10 @@ export function CampusSquare() {
                     <div className="mb-2 px-2">
                         <span className="text-xs text-[var(--text-muted)] italic">
                             {typingUsers.length === 1
-                                ? `${typingUsers[0].name} is typing...`
+                                ? `${typingUsers[0]!.name} is typing...`
                                 : typingUsers.length === 2
-                                    ? `${typingUsers[0].name} and ${typingUsers[1].name} are typing...`
-                                    : `${typingUsers[0].name} and ${typingUsers.length - 1} others are typing...`}
+                                    ? `${typingUsers[0]!.name} and ${typingUsers[1]!.name} are typing...`
+                                    : `${typingUsers[0]!.name} and ${typingUsers.length - 1} others are typing...`}
                         </span>
                         <span className="inline-flex ml-1">
                             <span className="w-1 h-1 bg-[var(--brand-primary)] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />

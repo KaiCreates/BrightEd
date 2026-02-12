@@ -6,7 +6,6 @@
 import {
     Order,
     OrderItem,
-    OrderStatus,
     CustomerType,
     PaymentTerms,
     QualityTier,
@@ -15,9 +14,8 @@ import {
     ProductTemplate,
     BusinessType,
 } from './economy-types';
-import { getBusinessType } from './business-templates';
 import { generateOrderNarrative, generateConsequenceMessage } from './order-narratives';
-import { CustomerProfile, updateCustomerLoyalty, calculateLoyaltyBonus, createCustomerProfile } from './loyalty-system';
+import { CustomerProfile, updateCustomerLoyalty, calculateLoyaltyBonus } from './loyalty-system';
 
 // ============================================================================
 // ORDER GENERATION
@@ -119,11 +117,14 @@ function selectOrderItems(
         });
 
         const totalWeight = weightedProducts.reduce((acc, p) => acc + p.weight, 0);
+        if (totalWeight <= 0) break;
         let roll = Math.random() * totalWeight;
         let selectedIdx = 0;
 
         for (let j = 0; j < weightedProducts.length; j++) {
-            roll -= weightedProducts[j].weight;
+            const wp = weightedProducts[j];
+            if (!wp) continue;
+            roll -= wp.weight;
             if (roll <= 0) {
                 selectedIdx = j;
                 break;
@@ -131,6 +132,7 @@ function selectOrderItems(
         }
 
         const product = availableProducts[selectedIdx];
+        if (!product) continue;
 
         // Quantity varies by product type
         const quantity = product.baseTimeMinutes < 10
@@ -248,7 +250,6 @@ export function generateOrder(
 
     // Check if returning customer
     const existingCustomer = customerProfiles?.get(customerId);
-    const isReturning = existingCustomer && existingCustomer.totalOrders > 0;
 
     // Quality tier based on reputation and customer
     let qualityTier: QualityTier = 'standard';
@@ -278,9 +279,9 @@ export function generateOrder(
     const paymentTerms = generatePaymentTerms(customerType, businessType.category);
 
     // Customer mood
-    const moods: Order['customerMood'][] = ['happy', 'neutral', 'neutral', 'impatient'];
+    const moods: Order['customerMood'][] = ['happy', 'neutral', 'impatient'];
     if (customerType === 'vip') moods.push('demanding');
-    const customerMood = moods[Math.floor(Math.random() * moods.length)];
+    const customerMood = moods[Math.floor(Math.random() * moods.length)] || 'neutral';
 
     // Loyalty level
     let loyaltyLevel: Order['loyaltyLevel'] = 'new';
@@ -312,8 +313,8 @@ export function generateOrder(
 
     // Generate narrative context
     const narrative = generateOrderNarrative(order, businessType.category);
-    (order as any).narrative = narrative.context;
-    (order as any).narrativeData = narrative;
+    order.narrative = narrative.context;
+    order.narrativeData = narrative;
 
     return order;
 }
@@ -487,12 +488,13 @@ export function generateReview(
     ];
 
     let text = "";
-    if (rating >= 4) text = praise[Math.floor(Math.random() * praise.length)];
-    else if (rating === 3) text = neutral[Math.floor(Math.random() * neutral.length)];
-    else text = complaints[Math.floor(Math.random() * complaints.length)];
+    if (rating >= 4) text = praise[Math.floor(Math.random() * praise.length)] || "Excellent service!";
+    else if (rating === 3) text = neutral[Math.floor(Math.random() * neutral.length)] || "It was okay.";
+    else text = complaints[Math.floor(Math.random() * complaints.length)] || "Disappointing experience.";
 
     if (failureReason === 'deadline_missed') text = "Wait all day and nothing! Terrible.";
-    if (failureReason === 'stockout') text = "They never have anything in stock.";
+    else if (failureReason === 'stockout') text = "They never have anything in stock.";
+    else if (failureReason === 'cancelled_by_business') text = "They cancelled my order for no reason.";
 
     // Loyalty bonus to text
     if (order.loyaltyLevel === 'loyal' && rating >= 4) text += " Always my go-to spot.";
@@ -508,11 +510,11 @@ export function completeOrder(
     qualityScore: number, // 0-100
     businessType?: BusinessType, // Optional, but needed for inventory deduction
     customerProfile?: CustomerProfile // Optional, for loyalty tracking
-): { 
-    order: Order; 
-    payment: number; 
-    tip: number; 
-    inventoryDeductions: Record<string, number>; 
+): {
+    order: Order;
+    payment: number;
+    tip: number;
+    inventoryDeductions: Record<string, number>;
     review: { rating: number; text: string };
     loyaltyUpdate?: {
         customerId: string;
@@ -593,14 +595,14 @@ export function completeOrder(
         };
 
         // Generate consequence message if narrative exists
-        if ((order as any).narrativeData) {
+        if (order.narrativeData) {
             const consequenceMsg = generateConsequenceMessage(
-                (order as any).narrativeData,
+                order.narrativeData,
                 qualityScore,
                 onTime,
                 result.loyaltyChange
             );
-            (order as any).consequenceMessage = consequenceMsg;
+            order.consequenceMessage = consequenceMsg;
         }
     }
 
@@ -737,7 +739,7 @@ export function collectDuePayments(
         if (order.paidAmount <= 0) continue;
 
         // Skip anything already marked as collected
-        if ((order as any).isCollected) continue;
+        if (order.isCollected) continue;
 
         if (order.paymentTerms.type === 'net_days' && order.paymentTerms.netDays) {
             const completedDate = new Date(order.completedAt!);

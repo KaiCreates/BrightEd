@@ -10,7 +10,7 @@ import {
     ExpenseCategory,
     FailureType,
 } from './economy-types';
-import { getBusinessType } from './business-templates';
+import './business-templates'; // Type only if needed, or remove if unused entirely. Wait, let's just remove the import.
 
 // ============================================================================
 // ECONOMIC STABILIZERS
@@ -469,7 +469,7 @@ export function checkFinancialFailures(
     pendingExpenses: Expense[]
 ): FailureType | null {
     const unpaidRent = pendingExpenses.find(e => e.category === 'rent' && !e.paidAt);
-    const unpaidUtilities = pendingExpenses.find(e => e.category === 'utilities' && !e.paidAt);
+    // Simplified logic
 
     if (businessState.cashBalance < 0) {
         return 'cash_crisis';

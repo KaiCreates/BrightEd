@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import React, { useState, useCallback } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import {
     DndContext,
     DragEndEvent,
@@ -18,7 +18,6 @@ import {
     LabItem,
     ReactionRule,
     itemVariants,
-    successVariants,
     shakeVariants,
     createParticles,
     Particle
@@ -166,7 +165,7 @@ export default function LabWorkbench({
     initialInventory,
     reactionRules,
     objectives,
-    onComplete,
+    onComplete: _onComplete,
     hints = []
 }: LabWorkbenchProps) {
     const [inventory, setInventory] = useState<LabItem[]>(initialInventory);
@@ -176,7 +175,7 @@ export default function LabWorkbench({
     const [shake, setShake] = useState(false);
     const [hintIndex, setHintIndex] = useState(0);
 
-    const { professor, showSuccess, showWarning, showHint, resetToIdle, recordInteraction } = useProfessor({
+    const { professor, showSuccess, showWarning, showHint, recordInteraction } = useProfessor({
         initialMessage: "Welcome to the lab! Drag items from the shelf to the workbench."
     });
 
@@ -250,7 +249,7 @@ export default function LabWorkbench({
 
     const handleHintRequest = () => {
         if (hints.length > 0) {
-            showHint(hints[hintIndex % hints.length]);
+            showHint(hints[hintIndex % hints.length]!);
             setHintIndex(prev => prev + 1);
         }
     };
@@ -348,14 +347,14 @@ export default function LabWorkbench({
                                 <div
                                     key={obj.id}
                                     className={`p-4 rounded-2xl border transition-all ${obj.completed
-                                            ? 'bg-emerald-500/10 border-emerald-500/30'
-                                            : 'bg-[#131325] border-[#3D3D5C]'
+                                        ? 'bg-emerald-500/10 border-emerald-500/30'
+                                        : 'bg-[#131325] border-[#3D3D5C]'
                                         }`}
                                 >
                                     <div className="flex items-start gap-3">
                                         <div className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center text-xs ${obj.completed
-                                                ? 'bg-emerald-500 border-emerald-500 text-white'
-                                                : 'border-zinc-600'
+                                            ? 'bg-emerald-500 border-emerald-500 text-white'
+                                            : 'border-zinc-600'
                                             }`}>
                                             {obj.completed ? '✓' : i + 1}
                                         </div>

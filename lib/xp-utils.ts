@@ -17,14 +17,14 @@ export interface XPUpdateResult {
     xpGain: number;
     xpToday: number;
     isCapped: boolean;
-    updates: Record<string, any>;
+    updates: Record<string, unknown>;
 }
 
 /**
  * Basic calculation logic, SDK agnostic
  */
 export function calculateXPGain(
-    userData: any,
+    userData: Record<string, unknown>,
     rawGain: number,
     todayKey: string = getDayKey()
 ): { xpGain: number; isNewDay: boolean; isCapped: boolean; currentXpToday: number } {
@@ -34,7 +34,7 @@ export function calculateXPGain(
     // Apply global modifier
     const initialGain = Math.max(1, Math.round(rawGain * XP_MODIFIER));
 
-    let currentXpToday = isNewDay ? 0 : (userData.xp_today || 0);
+    const currentXpToday = isNewDay ? 0 : ((userData['xp_today'] as number) || 0);
     let finalGain = initialGain;
     let isCapped = false;
 
@@ -53,13 +53,13 @@ export function calculateXPGain(
  * Calculates XP gain with daily cap and reset logic using Admin SDK increments
  */
 export function calculateXPUpdate(
-    userData: any,
+    userData: Record<string, unknown>,
     rawGain: number,
     todayKey: string = getDayKey()
 ): XPUpdateResult {
     const { xpGain, isNewDay, isCapped, currentXpToday } = calculateXPGain(userData, rawGain, todayKey);
 
-    const updates: Record<string, any> = {
+    const updates: Record<string, unknown> = {
         xp: admin.firestore.FieldValue.increment(xpGain),
         xp_today: isNewDay ? xpGain : admin.firestore.FieldValue.increment(xpGain),
         lastLearningDay: todayKey,

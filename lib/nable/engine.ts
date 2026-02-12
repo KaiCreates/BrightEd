@@ -21,18 +21,16 @@ import {
     ContentItem,
     MicroLesson,
     NABLE_CONSTANTS,
-    UIMood,
     InteractionMetrics,
     LearningEvent
 } from './types';
 
-import { classifyError, analyzeErrorPatterns, suggestRemediationTopic, classifyErrorEnhanced, EnhancedErrorResult } from './error-classifier';
-import { updateSubSkillScore, createInitialSubSkillScore, updateMastery, calculateFluency } from './mastery-tracker';
+import { classifyErrorEnhanced, EnhancedErrorResult, suggestRemediationTopic } from './error-classifier';
+import { updateSubSkillScore, createInitialSubSkillScore } from './mastery-tracker';
 import { calculateDifficultyScaling, rankQuestionsByFit, getRecommendedDifficulty } from './difficulty-scaler';
-import { checkSessionRefresh, applyDecayToGraph, calculateMemoryDecay } from './spaced-repetition';
-import { markSkillAsTheoreticalOnly } from './story-analyzer';
-import { normalizeQuestion, NormalizedQuestion, padOptions } from './question-normalizer';
-import { detectWeirdQuestion, filterContentPool, QCResult } from './quality-control';
+import { checkSessionRefresh, applyDecayToGraph } from './spaced-repetition';
+import { normalizeQuestion, padOptions } from './question-normalizer';
+import { detectWeirdQuestion, filterContentPool } from './quality-control';
 
 /**
  * Create initial NABLE state for new user
@@ -73,11 +71,11 @@ export function loadState(
         : {};
 
     // V4: Merge Delta if provided
-    if (existingData.knowledgeGraph && (existingData as any).stateDelta) {
+    if (existingData.knowledgeGraph && (existingData as NABLEState & { stateDelta?: KnowledgeGraph }).stateDelta) {
         knowledgeGraph = {
             ...knowledgeGraph,
-            ...(existingData as any).stateDelta
-        };
+            ...(existingData as NABLEState & { stateDelta?: KnowledgeGraph }).stateDelta
+        } as KnowledgeGraph;
     }
 
     return {
@@ -193,7 +191,7 @@ export function evaluate(
     const newHearts = correct ? state.hearts : Math.max(0, state.hearts - 1);
 
     // Calculate difficulty scaling
-    const primarySubSkill = subSkills[0];
+    const primarySubSkill = subSkills[0] ?? objectiveId;
     const primaryScore = newKnowledgeGraph[primarySubSkill] || createInitialSubSkillScore();
 
     const scaling = calculateDifficultyScaling(
@@ -266,7 +264,7 @@ export function evaluate(
         errorType: errorClassification,
         timeToAnswer,
         priorMastery: primaryScore.mastery, // Score before update
-        newMastery: newKnowledgeGraph[primarySubSkill].mastery,
+        newMastery: (newKnowledgeGraph[primarySubSkill] as SubSkillScore).mastery,
         interventionId: microLesson ? microLesson.id : undefined
     };
 
@@ -326,7 +324,7 @@ export function recommend(
 
     // Find weak sub-skills
     const weakSkills = Object.entries(state.knowledgeGraph)
-        .filter(([_, score]) => score.mastery < 0.5)
+        .filter(([, score]) => score.mastery < 0.5)
         .map(([id]) => id);
 
     // Calculate target difficulty
@@ -494,15 +492,15 @@ export function getStatus(state: NABLEState): {
 
     const sorted = skills.sort((a, b) => a[1].mastery - b[1].mastery);
 
-    const overallMastery = skills.reduce((sum, [_, s]) => sum + s.mastery, 0) / skills.length;
-    const overallConfidence = skills.reduce((sum, [_, s]) => sum + s.confidence, 0) / skills.length;
+    const overallMastery = skills.reduce((sum, [, s]) => sum + s.mastery, 0) / skills.length;
+    const overallConfidence = skills.reduce((sum, [, s]) => sum + s.confidence, 0) / skills.length;
 
     const weakestSkills = sorted.slice(0, 3).map(([id]) => id);
     const strongestSkills = sorted.slice(-3).reverse().map(([id]) => id);
 
     // Recommended focus: weak skills + theoretical-only + high decay
     const recommendedFocus = skills
-        .filter(([_, s]) => s.mastery < 0.5 || s.theoreticalOnly || s.memoryDecay > 0.5)
+        .filter(([, s]) => s.mastery < 0.5 || s.theoreticalOnly || s.memoryDecay > 0.5)
         .slice(0, 5)
         .map(([id]) => id);
 

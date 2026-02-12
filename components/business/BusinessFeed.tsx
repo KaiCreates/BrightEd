@@ -30,6 +30,7 @@ const BusinessItem = ({ biz, idx, rankBadge }: { biz: BusinessFeedItem, idx: num
         const resolveMissingName = async () => {
             if (!biz.ownerName || biz.ownerName === 'Unknown Founder') {
                 try {
+                    if (!db) return;
                     const userSnap = await getDoc(doc(db, "users", biz.ownerId));
                     if (userSnap.exists()) {
                         const data = userSnap.data();
@@ -37,7 +38,7 @@ const BusinessItem = ({ biz, idx, rankBadge }: { biz: BusinessFeedItem, idx: num
                         setResolvedName(name);
 
                         // Auto-recovery: If current user is the owner, fix the business doc
-                        const currentUser = auth.currentUser;
+                        const currentUser = auth?.currentUser;
                         if (currentUser && currentUser.uid === biz.ownerId) {
                             const bizRef = doc(db, "businesses", biz.id);
                             updateDoc(bizRef, { ownerName: name }).catch(console.error);
@@ -91,6 +92,11 @@ export default function BusinessFeed() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!db) {
+            setLoading(false);
+            return;
+        }
+
         const q = query(
             collection(db, "businesses"),
             orderBy("valuation", "desc"),

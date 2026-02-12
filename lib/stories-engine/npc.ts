@@ -21,7 +21,7 @@ export interface NPCMemoryEntry {
   tone: 'polite' | 'neutral' | 'aggressive';
 }
 
-function parseJson<T>(raw: any, fallback: T): T {
+function parseJson<T>(raw: unknown, fallback: T): T {
   if (!raw) return fallback;
   if (typeof raw !== 'string') return raw as T;
   try {
@@ -47,7 +47,7 @@ export async function recordInteraction(
   interactions.push(entry);
   const sentiment = computeSentiment(interactions);
 
-  await recordNPCInteraction(userId, npcId, interactions.slice(-50), sentiment);
+  await recordNPCInteraction(userId, npcId, interactions as unknown as Record<string, unknown>[], sentiment);
 }
 
 function computeSentiment(interactions: NPCMemoryEntry[]): number {
@@ -67,7 +67,7 @@ function computeSentiment(interactions: NPCMemoryEntry[]): number {
 export function disposition(
   reputation: number,
   sentiment: number,
-  config: NPCConfig
+  _config: NPCConfig
 ): 'hostile' | 'cautious' | 'neutral' | 'friendly' | 'trusted' {
   const score = reputation * 0.5 + sentiment * 0.5;
   if (score >= 0.7) return 'trusted';

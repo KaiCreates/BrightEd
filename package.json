@@ -52,6 +52,8 @@
     "@types/react-dom": "^18.3.1",
     "@types/react-window": "^1.8.8",
     "@types/vanilla-tilt": "^1.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
     "@vitest/ui": "^4.0.18",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",

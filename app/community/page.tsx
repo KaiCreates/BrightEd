@@ -235,7 +235,7 @@ function CommunityHubInner() {
     return Math.max(0, Math.min(1, pct))
   }, [userData?.xp])
 
-  const activeDistrict = useMemo(() => DISTRICTS.find((d) => d.id === activeDistrictId) || DISTRICTS[0], [activeDistrictId])
+  const activeDistrict = useMemo(() => DISTRICTS.find((d) => d.id === activeDistrictId) || DISTRICTS[0]!, [activeDistrictId])
   const channels = activeDistrict.channels
 
   useEffect(() => {

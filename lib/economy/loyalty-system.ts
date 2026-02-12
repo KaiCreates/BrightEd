@@ -131,11 +131,12 @@ export function calculateLoyaltyChange(
 export function getLoyaltyTier(score: number): LoyaltyTier {
     // Find highest tier the score qualifies for
     for (let i = LOYALTY_TIERS.length - 1; i >= 0; i--) {
-        if (score >= LOYALTY_TIERS[i].minScore) {
-            return LOYALTY_TIERS[i];
+        const tier = LOYALTY_TIERS[i];
+        if (tier && score >= tier.minScore) {
+            return tier;
         }
     }
-    return LOYALTY_TIERS[0];
+    return LOYALTY_TIERS[0]!;
 }
 
 /**

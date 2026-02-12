@@ -1,0 +1,1 @@
+app/practicals/business/operations/BusinessOperationsCommandCenter.tsx(778,1): error TS1005: '}' expected.

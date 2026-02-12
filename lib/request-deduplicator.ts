@@ -5,7 +5,7 @@
  * only one actual request is made and all callers receive the same result.
  */
 
-const pendingRequests = new Map<string, Promise<any>>();
+const pendingRequests = new Map<string, Promise<unknown>>();
 
 /**
  * Execute a fetch operation with deduplication.

@@ -39,7 +39,7 @@ export default function HomePage() {
 
     const ACHIEVEMENT_PREVIEWS = ALL_ACHIEVEMENTS.slice(0, 4).map(ach => ({
         ...ach,
-        unlocked: checkAchievement(ach, userData, leaderPreview.topBusiness?.value || 0),
+        unlocked: checkAchievement(ach, userData as any, leaderPreview.topBusiness?.value || 0),
         progress: 0 // We can add progress calculation logic later if needed
     }))
 
@@ -143,7 +143,7 @@ export default function HomePage() {
                     fetch(`/api/leaderboards?` + new URLSearchParams({ type: 'streak', limit: '1' }), {
                         headers: { Authorization: `Bearer ${token}` },
                     }),
-                    getDocs(query(collection(db, 'businesses'), orderBy('valuation', 'desc'), limit(1))),
+                    db ? getDocs(query(collection(db, 'businesses'), orderBy('valuation', 'desc'), limit(1))) : Promise.resolve({ docs: [] }),
                 ])
 
                 if (cancelled) return

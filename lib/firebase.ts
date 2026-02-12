@@ -68,12 +68,12 @@ export function getFirebaseStorage() {
 
 // Legacy exports for backward compatibility (deprecated)
 export const isFirebaseReady = isConfigValid;
-export const auth = isFirebaseReady ? getAuth(getInitializedApp()) : null as any;
+export const auth = isFirebaseReady ? getAuth(getInitializedApp()) : null as unknown as ReturnType<typeof getAuth>;
 export const db = isFirebaseReady ? initializeFirestore(getInitializedApp(), {
     experimentalForceLongPolling: true,
-}) : null as any;
-export const realtimeDb = isFirebaseReady && firebaseConfig.databaseURL ? getDatabase(getInitializedApp()) : null as any;
-export const storage = isFirebaseReady ? getStorage(getInitializedApp()) : null as any;
+}) : null as unknown as ReturnType<typeof initializeFirestore>;
+export const realtimeDb = isFirebaseReady && firebaseConfig.databaseURL ? getDatabase(getInitializedApp()) : null as unknown as ReturnType<typeof getDatabase>;
+export const storage = isFirebaseReady ? getStorage(getInitializedApp()) : null as unknown as ReturnType<typeof getStorage>;
 
 if (typeof window !== 'undefined') {
     try {

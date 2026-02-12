@@ -155,7 +155,7 @@ export function normalizeOption(option: string | null | undefined, index: number
  */
 export function normalizeQuestion(
     options: (string | null | undefined)[],
-    questionText?: string
+    _questionText?: string
 ): NormalizedQuestion {
     const warnings: string[] = [];
     const emptyOptionIndices: number[] = [];

@@ -131,7 +131,7 @@ function validateInput(body: any): { subjects: string[], userProgress: UserProgr
  */
 function getSubjectFromId(id: string): string {
   if (!id) return 'General';
-  const prefix = id.split('-')[0].toUpperCase();
+  const prefix = (id.split('-')[0] ?? '').toUpperCase();
 
   if (prefix === 'MATH') return 'Mathematics';
   if (prefix === 'BIO' || prefix === 'BIOL') return 'Biology';
@@ -180,7 +180,7 @@ function groupObjectivesBySubject(
 
     // Deduplicate globally across all subjects
     if (!globalSeenIds.has(obj.id)) {
-      bySubject[subject].push(obj);
+      bySubject[subject]!.push(obj);
       globalSeenIds.add(obj.id);
     }
   }
@@ -302,7 +302,7 @@ function generateLearningPath(
 
     // Group by difficulty
     const byDifficulty: { [difficulty: string]: SyllabusObjective[] } = {};
-    for (const obj of subjectObjectives) {
+    for (const obj of (subjectObjectives ?? [])) {
       // Default difficulty to 5 if not specified
       const difficulty = obj.difficulty ?? 5;
       const key = difficulty.toString();
@@ -324,7 +324,7 @@ function generateLearningPath(
       const group = byDifficulty[difficulty.toString()];
 
       // Sort within difficulty group for optimal learning
-      const sortedGroup = sortObjectivesForLearning(group, userProgress);
+      const sortedGroup = sortObjectivesForLearning(group ?? [], userProgress);
 
       // Add all objectives from this difficulty level
       path.push(...sortedGroup);

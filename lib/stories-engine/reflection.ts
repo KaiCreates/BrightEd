@@ -28,7 +28,7 @@ export function buildReflection(p: {
  * Whiteboard export hook. In Phase 1, we persist locally;
  * later this can POST to a Whiteboard API or store in shared DB.
  */
-export function exportToWhiteboard(_payload: ReflectionPayload): void {
+export function exportToWhiteboard(_: ReflectionPayload): void {
   // TODO: POST /api/whiteboard/reflection or equivalent
   // For now, payload is returned to client; UI can send to Whiteboard if integrated.
 }

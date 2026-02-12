@@ -109,7 +109,7 @@ function WaterBathZone({
 }) {
     const { setNodeRef } = useDroppable({ id: bath.id });
 
-    const statusLabel: Record<string, { text: string; color: string }> = {
+    const statusLabel: Record<WaterBath['enzymeStatus'], { text: string; color: string }> = {
         inactive: { text: 'Too Cold - Slow Reaction', color: 'text-blue-400' },
         optimal: { text: 'Optimal - Fast Reaction', color: 'text-emerald-400' },
         denatured: { text: 'Denatured - No Reaction', color: 'text-red-400' }
@@ -217,13 +217,14 @@ export default function EnzymeLabV2Page() {
             setTestTubes(prev => {
                 const updated = { ...prev };
                 Object.keys(updated).forEach(key => {
-                    if (updated[key].hasAmylase && updated[key].hasStarch) {
-                        const bath = WATER_BATHS.find(b => b.id === updated[key].bathId);
+                    const tube = updated[key];
+                    if (tube && tube.hasAmylase && tube.hasStarch) {
+                        const bath = WATER_BATHS.find(b => b.id === tube.bathId)!;
                         updated[key] = {
-                            ...updated[key],
-                            timeElapsed: updated[key].timeElapsed + 10,
+                            ...tube,
+                            timeElapsed: tube.timeElapsed + 10,
                             // Starch breaks down at optimal temp after ~60s
-                            starchBroken: bath?.enzymeStatus === 'optimal' && updated[key].timeElapsed >= 50
+                            starchBroken: bath.enzymeStatus === 'optimal' && tube.timeElapsed >= 50
                         };
                     }
                 });
@@ -256,7 +257,7 @@ export default function EnzymeLabV2Page() {
 
         const reagentId = active.id as string;
         const bathId = over.id as string;
-        const bath = WATER_BATHS.find(b => b.id === bathId);
+        const bath = WATER_BATHS.find(b => b.id === bathId)!;
 
         if (!bath) return;
 
@@ -286,7 +287,7 @@ export default function EnzymeLabV2Page() {
 
     const handleTest = (bathId: string) => {
         const tube = testTubes[bathId];
-        const bath = WATER_BATHS.find(b => b.id === bathId);
+        const bath = WATER_BATHS.find(b => b.id === bathId)!;
 
         if (!tube || !bath) return;
 

@@ -10,6 +10,8 @@ import { doc, getDoc, updateDoc, collection, query, where, getDocs, arrayRemove 
 import { getFirebaseDb, getFirebaseAuth } from '@/lib/firebase'
 import { updateProfile, updateEmail, sendPasswordResetEmail, signOut } from 'firebase/auth'
 import { toast } from 'react-hot-toast'
+import { ActiveSessionsList } from '@/components/session/ActiveSessionsList'
+import { SecurityLog } from '@/components/security/SecurityLog'
 
 export default function ProfileSettingsPage({ params }: { params: { username: string } }) {
     const router = useRouter()
@@ -325,6 +327,32 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
                                 <div className="text-center p-12 bg-white/5 rounded-2xl border-dashed border-2 border-white/10 text-[var(--text-muted)]">
                                     No blocked users.
                                 </div>
+                            )}
+                        </BrightLayer>
+                    </section>
+
+                    {/* Active Sessions */}
+                    <section>
+                        <BrightLayer variant="glass" padding="lg" className="border-t-4 border-purple-500">
+                            <h2 className="text-2xl font-black mb-6 text-purple-500 flex items-center gap-3">
+                                <span>💻</span> Active Sessions
+                            </h2>
+                            
+                            {user?.uid && (
+                                <ActiveSessionsList userId={user.uid} />
+                            )}
+                        </BrightLayer>
+                    </section>
+
+                    {/* Login Activity Log */}
+                    <section>
+                        <BrightLayer variant="glass" padding="lg" className="border-t-4 border-cyan-500">
+                            <h2 className="text-2xl font-black mb-6 text-cyan-500 flex items-center gap-3">
+                                <span>📊</span> Login Activity
+                            </h2>
+                            
+                            {user?.uid && (
+                                <SecurityLog userId={user.uid} />
                             )}
                         </BrightLayer>
                     </section>
