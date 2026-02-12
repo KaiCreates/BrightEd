@@ -231,7 +231,19 @@ export default function SignUpPage() {
       router.push(`/welcome/diagnostic?${diagParams.toString()}`)
     } catch (err: any) {
       console.error('Signup Error:', err)
-      setError(err.message || 'An error occurred during signup')
+      if (err.message?.includes('Firebase configuration is missing') || err.code === 'auth/configuration-not-found') {
+        setError('Authentication service is temporarily unavailable. Please contact support or try again later.')
+      } else if (err.code === 'auth/email-already-in-use') {
+        setError('An account with this email already exists.')
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password is too weak. Please use a stronger password.')
+      } else if (err.code === 'auth/network-request-failed') {
+        setError('Connection problem. Please check your internet and try again.')
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Please enter a valid email address.')
+      } else {
+        setError(err.message || 'An unexpected error occurred. Please try again.')
+      }
     } finally {
       setLoading(false)
     }

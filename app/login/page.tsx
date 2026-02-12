@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/auth-context';
+import { getFirebaseDiagnosticInfo } from '@/lib/firebase';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,6 +16,43 @@ export default function LoginPage() {
     email: '',
     password: ''
   });
+  const [firebaseStatus, setFirebaseStatus] = useState<{
+    configured: boolean;
+    message: string;
+    details: Record<string, boolean>;
+  } | null>(null);
+
+  // Check Firebase configuration on mount
+  useEffect(() => {
+    try {
+      const diag = getFirebaseDiagnosticInfo();
+      const configured = diag.isConfigured && diag.hasApiKey && diag.hasAppId;
+      
+      setFirebaseStatus({
+        configured,
+        message: configured 
+          ? 'Authentication service ready'
+          : 'Authentication service not configured',
+        details: {
+          apiKey: diag.hasApiKey,
+          appId: diag.hasAppId,
+          authDomain: !!diag.authDomain,
+          projectId: !!diag.projectId,
+        }
+      });
+
+      if (!configured) {
+        console.error('[Login] Firebase not configured:', diag);
+      }
+    } catch (err) {
+      console.error('[Login] Error checking Firebase config:', err);
+      setFirebaseStatus({
+        configured: false,
+        message: 'Error checking authentication configuration',
+        details: {}
+      });
+    }
+  }, []);
 
   // Redirect handled by AuthGate
   /*
@@ -40,10 +78,22 @@ export default function LoginPage() {
       router.push('/home');
     } catch (err: any) {
       console.error('Login error:', err);
-      if (err.message.includes('Firebase configuration is missing')) {
-        setError('Authentication service is temporarily unavailable. Please try again later.');
-      } else {
+      
+      // Check if it's a configuration error
+      const isConfigError = err.message?.includes('Firebase configuration is missing') || 
+                           err.code === 'auth/configuration-not-found' ||
+                           err.message?.includes('configuration is missing');
+      
+      if (isConfigError) {
+        setError('Authentication service is not configured. Please check your environment variables or contact support.');
+      } else if (err.code === 'auth/network-request-failed') {
+        setError('Connection problem. Please check your internet and try again.');
+      } else if (err.code === 'auth/too-many-requests') {
+        setError('Too many failed attempts. Please try again later.');
+      } else if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
         setError('Invalid email or password');
+      } else {
+        setError(err.message || 'An unexpected error occurred. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -134,6 +184,54 @@ export default function LoginPage() {
               </motion.div>
             )}
 
+            {/* Firebase Configuration Status */}
+            {firebaseStatus && !firebaseStatus.configured && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-xl"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="text-xl">⚠️</span>
+                  <div className="flex-1">
+                    <p className="font-bold text-yellow-800 mb-2">
+                      Configuration Issue Detected
+                    </p>
+                    <p className="text-sm text-yellow-700 mb-3">
+                      The authentication service is not properly configured. This usually means environment variables are missing.
+                    </p>
+                    
+                    {/* Status Grid */}
+                    <div className="grid grid-cols-2 gap-2 mb-3">
+                      {Object.entries(firebaseStatus.details).map(([key, status]) => (
+                        <div key={key} className={`flex items-center gap-2 text-xs px-2 py-1 rounded ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                          <span>{status ? '✓' : '✗'}</span>
+                          <span className="capitalize font-bold">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="space-y-2 text-xs text-yellow-700">
+                      <p className="font-bold">To fix this:</p>
+                      <ol className="list-decimal list-inside space-y-1">
+                        <li>Check that all Firebase environment variables are set in Render Dashboard</li>
+                        <li>Verify NEXT_PUBLIC_FIREBASE_API_KEY and NEXT_PUBLIC_FIREBASE_APP_ID are correct</li>
+                        <li>Redeploy the application after updating environment variables</li>
+                      </ol>
+                    </div>
+
+                    <a 
+                      href="/api/health" 
+                      target="_blank"
+                      className="inline-block mt-3 text-xs font-bold text-yellow-800 hover:underline"
+                    >
+                      View detailed diagnostics →
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             <div className="pt-4">
               <button
                 type="submit"
@@ -158,7 +256,7 @@ export default function LoginPage() {
                     setLoading(true);
                     const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
                     const { getFirebaseAuth } = await import('@/lib/firebase');
-                    
+
                     const auth = getFirebaseAuth();
                     const provider = new GoogleAuthProvider();
                     await signInWithPopup(auth, provider);

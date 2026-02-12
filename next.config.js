@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Render.com Environment Variable Support
   typescript: {
     ignoreBuildErrors: true,
   },

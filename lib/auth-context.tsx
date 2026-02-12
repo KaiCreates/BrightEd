@@ -86,7 +86,7 @@ export interface UserData {
     };
     blockedUsers?: string[];
     mutedUsers?: string[];
-    
+
     // Password Security
     passwordHistory?: {
         hash: string;
@@ -96,7 +96,7 @@ export interface UserData {
     }[];
     passwordLastChanged?: string;
     passwordResetCount?: number;
-    
+
     // Session Management
     activeSessions?: {
         sessionId: string;
@@ -157,8 +157,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         let auth;
         try {
             auth = getFirebaseAuth();
-        } catch (error) {
-            console.warn("Firebase Auth not initialized. Skipping auth listener.", error);
+        } catch (error: any) {
+            console.error("CRITICAL: AuthProvider failed to initialize Firebase Auth.", error.message);
+            // In development, show a clear warning that auth will fail
+            if (process.env.NODE_ENV === 'development') {
+                console.warn("DEVELOPER TIP: Check your .env.local file for NEXT_PUBLIC_FIREBASE_* variables.");
+            }
             setLoading(false);
             return;
         }

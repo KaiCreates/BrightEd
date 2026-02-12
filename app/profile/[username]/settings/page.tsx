@@ -12,6 +12,7 @@ import { updateProfile, updateEmail, sendPasswordResetEmail, signOut } from 'fir
 import { toast } from 'react-hot-toast'
 import { ActiveSessionsList } from '@/components/session/ActiveSessionsList'
 import { SecurityLog } from '@/components/security/SecurityLog'
+import { FirebaseDiagnostic } from '@/components/diagnostic/FirebaseDiagnostic'
 
 export default function ProfileSettingsPage({ params }: { params: { username: string } }) {
     const router = useRouter()
@@ -195,6 +196,16 @@ export default function ProfileSettingsPage({ params }: { params: { username: st
                 </div>
 
                 <div className="grid gap-8">
+
+                    {/* Firebase Diagnostics */}
+                    <section>
+                        <BrightLayer variant="glass" padding="lg" className="border-t-4 border-orange-500">
+                            <h2 className="text-2xl font-black mb-6 text-orange-500 flex items-center gap-3">
+                                <span>🔧</span> System Diagnostics
+                            </h2>
+                            <FirebaseDiagnostic />
+                        </BrightLayer>
+                    </section>
 
                     {/* Public Profile */}
                     <section>

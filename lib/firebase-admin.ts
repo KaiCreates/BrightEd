@@ -24,10 +24,12 @@ export function getFirebaseAdmin() {
             const p = path.isAbsolute(serviceAccountPathEnv) ? serviceAccountPathEnv : path.join(process.cwd(), serviceAccountPathEnv);
             if (fs.existsSync(p)) {
                 serviceAccount = JSON.parse(fs.readFileSync(p, 'utf8'));
+            } else {
+                console.error(`Firebase Admin: Service account file not found at ${p}`);
             }
         }
     } catch (error) {
-        console.error("Failed to parse Firebase Admin credentials:", error);
+        console.error("CRITICAL: Failed to parse Firebase Admin credentials. Ensure FIREBASE_ADMIN_SERVICE_ACCOUNT_JSON is valid JSON.", error);
     }
 
     if (!serviceAccount) {
