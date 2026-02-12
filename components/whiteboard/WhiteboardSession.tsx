@@ -12,18 +12,6 @@ import {
   setDoc,
 } from 'firebase/firestore'
 import { useTheme } from '@/lib/theme-context'
-
-// --- PDF.js Loader ---
-type PdfJsLegacy = any
-let pdfjsLegacyPromise: Promise<PdfJsLegacy> | null = null
-
-async function loadPdfjsLegacy(): Promise<PdfJsLegacy> {
-  if (!pdfjsLegacyPromise) {
-    pdfjsLegacyPromise = import('pdfjs-dist/legacy/build/pdf.mjs') as any
-  }
-  return pdfjsLegacyPromise
-}
-
 // --- Types ---
 type Tool = 'select' | 'hand' | 'pen' | 'rect' | 'circle' | 'arrow' | 'text' | 'image' | 'laser' | 'comment' | 'sticky' | 'frame'
 type PenColor = 'black' | 'red' | 'blue' | 'green' | 'yellow' | 'white'
@@ -612,16 +600,202 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
     setElements(prev => [...prev, { id: safeUuid(), type: 'image', x: 100, y: 100, w: w * scale, h: h * scale, url: dataUrl, createdAt: Date.now(), color: 'black', width: 0 }])
   }, [])
 
-  const handleUploadImage = useCallback(async (file: File) => {
-    if (file.size > 20 * 1024 * 1024) return alert('Too large')
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const img = new window.Image()
-      img.src = e.target?.result as string
-      img.onload = () => addImageElementFromDataUrl(img.src, img.width || 800, img.height || 600)
+
+
+  const processFile = useCallback(async (file: File, targetX: number, targetY: number) => {
+    if (file.type.startsWith('image/')) {
+      if (file.size > 20 * 1024 * 1024) return alert('Image too large (max 20MB)')
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const img = new window.Image()
+        img.src = e.target?.result as string
+        img.onload = () => {
+          const scale = Math.min(1, 520 / (img.width || 520))
+          const w = (img.width || 800) * scale
+          const h = (img.height || 600) * scale
+          setElements(prev => [...prev, {
+            id: safeUuid(),
+            type: 'image',
+            x: targetX,
+            y: targetY,
+            w,
+            h,
+            url: img.src,
+            createdAt: Date.now(),
+            color: 'black',
+            width: 0
+          }])
+        }
+      }
+      reader.readAsDataURL(file)
+    } else if (file.type === 'application/pdf') {
+      try {
+        const arrayBuffer = await file.arrayBuffer()
+
+        // Dynamically import PDF.js to avoid SSR issues
+        const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
+        // Set worker (only needs to be done once, but safe to repeat)
+        if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/legacy/build/pdf.worker.min.mjs`
+        }
+
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer })
+        const pdf = await loadingTask.promise
+
+        // Render first page as an image
+        const page = await pdf.getPage(1)
+        const viewport = page.getViewport({ scale: 1.5 }) // Render at nice quality
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        if (!context) return
+
+        canvas.height = viewport.height
+        canvas.width = viewport.width
+
+        await page.render({ canvasContext: context, viewport } as any).promise
+
+        const imgDataUrl = canvas.toDataURL('image/png')
+        const w = viewport.width / 1.5 // Display at natural size (assuming 1.5 scale was for quality)
+        const h = viewport.height / 1.5
+
+        setElements(prev => [...prev, {
+          id: safeUuid(),
+          type: 'image',
+          x: targetX,
+          y: targetY,
+          w,
+          h,
+          url: imgDataUrl,
+          createdAt: Date.now(),
+          color: 'black',
+          width: 0
+        }])
+
+      } catch (err) {
+        console.error('Error loading PDF:', err)
+        alert('Failed to load PDF. Please try again.')
+      }
     }
-    reader.readAsDataURL(file)
-  }, [addImageElementFromDataUrl])
+  }, [])
+
+  const handleUploadImage = useCallback(async (file: File) => {
+    processFile(file, panX + 100 * zoom, panY + 100 * zoom) // Default position if uploaded via button
+  }, [panX, panY, zoom, processFile])
+
+  // --- Copy / Paste Handlers ---
+  useEffect(() => {
+    const handlePaste = async (e: ClipboardEvent) => {
+      // If we are editing text, let default behavior happen
+      if ((e.target as HTMLElement).tagName === 'TEXTAREA' || (e.target as HTMLElement).tagName === 'INPUT') return;
+
+      e.preventDefault()
+
+      const items = e.clipboardData?.items
+      if (!items) return
+
+      // Determine paste position (center of screen or mouse pos if we tracked it globally, 
+      // but for now let's use slightly offset from center of view)
+      // We can use the center of the current viewport:
+      const rect = containerRef.current?.getBoundingClientRect()
+      let pasteX = 100
+      let pasteY = 100
+
+      if (rect) {
+        // Center of viewport in world coordinates
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
+        pasteX = (centerX - panX) / zoom
+        pasteY = (centerY - panY) / zoom
+      }
+
+      // 1. Handle Files (Images/PDFs)
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].kind === 'file') {
+          const file = items[i].getAsFile()
+          if (file) {
+            await processFile(file, pasteX, pasteY)
+            pasteX += 20 // Stagger multiple pastes
+            pasteY += 20
+          }
+        } else if (items[i].kind === 'string' && items[i].type === 'text/plain') {
+          // 2. Handle Text / Internal Elements
+          items[i].getAsString((s) => {
+            try {
+              const parsed = JSON.parse(s)
+              if (Array.isArray(parsed) && parsed[0]?.id && parsed[0]?.type) {
+                // It's likely our elements
+                const newElements = parsed.map((el: WhiteboardElement) => {
+                  const offset = 20
+                  if (el.type === 'path') {
+                    return {
+                      ...el,
+                      id: safeUuid(),
+                      points: el.points.map(p => ({ x: p.x + offset, y: p.y + offset })),
+                      createdAt: Date.now()
+                    }
+                  }
+                  return {
+                    ...el,
+                    id: safeUuid(),
+                    x: (el as any).x + offset,
+                    y: (el as any).y + offset,
+                    createdAt: Date.now()
+                  }
+                })
+                setElements(prev => [...prev, ...newElements])
+                // Select the new elements
+                if (newElements.length === 1) setSelection(newElements[0].id)
+              } else {
+                // Plain text paste -> create sticky note?
+                // Or maybe just text tool?
+              }
+            } catch {
+              // Not JSON, treat as plain text
+              // Maybe create a text element or sticky?
+              // For now, let's create a sticky note with the text
+              /*
+              setElements(prev => [...prev, { 
+                  id: safeUuid(), 
+                  type: 'sticky', 
+                  x: pasteX, 
+                  y: pasteY, 
+                  w: 200, 
+                  h: 200, 
+                  text: s, 
+                  color: 'yellow', 
+                  createdAt: Date.now(), 
+                  width: 0 
+              }])
+              */
+            }
+          })
+        }
+      }
+    }
+
+    const handleCopy = (e: ClipboardEvent) => {
+      // If editing text, ignore
+      if ((e.target as HTMLElement).tagName === 'TEXTAREA' || (e.target as HTMLElement).tagName === 'INPUT') return;
+
+      if (selection) {
+        const el = elements.find(e => e.id === selection)
+        if (el) {
+          e.preventDefault()
+          e.clipboardData?.setData('text/plain', JSON.stringify([el])) // Wrap in array for future multi-select support
+
+          // If it's an image, try to write image data too? 
+          // (Browser support varies, often requires permissions API or Blob)
+        }
+      }
+    }
+
+    window.addEventListener('paste', handlePaste)
+    window.addEventListener('copy', handleCopy)
+    return () => {
+      window.removeEventListener('paste', handlePaste)
+      window.removeEventListener('copy', handleCopy)
+    }
+  }, [selection, elements, panX, panY, zoom, processFile])
 
   // --- Rendering UI ---
   if (!isOpen || !isMounted) return null
@@ -877,24 +1051,24 @@ export function WhiteboardSession(props: WhiteboardSessionProps) {
       </div>
 
       {/* Zoom Controls (Bottom Right Desktop / Top Right Mobile) */}
-      <div className={`absolute z-[130] flex items-center gap-2 md:gap-3 rounded-2xl p-1 md:p-1.5 pro-sidebar-shadow border transition-all ${isMobile ? 'top-20 right-4 h-10' : 'bottom-6 right-6 h-12'} ${theme === 'dark' ? 'bg-[#1A1A1A] border-white/5' : 'bg-white border-black/5'}`}>
+      <div className={`absolute z-[130] flex items-center gap-1 md:gap-3 rounded-2xl p-1 md:p-1.5 pro-sidebar-shadow border transition-all ${isMobile ? 'top-16 right-4 h-9' : 'bottom-6 right-6 h-12'} ${theme === 'dark' ? 'bg-[#1A1A1A] border-white/5' : 'bg-white border-black/5'}`}>
         {!isMobile && (
           <button className={`p-2 rounded-xl transition-all ${theme === 'dark' ? 'text-white/60 hover:text-white hover:bg-white/5' : 'text-slate-400 hover:text-slate-800 hover:bg-black/5'}`} title="Zoom settings" aria-label="Zoom settings">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M4 12h16M12 4v16" /></svg>
           </button>
         )}
         <button className={`p-1.5 rounded-lg transition-all font-black ${theme === 'dark' ? 'text-white hover:bg-white/5' : 'text-slate-800 hover:bg-black/5'}`} onClick={() => setZoom(prev => Math.max(0.1, prev - 0.1))} aria-label="Zoom out">
-          <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14" /></svg>
+          <svg className="w-3.5 h-3.5 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14" /></svg>
         </button>
-        <span className={`text-[10px] md:text-xs font-black w-10 md:w-14 text-center ${theme === 'dark' ? 'text-white/80' : 'text-slate-600'}`}>{Math.round(zoom * 100)}%</span>
+        <span className={`text-[9px] md:text-xs font-black w-8 md:w-14 text-center ${theme === 'dark' ? 'text-white/80' : 'text-slate-600'}`}>{Math.round(zoom * 100)}%</span>
         <button className={`p-1.5 rounded-lg transition-all font-black ${theme === 'dark' ? 'text-white hover:bg-white/5' : 'text-slate-800 hover:bg-black/5'}`} onClick={() => setZoom(prev => Math.min(3, prev + 0.1))} aria-label="Zoom in">
-          <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14" /></svg>
+          <svg className="w-3.5 h-3.5 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M5 12h14" /></svg>
         </button>
       </div>
 
       {/* Professor Bright Floating Mascot */}
       <motion.div
-        className="absolute bottom-20 right-8 z-[130] pointer-events-none hidden md:block"
+        className="absolute bottom-20 right-8 z-[130] pointer-events-none hidden lg:block"
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >

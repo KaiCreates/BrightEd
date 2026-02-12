@@ -89,7 +89,7 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden xl:flex items-center gap-0.5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="hidden 2xl:flex items-center gap-0.5 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {isAuthenticated ? (
               navItems.map((item) => {
                 const isActive = pathname?.startsWith(item.href)
@@ -142,16 +142,16 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 md:gap-4 relative z-10">
+          <div className="flex items-center gap-2 md:gap-3 relative z-10">
             {isAuthenticated && (
-              <div className="flex items-center gap-1 md:gap-3 bg-white/5 px-2 md:px-4 py-1.5 rounded-2xl border border-white/10">
+              <div className="flex items-center gap-1 md:gap-2 bg-white/5 px-2 md:px-3 py-1.5 rounded-2xl border border-white/10">
                 {/* Flag / Subject */}
-                <div className="hidden sm:flex items-center gap-1.5 group/stat cursor-pointer">
+                <div className="hidden lg:flex items-center gap-1.5 group/stat cursor-pointer">
                   <span className="text-lg md:text-xl">🇹🇹</span>
                   <span className="text-xs md:text-sm font-black text-white/40 group-hover/stat:text-white transition-colors">11</span>
                 </div>
 
-                <div className="hidden sm:block w-[1px] h-4 bg-white/10 mx-1" />
+                <div className="hidden lg:block w-[1px] h-4 bg-white/10 mx-1" />
 
                 {/* Streak */}
                 <div className="flex items-center gap-1.5 group/stat cursor-pointer">
@@ -159,15 +159,15 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
                   <span className="text-xs md:text-sm font-black text-[var(--brand-accent)]">{userData?.streak || 0}</span>
                 </div>
 
-                <div className="w-[1px] h-4 bg-white/10 mx-1" />
+                <div className="w-[1px] h-4 bg-white/10 mx-0.5" />
 
                 {/* Gems / B-Coins */}
                 <div className="flex items-center gap-1.5 group/stat cursor-pointer">
-                  <BCoinIcon size={20} className="filter drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                  <BCoinIcon size={18} className="filter drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                   <span className="text-xs md:text-sm font-black text-blue-400">{userData?.bCoins?.toLocaleString() || '0'}</span>
                 </div>
 
-                <div className="hidden xs:flex w-[1px] h-4 bg-white/10 mx-1" />
+                <div className="hidden xs:flex w-[1px] h-4 bg-white/10 mx-0.5" />
 
                 {/* Hearts / Consistency */}
                 <div className="hidden xs:flex items-center gap-1.5 group/stat cursor-pointer">
@@ -184,7 +184,8 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
             {/* Mobile Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="xl:hidden ml-2 p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-95 transition-all text-[var(--text-primary)]"
+              className="xl:hidden ml-1 p-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 active:scale-90 transition-all text-[var(--text-primary)]"
+              aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -202,38 +203,45 @@ export function Navigation({ variant = 'default' }: { variant?: 'default' | 'min
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
             className="absolute top-full left-0 right-0 mt-3 p-2"
           >
-            <div className="bg-[var(--bg-elevated)]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl p-4 flex flex-col gap-2">
+            <div className="bg-[var(--bg-elevated)]/90 backdrop-blur-3xl border border-white/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-3 flex flex-col gap-1.5 overflow-hidden">
               {isAuthenticated ? (
-                navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`p-3 rounded-xl font-bold flex items-center gap-4 transition-colors ${pathname?.startsWith(item.href)
-                      ? 'bg-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/20'
-                      : 'text-[var(--text-primary)] hover:bg-white/5'
-                      }`}
-                  >
-                    <span className="text-xl">{item.icon}</span>
-                    {item.label}
-                  </Link>
-                ))
+                <div className="grid grid-cols-2 gap-2">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.label === 'Profile' && userData?.username ? `/profile/${userData.username}` : item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`p-4 rounded-2xl font-black flex flex-col items-center justify-center gap-2 transition-all active:scale-95 ${pathname?.startsWith(item.href)
+                        ? 'bg-[var(--brand-primary)] text-white shadow-xl shadow-[var(--brand-primary)]/30'
+                        : 'bg-white/5 text-[var(--text-primary)] hover:bg-white/10'
+                        }`}
+                    >
+                      <span className="text-2xl">{item.icon}</span>
+                      <span className="text-[10px] uppercase tracking-widest">{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
               ) : (
-                publicNavItems.map(item => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="p-3 rounded-xl font-bold text-[var(--text-primary)] hover:bg-white/5 text-center"
-                  >
-                    {item.label}
-                  </Link>
-                ))
+                <div className="flex flex-col gap-2">
+                  {publicNavItems.map(item => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`p-4 rounded-2xl font-black text-center transition-all active:scale-95 ${item.label === 'Sign Up'
+                        ? 'bg-[var(--brand-primary)] text-white'
+                        : 'bg-white/5 text-[var(--text-primary)] hover:bg-white/10'
+                        }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
           </motion.div>
